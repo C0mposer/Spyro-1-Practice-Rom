@@ -2,7 +2,7 @@
 
 # Spyro 1 Practice Codes For PS2
 
-This is a mod for the original Spyro the Dragon that adds practice features. This is for use primarily on PS2 with a burnt disc. 
+This is a mod for the original Spyro the Dragon that adds practice features for speedrunners. This is for use primarily on PS2 with a burnt disc. 
 
 These codes are relatively simple in comparison to [my Popstarter practice codes](https://discord.gg/rm4ZnjzeZR), that can also run on PS2. These codes lack the ability to do full save-states, however, they can run on the actual PS1 backwards compatibility layer of the PS2 with a burnt disc. Meaning: no Popstarter lag, no inaccuracies, resulting in completely accurate practice.
 

@@ -12,9 +12,10 @@ This mod was created using the [psx-modding-toolchain by Redhot](https://github.
 
 ## Features
 1. Level Select in Inventory Menu (L1, L2, L3, R1, R2, R3)
-2. Collectables Always Respawn (gems, dragons, eggs)
-3. Automatically Skips Intro
-4. Respawn Spyro (L1 + R1 + Circle)
+2. Respawn Spyro (L1 + R1 + Circle)
+3. Save/Load Position (L3/R3)
+4. Collectables Always Respawn (gems, dragons, eggs)
+5. Automatically Skips Intro
 
 ## Downloads
 #### Main Download

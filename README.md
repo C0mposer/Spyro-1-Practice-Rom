@@ -13,14 +13,14 @@ This mod was created using the [psx-modding-toolchain by Redhot](https://github.
 
 ## Downloads
 #### Main Download
- -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Skip-Intro-Mod/releases/download/Release1/spyro1_SkipIntro.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
+ -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release1/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
  -  **CUE File**: Once you've patched your bin,  you can create a cue file for it [here](https://www.duckstation.org/cue-maker/). This cue file can now be burned and played on a [mechapwn'd](https://github.com/MechaResearch/MechaPwn)/chipped PS2.
 
 
 ## Compiling & Building
 
 1. Compiling this mod requires the [psx-modding-toolchain by Redhot](https://github.com/mateusfavarin/psx-modding-toolchain). 
-2. Once you have installed it and its pre-requisites, place the folder [from the source code download](https://github.com/C0mposer/Spyro-1-Skip-Intro-Mod/archive/refs/heads/master.zip), into the **/games/** folder of your psx-modding-toolchain directory.
+2. Once you have installed it and its pre-requisites, place the folder [from the source code download](https://github.com/C0mposer/Spyro-1-Skip-Pracice-Codes/archive/refs/heads/master.zip), into the **/games/** folder of your psx-modding-toolchain directory.
 3. Browse to the **/mods/PracticeCodes/** directory, and open the MOD.bat file. From here you should be prompted with multiple options in a command line gui
 
 #### Building BIN/CUE

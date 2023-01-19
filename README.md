@@ -10,6 +10,11 @@ To play this using a burnt disc on PS2, will require you to have a softmodded ps
 
 This mod was created using the [psx-modding-toolchain by Redhot](https://github.com/mateusfavarin/psx-modding-toolchain). 
 
+## Features
+1. Level Select in Inventory Menu (L1, L2, L3, R1, R2, R3)
+2. Collectables Always Respawn (gems, dragons, eggs)
+3. Automatically Skips Intro
+4. Respawn Spyro (L1 + R1 + Circle)
 
 ## Downloads
 #### Main Download

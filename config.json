@@ -1,0 +1,48 @@
+{
+    "compiler": {
+        "function_sections": 1,
+        "reorder_functions": 1,
+        "optimization": 4,
+        "debug": 0,
+        "psyq": 0,
+        "8mb": 1
+    },
+    "versions": [
+    {
+        "NTSC": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 94228
+        }
+    },
+    {
+        "ReduxTestCDMod": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 94231
+        }
+    },
+    {
+        "PS2_NTSC": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 94230
+        }
+    }
+    ]
+}

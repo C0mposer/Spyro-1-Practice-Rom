@@ -1,0 +1,83 @@
+_levelID = 0x800758B4;
+_portalToExitFromInHW = 0x800758AC;
+_currentButton = 0x80077380;
+_currentButtonOneFrame = 0x80077378;
+_secondController = 0x80078E50;
+_leftAnalogStick = 0x800773D2;
+_rightAnalogStick = 0x800773D0;
+_gameState = 0x800757D8;
+_globalGems = 0x80075860;
+_globalLives = 0x8007582C;
+_levelGemsCollectedArray = 0x80077420;
+
+_spyro = 0x80078A58;
+
+_globalTimer = 0x800749e0;
+_levelTimerWhenActive = 0x8007572C;
+_levelTimer_60fps = 0x800758C8;
+_pausedTimer = 0x800758B8;
+_vSyncTimer = 0x800749E0;
+_wobbleAndOpacityTimer = 0x800770f4;
+
+_cameraPosition = 0x80076DF8;
+_cameraAngle = 0x80076E1C;
+
+_shouldCameraFollowSpyro = 0x80033b4c;
+
+_LockCameraToSpyroPTR = 0x80035fb4;
+
+_effect_ScreenFadeIn = 0x80075918;
+_effect_ScreenLetterBox = 0x800756C0;
+
+_selectMenuOption = 0x80075744;
+_startMenuSelection = 0x80075720;
+_isInsideOptionsMenu = 0x800757C8;
+_mainMenuState = 0x80078D88;
+_isPastTitleScreen = 0x8007566c;
+
+_ballonistState = 0x800777e8;
+
+_movementSubState = 0x80078AD4;
+_flyInAnimation = 0x80076EA8;
+_fullyPaused = 0x801ffe64;
+_flightWingsAnimation = 0x80078CA4;
+_whichCutscene = 0x80078D94;
+_isLoading = 0x800756B0;
+_isInLoadingScreen = 0x80078C48;
+_isInPortal = 0x80078C70;
+_canFlyIn = 0x800756D0;
+_shouldRespawnAtCheckpoint = 0x80077888;
+
+_collectablesStateArray = 0x80077900;
+
+_ptr_HudMobyData = 0x80075710;
+
+_ptr_levelMobys = 0x80075828;
+
+_ptr_dynamicLevelMobys = 0x8007573C;
+
+_ptr_endDynamicMobys = 0x80075930;
+
+_ptr_levelMobyData = 0x80075930;
+
+_ptr_particleLinkedList = 0x80075738;
+
+_ptr_graphicsRelated = 0x800757b0;
+
+_ptrTextUnk = 0x800720f4;
+
+_headAndChestSpinTimer = 0x80077fe4;
+
+_unk_spinRelated = 0x8006cc78;
+
+_localSoundEffects = 0x800761D4;
+
+
+
+_canOpenFairyText = 0x80078D00;
+_fairyMenuSelection = 0x80078D08;
+_fairyMenusArray = 0x80078D0C;
+
+_musicSectors = 0x8006f200;
+
+_freeSpace = 0x80073990;

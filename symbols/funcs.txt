@@ -1,0 +1,55 @@
+printf = 0x8006279c;
+sprintf = 0x80062fd4;
+memset = 0x80016914;
+rand = 0x8006272c;
+srand = 0x8006275c;
+
+DrawTextCapitals = 0x80017FE4;
+DrawTextAll = 0x800181AC;
+DrawTextBox = 0x8001860c;
+DrawArrow = 0x80018534;
+DrawLine = 0x8001844c;
+DrawPrimitive = 0x800168dc;
+FillScreenColor = 0x800190d4;
+
+PlaySoundEffect = 0x80055a78;
+
+DrawShapePreReq = 0x80060670;
+DrawMobys = 0x8001f798;
+CopyHudToShaded = 0x80018880;
+DrawShadedMobys = 0x80022a2c;
+
+UpdateMobyCollision = 0x800529e4;
+
+Vec3IntToShortDiv4 = 0x80017bfc;
+
+GetNextParticleSlot = 0x80053570;
+CreateParticle = 0x800873e0;
+
+PlayIntroCutscenes = 0x800331ac;
+TheAdventureBegins = 0x8002d440;
+TheAdventureContinues = 0x80032b08;
+
+LockCameraToSpyro = 0x80035fb4;
+
+RenderObjs = 0x80019698;
+
+maybe_Calculate8BitDifference = 0x80017908;
+maybe_CalculateAngle = 0x800169ac;
+
+CdRead = 0x8006606C;
+CdInit = 0x8006397C;
+CdReadCallback = 0x8006623C;
+CdStatus = 0x80063A8C;
+CdSync = 0x80063BD8;
+CdControl = 0x80063C48;
+CdControlB = 0x80063EAC;
+CdDataCallback = 0x80064050;
+CdIntToPos = 0x80064094;
+CdPosToInt = 0x80064198;
+Cd_Sync = 0x800647A0;
+CdGetSector = 0x80064010;
+
+
+
+

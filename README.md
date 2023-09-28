@@ -19,7 +19,7 @@ This mod was created using the [psx-modding-toolchain by Redhot](https://github.
 
 ## Downloads
 #### Main Download
- -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release1/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
+ -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release2/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
  -  **CUE File**: Once you've patched your bin,  you can create a cue file for it [here](https://www.duckstation.org/cue-maker/). This cue file can now be burned and played on a [mechapwn'd](https://github.com/MechaResearch/MechaPwn)/chipped PS2.
 
 

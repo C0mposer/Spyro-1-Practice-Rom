@@ -1,5 +1,17 @@
 #include <common.h>
 
+//Quick Memcpy Implementation
+void MyMemCpy(void *dest, void *src, int n) 
+{ 
+// Typecast src and dest addresses to (char *) 
+char *csrc = (char *)src; 
+char *cdest = (char *)dest; 
+  
+// Copy contents of src[] to dest[] 
+for (int i=0; i<n; i++) 
+    cdest[i] = csrc[i]; 
+} 
+
 bool hasSkippedIntro = FALSE;
 bool hasUnlockedLevels = FALSE;
 
@@ -28,41 +40,19 @@ void ResetCollectables()
 }
 
 void SavePosition()
-{
-    _freeSpace[0] = _spyro.position.x;
-    _freeSpace[1] = _spyro.position.y;
-    _freeSpace[2] = _spyro.position.z;
+{  
+    //Copying The Spyro struct and most of the camera struct (starting from cam pos, 24 onwards)
+    MyMemCpy(_freeSpace, &_spyro, sizeof(_spyro));
+    MyMemCpy((char*)_freeSpace + 0x370, &_cameraPosition, 0x50);
 
-    _freeSpace[3] = _spyro.angle.pitch;
-    _freeSpace[4] = _spyro.angle.yaw;
-    _freeSpace[5] = _spyro.angle.roll;
-
-    _freeSpace[6] = _cameraPosition.x;
-    _freeSpace[7] = _cameraPosition.y;
-    _freeSpace[8] = _cameraPosition.z;
-
-    _freeSpace[9] = _cameraAngle.pitch;
-    _freeSpace[0xA] = _cameraAngle.yaw;
-    _freeSpace[0xB] = _cameraAngle.roll;
 }
 
 void ReloadPosition()
 {
-        _spyro.position.x = _freeSpace[0];
-        _spyro.position.y = _freeSpace[1];
-        _spyro.position.z = _freeSpace[2];
+    //Reloading The Spyro struct and most of the camera struct (starting from cam pos, 24 onwards)
+    MyMemCpy(&_spyro, _freeSpace, sizeof(_spyro));
+    MyMemCpy(&_cameraPosition, (char*)_freeSpace + 0x370, 0x50);
 
-        _spyro.angle.pitch = _freeSpace[3];
-        _spyro.angle.yaw = _freeSpace[4];
-        _spyro.angle.roll = _freeSpace[5];
-
-        _cameraPosition.x = _freeSpace[6];
-        _cameraPosition.y = _freeSpace[7];
-        _cameraPosition.z = _freeSpace[8];
-
-        _cameraAngle.pitch = _freeSpace[9];
-        _cameraAngle.yaw = _freeSpace[0xA];
-        _cameraAngle.roll = _freeSpace[0xB];
 }
 
 void RespawnSpyro()
@@ -107,7 +97,7 @@ void MainFunc()
         UnlockAllLevels();
         SetTitleScreenColor();
     }
-    if(_currentButtonOneFrame == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
+    if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
     {
         RespawnSpyro();
     }
@@ -119,7 +109,7 @@ void MainFunc()
     {
         ReloadPosition();
     }
-    if(_currentButtonOneFrame == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH)
+    if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH)
     {
         ResetLevelGems();
     }

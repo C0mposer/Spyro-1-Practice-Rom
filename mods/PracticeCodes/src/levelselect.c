@@ -140,6 +140,7 @@ void ActivateLevelSelect()
 	//Level Level
 	if (levelSelectState == 2)
 	{
+		_spyro.state = 0;
 		_gameState = 0xA;
 		_pausedTimer = 0;
 		levelSelectState = 3;

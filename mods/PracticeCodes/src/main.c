@@ -119,4 +119,10 @@ void MainFunc()
         ResetLevelGems();
     }
 
+    //Make Nestor Skippable
+    if(_levelID == ARTISANS_ID)
+    {
+        _isNestorUnskipable = FALSE;
+    }
+
 }

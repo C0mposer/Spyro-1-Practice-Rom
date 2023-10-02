@@ -119,7 +119,7 @@ InstaLoadState ilState;
 void InstaLoad(){
 	
 	if(ilState.ready){
-		ResetCollectables();
+		ResetLevelCollectables();
         _flightWingsAnimation = 0;
         _loadingScreenTimer = 0;
         _isLoading = 1;									//Set to 0 to immidiately start fly in

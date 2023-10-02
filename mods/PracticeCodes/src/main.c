@@ -59,7 +59,7 @@ void RespawnSpyro()
     _shouldRespawnAtCheckpoint = FALSE;
 }
 
-void ResetLevelGems()
+void ResetLevelCollectables()
 {
     for (int i = 0; i < 35; i++)
     {
@@ -116,7 +116,7 @@ void MainFunc()
     }
     if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH)
     {
-        ResetLevelGems();
+        ResetLevelCollectables();
     }
 
     //Make Nestor Skippable

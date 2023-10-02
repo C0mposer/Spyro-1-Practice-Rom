@@ -109,7 +109,7 @@ void LevelSelect()
 
 }
 
-
+//Custom Function for instantly flying back in into current level
 void InstaLoad(){
 	
 	if(ilState.ready){

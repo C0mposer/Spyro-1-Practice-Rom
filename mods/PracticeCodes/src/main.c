@@ -47,7 +47,7 @@ void SavePosition()
 {  
     //Copying The Spyro struct and most of the camera struct
     MyMemCopy(_freeSpace, &_spyro, sizeof(_spyro));
-    MyMemCopy((char*)_freeSpace + 0x370, &_cameraStart, 0x70);
+    MyMemCopy((byte*)_freeSpace + 0x370, &_cameraStart, 0x70);
 
 }
 
@@ -55,7 +55,7 @@ void ReloadPosition()
 {
     //Reloading The Spyro struct and most of the camera struct
     MyMemCopy(&_spyro, _freeSpace, sizeof(_spyro));
-    MyMemCopy(&_cameraStart, (char*)_freeSpace + 0x370, 0x70);
+    MyMemCopy(&_cameraStart, (byte*)_freeSpace + 0x370, 0x70);
 
 }
 

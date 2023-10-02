@@ -78,24 +78,17 @@ void ActivateLevelSelect()
 
 	DetermineButton();
 
-
-	//Pause to prepare for level leave
-	if(levelSelectState == 1)
-	{
-		levelSelectState = 2;
-	}
-
 	//Level Level
-	if (levelSelectState == 2)
+	if (levelSelectState == 1)
 	{
 		_spyro.state = 0;
 		_gameState = 0xA;
 		_pausedTimer = 0;
-		levelSelectState = 3;
+		levelSelectState = 2;
 	}
 
 	//Set Level ID and Animation to values detemined in HOPEFULLY A FUNC
-	if(_movementSubState == MOVEMENT_SUBSTATE_LOADING && levelSelectState == 3)
+	if(_movementSubState == MOVEMENT_SUBSTATE_LOADING && levelSelectState == 2)
 	{
 		if(selectedButton == 0){
 			_canFlyIn = 0;

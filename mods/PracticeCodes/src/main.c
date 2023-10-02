@@ -127,7 +127,7 @@ void MainFunc()
 
     if(_currentButton == L1_BUTTON + R1_BUTTON + X_BUTTON)
     {
-        _spyro.position.x += 500;
+        _spyro.position.z += 500;
     }
 
 }

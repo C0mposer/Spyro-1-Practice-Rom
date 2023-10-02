@@ -90,3 +90,5 @@ mods/PracticeCodes/asm/hud_hooks.s
 mods/PracticeCodes/src/hud.c
 .gitignore
 mods/PracticeCodes/src/hud.c
+mods/PracticeCodes/asm/hud_hooks.s
+

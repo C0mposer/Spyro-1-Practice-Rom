@@ -1,5 +1,9 @@
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/levelselect.c, MainFunc.bin
+NTSC, exe, 0x80010084, 0x0, src/patch1.txt
+NTSC, exe, 0x8007556c, 0x0, src/patch2.txt
 
 PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 PS2_NTSC, header, 0x8000A960, 0x0, src/main.c src/levelselect.c, MainFunc.bin
+PS2_NTSC, exe, 0x80010084, 0x0, src/patch1.txt
+PS2_NTSC, exe, 0x8007556c, 0x0, src/patch2.txt

@@ -14,6 +14,12 @@ short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, F
 
 
 
+typedef struct InstaLoadState{
+	int ready;
+	int timer;
+}InstaLoadState;
+
+InstaLoadState ilState;
 
 
 void DetermineButton()
@@ -102,12 +108,6 @@ void ActivateLevelSelect()
 
 }
 
-typedef struct InstaLoadState{
-	int ready;
-	int timer;
-}InstaLoadState;
-
-InstaLoadState ilState;
 
 void InstaLoad(){
 	

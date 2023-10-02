@@ -4,8 +4,8 @@ NTSC, header, 0x8000B0B8, 0x0, src/main.c src/levelselect.c, MainFunc.bin
 NTSC, exe, 0x80010084, 0x0, patches/levelselectnames.bin
 NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
-HUD_TEST, exe, 0x80033e38, 0x0, asm/hud_hooks.s
-HUD_TEST, header, 0x8000B0B8, 0x0, src/hud.c, HUD.bin
+HUD_TEST, exe, 0x80033e38, 0x0, asm/hud_hook_test.s
+HUD_TEST, header, 0x8000B0B8, 0x0, src/hud_test.c, HUD.bin
 
 
 PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s

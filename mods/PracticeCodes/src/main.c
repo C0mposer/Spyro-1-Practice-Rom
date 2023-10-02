@@ -100,19 +100,16 @@ void MainFunc()
     }
     
     //Main Loop
-    if(mod_state == UNLOCKED_LEVELS)
+    if(mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
     {
-        if(_gameState == GAMESTATE_GAMEPLAY)
+        //Save/Load spyro & camera information
+        if(_currentButtonOneFrame == L3_BUTTON)
         {
-            //Save/Load spyro & camera information
-            if(_currentButtonOneFrame == L3_BUTTON)
-            {
-                SaveSpyroAndCamera();
-            }
-            if(_currentButtonOneFrame == R3_BUTTON)
-            {
-                ReloadSpyroAndCamera();
-            }
+            SaveSpyroAndCamera();
+        }
+        if(_currentButtonOneFrame == R3_BUTTON)
+        {
+            ReloadSpyroAndCamera();
         }
 
         //Respawn spyro & reset level gems
@@ -136,11 +133,11 @@ void MainFunc()
         {
             _spyro.position.z += 500;
         }
-        //Moonjump
-        if(_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + SQUARE_BUTTON)
+
+        //Quick Drown
+        if(_spyro.drownTimer > 0x100)
         {
-            _spyro += 500;
+            _spyro.drownTimer = 0x240;
         }
     }
-
 }

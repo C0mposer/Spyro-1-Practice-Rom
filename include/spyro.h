@@ -2,6 +2,7 @@
 #define SPYRO_H
 
 #include "common.h"
+#include "vector.h"
 
 typedef struct Spyro
 {

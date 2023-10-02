@@ -89,6 +89,7 @@ void LevelSelect()
 	{
 		ResetLevelCollectables();
 		_spyro.state = 0;
+		_spyro.timer_framesInAir = 1;
 		_gameState = 0xA;
 		_pausedTimer = 0;
 		levelSelectState = 2;
@@ -122,7 +123,8 @@ void InstaLoad(){
         _levelLoadState = 0xB;
         _flyInAnimation = flyInArray[_levelIDIndex];
         _cameraLockingRelated = 0x80000012;				// 0x80000012 is not an address it is just the value it is expecting for level loads
-        _musicState = 0x40;
+        _spyro.timer_framesInAir = 1;
+		_musicState = 0x40;
 		_spyro.health = 3;
 		ilState.ready = FALSE;
 		ilState.timer = 3 * 30;

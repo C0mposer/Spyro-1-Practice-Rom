@@ -125,4 +125,9 @@ void MainFunc()
         _isNestorUnskipable = FALSE;
     }
 
+    if(_currentButton == L1_BUTTON + R1_BUTTON + X_BUTTON)
+    {
+        _spyro.position.x += 500;
+    }
+
 }

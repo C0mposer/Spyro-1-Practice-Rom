@@ -79,7 +79,7 @@ void DetermineButton()
 
 }
 
-void ActivateLevelSelect()
+void LevelSelect()
 {
 
 	DetermineButton();

@@ -82,7 +82,8 @@ void MainFunc()
 {
     _globalLives = 99;
 
-    ActivateLevelSelect();
+    LevelSelect();
+    InstaLoad();
 
     //Run once upon starting
     if(!hasSkippedIntro && _globalTimer > 20)                //? If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins

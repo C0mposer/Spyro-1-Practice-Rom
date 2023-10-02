@@ -177,6 +177,13 @@ typedef struct u8RGBA
     unsigned char opacity;
 }u8RGBA;
 
+typedef struct RGB
+{
+    unsigned int R;
+    unsigned int G;
+    unsigned int B;
+}RGB;
+
 typedef struct u8RGB
 {
     unsigned char R;
@@ -338,6 +345,8 @@ extern char* _localSoundEffects; //0x800761D4
 extern char _balloonist_requirements_state[6];
 
 extern char _entered_level_flags[35];
+
+extern RGB _paused_screen_color;
 
 extern int _freeSpace[0xE5F]; //0x80073990                 //? This is almost 1kb of free space in the game. 0xE5F to be exact
 

@@ -70,6 +70,7 @@ void ResetLevelGems()
     }
 }
 
+//Changing asm instructions for pause menu RGB
 void SetTitleScreenColor()
 {
     *(short*)(0x8001A674) = 0x70;

@@ -86,6 +86,8 @@ _localSoundEffects = 0x800761D4;
 
 _cameraLockingRelated = 0x80076e90;
 
+_collectablesBitflags = 0x80077908;
+
 _canOpenFairyText = 0x80078D00;
 _fairyMenuSelection = 0x80078D08;
 _fairyMenusArray = 0x80078D0C;

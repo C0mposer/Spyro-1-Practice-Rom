@@ -353,9 +353,11 @@ extern char _entered_level_flags[35];
 
 extern RGB _paused_screen_color;
 
-extern int _cameraLockingRelated;
+extern int _cameraLockingRelated; //0x80076e90
 
-extern int _musicState;                                     //?
+extern int _collectablesBitflags; //0x80077908
+
+extern int _musicState; //0x800774B4                        //?
 
 extern char* _cameraStart; //0x80076DD0                     //? Start of Camera Struct?
 

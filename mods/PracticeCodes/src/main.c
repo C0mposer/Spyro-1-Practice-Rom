@@ -50,6 +50,7 @@ void RespawnSpyro()
 
 void ResetLevelCollectables()
 {
+    memset(&_collectablesBitflags, 0, 0x4B0);
     for (int i = 0; i < 35; i++)
     {
         _levelGemsCollectedArray[i] = 0;

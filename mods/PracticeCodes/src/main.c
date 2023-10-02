@@ -39,7 +39,7 @@ void SkipIntro()
 //NOP-ing an asm instruction that handles filling the collectables array
 void ResetCollectables()
 {
-    int* reset = 0x8003B99C;
+    unsigned int* reset = 0x8003B99C;
     *reset = 0x34030000; 
 }
 

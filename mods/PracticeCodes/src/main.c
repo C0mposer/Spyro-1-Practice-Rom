@@ -14,8 +14,10 @@ void UnlockAllLevels()
         {
             _balloonist_requirements_state[i] = 2;
         }
-
-        _entered_level_flags[i] = 1;
+        if(i != 5)  //Don't Unlock Sunny Flight
+        {
+            _entered_level_flags[i] = 1;
+        }
     }
 }
 

@@ -136,6 +136,11 @@ void MainFunc()
         {
             _spyro.position.z += 500;
         }
+        //Moonjump
+        if(_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + SQUARE_BUTTON)
+        {
+            _spyro += 500;
+        }
     }
 
 }

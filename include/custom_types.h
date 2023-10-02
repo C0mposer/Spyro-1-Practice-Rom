@@ -12,6 +12,8 @@
 
 typedef int                     bool;
 
+typedef char                    byte;
+
 typedef signed char             s8;
 typedef unsigned char           u8;
 typedef signed short int        s16;

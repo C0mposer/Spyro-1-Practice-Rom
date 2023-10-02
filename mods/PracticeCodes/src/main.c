@@ -1,13 +1,14 @@
 #include <common.h>
+#include "levelselect.h"
 
 //Quick Memcpy Implementation
-void MyMemCpy(void *dest, void *src, int n) 
+void MyMemCopy(void *dest, void *src, int n) 
 { 
 // Typecast src and dest addresses to (char *) 
 char *csrc = (char *)src; 
 char *cdest = (char *)dest; 
   
-// Copy contents of src[] to dest[] 
+//Copy contents of src[] to dest[] 
 for (int i=0; i<n; i++) 
     cdest[i] = csrc[i]; 
 } 
@@ -15,6 +16,7 @@ for (int i=0; i<n; i++)
 bool hasSkippedIntro = FALSE;
 bool hasUnlockedLevels = FALSE;
 
+//Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
 {
     for (int i = 0; i < 33; i++)
@@ -43,17 +45,17 @@ void ResetCollectables()
 
 void SavePosition()
 {  
-    //Copying The Spyro struct and most of the camera struct (starting from cam pos, 24 onwards)
-    MyMemCpy(_freeSpace, &_spyro, sizeof(_spyro));
-    MyMemCpy((char*)_freeSpace + 0x370, &_cameraStart, 0x70);
+    //Copying The Spyro struct and most of the camera struct
+    MyMemCopy(_freeSpace, &_spyro, sizeof(_spyro));
+    MyMemCopy((char*)_freeSpace + 0x370, &_cameraStart, 0x70);
 
 }
 
 void ReloadPosition()
 {
-    //Reloading The Spyro struct and most of the camera struct (starting from cam pos, 24 onwards)
-    MyMemCpy(&_spyro, _freeSpace, sizeof(_spyro));
-    MyMemCpy(&_cameraStart, (char*)_freeSpace + 0x370, 0x70);
+    //Reloading The Spyro struct and most of the camera struct
+    MyMemCopy(&_spyro, _freeSpace, sizeof(_spyro));
+    MyMemCopy(&_cameraStart, (char*)_freeSpace + 0x370, 0x70);
 
 }
 
@@ -71,11 +73,13 @@ void ResetLevelGems()
     }
 }
 
-//Changing asm instructions for pause menu RGB
-void SetTitleScreenColor()
+//Changing asm instructions for pause menu RGB. Cannot change B, as the value is in a shared register.
+void SetTitleScreenColor(byte r, byte g)
 {
-    *(short*)(0x8001A674) = 0x70;
-    *(short*)(0x8001A67C) = 0x0;
+    static i;
+    *(short*)(0x8001A674) = r;
+    *(short*)(0x8001A67C) = g;
+    i++;
 }
 
 
@@ -98,7 +102,7 @@ void MainFunc()
     if(_isPastTitleScreen)
     {
         UnlockAllLevels();
-        SetTitleScreenColor();
+        SetTitleScreenColor(70, 0);
     }
     if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
     {

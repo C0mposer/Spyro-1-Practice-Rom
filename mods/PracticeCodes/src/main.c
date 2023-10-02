@@ -34,6 +34,7 @@ void SkipIntro()
     TheAdventureBegins();                                 //? Call The Adventure Begins cutscene sequence      
 }
 
+//NOP-ing an asm instruction that handles filling the collectables array
 void ResetCollectables()
 {
     int* reset = 0x8003B99C;
@@ -44,7 +45,7 @@ void SavePosition()
 {  
     //Copying The Spyro struct and most of the camera struct (starting from cam pos, 24 onwards)
     MyMemCpy(_freeSpace, &_spyro, sizeof(_spyro));
-    MyMemCpy((char*)_freeSpace + 0x370, &_cameraPosition, 0x50);
+    MyMemCpy((char*)_freeSpace + 0x370, &_cameraStart, 0x70);
 
 }
 
@@ -52,7 +53,7 @@ void ReloadPosition()
 {
     //Reloading The Spyro struct and most of the camera struct (starting from cam pos, 24 onwards)
     MyMemCpy(&_spyro, _freeSpace, sizeof(_spyro));
-    MyMemCpy(&_cameraPosition, (char*)_freeSpace + 0x370, 0x50);
+    MyMemCpy(&_cameraStart, (char*)_freeSpace + 0x370, 0x70);
 
 }
 

@@ -14,9 +14,11 @@ This mod was created using the [psx-modding-toolchain by Redhot](https://github.
 1. Level Select in Inventory Menu (L1, L2, L3, R1, R2, R3)
 2. Respawn Spyro (L1 + R1 + Circle)
 3. Save/Load Position (L3/R3)
-4. Re-Fly in to level quickly (L1 + R1 + UP + TRIANGLE)
-5. Collectables Always Respawn (gems, dragons, eggs)
-6. Automatically Skips Intro
+4. Re-Fly in to level quickly (L1 + R1 + Up + Triangle)
+5. Moon-jump (L1 + R1 + L2 + R2 + X)
+7. Collectables Always Respawn (Gems, Dragons, Eggs)
+8. Automatically Skips Intro
+9. Can Skip Nestor
 
 ## Downloads
 #### Main Download

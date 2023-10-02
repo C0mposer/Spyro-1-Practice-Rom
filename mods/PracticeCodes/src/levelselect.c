@@ -87,6 +87,7 @@ void LevelSelect()
 	//Level Level
 	if (levelSelectState == 1)
 	{
+		ResetLevelCollectables();
 		_spyro.state = 0;
 		_gameState = 0xA;
 		_pausedTimer = 0;

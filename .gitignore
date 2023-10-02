@@ -60,3 +60,21 @@ mods/PracticeCodes/plugins/__pycache__/plugin.cpython-310.pyc
 build/PS2 Disc Practice Codes.zip
 build/spyro1_PracticeCodes.xdelta
 .vscode/launch.json
+mods/PracticeCodes/debug/dep/hud_hook.dep
+mods/PracticeCodes/debug/obj/hud_hook.o
+mods/PracticeCodes/output/asmhud_hooks.bin
+mods/PracticeCodes/output/Hud.bin
+.gitignore
+mods/PracticeCodes/src/hud.o
+mods/PracticeCodes/src/hud.dep
+mods/PracticeCodes/mod.map
+mods/PracticeCodes/src/levelselect.o
+mods/PracticeCodes/src/levelselect.dep
+mods/PracticeCodes/src/main.dep
+.gitignore
+mods/PracticeCodes/src/main.o
+mods/PracticeCodes/asm/hook.dep
+.gitignore
+mods/PracticeCodes/asm/hook.o
+mods/PracticeCodes/asm/hud_hook.dep
+mods/PracticeCodes/asm/hud_hook.o

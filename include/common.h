@@ -285,6 +285,7 @@ extern int _levelTimerWhenActive; //0x8007572C               //? This is a level
 extern int _levelTimer_60fps; //0x800758C8                   //? This is a level specific timer that runs at 60fps. This timer is running at all times, and doesn't reset until you enter a new level.
 extern int _vSyncTimer_60fps; //0x800749E0                   //? This is a global timer at 60fps. It is running at all times, and controls the vSync. If frozen, video freezes. Can be unfrozen.
 extern int _wobbleAndOpacityTimer; //0x800770f4              //? This is a timer that is often used for changing the opacity of things like lines, the shimmer of text, etc.
+extern int _loadingScreenTimer; //0x800756ac                 //? This is a timer that is used for the loading screen. It need to be set to 0 when triggering a level load
 
 //Important Stuff
 extern char _gameState; //0x800757D8                         //? Main gamestate. Gamestate values are stored in the GameState enums.
@@ -303,6 +304,7 @@ extern int _levelGemsCollectedArray[35]; //0x80077420            //? Total amoun
 
 extern char _levelID; //0x800758B4                           //? Level ID according to the LevelIDs enum. This LevelID is used to determine which level will be loaded when in a loading screen, amung other things.
 extern char _portalToExitFromInHW; //0x800758AC              //? Same as the Level Id for the level.
+extern int _levelIDIndex; //0x80075964                       //? Level ID that is used for indexing through level arrays.
 
 extern short _flyInAnimation; //0x80076EA8                   //? This is what determines the fly in animation for the level, determined by the LevelFlyInAnimations enum's.
 
@@ -315,6 +317,7 @@ extern int _shouldCameraFollowSpyro; //0x80033b4c            //? This is actuall
 
 extern char _mainMenuState; //0x80078D88                     //? This is the current state of the main menu. Should make an enum for this
 extern int _ballonistState; //0x800777e8                     //? The Sub State for the balloonist. Should make an enum for this.
+extern int _levelLoadState; //0x800758b8                     //? The sub state for level loads.
 
 extern int _startMenuSelection; //0x80075720                 //? This is the current option selected in the main start menu, according to the StartMenuSelections enum's.
 extern int _selectMenuOption; //0x80075744                   //? This is the current homeworld menu in the inventory menu according to the InventoryMenuSelections enum's.
@@ -338,6 +341,8 @@ extern int* _ptr_HudMobyData; //0x80075930                    //? Not too sure. 
 
 extern char* _ptr_particleLinkedList; //0x80075738           //? This is a pointer to the next available particle slot.
 
+extern int* _ptr_levelSpawn; //0x800785e4                    //? This is a pointer to the spawn coordinates for the current level.
+
 extern int _headAndChestSpinTimer; //0x80077fe4
 extern int _unk_spinRelated; //0x8006cc78
 extern char* _localSoundEffects; //0x800761D4
@@ -347,6 +352,10 @@ extern char _balloonist_requirements_state[6];
 extern char _entered_level_flags[35];
 
 extern RGB _paused_screen_color;
+
+extern int _cameraLockingRelated;
+
+extern int _musicState;                                     //?
 
 extern char* _cameraStart; //0x80076DD0                     //? Start of Camera Struct?
 

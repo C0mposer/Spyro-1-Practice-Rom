@@ -2,66 +2,15 @@
 #include <levelselect.h>
 
 char levelSelectState = 0;
-levelSelectData selectedData;
 char selectedButton;
 
-//Storing all the home world options in an array, and storing all the Level ID's in the respective homeworld and their fly in animation in an nested array
-levelSelectData bakedData[6][6] =
-{
-	{	//Artisans
-		{TOWN_SQUARE_ID,		FACING_LEFT},		//r1Button
-		{STONE_HILL_ID,			FACING_LEFT},		//l1Button
-		{TOASTY_ID,				FACING_LEFT},		//r2Button
-		{DARK_HALLOW_ID,		FACING_FORWARD},	//l2Button
-		{SUNNY_FLIGHT_ID,		RETURNING_HOME},	//r3Button
-		{ARTISANS_ID,			FACING_LEFT},		//l3Button
-	},
-
-	{	//Peace Keepers
-		{ICE_CAVERN_ID,			FACING_RIGHT},		//r1Button
-		{DRY_CANYON_ID,			FACING_LEFT},		//l1Button
-		{SHEMP_ID,				FACING_LEFT},		//r2Button
-		{CLIFF_TOWN_ID,			FACING_RIGHT},		//l2Button
-		{NIGHT_FLIGHT_ID,		FACING_RIGHT},		//r3Button
-		{PEACE_KEEPERS_ID,		FACING_LEFT},		//l3Button
-	},
- 
-	{	//Magic Crafters
-		{WIZARD_PEAK_ID,		FACING_DIAGONAL},	//r1Button
-		{ALPINE_RIDGE_ID,		FACING_LEFT},		//l1Button
-		{BLOWHARD_ID,			FACING_RIGHT},		//r2Button
-		{HIGH_CAVES_ID,			FACING_BACKWARDS},	//l2Button
-		{CRYSTAL_FLIGHT_ID,		FACING_LEFT},		//r3Button
-		{MAGIC_CRAFTERS_ID,		FACING_LEFT},		//l3Button
-	},
- 
-	{	//Beast Makers
-		{TREE_TOPS_ID,			FACING_BACKWARDS},	//r1Button
-		{TERRACE_VILLAGE_ID,	FACING_LEFT},		//l1Button
-		{METALHEAD_ID,			FACING_BACKWARDS},	//r2Button
-		{MISTY_BOG_ID,			FACING_LEFT},		//l2Button
-		{WILD_FLIGHT_ID,		FACING_LEFT},		//r3Button
-		{BEAST_MAKERS_ID,		FACING_LEFT},		//l3Button
-	},
- 
-	{	//Dream Weavers
-		{HAUNTED_TOWERS_ID,		FACING_LEFT},		//r1Button
-		{DARK_PASSAGE_ID,		FACING_BACKWARDS},	//l1Button
-		{JACQUES_ID,			FACING_RIGHT},		//r2Button
-		{LOFTY_CASTLE_ID,		FACING_LEFT},		//l2Button
-		{ICY_FLIGHT_ID,			FACING_LEFT},		//r3Button
-		{DREAM_WEAVERS_ID,		FACING_LEFT},		//l3Button
-	},
- 
-	{	//Gnasty's World
-		{GNASTY_GNORC_ID,		FACING_LEFT},		//r1Button
-		{GNORC_COVE_ID,			FACING_BACKWARDS},	//l1Button
-		{GNASTYS_LOOT_ID,		FACING_LEFT},		//r2Button
-		{TWILIGHT_HARBOR_ID,	FACING_LEFT},		//l2Button
-		{GNASTYS_WORLD_ID,		FACING_LEFT},		//r3Button
-		{GNASTYS_WORLD_ID,		FACING_LEFT},		//l3Button
-	},
-};
+//Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
+short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
+						FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_RIGHT, FACING_LEFT, FACING_RIGHT,
+						FACING_LEFT, FACING_LEFT, FACING_BACKWARDS, FACING_DIAGONAL, FACING_RIGHT, FACING_LEFT,
+						FACING_LEFT, FACING_LEFT, FACING_LEFT, FACING_BACKWARDS, FACING_BACKWARDS, FACING_LEFT,
+						FACING_LEFT, FACING_BACKWARDS, FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_LEFT,
+						FACING_LEFT, FACING_BACKWARDS, FACING_LEFT, FACING_LEFT, FACING_LEFT, FACING_LEFT};
 
 
 
@@ -77,7 +26,7 @@ void DetermineButton()
 
 		switch(_currentButton)
 		{
-			case(R1_BUTTON):
+			case(L3_BUTTON):
 			{
 				selectedButton = 0;
 				break;
@@ -89,25 +38,25 @@ void DetermineButton()
 				break;
 			}
 			
-			case(R2_BUTTON):
+			case(L2_BUTTON):
 			{
 				selectedButton = 2;
 				break;
 			}
 			
-			case(L2_BUTTON):
+			case(R1_BUTTON):
 			{
 				selectedButton = 3;
 				break;
 			}
 			
-			case(R3_BUTTON):
+			case(R2_BUTTON):
 			{
 				selectedButton = 4;
 				break;
 			}
 			
-			case(L3_BUTTON):
+			case(R3_BUTTON):
 			{
 				selectedButton = 5;
 				break;
@@ -129,7 +78,6 @@ void ActivateLevelSelect()
 
 	DetermineButton();
 
-	selectedData = bakedData[_selectMenuOption][selectedButton];
 
 	//Pause to prepare for level leave
 	if(levelSelectState == 1)
@@ -149,20 +97,54 @@ void ActivateLevelSelect()
 	//Set Level ID and Animation to values detemined in HOPEFULLY A FUNC
 	if(_movementSubState == MOVEMENT_SUBSTATE_LOADING && levelSelectState == 3)
 	{
+		if(selectedButton == 0){
+			_canFlyIn = 0;
+		}
 		_flightWingsAnimation = 0;
 		_portalToExitFromInHW = 0;
-		_levelID = selectedData.levelID;
-		_flyInAnimation = selectedData.anim;
-        levelSelectState = 4;
+		_levelID = ((_selectMenuOption + 1) * 0xA + selectedButton < 0x41 ? (_selectMenuOption + 1) * 0xA + selectedButton : 0x3C);
+		_flyInAnimation = flyInArray[_selectMenuOption * 6 + selectedButton];
+        levelSelectState = 0;
     }
 
-	//Reset Level Select Flag, and levelSelectData
-	if(levelSelectState == 4)
-	{
-		levelSelectState = 0;
-		selectedData.levelID = 0;
-		selectedData.anim = 0;
-        levelSelectState = 0;
+}
+
+typedef struct InstaLoadState{
+	int ready;
+	int timer;
+}InstaLoadState;
+
+InstaLoadState ilState;
+
+void InstaLoad(){
+	
+	if(ilState.ready){
+		ResetCollectables();
+        _flightWingsAnimation = 0;
+        _loadingScreenTimer = 0;
+        _isLoading = 1;									//Set to 0 to immidiately start fly in
+        _canFlyIn = 1;
+        _gameState = GAMESTATE_LOADING;
+        _levelLoadState = 0xB;
+        _flyInAnimation = flyInArray[_levelIDIndex];
+        _cameraLockingRelated = 0x80000012;				// 0x80000012 is not an address it is just the value it is expecting for level loads
+        _musicState = 0x40;
+		_spyro.health = 3;
+		ilState.ready = 0;
+		ilState.timer = 3 * 30;
+    }
+
+	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON)){		//Hack to load the terrain near fly in before it is initiated
+        _spyro.position.x = *_ptr_levelSpawn;
+		_spyro.position.y = *(_ptr_levelSpawn + 1);
+		_spyro.position.z = *(_ptr_levelSpawn + 2);
+		ilState.ready = 1;
 	}
 
+	if(ilState.timer){
+		ilState.timer--;
+		if(!ilState.timer){
+			_isLoading = 0;
+		}
+	}
 }

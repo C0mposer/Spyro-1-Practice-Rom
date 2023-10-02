@@ -78,3 +78,6 @@ mods/PracticeCodes/asm/hook.dep
 mods/PracticeCodes/asm/hook.o
 mods/PracticeCodes/asm/hud_hook.dep
 mods/PracticeCodes/asm/hud_hook.o
+mods/PracticeCodes/buildList.txt
+mods/PracticeCodes/debug/obj/hud.o
+mods/PracticeCodes/debug/dep/hud.dep

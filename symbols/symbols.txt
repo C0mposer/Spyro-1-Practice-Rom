@@ -16,6 +16,8 @@ _entered_level_flags = 0x80078E78;
 _paused_screen_color = 0x8001A674;
 _cameraStart = 0x80076DD0;
 
+_isNestorUnskipable = 0x801747F4;
+
 _spyro = 0x80078A58;
 
 _globalTimer = 0x800749e0;

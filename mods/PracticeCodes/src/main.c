@@ -36,26 +36,20 @@ void SkipIntro()
     TheAdventureBegins();                                 //? Call The Adventure Begins cutscene sequence      
 }
 
-//NOP-ing an asm instruction that handles filling the collectables array
-void ResetCollectables()
-{
-    int* reset = 0x8003B99C;
-    *reset = 0x34030000; 
-}
 
-void SavePosition()
+void SaveSpyroAndCamera()
 {  
     //Copying The Spyro struct and most of the camera struct
     MyMemCopy(_freeSpace, &_spyro, sizeof(_spyro));
-    MyMemCopy((byte*)_freeSpace + 0x370, &_cameraStart, 0x70);
+    MyMemCopy((byte*)_freeSpace + 0x370, &_cameraStart, 0xFF);
 
 }
 
-void ReloadPosition()
+void ReloadSpyroAndCamera()
 {
     //Reloading The Spyro struct and most of the camera struct
     MyMemCopy(&_spyro, _freeSpace, sizeof(_spyro));
-    MyMemCopy(&_cameraStart, (byte*)_freeSpace + 0x370, 0x70);
+    MyMemCopy(&_cameraStart, (byte*)_freeSpace + 0x370, 0xFF);
 
 }
 
@@ -76,10 +70,8 @@ void ResetLevelGems()
 //Changing asm instructions for pause menu RGB. Cannot change B, as the value is in a shared register.
 void SetTitleScreenColor(byte r, byte g)
 {
-    static i;
     *(short*)(0x8001A674) = r;
     *(short*)(0x8001A67C) = g;
-    i++;
 }
 
 
@@ -91,34 +83,51 @@ void MainFunc()
     _globalLives = 99;
 
     ActivateLevelSelect();
-    ResetCollectables();
 
+    //Run once upon starting
     if(!hasSkippedIntro && _globalTimer > 20)                //? If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
     {
         SkipIntro();
         hasSkippedIntro = TRUE;
     }
 
-    if(_isPastTitleScreen)
+    //Run once upon skipping intro
+    if(_isPastTitleScreen && !hasUnlockedLevels)
     {
         UnlockAllLevels();
         SetTitleScreenColor(70, 0);
+        hasUnlockedLevels = TRUE;
     }
+    
+    //Save/Load spyro & camera information
+    if(_currentButtonOneFrame == L3_BUTTON)
+    {
+        SaveSpyroAndCamera();
+    }
+    if(_currentButtonOneFrame == R3_BUTTON)
+    {
+        ReloadSpyroAndCamera();
+    }
+
+    //Respawn spyro & reset level gems
     if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
     {
         RespawnSpyro();
     }
-    if(_currentButtonOneFrame == L3_BUTTON)
-    {
-        SavePosition();
-    }
-    if(_currentButtonOneFrame == R3_BUTTON)
-    {
-        ReloadPosition();
-    }
     if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH)
     {
         ResetLevelGems();
+    }
+
+    //Make Nestor Skippable
+    if(_levelID == ARTISANS_ID)
+    {
+        _isNestorUnskipable = FALSE;
+    }
+
+    if(_currentButton == L1_BUTTON + R1_BUTTON + X_BUTTON)
+    {
+        _spyro.position.z += 500;
     }
 
 }

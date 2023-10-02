@@ -56,7 +56,7 @@ _isInLoadingScreen = 0x80078C48;
 _isInPortal = 0x80078C70;
 _canFlyIn = 0x800756D0;
 _shouldRespawnAtCheckpoint = 0x80077888;
-_levelLoadState = 0x800758b8;
+_levelLoadState = 0x80075864;
 
 _collectablesStateArray = 0x80077900;
 

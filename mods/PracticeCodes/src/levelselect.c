@@ -124,15 +124,15 @@ void InstaLoad(){
         _cameraLockingRelated = 0x80000012;				// 0x80000012 is not an address it is just the value it is expecting for level loads
         _musicState = 0x40;
 		_spyro.health = 3;
-		ilState.ready = 0;
+		ilState.ready = FALSE;
 		ilState.timer = 3 * 30;
     }
 
-	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON)){		//Hack to load the terrain near fly in before it is initiated
+	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){		//Hack to load the terrain near fly in before it is initiated
         _spyro.position.x = *_ptr_levelSpawn;
 		_spyro.position.y = *(_ptr_levelSpawn + 1);
 		_spyro.position.z = *(_ptr_levelSpawn + 2);
-		ilState.ready = 1;
+		ilState.ready = TRUE;
 	}
 
 	if(ilState.timer){

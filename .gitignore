@@ -84,3 +84,9 @@ mods/PracticeCodes/debug/dep/hud.dep
 mods/PracticeCodes/debug/dep/hud_hooks.dep
 mods/PracticeCodes/debug/obj/hud_hooks.o
 mods/PracticeCodes/output/asmhud_hookss.bin
+mods/PracticeCodes/asm/hud_hooks.s
+mods/PracticeCodes/src/hud.c
+mods/PracticeCodes/asm/hud_hooks.s
+mods/PracticeCodes/src/hud.c
+.gitignore
+mods/PracticeCodes/src/hud.c

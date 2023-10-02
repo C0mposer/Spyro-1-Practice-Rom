@@ -134,10 +134,5 @@ void MainFunc()
             _spyro.position.z += 500;
         }
 
-        //Quick Drown
-        if(_spyro.drownTimer > 0x100)
-        {
-            _spyro.drownTimer = 0x240;
-        }
     }
 }

@@ -49,7 +49,7 @@ void RespawnSpyro()
 }
 
 void ResetLevelCollectables()
-{
+{   
     for (int i = 0; i < 35; i++)
     {
         _levelGemsCollectedArray[i] = 0;

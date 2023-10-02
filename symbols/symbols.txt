@@ -10,6 +10,9 @@ _globalGems = 0x80075860;
 _globalLives = 0x8007582C;
 _levelGemsCollectedArray = 0x80077420;
 
+_balloonist_requirements_state = 0x800758D0;
+_entered_level_flags = 0x80078E78;
+
 _spyro = 0x80078A58;
 
 _globalTimer = 0x800749e0;

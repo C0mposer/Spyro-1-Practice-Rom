@@ -19,11 +19,12 @@ void UnlockAllLevels()
 {
     for (int i = 0; i < 33; i++)
     {
-    if(i < 6){
-    *(char *)(0x800758D0 + i) = 2;
-    }
+        if(i < 6)
+        {
+            _balloonist_requirements_state[i] = 2;
+        }
 
-    *(char *)(0x80078E78 + i) = 1;
+        _entered_level_flags[i] = 1;
     }
 }
 

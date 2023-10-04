@@ -13,13 +13,7 @@ short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, F
 						FACING_LEFT, FACING_BACKWARDS, FACING_LEFT, FACING_LEFT, FACING_LEFT, FACING_LEFT};
 
 
-
-typedef struct InstaLoadState{
-	int ready;
-	int timer;
-}InstaLoadState;
-
-InstaLoadState ilState;
+int instaLoadReady;
 
 
 void DetermineButton()
@@ -113,11 +107,22 @@ void LevelSelect()
 //Custom Function for instantly flying back in into current level
 void InstaLoad(){
 	
-	if(ilState.ready){
+	if(_isLoading == 1 && _levelLoadState == 0xA){
+		SavePosition();
+	}
+
+	if(instaLoadReady == 1){
+		ReloadPosition();
+		if(_levelLoadState == 0xC){
+			instaLoadReady = FALSE;
+		}
+    }
+
+	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;
         _loadingScreenTimer = 0;
-        _isLoading = 1;									//Set to 0 to immidiately start fly in
+        _isLoading = 0;									//Set to 0 to immidiately start fly in
         _canFlyIn = 1;
         _gameState = GAMESTATE_LOADING;
         _levelLoadState = 0xB;
@@ -126,21 +131,7 @@ void InstaLoad(){
         _spyro.timer_framesInAir = 1;					//For Tree Tops
 		_musicState = 0x40;
 		_spyro.health = 3;
-		ilState.ready = FALSE;
-		ilState.timer = 3 * 30;
-    }
-
-	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){		//Hack to load the terrain near fly in before it is initiated
-        _spyro.position.x = *_ptr_levelSpawn;
-		_spyro.position.y = *(_ptr_levelSpawn + 1);
-		_spyro.position.z = *(_ptr_levelSpawn + 2);
-		ilState.ready = TRUE;
+		instaLoadReady = 1;
 	}
 
-	if(ilState.timer){
-		ilState.timer--;
-		if(!ilState.timer){
-			_isLoading = 0;
-		}
-	}
 }

@@ -120,6 +120,10 @@ void InstaLoad(){
 		}
     }
 
+	if(_levelLoadState == 0xD){
+		*(int *)0x80056528 = 0x0c005c7f;
+	}
+
 	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;
@@ -128,6 +132,7 @@ void InstaLoad(){
 			_isLoading = 0;									//Set to 0 to immidiately start fly in
 			instaLoadReady = TRUE;
 			_levelLoadState = 0xB;
+			*(int *)0x80056528 = 0x00000000;
 		}
 		else{
 			_isLoading = 1;

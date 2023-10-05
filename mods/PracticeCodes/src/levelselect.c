@@ -121,7 +121,8 @@ void InstaLoad(){
     }
 
 	if(_levelLoadState == 0xD){
-		*(int *)0x80056528 = 0x0c005c7f;
+		//
+		*(int *)0x80056528 = 0x0C005C7F;					//Putting SFX proccessing Vec3Length back after insta-load
 	}
 
 	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
@@ -130,14 +131,14 @@ void InstaLoad(){
         _loadingScreenTimer = 0;
         if(instaLoadLevelID == _levelIDIndex){
 			_isLoading = 0;									//Set to 0 to immidiately start fly in
-			instaLoadReady = TRUE;
 			_levelLoadState = 0xB;
-			*(int *)0x80056528 = 0x00000000;
+			*(int *)0x80056528 = 0x00000000;				//NOP-ing SFX proccessing Vec3Length, because of weird bug with vortex
+			instaLoadReady = TRUE;
 		}
 		else{
 			_isLoading = 1;
-			instaLoadReady = FALSE;
 			_levelLoadState = 0x0;
+			instaLoadReady = FALSE;
 		}
 		_canFlyIn = 1;
         _gameState = GAMESTATE_LOADING;
@@ -145,8 +146,8 @@ void InstaLoad(){
 		_portalNumber = 0xffffffff;
         _flyInAnimation = flyInArray[_levelIDIndex];
         _cameraLockingRelated = 0x80000012;				// 0x80000012 is not an address it is just the value it is expecting for level loads
-        _spyro.timer_framesInAir = 1;					//For Tree Tops
 		_musicState = 0x40;
+        _spyro.timer_framesInAir = 1;					//For Tree Tops
 		_spyro.health = 3;
 	}
 

@@ -1,6 +1,7 @@
 #include <common.h>
 #include "myfuncs.h"
 #include "levelselect.h"
+#include <bg_colors.h>
 
 enum ModState
 {
@@ -11,6 +12,12 @@ enum ModState
 typedef enum ModState ModState;
 
 ModState mod_state = GAME_STARTED;
+
+RedGreen bg_colors[6] = {{0x70, 0}, {0xB0, 0xB0}, {0x00, 0x50}, {0xB0, 0x30}, {0x40, 0x18}, {0, 0}};
+
+extern BackgroundColor bg_color_index;
+
+extern bool should_update_bg_color;
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
@@ -78,11 +85,22 @@ void SetTitleScreenColor(byte r, byte g)
 //* ~ MAIN HOOK ~
 //*
 void MainFunc()
-{
-    _globalLives = 99;
+{   
+    //NOP-ing the JAL's to the fairy functions
+    int* fairy_jal = (int*)0x8001EEC4;
+    int* start_fairy_jal = (int*)0x80033998;
+    *fairy_jal = NOP;
+    *start_fairy_jal = NOP;
+
+    //! At seperate memory locations
+    {
+        InGameTimerHook();
+    }
 
     LevelSelect();
     InstaLoad();
+
+    _globalLives = 99;
 
     //Run once upon starting game
     if(mod_state == GAME_STARTED && _globalTimer > 20)                //? If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
@@ -95,8 +113,14 @@ void MainFunc()
     if(mod_state == SKIPPED_INTRO)
     {
         UnlockAllLevels();
-        SetTitleScreenColor(70, 0);
+        //memset((void*)0x8001b648, 0, 0x350); //Clear top of inventory menu   
         mod_state = UNLOCKED_LEVELS;
+    }
+
+    if(should_update_bg_color)
+    {
+        SetTitleScreenColor(bg_colors[bg_color_index].r, bg_colors[bg_color_index].g);
+        should_update_bg_color = false;
     }
     
     //Main Loop

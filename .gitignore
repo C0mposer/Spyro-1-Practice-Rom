@@ -97,3 +97,8 @@ mods/PracticeCodes/asm/hud_hooks.dep
 mods/PracticeCodes/asm/hud_hooks.o
 build/PS2 Spyro 1 Disk Codes.zip
 build/PS2 Spyro 1 Disc Codes.zip
+mods/PracticeCodes/debug/dep/IGT.dep
+mods/PracticeCodes/debug/dep/custom_text.dep
+mods/PracticeCodes/debug/obj/custom_text.o
+mods/PracticeCodes/debug/obj/IGT.o
+mods/PracticeCodes/output/IGT.bin

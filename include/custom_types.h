@@ -3,8 +3,11 @@
 
 #define TRUE 1
 #define FALSE 0
+#define true 1
+#define false 0
 
 #define NULL 0
+#define NOP 0
 
 #define DECIMAL 10
 #define HEXIDECIMAL 16

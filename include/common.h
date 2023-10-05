@@ -363,6 +363,8 @@ extern char* _cameraStart; //0x80076DD0                     //? Start of Camera 
 
 extern int _isNestorUnskipable;
 
+extern int _hBlankTimer;
+
 extern int _freeSpace[0xE5F]; //0x80073990                  //? This is almost 1kb of free space in the game. 0xE5F to be exact
 
 #endif /* COMMON_H */

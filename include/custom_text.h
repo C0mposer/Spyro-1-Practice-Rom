@@ -66,12 +66,6 @@ struct LowercaseTextInfo
     int size;                                        //Higher number, smaller size
 };
 
-void MobyRender()
-{
-    memset((void*)0x8006fcf4, 0, 0x900);
-	_ptrTextUnk = 0;
-	CopyHudToShaded();
-	DrawShadedMobys();
-}
+void MobyRender();
 
 #endif /* CUSTOM_TEXT_H */

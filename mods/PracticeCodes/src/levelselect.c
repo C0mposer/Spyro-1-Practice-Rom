@@ -13,8 +13,8 @@ short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, F
 						FACING_LEFT, FACING_BACKWARDS, FACING_LEFT, FACING_LEFT, FACING_LEFT, FACING_LEFT};
 
 
-int instaLoadReady;
-
+bool instaLoadReady = FALSE;
+signed int instaLoadLevelID = -1;
 
 void DetermineButton()
 {
@@ -87,6 +87,7 @@ void LevelSelect()
 		_gameState = 0xA;
 		_pausedTimer = 0;
 		levelSelectState = 2;
+		_spyro.health = 3;
 	}
 
 	//Set Level ID and Animation to values detemined in HOPEFULLY A FUNC
@@ -107,31 +108,41 @@ void LevelSelect()
 //Custom Function for instantly flying back in into current level
 void InstaLoad(){
 	
-	if(_isLoading == 1 && _levelLoadState == 0xA){
+	if(_isLoading == 1 && _levelLoadState == 0xA && _portalToExitFromInHW == 0){
 		SaveSpyroAndCamera();
+		instaLoadLevelID = _levelIDIndex;
 	}
 
-	if(instaLoadReady == 1){
+	if(instaLoadReady == TRUE){
 		ReloadSpyroAndCamera();
 		if(_levelLoadState == 0xC){
 			instaLoadReady = FALSE;
 		}
     }
 
-	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
+	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;
         _loadingScreenTimer = 0;
-        _isLoading = 0;									//Set to 0 to immidiately start fly in
-        _canFlyIn = 1;
+        if(instaLoadLevelID == _levelIDIndex){
+			_isLoading = 0;									//Set to 0 to immidiately start fly in
+			instaLoadReady = TRUE;
+			_levelLoadState = 0xB;
+		}
+		else{
+			_isLoading = 1;
+			instaLoadReady = FALSE;
+			_levelLoadState = 0x0;
+		}
+		_canFlyIn = 1;
         _gameState = GAMESTATE_LOADING;
-        _levelLoadState = 0xB;
+		_portalToExitFromInHW = 0;
+		_portalNumber = 0xffffffff;
         _flyInAnimation = flyInArray[_levelIDIndex];
         _cameraLockingRelated = 0x80000012;				// 0x80000012 is not an address it is just the value it is expecting for level loads
         _spyro.timer_framesInAir = 1;					//For Tree Tops
 		_musicState = 0x40;
 		_spyro.health = 3;
-		instaLoadReady = 1;
 	}
 
 }

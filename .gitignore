@@ -102,3 +102,5 @@ mods/PracticeCodes/debug/dep/custom_text.dep
 mods/PracticeCodes/debug/obj/custom_text.o
 mods/PracticeCodes/debug/obj/IGT.o
 mods/PracticeCodes/output/IGT.bin
+plugins/__pycache__/plugin.cpython-311.pyc
+.gitignore

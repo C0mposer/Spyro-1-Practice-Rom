@@ -120,7 +120,7 @@ void InstaLoad(){
 		}
     }
 
-	if(_currentButton == (L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
+	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;
         _loadingScreenTimer = 0;

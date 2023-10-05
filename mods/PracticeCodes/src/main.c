@@ -12,6 +12,8 @@ typedef enum ModState ModState;
 
 ModState mod_state = GAME_STARTED;
 
+extern signed int instaLoadLevelID;
+
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
 {
@@ -106,6 +108,7 @@ void MainFunc()
         if(_currentButtonOneFrame == L3_BUTTON)
         {
             SaveSpyroAndCamera();
+            instaLoadLevelID = -1;                                  //signals to the instaload function that the fly-in position and camera needs to be saved again
         }
         if(_currentButtonOneFrame == R3_BUTTON)
         {

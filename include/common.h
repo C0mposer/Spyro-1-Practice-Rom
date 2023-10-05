@@ -306,6 +306,8 @@ extern char _levelID; //0x800758B4                           //? Level ID accord
 extern char _portalToExitFromInHW; //0x800758AC              //? Same as the Level Id for the level.
 extern int _levelIDIndex; //0x80075964                       //? Level ID that is used for indexing through level arrays.
 
+extern int _portalNumber; //0x8007576c                       //? Number for the portal that spyro should fly out of in the homeworld
+
 extern short _flyInAnimation; //0x80076EA8                   //? This is what determines the fly in animation for the level, determined by the LevelFlyInAnimations enum's.
 
 extern Vec3 _cameraPosition; //0x80076DF8                    //? Start of Camera Position Vector

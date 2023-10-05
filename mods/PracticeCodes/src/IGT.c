@@ -87,7 +87,7 @@ MenuState menu_state = MENU_HIDDEN;
 BackgroundColor bg_color_index;
 bool should_update_bg_color = TRUE;
 
-FPS_t my_fps = {0};
+FPS_t fps_data = {0};
 
 CapitalTextInfo timer_text_info = {0};
 CapitalTextInfo fps_text_info = {0};
@@ -183,16 +183,16 @@ void InGameTimerHook()
         if(custom_menu.fps_mode != FPS_OFF)
         {
             char buffer[10] = {0};
-            my_fps.difference = _hBlankTimer - my_fps.compareTimer;
-            my_fps.compareTimer = _hBlankTimer;
-            my_fps.difference_from_baseline = my_fps.difference - BASELINE;
-            my_fps.fps = 30 - (my_fps.difference_from_baseline / TIMER_TO_FRAME / 2);
+            fps_data.difference = _hBlankTimer - fps_data.compareTimer;
+            fps_data.compareTimer = _hBlankTimer;
+            fps_data.difference_from_baseline = fps_data.difference - BASELINE;
+            fps_data.fps = 30 - (fps_data.difference_from_baseline / TIMER_TO_FRAME / 2);
                 
-            sprintf(buffer, "FPS %d", my_fps.fps);
+            sprintf(buffer, "FPS %d", fps_data.fps);
                 
-            if(my_fps.fps < 100)
+            if(fps_data.fps < 100)
             {
-                if(custom_menu.fps_mode == FPS_ALWAYS || (custom_menu.fps_mode == FPS_ONLY_DROPPED && my_fps.fps <= 29))
+                if(custom_menu.fps_mode == FPS_ALWAYS || (custom_menu.fps_mode == FPS_ONLY_DROPPED && fps_data.fps <= 29))
                 {
                     fps_text_info.x = SCREEN_LEFT_EDGE + 0x10;
                     fps_text_info.y = 20;

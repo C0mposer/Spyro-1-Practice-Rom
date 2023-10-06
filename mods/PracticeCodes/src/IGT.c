@@ -15,6 +15,15 @@ typedef enum TimerState
 
 }TimerState;
 
+typedef enum ILTimerState
+{
+    IL_FLYING_IN,
+    IL_STARTED,
+    IL_DISPLAYING,
+    IL_STOPPED
+
+}ILTimerState;
+
 typedef enum MenuState
 {
     MENU_HIDDEN,
@@ -46,6 +55,8 @@ typedef struct Menu
     char* timer_mode_text;
     FPSMode fps_mode;
     char* fps_mode_text;
+    bool il_loop_mode;
+    char* il_mode_text;
     bool sparx_mode;
     char* sparx_mode_text;
     bool quick_goop_mode;
@@ -83,6 +94,12 @@ bool has_toggled_menu = FALSE;
 Timer mainTimer = {0};
 TimerState timer_state = TIMER_STOPPED;
 
+Timer ilTimer = {0};
+TimerState il_timer_state = TIMER_STOPPED;
+int framesSpentLoading = 0;
+char loadlessAscii[10];
+extern short flyInArray[36];
+
 Menu custom_menu = {0};
 MenuState menu_state = MENU_HIDDEN;
 
@@ -93,7 +110,7 @@ FPS_t fps_data = {0};
 
 CapitalTextInfo timer_text_info = {0};
 CapitalTextInfo fps_text_info = {0};
-CapitalTextInfo menu_text_info[5] = {{0}};
+CapitalTextInfo menu_text_info[6] = {{0}};
 
 void InGameTimerHook()
 {
@@ -160,6 +177,61 @@ void InGameTimerHook()
             }
 
         }
+        
+        //! IL Timer Stuffs
+        {
+            if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING)){
+                il_timer_state = IL_FLYING_IN;
+            }
+            else if(il_timer_state == IL_FLYING_IN && _gameState == GAMESTATE_GAMEPLAY){
+                il_timer_state = IL_STARTED;
+                ilTimer.timer_at_reset = _levelTimer_60fps;
+                framesSpentLoading = 0;
+            }
+            else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //state 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
+                framesSpentLoading++;
+            }
+            else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING){
+                ilTimer.timer = _globalTimer - ilTimer.timer_at_reset;
+                ilTimer.minutes = (ilTimer.timer * 10) / 35892;
+                ilTimer.secondsTensPlace = ((ilTimer.timer * 10) % 35892) / 5982;
+                ilTimer.secondsOnesPlace = ((ilTimer.timer * 100) % 59820) / 5982;
+                ilTimer.milisecondsTenthsPlace = ((ilTimer.timer * 1000) % 59820) / 5982;
+                ilTimer.milisecondsHundrethsPlace = ((ilTimer.timer * 10000) % 59820) / 5982;
+
+                sprintf(ilTimer.ascii, "%d.%d%d.%d%d\n", ilTimer.minutes, ilTimer.secondsTensPlace, ilTimer.secondsTensPlace, ilTimer.milisecondsTenthsPlace, ilTimer.milisecondsHundrethsPlace);
+
+                ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
+                ilTimer.minutes = (ilTimer.timer * 10) / 35892;
+                ilTimer.secondsTensPlace = ((ilTimer.timer * 10) % 35892) / 5982;
+                ilTimer.secondsOnesPlace = ((ilTimer.timer * 100) % 59820) / 5982;
+                ilTimer.milisecondsTenthsPlace = ((ilTimer.timer * 1000) % 59820) / 5982;
+                ilTimer.milisecondsHundrethsPlace = ((ilTimer.timer * 10000) % 59820) / 5982;
+
+                sprintf(loadlessAscii, "%d.%d%d.%d%d\n", ilTimer.minutes, ilTimer.secondsTensPlace, ilTimer.secondsTensPlace, ilTimer.milisecondsTenthsPlace, ilTimer.milisecondsHundrethsPlace);
+
+                il_timer_state = IL_DISPLAYING;
+
+                //! IL Looping
+                if((custom_menu.il_loop_mode == TRUE && _spyro.timer_framesInAir != 1 && _portalNumber == -1)){
+                    _levelID = _portalToExitFromInHW;
+                    _portalToExitFromInHW = 0;
+                    _flyInAnimation = flyInArray[_levelIDIndex];
+                }
+            }
+            
+            //DISPLAY
+            if(il_timer_state == IL_DISPLAYING){
+                
+                //Do display shit here :)
+                //Both times on the left of the screen
+                //Regular time larger and then loadless time below it slightly smaller
+
+                if(_levelLoadState >= 0xB){
+                    il_timer_state = IL_STOPPED;
+                }
+            }
+        }
     
         //! Show the FPS
         if(custom_menu.fps_mode != FPS_OFF)
@@ -210,7 +282,7 @@ void InGameTimerHook()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            char buffer[5][20] = {0};
+            char buffer[6][20] = {0};
 
             _spyro.isMovementLocked = TRUE;
 
@@ -231,18 +303,22 @@ void InGameTimerHook()
             menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x50;
             menu_text_info[3].y = 130;
             menu_text_info[3].size = DEFAULT_SIZE;
-
             
             menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x50;
             menu_text_info[4].y = 150;
             menu_text_info[4].size = DEFAULT_SIZE;
 
+            menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x50;
+            menu_text_info[5].y = 170;
+            menu_text_info[5].size = DEFAULT_SIZE;
+
 
             sprintf(&buffer, "%s", custom_menu.timer_mode_text);
             sprintf(&buffer[1], "%s", custom_menu.fps_mode_text);
-            sprintf(&buffer[2], "%s", custom_menu.sparx_mode_text);
-            sprintf(&buffer[3], "%s", custom_menu.quick_goop_text);
-            sprintf(&buffer[4], "%s", custom_menu.bg_color_text);
+            sprintf(&buffer[2], "%s", custom_menu.il_mode_text);
+            sprintf(&buffer[3], "%s", custom_menu.sparx_mode_text);
+            sprintf(&buffer[4], "%s", custom_menu.quick_goop_text);
+            sprintf(&buffer[5], "%s", custom_menu.bg_color_text);
 
             //Fix later?
             if(custom_menu.selection == 0)
@@ -252,6 +328,7 @@ void InGameTimerHook()
                 DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 1)
             {
@@ -260,6 +337,7 @@ void InGameTimerHook()
                 DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 2)
             {
@@ -268,6 +346,7 @@ void InGameTimerHook()
                 DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
                 DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 3)
             {
@@ -276,6 +355,7 @@ void InGameTimerHook()
                 DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
                 DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 4)
             {
@@ -284,12 +364,23 @@ void InGameTimerHook()
                 DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
                 DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            else if(custom_menu.selection == 5)
+            {
+                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
 
             // Fill text with defaults if NULL
             if(custom_menu.fps_mode_text == NULL)
             {
                 custom_menu.fps_mode_text = "FPS OFF";
+                custom_menu.il_mode_text = "IL LOOPING OFF";
                 custom_menu.sparx_mode_text = "PERMA SPARX OFF";
                 custom_menu.quick_goop_text = "QUICK GOOP OFF";
                 custom_menu.bg_color_text = "BG PINK";
@@ -298,11 +389,11 @@ void InGameTimerHook()
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                custom_menu.selection = (custom_menu.selection + 1) % 5;
+                custom_menu.selection = (custom_menu.selection + 1) % 6;
             }
             if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
             {
-                custom_menu.selection = (custom_menu.selection - 1) % 5;
+                custom_menu.selection = (custom_menu.selection - 1) % 6;
             }
             
             // Play Sound Effect
@@ -379,8 +470,34 @@ void InGameTimerHook()
 
             }
 
-            // Sparx Selection
+            // IL Looping Selection
             else if(custom_menu.selection == 2)
+            {
+
+                if(_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    custom_menu.il_loop_mode = (custom_menu.il_loop_mode + 1) % 2;
+                }
+                if(_currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    custom_menu.il_loop_mode = (custom_menu.il_loop_mode - 1) % 2;
+                }
+
+                if(custom_menu.il_loop_mode == FALSE)
+                {
+                    custom_menu.il_mode_text = "IL LOOPING OFF";
+
+                }
+                if(custom_menu.il_loop_mode == TRUE)
+                {
+                    custom_menu.il_mode_text = "IL LOOPING ON";
+
+                }
+
+            }
+
+            // Sparx Selection
+            else if(custom_menu.selection == 3)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
@@ -404,7 +521,7 @@ void InGameTimerHook()
             }
 
             // Quick Goop Selection
-            else if(custom_menu.selection == 3)
+            else if(custom_menu.selection == 4)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
@@ -428,7 +545,7 @@ void InGameTimerHook()
             }
 
             // BG Color Selection
-            else if(custom_menu.selection == 4)
+            else if(custom_menu.selection == 5)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
@@ -498,7 +615,7 @@ void InGameTimerHook()
     }
 
         // //Render the HUD Text
-    if((custom_menu.fps_mode != FPS_OFF || custom_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY)
+    if(((custom_menu.fps_mode != FPS_OFF || custom_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
     {
         //printf("RENDERING\n");
         MobyRender();

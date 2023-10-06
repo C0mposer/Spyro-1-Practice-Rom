@@ -319,7 +319,8 @@ extern int _shouldCameraFollowSpyro; //0x80033b4c            //? This is actuall
 
 extern char _mainMenuState; //0x80078D88                     //? This is the current state of the main menu. Should make an enum for this
 extern int _ballonistState; //0x800777e8                     //? The Sub State for the balloonist. Should make an enum for this.
-extern int _levelLoadState; //0x800758b8                     //? The sub state for level loads.
+extern int _levelLoadState; //0x80075864                     //? The sub state for level loads.
+extern int _dragonState; //0x80077058                        //? The sub state for dragon cracking.
 
 extern int _startMenuSelection; //0x80075720                 //? This is the current option selected in the main start menu, according to the StartMenuSelections enum's.
 extern int _selectMenuOption; //0x80075744                   //? This is the current homeworld menu in the inventory menu according to the InventoryMenuSelections enum's.

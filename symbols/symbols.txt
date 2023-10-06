@@ -46,6 +46,7 @@ _mainMenuState = 0x80078D88;
 _isPastTitleScreen = 0x8007566c;
 
 _ballonistState = 0x800777e8;
+_dragonState = 0x80077058;
 
 _movementSubState = 0x80078AD4;
 _flyInAnimation = 0x80076EA8;

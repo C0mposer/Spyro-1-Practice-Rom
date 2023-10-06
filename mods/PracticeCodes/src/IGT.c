@@ -4,7 +4,7 @@
 #include <bg_colors.h>
 
 #define BASELINE 526
-#define TIMER_TO_FRAME 17
+#define TIMER_TO_FRAME 17   //17*30 is 526
 
 typedef enum TimerState
 {
@@ -58,10 +58,12 @@ typedef struct Menu
 typedef struct Timer
 {
     int timer;
-    int framesInSecond;
-    int seconds;
+    int timer_at_reset;
+    int secondsOnesPlace;
+    int secondsTensPlace;
     int displaySeconds;
-    int miliseconds;
+    int milisecondsTenthsPlace;
+    int milisecondsHundrethsPlace;
     int minutes;
     char ascii[10];
 
@@ -105,6 +107,7 @@ void InGameTimerHook()
             //Button Checks
             if(_currentButtonOneFrame == R3_BUTTON)
             {   
+                mainTimer.timer_at_reset = _globalTimer;
                 mainTimer.timer = 0;
                 timer_state = custom_menu.timer_mode;
             }
@@ -118,45 +121,24 @@ void InGameTimerHook()
             //Show the running timer
             if(timer_state == TIMER_RUNNING || timer_state == TIMER_RUNNING_NO_DISPLAY)
             {
-                mainTimer.timer++;
-                mainTimer.framesInSecond = mainTimer.timer % 30;
-                mainTimer.seconds = (mainTimer.timer / 30);
-                mainTimer.displaySeconds = mainTimer.seconds % 60;
-                mainTimer.miliseconds = mainTimer.framesInSecond * 100 / 30;
-                mainTimer.minutes = mainTimer.seconds / 60;
+                //Math for 29.91hz
+                mainTimer.timer = _globalTimer - mainTimer.timer_at_reset;
+                mainTimer.minutes = (mainTimer.timer * 10) / 35892;
+                mainTimer.secondsTensPlace = ((mainTimer.timer * 10) % 35892) / 5982;
+                mainTimer.secondsOnesPlace = ((mainTimer.timer * 100) % 59820) / 5982;
+                mainTimer.milisecondsTenthsPlace = ((mainTimer.timer * 1000) % 59820) / 5982;
+                mainTimer.milisecondsHundrethsPlace = ((mainTimer.timer * 10000) % 59820) / 5982;
 
-                //No minutes
-                //If needs 0 for ms (0.0x)
-                if(mainTimer.miliseconds < 10 && mainTimer.minutes == 0)
+                //Seconds
+                if(mainTimer.minutes == 0)
                 {
-                    sprintf(mainTimer.ascii, "%d.0%d", mainTimer.displaySeconds, mainTimer.miliseconds);
-                }
-                //No zeros needed (0.xx)
-                else if(mainTimer.miliseconds > 10 && mainTimer.minutes == 0)
-                {
-                    sprintf(mainTimer.ascii, "%d.%d", mainTimer.displaySeconds, mainTimer.miliseconds);
+                    sprintf(mainTimer.ascii, "%d%d.%d%d", mainTimer.secondsTensPlace, mainTimer.secondsOnesPlace, mainTimer.milisecondsTenthsPlace, mainTimer.milisecondsHundrethsPlace);
                 }
 
                 //Minutes
-                //If needs 0 for ms and s (0:0x.0x)
-                else if(mainTimer.miliseconds < 10 && mainTimer.displaySeconds < 10 && mainTimer.minutes >= 1)
+                else if(mainTimer.minutes >= 1)
                 {
-                    sprintf(mainTimer.ascii, "%d.0%d.0%d", mainTimer.minutes, mainTimer.displaySeconds, mainTimer.miliseconds);
-                }
-                //If needs 0 for s (0:0x.xx)
-                else if(mainTimer.miliseconds > 10 && mainTimer.displaySeconds < 10 && mainTimer.minutes >= 1)
-                {
-                    sprintf(mainTimer.ascii, "%d.0%d.%d", mainTimer.minutes, mainTimer.displaySeconds, mainTimer.miliseconds);
-                }
-                //If needs 0 for ms (0:xx.0x)
-                else if(mainTimer.miliseconds < 10 && mainTimer.displaySeconds >= 10 && mainTimer.minutes >= 1)
-                {
-                    sprintf(mainTimer.ascii, "%d.%d.0%d", mainTimer.minutes, mainTimer.displaySeconds, mainTimer.miliseconds);
-                }
-                //No need for 0's (0:xx.xx)
-                else if(mainTimer.miliseconds > 10 && mainTimer.displaySeconds >= 10 && mainTimer.minutes >= 1)
-                {
-                    sprintf(mainTimer.ascii, "%d.%d.%d", mainTimer.minutes, mainTimer.displaySeconds, mainTimer.miliseconds);
+                    sprintf(mainTimer.ascii, "%d.%d%d.%d%d", mainTimer.minutes, mainTimer.secondsTensPlace, mainTimer.secondsOnesPlace, mainTimer.milisecondsTenthsPlace, mainTimer.milisecondsHundrethsPlace);
                 }
 
                 timer_text_info.x = SCREEN_RIGHT_EDGE - 0x80;
@@ -179,11 +161,11 @@ void InGameTimerHook()
 
         }
     
-        // Show the FPS
+        //! Show the FPS
         if(custom_menu.fps_mode != FPS_OFF)
         {
             char buffer[10] = {0};
-            fps_data.difference = _hBlankTimer - fps_data.compareTimer;
+            fps_data.difference = _hBlankTimer - fps_data.compareTimer; 
             fps_data.compareTimer = _hBlankTimer;
             fps_data.difference_from_baseline = fps_data.difference - BASELINE;
             fps_data.fps = 30 - (fps_data.difference_from_baseline / TIMER_TO_FRAME / 2);
@@ -335,10 +317,14 @@ void InGameTimerHook()
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
                     custom_menu.timer_mode = (custom_menu.timer_mode + 1) % 3;
+                    mainTimer.timer_at_reset = _globalTimer;
+                    mainTimer.timer = 0;
                 }
                 if(_currentButtonOneFrame == LEFT_BUTTON)
                 {
                     custom_menu.timer_mode = (custom_menu.timer_mode - 1) % 3;
+                    mainTimer.timer_at_reset = _globalTimer;
+                    mainTimer.timer = 0;
                 }
 
                 if(custom_menu.timer_mode == TIMER_OFF)
@@ -518,9 +504,10 @@ void InGameTimerHook()
         MobyRender();
     }
 
-        // printf("Timer: %u\n", _hBlankTimer);
-        // printf("FPS : %u\n", fps);
-        // printf("Comparison from Last Frame : %u\n\n", difference);
+         printf("Timer: %u\n", _hBlankTimer);
+         printf("FPS : %u\n", fps_data.fps);
+         printf("Comparison from Last Frame : %u\n\n", fps_data.difference);
+         printf("Comparison from Baseline : %u\n\n", fps_data.difference_from_baseline);
         // printf("X: %d Y: %d\n", menu_text_info[0].x, menu_text_info[0].y);
        
 

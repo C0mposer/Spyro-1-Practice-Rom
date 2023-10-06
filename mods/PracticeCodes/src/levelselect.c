@@ -108,20 +108,22 @@ void LevelSelect()
 //Custom Function for instantly flying back in into current level
 void InstaLoad(){
 	
-	if(_isLoading == 1 && _levelLoadState == 0xA && _portalToExitFromInHW == 0){
+	if(_isLoading == 1 && _levelLoadState == 0xA && _portalToExitFromInHW == 0)
+	{
 		SaveSpyroAndCamera();
 		instaLoadLevelID = _levelIDIndex;
 	}
 
-	if(instaLoadReady == TRUE){
+	if(instaLoadReady == TRUE)
+	{
 		ReloadSpyroAndCamera();
 		if(_levelLoadState == 0xC){
 			instaLoadReady = FALSE;
 		}
     }
 
-	if(_levelLoadState == 0xD){
-		//
+	if(_levelLoadState == 0xD)
+	{
 		*(int *)0x80056528 = 0x0C005C7F;					//Putting SFX proccessing Vec3Length back after insta-load
 	}
 
@@ -129,13 +131,15 @@ void InstaLoad(){
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;
         _loadingScreenTimer = 0;
-        if(instaLoadLevelID == _levelIDIndex){
+        if(instaLoadLevelID == _levelIDIndex)
+		{
 			_isLoading = 0;									//Set to 0 to immidiately start fly in
 			_levelLoadState = 0xB;
 			*(int *)0x80056528 = 0x00000000;				//NOP-ing SFX proccessing Vec3Length, because of weird bug with vortex
 			instaLoadReady = TRUE;
 		}
-		else{
+		else
+		{
 			_isLoading = 1;
 			_levelLoadState = 0x0;
 			instaLoadReady = FALSE;

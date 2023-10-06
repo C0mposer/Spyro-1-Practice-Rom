@@ -226,6 +226,8 @@ void InGameTimerHook()
                 //Do display shit here :)
                 //Both times on the left of the screen
                 //Regular time larger and then loadless time below it slightly smaller
+                
+                //!We ran out of space by 400 bytes L boser lol -Composer
 
                 if(_levelLoadState >= 0xB){
                     il_timer_state = IL_STOPPED;

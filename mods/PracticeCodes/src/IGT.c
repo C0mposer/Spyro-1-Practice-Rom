@@ -55,7 +55,7 @@ typedef struct Menu
     char* timer_mode_text;
     FPSMode fps_mode;
     char* fps_mode_text;
-    bool il_loop_mode;
+    bool il_mode;
     char* il_mode_text;
     bool sparx_mode;
     char* sparx_mode_text;
@@ -193,49 +193,49 @@ void InGameTimerHook()
         
         //! IL Timer Stuffs
         {
-            if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING)){
-                il_timer_state = IL_FLYING_IN;
-            }
-            else if(il_timer_state == IL_FLYING_IN && _gameState == GAMESTATE_GAMEPLAY){
-                il_timer_state = IL_STARTED;
-                ilTimerStart = _globalTimer;
-                framesSpentLoading = 0;
-            }
-            else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //state 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
-                framesSpentLoading++;
-            }
-            else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING){
-                Timer ilTimer;
-                ilTimer.timer = _globalTimer - ilTimerStart;
-                FramesToTimer(&ilTimer);
-                LoadAscii(&ilTimer, &ilAscii);
-
-                ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
-                FramesToTimer(&ilTimer);
-                LoadAscii(&ilTimer, &loadlessAscii);
-
-                il_timer_state = IL_DISPLAYING;
-
-                //! IL Looping
-                if((custom_menu.il_loop_mode == TRUE && _spyro.timer_framesInAir != 1 && _portalNumber == -1)){
-                    _levelID = _portalToExitFromInHW;
-                    _portalToExitFromInHW = 0;
-                    _flyInAnimation = flyInArray[_levelIDIndex];
-                    ResetLevelCollectables();
+            if(custom_menu.il_mode){
+                if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING)){
+                    il_timer_state = IL_FLYING_IN;
                 }
-            }
-            
-            //DISPLAY
-            if(il_timer_state == IL_DISPLAYING){
-                CapitalTextInfo il_text_info = {SCREEN_LEFT_EDGE + 0x10, 50, 0x1400};
-                CapitalTextInfo il2_text_info = {SCREEN_LEFT_EDGE + 0x10, 65, 0x1800};
-                DrawTextCapitals(ilAscii, &il_text_info, 0xF, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(loadlessAscii, &il2_text_info, 0xB, MOBY_COLOR_PURPLE);
-                
-                //!We ran out of space by 400 bytes L boser lol -Composer
+                else if(il_timer_state == IL_FLYING_IN && _gameState == GAMESTATE_GAMEPLAY){
+                    il_timer_state = IL_STARTED;
+                    ilTimerStart = _globalTimer;
+                    framesSpentLoading = 0;
+                }
+                else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //state 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
+                    framesSpentLoading++;
+                }
+                else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING){
+                    Timer ilTimer;
+                    ilTimer.timer = _globalTimer - ilTimerStart;
+                    FramesToTimer(&ilTimer);
+                    LoadAscii(&ilTimer, &ilAscii);
 
-                if(_levelLoadState >= 0xB){
-                    il_timer_state = IL_STOPPED;
+                    ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
+                    FramesToTimer(&ilTimer);
+                    LoadAscii(&ilTimer, &loadlessAscii);
+
+                    il_timer_state = IL_DISPLAYING;
+
+                    //! IL Looping
+                    if((_spyro.timer_framesInAir != 1 && _portalNumber == -1)){
+                        _levelID = _portalToExitFromInHW;
+                        _portalToExitFromInHW = 0;
+                        _flyInAnimation = flyInArray[_levelIDIndex];
+                        ResetLevelCollectables();
+                    }
+                }
+                
+                //DISPLAY
+                if(il_timer_state == IL_DISPLAYING){
+                    CapitalTextInfo il_text_info = {SCREEN_LEFT_EDGE + 0x10, 50, 0x1400};
+                    CapitalTextInfo il2_text_info = {SCREEN_LEFT_EDGE + 0x10, 65, 0x1800};
+                    DrawTextCapitals(ilAscii, &il_text_info, 0xF, MOBY_COLOR_PURPLE);
+                    DrawTextCapitals(loadlessAscii, &il2_text_info, 0xB, MOBY_COLOR_PURPLE);
+
+                    if(_levelLoadState >= 0xB){
+                        il_timer_state = IL_STOPPED;
+                    }
                 }
             }
         }
@@ -382,7 +382,7 @@ void InGameTimerHook()
             if(custom_menu.fps_mode_text == NULL)
             {
                 custom_menu.fps_mode_text = "FPS OFF";
-                custom_menu.il_mode_text = "IL LOOPING OFF";
+                custom_menu.il_mode_text = "IL MODE OFF";
                 custom_menu.sparx_mode_text = "PERMA SPARX OFF";
                 custom_menu.quick_goop_text = "QUICK GOOP OFF";
                 custom_menu.bg_color_text = "BG PINK";
@@ -478,21 +478,21 @@ void InGameTimerHook()
 
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    custom_menu.il_loop_mode = (custom_menu.il_loop_mode + 1) % 2;
+                    custom_menu.il_mode = (custom_menu.il_mode + 1) % 2;
                 }
                 if(_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    custom_menu.il_loop_mode = (custom_menu.il_loop_mode - 1) % 2;
+                    custom_menu.il_mode = (custom_menu.il_mode - 1) % 2;
                 }
 
-                if(custom_menu.il_loop_mode == FALSE)
+                if(custom_menu.il_mode == FALSE)
                 {
-                    custom_menu.il_mode_text = "IL LOOPING OFF";
+                    custom_menu.il_mode_text = "IL MODE OFF";
 
                 }
-                if(custom_menu.il_loop_mode == TRUE)
+                if(custom_menu.il_mode == TRUE)
                 {
-                    custom_menu.il_mode_text = "IL LOOPING ON";
+                    custom_menu.il_mode_text = "IL MODE ON";
 
                 }
 

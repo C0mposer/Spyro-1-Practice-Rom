@@ -193,7 +193,8 @@ void InGameTimerHook()
         
         //! IL Timer Stuffs
         {
-            if(custom_menu.il_mode){
+            if(custom_menu.il_mode)
+            {
                 if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING)){
                     il_timer_state = IL_FLYING_IN;
                 }
@@ -205,7 +206,8 @@ void InGameTimerHook()
                 else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //state 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
                     framesSpentLoading++;
                 }
-                else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING){
+                else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING)
+                {
                     Timer ilTimer;
                     ilTimer.timer = _globalTimer - ilTimerStart;
                     FramesToTimer(&ilTimer);
@@ -218,7 +220,8 @@ void InGameTimerHook()
                     il_timer_state = IL_DISPLAYING;
 
                     //! IL Looping
-                    if((_spyro.timer_framesInAir != 1 && _portalNumber == -1)){
+                    if((_spyro.timer_framesInAir != 1 && _portalNumber == -1))
+                    {
                         _levelID = _portalToExitFromInHW;
                         _portalToExitFromInHW = 0;
                         _flyInAnimation = flyInArray[_levelIDIndex];

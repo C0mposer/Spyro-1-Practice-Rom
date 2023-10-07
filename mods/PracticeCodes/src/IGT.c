@@ -290,8 +290,6 @@ void InGameTimerHook()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            char buffer[6][20] = {0};
-
             _spyro.isMovementLocked = TRUE;
 
             DrawTextBox(0x30, 0x1D0, 0x30, 0xC0);

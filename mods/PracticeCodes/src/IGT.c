@@ -284,8 +284,6 @@ void InGameTimerHook()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            char buffer[6][20] = {0};
-
             _spyro.isMovementLocked = TRUE;
 
             DrawTextBox(0x30, 0x1D0, 0x30, 0xC0);
@@ -315,67 +313,60 @@ void InGameTimerHook()
             menu_text_info[5].size = DEFAULT_SIZE;
 
 
-            sprintf(&buffer, "%s", custom_menu.timer_mode_text);
-            sprintf(&buffer[1], "%s", custom_menu.fps_mode_text);
-            sprintf(&buffer[2], "%s", custom_menu.il_mode_text);
-            sprintf(&buffer[3], "%s", custom_menu.sparx_mode_text);
-            sprintf(&buffer[4], "%s", custom_menu.quick_goop_text);
-            sprintf(&buffer[5], "%s", custom_menu.bg_color_text);
-
             //Fix later?
             if(custom_menu.selection == 0)
             {
-                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 1)
             {
-                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 2)
             {
-                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 3)
             {
-                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 4)
             {
-                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             else if(custom_menu.selection == 5)
             {
-                DrawTextCapitals(buffer, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[1], &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[2], &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[3], &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[4], &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                DrawTextCapitals(buffer[5], &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
 
             // Fill text with defaults if NULL

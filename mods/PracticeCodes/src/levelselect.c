@@ -126,7 +126,7 @@ void InstaLoad(){
 
 	if(_levelLoadState == 0xD)
 	{
-		*(int *)0x80056528 = 0x0C005C7F;					//Putting SFX proccessing Vec3Length back after insta-load
+		*(int *)0x80056528 = 0x0C005C7F;						//Putting SFX proccessing Vec3Length back after insta-load
 	}
 
 	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY)

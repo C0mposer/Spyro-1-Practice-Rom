@@ -20,7 +20,7 @@ extern bool should_update_bg_color;
 
 extern signed int instaLoadLevelID;
 
-extern bool shouldResetCollectables;
+extern bool should_reset_collectables;
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
@@ -140,7 +140,7 @@ void MainFunc()
         {
             RespawnSpyro();
         }
-        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH) && shouldResetCollectables)
+        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH) && should_reset_collectables)
         {
             ResetLevelCollectables();
         }

@@ -116,7 +116,7 @@ MenuState menu_state = MENU_HIDDEN;
 //?Externs elsewhere
 BackgroundColor bg_color_index;
 bool should_update_bg_color = true;
-bool shouldResetCollectables = true;
+bool should_reset_collectables = true;
 
 
 //CapitalTextInfo timer_text_info = {0};        // Structs Now Initialized on the stack only when needed
@@ -283,7 +283,7 @@ void InGameTimerHook()
 
             _spyro.isMovementLocked = TRUE;
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0xC0);
+            DrawTextBox(0x30, 0x1D0, 0x30, 0xBE);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -455,13 +455,13 @@ void InGameTimerHook()
                 if(custom_menu.reset_mode == 0)
                 {
                     custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
-                    shouldResetCollectables = true;
+                    should_reset_collectables = true;
 
                 }
                 else if(custom_menu.reset_mode == 1)
                 {
                     custom_menu.reset_mode_text = "RESET COLLECTABLES OFF";
-                    shouldResetCollectables = false;
+                    should_reset_collectables = false;
 
                 }
 

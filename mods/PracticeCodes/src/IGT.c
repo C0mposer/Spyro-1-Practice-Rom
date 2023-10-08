@@ -566,12 +566,12 @@ void InGameTimerHook()
 
         }
         
-
         // Has Released Menu Button
         if(_currentButton != L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON)
         {
             has_toggled_menu = FALSE;
         }
+        
     }
 
     //! Sparx and Quick Goop

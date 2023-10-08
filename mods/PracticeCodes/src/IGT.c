@@ -114,7 +114,8 @@ FPS_t fps_data = {0};
 //CapitalTextInfo fps_text_info = {0};
 //CapitalTextInfo menu_text_info[6] = {{0}};
 
-void FramesToTimer(Timer *ptr_timer){
+void FramesToTimer(Timer* ptr_timer)
+{
     ptr_timer->minutes = (ptr_timer->timer * 10) / 35892;
     ptr_timer->secondsTensPlace = ((ptr_timer->timer * 10) % 35892) / 5982;
     ptr_timer->secondsOnesPlace = ((ptr_timer->timer * 100) % 59820) / 5982;
@@ -122,7 +123,7 @@ void FramesToTimer(Timer *ptr_timer){
     ptr_timer->milisecondsHundrethsPlace = ((ptr_timer->timer * 10000) % 59820) / 5982;
 }
 
-void LoadAscii(Timer *ptr_timer, char *ascii){
+void LoadAscii(Timer* ptr_timer, char* ascii){
     sprintf(ascii, "%d.%d%d.%d%d", ptr_timer->minutes, ptr_timer->secondsTensPlace, ptr_timer->secondsOnesPlace, ptr_timer->milisecondsTenthsPlace, ptr_timer->milisecondsHundrethsPlace);
 }
 

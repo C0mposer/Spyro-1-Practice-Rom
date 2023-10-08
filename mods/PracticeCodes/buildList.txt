@@ -9,7 +9,7 @@ NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 
 PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
-PS2_NTSC, header, 0x8000A960, 0x0, src/main.c src/levelselect.c, MainFunc.bin
+PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/levelselect.c, MainFunc.bin
 PS2_NTSC, exe, 0x800314b4, 0x0, src/IGT.c src/custom_text.c, IGT.bin
 PS2_NTSC, exe, 0x80010084, 0x0, patches/levelselectnames.bin
 PS2_NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin

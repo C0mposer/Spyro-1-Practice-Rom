@@ -358,7 +358,7 @@ void InGameTimerHook()
             {
                 custom_menu.il_mode_text = "IL MODE OFF";
                 custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
-                custom_menu.sparx_mode_text = "PERMA SPARX OFF";
+                custom_menu.sparx_mode_text = "SPARX NORMAL";
                 custom_menu.quick_goop_text = "QUICK GOOP OFF";
                 custom_menu.bg_color_text = "BG PINK";
             }
@@ -474,7 +474,7 @@ void InGameTimerHook()
 
                 if(custom_menu.sparx_mode == PERMA_SPARX_OFF)
                 {
-                    custom_menu.sparx_mode_text = "PERMA SPARX OFF";
+                    custom_menu.sparx_mode_text = "SPARX NORMAL";
 
                 }
                 else if(custom_menu.sparx_mode == PERMA_SPARX_ON)
@@ -484,7 +484,7 @@ void InGameTimerHook()
                 }
                 else if(custom_menu.sparx_mode == SPARXLESS)
                 {
-                    custom_menu.sparx_mode_text = "SPARXLESS";
+                    custom_menu.sparx_mode_text = "SPARXLESS ON";
 
                 }
             }
@@ -571,7 +571,7 @@ void InGameTimerHook()
         {
             has_toggled_menu = FALSE;
         }
-        
+
     }
 
     //! Sparx and Quick Goop
@@ -594,7 +594,6 @@ void InGameTimerHook()
         }
     }
 
-        // //Render the HUD Text
     if(((custom_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
     {
         //printf("RENDERING\n");

@@ -129,7 +129,7 @@ void InstaLoad(){
 		*(int *)0x80056528 = 0x0C005C7F;						//Putting SFX proccessing Vec3Length back after insta-load
 	}
 
-	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY)
+	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON) && _gameState == GAMESTATE_GAMEPLAY)
 	{
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;

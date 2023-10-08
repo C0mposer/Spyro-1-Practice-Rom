@@ -12,13 +12,15 @@ typedef enum ModState ModState;
 
 ModState mod_state = GAME_STARTED;
 
-RedGreen bg_colors[6] = {{0x70, 0}, {0xB0, 0xB0}, {0x00, 0x50}, {0xB0, 0x30}, {0x40, 0x18}, {0, 0}};
+RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50},};
 
 extern BackgroundColor bg_color_index;
 
 extern bool should_update_bg_color;
 
 extern signed int instaLoadLevelID;
+
+extern bool shouldResetCollectables;
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
@@ -75,7 +77,7 @@ void ResetLevelCollectables()
 }
 
 //Changing asm instructions for pause menu RGB. Cannot change B, as the value is in a shared register.
-void SetTitleScreenColor(byte r, byte g)
+inline void SetTitleScreenColor(byte r, byte g)
 {
     *(short*)(0x8001A674) = r;
     *(short*)(0x8001A67C) = g;
@@ -87,12 +89,6 @@ void SetTitleScreenColor(byte r, byte g)
 //*
 void MainFunc()
 {   
-    //NOP-ing the JAL's to the fairy functions
-    int* fairy_jal = (int*)0x8001EEC4;
-    int* start_fairy_jal = (int*)0x80033998;
-    *fairy_jal = NOP;
-    *start_fairy_jal = NOP;
-
     //! At seperate memory locations
     {
         InGameTimerHook();
@@ -107,6 +103,7 @@ void MainFunc()
     if(mod_state == GAME_STARTED && _globalTimer > 20)                //? If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
     {
         SkipIntro();
+        _musicVolume = 0;
         mod_state = SKIPPED_INTRO;
     }
 
@@ -143,7 +140,7 @@ void MainFunc()
         {
             RespawnSpyro();
         }
-        if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH)
+        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH) && shouldResetCollectables)
         {
             ResetLevelCollectables();
         }

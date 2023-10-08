@@ -57,6 +57,8 @@ typedef struct Menu
     char* fps_mode_text;
     bool il_mode;
     char* il_mode_text;
+    int reset_mode;
+    char* reset_mode_text;
     bool sparx_mode;
     char* sparx_mode_text;
     bool quick_goop_mode;
@@ -102,13 +104,16 @@ char ilAscii[10];
 char loadlessAscii[10];
 extern short flyInArray[36];
 
+FPS_t fps_data = {0};
+
 Menu custom_menu = {0};
 MenuState menu_state = MENU_HIDDEN;
 
+//?Externs elsewhere
 BackgroundColor bg_color_index;
-bool should_update_bg_color = TRUE;
+bool should_update_bg_color = true;
+bool shouldResetCollectables = true;
 
-FPS_t fps_data = {0};
 
 //CapitalTextInfo timer_text_info = {0};        // Structs Now Initialized on the stack only when needed
 //CapitalTextInfo fps_text_info = {0};
@@ -175,7 +180,7 @@ void InGameTimerHook()
                 timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
                 timer_text_info.size = DEFAULT_SIZE;
 
-                if(timer_state == TIMER_RUNNING)
+                if(timer_state == TIMER_RUNNING && _gameState == GAMESTATE_GAMEPLAY)
                     DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
 
             }
@@ -257,7 +262,7 @@ void InGameTimerHook()
                 
             if(fps_data.fps < 100)
             {
-                if(custom_menu.fps_mode == FPS_ALWAYS || (custom_menu.fps_mode == FPS_ONLY_DROPPED && fps_data.fps <= 29))
+                if((custom_menu.fps_mode == FPS_ALWAYS || (custom_menu.fps_mode == FPS_ONLY_DROPPED && fps_data.fps <= 29)) && _gameState == GAMESTATE_GAMEPLAY)
                 {
                     CapitalTextInfo fps_text_info = {0};
                     fps_text_info.x = SCREEN_LEFT_EDGE + 0x10;
@@ -296,31 +301,36 @@ void InGameTimerHook()
 
             _spyro.isMovementLocked = TRUE;
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0xC0);
-            CapitalTextInfo menu_text_info[6] = {{0}};
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x50;
+            DrawTextBox(0x30, 0x1D0, 0x30, 0xD1);
+            CapitalTextInfo menu_text_info[7] = {{0}};
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
             menu_text_info[0].size = DEFAULT_SIZE;
 
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x50;
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[1].y = 90;
             menu_text_info[1].size = DEFAULT_SIZE;
 
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x50;
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[2].y = 110;
             menu_text_info[2].size = DEFAULT_SIZE;
 
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x50;
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[3].y = 130;
             menu_text_info[3].size = DEFAULT_SIZE;
             
-            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x50;
+            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[4].y = 150;
             menu_text_info[4].size = DEFAULT_SIZE;
 
-            menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x50;
+            menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[5].y = 170;
             menu_text_info[5].size = DEFAULT_SIZE;
+
+
+            menu_text_info[6].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[6].y = 190;
+            menu_text_info[6].size = DEFAULT_SIZE;
 
 
             if(custom_menu.selection == 0)
@@ -349,26 +359,34 @@ void InGameTimerHook()
 
             if(custom_menu.selection == 3)
             {
-                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-            
+
             if(custom_menu.selection == 4)
             {
-                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
             if(custom_menu.selection == 5)
             {
-                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+            if(custom_menu.selection == 6)
+            {
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
 
@@ -377,6 +395,7 @@ void InGameTimerHook()
             {
                 custom_menu.fps_mode_text = "FPS OFF";
                 custom_menu.il_mode_text = "IL MODE OFF";
+                custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
                 custom_menu.sparx_mode_text = "PERMA SPARX OFF";
                 custom_menu.quick_goop_text = "QUICK GOOP OFF";
                 custom_menu.bg_color_text = "BG PINK";
@@ -385,11 +404,11 @@ void InGameTimerHook()
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                custom_menu.selection = (custom_menu.selection + 1) % 6;
+                custom_menu.selection = (custom_menu.selection + 1) % 7;
             }
             if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
             {
-                custom_menu.selection = (custom_menu.selection - 1) % 6;
+                custom_menu.selection = custom_menu.selection - 1;
             }
             
             // Play Sound Effect
@@ -469,14 +488,9 @@ void InGameTimerHook()
             // IL Looping Selection
             else if(custom_menu.selection == 2)
             {
-
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
+                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     custom_menu.il_mode = (custom_menu.il_mode + 1) % 2;
-                }
-                if(_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.il_mode = (custom_menu.il_mode - 1) % 2;
                 }
 
                 if(custom_menu.il_mode == FALSE)
@@ -492,16 +506,37 @@ void InGameTimerHook()
 
             }
 
-            // Sparx Selection
+            // Reset Selection
             else if(custom_menu.selection == 3)
             {
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
+
+                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    custom_menu.reset_mode = (custom_menu.reset_mode + 1) % 2;
+                }
+
+                //Flipped for sake of on being first option
+                if(custom_menu.reset_mode == 0)
+                {
+                    custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
+                    shouldResetCollectables = true;
+
+                }
+                if(custom_menu.reset_mode == 1)
+                {
+                    custom_menu.reset_mode_text = "RESET COLLECTABLES OFF";
+                    shouldResetCollectables = false;
+
+                }
+
+            }
+
+            // Sparx Selection
+            else if(custom_menu.selection == 4)
+            {
+                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     custom_menu.sparx_mode = (custom_menu.sparx_mode + 1) % 2;
-                }
-                if(_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.sparx_mode = (custom_menu.sparx_mode - 1) % 2;
                 }
 
                 if(custom_menu.sparx_mode == FALSE)
@@ -517,15 +552,11 @@ void InGameTimerHook()
             }
 
             // Quick Goop Selection
-            else if(custom_menu.selection == 4)
+            else if(custom_menu.selection == 5)
             {
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
+                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     custom_menu.quick_goop_mode = (custom_menu.quick_goop_mode + 1) % 2;
-                }
-                if(_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.quick_goop_mode = (custom_menu.quick_goop_mode - 1) % 2;
                 }
 
                 if(custom_menu.quick_goop_mode == FALSE)
@@ -541,7 +572,7 @@ void InGameTimerHook()
             }
 
             // BG Color Selection
-            else if(custom_menu.selection == 5)
+            else if(custom_menu.selection == 6)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
@@ -569,11 +600,6 @@ void InGameTimerHook()
                     custom_menu.bg_color_text = "BG TEAL";
 
                 }
-                if(bg_color_index == BG_SALMON)
-                {
-                    custom_menu.bg_color_text = "BG SALMON";
-
-                }
                 if(bg_color_index == BG_PURPLE)
                 {
                     custom_menu.bg_color_text = "BG PURPLE";
@@ -582,6 +608,11 @@ void InGameTimerHook()
                 if(bg_color_index == BG_BLUE)
                 {
                     custom_menu.bg_color_text = "BG BLUE";
+
+                }
+                if(bg_color_index == BG_GREY)
+                {
+                    custom_menu.bg_color_text = "BG GREY";
 
                 }
             }

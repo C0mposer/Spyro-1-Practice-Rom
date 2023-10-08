@@ -108,8 +108,9 @@ void LevelSelect()
 //Custom Function for instantly flying back in into current level
 void InstaLoad(){
 	
-	if(_isLoading == 1 && _levelLoadState == 0xA && _portalToExitFromInHW == 0)
+	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
+		//printf("Saving\n");
 		SaveSpyroAndCamera();
 		instaLoadLevelID = _levelIDIndex;
 	}
@@ -117,7 +118,8 @@ void InstaLoad(){
 	if(instaLoadReady == TRUE)
 	{
 		ReloadSpyroAndCamera();
-		if(_levelLoadState == 0xC){
+		if(_levelLoadState == 0xC)
+		{
 			instaLoadReady = FALSE;
 		}
     }
@@ -127,20 +129,22 @@ void InstaLoad(){
 		*(int *)0x80056528 = 0x0C005C7F;					//Putting SFX proccessing Vec3Length back after insta-load
 	}
 
-	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY){
+	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON + UP_BUTTON) && _gameState == GAMESTATE_GAMEPLAY)
+	{
 		ResetLevelCollectables();
         _flightWingsAnimation = 0;
         _loadingScreenTimer = 0;
         if(instaLoadLevelID == _levelIDIndex)
 		{
-			_isLoading = 0;									//Set to 0 to immidiately start fly in
+			//printf("Starting\n");
 			_levelLoadState = 0xB;
-			*(int *)0x80056528 = 0x00000000;				//NOP-ing SFX proccessing Vec3Length, because of weird bug with vortex
+			_isLoading = 0;										//Set to 0 to immidiately start fly in. Is this needed?
+			*(int *)0x80056528 = 0x00000000;					//NOP-ing SFX proccessing Vec3Length, because of weird bug with vortex
 			instaLoadReady = TRUE;
 		}
 		else
 		{
-			_isLoading = 1;
+			_isLoading = 1;									
 			_levelLoadState = 0x0;
 			instaLoadReady = FALSE;
 		}

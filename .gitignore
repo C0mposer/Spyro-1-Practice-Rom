@@ -299,3 +299,10 @@ build/bootedit/TMD_models/YUGIB.TMD
 build/bootedit/TMD_models/YUGIOH.TMD
 build/bootedit/TMD_models/yyy.TMD
 build/bootedit/TMD_models/ZSOLDIER.TMD
+mods/PracticeCodes/buildList.txt
+mods/PracticeCodes/debug/dep/gamestate_fairy_fix.dep
+mods/PracticeCodes/debug/dep/title_nop.dep
+mods/PracticeCodes/debug/obj/gamestate_fairy_fix.o
+mods/PracticeCodes/debug/obj/title_nop.o
+mods/PracticeCodes/output/asmgamestate_fairy_fixs.bin
+mods/PracticeCodes/output/asmtitle_nops.bin

@@ -363,6 +363,8 @@ extern int _collectablesBitflags; //0x80077908
 
 extern int _musicState; //0x800774B4                        //?
 
+extern int _musicVolume; //0x80075748                       //? Music Volume in Pause Menu
+
 extern char* _cameraStart; //0x80076DD0                     //? Start of Camera Struct?
 
 extern int _isNestorUnskipable;

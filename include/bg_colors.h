@@ -12,9 +12,9 @@ typedef enum BackgroundColor
     BG_PINK,
     BG_YELLOW,
     BG_TEAL,
-    BG_SALMON,
     BG_PURPLE,
-    BG_BLUE
+    BG_BLUE,
+    BG_GREY
 
 }BackgroundColor;
 

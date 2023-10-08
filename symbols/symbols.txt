@@ -96,6 +96,7 @@ _fairyMenusArray = 0x80078D0C;
 
 _musicSectors = 0x8006f200;
 _musicState = 0x800774B4;
+_musicVolume = 0x80075748;
 
 _hBlankTimer = 0x1F801110;
 

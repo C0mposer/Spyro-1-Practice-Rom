@@ -1,4 +1,5 @@
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
+NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/levelselect.c, MainFunc.bin
 
 NTSC, exe, 0x800314b4, 0x0, src/IGT.c src/custom_text.c, IGT.bin

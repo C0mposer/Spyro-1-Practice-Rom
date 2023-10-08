@@ -523,38 +523,49 @@ void InGameTimerHook()
                     should_update_bg_color = TRUE;
                 }
 
-                if(bg_color_index == BG_PINK)
+                switch(bg_color_index)
                 {
-                    custom_menu.bg_color_text = "BG PINK";
-
+                    case(BG_PINK):
+                    {
+                        custom_menu.bg_color_text = "BG PINK";
+                        break;
+                    }
+                    case(BG_YELLOW):
+                    {
+                        custom_menu.bg_color_text = "BG YELLOW";
+                        break;
+                    }
+                    case(BG_TEAL):
+                    {
+                        custom_menu.bg_color_text = "BG TEAL";
+                        break;
+                    }
+                    case(BG_PURPLE):
+                    {
+                        custom_menu.bg_color_text = "BG PURPLE";
+                        break;
+                    }
+                    case(BG_BLUE):
+                    {
+                        custom_menu.bg_color_text = "BG BLUE";
+                        break;
+                    }
+                    case(BG_GREY):
+                    {
+                        custom_menu.bg_color_text = "BG GREY";
+                        break;
+                    }
+                    default:
+                    {
+                        custom_menu.bg_color_text = "BG GREY";
+                        break;
+                    }
                 }
-                else if(bg_color_index == BG_YELLOW)
-                {
-                    custom_menu.bg_color_text = "BG YELLOW";
-
-                }
-                else if(bg_color_index == BG_TEAL)
-                {
-                    custom_menu.bg_color_text = "BG TEAL";
-
-                }
-                else if(bg_color_index == BG_PURPLE)
-                {
-                    custom_menu.bg_color_text = "BG PURPLE";
-
-                }
-                else if(bg_color_index == BG_BLUE)
-                {
-                    custom_menu.bg_color_text = "BG BLUE";
-
-                }
-                else if(bg_color_index == BG_GREY)
-                {
-                    custom_menu.bg_color_text = "BG GREY";
-
-                }
+        
             }
+            
         }
+        
 
         // Has Released Menu Button
         if(_currentButton != L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON)

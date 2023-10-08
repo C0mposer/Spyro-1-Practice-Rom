@@ -47,19 +47,25 @@ typedef enum FPSMode
 
 }FPSMode;
 
+typedef enum SparxMode
+{
+    PERMA_SPARX_OFF,
+    PERMA_SPARX_ON,
+    SPARXLESS
+
+}SparxMode;
+
 
 typedef struct Menu
 {
     int selection;
     TimerMode timer_mode;
     char* timer_mode_text;
-    FPSMode fps_mode;
-    char* fps_mode_text;
     bool il_mode;
     char* il_mode_text;
     int reset_mode;
     char* reset_mode_text;
-    bool sparx_mode;
+    SparxMode sparx_mode;
     char* sparx_mode_text;
     bool quick_goop_mode;
     char* quick_goop_text;
@@ -104,8 +110,6 @@ char ilAscii[10];
 char loadlessAscii[10];
 extern short flyInArray[36];
 
-FPS_t fps_data = {0};
-
 Menu custom_menu = {0};
 MenuState menu_state = MENU_HIDDEN;
 
@@ -134,7 +138,7 @@ void LoadAscii(Timer* ptr_timer, char* ascii){
 
 void InGameTimerHook()
 {
-   //! Timer & FPS
+   //! Timer
     {
 
         if(timer_state != TIMER_STOPPED)
@@ -248,32 +252,8 @@ void InGameTimerHook()
                 }
             }
         }
-    
-        //! Show the FPS
-        if(custom_menu.fps_mode != FPS_OFF)
-        {
-            char buffer[10] = {0};
-            fps_data.difference = _hBlankTimer - fps_data.compareTimer; 
-            fps_data.compareTimer = _hBlankTimer;
-            fps_data.difference_from_baseline = fps_data.difference - BASELINE;
-            fps_data.fps = 30 - (fps_data.difference_from_baseline / TIMER_TO_FRAME / 2);
-                
-            sprintf(buffer, "FPS %d", fps_data.fps);
-                
-            if(fps_data.fps < 100)
-            {
-                if((custom_menu.fps_mode == FPS_ALWAYS || (custom_menu.fps_mode == FPS_ONLY_DROPPED && fps_data.fps <= 29)) && _gameState == GAMESTATE_GAMEPLAY)
-                {
-                    CapitalTextInfo fps_text_info = {0};
-                    fps_text_info.x = SCREEN_LEFT_EDGE + 0x10;
-                    fps_text_info.y = 20;
-                    fps_text_info.size = DEFAULT_SIZE;
-                    DrawTextCapitals(buffer, &fps_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                }
-            }
-            
-        }
     }
+
 
     //! Menu
     {
@@ -299,10 +279,12 @@ void InGameTimerHook()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
+            CapitalTextInfo menu_text_info[6] = {{0}};
+
             _spyro.isMovementLocked = TRUE;
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0xD1);
-            CapitalTextInfo menu_text_info[7] = {{0}};
+            DrawTextBox(0x30, 0x1D0, 0x30, 0xC0);
+            
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
             menu_text_info[0].size = DEFAULT_SIZE;
@@ -327,12 +309,6 @@ void InGameTimerHook()
             menu_text_info[5].y = 170;
             menu_text_info[5].size = DEFAULT_SIZE;
 
-
-            menu_text_info[6].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[6].y = 190;
-            menu_text_info[6].size = DEFAULT_SIZE;
-
-
             if(custom_menu.selection == 0)
             {
                 DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -340,60 +316,51 @@ void InGameTimerHook()
             else{
                 DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-
+            
             if(custom_menu.selection == 1)
             {
-                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.fps_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-            
+
             if(custom_menu.selection == 2)
             {
-                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
             if(custom_menu.selection == 3)
             {
-                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-
+            
             if(custom_menu.selection == 4)
             {
-                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
             if(custom_menu.selection == 5)
             {
-                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            
-            if(custom_menu.selection == 6)
-            {
-                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
 
             // Fill text with defaults if NULL
-            if(custom_menu.fps_mode_text == NULL)
+            if(custom_menu.reset_mode_text == NULL)
             {
-                custom_menu.fps_mode_text = "FPS OFF";
                 custom_menu.il_mode_text = "IL MODE OFF";
                 custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
                 custom_menu.sparx_mode_text = "PERMA SPARX OFF";
@@ -404,9 +371,9 @@ void InGameTimerHook()
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                custom_menu.selection = (custom_menu.selection + 1) % 7;
+                custom_menu.selection = (custom_menu.selection + 1) % 6;
             }
-            if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
+            else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
             {
                 custom_menu.selection = custom_menu.selection - 1;
             }
@@ -454,39 +421,8 @@ void InGameTimerHook()
                 }
             }
 
-            // FPS Selection
-            else if(custom_menu.selection == 1)
-            {
-
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
-                {
-                    custom_menu.fps_mode = (custom_menu.fps_mode + 1) % 3;
-                }
-                if(_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.fps_mode = (custom_menu.fps_mode - 1) % 3;
-                }
-
-                if(custom_menu.fps_mode == FPS_OFF)
-                {
-                    custom_menu.fps_mode_text = "FPS OFF";
-
-                }
-                if(custom_menu.fps_mode == FPS_ONLY_DROPPED)
-                {
-                    custom_menu.fps_mode_text = "FPS ONLY DROPS";
-
-                }
-                if(custom_menu.fps_mode == FPS_ALWAYS)
-                {
-                    custom_menu.fps_mode_text = "FPS ALWAYS";
-
-                }
-
-            }
-
             // IL Looping Selection
-            else if(custom_menu.selection == 2)
+            else if(custom_menu.selection == 1)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
@@ -498,7 +434,7 @@ void InGameTimerHook()
                     custom_menu.il_mode_text = "IL MODE OFF";
 
                 }
-                if(custom_menu.il_mode == TRUE)
+                else if(custom_menu.il_mode == TRUE)
                 {
                     custom_menu.il_mode_text = "IL MODE ON";
 
@@ -507,7 +443,7 @@ void InGameTimerHook()
             }
 
             // Reset Selection
-            else if(custom_menu.selection == 3)
+            else if(custom_menu.selection == 2)
             {
 
                 if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
@@ -522,7 +458,7 @@ void InGameTimerHook()
                     shouldResetCollectables = true;
 
                 }
-                if(custom_menu.reset_mode == 1)
+                else if(custom_menu.reset_mode == 1)
                 {
                     custom_menu.reset_mode_text = "RESET COLLECTABLES OFF";
                     shouldResetCollectables = false;
@@ -532,27 +468,36 @@ void InGameTimerHook()
             }
 
             // Sparx Selection
-            else if(custom_menu.selection == 4)
+            else if(custom_menu.selection == 3)
             {
-                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    custom_menu.sparx_mode = (custom_menu.sparx_mode + 1) % 2;
+                    custom_menu.sparx_mode = (custom_menu.sparx_mode + 1) % 3;
+                }
+                else if(_currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    custom_menu.sparx_mode = (custom_menu.sparx_mode - 1) % 3;
                 }
 
-                if(custom_menu.sparx_mode == FALSE)
+                if(custom_menu.sparx_mode == PERMA_SPARX_OFF)
                 {
                     custom_menu.sparx_mode_text = "PERMA SPARX OFF";
 
                 }
-                if(custom_menu.sparx_mode == TRUE)
+                else if(custom_menu.sparx_mode == PERMA_SPARX_ON)
                 {
                     custom_menu.sparx_mode_text = "PERMA SPARX ON";
+
+                }
+                else if(custom_menu.sparx_mode == SPARXLESS)
+                {
+                    custom_menu.sparx_mode_text = "SPARXLESS";
 
                 }
             }
 
             // Quick Goop Selection
-            else if(custom_menu.selection == 5)
+            else if(custom_menu.selection == 4)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
@@ -564,7 +509,7 @@ void InGameTimerHook()
                     custom_menu.quick_goop_text = "QUICK GOOP OFF";
 
                 }
-                if(custom_menu.quick_goop_mode == TRUE)
+                else if(custom_menu.quick_goop_mode == TRUE)
                 {
                     custom_menu.quick_goop_text = "QUICK GOOP ON";
 
@@ -572,14 +517,14 @@ void InGameTimerHook()
             }
 
             // BG Color Selection
-            else if(custom_menu.selection == 6)
+            else if(custom_menu.selection == 5)
             {
                 if(_currentButtonOneFrame == RIGHT_BUTTON)
                 {
                     bg_color_index = (bg_color_index + 1) % 6;
                     should_update_bg_color = TRUE;
                 }
-                if(_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
+                else if(_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
                 {
                     bg_color_index = (bg_color_index - 1) % 6;
                     should_update_bg_color = TRUE;
@@ -590,27 +535,27 @@ void InGameTimerHook()
                     custom_menu.bg_color_text = "BG PINK";
 
                 }
-                if(bg_color_index == BG_YELLOW)
+                else if(bg_color_index == BG_YELLOW)
                 {
                     custom_menu.bg_color_text = "BG YELLOW";
 
                 }
-                if(bg_color_index == BG_TEAL)
+                else if(bg_color_index == BG_TEAL)
                 {
                     custom_menu.bg_color_text = "BG TEAL";
 
                 }
-                if(bg_color_index == BG_PURPLE)
+                else if(bg_color_index == BG_PURPLE)
                 {
                     custom_menu.bg_color_text = "BG PURPLE";
 
                 }
-                if(bg_color_index == BG_BLUE)
+                else if(bg_color_index == BG_BLUE)
                 {
                     custom_menu.bg_color_text = "BG BLUE";
 
                 }
-                if(bg_color_index == BG_GREY)
+                else if(bg_color_index == BG_GREY)
                 {
                     custom_menu.bg_color_text = "BG GREY";
 
@@ -625,11 +570,15 @@ void InGameTimerHook()
         }
     }
 
-    //! Perma Sparx and Quick Goop
+    //! Sparx and Quick Goop
     {
-        if(custom_menu.sparx_mode == TRUE)
+        if(custom_menu.sparx_mode == PERMA_SPARX_ON)
         {
             _spyro.health = 3;
+        }
+        if(custom_menu.sparx_mode == SPARXLESS)
+        {
+            _spyro.health = 0;
         }
 
         if(custom_menu.quick_goop_mode == TRUE)
@@ -642,7 +591,7 @@ void InGameTimerHook()
     }
 
         // //Render the HUD Text
-    if(((custom_menu.fps_mode != FPS_OFF || custom_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
+    if(((custom_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
     {
         //printf("RENDERING\n");
         MobyRender();

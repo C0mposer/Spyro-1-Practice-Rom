@@ -306,3 +306,6 @@ mods/PracticeCodes/debug/obj/gamestate_fairy_fix.o
 mods/PracticeCodes/debug/obj/title_nop.o
 mods/PracticeCodes/output/asmgamestate_fairy_fixs.bin
 mods/PracticeCodes/output/asmtitle_nops.bin
+mods/PracticeCodes/asm/test.dep
+mods/PracticeCodes/asm/test.o
+mods/PracticeCodes/output/asmtests.bin

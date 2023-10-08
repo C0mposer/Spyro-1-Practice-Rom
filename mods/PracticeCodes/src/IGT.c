@@ -386,13 +386,11 @@ void InGameTimerHook()
                 {
                     custom_menu.timer_mode = (custom_menu.timer_mode + 1) % 3;
                     mainTimerAtReset = _globalTimer;
-                    //mainTimer.timer = 0;
                 }
                 if(_currentButtonOneFrame == LEFT_BUTTON)
                 {
                     custom_menu.timer_mode = (custom_menu.timer_mode - 1) % 3;
                     mainTimerAtReset = _globalTimer;
-                    //mainTimer.timer = 0;
                 }
 
                 if(custom_menu.timer_mode == TIMER_OFF)

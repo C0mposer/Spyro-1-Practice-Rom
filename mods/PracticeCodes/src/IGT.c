@@ -563,7 +563,7 @@ void InGameTimerHook()
                 }
         
             }
-            
+
         }
         
 
@@ -580,7 +580,7 @@ void InGameTimerHook()
         {
             _spyro.health = 3;
         }
-        if(custom_menu.sparx_mode == SPARXLESS)
+        else if(custom_menu.sparx_mode == SPARXLESS)
         {
             _spyro.health = 0;
         }

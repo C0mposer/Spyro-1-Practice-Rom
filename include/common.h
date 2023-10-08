@@ -228,6 +228,7 @@ typedef struct NOPHexCode
 int printf (const char * format, ...);
 int sprintf(char *output, const char *format, ...);
 void memset(void *str, int c, int n);
+void* memcpy(void* destination, const void* source, int num);
 int rand();
 void srand(int seed);
 

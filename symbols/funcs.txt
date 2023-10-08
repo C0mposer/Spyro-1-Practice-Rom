@@ -1,6 +1,7 @@
 printf = 0x8006279c;
 sprintf = 0x80062fd4;
 memset = 0x80016914;
+memcpy = 0x800626f8;
 rand = 0x8006272c;
 srand = 0x8006275c;
 

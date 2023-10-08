@@ -1,5 +1,4 @@
 #include <common.h>
-#include "myfuncs.h"
 #include "levelselect.h"
 #include <bg_colors.h>
 
@@ -47,16 +46,16 @@ void SkipIntro()
 void SaveSpyroAndCamera()
 {  
     //Copying The Spyro struct and most of the camera struct
-    MyMemCopy(_freeSpace, &_spyro, sizeof(_spyro));
-    MyMemCopy((byte*)_freeSpace + 0x370, &_cameraStart, 0xFF);
+    memcpy(_freeSpace, &_spyro, sizeof(_spyro));
+    memcpy((byte*)_freeSpace + 0x370, &_cameraStart, 0xFF);
 
 }
 
 void ReloadSpyroAndCamera()
 {
     //Reloading The Spyro struct and most of the camera struct
-    MyMemCopy(&_spyro, _freeSpace, sizeof(_spyro));
-    MyMemCopy(&_cameraStart, (byte*)_freeSpace + 0x370, 0xFF);
+    memcpy(&_spyro, _freeSpace, sizeof(_spyro));
+    memcpy(&_cameraStart, (byte*)_freeSpace + 0x370, 0xFF);
 
 }
 

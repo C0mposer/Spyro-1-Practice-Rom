@@ -14,13 +14,17 @@ ModState mod_state = GAME_STARTED;
 
 RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50},};
 
+//Externs
 extern BackgroundColor bg_color_index;
 
 extern bool should_update_bg_color;
 
 extern signed int instaLoadLevelID;
 
+extern int mainTimerAtReset;
+
 extern bool should_reset_collectables;
+
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
@@ -139,6 +143,7 @@ void MainFunc()
         if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
         {
             RespawnSpyro();
+            mainTimerAtReset = _globalTimer;
         }
         if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH) && should_reset_collectables)
         {

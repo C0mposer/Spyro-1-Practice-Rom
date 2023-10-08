@@ -119,10 +119,7 @@ bool should_update_bg_color = true;
 bool should_reset_collectables = true;
 
 
-//CapitalTextInfo timer_text_info = {0};        // Structs Now Initialized on the stack only when needed
-//CapitalTextInfo fps_text_info = {0};
-//CapitalTextInfo menu_text_info[6] = {{0}};
-
+//Math for 29.91hz
 void FramesToTimer(Timer* ptr_timer)
 {
     ptr_timer->minutes = (ptr_timer->timer * 10) / 35892;
@@ -149,7 +146,6 @@ void InGameTimerHook()
             if(_currentButtonOneFrame == R3_BUTTON)
             {   
                 mainTimerAtReset = _globalTimer;
-                //mainTimer.timer = 0;
                 timer_state = custom_menu.timer_mode;
             }
 
@@ -162,7 +158,6 @@ void InGameTimerHook()
             //Show the running timer
             if(timer_state == TIMER_RUNNING || timer_state == TIMER_RUNNING_NO_DISPLAY)
             {
-                //Math for 29.91hz
                 Timer mainTimer;
                 mainTimer.timer = _globalTimer - mainTimerAtReset;
                 FramesToTimer(&mainTimer);

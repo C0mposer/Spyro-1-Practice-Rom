@@ -590,11 +590,4 @@ void InGameTimerHook()
         MobyRender();
     }
 
-        // printf("Timer: %u\n", _hBlankTimer);
-        // printf("FPS : %u\n", fps_data.fps);
-        // printf("Comparison from Last Frame : %u\n\n", fps_data.difference);
-        // printf("Comparison from Baseline : %u\n\n", fps_data.difference_from_baseline);
-        // printf("X: %d Y: %d\n", menu_text_info[0].x, menu_text_info[0].y);
-       
-
 }

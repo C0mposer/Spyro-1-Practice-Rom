@@ -73,11 +73,11 @@ If you wish to patch your own spyro 1 bin/cue file instead, download the patch h
  ### All Other Platforms (PS1, PS3, Emulator, etc)
 **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:
-[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro1_PracticeCodes_PS1_EMU.zip)
+[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS1.zip)
 
 **Xdelta Downloads**:
 If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
-[PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS1_EMU.xdelta)
+[PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS1.xdelta)
 
 ## Compiling & Building
 If you wish to compile the mod yourself, you'll need a few prerequisites

@@ -74,6 +74,7 @@ void RespawnSpyro()
 
 void ResetLevelCollectables()
 {
+    printf("RESETTING GEMS\n");
     if(should_reset_collectables)
     {
         memset(&_collectablesBitflags, 0, 0x4B0);
@@ -149,7 +150,7 @@ void MainFunc()
             RespawnSpyro();
             mainTimerAtReset = _globalTimer;
         }
-        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH))
+        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON))
         {
             ResetLevelCollectables();
         }

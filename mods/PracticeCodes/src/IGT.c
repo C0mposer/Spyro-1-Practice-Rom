@@ -209,7 +209,7 @@ void InGameTimerHook()
                     ilTimerStart = _globalTimer;
                     framesSpentLoading = 0;
                 }
-                else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //state 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
+                else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //State 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
                     framesSpentLoading++;
                 }
                 else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING)

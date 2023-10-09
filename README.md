@@ -8,8 +8,6 @@ This can be played on PS1, PS2, PS3, and most emulators.
 
 To play this on PS2 with a burnt disk will require you to specifically download the **PS2 version**. It will also require you to have a softmodded ps2 with [Mechapwn](https://github.com/MechaResearch/MechaPwn) installed, or have a modchip.
 
-Made with love from Composer and Oddkara 
-
 ## Hotkeys:
 1. Open Custom Menu (**L2 + R2 + Triangle**)
 2. Open Level Select (**Select**)
@@ -61,11 +59,10 @@ Skips straight to "The Adventure Continues..."
 Nestor is always skippable like any other dragon. Allows for faster nestor skip practice.
 
 ## Downloads
-#### Main Download
-##### PS2
+#### PS2
  -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release2/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
  -  **CUE File**: Once you've patched your bin,  you can create a cue file for it [here](https://www.duckstation.org/cue-maker/). This cue file can now be burned and played on a [mechapwn'd](https://github.com/MechaResearch/MechaPwn)/chipped PS2.
- ##### All Other Platforms (PS1, PS3, Emulator, etc)
+ #### All Other Platforms (PS1, PS3, Emulator, etc)
  -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release2/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
  -  **CUE File**: Once you've patched your bin,  you can create a cue file for it [here](https://www.duckstation.org/cue-maker/). This cue file can now be burned and played on a [mechapwn'd](https://github.com/MechaResearch/MechaPwn)/chipped PS2.
 
@@ -101,4 +98,4 @@ Nestor is always skippable like any other dragon. Allows for faster nestor skip 
 
 ## Contact
 
-If you need any help building this project, or are trying to get into spyro/game modding in general, feel free to reach out to us on discord: **Composer** & **OddKara**
+If you need any help building this project, or are just trying to get into spyro/game modding in general, feel free to reach out to us on discord: **Composer** & **OddKara** :)

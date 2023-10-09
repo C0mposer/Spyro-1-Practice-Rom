@@ -1,6 +1,6 @@
 
 
-# Spyro 1 Practice Codes For PS2
+# Spyro 1 Practice Codes
 
 This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *partial save-states*, *timing functionality*, and many other quality of life features.
 
@@ -25,7 +25,7 @@ This setting displays an on screen timer that resets upon reloading spyro, and s
 - **TIMER ALWAYS** mode displays the timer on screen at all times.
 	 
 ### IL Mode:
-This setting lets you practice & time individual level runs for most categories! (SPREADSHEET FOR VORTEX & 120 COMING SOON!)
+This setting lets you practice & time individual level runs for most categories! [Click here to view the IL spreadsheet](https://www.docs.google.com/spreadsheets/d/1FLkc8-dGTO4jJhAi5nDrhm0h6qlVflPlAIlXAYEylsg/edit#gid=1140931951)
 
 - Once you enter/re-fly in to a level, a timer will keep track of its time starting the first frame the HUD starts coming down from the fly in.
 - Once you leave through a vortex/through the pause menu, it will then stop the first frame the HUD for the "RETURNING HOME" text starts coming down in the loading screen.
@@ -63,7 +63,7 @@ Nestor is always skippable like any other dragon. Allows for faster nestor skip 
 ### PS2
  **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:
-[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro.1.Practice.Codes.PS2.zip)
+[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS2.zip)
 
 **Xdelta Downloads**:
 If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
@@ -73,7 +73,7 @@ If you wish to patch your own spyro 1 bin/cue file instead, download the patch h
  ### All Other Platforms (PS1, PS3, Emulator, etc)
 **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:
-[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro1_Practice_Codes_PS1_EMU.zip)
+[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro1_PracticeCodes_PS1_EMU.zip)
 
 **Xdelta Downloads**:
 If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:

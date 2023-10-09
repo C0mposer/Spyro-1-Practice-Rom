@@ -68,6 +68,8 @@ To simply download the rom and get practicing, download the cue/bin here:
 **Xdelta Downloads**:
 If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
 [PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS2.xdelta)
+
+*Note: To play this rom on PS2 requires either a mechapwn'd or modchipped PS2 to read the burned disk*
  ### All Other Platforms (PS1, PS3, Emulator, etc)
 **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:
@@ -78,7 +80,7 @@ If you wish to patch your own spyro 1 bin/cue file instead, download the patch h
 [PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS1_EMU.xdelta)
 
 ## Compiling & Building
-
+If you wish to compile the mod yourself, you'll need a few prerequisites
 1. Compiling this mod requires the [psx-modding-toolchain by Redhot](https://github.com/mateusfavarin/psx-modding-toolchain). 
 2. Once you have installed it and its pre-requisites, place the folder [from the source code download](https://github.com/C0mposer/Spyro-1-Practice-Codes/archive/refs/heads/master.zip), into the **/games/** folder of your psx-modding-toolchain directory.
 4. Place your personal spyro 1 bin file in **/build/** and rename it to **spyro1.bin**

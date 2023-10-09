@@ -63,7 +63,7 @@ Nestor is always skippable like any other dragon. Allows for faster nestor skip 
 ### PS2
  **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:
-[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro.1.Practice.Codes.PS2.zip)
+[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS2.zip)
 
 **Xdelta Downloads**:
 If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
@@ -73,7 +73,7 @@ If you wish to patch your own spyro 1 bin/cue file instead, download the patch h
  ### All Other Platforms (PS1, PS3, Emulator, etc)
 **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:
-[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro1_Practice_Codes_PS1_EMU.zip)
+[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro1_PracticeCodes_PS1_EMU.zip)
 
 **Xdelta Downloads**:
 If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:

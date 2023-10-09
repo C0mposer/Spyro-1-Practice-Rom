@@ -25,7 +25,7 @@ This setting displays an on screen timer that resets upon reloading spyro, and s
 - **TIMER ALWAYS** mode displays the timer on screen at all times.
 	 
 ### IL Mode:
-This setting lets you practice & time individual level runs for most categories! (SPREADSHEET FOR VORTEX & 120 COMING SOON!)
+This setting lets you practice & time individual level runs for most categories! [Click here to view the IL Spreadsheet](https://www.docs.google.com/spreadsheets/d/1FLkc8-dGTO4jJhAi5nDrhm0h6qlVflPlAIlXAYEylsg/edit#gid=1140931951)
 
 - Once you enter/re-fly in to a level, a timer will keep track of its time starting the first frame the HUD starts coming down from the fly in.
 - Once you leave through a vortex/through the pause menu, it will then stop the first frame the HUD for the "RETURNING HOME" text starts coming down in the loading screen.

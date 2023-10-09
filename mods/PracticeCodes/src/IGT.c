@@ -230,7 +230,6 @@ void InGameTimerHook()
                         _levelID = _portalToExitFromInHW;
                         _portalToExitFromInHW = 0;
                         _flyInAnimation = flyInArray[_levelIDIndex];
-                        ResetLevelCollectables();
                     }
                 }
                 
@@ -243,6 +242,7 @@ void InGameTimerHook()
 
                     if(_levelLoadState >= 0xB){
                         il_timer_state = IL_STOPPED;
+                        ResetLevelCollectables();
                     }
                 }
             }

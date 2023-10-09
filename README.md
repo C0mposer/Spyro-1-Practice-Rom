@@ -58,14 +58,24 @@ Skips straight to "The Adventure Continues..."
 ### Nestor Skip:
 Nestor is always skippable like any other dragon. Allows for faster nestor skip practice.
 
-## Downloads
-#### PS2
- -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release2/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
- -  **CUE File**: Once you've patched your bin,  you can create a cue file for it [here](https://www.duckstation.org/cue-maker/). This cue file can now be burned and played on a [mechapwn'd](https://github.com/MechaResearch/MechaPwn)/chipped PS2.
- #### All Other Platforms (PS1, PS3, Emulator, etc)
- -  **Download Patch**: Download the main [xdelta patch here](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/release2/spyro1_PracticeCodes.xdelta), then your personal Spyro 1 bin file can be [patched here](https://hack64.net/tools/patcher.php)
- -  **CUE File**: Once you've patched your bin,  you can create a cue file for it [here](https://www.duckstation.org/cue-maker/). This cue file can now be burned and played on a [mechapwn'd](https://github.com/MechaResearch/MechaPwn)/chipped PS2.
+# Downloads
+**Be sure to download the correct version for the platform you are going to play on**
+### PS2
+ **BIN/CUE Download**
+To simply download the rom and get practicing, download the cue/bin here:
+[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro.1.Practice.Codes.PS2.zip)
 
+**Xdelta Downloads**:
+If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
+[PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS2.xdelta)
+ ### All Other Platforms (PS1, PS3, Emulator, etc)
+**BIN/CUE Download**
+To simply download the rom and get practicing, download the cue/bin here:
+[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/Spyro1_Practice_Codes_PS1_EMU.zip)
+
+**Xdelta Downloads**:
+If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
+[PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS1_EMU.xdelta)
 
 ## Compiling & Building
 

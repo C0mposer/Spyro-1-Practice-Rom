@@ -8,6 +8,7 @@ NTSC, exe, 0x80010084, 0x0, patches/levelselectnames.bin
 NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 
+
 PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 

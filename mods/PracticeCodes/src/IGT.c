@@ -103,7 +103,7 @@ int mainTimerAtReset;                       // so I moved the timer_at_reset and
 char mainTimerAscii[10];                    // The structs can be reworked to not include these anymore if this change sticks
 TimerState timer_state = TIMER_STOPPED;     // The timer struct is still being used but it just initialized on the stack now
 
-TimerState il_timer_state = TIMER_STOPPED;
+ILTimerState il_timer_state = IL_STOPPED;
 int framesSpentLoading = 0;
 int ilTimerStart = 0;
 char ilAscii[10];
@@ -146,7 +146,7 @@ void InGameTimerHook()
             if(_currentButtonOneFrame == R3_BUTTON)
             {   
                 mainTimerAtReset = _globalTimer;
-                timer_state = custom_menu.timer_mode;
+                timer_state = (TimerState)custom_menu.timer_mode;
             }
 
             if(_currentButtonOneFrame == START_BUTTON)
@@ -171,7 +171,7 @@ void InGameTimerHook()
                 //Minutes
                 else if(mainTimer.minutes >= 1)
                 {
-                    LoadAscii(&mainTimer, &mainTimerAscii);
+                    LoadAscii(&mainTimer, mainTimerAscii);
                 }
 
                 CapitalTextInfo timer_text_info = {0};
@@ -216,11 +216,11 @@ void InGameTimerHook()
                     Timer ilTimer;
                     ilTimer.timer = _globalTimer - ilTimerStart;
                     FramesToTimer(&ilTimer);
-                    LoadAscii(&ilTimer, &ilAscii);
+                    LoadAscii(&ilTimer, ilAscii);
 
                     ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
                     FramesToTimer(&ilTimer);
-                    LoadAscii(&ilTimer, &loadlessAscii);
+                    LoadAscii(&ilTimer, loadlessAscii);
 
                     il_timer_state = IL_DISPLAYING;
 
@@ -396,7 +396,7 @@ void InGameTimerHook()
                 if(custom_menu.timer_mode == TIMER_OFF)
                 {
                     custom_menu.timer_mode_text = "TIMER OFF";
-                    timer_state = TIMER_OFF;
+                    timer_state = (TimerState)TIMER_OFF;
                 }
                 else if(custom_menu.timer_mode == TIMER_ONLY_PAUSE)
                 {

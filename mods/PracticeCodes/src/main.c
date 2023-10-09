@@ -73,10 +73,13 @@ void RespawnSpyro()
 
 void ResetLevelCollectables()
 {
-    memset(&_collectablesBitflags, 0, 0x4B0);
-    for (int i = 0; i < 35; i++)
+    if(should_reset_collectables)
     {
-        _levelGemsCollectedArray[i] = 0;
+        memset(&_collectablesBitflags, 0, 0x4B0);
+        for (int i = 0; i < 35; i++)
+        {
+            _levelGemsCollectedArray[i] = 0;
+        }
     }
 }
 
@@ -145,7 +148,7 @@ void MainFunc()
             RespawnSpyro();
             mainTimerAtReset = _globalTimer;
         }
-        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH) && should_reset_collectables)
+        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON || _movementSubState == MOVEMENT_SUBSTATE_LOADING || _gameState == GAMESTATE_DEATH))
         {
             ResetLevelCollectables();
         }

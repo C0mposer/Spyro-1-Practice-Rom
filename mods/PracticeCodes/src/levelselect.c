@@ -138,7 +138,7 @@ void InstaLoad(){
 		{
 			//printf("Starting\n");
 			_levelLoadState = 0xB;
-			_isLoading = 0;										//Set to 0 to immidiately start fly in. Is this needed?
+			//_isLoading = 0;									//Removing for now
 			*(int *)0x80056528 = 0x00000000;					//NOP-ing SFX proccessing Vec3Length, because of weird bug with vortex
 			instaLoadReady = TRUE;
 		}

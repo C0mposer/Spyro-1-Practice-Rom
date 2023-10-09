@@ -1,5 +1,6 @@
 #include <common.h>
 #include "levelselect.h"
+#include <shared_funcs.h>
 #include <bg_colors.h>
 
 enum ModState

@@ -1,5 +1,6 @@
 #include <common.h>
 #include <levelselect.h>
+#include <shared_funcs.h>
 
 char levelSelectState = 0;
 char selectedButton;

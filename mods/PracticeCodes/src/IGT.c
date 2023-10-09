@@ -1,6 +1,7 @@
 #include <common.h>
 #include <custom_text.h>
 #include <sound.h>
+#include <shared_funcs.h>
 #include <bg_colors.h>
 
 #define BASELINE 526

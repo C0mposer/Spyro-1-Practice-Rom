@@ -1,6 +1,6 @@
 
 
-# Spyro 1 Practice Codes For PS2
+# Spyro 1 Practice Codes
 
 This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *partial save-states*, *timing functionality*, and many other quality of life features.
 

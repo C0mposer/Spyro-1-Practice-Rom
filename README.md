@@ -21,27 +21,27 @@ To play this on PS2 with a burnt disk will require you to specifically download 
 ### Timer: 
 This setting displays an on screen timer that resets upon reloading spyro, and stops upon pausing. Can be used for timing movement/routes in game!
 
-	 - "TIMER ONLY STOPPED" mode displays the timer on screen only when you pause to stop the timer. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
-	 - "TIMER ALWAYS" mode displays the timer on screen at all times.
+- **TIMER ONLY STOPPED** mode displays the timer on screen only when you pause to stop the timer. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
+- **TIMER ALWAYS** mode displays the timer on screen at all times.
 	 
 ### IL Mode:
 This setting lets you practice & time individual level runs for most categories! (SPREADSHEET FOR VORTEX & 120 COMING SOON!)
 
-	 - Once you enter/re-fly in to a level, a timer will keep track of its time starting the first frame the HUD starts coming down from the fly in.
-	 - Once you leave through a vortex/through the pause menu, it will then stop the first frame the HUD for the "RETURNING HOME" text starts coming down in the loading screen.
-	 - The loading screen will then display your individual level time in big text, and underneath display the loadless version of the same time to account for dragons in slightly smaller text.
-	 - It will also reload you back into the same level to let you practice on loop.
-	 - This timer should be accurate within 1 frame (~0.03) in most situations.
+- Once you enter/re-fly in to a level, a timer will keep track of its time starting the first frame the HUD starts coming down from the fly in.
+- Once you leave through a vortex/through the pause menu, it will then stop the first frame the HUD for the "RETURNING HOME" text starts coming down in the loading screen.
+- The loading screen will then display your individual level time in big text, and underneath display the loadless version of the same time to account for dragons in slightly smaller text.
+- It will also reload you back into the same level to let you practice on loop.
+- This timer should be accurate within 1 frame (~0.03) in most situations.
 	 
 ### Reset Collectables:
 This setting resets all collectables anytime you reload the level through flying in/re-flying in, respawning spyro, etc. (ON by default)
 
-	 - Wont reset collectables if you die normally in game even when ON, so you can still death abuse during practice.
-	 - Could be turned off to practice homeworlds/longer segments while maintaining what you've collected.
+- Wont reset collectables if you die normally in game even when ON, so you can still death abuse during practice.
+- Could be turned off to practice homeworlds/longer segments while maintaining what you've collected.
 	 
 ### Sparx Mode:
-	 - "PERMA SPARX ON" mode keeps sparx gold at all times, and your health will never deplete.
-	 - "SPARXLESS ON" mode keeps sparx dead at all times, allowing for sparxless practice.
+- **PERMA SPARX ON** mode keeps sparx gold at all times, and your health will never deplete.
+- **SPARXLESS ON** mode keeps sparx dead at all times, allowing for sparxless practice.
 	 
 ### Quick Goop:
 This setting kills spyro in goop the moment you can not input anymore. Small quality of life feature to reduce the amount of time you have to wait to die in goop.

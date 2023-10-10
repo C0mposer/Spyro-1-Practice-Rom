@@ -112,13 +112,13 @@ void InstaLoad(){
 	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
 		//printf("Saving\n");
-		SaveSpyroAndCamera();
+		SaveSpyroAndCamera(true);
 		instaLoadLevelID = _levelIDIndex;
 	}
 
 	if(instaLoadReady == TRUE)
 	{
-		ReloadSpyroAndCamera();
+		ReloadSpyroAndCamera(true);
 		if(_levelLoadState == 0xC)
 		{
 			instaLoadReady = FALSE;

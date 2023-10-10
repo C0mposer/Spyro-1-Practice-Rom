@@ -50,20 +50,31 @@ void SkipIntro()
 }
 
 
-void SaveSpyroAndCamera()
+void SaveSpyroAndCamera(bool flyInFlag)
 {  
+
+    if(!flyInFlag)
+        free_space = _freeSpace;
+    else
+        free_space = *(byte*)0x80073e00;
+
     //Copying The Spyro struct and most of the camera struct
     memcpy(_freeSpace, &_spyro, sizeof(_spyro));
-    memcpy((byte*)_freeSpace + 0x370, &_cameraStart, 0xFF);
+    memcpy((byte*)_freeSpace + 0x270, &_cameraStart, 0xFF);
 
 }
 
-void ReloadSpyroAndCamera()
+void ReloadSpyroAndCamera(bool flyInFlag)
 {
+
+    if(!flyInFlag)
+        free_space = _freeSpace;
+    else
+        free_space = *(byte*)0x80073e00;
+
     //Reloading The Spyro struct and most of the camera struct
     memcpy(&_spyro, _freeSpace, sizeof(_spyro));
-    memcpy(&_cameraStart, (byte*)_freeSpace + 0x370, 0xFF);
-
+    memcpy(&_cameraStart, (byte*)_freeSpace + 0x270, 0xFF);
 }
 
 void RespawnSpyro()
@@ -136,12 +147,12 @@ void MainFunc()
         //Save/Load spyro & camera information
         if(_currentButtonOneFrame == L3_BUTTON)
         {
-            SaveSpyroAndCamera();
+            SaveSpyroAndCamera(false);
             instaLoadLevelID = -1;                                  //signals to the instaload function that the fly-in position and camera needs to be saved again
         }
         if(_currentButtonOneFrame == R3_BUTTON)
         {
-            ReloadSpyroAndCamera();
+            ReloadSpyroAndCamera(false);
         }
 
         //Respawn spyro & reset level gems

@@ -52,29 +52,39 @@ void SkipIntro()
 
 void SaveSpyroAndCamera(bool flyInFlag)
 {  
+    byte* free_space = NULL;
 
     if(!flyInFlag)
-        free_space = _freeSpace;
+    {
+        free_space = (byte*)_freeSpace;
+    }
     else
-        free_space = *(byte*)0x80073e00;
+    {
+        free_space = (byte*)0x80073e10;
+    }
 
     //Copying The Spyro struct and most of the camera struct
-    memcpy(_freeSpace, &_spyro, sizeof(_spyro));
-    memcpy((byte*)_freeSpace + 0x270, &_cameraStart, 0xFF);
+    memcpy(free_space, &_spyro, sizeof(_spyro));
+    memcpy((byte*)free_space + 0x270, &_cameraStart, 0xFF);
 
 }
 
 void ReloadSpyroAndCamera(bool flyInFlag)
 {
+    byte* free_space = NULL;
 
     if(!flyInFlag)
-        free_space = _freeSpace;
+    {
+        free_space = (byte*)_freeSpace;
+    }
     else
-        free_space = *(byte*)0x80073e00;
+    {
+        free_space = (byte*)0x80073e10;
+    }
 
     //Reloading The Spyro struct and most of the camera struct
-    memcpy(&_spyro, _freeSpace, sizeof(_spyro));
-    memcpy(&_cameraStart, (byte*)_freeSpace + 0x270, 0xFF);
+    memcpy(&_spyro, free_space, sizeof(_spyro));
+    memcpy(&_cameraStart, (byte*)free_space + 0x270, 0xFF);
 }
 
 void RespawnSpyro()
@@ -148,7 +158,7 @@ void MainFunc()
         if(_currentButtonOneFrame == L3_BUTTON)
         {
             SaveSpyroAndCamera(false);
-            instaLoadLevelID = -1;                                  //signals to the instaload function that the fly-in position and camera needs to be saved again
+            //instaLoadLevelID = -1;                                  //signals to the instaload function that the fly-in position and camera needs to be saved again
         }
         if(_currentButtonOneFrame == R3_BUTTON)
         {

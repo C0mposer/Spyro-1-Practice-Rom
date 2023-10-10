@@ -101,3 +101,5 @@ _musicVolume = 0x80075748;
 _hBlankTimer = 0x1F801110;
 
 _freeSpace = 0x80073990;
+
+_freeSpace2 = 0x80073e00;

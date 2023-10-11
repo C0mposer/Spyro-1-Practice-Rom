@@ -6,7 +6,7 @@ This mod for the original Spyro the Dragon adds practice features for speedrunne
 
 This can be played on PS1, PS2, PS3, and most emulators. 
 
-To play this on PS2 with a burnt disk will require you to specifically download the **PS2 version**. It will also require you to have a softmodded ps2 with [Mechapwn](https://github.com/MechaResearch/MechaPwn) installed, or have a modchip.
+To play this on PS2 with a burnt disk will require you to specifically download the **PS2 version**. It will also require you to have a softmodded ps2 with [MechaPwn](https://github.com/MechaResearch/MechaPwn) installed, or have a modchip.
 
 ## Hotkeys:
 1. Open Custom Menu (**L2 + R2 + Triangle**)

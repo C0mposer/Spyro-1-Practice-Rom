@@ -4,9 +4,6 @@
 #include <shared_funcs.h>
 #include <bg_colors.h>
 
-#define BASELINE 526
-#define TIMER_TO_FRAME 17   //17*30 is 526
-
 typedef enum TimerState
 {
     TIMER_STOPPED,

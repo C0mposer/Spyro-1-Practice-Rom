@@ -13,8 +13,6 @@ typedef enum ModState ModState;
 
 ModState mod_state = GAME_STARTED;
 
-RanOnceBitFlags bitflags = {0};
-
 bool hasSavedSpyro = false;
 
 const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
@@ -57,12 +55,12 @@ void SaveSpyroAndCamera(bool flyInFlag)
 
     if(!flyInFlag)
     {
-        free_space = (byte*)_freeSpace;
-        hasSavedSpyro = true;   //To load only after L3 has been pressed
+        free_space = (byte*)0x80073990;     //Free space 1 for L3
+        hasSavedSpyro = true;               //To load only after L3 has been pressed
     }
     else
     {
-        free_space = (byte*)0x80073e10;
+        free_space = (byte*)0x80073e10;     //Free space 2 for fly in snap-shot for instaload
     }
 
     //Copying The Spyro struct and most of the camera struct
@@ -192,13 +190,17 @@ void MainFunc()
     }
 
     //Safeguards against loading with other levels savestate/no savestate
-    if(!bitflags.hasRanOnceLoadSpyroReset && _movementSubState == MOVEMENT_SUBSTATE_LOADING)
     {
-        hasSavedSpyro = false;
-        bitflags.hasRanOnceLoadSpyroReset = true;
-    }   
-    else if(_movementSubState != MOVEMENT_SUBSTATE_LOADING)
-    {
-        bitflags.hasRanOnceLoadSpyroReset = false;
+        static bool hasResetSavestate = false;   //To run only once when entering a loading screen
+        
+        if(!hasResetSavestate && _movementSubState == MOVEMENT_SUBSTATE_LOADING)
+        {
+            hasSavedSpyro = false;
+            hasResetSavestate = true;
+        }   
+        else if(_movementSubState != MOVEMENT_SUBSTATE_LOADING)
+        {
+            hasResetSavestate = false;
+        }
     }
 }

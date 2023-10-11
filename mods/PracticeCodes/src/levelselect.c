@@ -98,10 +98,10 @@ void LevelSelect()
 	if (levelSelectState == LEVEL_CHOSEN)
 	{
 		ResetLevelCollectables();
+		_gameState = GAMESTATE_EXITING_LEVEL;
 		_spyro.state = 0;
-		_spyro.timer_framesInAir = 1;			//For Tree Tops
-		_gameState = 0xA;
 		_pausedTimer = 0;
+		_spyro.timer_framesInAir = 1;			//For Tree Tops
 		_spyro.health = 3;
 
 		levelSelectState = STARTING_LEVEL_LOAD;
@@ -130,13 +130,13 @@ void InstaLoad(){
 	//Save Camera and Spyro when it is stopped
 	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
-		SaveSpyroAndCamera(true);
+		SaveSpyroAndCamera(TRUE);
 	}
 
 	//If the instaload has been set up, reload the Camera and Spyro
 	if(instaLoadReady == TRUE)
 	{
-		ReloadSpyroAndCamera(true);
+		ReloadSpyroAndCamera(TRUE);
 
 		//Once the level load state is C, reset the bool to allow for another instaload
 		if(_levelLoadState == 0xC)
@@ -160,7 +160,7 @@ void InstaLoad(){
 		{
 			_levelLoadState = 0xB;
 			_gameState = GAMESTATE_LOADING;
-			_canFlyIn = 1;
+			_canFlyIn = TRUE;
 			_loadingScreenTimer = 0;
 			_flightWingsAnimation = 0;
 			_portalToExitFromInHW = 0;

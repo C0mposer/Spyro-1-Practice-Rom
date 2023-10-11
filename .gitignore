@@ -323,3 +323,5 @@ build/bootedit/spyro1_PracticeCodes.bin
 mods/PracticeCodes/debug/dep/hexedit.dep
 mods/PracticeCodes/debug/obj/hexedit.o
 mods/PracticeCodes/output/HexEdit.bin
+mods/PracticeCodes/src/hexedit.dep
+mods/PracticeCodes/src/hexedit.o

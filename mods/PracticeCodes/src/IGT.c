@@ -106,15 +106,17 @@ int framesSpentLoading = 0;
 int ilTimerStart = 0;
 char ilAscii[10];
 char loadlessAscii[10];
-extern short flyInArray[36];
 
 Menu custom_menu = {0};
 MenuState menu_state = MENU_HIDDEN;
 
-//?Externs elsewhere
+// Externing elsewhere
 BackgroundColor bg_color_index;
 bool should_update_bg_color = true;
 bool should_reset_collectables = true;
+
+// Externed from elsewhere
+extern short flyInArray[36];
 
 
 //Math for 29.91hz
@@ -198,10 +200,12 @@ void InGameTimerHook()
         {
             if(custom_menu.il_mode)
             {
-                if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING)){
+                if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING))
+                {
                     il_timer_state = IL_FLYING_IN;
                 }
-                else if(il_timer_state == IL_FLYING_IN && _gameState == GAMESTATE_GAMEPLAY){
+                else if(il_timer_state == IL_FLYING_IN && _gameState == GAMESTATE_GAMEPLAY)
+                {
                     il_timer_state = IL_STARTED;
                     ilTimerStart = _globalTimer;
                     framesSpentLoading = 0;
@@ -232,13 +236,15 @@ void InGameTimerHook()
                 }
                 
                 //DISPLAY
-                if(il_timer_state == IL_DISPLAYING){
+                if(il_timer_state == IL_DISPLAYING)
+                {
                     CapitalTextInfo il_text_info = {SCREEN_LEFT_EDGE + 0x10, 50, 0x1400};
                     CapitalTextInfo il2_text_info = {SCREEN_LEFT_EDGE + 0x10, 65, 0x1800};
                     DrawTextCapitals(ilAscii, &il_text_info, 0xF, MOBY_COLOR_PURPLE);
                     DrawTextCapitals(loadlessAscii, &il2_text_info, 0xB, MOBY_COLOR_PURPLE);
 
-                    if(_levelLoadState >= 0xB){
+                    if(_levelLoadState >= 0xB)
+                    {
                         il_timer_state = IL_STOPPED;
                         ResetLevelCollectables();
                     }
@@ -251,7 +257,7 @@ void InGameTimerHook()
     //! Menu
     {
         // Open Menu
-        if(_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu)
+        if(_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
         {
             menu_state = !menu_state;
             has_toggled_menu = TRUE;

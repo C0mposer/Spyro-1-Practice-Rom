@@ -1,5 +1,5 @@
 #include <common.h>
-#include "levelselect.h"
+#include <levelselect.h>
 #include <shared_funcs.h>
 #include <bg_colors.h>
 
@@ -14,6 +14,7 @@ typedef enum ModState ModState;
 ModState mod_state = GAME_STARTED;
 
 bool hasSavedSpyro = false;
+bool hasResetSavestate = false;
 
 const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
 
@@ -189,10 +190,8 @@ void MainFunc()
 
     }
 
-    //Safeguards against loading with other levels savestate/no savestate
-    {
-        static bool hasResetSavestate = false;   //To run only once when entering a loading screen
-        
+    //Safeguard against loading with another levels savestate/no savestate
+    {     
         if(!hasResetSavestate && _movementSubState == MOVEMENT_SUBSTATE_LOADING)
         {
             hasSavedSpyro = false;

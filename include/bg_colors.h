@@ -3,8 +3,8 @@
 
 typedef struct RedGreen
 {
-    int r;
-    int g;
+    byte r;
+    byte g;
 }RedGreen;
 
 typedef enum BackgroundColor

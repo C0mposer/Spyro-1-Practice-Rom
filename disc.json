@@ -33,23 +33,5 @@
                 }
             ]
         }
-    ],
-
-    "HUD_TEST": 
-    [
-        {
-            "SCUS_942.28": [
-                {
-                    "name": "header",
-                    "address": "0x8000B070",
-                    "offset": "0x0"
-                },
-                {
-                    "name": "exe",
-                    "address": "0x80010000",
-                    "offset": "0x800"
-                }
-            ]
-        }
     ]
 }

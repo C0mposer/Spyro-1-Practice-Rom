@@ -204,6 +204,12 @@ typedef struct NOPHexCode
     int hexCode2;
 }NOPHexCode;
 
+typedef struct RanOnceBitFlags
+{
+    bool hasRanOnceLoadSpyroReset:1;
+
+
+}RanOnceBitFlags;
 
 
 //*~~~~~~~~~~~~~~~~

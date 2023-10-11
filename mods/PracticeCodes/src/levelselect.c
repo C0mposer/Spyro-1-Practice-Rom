@@ -2,11 +2,29 @@
 #include <levelselect.h>
 #include <shared_funcs.h>
 
-char levelSelectState = 0;
-char selectedButton;
+typedef enum LevelSelectState
+{
+	READY,
+	LEVEL_CHOSEN,
+	STARTING_LEVEL_LOAD
+}LevelSelectState;
+
+typedef enum LevelSelectButtonSelections
+{
+	LEVEL_SELECT_L3,
+	LEVEL_SELECT_L1,
+	LEVEL_SELECT_L2,
+	LEVEL_SELECT_R1,
+	LEVEL_SELECT_R2,
+	LEVEL_SELECT_R3
+}LevelSelectButtonSelections;
+
+LevelSelectState levelSelectState = READY;
+bool instaLoadReady = FALSE;
+LevelSelectButtonSelections buttonSelection = 0;
 
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
-short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
+const short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
 						FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_RIGHT, FACING_LEFT, FACING_RIGHT,
 						FACING_LEFT, FACING_LEFT, FACING_BACKWARDS, FACING_DIAGONAL, FACING_RIGHT, FACING_LEFT,
 						FACING_LEFT, FACING_LEFT, FACING_LEFT, FACING_BACKWARDS, FACING_BACKWARDS, FACING_LEFT,
@@ -14,58 +32,55 @@ short flyInArray[36] = {FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, F
 						FACING_LEFT, FACING_BACKWARDS, FACING_LEFT, FACING_LEFT, FACING_LEFT, FACING_LEFT};
 
 
-bool instaLoadReady = FALSE;
-signed int instaLoadLevelID = -1;
 
 void DetermineButton()
 {
 	//if you're in the inventory, and have yet to pick a level
-	if(_gameState == GAMESTATE_INVENTORY && levelSelectState == 0)
+	if(_gameState == GAMESTATE_INVENTORY && levelSelectState == READY)
 	{
-
-		levelSelectState = 1;
+		levelSelectState = LEVEL_CHOSEN;	//Assume button has been pressed, until default case. To avoid repeating in each case.
 
 		switch(_currentButton)
 		{
 			case(L3_BUTTON):
 			{
-				selectedButton = 0;
+				buttonSelection = LEVEL_SELECT_L3;
 				break;
 			}
 			
 			case(L1_BUTTON):
 			{
-				selectedButton = 1;
+				buttonSelection = LEVEL_SELECT_L1;
 				break;
 			}
 			
 			case(L2_BUTTON):
 			{
-				selectedButton = 2;
+				buttonSelection = LEVEL_SELECT_L2;
 				break;
 			}
 			
 			case(R1_BUTTON):
 			{
-				selectedButton = 3;
+				buttonSelection = LEVEL_SELECT_R1;
 				break;
 			}
 			
 			case(R2_BUTTON):
 			{
-				selectedButton = 4;
+				buttonSelection = LEVEL_SELECT_R2;
 				break;
 			}
 			
 			case(R3_BUTTON):
 			{
-				selectedButton = 5;
+				buttonSelection = LEVEL_SELECT_R3;
 				break;
 			}
 
 			default:
 			{
-				levelSelectState = 0;
+				levelSelectState = READY;	//Set state back to ready. This won't run if a relavent button is pressed.
 				break;
 			}
 		}
@@ -79,85 +94,86 @@ void LevelSelect()
 
 	DetermineButton();
 
-	//Level Level
-	if (levelSelectState == 1)
+	//Prepare Level Select
+	if (levelSelectState == LEVEL_CHOSEN)
 	{
 		ResetLevelCollectables();
 		_spyro.state = 0;
 		_spyro.timer_framesInAir = 1;			//For Tree Tops
 		_gameState = 0xA;
 		_pausedTimer = 0;
-		levelSelectState = 2;
 		_spyro.health = 3;
+
+		levelSelectState = STARTING_LEVEL_LOAD;
 	}
 
-	//Set Level ID and Animation to values detemined in HOPEFULLY A FUNC
-	if(_movementSubState == MOVEMENT_SUBSTATE_LOADING && levelSelectState == 2)
+	//Set Level ID and Animation to correct values for level fly in
+	if(_movementSubState == MOVEMENT_SUBSTATE_LOADING && levelSelectState == STARTING_LEVEL_LOAD)
 	{
-		if(selectedButton == 0){
+		//If selected homeworld, just spawn in
+		if(buttonSelection == LEVEL_SELECT_L3){
 			_canFlyIn = 0;
 		}
 		_flightWingsAnimation = 0;
 		_portalToExitFromInHW = 0;
-		_levelID = ((_selectMenuOption + 1) * 0xA + selectedButton < 0x41 ? (_selectMenuOption + 1) * 0xA + selectedButton : 0x3C);
-		_flyInAnimation = flyInArray[_selectMenuOption * 6 + selectedButton];
-        levelSelectState = 0;
+		_levelID = ((_selectMenuOption + 1) * 0xA + buttonSelection < 0x41 ? (_selectMenuOption + 1) * 0xA + buttonSelection : 0x3C);
+		_flyInAnimation = flyInArray[_selectMenuOption * 6 + buttonSelection];
+
+        levelSelectState = READY;
     }
 
 }
 
-//Custom Function for instantly flying back in into current level
+//Custom Function for instantly flying back into current level
 void InstaLoad(){
 	
+	//Save Camera and Spyro when it is stopped
 	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
-		//printf("Saving\n");
 		SaveSpyroAndCamera(true);
-		instaLoadLevelID = _levelIDIndex;
 	}
 
+	//If the instaload has been set up, reload the Camera and Spyro
 	if(instaLoadReady == TRUE)
 	{
 		ReloadSpyroAndCamera(true);
+
+		//Once the level load state is C, reset the bool to allow for another instaload
 		if(_levelLoadState == 0xC)
 		{
 			instaLoadReady = FALSE;
 		}
     }
 
+	//Once the fly in starts, un-nop Vec3Length in SFX Proccessing
 	if(_levelLoadState == 0xD)
 	{
-		*(int *)0x80056528 = 0x0C005C7F;						//Putting SFX proccessing Vec3Length back after insta-load
+		*(int *)0x80056528 = 0x0C005C7F;						//Putting Vec3Length sfx call back after insta-load (0x0C005C7F is the asm opcode bytes for the function call)
 	}
 
-	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON) && _gameState == GAMESTATE_GAMEPLAY)
+	//If pressed hotkey for instaload
+	if(_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON) && _gameState == GAMESTATE_GAMEPLAY && _levelID % 10 != 0)
 	{
 		ResetLevelCollectables();
-        _flightWingsAnimation = 0;
-        _loadingScreenTimer = 0;
-        if(instaLoadLevelID == _levelIDIndex)
+
+		//Pre-reqs for insta-load
 		{
-			//printf("Starting\n");
 			_levelLoadState = 0xB;
-			//_isLoading = 0;									//Removing for now
-			*(int *)0x80056528 = 0x00000000;					//NOP-ing SFX proccessing Vec3Length, because of weird bug with vortex
-			instaLoadReady = TRUE;
+			_gameState = GAMESTATE_LOADING;
+			_canFlyIn = 1;
+			_loadingScreenTimer = 0;
+			_flightWingsAnimation = 0;
+			_portalToExitFromInHW = 0;
+			_portalNumber = 0xffffffff;
+			_flyInAnimation = flyInArray[_levelIDIndex];
+			_cameraLockingRelated = 0x80000012;					// 0x80000012 is not an address it is just the value it is expecting for level loads
+			_musicState = 0x40;
+			_spyro.timer_framesInAir = 1;						// For Tree Tops
+			_spyro.health = 3;
+			*(int *)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?
 		}
-		else
-		{
-			_isLoading = 1;									
-			_levelLoadState = 0x0;
-			instaLoadReady = FALSE;
-		}
-		_canFlyIn = 1;
-        _gameState = GAMESTATE_LOADING;
-		_portalToExitFromInHW = 0;
-		_portalNumber = 0xffffffff;
-        _flyInAnimation = flyInArray[_levelIDIndex];
-        _cameraLockingRelated = 0x80000012;				// 0x80000012 is not an address it is just the value it is expecting for level loads
-		_musicState = 0x40;
-        _spyro.timer_framesInAir = 1;					//For Tree Tops
-		_spyro.health = 3;
+
+		instaLoadReady = TRUE;									
 	}
 
 }

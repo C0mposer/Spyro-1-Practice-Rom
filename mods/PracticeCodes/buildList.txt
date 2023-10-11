@@ -3,6 +3,7 @@ NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/levelselect.c, MainFunc.bin
 NTSC, exe, 0x800314b4, 0x0, src/IGT.c src/custom_text.c, IGT.bin
+NTSC, exe, 0x8001D718, 0x0, src/hexedit.c, HexEdit.bin
 
 NTSC, exe, 0x80010084, 0x0, patches/levelselectnames.bin
 NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin

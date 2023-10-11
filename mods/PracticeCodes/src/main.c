@@ -13,14 +13,15 @@ typedef enum ModState ModState;
 
 ModState mod_state = GAME_STARTED;
 
-RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
+RanOnceBitFlags bitflags = {0};
+
+bool hasSavedSpyro = false;
+
+const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
 
 //Externs
 extern BackgroundColor bg_color_index;
-
 extern bool should_update_bg_color;
-
-extern signed int instaLoadLevelID;
 
 extern int mainTimerAtReset;
 
@@ -43,12 +44,12 @@ void UnlockAllLevels()
     }
 }
 
+//This runs The Adventure Begins cutscene
 void SkipIntro()
 {
     _isPastTitleScreen = TRUE;                            //? This flag is checked by TheAdventureBeings() before it runs, so we must set this flag to TRUE.
-    TheAdventureBegins();                                 //? Call The Adventure Begins cutscene sequence      
+    TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
 }
-
 
 void SaveSpyroAndCamera(bool flyInFlag)
 {  
@@ -57,6 +58,7 @@ void SaveSpyroAndCamera(bool flyInFlag)
     if(!flyInFlag)
     {
         free_space = (byte*)_freeSpace;
+        hasSavedSpyro = true;   //To load only after L3 has been pressed
     }
     else
     {
@@ -87,15 +89,16 @@ void ReloadSpyroAndCamera(bool flyInFlag)
     memcpy(&_cameraStart, (byte*)free_space + 0x270, 0xFF);
 }
 
+//This function puts spyro at 0 which will always immediately kill him, since its a void spot.
 void RespawnSpyro()
 {
     _spyro.position.z = 0;
     _shouldRespawnAtCheckpoint = FALSE;
 }
 
+//This function clears the bitflags for which collectables should spawn into a level/homeworld with spyro. This is the same area that the memory card writes to when loading a game.
 void ResetLevelCollectables()
 {
-    printf("RESETTING GEMS\n");
     if(should_reset_collectables)
     {
         memset(&_collectablesBitflags, 0, 0x4B0);
@@ -106,45 +109,44 @@ void ResetLevelCollectables()
     }
 }
 
-//Changing asm instructions for pause menu RGB. Cannot change B, as the value is in a shared register.
+//Changing asm instructions for pause menu RGB. Cannot change B value, as the value is in a shared register with other crucial parts of the struct.
 inline void SetTitleScreenColor(byte r, byte g)
 {
     *(short*)(0x8001A674) = r;
     *(short*)(0x8001A67C) = g;
 }
 
-
 //*
 //* ~ MAIN HOOK ~
 //*
 void MainFunc()
 {   
-    //! At seperate memory locations
-    {
-        InGameTimerHook();
-    }
-
     LevelSelect();
     InstaLoad();
 
-    _globalLives = 99;
+    //! At seperate memory locations (See buildlist.txt)
+    {
+        InGameTimerHook();
+        //HexEdit();
+    }
 
     //Run once upon starting game
     if(mod_state == GAME_STARTED && _globalTimer > 20)                //? If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
     {
         SkipIntro();
-        _musicVolume = 0;
         mod_state = SKIPPED_INTRO;
+        _musicVolume = 0;
     }
 
     //Run once upon skipping intro
     if(mod_state == SKIPPED_INTRO)
     {
         UnlockAllLevels();
-        //memset((void*)0x8001b648, 0, 0x350); //Clear top of inventory menu   
         mod_state = UNLOCKED_LEVELS;
+        //memset((void*)0x8001b648, 0, 0x350); //Clear top of inventory menu   
     }
 
+    //Change background color when menu gets updated
     if(should_update_bg_color)
     {
         SetTitleScreenColor(bg_colors[bg_color_index].r, bg_colors[bg_color_index].g);
@@ -154,13 +156,14 @@ void MainFunc()
     //Main Loop
     if(mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
     {
-        //Save/Load spyro & camera information
+        //Save spyro & camera information
         if(_currentButtonOneFrame == L3_BUTTON)
         {
             SaveSpyroAndCamera(false);
-            //instaLoadLevelID = -1;                                  //signals to the instaload function that the fly-in position and camera needs to be saved again
         }
-        if(_currentButtonOneFrame == R3_BUTTON)
+
+        //Load spyro & camera information
+        if(_currentButtonOneFrame == R3_BUTTON && hasSavedSpyro == true)
         {
             ReloadSpyroAndCamera(false);
         }
@@ -169,11 +172,9 @@ void MainFunc()
         if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
         {
             RespawnSpyro();
-            mainTimerAtReset = _globalTimer;
-        }
-        if((_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON))
-        {
             ResetLevelCollectables();
+            mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
+            _globalLives = 100;
         }
 
         //Make Nestor Skippable
@@ -188,5 +189,16 @@ void MainFunc()
             _spyro.position.z += 500;
         }
 
+    }
+
+    //Safeguards against loading with other levels savestate/no savestate
+    if(!bitflags.hasRanOnceLoadSpyroReset && _movementSubState == MOVEMENT_SUBSTATE_LOADING)
+    {
+        hasSavedSpyro = false;
+        bitflags.hasRanOnceLoadSpyroReset = true;
+    }   
+    else if(_movementSubState != MOVEMENT_SUBSTATE_LOADING)
+    {
+        bitflags.hasRanOnceLoadSpyroReset = false;
     }
 }

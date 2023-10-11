@@ -267,6 +267,8 @@ void InGameTimerHook()
         // When Displaying Menu
         if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
         {
+            CapitalTextInfo menu_text_info[6] = {{0}};
+
             // Easy Exit
             if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
@@ -274,10 +276,6 @@ void InGameTimerHook()
                 _spyro.isMovementLocked = FALSE;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
-
-            CapitalTextInfo menu_text_info[6] = {{0}};
-
-            _spyro.isMovementLocked = TRUE;
 
             DrawTextBox(0x30, 0x1D0, 0x30, 0xBE);
             
@@ -304,6 +302,8 @@ void InGameTimerHook()
             menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[5].y = 170;
             menu_text_info[5].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
 
             if(custom_menu.selection == 0)
             {

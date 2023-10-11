@@ -6,5 +6,6 @@ void InGameTimerHook();
 void ResetLevelCollectables();
 void SaveSpyroAndCamera(bool flyInFlag);
 void ReloadSpyroAndCamera();
+void HexEdit(void);
 
 #endif /* SHARED_FUNCS_H */

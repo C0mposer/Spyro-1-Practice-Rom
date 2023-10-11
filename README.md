@@ -2,11 +2,11 @@
 
 # Spyro 1 Practice Codes
 
-This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *partial save-states*, *timing functionality*, and many other quality of life features.
+This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *partial save-states*, *a level select*, *timing functionality*, and many other quality of life features.
 
 This can be played on PS1, PS2, PS3, and most emulators. 
 
-To play this on PS2 with a burnt disk will require you to specifically download the **PS2 version**. It will also require you to have a softmodded ps2 with [Mechapwn](https://github.com/MechaResearch/MechaPwn) installed, or have a modchip.
+To play this on PS2 with a burnt disk will require you to specifically download the **PS2 version**. It will also require you to have a softmodded ps2 with [MechaPwn](https://github.com/MechaResearch/MechaPwn) installed, or have a modchip.
 
 ## Hotkeys:
 1. Open Custom Menu (**L2 + R2 + Triangle**)
@@ -62,14 +62,14 @@ Nestor is always skippable like any other dragon. Allows for faster nestor skip 
 **Be sure to download the correct version for the platform you are going to play on**
 ### PS2
  **BIN/CUE Download**
-To simply download the rom and get practicing, download the cue/bin here:
+To simply download the patched rom and get practicing, download the cue/bin here:
 [PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS2.zip)
 
 **Xdelta Downloads**:
-If you wish to patch your own spyro 1 bin/cue file instead, download the patch here:
+If you wish to patch your own personal spyro 1 bin/cue file instead, download the patch here:
 [PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1/spyro1_PracticeCodes_PS2.xdelta)
 
-*Note: To play this rom on PS2 requires either a mechapwn'd or modchipped PS2 to read the burned disk*
+*Note: To play this rom on PS2 requires either a mechapwn'd or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
  ### All Other Platforms (PS1, PS3, Emulator, etc)
 **BIN/CUE Download**
 To simply download the rom and get practicing, download the cue/bin here:

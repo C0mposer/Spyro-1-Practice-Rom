@@ -18,12 +18,10 @@ bool hasResetSavestate = false;
 
 const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
 
-//Externs
+// Externed from elsewhere
 extern BackgroundColor bg_color_index;
 extern bool should_update_bg_color;
-
 extern int mainTimerAtReset;
-
 extern bool should_reset_collectables;
 
 
@@ -142,6 +140,7 @@ void MainFunc()
     {
         UnlockAllLevels();
         mod_state = UNLOCKED_LEVELS;
+        _globalLives = 99;
         //memset((void*)0x8001b648, 0, 0x350); //Clear top of inventory menu   
     }
 

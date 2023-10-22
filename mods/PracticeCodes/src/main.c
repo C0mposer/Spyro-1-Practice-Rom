@@ -128,7 +128,7 @@ void MainFunc()
     }
 
     //Run once upon starting game
-    if(mod_state == GAME_STARTED && _globalTimer > 20)                //? If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
+    if(mod_state == GAME_STARTED && _globalTimer > 20)                // If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
     {
         SkipIntro();
         mod_state = SKIPPED_INTRO;

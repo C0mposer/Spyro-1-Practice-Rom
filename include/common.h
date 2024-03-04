@@ -212,6 +212,12 @@ typedef struct RanOnceBitFlags
 
 }RanOnceBitFlags;
 
+typedef struct AnalogStick
+{
+    u8 x_axis;
+    u8 y_axis;
+}AnalogStick;
+
 
 //*~~~~~~~~~~~~~~~~
 //*Custom Functions 
@@ -301,6 +307,7 @@ extern unsigned short _currentButton; //0x80077380           //? Value coorspond
 extern unsigned short _currentButtonOneFrame; //0x80077378   //? Value coorsponding the the current button being pressed, then goes back to 0 after 1 frame.
 extern int _secondController; //0x80078E50                   //! STILL RESEARCHING
 //Analog Sticks in analog_sticks.h
+extern AnalogStick _rightAnalogStick;
 
 extern Spyro _spyro; //0x80078A58                            //? Start of the Spyro Struct
 extern int _movementSubState; //0x80078AD4                   //! Research this more. 0xA is the loop for example.

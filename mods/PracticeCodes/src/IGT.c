@@ -421,7 +421,7 @@ void InGameTimerHook()
             // IL Looping Selection
             else if(custom_menu.selection == 1)
             {
-                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     custom_menu.il_mode = (custom_menu.il_mode + 1) % 2;
                 }
@@ -586,7 +586,10 @@ void InGameTimerHook()
         }
         else if(custom_menu.sparx_mode == SPARXLESS)
         {
-            _spyro.health = 0;
+            if (_spyro.health > 0)
+            {
+                _spyro.health = 0;
+            }
         }
 
         if(custom_menu.quick_goop_mode == TRUE)

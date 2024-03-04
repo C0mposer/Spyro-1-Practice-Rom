@@ -2,6 +2,8 @@
 #include <levelselect.h>
 #include <shared_funcs.h>
 #include <bg_colors.h>
+#include <rat_code.h>
+#include <multitap.h>
 
 enum ModState
 {
@@ -118,13 +120,15 @@ inline void SetTitleScreenColor(byte r, byte g)
 //*
 void MainFunc()
 {   
+    //! Other functions to run every frame
     LevelSelect();
     InstaLoad();
 
     //! At seperate memory locations (See buildlist.txt)
     {
         InGameTimerHook();
-        //HexEdit();
+        RatCodeUpdate();
+        MultiTapUpdate();
     }
 
     //Run once upon starting game

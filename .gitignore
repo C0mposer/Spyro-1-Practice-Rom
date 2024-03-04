@@ -332,3 +332,12 @@ build/bootedit/spyro1_PracticeCodes_PS2_ALTBUTTONS.xdelta
 build/bootedit/spyro1_PracticeCodes_PS2_ALTBUTTONS.zip
 .gitignore
 .gitignore
+TODO.txt
+build/bootedit/ratcode.zip
+mods/PracticeCodes/debug/dep/multi_tap.dep
+mods/PracticeCodes/debug/dep/rat_code.dep
+mods/PracticeCodes/debug/obj/multi_tap.o
+mods/PracticeCodes/debug/obj/rat_code.o
+mods/PracticeCodes/output/srcrat_codec.bin
+mods/PracticeCodes/src/hexedit.c
+mods/PracticeCodes/src/rat_move

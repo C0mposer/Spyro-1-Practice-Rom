@@ -1,4 +1,4 @@
-**TLDR: Key Glitch is the result of a dangling pointer to the root gem that spawns out of a keychest, and can be avoided 100% of the time by resetting your console.** 
+**TLDR: Key Glitch is the result of a dangling pointer to the root gem that spawns out of a keychest, and can be avoided 100% of the time by resetting your console after attempts.** 
 
 Key Glitch is a glitch that has plauged S1 runners for a while. It causes a keychest to not open, even though you have seemingly grabbed the key.
 

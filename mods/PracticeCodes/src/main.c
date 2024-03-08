@@ -105,8 +105,10 @@ void ResetLevelCollectables()
         {
             _levelGemsCollectedArray[i] = 0;
         }
+
+        // Key Glitch Fix
         _keyState = 0;
-        _ptr_keyChestHostGem = 0x00000000;
+        _ptr_keyChestHostGem = NULL;
     }
 }
 

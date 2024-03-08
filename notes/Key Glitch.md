@@ -87,7 +87,7 @@ If we reset after any other key chest, for example jacques, that pointer will da
 
 This is why it doesn't happen in other levels normally.
 
-This also explains why Saboom suposedly got it in stone hill while practicing ILs. If one were to open a keychest in stone hill, and then reset just to go straight back into stone hill, the pointer will be dangling from the stone hill key chest.  
+This also explains why Saboom suposedly got it in stone hill while practicing ILs. If one were to open a keychest in stone hill, and then reset just to go straight back into stone hill, the pointer will still be dangling from the stone hill keychest root gem prior.  
 
 Key glitch can happen in any level if you don't open any other key chests in between your reset, like with IL practice. It just happens to be any% is one of the only examples where this happens in an actual category, with tree tops.
 

@@ -81,7 +81,7 @@ And since each level has its own memory location for dynamic mobys, you will nev
 
 Considering why this works, it makes sense why it happens most in any%, in tree tops. The first key chest we open in any% is in tree tops, and so if we reset to a failed stoneknot, that pointer will be dangling until we get back to that first keychest in tree tops again. 
 
-If we reset after any other key chest, for example jacques, that pointer will dangle up until we break to the tree tops key chest.  
+If we reset after any other key chest, for example jacques, that pointer will dangle up until we break the tree tops key chest.  
 
 This is why it doesn't happen in other levels normally.
 

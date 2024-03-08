@@ -199,7 +199,7 @@ void MainFunc()
 
     //Safeguard against loading with another levels savestate/no savestate
     {     
-        if(!hasResetSavestate && _levelLoadState < 0xB) // 
+        if(!hasResetSavestate && _levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
         {
             hasSavedSpyro = false;
             hasResetSavestate = true;

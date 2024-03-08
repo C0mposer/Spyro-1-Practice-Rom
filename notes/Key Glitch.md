@@ -75,7 +75,7 @@ Once you are in either state KEYCHEST_OPENED/ROOTGEM_COLLECTED (2/3), the key is
 
 You may be wondering, isn't it highly unlikely that a gem from a chest/enemy spawns into the ***same exact*** memory location as the root gem on your last run? And why does it only happen in the same level you were in before?
 
-Every level has its own unique statically sized memory location for dynamically allocated mobys. As soon as you enter a level, dynamic mobys will start spawning at the same location, every time. Each moby is also the same in size, 0x58 bytes. Effictively meaning that you will very likely cycle through the same memory locations for these dynamic mobys as they spawn/despawn. 
+Every level has its own unique statically sized memory location for dynamically allocated mobys. As soon as you enter a level, dynamic mobys will start spawning at the same location, every time. Each moby is also the same in size, 0x58 bytes. Effectively meaning that you will very likely cycle through the same memory locations for these dynamic mobys as they spawn/despawn. 
 
 And since each level has its own memory location for dynamic mobys, you will never encounter a situation where breaking a keychest in one level, will cause key glitch in another level.
 

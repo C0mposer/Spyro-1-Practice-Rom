@@ -69,7 +69,9 @@ However, the problem is that this global pointer that is pointing into dynamical
 
 So in simple terms, if you are running any%, and reset anytime between opening the keychest in tree tops, and before opening another keychest, this pointer will be dangling into dynamically alocated moby data. 
 
-So next time you enter tree tops, and you break a chest, or kill an enemy, that ***spawns a gem that happens to be allocated into the same exact memory location as the root gem was allocated to on your last run***... when you collect that gem, the CollectGem function will think you have collected the root gem! Your keystate will be changed from KEY_NOT_COLLECTED/KEY_COLLECTED (0/1) to ROOTGEM_COLLECTED *(3)*, effectivly removing the key from your inventory. Once you are in either state KEYCHEST_OPENED/ROOTGEM_COLLECTED (2/3), the key is considered "used", as normally you would only be able to access state ROOTGEM_COLLECTED *(3)* once you have used to key!
+So next time you enter tree tops, and you break a chest, or kill an enemy, that ***spawns a gem that happens to be allocated into the same exact memory location as the root gem was allocated to on your last run***... when you collect that gem, the CollectGem function will think you have collected the root gem!  
+Your keystate will be changed from KEY_NOT_COLLECTED/KEY_COLLECTED (0/1) to ROOTGEM_COLLECTED *(3)*, effectivly removing the key from your inventory.  
+Once you are in either state KEYCHEST_OPENED/ROOTGEM_COLLECTED (2/3), the key is considered "used", as normally you would only be able to access state ROOTGEM_COLLECTED *(3)* once you have used to key!
 
 You may be wondering, isn't it highly unlikely that a gem from a chest/enemy spawns into the ***same exact*** memory location as the root gem on your last run? And why does it only happen in the same level you were in before?
 

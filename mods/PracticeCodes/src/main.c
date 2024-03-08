@@ -199,7 +199,7 @@ void MainFunc()
 
     //Safeguard against loading with another levels savestate/no savestate
     {     
-        if(!hasResetSavestate && _levelLoadState == 5)
+        if(!hasResetSavestate && _levelLoadState < 0xB) // 
         {
             hasSavedSpyro = false;
             hasResetSavestate = true;

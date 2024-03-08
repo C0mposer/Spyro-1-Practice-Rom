@@ -18,13 +18,13 @@ Here is a simplified version CollectGem Function with the relevant code commente
 
 ```c
 
-typedef enum KeyStates
+enum KeyStates
 {
     KEY_NOT_COLLECTED = 0,
     KEY_COLLECTED = 1,
     KEYCHEST_OPENED = 2,
     ROOTGEM_COLLECTED = 3;
-} Keystates;
+};
 
 void CollectGem(Moby* self)
 

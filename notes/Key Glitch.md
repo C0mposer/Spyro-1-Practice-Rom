@@ -10,11 +10,11 @@ When you open a keychest, a global pointer in memory at **0x80075758** holds the
 This gem gets allocated into a heap specifically for the dynamic mobys that get spawned into the level. 
 
 Dynamic mobys are the objects that don't exist until some event spawns them.   
-*For example: gems that come out of boxes, gems fall out of enemies, lifes that break out of life chests, and of course, the gems that come out of a keychest.*
+*For example: gems that come out of boxes, gems fall out of enemies, life's that break out of life chests, and of course, the gems that come out of a keychest.*
 
 This root gem pointer is used in the **CollectGem** function to check if the current gem being collected, is equal to that root-gem that got spawned from the keychest.
 
-Here is a simplified version CollectGem Function with the relavent code commented:
+Here is a simplified version CollectGem Function with the relevent code commented:
 
 ```c
 
@@ -67,7 +67,7 @@ If the gem currently being collected is the root gem, it will set your global ke
 
 However, the problem is that this global pointer that is pointing into dynamically spawned mobys... is never reset back to NULL, ever. Even when you go to the title screen. This global pointer is only changed when you open another keychest, changing it to that new root gem.
 
-So in simple terms, if you are running any%, and reset anytime between opening the keychest in tree tops, and before opening another keychest, this pointer will be dangling into dynamically alocated moby data. 
+So in simple terms, if you are running any%, and reset anytime between opening the keychest in tree tops, and before opening another keychest, this pointer will be dangling into dynamically allocated moby data. 
 
 So next time you enter tree tops, and you break a chest, or kill an enemy, that ***spawns a gem that happens to be allocated into the same exact memory location as the root gem was allocated to on your last run***... when you collect that gem, the CollectGem function will think you have collected the root gem!  
 Your keystate will be changed from KEY_NOT_COLLECTED/KEY_COLLECTED (0/1) to ROOTGEM_COLLECTED *(3)*, effectivly removing the key from your inventory.  

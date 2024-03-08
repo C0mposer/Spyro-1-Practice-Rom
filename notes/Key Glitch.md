@@ -89,4 +89,6 @@ This also explains why Saboom suposedly got it in stone hill while practicing IL
 
 Key glitch can happen in any level if you don't open any other key chests in between your reset, like with IL practice. It just happens to be any% is one of the only examples where this happens in an actual category, with tree tops.
 
-Thanks for reading :) Shoutouts to OddKara 
+Thanks for reading :) Write up by: Composer
+
+Shoutouts to OddKara for helping in research

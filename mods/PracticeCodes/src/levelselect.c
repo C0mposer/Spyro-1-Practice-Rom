@@ -130,6 +130,7 @@ void InstaLoad(){
 	//Save Camera and Spyro when it is stopped
 	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
+		_spyro.health = 3; // Setting before the save since it will load his struct
 		SaveSpyroAndCamera(TRUE);
 	}
 
@@ -169,7 +170,6 @@ void InstaLoad(){
 			_cameraLockingRelated = 0x80000012;					// 0x80000012 is not an address it is just the value it is expecting for level loads
 			_musicState = 0x40;
 			_spyro.timer_framesInAir = 1;						// For Tree Tops
-			_spyro.health = 3;
 			*(int *)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?
 		}
 

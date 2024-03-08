@@ -10,8 +10,8 @@ typedef enum RatCodeState
 } RatCodeState;
 RatCodeState rat_code_state = UNFROZEN;
 
-bool has_toggled_rat_code = false;
 bool has_saved_rat = false;
+
 bool should_lock = false;
 int frames_locked = 0;
 

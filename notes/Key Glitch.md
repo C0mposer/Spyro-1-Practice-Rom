@@ -14,7 +14,7 @@ Dynamic mobys are the objects that don't exist until some event spawns them.
 
 This root gem pointer is used in the **CollectGem** function to check if the current gem being collected, is equal to that root-gem that got spawned from the keychest.
 
-Here is a simplified version CollectGem Function with the relavant code commented:
+Here is a simplified version CollectGem Function with the relevant code commented:
 
 ```c
 

@@ -5,7 +5,7 @@ So it never happens on your first run from a fresh console boot.
 
 **The reason Keyglitch happens, is the result of dangling pointer relating to the root gem of a keychest.**
 
-When you open a keychest, a global pointer in memory at **0x80075758** holds the address of the last root gem moby *(object)* that gets spawned from a keychest. 
+When you open a keychest, a global pointer in memory at **0x80075758** holds the address of the last root gem moby *(object)* that gets spawned from a keychest. The **root gem** is the first gem that spawns from the keychest.
 
 This gem gets allocated into a heap specifically for the dynamic mobys that get spawned into the level. 
 

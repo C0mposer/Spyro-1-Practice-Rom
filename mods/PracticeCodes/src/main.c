@@ -105,6 +105,8 @@ void ResetLevelCollectables()
         {
             _levelGemsCollectedArray[i] = 0;
         }
+        _keyState = 0;
+        _ptr_keyChestHostGem = 0x00000000;
     }
 }
 

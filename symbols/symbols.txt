@@ -106,3 +106,6 @@ _freeSpace2 = 0x80073e00;
 
 dorito = 0x801597E4;
 dorito_run_time_left = 0x8015EFAC;
+
+_keyState = 0x80075830;
+_ptr_keyChestHostGem = 0x80075758;

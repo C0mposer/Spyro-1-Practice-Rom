@@ -65,7 +65,7 @@ void CollectGem(Moby* self)
 
 If the gem currently being collected is the root gem, it will set your global key state to ROOTGEM_COLLECTED *(3)*. In any normal circumstance, the key state will be at KEYCHEST_OPENED *(2)* when this check succeeds.
 
-However, the problem is that this global pointer that is pointing into dynamically spawned mobys... is never reset back to NULL, ever. Even when you go to the title screen. This global pointer is only changed when you open another keychest, changing it to that new root gem.
+However, the problem is that this global pointer that is pointing into dynamically spawned mobys... **is never reset back to NULL, ever**. Even when you go to the title screen. This global pointer is only changed when you open another keychest, changing it to that new root gem.
 
 So in simple terms, if you are running any%, and reset anytime between opening the keychest in tree tops, and before opening another keychest, this pointer will be dangling into dynamically allocated moby data. 
 

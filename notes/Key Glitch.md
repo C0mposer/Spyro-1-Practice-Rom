@@ -3,8 +3,7 @@
 **Write Up:**  
 Key Glitch has plauged S1 runners for a while. It causes a keychest to not open, even though you have seemingly grabbed the key.
 
-Within the past year or so, people have noticed that key glitch only happens after resetting from a level that has a keychest. 
-So it never happens on your first run from a fresh console boot.
+Within the past year or so, people have noticed that key glitch doesn't tend to happen on their first attempt from console boot. It only seems to happen after subsequent attempts. This implied that something wasn't being reset properly when resetting the game through the menu.
 
 **The reason Keyglitch happens, is the result of dangling pointer relating to the root gem of a keychest.**
 

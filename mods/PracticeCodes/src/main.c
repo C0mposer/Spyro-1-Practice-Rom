@@ -199,12 +199,12 @@ void MainFunc()
 
     //Safeguard against loading with another levels savestate/no savestate
     {     
-        if(!hasResetSavestate && _movementSubState == MOVEMENT_SUBSTATE_LOADING)
+        if(!hasResetSavestate && _levelLoadState == 5)
         {
             hasSavedSpyro = false;
             hasResetSavestate = true;
         }   
-        else if(_movementSubState != MOVEMENT_SUBSTATE_LOADING)
+        else if(_levelLoadState == -1)
         {
             hasResetSavestate = false;
         }

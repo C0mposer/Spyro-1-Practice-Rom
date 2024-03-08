@@ -10,7 +10,7 @@ When you open a keychest, a global pointer in memory at **0x80075758** holds the
 This gem gets allocated into a heap specifically for the dynamic mobys that get spawned into the level. 
 
 Dynamic mobys are the objects that don't exist until some event spawns them.   
-*For example: gems that come out of boxes, gems fall out of enemies, life's that break out of life chests, and of course, the gems that come out of a keychest.*
+*For example: gems that come out of boxes, gems that fall out of enemies, life's that break out of life chests, and of course, the gems that come out of a keychest.*
 
 This root gem pointer is used in the **CollectGem** function to check if the current gem being collected, is equal to that root-gem that got spawned from the keychest.
 

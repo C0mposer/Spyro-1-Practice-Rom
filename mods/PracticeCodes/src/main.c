@@ -67,6 +67,7 @@ void SaveSpyroAndCamera(bool flyInFlag)
     //Copying The Spyro struct and most of the camera struct
     memcpy(free_space, &_spyro, sizeof(_spyro));
     memcpy((byte*)free_space + 0x270, &_cameraStart, 0xFF);
+    memcpy((byte *)free_space + 0x380, &_keyState, 0x4);
 
 }
 
@@ -86,6 +87,7 @@ void ReloadSpyroAndCamera(bool flyInFlag)
     //Reloading The Spyro struct and most of the camera struct
     memcpy(&_spyro, free_space, sizeof(_spyro));
     memcpy(&_cameraStart, (byte*)free_space + 0x270, 0xFF);
+    memcpy(&_keyState, (byte *)free_space + 0x380, 0x4);
 }
 
 //This function puts spyro at 0 which will always immediately kill him, since its a void spot.
@@ -186,13 +188,19 @@ void MainFunc()
         //Make Nestor Skippable
         if(_levelID == ARTISANS_ID)
         {
-            _isNestorUnskipable = FALSE;
+            _nestorMakeUnskipable = FALSE;
         }
 
         //Moonjump
         if(_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
         {
             _spyro.position.z += 500;
+        }
+
+        //Give Key
+        if(CheckButtonMultiTap(TRIANGLE_BUTTON, 3))
+        {
+            _keyState = 1;
         }
 
     }

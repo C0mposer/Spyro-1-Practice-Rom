@@ -20,8 +20,8 @@ void SaveRat(void)
 {
     byte *free_space = (byte *)0x80073990;
 
-    memcpy((byte *)free_space + 0x380, &dorito.position, sizeof(dorito.position));
-    memcpy((byte *)free_space + 0x390, &dorito.rotation, sizeof(dorito.rotation));
+    memcpy((byte *)free_space + 0x390, &dorito.position, sizeof(dorito.position));
+    memcpy((byte *)free_space + 0x3A0, &dorito.rotation, sizeof(dorito.rotation));
 
     has_saved_rat = true;
 }

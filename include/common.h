@@ -334,7 +334,7 @@ extern int _shouldCameraFollowSpyro; //0x80033b4c            //? This is actuall
 
 extern char _mainMenuState; //0x80078D88                     //? This is the current state of the main menu. Should make an enum for this
 extern int _ballonistState; //0x800777e8                     //? The Sub State for the balloonist. Should make an enum for this.
-extern unsigned int _levelLoadState; //0x80075864                     //? The sub state for level loads.
+extern unsigned int _levelLoadState; //0x80075864            //? The sub state for level loads.
 extern int _dragonState; //0x80077058                        //? The sub state for dragon cracking.
 extern int _keyState; //0x80075830                           //? The status of the current level's key
 
@@ -384,7 +384,7 @@ extern int _musicVolume; //0x80075748                       //? Music Volume in 
 
 extern char* _cameraStart; //0x80076DD0                     //? Start of Camera Struct?
 
-extern int _isNestorUnskipable;
+extern int _nestorMakeUnskipable;
 
 extern int _hBlankTimer;
 

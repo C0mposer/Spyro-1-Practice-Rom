@@ -12,7 +12,7 @@ bool CheckButtonMultiTap(int button, int times_to_press)
 {
     if (_currentButton == button && !is_holding)
     {
-        timer = 1;
+        timer = 1;  // 1 is On, and it will start counting from here. Avoids having a seperate bool
         is_holding = true;
 
         current_amount_of_presses++;

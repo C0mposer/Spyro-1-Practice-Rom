@@ -116,7 +116,7 @@ bool should_update_bg_color = true;
 bool should_reset_collectables = true;
 
 // Externed from elsewhere
-extern short flyInArray[36];
+extern const short flyInArray[36];
 
 
 //Math for 29.91hz

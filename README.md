@@ -11,7 +11,7 @@ To play this on PS2 with a burnt CD will require you to specifically download th
 ## Hotkeys:
 1. Open Custom Menu (**L2 + R2 + Triangle**)
 2. Open Level Select (**Select**)
-3. Quick re-fly in to current level (**L1 + R1 + Triangle**)
+3. Quick Fly In To Current Level (**L1 + R1 + Triangle**)
 4. Respawn Spyro (**L1 + R1 + Circle**)
 5. Save/Load Spyro's Data (**L3** to save, **R3** to load)
 6. Moon-jump (**L1 + R1 + L2 + R2 + X**)

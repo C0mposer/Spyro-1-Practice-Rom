@@ -15,6 +15,7 @@ To play this on PS2 with a burnt CD will require you to specifically download th
 4. Respawn Spyro (**L1 + R1 + Circle**)
 5. Save/Load Spyro's Data (**L3** to save, **R3** to load)
 6. Moon-jump (**L1 + R1 + L2 + R2 + X**)
+7. Give Key (**Triangle x3**)
 
 ## Menu Features:
 
@@ -58,6 +59,10 @@ Skips straight to "The Adventure Continues..."
 ### Nestor Skip:
 Nestor is always skippable like any other dragon. Allows for faster nestor skip practice.
 
+### Rat Practice:
+You can freeze/unfreeze the rat by pressing **triangle 2 times**, to allow for a longer time to set up rat-surf.  
+  
+The rat is saved as a part of the sudo-savestate (L3/R3) as well
 # Downloads
 **Be sure to download the correct version for the platform you are going to play on**
 ### PS2

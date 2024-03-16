@@ -346,3 +346,11 @@ build/bootedit/spyro1_PracticeCodes_PS1.zip
 build/bootedit/spyro1_PracticeCodes_PS1.xdelta
 build/bootedit/spyro1_PracticeCodes_PS2.xdelta
 build/bootedit/spyro1_PracticeCodes.xml
+mods/PracticeCodes/output/asmheads.bin
+mods/PracticeCodes/output/head.bin
+mods/PracticeCodes/debug/obj/head.o
+mods/PracticeCodes/debug/obj/head_patch.o
+mods/PracticeCodes/debug/dep/head.dep
+mods/PracticeCodes/debug/dep/head_patch.dep
+build/spyro1_PracticeCodes/ASMHEADS.BIN
+build/spyro1_PracticeCodes/HEAD.BIN

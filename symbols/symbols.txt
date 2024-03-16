@@ -110,3 +110,11 @@ dorito_run_time_left = 0x8015EFAC;
 start_of_level_dragons = 0x123456;
 _keyState = 0x80075830;
 _ptr_keyChestHostGem = 0x80075758;
+
+_vortexFlags = 0x8007a6a8;
+_levelDragonCounts = 0x800772d8;
+
+_globalDragonCount = 0x80075750;
+_globalEggCount = 0x80075810;
+
+_ptr_headControlMoby = 0x8015865C;

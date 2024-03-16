@@ -140,6 +140,50 @@ enum LevelIDS
     GNASTYS_LOOT_ID = 0x40
 };
 
+enum LevelIndex
+{
+    INDEX_ARTISANS = 0,
+    INDEX_STONE_HILL = 1,
+    INDEX_TOWN_SQUARE = 2,
+    INDEX_DARK_HALLOW = 3,
+    INDEX_TOASTY = 4,
+    INDEX_SUNNY_FLIGHT = 5,
+
+    INDEX_PEACE_KEEPERS = 6,
+    INDEX_DRY_CANYON = 7,
+    INDEX_CLIFF_TOWN = 8,
+    INDEX_ICE_CAVERN = 9,
+    INDEX_SHEMP = 10,
+    INDEX_NIGHT_FLIGHT = 11,
+
+    INDEX_MAGIC_CRAFTERS = 12,
+    INDEX_ALPINE_RIDGE = 13,
+    INDEX_HIGH_CAVES = 14,
+    INDEX_WIZARD_PEAK = 15,
+    INDEX_BLOWHARD = 16,
+    INDEX_CRYSTAL_FLIGHT = 17,
+
+    INDEX_BEAST_MAKERS = 18,
+    INDEX_TERRACE_VILLAGE = 19,
+    INDEX_MISTY_BOG = 20,
+    INDEX_TREE_TOPS = 21,
+    INDEX_METALHEAD = 22,
+    INDEX_WILD_FLIGHT = 23,
+
+    INDEX_DREAM_WEAVERS = 24,
+    INDEX_HAUNTED_TOWERS = 25,
+    INDEX_DARK_PASSAGE = 26,
+    INDEX_LOFTY_CASTLE = 27,
+    INDEX_JACQUES = 28,
+    INDEX_ICY_FLIGHT = 29,
+
+    INDEX_GNASTYS_WORLD = 30,
+    INDEX_GNORC_COVE = 31,
+    INDEX_TWILIGHT_HARBOR = 32,
+    INDEX_GNASTY_GNORC = 33,
+    INDEX_GNASTYS_LOOT = 34
+};
+
 enum LevelFlyInAnimations
 {
     FACING_LEFT = 0xCA6C,
@@ -279,6 +323,9 @@ char* GetNextParticleSlot(char param_1);                                        
 
 void CreateParticle(int param_1, int param_2, int **ptrToMoby, int *param_4);                           //? This function creates a particle. param_1 amount of particles, param_2 Is the Particle ID, param_3 is a Vec3 to its Initial Spawn Position, param_4 Vec3 of Amount of Units to Travel from Inital POS
 
+void UpdateTerrain(unsigned int terrainNumber, char param_2, char param_3);                             //? This function updates moveable terrain
+void TerrainSkipToKeyFrame(unsigned int terrainNumber, char keyFrame, int param_3);                     //? This function jumps moveable terrain to a particular animation key frame
+int TerrainCurrentKeyFrame(int terrainNumber);                                                          //? This function returns the current key frame for the supplied movable terrain
 
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables
@@ -315,7 +362,10 @@ extern int _isInPortal; //0x80078C70                         //? 0x5 for in port
                                                              //! MIGHT BE PART OF SPYTO STRUCT. RESEARCH PLZ
 extern short _globalGems; //0x80075860                       //? Total amount of global gems collected
 extern int _globalLives; //0x8007582C                        //? Total amount of global lives
-extern int _levelGemsCollectedArray[35]; //0x80077420            //? Total amount of gems collected in each level
+extern int _globalDragons; //0x80075750                      //? Total amount of gloabl dragons
+extern int _globalEggs; //0x80075810                         //? Total amount of global eggs
+extern int _levelGemsCollectedArray[35]; //0x80077420        //? Total amount of gems collected in each level
+extern int _levelDragonCounts[35]; //0x800772d8              //? Total amount of dragons collected in each level
 
 extern char _levelID; //0x800758B4                           //? Level ID according to the LevelIDs enum. This LevelID is used to determine which level will be loaded when in a loading screen, amung other things.
 extern char _portalToExitFromInHW; //0x800758AC              //? Same as the Level Id for the level. Also if 0, means entering level for fly in, not returning home
@@ -364,6 +414,8 @@ extern char* _ptr_particleLinkedList; //0x80075738           //? This is a point
 
 extern int* _ptr_levelSpawn; //0x800785e4                    //? This is a pointer to the spawn coordinates for the current level.
 
+extern int* _ptr_headControlMoby; //0x8015865C               //? This is a pointer to the gnorc gnexus heads control moby
+
 extern int _headAndChestSpinTimer; //0x80077fe4
 extern int _unk_spinRelated; //0x8006cc78
 extern char* _localSoundEffects; //0x800761D4
@@ -371,6 +423,7 @@ extern char* _localSoundEffects; //0x800761D4
 extern char _balloonist_requirements_state[6];
 
 extern char _entered_level_flags[35];
+extern char _vortexFlags[35]; //0x8007a6a8
 
 extern RGB _paused_screen_color;
 

@@ -120,3 +120,10 @@ _isInInGameCutscene = 0x8007570c;
 _spyroInvisible = 0x80075814;
 
 _treeTopsThiefTimer = 0x80180250;
+_vortexFlags = 0x8007a6a8;
+_levelDragonCounts = 0x800772d8;
+
+_globalDragonCount = 0x80075750;
+_globalEggCount = 0x80075810;
+
+_ptr_headControlMoby = 0x8015865C;

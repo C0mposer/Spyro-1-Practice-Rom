@@ -130,7 +130,7 @@ void InstaLoadUpdate(){
 	//Save Camera and Spyro when it is stopped
 	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
-		_spyro.health = 3; // Setting before the save since it will load his struct
+		_spyro.health = YELLOW_SPARX; // Setting before the save since it will load his struct
 		SaveSpyroAndCamera(TRUE);
 	}
 

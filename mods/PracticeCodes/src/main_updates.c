@@ -164,6 +164,7 @@ void MainUpdate()
         {
             if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath)){
                 ReloadSpyroAndCamera(false);
+                readyToLoadstateAfterDeath = false;
 
                 if (_levelID == TREE_TOPS_ID)
                 {

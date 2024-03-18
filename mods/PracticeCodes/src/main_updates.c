@@ -100,18 +100,15 @@ void RespawnSpyro()
 //This function clears the bitflags for which collectables should spawn into a level/homeworld with spyro. This is the same area that the memory card writes to when loading a game.
 void ResetLevelCollectables()
 {
-    if(should_loadstate_gems)
+    memset(&_collectablesBitflags, 0, 0x4B0);
+    for (int i = 0; i < 35; i++)
     {
-        memset(&_collectablesBitflags, 0, 0x4B0);
-        for (int i = 0; i < 35; i++)
-        {
-            _levelGemsCollectedArray[i] = 0;
-        }
-
-        // Key Glitch Fix
-        _keyState = 0;
-        _ptr_keyChestHostGem = NULL;
+        _levelGemsCollectedArray[i] = 0;
     }
+
+    // Key Glitch Fix
+    _keyState = 0;
+    _ptr_keyChestHostGem = NULL;
 }
 
 //Changing asm instructions for pause menu RGB. Cannot change B value, as the value is in a shared register with other crucial parts of the struct.

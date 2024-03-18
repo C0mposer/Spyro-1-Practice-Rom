@@ -354,3 +354,7 @@ mods/PracticeCodes/debug/dep/head.dep
 mods/PracticeCodes/debug/dep/head_patch.dep
 build/spyro1_PracticeCodes/ASMHEADS.BIN
 build/spyro1_PracticeCodes/HEAD.BIN
+mods/PracticeCodes/debug/dep/credits_skip.dep
+mods/PracticeCodes/debug/dep/main_updates.dep
+mods/PracticeCodes/debug/obj/main_updates.o
+mods/PracticeCodes/debug/obj/credits_skip.o

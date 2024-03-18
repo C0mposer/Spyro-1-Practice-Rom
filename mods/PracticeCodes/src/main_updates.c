@@ -94,6 +94,7 @@ void ReloadSpyroAndCamera(bool flyInFlag)
 void RespawnSpyro()
 {
     _spyro.position.z = 0;
+    _globalLives = 100;
     _shouldRespawnAtCheckpoint = FALSE;
 }
 
@@ -183,7 +184,6 @@ void MainUpdate()
             RespawnSpyro();
             ResetLevelCollectables();
             mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-            _globalLives = 100;
         }
 
         //Make Nestor Skippable

@@ -107,6 +107,16 @@ _freeSpace2 = 0x80073e00;
 dorito = 0x801597E4;
 dorito_run_time_left = 0x8015EFAC;
 
+gnasty = 0x80160EC0;
+gnasty_chase_state = 0x80165DF8;
+ptr_gnasty_end_fight = 0x8016BEB8;
+path_ptr = 0x80165D9C;
+
 start_of_level_dragons = 0x123456;
 _keyState = 0x80075830;
 _ptr_keyChestHostGem = 0x80075758;
+_isInInGameCutscene = 0x8007570c;
+
+_spyroInvisible = 0x80075814;
+
+_treeTopsThiefTimer = 0x80180250;

@@ -2,7 +2,7 @@
 #define SHARED_FUNCS_H
 
 //Used to avoid "implicit declaration of function" warning
-void InGameTimerHook();
+void InGameTimerUpdate();
 void ResetLevelCollectables();
 void SaveSpyroAndCamera(bool flyInFlag);
 void ReloadSpyroAndCamera();

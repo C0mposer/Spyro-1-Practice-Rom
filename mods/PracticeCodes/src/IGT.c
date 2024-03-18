@@ -133,7 +133,7 @@ void LoadAscii(Timer* ptr_timer, char* ascii){
     sprintf(ascii, "%d.%d%d.%d%d", ptr_timer->minutes, ptr_timer->secondsTensPlace, ptr_timer->secondsOnesPlace, ptr_timer->milisecondsTenthsPlace, ptr_timer->milisecondsHundrethsPlace);
 }
 
-void InGameTimerHook()
+void InGameTimerUpdate()
 {
    //! Timer
     {
@@ -252,331 +252,330 @@ void InGameTimerHook()
             }
         }
     }
+}
 
-
-    //! Menu
+void CustomMenuUpdate(void)
+{ 
+    // Open Menu
+    if(_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
     {
-        // Open Menu
-        if(_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
-        {
-            menu_state = !menu_state;
-            has_toggled_menu = TRUE;
-            PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+        menu_state = !menu_state;
+        has_toggled_menu = TRUE;
+        PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
 
-            if(menu_state == MENU_HIDDEN)
-                _spyro.isMovementLocked = FALSE;
+        if(menu_state == MENU_HIDDEN)
+            _spyro.isMovementLocked = FALSE;
+    }
+
+    // When Displaying Menu
+    if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
+    {
+        CapitalTextInfo menu_text_info[6] = {{0}};
+
+        // Easy Exit
+        if(_currentButtonOneFrame == CIRCLE_BUTTON)
+        {
+            menu_state = MENU_HIDDEN;
+            _spyro.isMovementLocked = FALSE;
+            PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
         }
 
-        // When Displaying Menu
-        if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
+        DrawTextBox(0x30, 0x1D0, 0x30, 0xBE);
+        
+        menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+        menu_text_info[0].y = 70;
+        menu_text_info[0].size = DEFAULT_SIZE;
+
+        menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+        menu_text_info[1].y = 90;
+        menu_text_info[1].size = DEFAULT_SIZE;
+
+        menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+        menu_text_info[2].y = 110;
+        menu_text_info[2].size = DEFAULT_SIZE;
+
+        menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+        menu_text_info[3].y = 130;
+        menu_text_info[3].size = DEFAULT_SIZE;
+        
+        menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
+        menu_text_info[4].y = 150;
+        menu_text_info[4].size = DEFAULT_SIZE;
+
+        menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
+        menu_text_info[5].y = 170;
+        menu_text_info[5].size = DEFAULT_SIZE;
+
+        _spyro.isMovementLocked = TRUE;
+
+        if(custom_menu.selection == 0)
         {
-            CapitalTextInfo menu_text_info[6] = {{0}};
+            DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        }
+        else{
+            DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        }
+        
+        if(custom_menu.selection == 1)
+        {
+            DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        }
+        else{
+            DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        }
 
-            // Easy Exit
-            if(_currentButtonOneFrame == CIRCLE_BUTTON)
+        if(custom_menu.selection == 2)
+        {
+            DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        }
+        else{
+            DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        }
+
+        if(custom_menu.selection == 3)
+        {
+            DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        }
+        else{
+            DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        }
+        
+        if(custom_menu.selection == 4)
+        {
+            DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        }
+        else{
+            DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        }
+        
+        if(custom_menu.selection == 5)
+        {
+            DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        }
+        else{
+            DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        }
+
+
+        // Fill text with defaults if NULL
+        if(custom_menu.reset_mode_text == NULL)
+        {
+            custom_menu.il_mode_text = "IL MODE OFF";
+            custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
+            custom_menu.sparx_mode_text = "SPARX NORMAL";
+            custom_menu.quick_goop_text = "QUICK GOOP OFF";
+            custom_menu.bg_color_text = "BG PINK";
+        }
+
+        // Change Selection
+        if(_currentButtonOneFrame == DOWN_BUTTON)
+        {
+            custom_menu.selection = (custom_menu.selection + 1) % 6;
+        }
+        else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
+        {
+            custom_menu.selection = custom_menu.selection - 1;
+        }
+        
+        // Play Sound Effect
+        if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
+        {
+            PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+        }
+
+        // Timer Selection
+        if(custom_menu.selection == 0)
+        {
+            if(_currentButtonOneFrame == RIGHT_BUTTON)
             {
-                menu_state = MENU_HIDDEN;
-                _spyro.isMovementLocked = FALSE;
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                custom_menu.timer_mode = (custom_menu.timer_mode + 1) % 3;
+                mainTimerAtReset = _globalTimer;
             }
-
-            DrawTextBox(0x30, 0x1D0, 0x30, 0xBE);
-            
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 70;
-            menu_text_info[0].size = DEFAULT_SIZE;
-
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 90;
-            menu_text_info[1].size = DEFAULT_SIZE;
-
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 110;
-            menu_text_info[2].size = DEFAULT_SIZE;
-
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[3].y = 130;
-            menu_text_info[3].size = DEFAULT_SIZE;
-            
-            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[4].y = 150;
-            menu_text_info[4].size = DEFAULT_SIZE;
-
-            menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[5].y = 170;
-            menu_text_info[5].size = DEFAULT_SIZE;
-
-            _spyro.isMovementLocked = TRUE;
-
-            if(custom_menu.selection == 0)
+            if(_currentButtonOneFrame == LEFT_BUTTON)
             {
-                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            
-            if(custom_menu.selection == 1)
-            {
-                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                custom_menu.timer_mode = (custom_menu.timer_mode - 1) % 3;
+                mainTimerAtReset = _globalTimer;
             }
 
-            if(custom_menu.selection == 2)
+            if(custom_menu.timer_mode == TIMER_OFF)
             {
-                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                custom_menu.timer_mode_text = "TIMER OFF";
+                timer_state = (TimerState)TIMER_OFF;
             }
-            else{
-                DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            else if(custom_menu.timer_mode == TIMER_ONLY_PAUSE)
+            {
+                custom_menu.timer_mode_text = "TIMER ONLY STOPPED";
+
+                if(timer_state != TIMER_DISPLAYING)
+                    timer_state = TIMER_RUNNING_NO_DISPLAY;
+            }
+            else if(custom_menu.timer_mode == TIMER_ALWAYS)
+            {
+                custom_menu.timer_mode_text = "TIMER ALWAYS ON";
+
+                if(timer_state != TIMER_DISPLAYING)
+                    timer_state = TIMER_RUNNING;
+            }
+        }
+
+        // IL Looping Selection
+        else if(custom_menu.selection == 1)
+        {
+            if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+            {
+                custom_menu.il_mode = (custom_menu.il_mode + 1) % 2;
             }
 
-            if(custom_menu.selection == 3)
-            {
-                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            
-            if(custom_menu.selection == 4)
-            {
-                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            
-            if(custom_menu.selection == 5)
-            {
-                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-
-            // Fill text with defaults if NULL
-            if(custom_menu.reset_mode_text == NULL)
+            if(custom_menu.il_mode == FALSE)
             {
                 custom_menu.il_mode_text = "IL MODE OFF";
-                custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
-                custom_menu.sparx_mode_text = "SPARX NORMAL";
-                custom_menu.quick_goop_text = "QUICK GOOP OFF";
-                custom_menu.bg_color_text = "BG PINK";
-            }
-
-            // Change Selection
-            if(_currentButtonOneFrame == DOWN_BUTTON)
-            {
-                custom_menu.selection = (custom_menu.selection + 1) % 6;
-            }
-            else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
-            {
-                custom_menu.selection = custom_menu.selection - 1;
-            }
-            
-            // Play Sound Effect
-            if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
-            {
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            }
-
-            // Timer Selection
-            if(custom_menu.selection == 0)
-            {
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
-                {
-                    custom_menu.timer_mode = (custom_menu.timer_mode + 1) % 3;
-                    mainTimerAtReset = _globalTimer;
-                }
-                if(_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.timer_mode = (custom_menu.timer_mode - 1) % 3;
-                    mainTimerAtReset = _globalTimer;
-                }
-
-                if(custom_menu.timer_mode == TIMER_OFF)
-                {
-                    custom_menu.timer_mode_text = "TIMER OFF";
-                    timer_state = (TimerState)TIMER_OFF;
-                }
-                else if(custom_menu.timer_mode == TIMER_ONLY_PAUSE)
-                {
-                    custom_menu.timer_mode_text = "TIMER ONLY STOPPED";
-
-                    if(timer_state != TIMER_DISPLAYING)
-                        timer_state = TIMER_RUNNING_NO_DISPLAY;
-                }
-                else if(custom_menu.timer_mode == TIMER_ALWAYS)
-                {
-                    custom_menu.timer_mode_text = "TIMER ALWAYS ON";
-
-                    if(timer_state != TIMER_DISPLAYING)
-                        timer_state = TIMER_RUNNING;
-                }
-            }
-
-            // IL Looping Selection
-            else if(custom_menu.selection == 1)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.il_mode = (custom_menu.il_mode + 1) % 2;
-                }
-
-                if(custom_menu.il_mode == FALSE)
-                {
-                    custom_menu.il_mode_text = "IL MODE OFF";
-
-                }
-                else if(custom_menu.il_mode == TRUE)
-                {
-                    custom_menu.il_mode_text = "IL MODE ON";
-
-                }
 
             }
-
-            // Reset Selection
-            else if(custom_menu.selection == 2)
+            else if(custom_menu.il_mode == TRUE)
             {
+                custom_menu.il_mode_text = "IL MODE ON";
 
-                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.reset_mode = (custom_menu.reset_mode + 1) % 2;
-                }
-
-                //Flipped for sake of on being first option
-                if(custom_menu.reset_mode == 0)
-                {
-                    custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
-                    should_reset_collectables = true;
-
-                }
-                else if(custom_menu.reset_mode == 1)
-                {
-                    custom_menu.reset_mode_text = "RESET COLLECTABLES OFF";
-                    should_reset_collectables = false;
-
-                }
-
-            }
-
-            // Sparx Selection
-            else if(custom_menu.selection == 3)
-            {
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
-                {
-                    custom_menu.sparx_mode = (custom_menu.sparx_mode + 1) % 3;
-                }
-                else if(_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.sparx_mode = (custom_menu.sparx_mode - 1) % 3;
-                }
-
-                if(custom_menu.sparx_mode == PERMA_SPARX_OFF)
-                {
-                    custom_menu.sparx_mode_text = "SPARX NORMAL";
-
-                }
-                else if(custom_menu.sparx_mode == PERMA_SPARX_ON)
-                {
-                    custom_menu.sparx_mode_text = "PERMA SPARX ON";
-
-                }
-                else if(custom_menu.sparx_mode == SPARXLESS)
-                {
-                    custom_menu.sparx_mode_text = "SPARXLESS ON";
-
-                }
-            }
-
-            // Quick Goop Selection
-            else if(custom_menu.selection == 4)
-            {
-                if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    custom_menu.quick_goop_mode = (custom_menu.quick_goop_mode + 1) % 2;
-                }
-
-                if(custom_menu.quick_goop_mode == FALSE)
-                {
-                    custom_menu.quick_goop_text = "QUICK GOOP OFF";
-
-                }
-                else if(custom_menu.quick_goop_mode == TRUE)
-                {
-                    custom_menu.quick_goop_text = "QUICK GOOP ON";
-
-                }
-            }
-
-            // BG Color Selection
-            else if(custom_menu.selection == 5)
-            {
-                if(_currentButtonOneFrame == RIGHT_BUTTON)
-                {
-                    bg_color_index = (bg_color_index + 1) % 6;
-                    should_update_bg_color = TRUE;
-                }
-                else if(_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
-                {
-                    bg_color_index = (bg_color_index - 1) % 6;
-                    should_update_bg_color = TRUE;
-                }
-
-                switch(bg_color_index)
-                {
-                    case(BG_PINK):
-                    {
-                        custom_menu.bg_color_text = "BG PINK";
-                        break;
-                    }
-                    case(BG_YELLOW):
-                    {
-                        custom_menu.bg_color_text = "BG YELLOW";
-                        break;
-                    }
-                    case(BG_TEAL):
-                    {
-                        custom_menu.bg_color_text = "BG TEAL";
-                        break;
-                    }
-                    case(BG_PURPLE):
-                    {
-                        custom_menu.bg_color_text = "BG PURPLE";
-                        break;
-                    }
-                    case(BG_BLUE):
-                    {
-                        custom_menu.bg_color_text = "BG BLUE";
-                        break;
-                    }
-                    case(BG_GREY):
-                    {
-                        custom_menu.bg_color_text = "BG GREY";
-                        break;
-                    }
-                    default:
-                    {
-                        custom_menu.bg_color_text = "BG GREY";
-                        break;
-                    }
-                }
-        
             }
 
         }
-        
-        // Has Released Menu Button
-        if(_currentButton != L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON)
+
+        // Reset Selection
+        else if(custom_menu.selection == 2)
         {
-            has_toggled_menu = FALSE;
+
+            if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+            {
+                custom_menu.reset_mode = (custom_menu.reset_mode + 1) % 2;
+            }
+
+            //Flipped for sake of on being first option
+            if(custom_menu.reset_mode == 0)
+            {
+                custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
+                should_reset_collectables = true;
+
+            }
+            else if(custom_menu.reset_mode == 1)
+            {
+                custom_menu.reset_mode_text = "RESET COLLECTABLES OFF";
+                should_reset_collectables = false;
+
+            }
+
+        }
+
+        // Sparx Selection
+        else if(custom_menu.selection == 3)
+        {
+            if(_currentButtonOneFrame == RIGHT_BUTTON)
+            {
+                custom_menu.sparx_mode = (custom_menu.sparx_mode + 1) % 3;
+            }
+            else if(_currentButtonOneFrame == LEFT_BUTTON)
+            {
+                custom_menu.sparx_mode = (custom_menu.sparx_mode - 1) % 3;
+            }
+
+            if(custom_menu.sparx_mode == PERMA_SPARX_OFF)
+            {
+                custom_menu.sparx_mode_text = "SPARX NORMAL";
+
+            }
+            else if(custom_menu.sparx_mode == PERMA_SPARX_ON)
+            {
+                custom_menu.sparx_mode_text = "PERMA SPARX ON";
+
+            }
+            else if(custom_menu.sparx_mode == SPARXLESS)
+            {
+                custom_menu.sparx_mode_text = "SPARXLESS ON";
+
+            }
+        }
+
+        // Quick Goop Selection
+        else if(custom_menu.selection == 4)
+        {
+            if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+            {
+                custom_menu.quick_goop_mode = (custom_menu.quick_goop_mode + 1) % 2;
+            }
+
+            if(custom_menu.quick_goop_mode == FALSE)
+            {
+                custom_menu.quick_goop_text = "QUICK GOOP OFF";
+
+            }
+            else if(custom_menu.quick_goop_mode == TRUE)
+            {
+                custom_menu.quick_goop_text = "QUICK GOOP ON";
+
+            }
+        }
+
+        // BG Color Selection
+        else if(custom_menu.selection == 5)
+        {
+            if(_currentButtonOneFrame == RIGHT_BUTTON)
+            {
+                bg_color_index = (bg_color_index + 1) % 6;
+                should_update_bg_color = TRUE;
+            }
+            else if(_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
+            {
+                bg_color_index = (bg_color_index - 1) % 6;
+                should_update_bg_color = TRUE;
+            }
+
+            switch(bg_color_index)
+            {
+                case(BG_PINK):
+                {
+                    custom_menu.bg_color_text = "BG PINK";
+                    break;
+                }
+                case(BG_YELLOW):
+                {
+                    custom_menu.bg_color_text = "BG YELLOW";
+                    break;
+                }
+                case(BG_TEAL):
+                {
+                    custom_menu.bg_color_text = "BG TEAL";
+                    break;
+                }
+                case(BG_PURPLE):
+                {
+                    custom_menu.bg_color_text = "BG PURPLE";
+                    break;
+                }
+                case(BG_BLUE):
+                {
+                    custom_menu.bg_color_text = "BG BLUE";
+                    break;
+                }
+                case(BG_GREY):
+                {
+                    custom_menu.bg_color_text = "BG GREY";
+                    break;
+                }
+                default:
+                {
+                    custom_menu.bg_color_text = "BG GREY";
+                    break;
+                }
+            }
+    
         }
 
     }
+    
+    // Has Released Menu Button
+    if(_currentButton != L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON)
+    {
+        has_toggled_menu = FALSE;
+    }
+
 
     //! Sparx and Quick Goop
     {
@@ -606,5 +605,4 @@ void InGameTimerHook()
         //printf("RENDERING\n");
         MobyRender();
     }
-
 }

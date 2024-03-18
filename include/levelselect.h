@@ -1,8 +1,8 @@
 #ifndef LEVELSELECT_H
 #define LEVELSELECT_H
 
-void LevelSelect();
-void InstaLoad();
+void LevelSelectUpdate();
+void InstaLoadUpdate();
 
 
 #endif /* LEVELSELECT_H */

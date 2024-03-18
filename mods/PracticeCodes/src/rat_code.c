@@ -34,8 +34,8 @@ void TempLockRat(void)
     if (should_lock == true && frames_locked < 5)
     {
         // Loop loading pos/rot
-        memcpy((byte *)&dorito.position, free_space + 0x380, sizeof(dorito.position));
-        memcpy((byte *)&dorito.rotation, free_space + 0x390, sizeof(dorito.rotation));
+        memcpy((byte *)&dorito.position, free_space + 0x390, sizeof(dorito.position));
+        memcpy((byte *)&dorito.rotation, free_space + 0x3A0, sizeof(dorito.rotation));
         frames_locked++;
     }
     else if (frames_locked == 5)
@@ -52,8 +52,8 @@ void LoadRat(void)
 
     if (has_saved_rat)
     {
-        memcpy((byte *)&dorito.position, free_space + 0x380, sizeof(dorito.position));
-        memcpy((byte *)&dorito.rotation, free_space + 0x390, sizeof(dorito.rotation));
+        memcpy((byte *)&dorito.position, free_space + 0x390, sizeof(dorito.position));
+        memcpy((byte *)&dorito.rotation, free_space + 0x3A0, sizeof(dorito.rotation));
 
         dorito_run_time_left = 0;
 

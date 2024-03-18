@@ -89,7 +89,7 @@ void DetermineButton()
 
 }
 
-void LevelSelect()
+void LevelSelectUpdate()
 {
 
 	DetermineButton();
@@ -125,7 +125,7 @@ void LevelSelect()
 }
 
 //Custom Function for instantly flying back into current level
-void InstaLoad(){
+void InstaLoadUpdate(){
 	
 	//Save Camera and Spyro when it is stopped
 	if(_levelLoadState == 0xB && _portalToExitFromInHW == 0)

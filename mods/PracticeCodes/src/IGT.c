@@ -361,7 +361,7 @@ void CustomMenuUpdate(void)
         if(custom_menu.loadstate_mode_text == NULL)
         {
             custom_menu.il_mode_text = "IL MODE OFF";
-            custom_menu.loadstate_mode_text = "RESET GEM WITH R3 OFF";
+            custom_menu.loadstate_mode_text = "RESET ALL WITH R3 OFF";
             custom_menu.sparx_mode_text = "SPARX NORMAL";
             custom_menu.quick_goop_text = "QUICK GOOP OFF";
             custom_menu.bg_color_text = "BG PINK";
@@ -451,13 +451,13 @@ void CustomMenuUpdate(void)
             //Flipped for sake of on being first option
             if(custom_menu.loadstate_mode == 0)
             {
-                custom_menu.loadstate_mode_text = "RESET GEM WITH R3 OFF";
+                custom_menu.loadstate_mode_text = "RESET ALL WITH R3 OFF";
                 should_loadstate_gems = false;
 
             }
             else if(custom_menu.loadstate_mode == 1)
             {
-                custom_menu.loadstate_mode_text = "RESET GEM WITH R3 ON";
+                custom_menu.loadstate_mode_text = "RESET ALL WITH R3 ON";
                 should_loadstate_gems = true;
 
             }

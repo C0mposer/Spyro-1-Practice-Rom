@@ -16,6 +16,7 @@ ModState mod_state = GAME_STARTED;
 
 bool hasSavedSpyro = false;
 bool hasResetSavestate = false;
+bool readyToLoadstateAfterDeath = false;
 
 const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
 
@@ -23,7 +24,7 @@ const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x1
 extern BackgroundColor bg_color_index;
 extern bool should_update_bg_color;
 extern int mainTimerAtReset;
-extern bool should_reset_collectables;
+extern bool should_loadstate_gems;
 
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
@@ -99,7 +100,7 @@ void RespawnSpyro()
 //This function clears the bitflags for which collectables should spawn into a level/homeworld with spyro. This is the same area that the memory card writes to when loading a game.
 void ResetLevelCollectables()
 {
-    if(should_reset_collectables)
+    if(should_loadstate_gems)
     {
         memset(&_collectablesBitflags, 0, 0x4B0);
         for (int i = 0; i < 35; i++)
@@ -159,15 +160,22 @@ void MainUpdate()
         }
 
         //Load spyro & camera information
-        if(_currentButtonOneFrame == R3_BUTTON && hasSavedSpyro == true)
+        if((_currentButtonOneFrame == R3_BUTTON && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
-            ReloadSpyroAndCamera(false);
+            if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath)){
+                ReloadSpyroAndCamera(false);
 
-            if (_levelID == TREE_TOPS_ID)
-            {
-                _treeTopsThiefTimer = 0;    
-                _isInInGameCutscene = false;
-                _effect_ScreenLetterBox = 0;
+                if (_levelID == TREE_TOPS_ID)
+                {
+                    _treeTopsThiefTimer = 0;
+                    _isInInGameCutscene = false;
+                    _effect_ScreenLetterBox = 0;
+                }
+            }
+            else{
+                RespawnSpyro();
+                ResetLevelCollectables();
+                readyToLoadstateAfterDeath = true;
             }
         }
 

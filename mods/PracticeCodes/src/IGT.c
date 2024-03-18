@@ -61,8 +61,8 @@ typedef struct Menu
     char* timer_mode_text;
     bool il_mode;
     char* il_mode_text;
-    int reset_mode;
-    char* reset_mode_text;
+    int loadstate_mode;
+    char* loadstate_mode_text;
     SparxMode sparx_mode;
     char* sparx_mode_text;
     bool quick_goop_mode;
@@ -113,7 +113,7 @@ MenuState menu_state = MENU_HIDDEN;
 // Externing elsewhere
 BackgroundColor bg_color_index;
 bool should_update_bg_color = true;
-bool should_reset_collectables = true;
+bool should_loadstate_gems = false;
 
 // Externed from elsewhere
 extern const short flyInArray[36];
@@ -326,10 +326,10 @@ void CustomMenuUpdate(void)
 
         if(custom_menu.selection == 2)
         {
-            DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            DrawTextCapitals(custom_menu.loadstate_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
         }
         else{
-            DrawTextCapitals(custom_menu.reset_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            DrawTextCapitals(custom_menu.loadstate_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
         }
 
         if(custom_menu.selection == 3)
@@ -358,10 +358,10 @@ void CustomMenuUpdate(void)
 
 
         // Fill text with defaults if NULL
-        if(custom_menu.reset_mode_text == NULL)
+        if(custom_menu.loadstate_mode_text == NULL)
         {
             custom_menu.il_mode_text = "IL MODE OFF";
-            custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
+            custom_menu.loadstate_mode_text = "RESET GEM WITH R3 OFF";
             custom_menu.sparx_mode_text = "SPARX NORMAL";
             custom_menu.quick_goop_text = "QUICK GOOP OFF";
             custom_menu.bg_color_text = "BG PINK";
@@ -439,26 +439,26 @@ void CustomMenuUpdate(void)
 
         }
 
-        // Reset Selection
+        // Reset Gems W R3 Selection
         else if(custom_menu.selection == 2)
         {
 
             if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
             {
-                custom_menu.reset_mode = (custom_menu.reset_mode + 1) % 2;
+                custom_menu.loadstate_mode = (custom_menu.loadstate_mode + 1) % 2;
             }
 
             //Flipped for sake of on being first option
-            if(custom_menu.reset_mode == 0)
+            if(custom_menu.loadstate_mode == 0)
             {
-                custom_menu.reset_mode_text = "RESET COLLECTABLES ON";
-                should_reset_collectables = true;
+                custom_menu.loadstate_mode_text = "RESET GEMS WITH R3 OFF";
+                should_loadstate_gems = false;
 
             }
-            else if(custom_menu.reset_mode == 1)
+            else if(custom_menu.loadstate_mode == 1)
             {
-                custom_menu.reset_mode_text = "RESET COLLECTABLES OFF";
-                should_reset_collectables = false;
+                custom_menu.loadstate_mode_text = "RESET GEMS WITH R3 ON";
+                should_loadstate_gems = true;
 
             }
 

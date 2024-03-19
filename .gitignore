@@ -360,3 +360,5 @@ mods/PracticeCodes/debug/obj/main_updates.o
 mods/PracticeCodes/debug/obj/credits_skip.o
 build/spyro1_modded.bin
 build/spyro1_modded.cue
+mods/PracticeCodes/debug/dep/loot_plane.dep
+mods/PracticeCodes/debug/obj/loot_plane.o

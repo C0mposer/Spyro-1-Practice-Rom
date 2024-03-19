@@ -3,6 +3,7 @@
 #include <shared_funcs.h>
 #include <bg_colors.h>
 #include <multitap.h>
+#include <loot_plane.h>
 
 enum ModState
 {
@@ -160,7 +161,8 @@ void MainUpdate()
         //Load spyro & camera information
         if((_currentButtonOneFrame == R3_BUTTON && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
-            if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath)){
+            if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
+            {
                 ReloadSpyroAndCamera(false);
                 readyToLoadstateAfterDeath = false;
 
@@ -170,8 +172,14 @@ void MainUpdate()
                     _isInInGameCutscene = false;
                     _effect_ScreenLetterBox = 0;
                 }
+
+                if(_levelID == GNASTYS_LOOT_ID)
+                {
+                    LootGiveAllKeys();
+                }
             }
-            else{
+            else
+            {
                 RespawnSpyro();
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;

@@ -1,7 +1,7 @@
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-NTSC, header, 0x8000B0B8, 0x0, src/main.c src/main_updates.c src/credits_skip.c, MainFunc.bin
+NTSC, header, 0x8000B0B8, 0x0, src/main.c src/main_updates.c src/credits_skip.c src/loot_plane.c, MainFunc.bin
 NTSC, exe, 0x800314b4, 0x0, src/IGT.c src/custom_text.c, IGT.bin
 NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c
 
@@ -16,7 +16,7 @@ NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/main_updates.c src/credits_skip.c, MainFunc.bin
+PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/main_updates.c src/credits_skip.c src/loot_plane.c, MainFunc.bin
 PS2_NTSC, exe, 0x800314b4, 0x0, src/IGT.c src/custom_text.c, IGT.bin
 PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c
 

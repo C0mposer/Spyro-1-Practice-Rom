@@ -127,3 +127,12 @@ _globalDragonCount = 0x80075750;
 _globalEggCount = 0x80075810;
 
 _ptr_headControlMoby = 0x8015865C;
+
+_1st_loot_key_collected = 0x801535A0;
+_1st_loot_key = 0x8014AF1C;
+
+_2nd_loot_key_collected = 0x801535D0;
+_2nd_loot_key = 0x8014AF74;
+
+_3rd_loot_key_collected = 0x801545D8;
+_3rd_loot_key = 0x8014B1DC;

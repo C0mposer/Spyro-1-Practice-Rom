@@ -77,7 +77,7 @@ typedef struct Moby
 
     short requiredHUD2;
 
-    char UNK19;
+    char keyPickedUp; //0xFF for picked up
 
     char heldValue;
 

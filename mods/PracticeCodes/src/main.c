@@ -5,6 +5,7 @@
 #include <bg_colors.h>
 #include <rat_code.h>
 #include <credits_skip.h>
+#include <loot_plane.h>
 #include <multitap.h>
 
 
@@ -25,6 +26,7 @@ void MainFunc()
         CustomMenuUpdate();
         RatCodeUpdate();
         CreditsSkipUpdate();
+        LootPlaneUpdate();
         MultiTapUpdate();
     }
 

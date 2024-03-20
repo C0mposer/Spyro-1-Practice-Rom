@@ -8,12 +8,11 @@ int current_amount_of_presses = 0;
 bool is_holding = false;
 
 // Check if a button press has happened multiple times in succession
-bool CheckButtonMultiTap(int button, int times_to_press)
+bool CheckButtonMultiTap(unsigned short button, int times_to_press)
 {
-    if (_currentButton == button && !is_holding)
+    if ((_currentButtonOneFrame & button))
     {
         timer = 1;  // 1 is On, and it will start counting from here. Avoids having a seperate bool
-        is_holding = true;
 
         current_amount_of_presses++;
         
@@ -43,10 +42,5 @@ void MultiTapUpdate(void)
             timer = 0;
             current_amount_of_presses = 0;
         }
-    }
-
-    if (_currentButton == 0)
-    {
-        is_holding = false;
     }
 }

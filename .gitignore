@@ -362,3 +362,7 @@ build/spyro1_modded.bin
 build/spyro1_modded.cue
 mods/PracticeCodes/debug/dep/loot_plane.dep
 mods/PracticeCodes/debug/obj/loot_plane.o
+mods/PracticeCodes/debug/dep/supercharge.dep
+mods/PracticeCodes/debug/obj/supercharge.o
+mods/PracticeCodes/src/credits_skip.dep
+mods/PracticeCodes/src/credits_skip.o

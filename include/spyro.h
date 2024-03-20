@@ -4,6 +4,46 @@
 #include "common.h"
 #include "vector.h"
 
+enum SpyroStates
+{
+    IDLE_STANDING = 0x0,
+    BEGIN_WALK = 0x1,
+    WALKING = 0x2,
+    END_WALK = 0x3,
+    PIVOT = 0x4,
+    JUMP = 0x5,
+    FLOP = 0x6,
+    HURT_ZAPPED = 0x7,
+    ROLL_LEFT = 0x9,
+    ROLL_RIGHT = 0xA,
+    CHARGE = 0xB,
+    BONK = 0xC,
+    LEDGE_PEER = 0xD,
+    HURT_PITCH_HIGH = 0xE,
+    GLIDE = 0xF,
+    TRIANGLE_DROP = 0x10,
+    WHIRLWIND = 0x11,
+    IDLE_LOOK_AROUND = 0x12,
+    ROLL_DOWN_SLOPE = 0x13,
+    CHARGING_AIR = 0x14,
+    UPHILL_WALK = 0x15,
+    HURT_ROLL = 0x16,
+    PULL_BACK_GLIDE = 0x17,
+    CHARGING_AIR_SC_JUMP = 0x18,
+    HURT_SQUISHED = 0x19,
+    CANNON_ROTATE = 0x1A,
+    HURT_YAW = 0x1B,
+    HURT_PITCH_LOW = 0x1C,
+    DROWNING = 0x1D,
+    DEATH_SPIN = 0x1E,
+    DEATH_SQUISHED = 0x1F,
+    SUPERFLY = 0x20,
+    SUPERFLY_ASCENDING = 0x21,
+    SUPERFLY_DESCENDING = 0x22,
+    IDLE_SIT = 0x27,
+    SUPERCHARGE = 0x2C
+};
+
 typedef struct Spyro
 {
 
@@ -90,8 +130,8 @@ int unkown_portalRelated;
 int unkown_portalRelated2;
 int unkown_portalRelated3;
 int unkown_landingMomentumRelated;
-int unkown_angleRelated6;
-int unkown_angleRelated7;
+int angle_superChargeHorMomentum;
+int angle_superChargeVerMomentum;
 
 
 

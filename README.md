@@ -53,9 +53,9 @@ This setting lets you practice & time individual level runs for most categories!
 - This timer should be accurate within 1 frame (~0.03) in most situations.
 	 
 ### Reset All With R3:
-- This setting will reset the level every time before loading a sudo-savestate.   
+- This setting will reset the level every time before loading a sudo-savestate.     
 
-- This is essentially a macro for resetting the level manually with *L1 + R1 + Circle* and then pressing R3 after.
+This is essentially a macro for resetting the level manually with *L1 + R1 + Circle* and then pressing R3 after.
 	 
 ### Sparx Mode:
 - **PERMA SPARX ON** mode keeps sparx gold at all times, and your health will never deplete.

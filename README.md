@@ -52,8 +52,10 @@ This setting lets you practice & time individual level runs for most categories!
 - It will also reload you back into the same level to let you practice on loop.
 - This timer should be accurate within 1 frame (~0.03) in most situations.
 	 
-### Reset Collectables:
-This setting resets all collectables anytime you reload the level through flying in/re-flying in, respawning spyro, etc. (ON by default)
+### Reset All With R3:
+This setting will reset the level every time before loading a sudo-savestate.   
+
+This is essentially a macro for resetting the level manually with *L1 + R1 + Circle* and then pressing R3 after.
 
 - Wont reset collectables if you die normally in game even when ON, so you can still death abuse during practice.
 - Could be turned off to practice homeworlds/longer segments while maintaining what you've collected.

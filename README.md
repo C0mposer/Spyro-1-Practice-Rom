@@ -21,14 +21,16 @@ To play this on PS2 with a burnt CD will require you to specifically download th
 **Be sure to download the correct version for the platform you are going to play on**
 ## BIN/CUE Downloads**
 To simply download the patched rom and get practicing, download the cue/bin here:
--- [PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.zip)
    
+-- [PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.zip)
+    
 -- [PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS1.zip)
 
 *Note: To play this rom on PS2 requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
 
 **Xdelta Downloads**:
 If you wish to patch your own personal spyro 1 bin/cue file instead, download the patch here:
+   
 -- [PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.xdelta)
    
 -- [PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS1.xdelta)

@@ -28,7 +28,6 @@ void MainFunc()
         CreditsSkipUpdate();
         LootPlaneUpdate();
         MultiTapUpdate();
-        SuperchargeUpdate();
     }
 
     MainUpdate();

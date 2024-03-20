@@ -366,3 +366,6 @@ mods/PracticeCodes/debug/dep/supercharge.dep
 mods/PracticeCodes/debug/obj/supercharge.o
 mods/PracticeCodes/src/credits_skip.dep
 mods/PracticeCodes/src/credits_skip.o
+bootscreen_text.txt
+mods/PracticeCodes/src/supercharge.dep
+mods/PracticeCodes/src/supercharge.o

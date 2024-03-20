@@ -22,18 +22,18 @@ To play this on PS2 with a burnt CD will require you to specifically download th
 ## BIN/CUE Downloads
 To simply download the patched rom and get practicing, download the cue/bin here:
    
--- [PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.zip)
+[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.zip)
     
--- [PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS1.zip)
+[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS1.zip)
 
 *Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
 
 ## Xdelta Downloads
 If you wish to patch your own personal spyro 1 bin/cue file instead, download the patch here:
    
--- [PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.xdelta)
+[PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS2.xdelta)
    
--- [PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS1.xdelta)
+[PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4/spyro1_PracticeCodes_PS1.xdelta)
 
 ## Menu Features:
 
@@ -78,22 +78,22 @@ Skips straight to "The Adventure Continues..."
 Nestor is always skippable like any other dragon. Allows for faster nestor skip practice.
 
 ### Rat Practice:
--- Freeze/Unfreeze rat - *Triangle 2 times*  
+Freeze/Unfreeze rat - *Triangle 2 times*  
   
 Allows for a longer time to set up rat-surf.  
 The rat is saved as a part of the sudo-savestate (L3/R3) as well
 
 ### Open/Close heads in Gnasty's World
--- Open/Close Twilight Harbor - *L2 3 times*   
--- Open/Close Gnasty Gnorc - *R2 3 times*   
--- Open/Close Gnasty's Loot - *R1 3 times*   
+Open/Close Twilight Harbor - *L2 3 times*   
+Open/Close Gnasty Gnorc - *R2 3 times*   
+Open/Close Gnasty's Loot - *R1 3 times*   
 
 ### Credits Skip Practice
--- Warp to end of Gnasty Gnorc fight - *L1 + R1 + X*   
+Warp to end of Gnasty Gnorc fight - *L1 + R1 + X*   
 
 ### Loot Plane Practice
--- Warp before plane 2 with key - *L1 + R1 + X*   
--- Warp before plane 1 with key - *L1 + R1 + Square*   
+Warp before plane 2 with key - *L1 + R1 + X*   
+Warp before plane 1 with key - *L1 + R1 + Square*   
 
 
 ## Compiling & Building

@@ -84,16 +84,16 @@ Allows for a longer time to set up rat-surf.
 The rat is saved as a part of the sudo-savestate (L3/R3) as well
 
 ### Open/Close heads in Gnasty's World
--- Open/Close Twilight Harbor - *L2 3 times*
--- Open/Close Gnasty Gnorc - *R2 3 times*
--- Open/Close Gnasty's Loot - *R1 3 times*
+-- Open/Close Twilight Harbor - *L2 3 times*   
+-- Open/Close Gnasty Gnorc - *R2 3 times*   
+-- Open/Close Gnasty's Loot - *R1 3 times*   
 
 ### Credits Skip Practice
--- Warp to end of Gnasty Gnorc fight - *L1 + R1 + X*
+-- Warp to end of Gnasty Gnorc fight - *L1 + R1 + X*   
 
 ### Loot Plane Practice
--- Warp before plane 2 with key - *L1 + R1 + X*
--- Warp before plane 1 with key - *L1 + R1 + Square*
+-- Warp before plane 2 with key - *L1 + R1 + X*   
+-- Warp before plane 1 with key - *L1 + R1 + Square*   
 
 
 ## Compiling & Building

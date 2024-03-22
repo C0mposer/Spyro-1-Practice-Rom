@@ -227,7 +227,7 @@ void InGameTimerUpdate()
                     il_timer_state = IL_DISPLAYING;
 
                     // IL Looping
-                    if((_spyro.timer_framesInAir != 1 && _portalNumber == -1))
+                    if((_portalToExitFromInHW && _portalNumber == -1))
                     {
                         _levelID = _portalToExitFromInHW;
                         _portalToExitFromInHW = 0;

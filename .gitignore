@@ -369,3 +369,4 @@ mods/PracticeCodes/src/credits_skip.o
 bootscreen_text.txt
 mods/PracticeCodes/src/supercharge.dep
 mods/PracticeCodes/src/supercharge.o
+mods/PracticeCodes/debug/obj/save_state.o

@@ -386,7 +386,14 @@ extern char _mainMenuState; //0x80078D88                     //? This is the cur
 extern int _ballonistState; //0x800777e8                     //? The Sub State for the balloonist. Should make an enum for this.
 extern unsigned int _levelLoadState; //0x80075864            //? The sub state for level loads.
 extern int _dragonState; //0x80077058                        //? The sub state for dragon cracking.
-extern int _keyState; //0x80075830                           //? The status of the current level's key
+extern int _keyState; //0x80075830            
+extern int _doesHaveSuperflame;
+extern int _superflameTimer; 
+extern int _globalFlightLevelTimer;
+
+extern int _levelGemsCollectedArray[35];
+
+extern int _globalFlightLevelCollectedItemsArray[4];
 
 extern int _startMenuSelection; //0x80075720                 //? This is the current option selected in the main start menu, according to the StartMenuSelections enum's.
 extern int _selectMenuOption; //0x80075744                   //? This is the current homeworld menu in the inventory menu according to the InventoryMenuSelections enum's.
@@ -402,7 +409,10 @@ extern int* _ptr_levelMobys; //0x80075828                    //? This is a point
 extern int* _ptr_dynamicLevelMobys; //0x8007573C             //? This is a pointer to the start of the dynamic level moby's array.
 
 extern int* _ptr_levelMobyData; //0x80075930                 //? This is a pointer to the start of the level moby's data array.
-#define _ptr_levelMobyData _ptr_endDynamicMobys //0x80075930 //? Just giving it another name, since it also could be used to indicate the end of dynamic mobys, instead of just being used to indicate the start of levelMobyData.
+#define _ptr_endDynamicMobys _ptr_levelMobyData //0x80075930 //? Just giving it another name, since it also could be used to indicate the end of dynamic mobys, instead of just being used to indicate the start of levelMobyData.
+
+extern int* _ptr_sparx;
+extern int* _ptr_sparx2;
 
 extern int* _ptr_keyChestHostGem; //0x80075758                //? Points to the "Host Gem" for the last key chest that was opened.
 
@@ -415,6 +425,10 @@ extern char* _ptr_particleLinkedList; //0x80075738           //? This is a point
 extern int* _ptr_levelSpawn; //0x800785e4                    //? This is a pointer to the spawn coordinates for the current level.
 
 extern int* _ptr_headControlMoby; //0x8015865C               //? This is a pointer to the gnorc gnexus heads control moby
+
+extern int* _ptr_moving_texture_data;
+
+extern int*  _ptr_moving_collision_data;
 
 extern int _headAndChestSpinTimer; //0x80077fe4
 extern int _unk_spinRelated; //0x8006cc78
@@ -449,5 +463,6 @@ extern bool _isInInGameCutscene;
 extern bool _spyroInvisible;
 
 extern int _treeTopsThiefTimer;
+
 
 #endif /* COMMON_H */

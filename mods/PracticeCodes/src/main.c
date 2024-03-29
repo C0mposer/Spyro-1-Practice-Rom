@@ -28,6 +28,7 @@ void MainFunc()
         CreditsSkipUpdate();
         LootPlaneUpdate();
         MultiTapUpdate();
+        GeoDataUpdate();
     }
 
     MainUpdate();

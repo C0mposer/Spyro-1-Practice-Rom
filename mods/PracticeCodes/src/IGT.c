@@ -3,6 +3,7 @@
 #include <sound.h>
 #include <shared_funcs.h>
 #include <bg_colors.h>
+#include <igt.h>
 
 typedef enum TimerState
 {
@@ -61,7 +62,7 @@ typedef struct Menu
     char* timer_mode_text;
     bool il_mode;
     char* il_mode_text;
-    int loadstate_mode;
+    int state_selection;
     char* loadstate_mode_text;
     SparxMode sparx_mode;
     char* sparx_mode_text;
@@ -110,6 +111,10 @@ char loadlessAscii[10];
 Menu custom_menu = {0};
 MenuState menu_state = MENU_HIDDEN;
 
+int savestate_selection = 0;
+
+bool isHeld = false;
+
 // Externing elsewhere
 BackgroundColor bg_color_index;
 bool should_update_bg_color = true;
@@ -147,6 +152,19 @@ void InGameTimerUpdate()
             {   
                 mainTimerAtReset = _globalTimer;
                 timer_state = (TimerState)custom_menu.timer_mode;
+            }
+            if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld)
+            {
+                mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
+                timer_state = (TimerState)custom_menu.timer_mode;
+                isHeld = true;
+            }
+            if(_currentButton == L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON && !isHeld)
+            {
+                mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
+                timer_state = (TimerState)custom_menu.timer_mode;
+                isHeld = true;
+
             }
 
             if(_currentButtonOneFrame == START_BUTTON)
@@ -361,7 +379,7 @@ void CustomMenuUpdate(void)
         if(custom_menu.loadstate_mode_text == NULL)
         {
             custom_menu.il_mode_text = "IL MODE OFF";
-            custom_menu.loadstate_mode_text = "RESET ALL WITH R3 OFF";
+            custom_menu.loadstate_mode_text = "STATE 1";
             custom_menu.sparx_mode_text = "SPARX NORMAL";
             custom_menu.quick_goop_text = "QUICK GOOP OFF";
             custom_menu.bg_color_text = "BG PINK";
@@ -443,22 +461,33 @@ void CustomMenuUpdate(void)
         else if(custom_menu.selection == 2)
         {
 
-            if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+            if(_currentButtonOneFrame == LEFT_BUTTON && custom_menu.state_selection > 0)
             {
-                custom_menu.loadstate_mode = (custom_menu.loadstate_mode + 1) % 2;
+                custom_menu.state_selection--;
             }
+            if(_currentButtonOneFrame == RIGHT_BUTTON && custom_menu.state_selection < 2)
+            {
+                custom_menu.state_selection++;
+            }
+
 
             //Flipped for sake of on being first option
-            if(custom_menu.loadstate_mode == 0)
+            if(custom_menu.state_selection == 0)
             {
-                custom_menu.loadstate_mode_text = "RESET ALL WITH R3 OFF";
-                should_loadstate_gems = false;
+                custom_menu.loadstate_mode_text = "STATE 1";
+                savestate_selection = 0;
 
             }
-            else if(custom_menu.loadstate_mode == 1)
+            else if(custom_menu.state_selection == 1)
             {
-                custom_menu.loadstate_mode_text = "RESET ALL WITH R3 ON";
-                should_loadstate_gems = true;
+                custom_menu.loadstate_mode_text = "STATE 2";
+                savestate_selection = 1;
+
+            }
+            else if(custom_menu.state_selection == 2)
+            {
+                custom_menu.loadstate_mode_text = "STATE 3";
+                savestate_selection = 2;
 
             }
 
@@ -571,11 +600,21 @@ void CustomMenuUpdate(void)
     }
     
     // Has Released Menu Button
-    if(_currentButton != L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON)
+    if(!(_currentButton & L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON))
     {
         has_toggled_menu = FALSE;
     }
 
+    // Has Released Button
+    if(!(_currentButton & L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON))
+    {
+        isHeld = FALSE;
+    }
+    // Has Released Button
+    if(!(_currentButton & L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON))
+    {
+        isHeld = FALSE;
+    }
 
     //! Sparx and Quick Goop
     {

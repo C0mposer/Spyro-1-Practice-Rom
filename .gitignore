@@ -370,3 +370,9 @@ bootscreen_text.txt
 mods/PracticeCodes/src/supercharge.dep
 mods/PracticeCodes/src/supercharge.o
 mods/PracticeCodes/debug/obj/save_state.o
+mods/PracticeCodes/debug/dep/save_state.dep
+mods/PracticeCodes/src/IGT_OLD.c
+mods/PracticeCodes/src/watch_memory.c
+mods/PracticeCodes/src/test.c
+mods/PracticeCodes/src/watch_memory.dep
+mods/PracticeCodes/src/watch_memory.o

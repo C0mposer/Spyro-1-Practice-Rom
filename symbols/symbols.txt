@@ -8,6 +8,9 @@ _leftAnalogStick = 0x800773D2;
 _rightAnalogStick = 0x800773D0;
 _gameState = 0x800757D8;
 _globalGems = 0x80075860;
+_globalDragons = 0x80075750;
+_globalEggs = 0x80075810;
+_currentLevelGems = 0x80077FC8;
 _globalLives = 0x8007582C;
 _levelGemsCollectedArray = 0x80077420;
 _portalNumber = 0x8007576c;
@@ -60,6 +63,11 @@ _canFlyIn = 0x800756D0;
 _shouldRespawnAtCheckpoint = 0x80077888;
 _levelLoadState = 0x80075864;
 
+_doesHaveSuperflame = 0x80078764;
+_superflameTimer = 0x80078768;
+
+_levelGemsCollectedArray = 0x80077420;
+
 _collectablesStateArray = 0x80077900;
 
 _ptr_HudMobyData = 0x80075710;
@@ -72,6 +80,9 @@ _ptr_endDynamicMobys = 0x80075930;
 
 _ptr_levelMobyData = 0x80075930;
 
+_ptr_sparx = 0x80075898;
+_ptr_sparx2 = 0x80075890;
+
 _ptr_particleLinkedList = 0x80075738;
 
 _ptr_graphicsRelated = 0x800757b0;
@@ -79,6 +90,10 @@ _ptr_graphicsRelated = 0x800757b0;
 _ptrTextUnk = 0x800720f4;
 
 _ptr_levelSpawn = 0x800785e4;
+
+_ptr_moving_texture_data = 0x80078584;
+
+_ptr_moving_collision_data = 0x800785a4;
 
 _headAndChestSpinTimer = 0x80077fe4;
 
@@ -125,6 +140,9 @@ _levelDragonCounts = 0x800772d8;
 
 _globalDragonCount = 0x80075750;
 _globalEggCount = 0x80075810;
+
+_globalFlightLevelTimer = 0x80075908;
+_globalFlightLevelCollectedItemsArray = 0x80078630;
 
 _ptr_headControlMoby = 0x8015865C;
 

@@ -4,6 +4,7 @@
 #include <bg_colors.h>
 #include <multitap.h>
 #include <loot_plane.h>
+#include <igt.h>
 
 enum ModState
 {
@@ -97,6 +98,8 @@ void RespawnSpyro()
     _spyro.position.z = 0;
     _globalLives = 100;
     _shouldRespawnAtCheckpoint = FALSE;
+
+
 }
 
 //This function clears the bitflags for which collectables should spawn into a level/homeworld with spyro. This is the same area that the memory card writes to when loading a game.
@@ -155,7 +158,7 @@ void MainUpdate()
         //Save spyro & camera information
         if(_currentButtonOneFrame == L3_BUTTON)
         {
-            SaveSpyroAndCamera(false);
+            SaveStateTest();
         }
 
         //Load spyro & camera information
@@ -163,7 +166,7 @@ void MainUpdate()
         {
             if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
-                ReloadSpyroAndCamera(false);
+                LoadStateTest();
                 readyToLoadstateAfterDeath = false;
 
                 if (_levelID == TREE_TOPS_ID)
@@ -191,7 +194,6 @@ void MainUpdate()
         {
             RespawnSpyro();
             ResetLevelCollectables();
-            mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
         }
 
         //Make Nestor Skippable

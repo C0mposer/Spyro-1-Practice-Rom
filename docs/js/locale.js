@@ -7,7 +7,7 @@ const LOCALIZATION={
 		'light_theme':				'Light theme',
 
 		'apply_patch':				'Apply patch',
-		'rom_file':					'ROM file:',
+		'rom_file':					'Spyro 1 .bin file:',
 		'patch_file':				'Patch file:',
 		'remove_header':			'Remove header',
 		'add_header':				'Add temporary header',

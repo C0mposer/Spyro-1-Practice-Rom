@@ -400,6 +400,7 @@ extern int _selectMenuOption; //0x80075744                   //? This is the cur
 
 extern char _whichCutscene; //0x80078D94                     //? Which cutscene is currently being played
 
+extern char _effect_ScreenFadeOut; //0x8007593c              //? This is what determines how much to fill the screen with black for the fade to black
 extern char _effect_ScreenFadeIn; //0x80075918               //? This is what determines how much to fill the screen with a black fade in effect. Will automatically decrement the fade back to 0 unless set every frame.
 extern char _effect_ScreenLetterBox; //0x800756C0            //? This is what determines how much to fill the screen with the top and bottom letterbox effect. Will automatically decrement the letterbox to 0 unless set every frame.
 

@@ -95,7 +95,8 @@ void ReloadSpyroAndCamera(bool flyInFlag)
 //This function puts spyro at 0 which will always immediately kill him, since its a void spot.
 void RespawnSpyro()
 {
-    _spyro.position.z = 0;
+    _gameState = GAMESTATE_DEATH;
+    _effect_ScreenFadeOut = 0x0;
     _globalLives = 100;
     _shouldRespawnAtCheckpoint = FALSE;
 

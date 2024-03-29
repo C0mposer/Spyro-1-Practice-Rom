@@ -132,7 +132,7 @@ function fetchPatch(customPatchIndex, compressedFileIndex){
 
 	var uri=decodeURI(customPatch.file.trim());
 
-	console.log(patchURI);
+	console.log(uri);
 
 	if(typeof window.fetch==='function'){
 		fetch(uri)

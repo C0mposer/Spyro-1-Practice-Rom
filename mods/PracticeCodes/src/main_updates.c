@@ -5,6 +5,9 @@
 #include <multitap.h>
 #include <loot_plane.h>
 #include <igt.h>
+#include <right_stick.h>
+#include <sound.h>
+#include <custom_text.h>
 
 enum ModState
 {
@@ -20,6 +23,8 @@ bool hasSavedSpyro = false;
 bool hasResetSavestate = false;
 bool readyToLoadstateAfterDeath = false;
 
+int savestateSwitchedTimer = 0;
+
 const RedGreen bg_colors[6] = {{0x70, 0}, {0xA0, 0xA0}, {0x00, 0x50}, {0x40, 0x18}, {0, 0x10}, {0x50, 0x50}};
 
 // Externed from elsewhere
@@ -27,7 +32,8 @@ extern BackgroundColor bg_color_index;
 extern bool should_update_bg_color;
 extern int mainTimerAtReset;
 extern bool should_loadstate_gems;
-
+// from IGT.c
+extern int savestate_selection;
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
@@ -124,6 +130,13 @@ inline void SetTitleScreenColor(byte r, byte g)
     *(short*)(0x8001A67C) = g;
 }
 
+void DrawSavestateSwitchedText(void)
+{
+    char buf[3] = {0};
+    sprintf(&buf, "%d", savestate_selection + 1);
+    DrawTextCapitals(buf, &(CapitalTextInfo){.x=0x13, .y=0xDC, .size=DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+    MobyRender();
+}
 
 //! Main Basic Checks
 void MainUpdate()
@@ -159,6 +172,7 @@ void MainUpdate()
         //Save spyro & camera information
         if(_currentButtonOneFrame == L3_BUTTON)
         {
+            //SaveSpyroAndCamera(false);
             SaveStateTest();
         }
 
@@ -167,6 +181,7 @@ void MainUpdate()
         {
             if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
+                //ReloadSpyroAndCamera(false);
                 LoadStateTest();
                 readyToLoadstateAfterDeath = false;
 
@@ -215,6 +230,35 @@ void MainUpdate()
             _keyState = 1;
         }
 
+
+        // Quick Savestate Slot Selection
+        int direction = GetHorizontalRightStickDirection();
+
+        if (direction == LEFT && savestate_selection > 0)
+        {
+            savestate_selection--;
+            PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            savestateSwitchedTimer = 1;
+        }
+        else if (direction == RIGHT && savestate_selection < 2)
+        {
+            savestate_selection++;
+            PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            savestateSwitchedTimer = 1;
+        }
+
+        // Draw Switched Savestate Text
+        if (savestateSwitchedTimer > 0)
+        {
+            DrawSavestateSwitchedText();
+            savestateSwitchedTimer++;
+        }
+        if (savestateSwitchedTimer > 30)
+        {
+            savestateSwitchedTimer = 0;
+        }
+
+        
     }
 
     //Safeguard against loading with another levels savestate/no savestate
@@ -223,6 +267,8 @@ void MainUpdate()
         {
             hasSavedSpyro = false;
             hasResetSavestate = true;
+
+            memset((void*)STARTING_MEM, 0x0, 0x35000); // Clear extra memory
         }   
         else if((signed int)_levelLoadState == -1)
         {

@@ -378,3 +378,9 @@ mods/PracticeCodes/src/watch_memory.dep
 mods/PracticeCodes/src/watch_memory.o
 mods/PracticeCodes/src/save_state.dep
 mods/PracticeCodes/src/save_state.o
+mods/PracticeCodes/debug/dep/right_stick.dep
+mods/PracticeCodes/debug/dep/save_geo.dep
+mods/PracticeCodes/debug/obj/right_stick.o
+mods/PracticeCodes/debug/obj/save_geo.o
+mods/PracticeCodes/output/srcright_stickc.bin
+mods/PracticeCodes/src/test2.c

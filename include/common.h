@@ -9,6 +9,8 @@
 //Constants
 //~~~~~~~~~
 
+#define STARTING_MEM 0x80300000
+
 #define SCREEN_LEFT_EDGE 0x0
 #define SCREEN_RIGHT_EDGE 0x200
 #define SCREEN_TOP_EDGE 0x0
@@ -430,6 +432,10 @@ extern int* _ptr_headControlMoby; //0x8015865C               //? This is a point
 extern int* _ptr_moving_texture_data;
 
 extern int*  _ptr_moving_collision_data;
+
+extern int* _ptr_textures_array;
+
+extern int*  _ptr_ptr_moving_collision;
 
 extern int _headAndChestSpinTimer; //0x80077fe4
 extern int _unk_spinRelated; //0x8006cc78

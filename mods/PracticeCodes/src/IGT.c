@@ -62,8 +62,8 @@ typedef struct Menu
     char* timer_mode_text;
     bool il_mode;
     char* il_mode_text;
-    int state_selection;
-    char* loadstate_mode_text;
+    //int state_selection;    // Made a global to avoid externing this entire struct
+    char* stateslot_text;
     SparxMode sparx_mode;
     char* sparx_mode_text;
     bool quick_goop_mode;
@@ -344,10 +344,10 @@ void CustomMenuUpdate(void)
 
         if(custom_menu.selection == 2)
         {
-            DrawTextCapitals(custom_menu.loadstate_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            DrawTextCapitals(custom_menu.stateslot_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
         }
         else{
-            DrawTextCapitals(custom_menu.loadstate_mode_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            DrawTextCapitals(custom_menu.stateslot_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
         }
 
         if(custom_menu.selection == 3)
@@ -376,10 +376,10 @@ void CustomMenuUpdate(void)
 
 
         // Fill text with defaults if NULL
-        if(custom_menu.loadstate_mode_text == NULL)
+        if(custom_menu.stateslot_text == NULL)
         {
             custom_menu.il_mode_text = "IL MODE OFF";
-            custom_menu.loadstate_mode_text = "STATE 1";
+            custom_menu.stateslot_text = "STATE SLOT 1";
             custom_menu.sparx_mode_text = "SPARX NORMAL";
             custom_menu.quick_goop_text = "QUICK GOOP OFF";
             custom_menu.bg_color_text = "BG PINK";
@@ -457,38 +457,30 @@ void CustomMenuUpdate(void)
 
         }
 
-        // Reset Gems W R3 Selection
+        // Savestate Selection
         else if(custom_menu.selection == 2)
         {
 
-            if(_currentButtonOneFrame == LEFT_BUTTON && custom_menu.state_selection > 0)
+            if(_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
             {
-                custom_menu.state_selection--;
+                savestate_selection--;
             }
-            if(_currentButtonOneFrame == RIGHT_BUTTON && custom_menu.state_selection < 2)
+            if(_currentButtonOneFrame == RIGHT_BUTTON && savestate_selection < 2)
             {
-                custom_menu.state_selection++;
+                savestate_selection++;
             }
 
-
-            //Flipped for sake of on being first option
-            if(custom_menu.state_selection == 0)
+            if(savestate_selection == 0)
             {
-                custom_menu.loadstate_mode_text = "STATE 1";
-                savestate_selection = 0;
-
+                custom_menu.stateslot_text = "STATE SLOT 1";
             }
-            else if(custom_menu.state_selection == 1)
+            else if(savestate_selection == 1)
             {
-                custom_menu.loadstate_mode_text = "STATE 2";
-                savestate_selection = 1;
-
+                custom_menu.stateslot_text = "STATE SLOT 2";
             }
-            else if(custom_menu.state_selection == 2)
+            else if(savestate_selection == 2)
             {
-                custom_menu.loadstate_mode_text = "STATE 3";
-                savestate_selection = 2;
-
+                custom_menu.stateslot_text = "STATE SLOT 3";
             }
 
         }

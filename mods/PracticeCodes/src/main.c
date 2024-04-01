@@ -7,6 +7,7 @@
 #include <credits_skip.h>
 #include <loot_plane.h>
 #include <multitap.h>
+#include <moving_geo.h>
 
 
 
@@ -28,7 +29,7 @@ void MainFunc()
         CreditsSkipUpdate();
         LootPlaneUpdate();
         MultiTapUpdate();
-        GeoDataUpdate();
+        //GeoDataUpdate();
     }
 
     MainUpdate();

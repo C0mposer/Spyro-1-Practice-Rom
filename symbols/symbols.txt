@@ -96,6 +96,10 @@ _ptr_moving_texture_data = 0x80078584;
 
 _ptr_moving_collision_data = 0x800785a4;
 
+_ptr_textures_array = 0x800785a8;
+
+_ptr_ptr_moving_collision = 0x800785d4;
+
 _headAndChestSpinTimer = 0x80077fe4;
 
 _unk_spinRelated = 0x8006cc78;
@@ -155,3 +159,5 @@ _2nd_loot_key = 0x8014AF74;
 
 _3rd_loot_key_collected = 0x801545D8;
 _3rd_loot_key = 0x8014B1DC;
+
+InventoryMenuUpdate = 0x8002eb2c;

@@ -1,6 +1,7 @@
-#ifndef MOVING_PLAT_H
-#define MOVING_PLAT_H
+#ifndef MOVING_GEO_H
+#define MOVING_GEO_H
 
+// In game enum reversing
 enum GeoMovingState
 {
     GEO_MOVING,
@@ -16,4 +17,17 @@ struct MovingGeo
 };
 typedef struct MovingGeo MovingGeo;
 
-#endif /* MOVING_PLAT_H */
+
+// Custom enum for 1 frame reset
+enum GeoResetState
+{
+    OFF,
+    SHOULD_MOVE,
+    SHOULD_LOAD
+};
+
+void SaveGeoData();
+void LoadGeoData();
+void GeoDataUpdate();
+
+#endif /* MOVING_GEO_H */

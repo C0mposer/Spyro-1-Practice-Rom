@@ -100,6 +100,10 @@ _ptr_textures_array = 0x800785a8;
 
 _ptr_ptr_moving_collision = 0x800785d4;
 
+_ptr_low_lod_texture_data = 0x80078574;
+
+_ptr_myst_texture_data = 0x8007856C;
+
 _headAndChestSpinTimer = 0x80077fe4;
 
 _unk_spinRelated = 0x8006cc78;

@@ -17,19 +17,7 @@
                 "symbols.txt",
                 "funcs.txt"
             ],
-            "build_id": 94228
-        }
-    },
-    {
-        "HUD_TEST": 
-        {
-            "name": "spyro1.bin",
-            "symbols": 
-            [
-                "symbols.txt",
-                "funcs.txt"
-            ],
-            "build_id": 94232
+            "build_id": 1
         }
     },
     {
@@ -41,7 +29,7 @@
                 "symbols.txt",
                 "funcs.txt"
             ],
-            "build_id": 94230
+            "build_id": 2
         }
     }
     ]

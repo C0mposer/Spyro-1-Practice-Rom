@@ -9,7 +9,7 @@
 //Constants
 //~~~~~~~~~
 
-#define STARTING_MEM 0x80300000
+#define STARTING_MEM 0x80A10000
 
 #define SCREEN_LEFT_EDGE 0x0
 #define SCREEN_RIGHT_EDGE 0x200

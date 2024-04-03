@@ -384,3 +384,7 @@ mods/PracticeCodes/debug/obj/right_stick.o
 mods/PracticeCodes/debug/obj/save_geo.o
 mods/PracticeCodes/output/srcright_stickc.bin
 mods/PracticeCodes/src/test2.c
+build/spyro1/RAT_C_BE.BIN
+build/spyro1_PracticeCodes/RAT_C_BE.BIN
+mods/PracticeCodes/src/Untitled-1.c
+mods/PracticeCodes/basic.ld

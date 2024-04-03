@@ -12,7 +12,7 @@ extern int savestate_selection;
 extern bool hasSavedSpyro;
 
 
-// Choose the memory region to save/load a state based on the menu option. Each region takes up ~0x11000. Being safe because of collision/texture data
+// Choose the memory region to save/load a state based on the menu option. Each region takes up ~0x12000. Being safe because of collision/texture data, and doing 0x13000
 void SetMemoryRegion(void)
 {
     switch (savestate_selection)
@@ -110,7 +110,7 @@ void SaveStateTest(void)
 
     hasSavedSpyro = true;
 
-    printf("%X\n\n\n", local_mem_region);
+    //printf("%X\n\n\n", local_mem_region);
 }
 
 void LoadStateTest(void)

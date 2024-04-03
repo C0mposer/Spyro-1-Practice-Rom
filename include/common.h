@@ -8,8 +8,11 @@
 //~~~~~~~~~
 //Constants
 //~~~~~~~~~
-
+#if BUILD == 2
 #define STARTING_MEM 0x80A10000
+#else
+#define STARTING_MEM 0x80300000
+#endif
 
 #define SCREEN_LEFT_EDGE 0x0
 #define SCREEN_RIGHT_EDGE 0x200
@@ -429,13 +432,17 @@ extern int* _ptr_levelSpawn; //0x800785e4                    //? This is a point
 
 extern int* _ptr_headControlMoby; //0x8015865C               //? This is a pointer to the gnorc gnexus heads control moby
 
-extern int* _ptr_moving_texture_data;
+extern int* _ptr_moving_texture_data; //0x80078584
 
-extern int*  _ptr_moving_collision_data;
+extern int*  _ptr_moving_collision_data; //0x800785a4
 
-extern int* _ptr_textures_array;
+extern int* _ptr_textures_array; //0x800785a8
 
-extern int*  _ptr_ptr_moving_collision;
+extern int*  _ptr_ptr_moving_collision; //0x800785d4
+
+extern int* _ptr_low_lod_texture_data; //0x80078574
+
+extern int* _ptr_myst_texture_data; //0x8007856C
 
 extern int _headAndChestSpinTimer; //0x80077fe4
 extern int _unk_spinRelated; //0x8006cc78

@@ -70,13 +70,15 @@ void SaveGeoData(void)
     }
 
     // All moving collision in 1 area, no need to loop
-    int movingCollisionSize = (*((short *)_ptr_moving_collision_data[0] + 2) + *((short *)_ptr_moving_collision_data[0] + 3)) * 3;
-    int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
+    if(*(&_ptr_moving_collision_data - 1)){ //checks to make sure that there is moving collision to save
+        int movingCollisionSize = (*((short *)_ptr_moving_collision_data[0] + 2) + *((short *)_ptr_moving_collision_data[0] + 3)) * 3;
+        int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
 
-    //printf("%X\n", local_mem_region);
-    // Copy the actual collision data
-    memcpy(local_mem_region, ptr_movingCollision, movingCollisionSize * sizeof(int));
-    local_mem_region += movingCollisionSize;
+        printf("%X\n", *(&_ptr_moving_collision_data - 1));
+        // Copy the actual collision data
+        memcpy(local_mem_region, ptr_movingCollision, movingCollisionSize * sizeof(int));
+        local_mem_region += movingCollisionSize;
+    }
 }
 
 void LoadGeoData(void)
@@ -138,13 +140,13 @@ void LoadGeoData(void)
     }
 
     //All moving collision in 1 area, no need to loop
+    if(*(&_ptr_moving_collision_data - 1)) //checks to make sure that there is moving collision to save
+    {
     int movingCollisionSize = (*((short *)_ptr_moving_collision_data[0] + 2) + *((short *)_ptr_moving_collision_data[0] + 3)) * 3;
     int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
     // Copy the actual collision data
 
     //printf("T%X\n", local_mem_region);
-    if (movingCollisionSize > 0)
-    {
         memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
         local_mem_region += movingCollisionSize;
     }

@@ -59,7 +59,7 @@ void SaveGeoData(void)
         memcpy(local_mem_region, ptr_movingTexture, movingTextureSize * sizeof(int));
         local_mem_region += movingTextureSize;
 
-        printf("lod size %d: %X\n", i, movingTextureSize);
+        //printf("lod size %d: %X\n", i, movingTextureSize);
     }
 
     // Loop over the amount of moving collision 
@@ -143,10 +143,12 @@ void LoadGeoData(void)
     // Copy the actual collision data
 
     //printf("T%X\n", local_mem_region);
-    memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
-    local_mem_region += movingCollisionSize;
-    printf("end of local region: %X\n", local_mem_region);
-
+    if (movingCollisionSize > 0)
+    {
+        memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
+        local_mem_region += movingCollisionSize;
+    }
+        //printf("end of local region: %X\n", local_mem_region);
 
     // Set our geo state to SHOULD_MOVE, so that GeoDataUpdate() can begin
     //geo_reset_state = SHOULD_MOVE;

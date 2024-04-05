@@ -30,21 +30,21 @@ typedef enum MenuState
 
 }MenuState;
 
-typedef enum TimerMode
+typedef enum TimerDisplayMode
 {
     TIMER_OFF,
     TIMER_ONLY_PAUSE,
     TIMER_ALWAYS
 
-}TimerMode;
+}TimerDisplayMode;
 
-typedef enum FPSMode
+typedef enum ILTimerDisplayMode
 {
-    FPS_OFF,
-    FPS_ONLY_DROPPED,
-    FPS_ALWAYS
+    IL_TIMER_AT_END,
+    IL_TIMER_ALWAYS,
+    IL_TIMER_OFF
 
-}FPSMode;
+}ILTimerDisplayMode;
 
 typedef enum SparxMode
 {
@@ -58,20 +58,72 @@ typedef enum SparxMode
 typedef struct Menu
 {
     int selection;
-    TimerMode timer_mode;
-    char* timer_mode_text;
+    char* il_menu_text;
+    char* timer_menu_text;
+    char* savestate_menu_text;
+    char* misc_menu_text;
+}Menu;
+Menu custom_menu = {0};
+
+typedef struct ILMenu
+{
+    int selection;
     bool il_mode;
     char* il_mode_text;
-    //int state_selection;    // Made a global to avoid externing this entire struct
+    ILTimerDisplayMode il_timer_display_mode;
+    char* il_timer_display_mode_text;
+    bool display_on_dragon;
+    char* display_on_dragon_text;
+    bool display_on_land;
+    char* display_on_land_text;
+    bool dont_loop_level;
+    char* loop_level_text;
+
+}ILMenu;
+ILMenu il_menu = {0};
+typedef struct TimerMenu
+{
+    int selection;
+    TimerDisplayMode timer_mode;
+    char* timer_mode_text;
+
+}TimerMenu;
+TimerMenu timer_menu = {0};
+
+typedef struct SavestateMenu
+{
+    int selection;
+    //
     char* stateslot_text;
+    int savestate_button_index;
+    char* savestate_button_text;
+    int loadstate_button_index;
+    char* loadstate_button_text;
+    int switch_state_button_index;
+    char* switch_state_button_text;
+
+}SavestateMenu;
+SavestateMenu savestate_menu = {0};
+
+typedef struct MiscMenu
+{
+    int selection;
     SparxMode sparx_mode;
     char* sparx_mode_text;
     bool quick_goop_mode;
     char* quick_goop_text;
     char* bg_color_text;
+}MiscMenu;
+MiscMenu misc_menu = {0};
 
-}Menu;
-
+typedef enum CurrentMenu
+{
+    MAIN_MENU,
+    IL_MENU,
+    TIMER_MENU,
+    SAVESTATE_MENU,
+    MISC_MENU
+}CurrentMenu;
 
 typedef struct Timer
 {
@@ -108,8 +160,8 @@ int ilTimerStart = 0;
 char ilAscii[10];
 char loadlessAscii[10];
 
-Menu custom_menu = {0};
 MenuState menu_state = MENU_HIDDEN;
+int current_menu = MAIN_MENU;
 
 int savestate_selection = 0;
 
@@ -151,18 +203,18 @@ void InGameTimerUpdate()
             if(_currentButtonOneFrame == R3_BUTTON)
             {   
                 mainTimerAtReset = _globalTimer;
-                timer_state = (TimerState)custom_menu.timer_mode;
+                timer_state = (TimerState)timer_menu.timer_mode;
             }
             if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld)
             {
                 mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-                timer_state = (TimerState)custom_menu.timer_mode;
+                timer_state = (TimerState)timer_menu.timer_mode;
                 isHeld = true;
             }
             if(_currentButton == L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON && !isHeld)
             {
                 mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-                timer_state = (TimerState)custom_menu.timer_mode;
+                timer_state = (TimerState)timer_menu.timer_mode;
                 isHeld = true;
 
             }
@@ -225,7 +277,7 @@ void InGameTimerUpdate()
         
         //! IL Timer Stuffs
         {
-            if(custom_menu.il_mode)
+            if(il_menu.il_mode)
             {
                 if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING))
                 {
@@ -254,11 +306,14 @@ void InGameTimerUpdate()
                     il_timer_state = IL_DISPLAYING;
 
                     // IL Looping
-                    if((_portalToExitFromInHW && _portalNumber == -1))
+                    if(il_menu.dont_loop_level == false)
                     {
-                        _levelID = _portalToExitFromInHW;
-                        _portalToExitFromInHW = 0;
-                        _flyInAnimation = flyInArray[_levelIDIndex];
+                        if((_portalToExitFromInHW && _portalNumber == -1))
+                        {
+                            _levelID = _portalToExitFromInHW;
+                            _portalToExitFromInHW = 0;
+                            _flyInAnimation = flyInArray[_levelIDIndex];
+                        }
                     }
                 }
                 
@@ -291,311 +346,368 @@ void CustomMenuUpdate(void)
         PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
 
         if(menu_state == MENU_HIDDEN)
+        {
             _spyro.isMovementLocked = FALSE;
+            current_menu = MAIN_MENU;
+        }
     }
 
     // When Displaying Menu
     if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
     {
-        CapitalTextInfo menu_text_info[6] = {{0}};
+        if (current_menu == MAIN_MENU)
+        {       
+            CapitalTextInfo menu_text_info[4] = {{0}};
 
-        // Easy Exit
-        if(_currentButtonOneFrame == CIRCLE_BUTTON)
-        {
-            menu_state = MENU_HIDDEN;
-            _spyro.isMovementLocked = FALSE;
-            PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-        }
-
-        DrawTextBox(0x30, 0x1D0, 0x30, 0xBE);
-        
-        menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-        menu_text_info[0].y = 70;
-        menu_text_info[0].size = DEFAULT_SIZE;
-
-        menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-        menu_text_info[1].y = 90;
-        menu_text_info[1].size = DEFAULT_SIZE;
-
-        menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-        menu_text_info[2].y = 110;
-        menu_text_info[2].size = DEFAULT_SIZE;
-
-        menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-        menu_text_info[3].y = 130;
-        menu_text_info[3].size = DEFAULT_SIZE;
-        
-        menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
-        menu_text_info[4].y = 150;
-        menu_text_info[4].size = DEFAULT_SIZE;
-
-        menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
-        menu_text_info[5].y = 170;
-        menu_text_info[5].size = DEFAULT_SIZE;
-
-        _spyro.isMovementLocked = TRUE;
-
-        if(custom_menu.selection == 0)
-        {
-            DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        }
-        else{
-            DrawTextCapitals(custom_menu.timer_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
-        
-        if(custom_menu.selection == 1)
-        {
-            DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        }
-        else{
-            DrawTextCapitals(custom_menu.il_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
-
-        if(custom_menu.selection == 2)
-        {
-            DrawTextCapitals(custom_menu.stateslot_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        }
-        else{
-            DrawTextCapitals(custom_menu.stateslot_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
-
-        if(custom_menu.selection == 3)
-        {
-            DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        }
-        else{
-            DrawTextCapitals(custom_menu.sparx_mode_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
-        
-        if(custom_menu.selection == 4)
-        {
-            DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        }
-        else{
-            DrawTextCapitals(custom_menu.quick_goop_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
-        
-        if(custom_menu.selection == 5)
-        {
-            DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        }
-        else{
-            DrawTextCapitals(custom_menu.bg_color_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
-
-
-        // Fill text with defaults if NULL
-        if(custom_menu.stateslot_text == NULL)
-        {
-            custom_menu.il_mode_text = "IL MODE OFF";
-            custom_menu.stateslot_text = "STATE SLOT 1";
-            custom_menu.sparx_mode_text = "SPARX NORMAL";
-            custom_menu.quick_goop_text = "QUICK GOOP OFF";
-            custom_menu.bg_color_text = "BG PINK";
-        }
-
-        // Change Selection
-        if(_currentButtonOneFrame == DOWN_BUTTON)
-        {
-            custom_menu.selection = (custom_menu.selection + 1) % 6;
-        }
-        else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
-        {
-            custom_menu.selection = custom_menu.selection - 1;
-        }
-        
-        // Play Sound Effect
-        if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
-        {
-            PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-        }
-
-        // Timer Selection
-        if(custom_menu.selection == 0)
-        {
-            if(_currentButtonOneFrame == RIGHT_BUTTON)
+            // Easy Exit
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
-                custom_menu.timer_mode = (custom_menu.timer_mode + 1) % 3;
-                mainTimerAtReset = _globalTimer;
-            }
-            if(_currentButtonOneFrame == LEFT_BUTTON)
-            {
-                custom_menu.timer_mode = (custom_menu.timer_mode - 1) % 3;
-                mainTimerAtReset = _globalTimer;
+                menu_state = MENU_HIDDEN;
+                _spyro.isMovementLocked = FALSE;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            if(custom_menu.timer_mode == TIMER_OFF)
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x98);
+            
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[0].y = 70;
+            menu_text_info[0].size = DEFAULT_SIZE;
+
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[1].y = 90;
+            menu_text_info[1].size = DEFAULT_SIZE;
+
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[2].y = 110;
+            menu_text_info[2].size = DEFAULT_SIZE;
+
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 130;
+            menu_text_info[3].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
+
+            if(custom_menu.selection == 0)
             {
-                custom_menu.timer_mode_text = "TIMER OFF";
-                timer_state = (TimerState)TIMER_OFF;
+                DrawTextCapitals(custom_menu.il_menu_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
-            else if(custom_menu.timer_mode == TIMER_ONLY_PAUSE)
-            {
-                custom_menu.timer_mode_text = "TIMER ONLY STOPPED";
-
-                if(timer_state != TIMER_DISPLAYING)
-                    timer_state = TIMER_RUNNING_NO_DISPLAY;
+            else{
+                DrawTextCapitals(custom_menu.il_menu_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-            else if(custom_menu.timer_mode == TIMER_ALWAYS)
+            
+            if(custom_menu.selection == 1)
             {
-                custom_menu.timer_mode_text = "TIMER ALWAYS ON";
-
-                if(timer_state != TIMER_DISPLAYING)
-                    timer_state = TIMER_RUNNING;
+                DrawTextCapitals(custom_menu.timer_menu_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
-        }
-
-        // IL Looping Selection
-        else if(custom_menu.selection == 1)
-        {
-            if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-            {
-                custom_menu.il_mode = (custom_menu.il_mode + 1) % 2;
-            }
-
-            if(custom_menu.il_mode == FALSE)
-            {
-                custom_menu.il_mode_text = "IL MODE OFF";
-
-            }
-            else if(custom_menu.il_mode == TRUE)
-            {
-                custom_menu.il_mode_text = "IL MODE ON";
-
+            else{
+                DrawTextCapitals(custom_menu.timer_menu_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-        }
-
-        // Savestate Selection
-        else if(custom_menu.selection == 2)
-        {
-
-            if(_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
+            if(custom_menu.selection == 2)
             {
-                savestate_selection--;
+                DrawTextCapitals(custom_menu.savestate_menu_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
-            if(_currentButtonOneFrame == RIGHT_BUTTON && savestate_selection < 2)
-            {
-                savestate_selection++;
+            else{
+                DrawTextCapitals(custom_menu.savestate_menu_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-            if(savestate_selection == 0)
+            if(custom_menu.selection == 3)
             {
-                custom_menu.stateslot_text = "STATE SLOT 1";
+                DrawTextCapitals(custom_menu.misc_menu_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
-            else if(savestate_selection == 1)
-            {
-                custom_menu.stateslot_text = "STATE SLOT 2";
-            }
-            else if(savestate_selection == 2)
-            {
-                custom_menu.stateslot_text = "STATE SLOT 3";
+            else{
+                DrawTextCapitals(custom_menu.misc_menu_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-        }
 
-        // Sparx Selection
-        else if(custom_menu.selection == 3)
-        {
-            if(_currentButtonOneFrame == RIGHT_BUTTON)
+            // Fill text with defaults if NULL
+            if(custom_menu.il_menu_text == NULL)
             {
-                custom_menu.sparx_mode = (custom_menu.sparx_mode + 1) % 3;
-            }
-            else if(_currentButtonOneFrame == LEFT_BUTTON)
-            {
-                custom_menu.sparx_mode = (custom_menu.sparx_mode - 1) % 3;
+                custom_menu.il_menu_text = "IL SETTINGS";
+                custom_menu.timer_menu_text = "TIMER SETTINGS";
+                custom_menu.savestate_menu_text = "SAVESTATE SETTINGS";
+                custom_menu.misc_menu_text = "MISC SETTINGS";
             }
 
-            if(custom_menu.sparx_mode == PERMA_SPARX_OFF)
+            // Change Selection
+            if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                custom_menu.sparx_mode_text = "SPARX NORMAL";
-
+                custom_menu.selection = (custom_menu.selection + 1) % 4;
             }
-            else if(custom_menu.sparx_mode == PERMA_SPARX_ON)
+            else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
             {
-                custom_menu.sparx_mode_text = "PERMA SPARX ON";
-
+                custom_menu.selection = custom_menu.selection - 1;
             }
-            else if(custom_menu.sparx_mode == SPARXLESS)
+            
+            // Play Sound Effect
+            if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == X_BUTTON)
             {
-                custom_menu.sparx_mode_text = "SPARXLESS ON";
-
-            }
-        }
-
-        // Quick Goop Selection
-        else if(custom_menu.selection == 4)
-        {
-            if(_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-            {
-                custom_menu.quick_goop_mode = (custom_menu.quick_goop_mode + 1) % 2;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            if(custom_menu.quick_goop_mode == FALSE)
+            // Timer Selection
+            if(custom_menu.selection == 0)
             {
-                custom_menu.quick_goop_text = "QUICK GOOP OFF";
-
-            }
-            else if(custom_menu.quick_goop_mode == TRUE)
-            {
-                custom_menu.quick_goop_text = "QUICK GOOP ON";
-
-            }
-        }
-
-        // BG Color Selection
-        else if(custom_menu.selection == 5)
-        {
-            if(_currentButtonOneFrame == RIGHT_BUTTON)
-            {
-                bg_color_index = (bg_color_index + 1) % 6;
-                should_update_bg_color = TRUE;
-            }
-            else if(_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
-            {
-                bg_color_index = (bg_color_index - 1) % 6;
-                should_update_bg_color = TRUE;
-            }
-
-            switch(bg_color_index)
-            {
-                case(BG_PINK):
+                if(_currentButtonOneFrame == X_BUTTON)
                 {
-                    custom_menu.bg_color_text = "BG PINK";
-                    break;
-                }
-                case(BG_YELLOW):
-                {
-                    custom_menu.bg_color_text = "BG YELLOW";
-                    break;
-                }
-                case(BG_TEAL):
-                {
-                    custom_menu.bg_color_text = "BG TEAL";
-                    break;
-                }
-                case(BG_PURPLE):
-                {
-                    custom_menu.bg_color_text = "BG PURPLE";
-                    break;
-                }
-                case(BG_BLUE):
-                {
-                    custom_menu.bg_color_text = "BG BLUE";
-                    break;
-                }
-                case(BG_GREY):
-                {
-                    custom_menu.bg_color_text = "BG GREY";
-                    break;
-                }
-                default:
-                {
-                    custom_menu.bg_color_text = "BG GREY";
-                    break;
+                    current_menu = IL_MENU;
                 }
             }
-    
+            // IL Looping Selection
+            else if(custom_menu.selection == 1)
+            {
+                if(_currentButtonOneFrame == X_BUTTON)
+                {
+                    current_menu = TIMER_MENU;
+                }
+            }
+
+            // Savestate Selection
+            else if(custom_menu.selection == 2)
+            {
+                if(_currentButtonOneFrame == X_BUTTON)
+                {
+                    current_menu = SAVESTATE_MENU;
+                }
+            }
+
+            // Sparx Selection
+            else if(custom_menu.selection == 3)
+            {
+                if(_currentButtonOneFrame == X_BUTTON)
+                {
+                    current_menu = MISC_MENU;
+                }
+            }
+
+        }
+
+        if (current_menu == IL_MENU)
+        {       
+            CapitalTextInfo menu_text_info[5] = {{0}};
+
+            // Easy Exit
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
+            {
+                current_menu = MAIN_MENU;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            DrawTextBox(0x30, 0x1D0, 0x30, 0xA8);
+            
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[0].y = 70;
+            menu_text_info[0].size = DEFAULT_SIZE;
+
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[1].y = 90;
+            menu_text_info[1].size = DEFAULT_SIZE;
+
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[2].y = 110;
+            menu_text_info[2].size = DEFAULT_SIZE;
+
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 130;
+            menu_text_info[3].size = DEFAULT_SIZE;
+
+            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[4].y = 150;
+            menu_text_info[4].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
+
+            if(il_menu.selection == 0)
+            {
+                DrawTextCapitals(il_menu.il_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(il_menu.il_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+            if (il_menu.il_mode != true)
+            {
+                DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(il_menu.selection == 1)
+            {
+                DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+
+            if (il_menu.il_mode != true)
+            {
+                DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(il_menu.selection == 2)
+            {
+                DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+            if (il_menu.il_mode != true)
+            {
+                DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(il_menu.selection == 3)
+            {
+                DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+            if (il_menu.il_mode != true)
+            {
+                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(il_menu.selection == 4)
+            {
+                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+
+            // Fill text with defaults if NULL
+            if(il_menu.il_mode_text == NULL)
+            {
+                il_menu.il_mode_text = "IL MODE OFF";
+                il_menu.il_timer_display_mode_text = "IL TIMER AT END";
+                il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
+                il_menu.display_on_land_text = "DISPLAY LANDING OFF";
+                il_menu.loop_level_text = "LOOP LEVEL ON";
+            }
+
+            // Change Selection
+            if(_currentButtonOneFrame == DOWN_BUTTON && il_menu.il_mode == true)
+            {
+                il_menu.selection = (il_menu.selection + 1) % 5;
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && il_menu.selection != 0)
+            {
+                il_menu.selection = il_menu.selection - 1;
+            }
+            
+            // Play Sound Effect
+            if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
+            {
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            // Timer Selection
+            if(il_menu.selection == 0)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_menu.il_mode = (il_menu.il_mode + 1) % 2;
+                }
+
+                if(il_menu.il_mode == FALSE)
+                {
+                    il_menu.il_mode_text = "IL MODE OFF";
+
+                }
+                else if(il_menu.il_mode == TRUE)
+                {
+                    il_menu.il_mode_text = "IL MODE ON";
+
+                }
+            }
+            // IL Looping Selection
+            else if(il_menu.selection == 1)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    il_menu.il_timer_display_mode = (il_menu.il_timer_display_mode + 1) % 3;
+                }
+                
+                if (_currentButtonOneFrame == LEFT_BUTTON && il_menu.il_timer_display_mode > 0)
+                {
+                    il_menu.il_timer_display_mode--;
+                }
+
+                if(il_menu.il_timer_display_mode == IL_TIMER_AT_END)
+                {
+                    il_menu.il_timer_display_mode_text = "IL TIMER AT END";
+
+                }
+                else if(il_menu.il_timer_display_mode == IL_TIMER_ALWAYS)
+                {
+                    il_menu.il_timer_display_mode_text = "IL TIMER ALWAYS ON";
+
+                }
+                else if(il_menu.il_timer_display_mode == IL_TIMER_OFF)
+                {
+                    il_menu.il_timer_display_mode_text = "IL TIMER OFF";
+
+                }
+            }
+
+
+            else if(il_menu.selection == 2)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_menu.display_on_dragon = (il_menu.display_on_dragon + 1) % 3;
+                }
+
+                if(il_menu.display_on_dragon == TIMER_OFF)
+                {
+                    il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
+
+                }
+                else if(il_menu.display_on_dragon == TIMER_ONLY_PAUSE)
+                {
+                    il_menu.display_on_dragon_text = "DISPLAY AT DRAGON ON";
+
+                }
+            }
+
+            else if(il_menu.selection == 3)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_menu.display_on_land = (il_menu.display_on_land + 1) % 3;
+                }
+
+                if(il_menu.display_on_land == TIMER_OFF)
+                {
+                    il_menu.display_on_land_text = "DISPLAY LANDING OFF";
+
+                }
+                else if(il_menu.display_on_land == TIMER_ONLY_PAUSE)
+                {
+                    il_menu.display_on_land_text = "DISPLAY LANDING ON";
+
+                }
+            }
+            else if(il_menu.selection == 4)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_menu.loop_level_text = (il_menu.dont_loop_level + 1) % 3;
+                }
+
+                if(il_menu.dont_loop_level == 0)
+                {
+                    il_menu.loop_level_text = "LOOP LEVEL ON";
+
+                }
+                else if(il_menu.dont_loop_level == 1)
+                {
+                    il_menu.loop_level_text = "LOOP LEVEL OFF";
+
+                }
+            }
+
         }
 
     }
@@ -617,13 +729,13 @@ void CustomMenuUpdate(void)
         isHeld = FALSE;
     }
 
-    //! Sparx and Quick Goop
+    //! Checks
     {
-        if(custom_menu.sparx_mode == PERMA_SPARX_ON)
+        if(misc_menu.sparx_mode == PERMA_SPARX_ON)
         {
             _spyro.health = 3;
         }
-        else if(custom_menu.sparx_mode == SPARXLESS)
+        else if(misc_menu.sparx_mode == SPARXLESS)
         {
             if (_spyro.health > 0)
             {
@@ -631,7 +743,7 @@ void CustomMenuUpdate(void)
             }
         }
 
-        if(custom_menu.quick_goop_mode == TRUE)
+        if(misc_menu.quick_goop_mode == TRUE)
         {
             if(_spyro.drownTimer > 100)
             {
@@ -640,7 +752,7 @@ void CustomMenuUpdate(void)
         }
     }
 
-    if(((custom_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
+    if(((timer_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
     {
         //printf("RENDERING\n");
         MobyRender();

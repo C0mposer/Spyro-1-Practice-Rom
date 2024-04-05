@@ -167,14 +167,8 @@ void InGameTimerUpdate()
 
             }
 
-            if(_currentButtonOneFrame == START_BUTTON)
-            {
-                timer_state = TIMER_DISPLAYING;
-            }
-            
-
             //Show the running timer
-            if(timer_state == TIMER_RUNNING || timer_state == TIMER_RUNNING_NO_DISPLAY)
+            if(timer_state == TIMER_RUNNING || (timer_state == TIMER_RUNNING_NO_DISPLAY && _currentButtonOneFrame == START_BUTTON))
             {
                 Timer mainTimer;
                 mainTimer.timer = _globalTimer - mainTimerAtReset;
@@ -191,19 +185,15 @@ void InGameTimerUpdate()
                 {
                     LoadAscii(&mainTimer, mainTimerAscii);
                 }
+            }
 
-                CapitalTextInfo timer_text_info = {0};
-                timer_text_info.x = SCREEN_RIGHT_EDGE - 0x80;
-                timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
-                timer_text_info.size = DEFAULT_SIZE;
-
-                if(timer_state == TIMER_RUNNING && _gameState == GAMESTATE_GAMEPLAY)
-                    DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-
+            if(_currentButtonOneFrame == START_BUTTON)
+            {
+                timer_state = TIMER_DISPLAYING;
             }
 
             //Show the saved timer
-            if(timer_state == TIMER_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
+            if(timer_state != TIMER_RUNNING_NO_DISPLAY && _gameState == GAMESTATE_GAMEPLAY)
             {
                 CapitalTextInfo timer_text_info = {0};
                 timer_text_info.x = SCREEN_RIGHT_EDGE - 0x80;
@@ -212,6 +202,25 @@ void InGameTimerUpdate()
                 DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);                
             }
 
+            //Teehee
+            if(_dragonState == 2){
+                Timer ilTimer;
+                ilTimer.timer = _globalTimer - ilTimerStart;
+                FramesToTimer(&ilTimer);
+                LoadAscii(&ilTimer, ilAscii);
+            }
+            else if(_dragonState > 2 && _dragonState < 7){
+                CapitalTextInfo timer_text_info = {0};
+                timer_text_info.x = SCREEN_RIGHT_EDGE - 0x40;
+                timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
+                timer_text_info.size = DEFAULT_SIZE;
+                char temp[3];
+                sprintf(temp, "%X", _dragonWalkTime);
+                DrawTextCapitals(temp, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                timer_text_info.x = SCREEN_LEFT_EDGE + 0x20;
+                DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                MobyRender();
+            }
         }
         
         //! IL Timer Stuffs

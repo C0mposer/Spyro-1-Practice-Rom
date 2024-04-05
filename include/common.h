@@ -478,5 +478,7 @@ extern bool _spyroInvisible;
 
 extern int _treeTopsThiefTimer;
 
+extern int _dragonWalkTime;
+
 
 #endif /* COMMON_H */

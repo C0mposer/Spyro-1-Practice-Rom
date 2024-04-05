@@ -68,7 +68,7 @@ Menu custom_menu = {0};
 typedef struct ILMenu
 {
     int selection;
-    bool il_mode;
+    bool il_state;
     char* il_mode_text;
     ILTimerDisplayMode il_timer_display_mode;
     char* il_timer_display_mode_text;
@@ -84,8 +84,14 @@ ILMenu il_menu = {0};
 typedef struct TimerMenu
 {
     int selection;
-    TimerDisplayMode timer_mode;
-    char* timer_mode_text;
+    bool timer_state;
+    char* timer_state_text;
+    TimerDisplayMode timer_display_mode;
+    char* timer_display_mode_text;
+    short stop_timer_button_index;
+    char* stop_timer_button_text;
+    short reset_timer_button_index;
+    char* reset_timer_button_text;
 
 }TimerMenu;
 TimerMenu timer_menu = {0};
@@ -167,6 +173,9 @@ int savestate_selection = 0;
 
 bool isHeld = false;
 
+const short STOP_TIMER_BUTTONS[1] = {START_BUTTON, START_BUTTON};
+const short RESET_TIMER_BUTTONS[2] = {R3_BUTTON, SELECT_BUTTON};
+
 // Externing elsewhere
 BackgroundColor bg_color_index;
 bool should_update_bg_color = true;
@@ -200,21 +209,21 @@ void InGameTimerUpdate()
             //Main Timer Checks/Loop
 
             //Button Checks
-            if(_currentButtonOneFrame == R3_BUTTON)
+            if(_currentButtonOneFrame == RESET_TIMER_BUTTONS[timer_menu.reset_timer_button_index])
             {   
                 mainTimerAtReset = _globalTimer;
-                timer_state = (TimerState)timer_menu.timer_mode;
+                timer_state = (TimerState)timer_menu.timer_display_mode;
             }
             if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld)
             {
                 mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-                timer_state = (TimerState)timer_menu.timer_mode;
+                timer_state = (TimerState)timer_menu.timer_display_mode;
                 isHeld = true;
             }
             if(_currentButton == L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON && !isHeld)
             {
                 mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-                timer_state = (TimerState)timer_menu.timer_mode;
+                timer_state = (TimerState)timer_menu.timer_display_mode;
                 isHeld = true;
 
             }
@@ -239,7 +248,7 @@ void InGameTimerUpdate()
                 }
             }
 
-            if(_currentButtonOneFrame == START_BUTTON)
+            if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index])
             {
                 timer_state = TIMER_DISPLAYING;
             }
@@ -277,7 +286,7 @@ void InGameTimerUpdate()
         
         //! IL Timer Stuffs
         {
-            if(il_menu.il_mode)
+            if(il_menu.il_state)
             {
                 if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING))
                 {
@@ -424,7 +433,7 @@ void CustomMenuUpdate(void)
             if(custom_menu.il_menu_text == NULL)
             {
                 custom_menu.il_menu_text = "IL SETTINGS";
-                custom_menu.timer_menu_text = "TIMER SETTINGS";
+                custom_menu.timer_menu_text = "MANUAL TIMER SETTINGS";
                 custom_menu.savestate_menu_text = "SAVESTATE SETTINGS";
                 custom_menu.misc_menu_text = "MISC SETTINGS";
             }
@@ -493,7 +502,7 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0xA8);
+            DrawTextBox(0x30, 0x1F0, 0x30, 0xA8);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -525,7 +534,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(il_menu.il_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
-            if (il_menu.il_mode != true)
+            if (il_menu.il_state != true)
             {
                 DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
             }
@@ -539,7 +548,7 @@ void CustomMenuUpdate(void)
             }
             
 
-            if (il_menu.il_mode != true)
+            if (il_menu.il_state != true)
             {
                 DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
             }
@@ -551,7 +560,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-            if (il_menu.il_mode != true)
+            if (il_menu.il_state != true)
             {
                 DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
             }
@@ -563,7 +572,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
-            if (il_menu.il_mode != true)
+            if (il_menu.il_state != true)
             {
                 DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
             }
@@ -580,14 +589,14 @@ void CustomMenuUpdate(void)
             if(il_menu.il_mode_text == NULL)
             {
                 il_menu.il_mode_text = "IL MODE OFF";
-                il_menu.il_timer_display_mode_text = "IL TIMER AT END";
+                il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY AT END";
                 il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
                 il_menu.display_on_land_text = "DISPLAY LANDING OFF";
                 il_menu.loop_level_text = "LOOP LEVEL ON";
             }
 
             // Change Selection
-            if(_currentButtonOneFrame == DOWN_BUTTON && il_menu.il_mode == true)
+            if(_currentButtonOneFrame == DOWN_BUTTON && il_menu.il_state == true)
             {
                 il_menu.selection = (il_menu.selection + 1) % 5;
             }
@@ -607,15 +616,15 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    il_menu.il_mode = (il_menu.il_mode + 1) % 2;
+                    il_menu.il_state = (il_menu.il_state + 1) % 2;
                 }
 
-                if(il_menu.il_mode == FALSE)
+                if(il_menu.il_state == FALSE)
                 {
                     il_menu.il_mode_text = "IL MODE OFF";
 
                 }
-                else if(il_menu.il_mode == TRUE)
+                else if(il_menu.il_state == TRUE)
                 {
                     il_menu.il_mode_text = "IL MODE ON";
 
@@ -636,17 +645,17 @@ void CustomMenuUpdate(void)
 
                 if(il_menu.il_timer_display_mode == IL_TIMER_AT_END)
                 {
-                    il_menu.il_timer_display_mode_text = "IL TIMER AT END";
+                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY AT END";
 
                 }
                 else if(il_menu.il_timer_display_mode == IL_TIMER_ALWAYS)
                 {
-                    il_menu.il_timer_display_mode_text = "IL TIMER ALWAYS ON";
+                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY ALWAYS ON";
 
                 }
                 else if(il_menu.il_timer_display_mode == IL_TIMER_OFF)
                 {
-                    il_menu.il_timer_display_mode_text = "IL TIMER OFF";
+                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY OFF";
 
                 }
             }
@@ -710,6 +719,190 @@ void CustomMenuUpdate(void)
 
         }
 
+        if (current_menu == TIMER_MENU)
+        {       
+            CapitalTextInfo menu_text_info[4] = {{0}};
+
+            // Easy Exit
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
+            {
+                current_menu = MAIN_MENU;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x98);
+            
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[0].y = 70;
+            menu_text_info[0].size = DEFAULT_SIZE;
+
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[1].y = 90;
+            menu_text_info[1].size = DEFAULT_SIZE;
+
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[2].y = 110;
+            menu_text_info[2].size = DEFAULT_SIZE;
+
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 130;
+            menu_text_info[3].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
+
+            if(timer_menu.selection == 0)
+            {
+                DrawTextCapitals(timer_menu.timer_state_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(timer_menu.timer_state_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+
+            if (timer_menu.timer_state != true)
+            {
+                DrawTextCapitals(timer_menu.timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(timer_menu.selection == 1)
+            {
+                DrawTextCapitals(timer_menu.timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(timer_menu.timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+
+            if (timer_menu.timer_state != true)
+            {
+                DrawTextCapitals(timer_menu.stop_timer_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(timer_menu.selection == 2)
+            {
+                DrawTextCapitals(timer_menu.stop_timer_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(timer_menu.stop_timer_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+            if (timer_menu.timer_state != true)
+            {
+                DrawTextCapitals(timer_menu.reset_timer_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
+            else if(timer_menu.selection == 3)
+            {
+                DrawTextCapitals(timer_menu.reset_timer_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(timer_menu.reset_timer_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+
+            // Fill text with defaults if NULL
+            if(timer_menu.timer_state_text == NULL)
+            {
+                timer_menu.timer_state_text = "MANUAL TIMER OFF";
+                timer_menu.timer_display_mode_text = "DISPLAY ON STOP";
+                timer_menu.stop_timer_button_text = "STOP BUTTON START";
+                timer_menu.reset_timer_button_text = "RESET BUTTON R3";
+            }
+
+            // Change Selection
+            if(_currentButtonOneFrame == DOWN_BUTTON && timer_menu.timer_state == true)
+            {
+                timer_menu.selection = (timer_menu.selection + 1) % 4;
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection != 0)
+            {
+                timer_menu.selection = timer_menu.selection - 1;
+            }
+            
+            // Play Sound Effect
+            if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
+            {
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            // Timer Selection
+            if(timer_menu.selection == 0)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    timer_menu.timer_state = (timer_menu.timer_state + 1) % 2;
+                }
+
+                if(timer_menu.timer_state == FALSE)
+                {
+                    timer_menu.timer_state_text = "MANUAL TIMER OFF";
+
+                }
+                else if(timer_menu.timer_state == TRUE)
+                {
+                    timer_menu.timer_state_text = "MANUAL TIMER ON";
+
+                }
+            }
+            // IL Looping Selection
+            else if(timer_menu.selection == 1)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    timer_menu.timer_display_mode = (timer_menu.timer_display_mode + 1) % 2;
+                }
+
+                if(timer_menu.timer_display_mode == IL_TIMER_AT_END)
+                {
+                    timer_menu.timer_display_mode_text = "DISPLAY ON STOP";
+
+                }
+                else if(timer_menu.timer_display_mode == IL_TIMER_ALWAYS)
+                {
+                    timer_menu.timer_display_mode_text = "DISPLAY ALWAYS";
+
+                }
+            }
+
+
+            else if(timer_menu.selection == 2)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    timer_menu.stop_timer_button_index = (timer_menu.stop_timer_button_index + 1) % 2;
+                }
+
+                if(timer_menu.stop_timer_button_index == 0)
+                {
+                    timer_menu.stop_timer_button_text = "STOP BUTTON START";
+
+                }
+                else if(timer_menu.stop_timer_button_index == 1)
+                {
+                    timer_menu.stop_timer_button_text = "STOP BUTTON START";
+
+                }
+            }
+
+            else if(timer_menu.selection == 3)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    timer_menu.reset_timer_button_index = (timer_menu.reset_timer_button_index + 1) % 2;
+                }
+
+                if(timer_menu.reset_timer_button_index == 0)
+                {
+                    timer_menu.reset_timer_button_text = "RESET BUTTON R3";
+
+                }
+                else if(timer_menu.reset_timer_button_index == 1)
+                {
+                    timer_menu.reset_timer_button_text = "RESET BUTTON SELECT";
+
+                }
+            }
+
+        }
+
     }
     
     // Has Released Menu Button
@@ -752,7 +945,7 @@ void CustomMenuUpdate(void)
         }
     }
 
-    if(((timer_menu.timer_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
+    if(((timer_menu.timer_display_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
     {
         //printf("RENDERING\n");
         MobyRender();

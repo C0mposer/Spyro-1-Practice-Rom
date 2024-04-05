@@ -693,7 +693,7 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    il_menu.loop_level_text = (il_menu.dont_loop_level + 1) % 3;
+                    il_menu.dont_loop_level = (il_menu.dont_loop_level + 1) % 2;
                 }
 
                 if(il_menu.dont_loop_level == 0)

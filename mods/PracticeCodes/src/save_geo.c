@@ -74,7 +74,7 @@ void SaveGeoData(void)
         int movingCollisionSize = (*((short *)_ptr_moving_collision_data[0] + 2) + *((short *)_ptr_moving_collision_data[0] + 3)) * 3;
         int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
 
-        printf("%X\n", *(&_ptr_moving_collision_data - 1));
+        //printf("%X\n", *(&_ptr_moving_collision_data - 1));
         // Copy the actual collision data
         memcpy(local_mem_region, ptr_movingCollision, movingCollisionSize * sizeof(int));
         local_mem_region += movingCollisionSize;

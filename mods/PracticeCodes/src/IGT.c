@@ -6,24 +6,6 @@
 #include <bg_colors.h>
 #include <igt.h>
 
-typedef enum TimerState
-{
-    TIMER_STOPPED,
-    TIMER_RUNNING_NO_DISPLAY,
-    TIMER_RUNNING,
-    TIMER_DISPLAYING
-
-}TimerState;
-
-typedef enum ILTimerState
-{
-    IL_FLYING_IN,
-    IL_STARTED,
-    IL_DISPLAYING,
-    IL_STOPPED
-
-}ILTimerState;
-
 typedef enum MenuState
 {
     MENU_HIDDEN,
@@ -33,7 +15,6 @@ typedef enum MenuState
 
 typedef enum TimerDisplayMode
 {
-    TIMER_OFF,
     TIMER_ONLY_PAUSE,
     TIMER_ALWAYS
 
@@ -42,8 +23,7 @@ typedef enum TimerDisplayMode
 typedef enum ILTimerDisplayMode
 {
     IL_TIMER_AT_END,
-    IL_TIMER_ALWAYS,
-    IL_TIMER_OFF
+    IL_TIMER_ALWAYS
 
 }ILTimerDisplayMode;
 
@@ -136,19 +116,6 @@ typedef enum CurrentMenu
     MISC_MENU
 }CurrentMenu;
 
-typedef struct Timer
-{
-    int timer;
-    int timer_at_reset;
-    int secondsOnesPlace;
-    int secondsTensPlace;
-    int milisecondsTenthsPlace;
-    int milisecondsHundrethsPlace;
-    int minutes;
-    char ascii[10];
-
-}Timer;
-
 typedef struct FPS_t
 {
     int compareTimer;
@@ -159,17 +126,6 @@ typedef struct FPS_t
 
 // Globals
 bool has_toggled_menu = FALSE;
-
-//Timer mainTimer = {0};                    // Most of the Timer Struct doesn't need to be global
-int mainTimerAtReset;                       // so I moved the timer_at_reset and ascii elements to be individual globals
-char mainTimerAscii[10];                    // The structs can be reworked to not include these anymore if this change sticks
-TimerState timer_state = TIMER_STOPPED;     // The timer struct is still being used but it just initialized on the stack now
-
-ILTimerState il_timer_state = IL_STOPPED;
-int framesSpentLoading = 0;
-int ilTimerStart = 0;
-char ilAscii[10];
-char loadlessAscii[10];
 
 MenuState menu_state = MENU_HIDDEN;
 int current_menu = MAIN_MENU;
@@ -194,168 +150,16 @@ bool should_update_bg_color = true;
 bool should_loadstate_gems = false;
 
 // Externed from elsewhere
-extern const short flyInArray[36];
-
-
-//Math for 29.91hz
-void FramesToTimer(Timer* ptr_timer)
+typedef enum ILTimerState
 {
-    ptr_timer->minutes = (ptr_timer->timer * 10) / 35892;
-    ptr_timer->secondsTensPlace = ((ptr_timer->timer * 10) % 35892) / 5982;
-    ptr_timer->secondsOnesPlace = ((ptr_timer->timer * 100) % 59820) / 5982;
-    ptr_timer->milisecondsTenthsPlace = ((ptr_timer->timer * 1000) % 59820) / 5982;
-    ptr_timer->milisecondsHundrethsPlace = ((ptr_timer->timer * 10000) % 59820) / 5982;
-}
+    IL_FLYING_IN,
+    IL_STARTED,
+    IL_DISPLAYING,
+    IL_STOPPED
+}ILTimerState;
+extern ILTimerState il_timer_state;
+extern mainTimerAtReset;
 
-void LoadAscii(Timer* ptr_timer, char* ascii){
-    sprintf(ascii, "%d.%d%d.%d%d", ptr_timer->minutes, ptr_timer->secondsTensPlace, ptr_timer->secondsOnesPlace, ptr_timer->milisecondsTenthsPlace, ptr_timer->milisecondsHundrethsPlace);
-}
-
-void InGameTimerUpdate()
-{
-   //! Timer
-    {
-
-        if(timer_state != TIMER_STOPPED)
-        {
-            //Main Timer Checks/Loop
-
-            //Button Checks
-            if(_currentButtonOneFrame == RESET_TIMER_BUTTONS[timer_menu.reset_timer_mode])
-            {   
-                mainTimerAtReset = _globalTimer;
-                timer_state = (TimerState)timer_menu.timer_display_mode;
-            }
-            if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld)
-            {
-                mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-                timer_state = (TimerState)timer_menu.timer_display_mode;
-                isHeld = true;
-            }
-            if(_currentButton == L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON && !isHeld)
-            {
-                mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
-                timer_state = (TimerState)timer_menu.timer_display_mode;
-                isHeld = true;
-
-            }
-
-            //Show the running timer
-            if(timer_state == TIMER_RUNNING || (timer_state == TIMER_RUNNING_NO_DISPLAY && _currentButtonOneFrame == START_BUTTON))
-            {
-                Timer mainTimer;
-                mainTimer.timer = _globalTimer - mainTimerAtReset;
-                FramesToTimer(&mainTimer);
-
-                //Seconds
-                if(mainTimer.minutes == 0)
-                {
-                    sprintf(mainTimerAscii, "%d%d.%d%d", mainTimer.secondsTensPlace, mainTimer.secondsOnesPlace, mainTimer.milisecondsTenthsPlace, mainTimer.milisecondsHundrethsPlace);
-                }
-
-                //Minutes
-                else if(mainTimer.minutes >= 1)
-                {
-                    LoadAscii(&mainTimer, mainTimerAscii);
-                }
-            }
-
-            if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index])
-            {
-                timer_state = TIMER_DISPLAYING;
-            }
-
-            //Show the saved timer
-            if(timer_state != TIMER_RUNNING_NO_DISPLAY && _gameState == GAMESTATE_GAMEPLAY)
-            {
-                CapitalTextInfo timer_text_info = {0};
-                timer_text_info.x = SCREEN_RIGHT_EDGE - 0x80;
-                timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
-                timer_text_info.size = DEFAULT_SIZE;
-                DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);                
-            }
-
-            //Teehee
-            if(_dragonState == 2){
-                Timer ilTimer;
-                ilTimer.timer = _globalTimer - ilTimerStart;
-                FramesToTimer(&ilTimer);
-                LoadAscii(&ilTimer, ilAscii);
-            }
-            else if(_dragonState > 2 && _dragonState < 7){
-                CapitalTextInfo timer_text_info = {0};
-                timer_text_info.x = SCREEN_RIGHT_EDGE - 0x40;
-                timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
-                timer_text_info.size = DEFAULT_SIZE;
-                char temp[3];
-                sprintf(temp, "%X", _dragonWalkTime);
-                DrawTextCapitals(temp, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                timer_text_info.x = SCREEN_LEFT_EDGE + 0x20;
-                DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-                MobyRender();
-            }
-        }
-        
-        //! IL Timer Stuffs
-        {
-            if(il_menu.il_state)
-            {
-                if(il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING))
-                {
-                    il_timer_state = IL_FLYING_IN;
-                }
-                else if(il_timer_state == IL_FLYING_IN && _gameState == GAMESTATE_GAMEPLAY)
-                {
-                    il_timer_state = IL_STARTED;
-                    ilTimerStart = _globalTimer;
-                    framesSpentLoading = 0;
-                }
-                else if(il_timer_state == IL_STARTED && (_dragonState == 2 || _dragonState == 6)){ //State 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
-                    framesSpentLoading++;
-                }
-                else if(il_timer_state == IL_STARTED && _gameState == GAMESTATE_LOADING)
-                {
-                    Timer ilTimer;
-                    ilTimer.timer = _globalTimer - ilTimerStart;
-                    FramesToTimer(&ilTimer);
-                    LoadAscii(&ilTimer, ilAscii);
-
-                    ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
-                    FramesToTimer(&ilTimer);
-                    LoadAscii(&ilTimer, loadlessAscii);
-
-                    il_timer_state = IL_DISPLAYING;
-
-                    // IL Looping
-                    if(il_menu.dont_loop_level == false)
-                    {
-                        if((_portalToExitFromInHW && _portalNumber == -1))
-                        {
-                            _levelID = _portalToExitFromInHW;
-                            _portalToExitFromInHW = 0;
-                            _flyInAnimation = flyInArray[_levelIDIndex];
-                        }
-                    }
-                }
-                
-                //DISPLAY
-                if(il_timer_state == IL_DISPLAYING)
-                {
-                    CapitalTextInfo il_text_info = {SCREEN_LEFT_EDGE + 0x10, 50, 0x1400};
-                    CapitalTextInfo il2_text_info = {SCREEN_LEFT_EDGE + 0x10, 65, 0x1800};
-                    DrawTextCapitals(ilAscii, &il_text_info, 0xF, MOBY_COLOR_PURPLE);
-                    DrawTextCapitals(loadlessAscii, &il2_text_info, 0xB, MOBY_COLOR_PURPLE);
-
-                    if(_levelLoadState >= 0xB)
-                    {
-                        il_timer_state = IL_STOPPED;
-                        ResetLevelCollectables();
-                    }
-                }
-            }
-        }
-    }
-}
 
 void CustomMenuUpdate(void)
 { 
@@ -672,15 +476,15 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    il_menu.display_on_dragon = (il_menu.display_on_dragon + 1) % 3;
+                    il_menu.display_on_dragon = (il_menu.display_on_dragon + 1) % 2;
                 }
 
-                if(il_menu.display_on_dragon == TIMER_OFF)
+                if(il_menu.display_on_dragon == FALSE)
                 {
                     il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
 
                 }
-                else if(il_menu.display_on_dragon == TIMER_ONLY_PAUSE)
+                else if(il_menu.display_on_dragon == TRUE)
                 {
                     il_menu.display_on_dragon_text = "DISPLAY AT DRAGON ON";
 
@@ -691,15 +495,15 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    il_menu.display_on_land = (il_menu.display_on_land + 1) % 3;
+                    il_menu.display_on_land = (il_menu.display_on_land + 1) % 2;
                 }
 
-                if(il_menu.display_on_land == TIMER_OFF)
+                if(il_menu.display_on_land == FALSE)
                 {
                     il_menu.display_on_land_text = "DISPLAY LANDING OFF";
 
                 }
-                else if(il_menu.display_on_land == TIMER_ONLY_PAUSE)
+                else if(il_menu.display_on_land == TRUE)
                 {
                     il_menu.display_on_land_text = "DISPLAY LANDING ON";
 
@@ -855,6 +659,7 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     timer_menu.timer_display_mode = (timer_menu.timer_display_mode + 1) % 2;
+                    mainTimerAtReset = _globalTimer;
                 }
 
                 if(timer_menu.timer_display_mode == IL_TIMER_AT_END)
@@ -1254,7 +1059,7 @@ void CustomMenuUpdate(void)
                     misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
 
                 }
-                else if (misc_menu.show_dragon_touch == 1)
+                else if (misc_menu.show_dragon_touch == TRUE)
                 {
                     misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH ON";
 
@@ -1403,7 +1208,18 @@ void CustomMenuUpdate(void)
         }
     }
 
-    if(((timer_menu.timer_display_mode != TIMER_OFF || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING))
+    //! DRAGON TOUCH
+    if(misc_menu.show_dragon_touch && _dragonState > 2 && _dragonState < 7){
+        CapitalTextInfo timer_text_info = {0};
+        timer_text_info.x = SCREEN_RIGHT_EDGE - 0x40;
+        timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
+        timer_text_info.size = DEFAULT_SIZE;
+        char temp[4];
+        sprintf(temp, "%d", _dragonWalkTime);
+        DrawTextCapitals(temp, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+    }
+
+    if(((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING) || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))
     {
         //printf("RENDERING\n");
         MobyRender();

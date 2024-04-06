@@ -23,7 +23,8 @@ void MainFunc()
     }
     //! Other functions to run every frame at seperate memory locations (See buildlist.txt)
     {
-        InGameTimerUpdate();
+        TimerUpdate();
+        ILUpdate();
         CustomMenuUpdate();
         RatCodeUpdate();
         CreditsSkipUpdate();

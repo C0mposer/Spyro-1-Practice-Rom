@@ -43,6 +43,8 @@ extern int switch_state_button_index;
 extern const short SAVESTATE_BUTTONS[2];
 extern const short LOADSTATE_BUTTONS[3];
 
+extern int il_timer_offset[3];
+
 
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
@@ -334,6 +336,9 @@ void MainUpdate()
         if(!hasResetSavestate && _levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
         {
             hasSavedSpyro = false;
+            for(int i = 0; i < 3; i++){                     //Setting the IL Timer offsets back to 0 when going to a new level
+                il_timer_offset[i] = 0;
+            }
             hasResetSavestate = true;
 
             memset((void*)STARTING_MEM, 0x0, 0x35000); // Clear extra memory

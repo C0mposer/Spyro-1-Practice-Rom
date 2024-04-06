@@ -9,13 +9,13 @@ typedef struct RedGreen
 
 typedef enum BackgroundColor
 {
-    BG_PINK,
-    BG_YELLOW,
-    BG_TEAL,
-    BG_PURPLE,
     BG_BLUE,
-    BG_GREY
-
+    BG_PURPLE,
+    BG_TEAL,
+    BG_GREY,
+    BG_PINK,
+    BG_ORANGE,
+    BG_YELLOW
 }BackgroundColor;
 
 

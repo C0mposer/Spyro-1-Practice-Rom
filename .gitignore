@@ -393,3 +393,10 @@ mods/PracticeCodes/debug/dep/il_timer.dep
 mods/PracticeCodes/debug/dep/manual_timer.dep
 mods/PracticeCodes/debug/obj/il_timer.o
 mods/PracticeCodes/debug/obj/manual_timer.o
+mods/PracticeCodes/debug/dep/custom_menu.dep
+mods/PracticeCodes/debug/obj/custom_menu.o
+mods/PracticeCodes/output/srccustom_menuc.bin
+mods/PracticeCodes/output/srcil_timerc.bin
+mods/PracticeCodes/output/srcmanual_timerc.bin
+mods/PracticeCodes/src/IGT.dep
+mods/PracticeCodes/src/IGT.o

@@ -3,4 +3,6 @@
 
 void MainUpdate(void);
 
+void ChangeInventoryMenu(SwitchButton state);
+
 #endif /* MAIN_UPDATES_H */

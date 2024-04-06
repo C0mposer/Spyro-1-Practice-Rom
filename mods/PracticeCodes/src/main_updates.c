@@ -22,6 +22,7 @@ ModState mod_state = GAME_STARTED;
 bool hasSavedSpyro = false;
 bool hasResetSavestate = false;
 bool readyToLoadstateAfterDeath = false;
+bool switch_button_held;
 
 int savestateSwitchedTimer = 0;
 
@@ -34,6 +35,15 @@ extern int mainTimerAtReset;
 extern bool should_loadstate_gems;
 // from IGT.c
 extern int savestate_selection;
+
+extern int savestate_button_index;
+extern int loadstate_button_index;
+extern int switch_state_button_index;
+
+extern const short SAVESTATE_BUTTONS[2];
+extern const short LOADSTATE_BUTTONS[3];
+
+
 
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
@@ -138,6 +148,22 @@ void DrawSavestateSwitchedText(void)
     MobyRender();
 }
 
+void ChangeInventoryMenu(SwitchButton state)
+{
+    if (state == OFF)
+    {
+        // NOP Call to PrepareInventoryGamestate
+        *(int*)(0x80033C28) = 0x0;
+        *(int*)(0x80033C2C) = 0x0;
+    }
+    else if (state == ON)
+    {
+        // NOP Call to PrepareInventoryGamestate
+        *(int*)(0x80033C28) = 0x0C00B1C5;
+        *(int*)(0x80033C2C) = 0x24040001;
+    }
+}
+
 //! Main Basic Checks
 void MainUpdate()
 {
@@ -170,14 +196,25 @@ void MainUpdate()
     if(mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
     {
         //Save spyro & camera information
-        if(_currentButtonOneFrame == L3_BUTTON)
+        if(savestate_button_index < 2) //
         {
-            //SaveSpyroAndCamera(false);
-            SaveStateTest();
+            if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
+            {
+                //SaveSpyroAndCamera(false);
+                SaveStateTest();
+            }
+        }
+        if(savestate_button_index == 2) // for multi tap check
+        {
+            if(CheckButtonMultiTap(L3_BUTTON, 2))
+            {
+                //SaveSpyroAndCamera(false);
+                SaveStateTest();
+            }
         }
 
         //Load spyro & camera information
-        if((_currentButtonOneFrame == R3_BUTTON && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
+        if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
             if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
@@ -232,21 +269,43 @@ void MainUpdate()
 
 
         // Quick Savestate Slot Selection
-        int direction = GetHorizontalRightStickDirection();
+        if(switch_state_button_index == 0)
+        {    
+            int direction = GetHorizontalRightStickDirection();
 
-        if (direction == LEFT && savestate_selection > 0)
-        {
-            savestate_selection--;
-            PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            savestateSwitchedTimer = 1;
-        }
-        else if (direction == RIGHT && savestate_selection < 2)
-        {
-            savestate_selection++;
-            PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            savestateSwitchedTimer = 1;
-        }
+            if (direction == LEFT && savestate_selection > 0)
+            {
+                savestate_selection--;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
+            }
+            else if (direction == RIGHT && savestate_selection < 2)
+            {
+                savestate_selection++;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
+            }
 
+        }
+        else if (switch_state_button_index == 1)
+        {        
+            if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_button_held)
+            {
+                savestate_selection--;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
+
+                switch_button_held = true;
+            }
+            if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_button_held)
+            {
+                savestate_selection++;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
+
+                switch_button_held = true;
+            }
+        }
         // Draw Switched Savestate Text
         if (savestateSwitchedTimer > 0)
         {
@@ -258,6 +317,15 @@ void MainUpdate()
             savestateSwitchedTimer = 0;
         }
 
+
+
+        // Check for release
+        {
+            if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
+            {
+                switch_button_held = false;
+            }
+        }
         
     }
 

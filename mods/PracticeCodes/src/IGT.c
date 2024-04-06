@@ -2,6 +2,7 @@
 #include <custom_text.h>
 #include <sound.h>
 #include <shared_funcs.h>
+#include <main_updates.h>
 #include <bg_colors.h>
 #include <igt.h>
 
@@ -101,11 +102,11 @@ typedef struct SavestateMenu
     int selection;
     //
     char* stateslot_text;
-    int savestate_button_index;
+    //int savestate_button_index;
     char* savestate_button_text;
-    int loadstate_button_index;
+    //int loadstate_button_index;
     char* loadstate_button_text;
-    int switch_state_button_index;
+    //int switch_state_button_index;
     char* switch_state_button_text;
 
 }SavestateMenu;
@@ -175,6 +176,13 @@ bool isHeld = false;
 
 const short STOP_TIMER_BUTTONS[1] = {START_BUTTON, START_BUTTON};
 const short RESET_TIMER_BUTTONS[2] = {R3_BUTTON, SELECT_BUTTON};
+
+const short SAVESTATE_BUTTONS[2] = {L3_BUTTON, START_BUTTON};
+const short LOADSTATE_BUTTONS[3] = {R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_BUTTON + CIRCLE_BUTTON)};
+
+int savestate_button_index;
+int loadstate_button_index;
+int switch_state_button_index;
 
 // Externing elsewhere
 BackgroundColor bg_color_index;
@@ -635,7 +643,7 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    il_menu.il_timer_display_mode = (il_menu.il_timer_display_mode + 1) % 3;
+                    il_menu.il_timer_display_mode = (il_menu.il_timer_display_mode + 1) % 2;
                 }
                 
                 if (_currentButtonOneFrame == LEFT_BUTTON && il_menu.il_timer_display_mode > 0)
@@ -650,12 +658,7 @@ void CustomMenuUpdate(void)
                 }
                 else if(il_menu.il_timer_display_mode == IL_TIMER_ALWAYS)
                 {
-                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY ALWAYS ON";
-
-                }
-                else if(il_menu.il_timer_display_mode == IL_TIMER_OFF)
-                {
-                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY OFF";
+                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY ALWAYS";
 
                 }
             }
@@ -730,7 +733,7 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x98);
+            DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -804,7 +807,7 @@ void CustomMenuUpdate(void)
                 timer_menu.timer_state_text = "MANUAL TIMER OFF";
                 timer_menu.timer_display_mode_text = "DISPLAY ON STOP";
                 timer_menu.stop_timer_button_text = "STOP BUTTON START";
-                timer_menu.reset_timer_button_text = "RESET BUTTON R3";
+                timer_menu.reset_timer_button_text = "RESET ON LOAD AND RESET";
             }
 
             // Change Selection
@@ -915,7 +918,7 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x98);
+            DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -935,7 +938,7 @@ void CustomMenuUpdate(void)
 
             _spyro.isMovementLocked = TRUE;
 
-            if(timer_menu.selection == 0)
+            if(savestate_menu.selection == 0)
             {
                 DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
@@ -944,7 +947,7 @@ void CustomMenuUpdate(void)
             }
             
 
-            if(timer_menu.selection == 1)
+            if(savestate_menu.selection == 1)
             {
                 DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
@@ -953,7 +956,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
-            if(timer_menu.selection == 2)
+            if(savestate_menu.selection == 2)
             {
                 DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
@@ -961,7 +964,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-            if(timer_menu.selection == 3)
+            if(savestate_menu.selection == 3)
             {
                 DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
@@ -974,19 +977,19 @@ void CustomMenuUpdate(void)
             if(savestate_menu.stateslot_text == NULL)
             {
                 savestate_menu.stateslot_text = "CURRENT SLOT 1";
-                savestate_menu.savestate_button_text = "SAVESTATE BUTTON L3";
-                savestate_menu.loadstate_button_text = "LOADSTATE BUTTON R3";
+                savestate_menu.savestate_button_text = "SAVE BUTTON L3";
+                savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
             }
 
             // Change Selection
-            if(_currentButtonOneFrame == DOWN_BUTTON && timer_menu.timer_state == true)
+            if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                timer_menu.selection = (timer_menu.selection + 1) % 4;
+                savestate_menu.selection = (savestate_menu.selection + 1) % 4;
             }
-            else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection != 0)
+            else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
             {
-                timer_menu.selection = timer_menu.selection - 1;
+                savestate_menu.selection = savestate_menu.selection - 1;
             }
             
             // Play Sound Effect
@@ -996,7 +999,7 @@ void CustomMenuUpdate(void)
             }
 
             
-            if(timer_menu.selection == 0)
+            if(savestate_menu.selection == 0)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
@@ -1026,26 +1029,26 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    savestate_menu.savestate_button_index = (savestate_menu.savestate_button_index + 1) % 3;
+                    savestate_button_index = (savestate_button_index + 1) % 3;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_menu.savestate_button_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_button_index > 0)
                 {
-                    savestate_menu.savestate_button_index--;
+                    savestate_button_index--;
                 }
 
-                if (savestate_menu.savestate_button_index == 0)
+                if (savestate_button_index == 0)
                 {
-                    savestate_menu.savestate_button_text = "SAVESTATE BUTTON L3";
+                    savestate_menu.savestate_button_text = "SAVE BUTTON L3";
 
                 }
-                else if (savestate_menu.savestate_button_index == 1)
+                else if (savestate_button_index == 1)
                 {
-                    savestate_menu.savestate_button_text = "SAVESTATE BUTTON START";
+                    savestate_menu.savestate_button_text = "SAVE BUTTON START";
 
                 }
-                else if (savestate_menu.savestate_button_index == 2)
+                else if (savestate_button_index == 2)
                 {
-                    savestate_menu.savestate_button_text = "SAVESTATE BUTTON L3 X2";
+                    savestate_menu.savestate_button_text = "SAVE BUTTON L3 X2";
 
                 }
             }
@@ -1055,54 +1058,48 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    savestate_menu.loadstate_button_index = (savestate_menu.loadstate_button_index + 1) % 4;
+                    loadstate_button_index = (loadstate_button_index + 1) % 2;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_menu.loadstate_button_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON && loadstate_button_index > 0)
                 {
-                    savestate_menu.loadstate_button_index--;
+                    loadstate_button_index--;
                 }
 
-                if (savestate_menu.loadstate_button_index == 0)
+                if (loadstate_button_index == 0)
                 {
-                    savestate_menu.loadstate_button_text = "LOADSTATE BUTTON R3";
-
+                    savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
+                    ChangeInventoryMenu(ON);
                 }
-                else if (savestate_menu.loadstate_button_index == 1)
+                else if (loadstate_button_index == 1)
                 {
-                    savestate_menu.loadstate_button_text = "SELECT";
-
-                }
-                else if (savestate_menu.loadstate_button_index == 2)
-                {
-                    savestate_menu.loadstate_button_text = "L2 + R2 X2";
-
-                }
-                else if (savestate_menu.loadstate_button_index == 3)
-                {
-                    savestate_menu.loadstate_button_text = "L2 + R2 + CIRCLE";
-
+                    savestate_menu.loadstate_button_text = "LOAD BUTTON SELECT";
+                    ChangeInventoryMenu(OFF);
                 }
             }
 
-            else if(timer_menu.selection == 3)
+
+            else if(savestate_menu.selection == 3)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    timer_menu.reset_timer_mode = (timer_menu.reset_timer_mode + 1) % 2;
+                    switch_state_button_index = (switch_state_button_index + 1) % 2;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && switch_state_button_index > 0)
+                {
+                    switch_state_button_index--;
                 }
 
-                if(timer_menu.reset_timer_mode == 0)
+                if (switch_state_button_index == 0)
                 {
-                    timer_menu.reset_timer_button_text = "RESET BUTTON R3";
+                    savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
 
                 }
-                else if(timer_menu.reset_timer_mode == 1)
+                else if (switch_state_button_index == 1)
                 {
-                    timer_menu.reset_timer_button_text = "RESET BUTTON SELECT";
+                    savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
 
                 }
             }
-
         }
     }
     

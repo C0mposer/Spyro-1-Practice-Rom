@@ -18,14 +18,6 @@ struct MovingGeo
 typedef struct MovingGeo MovingGeo;
 
 
-// Custom enum for 1 frame reset
-enum GeoResetState
-{
-    OFF,
-    SHOULD_MOVE,
-    SHOULD_LOAD
-};
-
 void SaveGeoData();
 void LoadGeoData();
 void GeoDataUpdate();

@@ -24,6 +24,12 @@ typedef enum Direction
     RIGHT
 }Direction;
 
+typedef enum SwitchButton
+{
+    OFF,
+    ON
+}SwitchButton;
+
 enum Buttons
 {
     X_BUTTON = 0x0040,

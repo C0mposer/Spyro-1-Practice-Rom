@@ -1191,7 +1191,7 @@ void CustomMenuUpdate(void)
                 misc_menu.sparx_mode_text = "SPARX MODE NORMAL";
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
                 misc_menu.quick_goop_text = "QUICK GOOP OFF";
-                misc_menu.bg_color_text = "BG COLOR PINK";
+                misc_menu.bg_color_text = "BG COLOR ORANGE";
                 misc_menu.super_mode_text = "NGPLUS OFF";
             }
 
@@ -1288,7 +1288,7 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    bg_color_index = (bg_color_index + 1) % 6;
+                    bg_color_index = (bg_color_index + 1) % 7;
                     should_update_bg_color = TRUE;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
@@ -1299,19 +1299,9 @@ void CustomMenuUpdate(void)
 
                 switch(bg_color_index)
                 {
-                    case(BG_PINK):
+                    case(BG_BLUE):
                     {
-                        misc_menu.bg_color_text = "BG COLOR PINK";
-                        break;
-                    }
-                    case(BG_YELLOW):
-                    {
-                        misc_menu.bg_color_text = "BG COLOR YELLOW";
-                        break;
-                    }
-                    case(BG_TEAL):
-                    {
-                        misc_menu.bg_color_text = "BG COLOR TEAL";
+                        misc_menu.bg_color_text = "BG COLOR BLUE";
                         break;
                     }
                     case(BG_PURPLE):
@@ -1319,14 +1309,29 @@ void CustomMenuUpdate(void)
                         misc_menu.bg_color_text = "BG COLOR PURPLE";
                         break;
                     }
-                    case(BG_BLUE):
+                    case(BG_TEAL):
                     {
-                        misc_menu.bg_color_text = "BG COLOR BLUE";
+                        misc_menu.bg_color_text = "BG COLOR TEAL";
                         break;
                     }
                     case(BG_GREY):
                     {
                         misc_menu.bg_color_text = "BG COLOR GREY";
+                        break;
+                    }
+                    case(BG_PINK):
+                    {
+                        misc_menu.bg_color_text = "BG COLOR PINK";
+                        break;
+                    }
+                    case(BG_ORANGE):
+                    {
+                        misc_menu.bg_color_text = "BG COLOR ORANGE";
+                        break;    
+                    }
+                    case(BG_YELLOW):
+                    {
+                        misc_menu.bg_color_text = "BG COLOR YELLOW";
                         break;
                     }
                     default:

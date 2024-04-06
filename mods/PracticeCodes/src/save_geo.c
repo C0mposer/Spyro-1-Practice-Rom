@@ -38,7 +38,7 @@ void SaveGeoData(void)
         memcpy(local_mem_region, ptr_movingTexture, movingTextureSize * sizeof(int));
         local_mem_region += movingTextureSize;
 
-        printf("size %d: %X\n", i, movingTextureSize);
+        //printf("size %d: %X\n", i, movingTextureSize);
     }
 
     for (int i = 0; i < _amount_of_low_lod_textures; i++)

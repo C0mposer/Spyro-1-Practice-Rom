@@ -389,3 +389,7 @@ build/spyro1_PracticeCodes/RAT_C_BE.BIN
 mods/PracticeCodes/src/Untitled-1.c
 mods/PracticeCodes/basic.ld
 mods/PracticeCodes/output/srcIGTc.bin
+mods/PracticeCodes/debug/dep/il_timer.dep
+mods/PracticeCodes/debug/dep/manual_timer.dep
+mods/PracticeCodes/debug/obj/il_timer.o
+mods/PracticeCodes/debug/obj/manual_timer.o

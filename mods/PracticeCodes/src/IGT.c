@@ -90,7 +90,7 @@ typedef struct TimerMenu
     char* timer_display_mode_text;
     short stop_timer_button_index;
     char* stop_timer_button_text;
-    short reset_timer_button_index;
+    short reset_timer_mode;
     char* reset_timer_button_text;
 
 }TimerMenu;
@@ -209,7 +209,7 @@ void InGameTimerUpdate()
             //Main Timer Checks/Loop
 
             //Button Checks
-            if(_currentButtonOneFrame == RESET_TIMER_BUTTONS[timer_menu.reset_timer_button_index])
+            if(_currentButtonOneFrame == RESET_TIMER_BUTTONS[timer_menu.reset_timer_mode])
             {   
                 mainTimerAtReset = _globalTimer;
                 timer_state = (TimerState)timer_menu.timer_display_mode;
@@ -886,15 +886,217 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    timer_menu.reset_timer_button_index = (timer_menu.reset_timer_button_index + 1) % 2;
+                    timer_menu.reset_timer_mode = (timer_menu.reset_timer_mode + 1) % 2;
                 }
 
-                if(timer_menu.reset_timer_button_index == 0)
+                if(timer_menu.reset_timer_mode == 0)
+                {
+                    timer_menu.reset_timer_button_text = "RESET ON LOAD AND RESET";
+
+                }
+                else if(timer_menu.reset_timer_mode == 1)
+                {
+                    timer_menu.reset_timer_button_text = "RESET ON LOAD ONLY";
+
+                }
+            }
+
+        }
+
+
+        if (current_menu == SAVESTATE_MENU)
+        {       
+            CapitalTextInfo menu_text_info[4] = {{0}};
+
+            // Easy Exit
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
+            {
+                current_menu = MAIN_MENU;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x98);
+            
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[0].y = 70;
+            menu_text_info[0].size = DEFAULT_SIZE;
+
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[1].y = 90;
+            menu_text_info[1].size = DEFAULT_SIZE;
+
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[2].y = 110;
+            menu_text_info[2].size = DEFAULT_SIZE;
+
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 130;
+            menu_text_info[3].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
+
+            if(timer_menu.selection == 0)
+            {
+                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+
+            if(timer_menu.selection == 1)
+            {
+                DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+            if(timer_menu.selection == 2)
+            {
+                DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+            if(timer_menu.selection == 3)
+            {
+                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+
+            // Fill text with defaults if NULL
+            if(savestate_menu.stateslot_text == NULL)
+            {
+                savestate_menu.stateslot_text = "CURRENT SLOT 1";
+                savestate_menu.savestate_button_text = "SAVESTATE BUTTON L3";
+                savestate_menu.loadstate_button_text = "LOADSTATE BUTTON R3";
+                savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
+            }
+
+            // Change Selection
+            if(_currentButtonOneFrame == DOWN_BUTTON && timer_menu.timer_state == true)
+            {
+                timer_menu.selection = (timer_menu.selection + 1) % 4;
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection != 0)
+            {
+                timer_menu.selection = timer_menu.selection - 1;
+            }
+            
+            // Play Sound Effect
+            if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
+            {
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            
+            if(timer_menu.selection == 0)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    savestate_selection = (savestate_selection + 1) % 3;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
+                {
+                    savestate_selection--;
+                }
+
+                if(savestate_selection == 0)
+                {
+                    savestate_menu.stateslot_text = "SLOT 1";
+                }
+                else if(savestate_selection == 1)
+                {
+                    savestate_menu.stateslot_text = "SLOT 2";
+                }
+                else if(savestate_selection == 2)
+                {
+                    savestate_menu.stateslot_text = "SLOT 3";
+                }
+            }
+            
+            
+            else if (savestate_menu.selection == 1)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    savestate_menu.savestate_button_index = (savestate_menu.savestate_button_index + 1) % 3;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_menu.savestate_button_index > 0)
+                {
+                    savestate_menu.savestate_button_index--;
+                }
+
+                if (savestate_menu.savestate_button_index == 0)
+                {
+                    savestate_menu.savestate_button_text = "SAVESTATE BUTTON L3";
+
+                }
+                else if (savestate_menu.savestate_button_index == 1)
+                {
+                    savestate_menu.savestate_button_text = "SAVESTATE BUTTON START";
+
+                }
+                else if (savestate_menu.savestate_button_index == 2)
+                {
+                    savestate_menu.savestate_button_text = "SAVESTATE BUTTON L3 X2";
+
+                }
+            }
+
+
+            else if (savestate_menu.selection == 2)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    savestate_menu.loadstate_button_index = (savestate_menu.loadstate_button_index + 1) % 4;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_menu.loadstate_button_index > 0)
+                {
+                    savestate_menu.loadstate_button_index--;
+                }
+
+                if (savestate_menu.loadstate_button_index == 0)
+                {
+                    savestate_menu.loadstate_button_text = "LOADSTATE BUTTON R3";
+
+                }
+                else if (savestate_menu.loadstate_button_index == 1)
+                {
+                    savestate_menu.loadstate_button_text = "SELECT";
+
+                }
+                else if (savestate_menu.loadstate_button_index == 2)
+                {
+                    savestate_menu.loadstate_button_text = "L2 + R2 X2";
+
+                }
+                else if (savestate_menu.loadstate_button_index == 3)
+                {
+                    savestate_menu.loadstate_button_text = "L2 + R2 + CIRCLE";
+
+                }
+            }
+
+            else if(timer_menu.selection == 3)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    timer_menu.reset_timer_mode = (timer_menu.reset_timer_mode + 1) % 2;
+                }
+
+                if(timer_menu.reset_timer_mode == 0)
                 {
                     timer_menu.reset_timer_button_text = "RESET BUTTON R3";
 
                 }
-                else if(timer_menu.reset_timer_button_index == 1)
+                else if(timer_menu.reset_timer_mode == 1)
                 {
                     timer_menu.reset_timer_button_text = "RESET BUTTON SELECT";
 
@@ -902,7 +1104,6 @@ void CustomMenuUpdate(void)
             }
 
         }
-
     }
     
     // Has Released Menu Button

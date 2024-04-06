@@ -1192,7 +1192,7 @@ void CustomMenuUpdate(void)
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
                 misc_menu.quick_goop_text = "QUICK GOOP OFF";
                 misc_menu.bg_color_text = "BG COLOR BLUE";
-                misc_menu.super_mode_text = "NGPLUS OFF";
+                misc_menu.super_mode_text = "NGPLUS MODE OFF";
             }
 
             // Change Selection

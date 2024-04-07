@@ -400,3 +400,6 @@ mods/PracticeCodes/output/srcil_timerc.bin
 mods/PracticeCodes/output/srcmanual_timerc.bin
 mods/PracticeCodes/src/IGT.dep
 mods/PracticeCodes/src/IGT.o
+mods/PracticeCodes/debug/dep/cd_load.dep
+mods/PracticeCodes/debug/obj/cd_load.o
+mods/PracticeCodes/output/menu.bin

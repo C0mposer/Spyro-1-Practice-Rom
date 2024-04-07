@@ -403,3 +403,13 @@ mods/PracticeCodes/src/IGT.o
 mods/PracticeCodes/debug/dep/cd_load.dep
 mods/PracticeCodes/debug/obj/cd_load.o
 mods/PracticeCodes/output/menu.bin
+build/iopMemory.bin
+build/shit.p2s
+build/spyro1_PracticeCodes/MENU.BIN
+build/spyro1_PracticeCodes/MENU2.BIN
+mods/PracticeCodes/debug/dep/cd_load.dep
+mods/PracticeCodes/debug/dep/custom_menu_2.dep
+mods/PracticeCodes/debug/obj/cd_load.o
+mods/PracticeCodes/debug/obj/custom_menu_2.o
+mods/PracticeCodes/output/menu.bin
+mods/PracticeCodes/output/menu2.bin

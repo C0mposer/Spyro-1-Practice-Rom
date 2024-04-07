@@ -25,13 +25,15 @@ void MainFunc()
     {
         TimerUpdate();
         ILUpdate();
-        CustomMenuUpdate();
-        RatCodeUpdate();
-        CreditsSkipUpdate();
-        LootPlaneUpdate();
-        MultiTapUpdate();
+        CdLoad();               //Becomes CustomMenuUpdate once code is loaded
+        // CustomMenuUpdate();
+        // CustomMenuUpdate2();
+        // RatCodeUpdate();
+        // CreditsSkipUpdate();
+        // LootPlaneUpdate();
+        // MultiTapUpdate();
         //GeoDataUpdate();
     }
 
-    MainUpdate();
+    // MainUpdate();
 }

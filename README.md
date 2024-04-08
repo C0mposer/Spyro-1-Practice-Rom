@@ -22,7 +22,7 @@ This can be played on PS1, PS2, PS3, and most emulators.
 ## PS2 (75k-90k)
 To download the patched rom and get practicing, download the bin & cue here:
    
-[Download bin & cue for PS2 (75k-90k)](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.1/spyro1_PracticeCodes_DEKCARD_PS2.zip)
+[Download bin & cue for PS2 (75k-90k)](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.1/spyro1_PracticeCodes_DECKARD_PS2.zip)
 
 *Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
 

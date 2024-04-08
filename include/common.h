@@ -9,7 +9,7 @@
 //Constants
 //~~~~~~~~~
 
-#if BUILD == 1
+#if BUILD == 0
     #define STARTING_MEM 0x80300000
 #elif BUILD == 2
     #define STARTING_MEM 0x80A10000

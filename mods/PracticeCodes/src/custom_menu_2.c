@@ -193,7 +193,7 @@ void CustomMenuUpdate2(){
             _spyro.isMovementLocked = TRUE;
 
 
-            #if BUILD == 2 // DECKARD HAS SAVESTATE SLOT
+            #if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
                 if(savestate_menu.selection == 0)
                 {
                     DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -224,7 +224,7 @@ void CustomMenuUpdate2(){
                 DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-            #if BUILD == 2
+            #if BUILD == 2 || BUILD == 0
                 if(savestate_menu.selection == 3)
                 {
                     DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -249,7 +249,7 @@ void CustomMenuUpdate2(){
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                #if BUILD == 2
+                #if BUILD == 2 || BUILD == 0
                     savestate_menu.selection = (savestate_menu.selection + 1) % 4;
                 #elif BUILD == 1 || BUILD == 3
                     savestate_menu.selection = 2;
@@ -257,7 +257,7 @@ void CustomMenuUpdate2(){
             }
             else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
             {
-                #if BUILD == 2
+                #if BUILD == 2 || BUILD == 0
                     savestate_menu.selection = savestate_menu.selection - 1;
                 #elif BUILD == 1 || BUILD == 3
                     savestate_menu.selection = 1;
@@ -270,9 +270,9 @@ void CustomMenuUpdate2(){
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            #if BUILD == 2
                 if(savestate_menu.selection == 0)
                 {
+            #if BUILD == 2 || BUILD == 0
                     if (_currentButtonOneFrame == RIGHT_BUTTON)
                     {
                         savestate_selection = (savestate_selection + 1) % 3;
@@ -294,8 +294,8 @@ void CustomMenuUpdate2(){
                     {
                         savestate_menu.stateslot_text = "CURRENT SLOT 3";
                     }
-                }
             #endif
+                }
             
             else if (savestate_menu.selection == 1)
             {
@@ -349,7 +349,7 @@ void CustomMenuUpdate2(){
                 }
             }
 
-            #if BUILD == 2
+            #if BUILD == 2 || BUILD == 0
                 else if(savestate_menu.selection == 3)
                 {
                     if (_currentButtonOneFrame == RIGHT_BUTTON)

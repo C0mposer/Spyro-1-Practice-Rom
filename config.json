@@ -9,6 +9,18 @@
     },
     "versions": [
     {
+        "REDUX": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 0
+        }
+    },
+    {
         "NTSC": 
         {
             "name": "spyro1.bin",

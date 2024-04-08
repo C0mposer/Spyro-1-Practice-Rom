@@ -24,7 +24,7 @@ void MainFunc()
         #if BUILD == 1                         
             LoadCdData(265759, 0x8000C000, 0x1000, 0, 600);     //Loads menu.bin
             LoadCdData(265761, 0x8000D000, 0x1000, 0, 600);     //Loads menu2.bin
-        #elif BUILD == 2
+        #elif BUILD == 2 || BUILD == 3
             LoadCdData(265759, 0x80008EB0, 0x1000, 0, 600);     //Loads menu.bin
             LoadCdData(265761, 0x80007540, 0x1000, 0, 600);     //Loads menu2.bin
         #endif

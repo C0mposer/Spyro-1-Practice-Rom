@@ -146,7 +146,7 @@ void DrawSavestateSwitchedText(void)
 {
     char buf[3] = {0};
     sprintf(&buf, "%d", savestate_selection + 1);
-    DrawTextCapitals(buf, &(CapitalTextInfo){.x=0x13, .y=0xDC, .size=DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+    DrawTextCapitals(buf, &(CapitalTextInfo){.x=0x100, .y=0xDC, .size=DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     MobyRender();
 }
 
@@ -202,7 +202,7 @@ void MainUpdate()
         {
             if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
             {
-                #if BUILD == 2
+                #if BUILD == 2 || BUILD == 0
                     SaveStateTest();
                 #elif BUILD == 1 || BUILD == 3
                     SaveSpyroAndCamera(false);
@@ -214,7 +214,7 @@ void MainUpdate()
         {
             if(CheckButtonMultiTap(L3_BUTTON, 2))
             {
-                #if BUILD == 2
+                #if BUILD == 2 || BUILD == 0
                 SaveStateTest();
                 #elif BUILD == 1 || BUILD == 3
                 SaveSpyroAndCamera(false);
@@ -227,8 +227,12 @@ void MainUpdate()
         {
             if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
-                //ReloadSpyroAndCamera(false);
-                LoadStateTest();
+                #if BUILD == 2 || BUILD == 0
+                    LoadStateTest();
+                #elif BUILD == 1 || BUILD == 3
+                    ReloadSpyroAndCamera(false);
+                #endif
+                
                 readyToLoadstateAfterDeath = false;
 
                 if (_levelID == TREE_TOPS_ID)
@@ -276,7 +280,7 @@ void MainUpdate()
             _keyState = 1;
         }
 
-        #if BUILD == 2  // ONLY DO SAVESTATE SLOTS ON DECKARD
+        #if BUILD == 2 || BUILD == 0  // ONLY DO SAVESTATE SLOTS ON DECKARD
             // Quick Savestate Slot Selection
             if(switch_state_button_index == 0)
             {    
@@ -349,7 +353,9 @@ void MainUpdate()
             }
             hasResetSavestate = true;
 
-            memset((void*)STARTING_MEM, 0x0, 0x35000); // Clear extra memory
+            #if BUILD == 2 || BUILD == 0
+                memset((void*)STARTING_MEM, 0x0, 0x35000); // Clear extra memory
+            #endif
         }   
         else if((signed int)_levelLoadState == -1)
         {

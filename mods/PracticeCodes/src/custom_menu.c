@@ -103,8 +103,8 @@ typedef struct MiscMenu
     bool quick_goop_mode;
     char* quick_goop_text;
     char* bg_color_text;
-    int super_mode;
-    char* super_mode_text;
+    int counter_mode;
+    char* counter_mode_text;
 }MiscMenu;
 MiscMenu misc_menu = {0};
 

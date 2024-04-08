@@ -15,6 +15,13 @@ typedef enum MenuState
 
 }MenuState;
 
+typedef enum TimerState
+{
+    TIMER_RUNNING,
+    TIMER_DISPLAYING
+
+}TimerState;
+
 typedef enum TimerDisplayMode
 {
     TIMER_ONLY_PAUSE,
@@ -103,10 +110,10 @@ typedef struct MiscMenu
     bool quick_goop_mode;
     char* quick_goop_text;
     char* bg_color_text;
-    int super_mode;
-    char* super_mode_text;
+    char* counter_mode_text;
 }MiscMenu;
 extern MiscMenu misc_menu;
+bool counter_mode; // removed from struct
 
 typedef enum CurrentMenu
 {
@@ -140,6 +147,7 @@ extern int switch_state_button_index;
 extern BackgroundColor bg_color_index;
 extern bool should_update_bg_color;
 extern bool should_loadstate_gems;
+extern TimerState timerState;
 
 
 typedef enum ILTimerState
@@ -461,7 +469,7 @@ void CustomMenuUpdate2(){
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
                 misc_menu.quick_goop_text = "QUICK GOOP OFF";
                 misc_menu.bg_color_text = "BG COLOR BLUE";
-                misc_menu.super_mode_text = "NGPLUS MODE OFF";
+                misc_menu.counter_mode_text = "COUNTER OFF";
             }
 
             // Change Selection
@@ -615,26 +623,28 @@ void CustomMenuUpdate2(){
             // {
             //     if (_currentButtonOneFrame == RIGHT_BUTTON)
             //     {
-            //         misc_menu.super_mode = (misc_menu.super_mode + 1) % 2;
+            //         counter_mode = (counter_mode + 1) % 2;
             //     }
-            //     else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.super_mode > 0)
+            //     else if (_currentButtonOneFrame == LEFT_BUTTON && counter_mode > 0)
             //     {
-            //         misc_menu.super_mode;
+            //         counter_mode;
             //     }
 
-            //     if(misc_menu.super_mode == 0)
+            //     if(counter_mode == 0)
             //     {
-            //         misc_menu.super_mode_text = "NGPLUS MODE OFF";
+            //         counter_mode_text = "COUNTER OFF";
             //     }
-            //     else if(misc_menu.super_mode == 1)
+            //     else if(counter_mode == 1)
             //     {
-            //         misc_menu.super_mode_text = "NGPLUS MODE ON";
+            //         counter_mode_text = "COUNTER ON";
             //     }
             // }
         }
     }
 
-    if(((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || menu_state == MENU_DISPLAYING || ShouldDisplayLandingTime()) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING) || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))
+    if(((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || timerState == TIMER_DISPLAYING || menu_state == MENU_DISPLAYING || ShouldDisplayLandingTime()) && _gameState == GAMESTATE_GAMEPLAY)
+    || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING) 
+    || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))
     {
         //printf("RENDERING\n");
         MobyRender();

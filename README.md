@@ -4,7 +4,7 @@
 
 This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *full save-states*, *a level select*, *timing functionalities*, *automatic collectable resetting*, and many other quality of life features.
 
-This can be played on PS1, PS2, PS3, and most emulators.
+This can be played on PS1, PS2, PS3, and most emulators.   
 *(however to use the full savestate functionality, you must have a PS2 75k-90k)*
 
 ## Default Hotkeys:

@@ -202,16 +202,23 @@ void MainUpdate()
         {
             if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
             {
-                //SaveSpyroAndCamera(false);
-                SaveStateTest();
+                #if BUILD == 2
+                    SaveStateTest();
+                #elif BUILD == 1 || BUILD == 3
+                    SaveSpyroAndCamera(false);
+                #endif
+                
             }
         }
         if(savestate_button_index == 2) // for multi tap check
         {
             if(CheckButtonMultiTap(L3_BUTTON, 2))
             {
-                //SaveSpyroAndCamera(false);
+                #if BUILD == 2
                 SaveStateTest();
+                #elif BUILD == 1 || BUILD == 3
+                SaveSpyroAndCamera(false);
+                #endif
             }
         }
 
@@ -269,66 +276,67 @@ void MainUpdate()
             _keyState = 1;
         }
 
+        #if BUILD == 2  // ONLY DO SAVESTATE SLOTS ON DECKARD
+            // Quick Savestate Slot Selection
+            if(switch_state_button_index == 0)
+            {    
+                int direction = GetHorizontalRightStickDirection();
 
-        // Quick Savestate Slot Selection
-        if(switch_state_button_index == 0)
-        {    
-            int direction = GetHorizontalRightStickDirection();
+                if (direction == LEFT && savestate_selection > 0)
+                {
+                    savestate_selection--;
+                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                    savestateSwitchedTimer = 1;
+                }
+                else if (direction == RIGHT && savestate_selection < 2)
+                {
+                    savestate_selection++;
+                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                    savestateSwitchedTimer = 1;
+                }
 
-            if (direction == LEFT && savestate_selection > 0)
-            {
-                savestate_selection--;
-                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                savestateSwitchedTimer = 1;
             }
-            else if (direction == RIGHT && savestate_selection < 2)
+            else if (switch_state_button_index == 1)
+            {        
+                if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_button_held)
+                {
+                    savestate_selection--;
+                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                    savestateSwitchedTimer = 1;
+
+                    switch_button_held = true;
+                }
+                if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_button_held)
+                {
+                    savestate_selection++;
+                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                    savestateSwitchedTimer = 1;
+
+                    switch_button_held = true;
+                }
+            }
+            // Draw Switched Savestate Text
+            if (savestateSwitchedTimer > 0)
             {
-                savestate_selection++;
-                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                savestateSwitchedTimer = 1;
+                DrawSavestateSwitchedText();
+                savestateSwitchedTimer++;
+            }
+            if (savestateSwitchedTimer > 30)
+            {
+                savestateSwitchedTimer = 0;
             }
 
-        }
-        else if (switch_state_button_index == 1)
-        {        
-            if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_button_held)
+
+
+            // Check for release
             {
-                savestate_selection--;
-                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                savestateSwitchedTimer = 1;
-
-                switch_button_held = true;
+                if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
+                {
+                    switch_button_held = false;
+                }
             }
-            if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_button_held)
-            {
-                savestate_selection++;
-                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                savestateSwitchedTimer = 1;
-
-                switch_button_held = true;
-            }
-        }
-        // Draw Switched Savestate Text
-        if (savestateSwitchedTimer > 0)
-        {
-            DrawSavestateSwitchedText();
-            savestateSwitchedTimer++;
-        }
-        if (savestateSwitchedTimer > 30)
-        {
-            savestateSwitchedTimer = 0;
-        }
-
-
-
-        // Check for release
-        {
-            if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
-            {
-                switch_button_held = false;
-            }
-        }
-        
+            
+        #endif
     }
 
     //Safeguard against loading with another levels savestate/no savestate

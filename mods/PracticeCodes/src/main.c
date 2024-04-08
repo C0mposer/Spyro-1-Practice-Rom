@@ -10,20 +10,29 @@
 #include <moving_geo.h>
 #include <cd.h>
 
-int ranOnce;
+bool hasLoadedCDCode;
 
 //*
 //* ~ MAIN EVERY FRAME HOOK ~
 //*
 void MainFunc()
 {   
-    if(!ranOnce){
-        _musicState = 0x40;                                 //Turns off Music
-        LoadCdData(265759, 0x8000C000, 0x1000, 0, 600);     //Loads menu.bin
-        LoadCdData(265761, 0x8000D000, 0x1000, 0, 600);     //Loads menu2.bin
-        ranOnce = 1;                                        //Set Flag
+    if(!hasLoadedCDCode)
+    {
+        _musicState = 0x40;        
+
+        #if BUILD == 1                         
+            LoadCdData(265759, 0x8000C000, 0x1000, 0, 600);     //Loads menu.bin
+            LoadCdData(265761, 0x8000D000, 0x1000, 0, 600);     //Loads menu2.bin
+        #elif BUILD == 2
+            LoadCdData(265759, 0x80008EB0, 0x1000, 0, 600);     //Loads menu.bin
+            LoadCdData(265761, 0x80007540, 0x1000, 0, 600);     //Loads menu2.bin
+        #endif
+
+        hasLoadedCDCode = true;                                 //Set Flag
     }
-    else{
+    else
+    {
         //! Other functions to run every frame
         {
         LevelSelectUpdate();

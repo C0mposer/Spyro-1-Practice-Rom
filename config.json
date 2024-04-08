@@ -21,7 +21,7 @@
         }
     },
     {
-        "PS2_NTSC": 
+        "DECKARD_PS2_NTSC": 
         {
             "name": "spyro1.bin",
             "symbols": 
@@ -30,6 +30,18 @@
                 "funcs.txt"
             ],
             "build_id": 2
+        }
+    },
+    {
+        "IOP_PS2_NTSC": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 3
         }
     }
     ]

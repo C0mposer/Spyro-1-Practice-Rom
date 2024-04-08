@@ -17,7 +17,24 @@
         }
     ],
     
-    "PS2_NTSC": 
+    "DECKARD_PS2_NTSC": 
+    [
+        {
+            "SCUS_942.28": [
+                {
+                    "name": "header",
+                    "address": "0x8000A8D0",
+                    "offset": "0x0"
+                },
+                {
+                    "name": "exe",
+                    "address": "0x80010000",
+                    "offset": "0x800"
+                }
+            ]
+        }
+    ],
+    "IOP_PS2_NTSC": 
     [
         {
             "SCUS_942.28": [

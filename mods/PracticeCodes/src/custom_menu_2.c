@@ -157,7 +157,13 @@ void CustomMenuUpdate2(){
     if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
     {
         if (current_menu == SAVESTATE_MENU)
-        {       
+        {     
+            // Set menu to 1 by default if not on DECKARD  
+            #if BUILD == 1 || BUILD == 3
+                if(savestate_menu.selection == 0)
+                    savestate_menu.selection = 1;
+            #endif
+
             CapitalTextInfo menu_text_info[4] = {{0}};
 
             // Easy Exit
@@ -166,9 +172,8 @@ void CustomMenuUpdate2(){
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
-
             DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
-            
+
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
             menu_text_info[0].size = DEFAULT_SIZE;
@@ -187,14 +192,20 @@ void CustomMenuUpdate2(){
 
             _spyro.isMovementLocked = TRUE;
 
-            if(savestate_menu.selection == 0)
-            {
-                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            
+
+            #if BUILD == 2 // DECKARD HAS SAVESTATE SLOT
+                if(savestate_menu.selection == 0)
+                {
+                    DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                }
+                else{
+                    DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                }
+            #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+
+                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+
+            #endif
 
             if(savestate_menu.selection == 1)
             {
@@ -213,14 +224,17 @@ void CustomMenuUpdate2(){
                 DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-            if(savestate_menu.selection == 3)
-            {
-                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else{
-                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
+            #if BUILD == 2
+                if(savestate_menu.selection == 3)
+                {
+                    DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                }
+                else{
+                    DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                }
+            #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            #endif
 
             // Fill text with defaults if NULL
             if(savestate_menu.stateslot_text == NULL)
@@ -231,14 +245,23 @@ void CustomMenuUpdate2(){
                 savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
             }
 
+
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                savestate_menu.selection = (savestate_menu.selection + 1) % 4;
+                #if BUILD == 2
+                    savestate_menu.selection = (savestate_menu.selection + 1) % 4;
+                #elif BUILD == 1 || BUILD == 3
+                    savestate_menu.selection = 2;
+                #endif
             }
             else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
             {
-                savestate_menu.selection = savestate_menu.selection - 1;
+                #if BUILD == 2
+                    savestate_menu.selection = savestate_menu.selection - 1;
+                #elif BUILD == 1 || BUILD == 3
+                    savestate_menu.selection = 1;
+                #endif
             }
             
             // Play Sound Effect
@@ -247,32 +270,32 @@ void CustomMenuUpdate2(){
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            
-            if(savestate_menu.selection == 0)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+            #if BUILD == 2
+                if(savestate_menu.selection == 0)
                 {
-                    savestate_selection = (savestate_selection + 1) % 3;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
-                {
-                    savestate_selection--;
-                }
+                    if (_currentButtonOneFrame == RIGHT_BUTTON)
+                    {
+                        savestate_selection = (savestate_selection + 1) % 3;
+                    }
+                    else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
+                    {
+                        savestate_selection--;
+                    }
 
-                if(savestate_selection == 0)
-                {
-                    savestate_menu.stateslot_text = "CURRENT SLOT 1";
+                    if(savestate_selection == 0)
+                    {
+                        savestate_menu.stateslot_text = "CURRENT SLOT 1";
+                    }
+                    else if(savestate_selection == 1)
+                    {
+                        savestate_menu.stateslot_text = "CURRENT SLOT 2";
+                    }
+                    else if(savestate_selection == 2)
+                    {
+                        savestate_menu.stateslot_text = "CURRENT SLOT 3";
+                    }
                 }
-                else if(savestate_selection == 1)
-                {
-                    savestate_menu.stateslot_text = "CURRENT SLOT 2";
-                }
-                else if(savestate_selection == 2)
-                {
-                    savestate_menu.stateslot_text = "CURRENT SLOT 3";
-                }
-            }
-            
+            #endif
             
             else if (savestate_menu.selection == 1)
             {
@@ -326,29 +349,30 @@ void CustomMenuUpdate2(){
                 }
             }
 
-
-            else if(savestate_menu.selection == 3)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+            #if BUILD == 2
+                else if(savestate_menu.selection == 3)
                 {
-                    switch_state_button_index = (switch_state_button_index + 1) % 2;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && switch_state_button_index > 0)
-                {
-                    switch_state_button_index--;
-                }
+                    if (_currentButtonOneFrame == RIGHT_BUTTON)
+                    {
+                        switch_state_button_index = (switch_state_button_index + 1) % 2;
+                    }
+                    else if (_currentButtonOneFrame == LEFT_BUTTON && switch_state_button_index > 0)
+                    {
+                        switch_state_button_index--;
+                    }
 
-                if (switch_state_button_index == 0)
-                {
-                    savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
+                    if (switch_state_button_index == 0)
+                    {
+                        savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
 
-                }
-                else if (switch_state_button_index == 1)
-                {
-                    savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
+                    }
+                    else if (switch_state_button_index == 1)
+                    {
+                        savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
 
+                    }
                 }
-            }
+            #endif
         }
 
 

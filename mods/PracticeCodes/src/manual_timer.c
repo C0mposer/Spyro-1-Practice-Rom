@@ -46,6 +46,7 @@ typedef struct TimerMenu
 
 extern TimerMenu timer_menu;
 TimerState timerState = TIMER_RUNNING;
+Timer mainTimer;
 int mainTimerAtReset;
 char mainTimerAscii[10];
 extern bool isHeld;
@@ -102,7 +103,6 @@ void TimerUpdate(){
         if(timerState == TIMER_RUNNING)
         {
             if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || timer_menu.timer_display_mode == TIMER_ALWAYS){
-                Timer mainTimer;
                 mainTimer.timer = _globalTimer - mainTimerAtReset;
                 FramesToTimer(&mainTimer);
                 LoadAscii(&mainTimer, mainTimerAscii);
@@ -118,9 +118,18 @@ void TimerUpdate(){
         if((timerState == TIMER_DISPLAYING || timer_menu.timer_display_mode == TIMER_ALWAYS) && _gameState == GAMESTATE_GAMEPLAY)
         {
             CapitalTextInfo timer_text_info = {0};
-            timer_text_info.x = SCREEN_RIGHT_EDGE - 0x80;
-            timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
-            timer_text_info.size = DEFAULT_SIZE;
+            if (mainTimer.minutes == 0)
+            {
+                timer_text_info.x = SCREEN_RIGHT_EDGE - 0x5A;
+                timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
+                timer_text_info.size = DEFAULT_SIZE;
+            }
+            else
+            {
+                timer_text_info.x = SCREEN_RIGHT_EDGE - 0x7D;
+                timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
+                timer_text_info.size = DEFAULT_SIZE;
+            }
             DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);                
         }
     }

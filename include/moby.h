@@ -1,6 +1,9 @@
 #ifndef MOBY_H
 #define MOBY_H
 
+#include <common.h>
+#include <vector.h>
+
 typedef struct Vec3_u8
 {
     unsigned char x;
@@ -14,6 +17,42 @@ typedef struct BGR_u8
     unsigned char G;
     unsigned char R;
 }BGR_u8;
+
+
+enum HudMobyTypes
+{
+    MOBY_ID_WATERFALL_PARTICLE_SPAWNER = 0xB,
+    MOBY_ID_LIFE_FIGURINE = 0xE,
+    MOBY_ID_EGG = 0x22,
+    MOBY_ID_SPYRO_HEAD = 0x3A,
+    MOBY_ID_EXCAILMATION = 0x4B,
+    MOBY_ID_COMMA = 0x4C,
+    MOBY_ID_KEY = 0xAD,
+    MOBY_ID_DRAGON_FIGURINE = 0x1FA,
+    MOBY_ID_GEM_CHEST = 0x1D7,
+    MOBY_ID_GEM_CHEST_2 = 0x1D9,
+    MOBY_ID_VOLUME_BAR = 0x1B2,
+
+    MOBY_ID_ONE_GEM = 0x53,
+    MOBY_ID_TWO_GEM = 0x54,
+    MOBY_ID_FIVE_GEM = 0x55,
+    MOBY_ID_TEN_GEM = 0x56,
+    MOBY_ID_TWENTYFIVE_GEM = 0x57
+};
+
+typedef struct Angle_u8
+{
+    char yaw;
+    char pitch;
+    char roll;
+}Angle_u8;
+typedef struct MyHudMoby
+{
+    Vec3 position;                  //Effective size in HUD.
+
+    Angle_u8 angle;                             
+
+}MyHudMoby;
 
 typedef struct Moby
 {

@@ -4,6 +4,9 @@
 #include <shared_funcs.h>
 #include <bg_colors.h>
 #include <igt.h>
+#include <moby.h>
+#include <draw_hud_moby.h>
+#include <landing_timer.h>
 
 typedef enum ILTimerState
 {
@@ -69,6 +72,8 @@ extern savestate_selection;
 int il_timer_offset[3] = {0};
 
 
+
+
 void ILUpdate(){
     if(il_menu.il_state)
     {
@@ -127,16 +132,33 @@ void ILUpdate(){
             }
             else if(_dragonState > 2 && _dragonState < 7){
                 CapitalTextInfo timer_text_info = {0};
-                timer_text_info.x = SCREEN_LEFT_EDGE + 0x10;
+                timer_text_info.x = SCREEN_LEFT_EDGE + 0x26;
                 timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
                 timer_text_info.size = DEFAULT_SIZE;
                 DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_GREEN);
+
+                MyHudMoby dragon_logo = {.position.x = SCREEN_LEFT_EDGE + 0x12, .position.y = SCREEN_TOP_EDGE + 0x27, .position.z = 3900};
+                CustomDrawMoby(MOBY_ID_DRAGON_FIGURINE, &dragon_logo, MOBY_COLOR_GREEN);
+                
             }
         }
 
         //IL LANDING CHECKPOINT TIMES
-        if(il_menu.display_on_land){
-            //! WILL DO LATER
+        if(il_menu.display_on_land && il_menu.il_timer_display_mode != IL_TIMER_ALWAYS){
+            if(ShouldSaveLandingTime()){
+                Timer ilTimer;
+                ilTimer.timer = _globalTimer - ilTimerStart;
+                FramesToTimer(&ilTimer);
+                LoadAscii(&ilTimer, ilAscii);
+            }
+            if(ShouldDisplayLandingTime() && _gameState == GAMESTATE_GAMEPLAY)
+            {
+                CapitalTextInfo timer_text_info = {0};
+                timer_text_info.x = SCREEN_LEFT_EDGE + 0x10;
+                timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
+                timer_text_info.size = DEFAULT_SIZE;
+                DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);   
+            }
         }
 
         // IL LOOPING //!TEST THIS, SHOULD WORK

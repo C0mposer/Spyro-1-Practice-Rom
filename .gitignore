@@ -413,3 +413,7 @@ mods/PracticeCodes/debug/obj/cd_load.o
 mods/PracticeCodes/debug/obj/custom_menu_2.o
 mods/PracticeCodes/output/menu.bin
 mods/PracticeCodes/output/menu2.bin
+mods/PracticeCodes/debug/dep/draw_hud_moby.dep
+mods/PracticeCodes/debug/dep/landing_timer.dep
+mods/PracticeCodes/debug/obj/draw_hud_moby.o
+mods/PracticeCodes/debug/obj/landing_timer.o

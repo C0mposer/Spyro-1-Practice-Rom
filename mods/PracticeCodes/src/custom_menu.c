@@ -5,6 +5,7 @@
 #include <main_updates.h>
 #include <bg_colors.h>
 #include <igt.h>
+#include <moby.h>
 
 typedef enum MenuState
 {
@@ -134,7 +135,7 @@ int savestate_selection = 0;
 
 bool isHeld = false;
 
-const short STOP_TIMER_BUTTONS[1] = {START_BUTTON, START_BUTTON};
+const short STOP_TIMER_BUTTONS[2] = {START_BUTTON, START_BUTTON};
 const short RESET_TIMER_BUTTONS[2] = {R3_BUTTON, SELECT_BUTTON};
 
 const short SAVESTATE_BUTTONS[2] = {L3_BUTTON, START_BUTTON};
@@ -1220,8 +1221,11 @@ void CustomMenuUpdate(void)
         timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
         timer_text_info.size = DEFAULT_SIZE;
         char temp[4];
-        sprintf(temp, "%d", _dragonWalkTime);
+        sprintf(temp, "%dF", (_dragonWalkTime - 64)/2);
         DrawTextCapitals(temp, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+
+        MyHudMoby dragon_logo = {.position.x = SCREEN_RIGHT_EDGE - 0x54, .position.y = SCREEN_TOP_EDGE + 0x27, .position.z = 3900};
+        CustomDrawMoby(MOBY_ID_DRAGON_FIGURINE, &dragon_logo, MOBY_COLOR_GOLD);
     }
 
     // if(((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || menu_state == MENU_DISPLAYING) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING) || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))

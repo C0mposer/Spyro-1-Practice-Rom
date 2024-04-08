@@ -44,10 +44,10 @@ void CdLoad()
 {
     if(hasStartedLoad == 0)
     {
-        ReadFileIntoRam(265759, AMOUNT_OF_SECTORS, 0x80008EB0);      //? Begin the code loading process
+        ReadFileIntoRam(265759, AMOUNT_OF_SECTORS, 0x8000C000);      //? Begin the code loading process
     }
     else if(hasStartedLoad == 2){
-        ReadFileIntoRam(265761, AMOUNT_OF_SECTORS, 0x80007540);
+        ReadFileIntoRam(265761, AMOUNT_OF_SECTORS, 0x8000D000);
     }
 	else if(hasStartedLoad == 4){
         CustomMenuUpdate();              //? Run the main Loop of the loaded code after its done loading and has returned to music playing mode
@@ -56,6 +56,7 @@ void CdLoad()
         CreditsSkipUpdate();
         LootPlaneUpdate();
         MultiTapUpdate();
+        CheckLandingUpdate();
         MainUpdate();
     }
 }

@@ -417,3 +417,5 @@ mods/PracticeCodes/debug/dep/draw_hud_moby.dep
 mods/PracticeCodes/debug/dep/landing_timer.dep
 mods/PracticeCodes/debug/obj/draw_hud_moby.o
 mods/PracticeCodes/debug/obj/landing_timer.o
+mods/PracticeCodes/src/cd_load.dep
+mods/PracticeCodes/src/cd_load.o

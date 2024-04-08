@@ -91,6 +91,8 @@ int CdPosToInt(CdlLOC * p);
 
 void read_cb(unsigned char status, unsigned char *optinalReturnPTR);
 
+void LoadCdData(int baseSector,unsigned int *buf,int numOfBytes,int offsetBytes, int param_5);
+
 extern int _musicSectors; //0x8006f200
 
 

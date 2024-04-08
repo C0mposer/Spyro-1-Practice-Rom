@@ -2,47 +2,42 @@
 
 # Spyro 1 Practice Codes
 
-This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *partial save-states*, *a level select*, *timing functionality*, *automatic collectable resetting*, and many other quality of life features.
+This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *full save-states*, *a level select*, *timing functionalities*, *automatic collectable resetting*, and many other quality of life features.
 
-This can be played on PS1, PS2, PS3, and most emulators. 
+This can be played on PS1, PS2, PS3, and most emulators.
+*(however to use the full savestate functionality, you must have a PS2 75k-90k)*
 
-To play this on PS2 with a burnt CD will require you to specifically download the **PS2 version**. It will also require you to have a softmodded PS2 with [MechaPwn](https://github.com/MechaResearch/MechaPwn) installed, or have a modchip.
-
-## Hotkeys:
+## Default Hotkeys:
 1. Open Custom Menu (**L2 + R2 + Triangle**)
 2. Open Level Select (**Select**)
 3. Quick Fly In To Current Level (**L1 + R1 + Triangle**)
-4. Respawn Spyro (**L1 + R1 + Circle**)
-5. Save/Load Spyro's Data (**L3** to save, **R3** to load)
+4. Savestate/Loadstate (**L3** to save, **R3** to load)
+5. Switch Savestate Slot (**Right Stick** **Left** & **Right**)
 6. Moon-jump (**L1 + R1 + L2 + R2 + X**)
-7. Give Key (**Triangle x3**)
+7. Respawn Spyro (**L1 + R1 + Circle**)
+8. Give Key (**Triangle x3**)
 
 # Downloads
 **Be sure to download the correct version for the platform you are going to play on**
-## BIN/CUE Downloads
-To simply download the patched rom and get practicing, download the cue/bin here:
+## PS2 (75k-90k)
+To download the patched rom and get practicing, download the bin & cue here:
    
-[PS2 bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4.1/spyro1_PracticeCodes_PS2.zip)
-    
-[PS1/PS3/EMU bin/cue](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4.1/spyro1_PracticeCodes_PS1.zip)
+[Download bin & cue for PS2 (75k-90k)](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.0/spyro1_PracticeCodes_DEKCARD_PS2.zip)
 
 *Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
 
-## Xdelta Downloads
-If you wish to patch your own personal spyro 1 bin/cue file instead, download the patch here:
+## PS2 (30k-70k)
+*Note, the 30k-70k models of PS2's are not capable of full savestates, however they are capable of partial savestates.*
+  
+To download the patched rom and get practicing, download the bin & cue here:
    
-[PS2 Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4.1/spyro1_PracticeCodes_PS2.xdelta)
-   
-[PS1/PS3/EMU Xdelta Patch](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease1.4.1/spyro1_PracticeCodes_PS1.xdelta)
+[Download bin & cue for PS2 (30k-70k)](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.0/spyro1_PracticeCodes_IOP_PS2.zip)
 
+*Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
+   
 ## Menu Features:
 
-### Timer: 
-This setting displays an on screen timer that resets upon reloading spyro, and stops upon pausing. Can be used for timing movement/routes in game!
-
-- **TIMER ONLY STOPPED** mode displays the timer on screen only when you pause to stop the timer. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
-- **TIMER ALWAYS** mode displays the timer on screen at all times.
-	 
+## IL Settings
 ### IL Mode:
 This setting lets you practice & time individual level runs for most categories! [Click here to view the IL spreadsheet](https://www.docs.google.com/spreadsheets/d/1FLkc8-dGTO4jJhAi5nDrhm0h6qlVflPlAIlXAYEylsg/edit#gid=1140931951)
 
@@ -52,15 +47,58 @@ This setting lets you practice & time individual level runs for most categories!
 - It will also reload you back into the same level to let you practice on loop.
 - This timer should be accurate within 1 frame (~0.03) in most situations.
 	 
-### Reset All With R3:
-- This setting will reset the level every time before loading a sudo-savestate.     
+### IL Timer Display: 
+This setting controls the main display setting for the IL Timer
 
-This is essentially a macro for resetting the level manually with *L1 + R1 + Circle* and then pressing R3 after.
-	 
+- **IL TIMER DISPLAY AT END** mode displays the IL timer on screen only when you finish a level. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
+- **TIMER ALWAYS** mode displays the IL timer on screen at all times, as well as at the end.    
+
+### Display At Dragon: 
+This setting will render the IL Timer when you freed a dragon.
+
+### Display Landing: 
+This setting will render the IL Timer when land on the ground.
+
+### Loop Level: 
+This setting controls if the level should loop upon exiting in IL Mode.
+
+## Manual Timer Settings
+### Manual Timer: 
+This setting displays an on screen timer that resets upon reloading your state/reloading spyro, and stops upon pausing. Can be used for manually timing movement, routes, & tricks in game!
+
+### Manual Timer Display Mode
+- **DISPLAY ON STOPPED** mode displays the timer on screen only when you pause to stop the timer. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
+- **DISPLAY ALWAYS** mode displays the timer on screen at all times.
+
+
+## Savestate Settings
+### Current Slot
+This lets you change your current savestate slot manually.
+
+### Save Button
+This lets you change your savestate button from 3 options:
+- L3
+- Start
+- L3 x2 (twice in a row)
+
+### Load Button
+This lets you change your loadstate button from 2 options:
+- R3
+- Select
+
+### Switch Slot
+This lets you change your hotkey for switching savestate slots from 2 options:
+- Rstick Left & Right
+- L1 + R1 + Dpad Left & Right
+
+## Misc Settings
 ### Sparx Mode:
 - **PERMA SPARX ON** mode keeps sparx gold at all times, and your health will never deplete.
 - **SPARXLESS ON** mode keeps sparx dead at all times, allowing for sparxless practice.
 	 
+### Show Dragon Touch:
+This setting shows the amount of frames you lost to a dragon touch (30fps).
+
 ### Quick Goop:
 This setting kills spyro in goop the moment you can not input anymore. Small quality of life feature to reduce the amount of time you have to wait to die in goop.
 	 
@@ -94,6 +132,9 @@ The rat is saved as a part of the sudo-savestate (L3/R3) as well
 - Warp before plane 2 with key - *L1 + R1 + X*   
 - Warp before plane 1 with key - *L1 + R1 + Square*   
 
+# Patch Game
+If you wish to patch your own personal spyro 1 .bin file instead, visit here:
+[Patch Personal Spyro 1 bin](https://c0mposer.github.io/Spyro-1-Practice-Codes/)
 
 ## Compiling & Building
 If you wish to compile the mod yourself, you'll need a few prerequisites

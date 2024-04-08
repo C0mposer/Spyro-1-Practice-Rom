@@ -1,8 +1,8 @@
 REDUX, exe, 0x80033e38, 0x0, asm/hook.s
 REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/cd_load.c src/draw_hud_moby.c src/landing_timer.c, MainFunc.bin
-REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/manual_timer.c, IGT.bin
+REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/cd_load.c src/manual_timer.c, MainFunc.bin
+REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c
 REDUX, exe, 0x80066840, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c
 REDUX, kernal, 0x8000C000, 0x0, src/custom_menu.c, menu.bin
@@ -19,8 +19,8 @@ REDUX, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/cd_load.c src/draw_hud_moby.c src/landing_timer.c, MainFunc.bin
-NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/manual_timer.c, IGT.bin
+NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/cd_load.c src/manual_timer.c, MainFunc.bin
+NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
 NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c
 NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/custom_text.c
 NTSC, kernal, 0x8000C000, 0x0, src/custom_menu.c, menu.bin

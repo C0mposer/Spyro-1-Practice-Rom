@@ -168,5 +168,6 @@ InventoryMenuUpdate = 0x8002eb2c;
 
 _dragonWalkTime = 0x80077070;
 
+_balloonDropLoc = 0x800777fc;
 
 should_reload_test_skins = 0x80074300;

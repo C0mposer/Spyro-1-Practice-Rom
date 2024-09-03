@@ -91,7 +91,9 @@ int CdPosToInt(CdlLOC * p);
 
 void read_cb(unsigned char status, unsigned char *optinalReturnPTR);
 
-void LoadCdData(int baseSector,unsigned int *buf,int numOfBytes,int offsetBytes, int param_5); //offsetBytes needs to be 0x1000 (maybe greater than 0x1000)
+void LoadCdData(int baseSector,unsigned int *buf,int numOfBytes,int offsetBytes, int param_5); //numBytes loads at least 0x800?, offsetBytes needs to be 0x1000 (maybe greater than 0x1000)
+
+void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, int offset_in_ints); //Ours
 
 extern int _musicSectors; //0x8006f200
 

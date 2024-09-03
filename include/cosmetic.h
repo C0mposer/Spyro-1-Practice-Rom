@@ -1,5 +1,5 @@
-#ifndef BG_COLORS_H
-#define BG_COLORS_H
+#ifndef COSMETIC_H
+#define COSMETIC_H
 
 typedef struct RedGreen
 {
@@ -26,20 +26,27 @@ typedef enum SpyroColor
     SKIN_CORAL_BLUE,
     SKIN_EMERALD,
     SKIN_GOLD,
-    SKIN_EMBER,
-    //SKIN_PETE,
-    SKIN_ZERA,
     SKIN_BERRY,
+    SKIN_ZERA,
     SKIN_PIXIE,
     SKIN_JAYO,
+    SKIN_PERIDOT,
     SKIN_TRANS,
-    SKIN_DITTO,
     SKIN_GOTH,
+    SKIN_DITTO,
+    SKIN_EMBER, 
     SKIN_CYNDER,
     SKIN_CYNDER_CREST
 }SpyroColor;
+typedef enum FlameColor
+{
+    FLAME_SKIN_DEFAULT,
+    FLAME_SKIN_ICE,
+    FLAME_SKIN_BLOOD,
+    FLAME_SKIN_GHOST
+}FlameColor;
 
 
 
 
-#endif /* BG_COLORS_H */
+#endif /* COSMETIC_H */

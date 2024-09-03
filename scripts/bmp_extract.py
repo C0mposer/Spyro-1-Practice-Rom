@@ -36,7 +36,7 @@ for y in range(height):
         
         sixteen_bit_bmp_data.append(RGBToVramBGR(pixel))
         
-with open(filename.split("\\")[-1] + "_temp", "wb+") as file:
+with open("temp/" + filename.split("\\")[-1].split("/")[-1] + "_temp", "wb+") as file:
         for i, data in enumerate(sixteen_bit_bmp_data):
             
             # Needs to be alligned to an int, so place padding after the first section
@@ -45,6 +45,6 @@ with open(filename.split("\\")[-1] + "_temp", "wb+") as file:
                 
             file.write(data.to_bytes(2, signed=False, byteorder='little'))
 
-with open(filename.split("\\")[-1] + "_temp", 'rb') as in_file:
-    with open(filename.split("\\")[-1].split(".")[0] + ".bin", 'wb') as out_file:
+with open("temp/" + filename.split("\\")[-1].split("/")[-1] + "_temp", 'rb') as in_file:
+    with open("bmps/" + filename.split("\\")[-1].split("/")[-1].split(".")[0] + ".bin", 'wb') as out_file:
         out_file.write(in_file.read()[1:])

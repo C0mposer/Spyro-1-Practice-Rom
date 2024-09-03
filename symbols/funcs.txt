@@ -50,6 +50,7 @@ CdIntToPos = 0x80064094;
 CdPosToInt = 0x80064198;
 Cd_Sync = 0x800647A0;
 CdGetSector = 0x80064010;
+CdReady = 0x80063bf8;
 LoadCdData = 0x80016500;
 UpdateTerrain = 0x8002b390;
 TerrainSkipToKeyFrame = 0x8002b444;

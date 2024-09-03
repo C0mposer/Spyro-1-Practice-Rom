@@ -3,8 +3,10 @@
 
 #include <common.h>
 
-void LoadBMPToMainRam(int sector);
-void WriteBMPToSpyroVram();
+void LoadSpyroBMPToMainRam(int sector);
+void WriteSpyroBMPToVram();
+void LoadFlameBMPToMainRam(int sector);
+void WriteFlameBMPToVram();
 
 
 #endif /* VRAM_H */

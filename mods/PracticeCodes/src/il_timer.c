@@ -2,7 +2,7 @@
 #include <custom_text.h>
 #include <sound.h>
 #include <shared_funcs.h>
-#include <bg_colors.h>
+#include <cosmetic.h>
 #include <igt.h>
 #include <moby.h>
 #include <draw_hud_moby.h>

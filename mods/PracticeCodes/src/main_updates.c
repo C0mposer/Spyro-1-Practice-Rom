@@ -1,7 +1,7 @@
 #include <common.h>
 #include <levelselect.h>
 #include <shared_funcs.h>
-#include <bg_colors.h>
+#include <cosmetic.h>
 #include <multitap.h>
 #include <loot_plane.h>
 #include <igt.h>
@@ -36,8 +36,11 @@ const RedGreen bg_colors[7] = {{0x0, 0x25}, {0x40, 0x18}, {0x00, 0x50}, {0x50, 0
 // Externed from elsewhere
 extern BackgroundColor bg_color_index;
 extern SpyroColor spyro_color_index;
+
 extern bool should_update_bg_color;
 extern bool should_load_spyro_color;
+extern bool should_load_flame_color;
+
 extern int mainTimerAtReset;
 extern bool should_loadstate_gems;
 // from IGT.c
@@ -52,7 +55,8 @@ extern const short LOADSTATE_BUTTONS[3];
 
 extern int il_timer_offset[3];
 
-extern bool should_write_bmp;
+extern bool should_write_spyro_bmp;
+extern bool should_write_flame_bmp;
 
 
 
@@ -203,15 +207,25 @@ void MainUpdate()
         SetTitleScreenColor(bg_colors[bg_color_index].r, bg_colors[bg_color_index].g);
         should_update_bg_color = false;
     }
-
+    //Change Spyro Skin
     if(should_load_spyro_color)
     {
-        LoadBMPToMainRam(SKIN_SECTOR);
+        LoadSpyroBMPToMainRam(SKIN_SECTOR);
         should_load_spyro_color = false;
     }
-    if(should_write_bmp && _isLoading == false)
+    if(should_write_spyro_bmp && _isLoading == false)
     {
-        WriteBMPToSpyroVram();
+        WriteSpyroBMPToVram();
+    }
+    //Change Flame Skin
+    if(should_load_flame_color)
+    {
+        LoadFlameBMPToMainRam(FLAME_SECTOR);
+        should_load_flame_color = false;
+    }
+    if(should_write_flame_bmp && _isLoading == false)
+    {
+        WriteFlameBMPToVram();
     }
     
     //Main Loop
@@ -394,12 +408,13 @@ void MainUpdate()
         //Reload Skin in Load
         if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && spyro_color_index > 0) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
         {
-            should_write_bmp = true;      
+            should_write_spyro_bmp = true;    
+            should_write_flame_bmp = true;  
         }   
     }
 
-    {
-        SkinTester();
-    }
+    // {
+    //     SkinTester();
+    // }
 
 }

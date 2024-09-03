@@ -3,7 +3,7 @@
 #include <sound.h>
 #include <shared_funcs.h>
 #include <main_updates.h>
-#include <bg_colors.h>
+#include <cosmetic.h>
 #include <igt.h>
 #include <moby.h>
 
@@ -44,6 +44,7 @@ typedef struct Menu
     char* timer_menu_text;
     char* savestate_menu_text;
     char* misc_menu_text;
+    char* cosmetic_menu_text;
 }Menu;
 Menu custom_menu = {0};
 
@@ -102,12 +103,17 @@ typedef struct MiscMenu
     char* show_dragon_touch_text;
     bool quick_goop_mode;
     char* quick_goop_text;
-    char* bg_color_text;
-    char* spyro_color_text;
-    int counter_mode;
-    char* counter_mode_text;
 }MiscMenu;
 MiscMenu misc_menu = {0};
+
+typedef struct CosmeticMenu
+{
+    int selection;
+    char* bg_color_text;
+    char* spyro_color_text;
+    char* flame_color_text;
+}CosmeticMenu;
+CosmeticMenu cosmetic_menu = {0};
 
 typedef enum CurrentMenu
 {
@@ -115,7 +121,8 @@ typedef enum CurrentMenu
     IL_MENU,
     TIMER_MENU,
     SAVESTATE_MENU,
-    MISC_MENU
+    MISC_MENU,
+    COSMETIC_MENU
 }CurrentMenu;
 
 typedef struct FPS_t
@@ -149,8 +156,10 @@ int switch_state_button_index;
 // Externing elsewhere
 BackgroundColor bg_color_index;
 SpyroColor spyro_color_index;
+FlameColor flame_color_index;
 bool should_update_bg_color = true;
 bool should_load_spyro_color = false;
+bool should_load_flame_color = false;
 bool should_loadstate_gems = false;
 
 // Externed from elsewhere
@@ -186,7 +195,7 @@ void CustomMenuUpdate(void)
     {
         if (current_menu == MAIN_MENU)
         {       
-            CapitalTextInfo menu_text_info[4] = {{0}};
+            CapitalTextInfo menu_text_info[5] = {{0}};
 
             // Easy Exit
             if(_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -196,7 +205,7 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x98);
+            DrawTextBox(0x30, 0x1D0, 0x30, 0xAA);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -213,6 +222,10 @@ void CustomMenuUpdate(void)
             menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[3].y = 130;
             menu_text_info[3].size = DEFAULT_SIZE;
+
+            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[4].y = 150;
+            menu_text_info[4].size = DEFAULT_SIZE;
 
             _spyro.isMovementLocked = TRUE;
 
@@ -248,6 +261,14 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(custom_menu.misc_menu_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
+            if(custom_menu.selection == 4)
+            {
+                DrawTextCapitals(custom_menu.cosmetic_menu_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(custom_menu.cosmetic_menu_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
 
             // Fill text with defaults if NULL
             if(custom_menu.il_menu_text == NULL)
@@ -256,12 +277,13 @@ void CustomMenuUpdate(void)
                 custom_menu.timer_menu_text = "MANUAL TIMER SETTINGS";
                 custom_menu.savestate_menu_text = "SAVESTATE SETTINGS";
                 custom_menu.misc_menu_text = "MISC SETTINGS";
+                custom_menu.cosmetic_menu_text = "COSMETIC SETTINGS";
             }
 
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                custom_menu.selection = (custom_menu.selection + 1) % 4;
+                custom_menu.selection = (custom_menu.selection + 1) % 5;
             }
             else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
             {
@@ -306,6 +328,14 @@ void CustomMenuUpdate(void)
                 if(_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = MISC_MENU;
+                }
+            }
+
+            else if(custom_menu.selection == 4)
+            {
+                if(_currentButtonOneFrame == X_BUTTON)
+                {
+                    current_menu = COSMETIC_MENU;
                 }
             }
 

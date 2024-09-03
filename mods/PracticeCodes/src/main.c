@@ -2,7 +2,7 @@
 #include <main_updates.h>
 #include <IGT.h>
 #include <levelselect.h>
-#include <bg_colors.h>
+#include <cosmetic.h>
 #include <rat_code.h>
 #include <credits_skip.h>
 #include <loot_plane.h>

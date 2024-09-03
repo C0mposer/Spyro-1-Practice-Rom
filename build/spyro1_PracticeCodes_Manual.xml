@@ -27,8 +27,8 @@
             <file name="MENU2.BIN" source="spyro1_PracticeCodes/MENU2.BIN" type="data" />
             <file name="ASMHEADS.BIN" source="spyro1_PracticeCodes/ASMHEADS.BIN" type="data" />
             <file name="HEAD.BIN" source="spyro1_PracticeCodes/HEAD.BIN" type="data" />
+            <file name="flames.bin" source="spyro1_PracticeCodes/flames.bin" type="data" />
             <file name="skins.bin" source="spyro1_PracticeCodes/skins.bin" type="data" />
-            <file name="flame.bin" source="spyro1_PracticeCodes/flame.bin" type="data" />
             <dir name="SOURCE" source="spyro1_PracticeCodes/SOURCE">
                 <file name="SOURCE.TRD" source="spyro1_PracticeCodes/SOURCE/SOURCE.TRD" type="data" />
             </dir>

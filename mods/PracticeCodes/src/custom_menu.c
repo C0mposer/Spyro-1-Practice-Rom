@@ -103,6 +103,7 @@ typedef struct MiscMenu
     bool quick_goop_mode;
     char* quick_goop_text;
     char* bg_color_text;
+    char* spyro_color_text;
     int counter_mode;
     char* counter_mode_text;
 }MiscMenu;
@@ -147,7 +148,9 @@ int switch_state_button_index;
 
 // Externing elsewhere
 BackgroundColor bg_color_index;
+SpyroColor spyro_color_index;
 bool should_update_bg_color = true;
+bool should_load_spyro_color = false;
 bool should_loadstate_gems = false;
 
 // Externed from elsewhere
@@ -717,200 +720,224 @@ void CustomMenuUpdate(void)
         }
 
 
-        // if (current_menu == SAVESTATE_MENU)
-        // {       
-        //     CapitalTextInfo menu_text_info[4] = {{0}};
+        if (current_menu == SAVESTATE_MENU)
+        {     
+            // Set menu to 1 by default if not on DECKARD  
+            #if BUILD == 1 || BUILD == 3
+                if(savestate_menu.selection == 0)
+                    savestate_menu.selection = 1;
+            #endif
 
-        //     // Easy Exit
-        //     if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
-        //     {
-        //         current_menu = MAIN_MENU;
-        //         PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-        //     }
+            CapitalTextInfo menu_text_info[4] = {{0}};
 
-        //     DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
+            // Easy Exit
+            if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
+            {
+                current_menu = MAIN_MENU;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+            DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
+
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[0].y = 70;
+            menu_text_info[0].size = DEFAULT_SIZE;
+
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[1].y = 90;
+            menu_text_info[1].size = DEFAULT_SIZE;
+
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[2].y = 110;
+            menu_text_info[2].size = DEFAULT_SIZE;
+
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 130;
+            menu_text_info[3].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
+
+
+            #if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
+                if(savestate_menu.selection == 0)
+                {
+                    DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                }
+                else{
+                    DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                }
+            #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+
+                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+
+            #endif
+
+            if(savestate_menu.selection == 1)
+            {
+                DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
             
-        //     menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[0].y = 70;
-        //     menu_text_info[0].size = DEFAULT_SIZE;
+            if(savestate_menu.selection == 2)
+            {
+                DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
 
-        //     menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[1].y = 90;
-        //     menu_text_info[1].size = DEFAULT_SIZE;
+            #if BUILD == 2 || BUILD == 0
+                if(savestate_menu.selection == 3)
+                {
+                    DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                }
+                else{
+                    DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                }
+            #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            #endif
 
-        //     menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[2].y = 110;
-        //     menu_text_info[2].size = DEFAULT_SIZE;
+            // Fill text with defaults if NULL
+            if(savestate_menu.stateslot_text == NULL)
+            {
+                savestate_menu.stateslot_text = "CURRENT SLOT 1";
+                savestate_menu.savestate_button_text = "SAVE BUTTON L3";
+                savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
+                savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
+            }
 
-        //     menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[3].y = 130;
-        //     menu_text_info[3].size = DEFAULT_SIZE;
 
-        //     _spyro.isMovementLocked = TRUE;
-
-        //     if(savestate_menu.selection == 0)
-        //     {
-        //         DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
+            // Change Selection
+            if(_currentButtonOneFrame == DOWN_BUTTON)
+            {
+                #if BUILD == 2 || BUILD == 0
+                    savestate_menu.selection = (savestate_menu.selection + 1) % 4;
+                #elif BUILD == 1 || BUILD == 3
+                    savestate_menu.selection = 2;
+                #endif
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
+            {
+                #if BUILD == 2 || BUILD == 0
+                    savestate_menu.selection = savestate_menu.selection - 1;
+                #elif BUILD == 1 || BUILD == 3
+                    savestate_menu.selection = 1;
+                #endif
+            }
             
+            // Play Sound Effect
+            if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
+            {
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
 
-        //     if(savestate_menu.selection == 1)
-        //     {
-        //         DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else
-        //     {
-        //         DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
+                if(savestate_menu.selection == 0)
+                {
+            #if BUILD == 2 || BUILD == 0
+                    if (_currentButtonOneFrame == RIGHT_BUTTON)
+                    {
+                        savestate_selection = (savestate_selection + 1) % 3;
+                    }
+                    else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
+                    {
+                        savestate_selection--;
+                    }
+
+                    if(savestate_selection == 0)
+                    {
+                        savestate_menu.stateslot_text = "CURRENT SLOT 1";
+                    }
+                    else if(savestate_selection == 1)
+                    {
+                        savestate_menu.stateslot_text = "CURRENT SLOT 2";
+                    }
+                    else if(savestate_selection == 2)
+                    {
+                        savestate_menu.stateslot_text = "CURRENT SLOT 3";
+                    }
+            #endif
+                }
             
-        //     if(savestate_menu.selection == 2)
-        //     {
-        //         DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
+            else if (savestate_menu.selection == 1)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    savestate_button_index = (savestate_button_index + 1) % 3;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_button_index > 0)
+                {
+                    savestate_button_index--;
+                }
 
-        //     if(savestate_menu.selection == 3)
-        //     {
-        //         DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
+                if (savestate_button_index == 0)
+                {
+                    savestate_menu.savestate_button_text = "SAVE BUTTON L3";
 
+                }
+                else if (savestate_button_index == 1)
+                {
+                    savestate_menu.savestate_button_text = "SAVE BUTTON START";
 
-        //     // Fill text with defaults if NULL
-        //     if(savestate_menu.stateslot_text == NULL)
-        //     {
-        //         savestate_menu.stateslot_text = "CURRENT SLOT 1";
-        //         savestate_menu.savestate_button_text = "SAVE BUTTON L3";
-        //         savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
-        //         savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
-        //     }
+                }
+                else if (savestate_button_index == 2)
+                {
+                    savestate_menu.savestate_button_text = "SAVE BUTTON L3 X2";
 
-        //     // Change Selection
-        //     if(_currentButtonOneFrame == DOWN_BUTTON)
-        //     {
-        //         savestate_menu.selection = (savestate_menu.selection + 1) % 4;
-        //     }
-        //     else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
-        //     {
-        //         savestate_menu.selection = savestate_menu.selection - 1;
-        //     }
-            
-        //     // Play Sound Effect
-        //     if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
-        //     {
-        //         PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-        //     }
-
-            
-        //     if(savestate_menu.selection == 0)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             savestate_selection = (savestate_selection + 1) % 3;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
-        //         {
-        //             savestate_selection--;
-        //         }
-
-        //         if(savestate_selection == 0)
-        //         {
-        //             savestate_menu.stateslot_text = "CURRENT SLOT 1";
-        //         }
-        //         else if(savestate_selection == 1)
-        //         {
-        //             savestate_menu.stateslot_text = "CURRENT SLOT 2";
-        //         }
-        //         else if(savestate_selection == 2)
-        //         {
-        //             savestate_menu.stateslot_text = "CURRENT SLOT 3";
-        //         }
-        //     }
-            
-            
-        //     else if (savestate_menu.selection == 1)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             savestate_button_index = (savestate_button_index + 1) % 3;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_button_index > 0)
-        //         {
-        //             savestate_button_index--;
-        //         }
-
-        //         if (savestate_button_index == 0)
-        //         {
-        //             savestate_menu.savestate_button_text = "SAVE BUTTON L3";
-
-        //         }
-        //         else if (savestate_button_index == 1)
-        //         {
-        //             savestate_menu.savestate_button_text = "SAVE BUTTON START";
-
-        //         }
-        //         else if (savestate_button_index == 2)
-        //         {
-        //             savestate_menu.savestate_button_text = "SAVE BUTTON L3 X2";
-
-        //         }
-        //     }
+                }
+            }
 
 
-        //     else if (savestate_menu.selection == 2)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             loadstate_button_index = (loadstate_button_index + 1) % 2;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && loadstate_button_index > 0)
-        //         {
-        //             loadstate_button_index--;
-        //         }
+            else if (savestate_menu.selection == 2)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    loadstate_button_index = (loadstate_button_index + 1) % 2;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && loadstate_button_index > 0)
+                {
+                    loadstate_button_index--;
+                }
 
-        //         if (loadstate_button_index == 0)
-        //         {
-        //             savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
-        //             ChangeInventoryMenu(ON);
-        //         }
-        //         else if (loadstate_button_index == 1)
-        //         {
-        //             savestate_menu.loadstate_button_text = "LOAD BUTTON SELECT";
-        //             ChangeInventoryMenu(OFF);
-        //         }
-        //     }
+                if (loadstate_button_index == 0)
+                {
+                    savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
+                    ChangeInventoryMenu(ON);
+                }
+                else if (loadstate_button_index == 1)
+                {
+                    savestate_menu.loadstate_button_text = "LOAD BUTTON SELECT";
+                    ChangeInventoryMenu(OFF);
+                }
+            }
 
+            #if BUILD == 2 || BUILD == 0
+                else if(savestate_menu.selection == 3)
+                {
+                    if (_currentButtonOneFrame == RIGHT_BUTTON)
+                    {
+                        switch_state_button_index = (switch_state_button_index + 1) % 2;
+                    }
+                    else if (_currentButtonOneFrame == LEFT_BUTTON && switch_state_button_index > 0)
+                    {
+                        switch_state_button_index--;
+                    }
 
-        //     else if(savestate_menu.selection == 3)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             switch_state_button_index = (switch_state_button_index + 1) % 2;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && switch_state_button_index > 0)
-        //         {
-        //             switch_state_button_index--;
-        //         }
+                    if (switch_state_button_index == 0)
+                    {
+                        savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
 
-        //         if (switch_state_button_index == 0)
-        //         {
-        //             savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
+                    }
+                    else if (switch_state_button_index == 1)
+                    {
+                        savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
 
-        //         }
-        //         else if (switch_state_button_index == 1)
-        //         {
-        //             savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
-
-        //         }
-        //     }
-        // }
+                    }
+                }
+            #endif
+        }
 
 
         // if (current_menu == MISC_MENU)

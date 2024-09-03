@@ -169,6 +169,8 @@ void ILUpdate(){
                 _levelID = _portalToExitFromInHW;
                 _portalToExitFromInHW = 0;
                 _flyInAnimation = flyInArray[_levelIDIndex];
+                
+                _spyro.health = 3;
             }
         }
         

@@ -40,26 +40,26 @@ void ReadFileIntoRam(int sector_number, int amount_of_sectors, int ram_area){
 }
 
 //* Main CD Hook
-void CdLoad()
-{
-    if(hasStartedLoad == 0)
-    {
-        ReadFileIntoRam(265759, AMOUNT_OF_SECTORS, 0x8000C000);      //? Begin the code loading process
-    }
-    else if(hasStartedLoad == 2){
-        ReadFileIntoRam(265761, AMOUNT_OF_SECTORS, 0x8000D000);
-    }
-	else if(hasStartedLoad == 4){
-        CustomMenuUpdate();              //? Run the main Loop of the loaded code after its done loading and has returned to music playing mode
-        CustomMenuUpdate2();
-        RatCodeUpdate();
-        CreditsSkipUpdate();
-        LootPlaneUpdate();
-        MultiTapUpdate();
-        CheckLandingUpdate();
-        MainUpdate();
-    }
-}
+// void CdLoad()
+// {
+//     if(hasStartedLoad == 0)
+//     {
+//         ReadFileIntoRam(265759, AMOUNT_OF_SECTORS, 0x8000C000);      //? Begin the code loading process
+//     }
+//     else if(hasStartedLoad == 2){
+//         ReadFileIntoRam(265761, AMOUNT_OF_SECTORS, 0x8000D000);
+//     }
+// 	else if(hasStartedLoad == 4){
+//         CustomMenuUpdate();              //? Run the main Loop of the loaded code after its done loading and has returned to music playing mode
+//         CustomMenuUpdate2();
+//         RatCodeUpdate();
+//         CreditsSkipUpdate();
+//         LootPlaneUpdate();
+//         MultiTapUpdate();
+//         CheckLandingUpdate();
+//         MainUpdate();
+//     }
+// }
 
 
 

@@ -54,4 +54,7 @@ LoadCdData = 0x80016500;
 UpdateTerrain = 0x8002b390;
 TerrainSkipToKeyFrame = 0x8002b444;
 TerrainCurrentKeyFrame = 0x8002b3f4;
-
+LoadClut2 = 0x8005ea2c;
+DrawSync = 0x8005f764;
+VSync = 0x8005dbc4;
+LoadImage = 0x8005fa28;

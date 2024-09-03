@@ -1,0 +1,37 @@
+<iso_project image_name="mkpsxiso.bin" cue_sheet="mkpsxiso.cue">
+    <track type="data">
+        <identifiers system="PLAYSTATION" application="PLAYSTATION" volume="SPYRO" publisher="SCEA" creation_date="1998081316560500+36" modification_date="1998081420000000+0" />
+        <license file="spyro1/license_data.dat" />
+        <default_attributes gmt_offs="36" xa_attrib="32" xa_perm="1365" xa_gid="0" xa_uid="0" />
+        <directory_tree>
+            <file name="SYSTEM.CNF" source="spyro1_PracticeCodes/SYSTEM.CNF" type="data" />
+            <dummy sectors="13" />
+            <file name="WAD.WAD" source="spyro1_PracticeCodes/WAD.WAD" type="data" />
+            <file name="SCUS_942.28" source="spyro1_PracticeCodes/SCUS_942.28" type="data" />
+            <dummy sectors="5921" />
+            <file name="PETEXA0.STR" source="spyro1_PracticeCodes/PETEXA0.STR" type="mixed" />
+            <file name="PETEXA1.STR" source="spyro1_PracticeCodes/PETEXA1.STR" type="mixed" />
+            <file name="PETEXA2.STR" source="spyro1_PracticeCodes/PETEXA2.STR" type="mixed" />
+            <file name="PETEXA3.STR" source="spyro1_PracticeCodes/PETEXA3.STR" type="mixed" />
+            <file name="PETEXA4.STR" source="spyro1_PracticeCodes/PETEXA4.STR" type="mixed" />
+            <file name="PETEXA5.STR" source="spyro1_PracticeCodes/PETEXA5.STR" type="mixed" />
+            <dir name="S0" source="spyro1_PracticeCodes/S0">
+                <file name="CRASH.EXE" source="spyro1_PracticeCodes/S0/CRASH.EXE" type="data" />
+                <file name="S000000D.NSD" source="spyro1_PracticeCodes/S0/S000000D.NSD" type="data" />
+                <file name="S000000D.NSF" source="spyro1_PracticeCodes/S0/S000000D.NSF" type="data" />
+                <file name="S000003C.NSD" source="spyro1_PracticeCodes/S0/S000003C.NSD" type="data" />
+                <file name="S000003C.NSF" source="spyro1_PracticeCodes/S0/S000003C.NSF" type="data" />
+                <file name="WARP.BIN" source="spyro1_PracticeCodes/S0/WARP.BIN" type="data" />
+            </dir>
+            <file name="MENU.BIN" source="spyro1_PracticeCodes/MENU.BIN" type="data" />
+            <file name="MENU2.BIN" source="spyro1_PracticeCodes/MENU2.BIN" type="data" />
+            <file name="ASMHEADS.BIN" source="spyro1_PracticeCodes/ASMHEADS.BIN" type="data" />
+            <file name="HEAD.BIN" source="spyro1_PracticeCodes/HEAD.BIN" type="data" />
+            <file name="skins.bin" source="spyro1_PracticeCodes/skins.bin" type="data" />
+            <file name="flame.bin" source="spyro1_PracticeCodes/flame.bin" type="data" />
+            <dir name="SOURCE" source="spyro1_PracticeCodes/SOURCE">
+                <file name="SOURCE.TRD" source="spyro1_PracticeCodes/SOURCE/SOURCE.TRD" type="data" />
+            </dir>
+        </directory_tree>
+    </track>
+</iso_project>

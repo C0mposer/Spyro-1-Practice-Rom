@@ -10,7 +10,8 @@ byte* mem_region = STARTING_MEM;
 extern int savestate_selection;
 // from main_updates.c
 extern bool hasSavedSpyro;
-
+extern int local_level_id;
+extern savestated_level_ids[3];
 
 // Choose the memory region to save/load a state based on the menu option. Each region takes up ~0x12000. Being safe because of collision/texture data, and doing 0x13000
 void SetMemoryRegion(void)
@@ -34,8 +35,11 @@ void SetMemoryRegion(void)
 void SaveStateTest(void)
 {
 
+
     SetMemoryRegion();
     
+    savestated_level_ids[savestate_selection] = _levelID;
+
     byte* local_mem_region = (byte*)mem_region; // Local region for adding to
 
     // Copy all level mobys, dynamic mobys, and moby data to the free DECKARD IOP area
@@ -79,7 +83,7 @@ void SaveStateTest(void)
     memcpy((int*)local_mem_region, &_globalFlightLevelCollectedItemsArray, sizeof(_globalFlightLevelCollectedItemsArray));
     local_mem_region += sizeof(_globalFlightLevelCollectedItemsArray);
 
-        // Copy general hud timer area
+    // Copy general hud timer area
     memcpy((int*)local_mem_region,      (void*)0x80077F20, 0x260);
     local_mem_region += 0x260;
 
@@ -106,6 +110,12 @@ void SaveStateTest(void)
     memcpy((byte*)local_mem_region, &_spyroInvisible, 0x4);
     local_mem_region += 0x4;
 
+    //Whirlwind Data
+    memcpy((byte*)local_mem_region, 0x80075668, 0x4);
+    local_mem_region += 0x4;
+    memcpy((byte*)local_mem_region, 0x80075724, 0x4);
+    local_mem_region += 0x4;
+
     SaveGeoData();
 
     hasSavedSpyro = true;
@@ -121,6 +131,8 @@ void LoadStateTest(void)
 
     if (*local_mem_region != NULL)
     {
+      if (savestated_level_ids[savestate_selection] == _levelID)
+      {
         // Reload all level mobys, dynamic mobys, and moby data from the free DECKARD IOP area
         memcpy( (byte*)_ptr_levelMobys, local_mem_region, 0x10000);
         local_mem_region += 0x10000;
@@ -189,7 +201,14 @@ void LoadStateTest(void)
         memcpy(&_spyroInvisible, (byte*)local_mem_region, 0x4);
         local_mem_region += 0x4;
 
+        //Whirlwind Data
+        memcpy(0x80075668, (byte*)local_mem_region, 0x4);
+        local_mem_region += 0x4;
+        memcpy(0x80075724, (byte*)local_mem_region, 0x4);
+        local_mem_region += 0x4;
+
         //printf("%X\n\n\n", local_mem_region);
         LoadGeoData();
+      }
     }
 }

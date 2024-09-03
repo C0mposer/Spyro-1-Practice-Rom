@@ -167,3 +167,6 @@ _3rd_loot_key = 0x8014B1DC;
 InventoryMenuUpdate = 0x8002eb2c;
 
 _dragonWalkTime = 0x80077070;
+
+
+should_reload_test_skins = 0x80074300;

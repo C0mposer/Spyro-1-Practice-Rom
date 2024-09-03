@@ -22,6 +22,8 @@
 
 #define SECONDS 30
 
+#define SKIN_SECTOR 265765
+
 typedef enum Direction
 {
     LEFT,
@@ -226,6 +228,13 @@ enum StartMenuSelections
 
 };
 
+typedef struct RECT
+{
+    short x;
+    short y;
+    short w;
+    short h;
+}RECT;
 typedef struct u8RGBA
 {
     unsigned char R;
@@ -338,6 +347,11 @@ void CreateParticle(int param_1, int param_2, int **ptrToMoby, int *param_4);   
 void UpdateTerrain(unsigned int terrainNumber, char param_2, char param_3);                             //? This function updates moveable terrain
 void TerrainSkipToKeyFrame(unsigned int terrainNumber, char keyFrame, int param_3);                     //? This function jumps moveable terrain to a particular animation key frame
 int TerrainCurrentKeyFrame(int terrainNumber);                                                          //? This function returns the current key frame for the supplied movable terrain
+
+short LoadClut2(unsigned int* clut, int x, int y);
+int DrawSync(int moode);
+int VSync(int mode);
+int LoadImage(RECT* rect, int* ram_location);
 
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables

@@ -8,6 +8,7 @@
 #include <right_stick.h>
 #include <sound.h>
 #include <custom_text.h>
+#include <vram.h>
 
 enum ModState
 {
@@ -26,11 +27,17 @@ bool switch_button_held;
 
 int savestateSwitchedTimer = 0;
 
+int savestated_level_ids[3] = {0}; // For keeping savestates upon loop
+
+bool should_savestate_after_dragon_or_load = false;
+
 const RedGreen bg_colors[7] = {{0x0, 0x25}, {0x40, 0x18}, {0x00, 0x50}, {0x50, 0x50}, {0x70, 0}, {0xCD, 0x80}, {0xA0, 0xA0}};
 
 // Externed from elsewhere
 extern BackgroundColor bg_color_index;
+extern SpyroColor spyro_color_index;
 extern bool should_update_bg_color;
+extern bool should_load_spyro_color;
 extern int mainTimerAtReset;
 extern bool should_loadstate_gems;
 // from IGT.c
@@ -44,6 +51,8 @@ extern const short SAVESTATE_BUTTONS[2];
 extern const short LOADSTATE_BUTTONS[3];
 
 extern int il_timer_offset[3];
+
+extern bool should_write_bmp;
 
 
 
@@ -81,7 +90,7 @@ void SaveSpyroAndCamera(bool flyInFlag)
     }
     else
     {
-        free_space = (byte*)0x80073e10;     //Free space 2 for fly in snap-shot for instaload
+        free_space = (byte*)0x80073d20;     //Free space 2 for fly in snap-shot for instaload
     }
 
     //Copying The Spyro struct and most of the camera struct
@@ -101,13 +110,14 @@ void ReloadSpyroAndCamera(bool flyInFlag)
     }
     else
     {
-        free_space = (byte*)0x80073e10;
+        free_space = (byte*)0x80073d20;
     }
 
     //Reloading The Spyro struct and most of the camera struct
     memcpy(&_spyro, free_space, sizeof(_spyro));
     memcpy(&_cameraStart, (byte*)free_space + 0x270, 0xFF);
     memcpy(&_keyState, (byte *)free_space + 0x380, 0x4);
+
 }
 
 //This function puts spyro at 0 which will always immediately kill him, since its a void spot.
@@ -160,7 +170,7 @@ void ChangeInventoryMenu(SwitchButton state)
     }
     else if (state == ON)
     {
-        // NOP Call to PrepareInventoryGamestate
+        // UN-NOP Call to PrepareInventoryGamestate
         *(int*)(0x80033C28) = 0x0C00B1C5;
         *(int*)(0x80033C2C) = 0x24040001;
     }
@@ -193,6 +203,16 @@ void MainUpdate()
         SetTitleScreenColor(bg_colors[bg_color_index].r, bg_colors[bg_color_index].g);
         should_update_bg_color = false;
     }
+
+    if(should_load_spyro_color)
+    {
+        LoadBMPToMainRam(SKIN_SECTOR);
+        should_load_spyro_color = false;
+    }
+    if(should_write_bmp && _isLoading == false)
+    {
+        WriteBMPToSpyroVram();
+    }
     
     //Main Loop
     if(mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
@@ -200,13 +220,15 @@ void MainUpdate()
         //Save spyro & camera information
         if(savestate_button_index < 2) //
         {
-            if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
+            if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load)
             {
                 #if BUILD == 2 || BUILD == 0
                     SaveStateTest();
                 #elif BUILD == 1 || BUILD == 3
                     SaveSpyroAndCamera(false);
                 #endif
+
+                should_savestate_after_dragon_or_load = false;
                 
             }
         }
@@ -343,23 +365,41 @@ void MainUpdate()
         #endif
     }
 
-    //Safeguard against loading with another levels savestate/no savestate
-    {     
-        if(!hasResetSavestate && _levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
+    // Prepare savestate after dragon
+    if(mod_state == UNLOCKED_LEVELS && (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING))
+    {
+        if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
         {
-            hasSavedSpyro = false;
-            for(int i = 0; i < 3; i++){                     //Setting the IL Timer offsets back to 0 when going to a new level
-                il_timer_offset[i] = 0;
-            }
-            hasResetSavestate = true;
-
-            #if BUILD == 2 || BUILD == 0
-                memset((void*)STARTING_MEM, 0x0, 0x35000); // Clear extra memory
-            #endif
-        }   
-        else if((signed int)_levelLoadState == -1)
-        {
-            hasResetSavestate = false;
+            should_savestate_after_dragon_or_load = true;
         }
     }
+
+    {     
+        //Safeguard against loading with another levels savestate/no savestate
+        if(_levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
+        {
+            _globalEggs = 0;
+
+            if(savestated_level_ids[savestate_selection] != _levelID)
+            {
+                savestate_selection = 0;
+            }
+
+            // for(int i = 0; i < 3; i++){                     //Setting the IL Timer offsets back to 0 when going to a new level
+            //     il_timer_offset[i] = 0;
+            // }
+
+        }   
+
+        //Reload Skin in Load
+        if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && spyro_color_index > 0) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
+        {
+            should_write_bmp = true;      
+        }   
+    }
+
+    {
+        SkinTester();
+    }
+
 }

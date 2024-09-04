@@ -183,7 +183,7 @@ void CustomMenuUpdate2()
             CapitalTextInfo menu_text_info[3] = {{0}};
 
             // Easy Exit
-            if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
@@ -248,6 +248,10 @@ void CustomMenuUpdate2()
             else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection != 0)
             {
                 misc_menu.selection = misc_menu.selection - 1;
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
+            {
+                misc_menu.selection = 2;
             }
             
             // Play Sound Effect
@@ -334,7 +338,7 @@ void CustomMenuUpdate2()
             CapitalTextInfo menu_text_info[3] = {{0}};
 
             // Easy Exit
-            if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
@@ -399,6 +403,10 @@ void CustomMenuUpdate2()
             else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection != 0)
             {
                 cosmetic_menu.selection = cosmetic_menu.selection - 1;
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection == 0)
+            {
+                cosmetic_menu.selection = 2;
             }
             
             // Play Sound Effect
@@ -502,14 +510,14 @@ void CustomMenuUpdate2()
                         cosmetic_menu.spyro_color_text = "SKIN ICY";
                         break;
                     }
-                    case(SKIN_CORAL_BLUE):
-                    {
-                        cosmetic_menu.spyro_color_text = "SKIN CORAL BLUE";
-                        break;
-                    }
                     case(SKIN_EMERALD):
                     {
                         cosmetic_menu.spyro_color_text = "SKIN EMERALD";
+                        break;
+                    }
+                    case(SKIN_CORAL_BLUE):
+                    {
+                        cosmetic_menu.spyro_color_text = "SKIN CORAL BLUE";
                         break;
                     }
                     case(SKIN_GOLD):
@@ -583,7 +591,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index == 0)
                 {
-                    flame_color_index = 2;
+                    flame_color_index = 3;
                     should_load_flame_color = true;
                 }
 
@@ -602,6 +610,11 @@ void CustomMenuUpdate2()
                     case(FLAME_SKIN_ICE):
                     {
                         cosmetic_menu.flame_color_text = "FLAME ICE";
+                        break;
+                    }
+                    case(FLAME_SKIN_JADE):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME JADE";
                         break;
                     }
                     case(FLAME_SKIN_GHOST):

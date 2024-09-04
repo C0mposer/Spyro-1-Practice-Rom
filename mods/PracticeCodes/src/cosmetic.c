@@ -78,6 +78,28 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[4] =
 		.left.g = 0xE3,
 		.left.b = 0xEE,
 		.left.shape_code = 0x30,
+	},
+	//3 Jade
+	{
+        .tip.r = 0x87,
+		.tip.g = 0xff,
+		.tip.b = 0xda,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0x28,
+		.center.g = 0x74,
+		.center.b = 0x5c,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0x2,
+		.right.g = 0xa2,
+		.right.b = 0x6c,
+		.right.shape_code = 0x30,
+
+		.left.r = 0x0,
+		.left.g = 0x98,
+		.left.b = 0x61,
+		.left.shape_code = 0x30
 	}
 };
 

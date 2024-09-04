@@ -42,8 +42,8 @@ typedef enum SpyroColor
     SKIN_DEFAULT,
     SKIN_DARK_RED,
     SKIN_ICY,
-    SKIN_CORAL_BLUE,
     SKIN_EMERALD,
+    SKIN_CORAL_BLUE,
     SKIN_GOLD,
     SKIN_BERRY,
     SKIN_ZERA,
@@ -62,6 +62,7 @@ typedef enum FlameColor
     FLAME_SKIN_DEFAULT,
     FLAME_SKIN_BLOOD,
     FLAME_SKIN_ICE,
+    FLAME_SKIN_JADE,
     FLAME_SKIN_GHOST
 }FlameColor;
 

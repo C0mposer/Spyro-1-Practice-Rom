@@ -12,6 +12,8 @@ extern int savestate_selection;
 extern bool hasSavedSpyro;
 extern int local_level_id;
 extern savestated_level_ids[3];
+//from moby_anim_crash_fix.c
+extern frames_unloaded_moby_anim_function;
 
 // Choose the memory region to save/load a state based on the menu option. Each region takes up ~0x12000. Being safe because of collision/texture data, and doing 0x13000
 void SetMemoryRegion(void)

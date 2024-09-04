@@ -79,8 +79,10 @@ void UnlockAllLevels()
 //This runs The Adventure Begins cutscene
 void SkipIntro()
 {
-    _isPastTitleScreen = TRUE;                            //? This flag is checked by TheAdventureBeings() before it runs, so we must set this flag to TRUE.
-    TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
+    _isPastTitleScreen = TRUE;                              //? This flag is checked by TheAdventureBeings() before it runs, so we must set this flag to TRUE.
+    #if BUILD != 0 //Don't call adventure begins on redux
+        TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
+    #endif
 }
 
 void SaveSpyroAndCamera(bool flyInFlag)
@@ -388,6 +390,7 @@ void MainUpdate()
         }
     }
 
+
     {     
         //Safeguard against loading with another levels savestate/no savestate
         if(_levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
@@ -412,6 +415,11 @@ void MainUpdate()
             should_write_flame_bmp = true;  
         }   
     }
+
+    // //Every frame check to check for nopping MobyAnimationUpdate
+    // {
+    //     MobyAnimCrashFix();
+    // }
 
     // {
     //     SkinTester();

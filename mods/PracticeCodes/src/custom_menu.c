@@ -289,6 +289,10 @@ void CustomMenuUpdate(void)
             {
                 custom_menu.selection = custom_menu.selection - 1;
             }
+            else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection == 0)
+            {
+                custom_menu.selection = 4;
+            }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == X_BUTTON)
@@ -454,6 +458,10 @@ void CustomMenuUpdate(void)
             {
                 il_menu.selection = il_menu.selection - 1;
             }
+            else if(_currentButtonOneFrame == UP_BUTTON && il_menu.selection == 0 && il_menu.il_state == true)
+            {
+                il_menu.selection = il_menu.selection = 4;
+            }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -569,7 +577,7 @@ void CustomMenuUpdate(void)
             CapitalTextInfo menu_text_info[4] = {{0}};
 
             // Easy Exit
-            if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
@@ -660,6 +668,10 @@ void CustomMenuUpdate(void)
             else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection != 0)
             {
                 timer_menu.selection = timer_menu.selection - 1;
+            }
+            else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection == 0 && timer_menu.timer_state == true)
+            {
+                timer_menu.selection = 3;
             }
             
             // Play Sound Effect
@@ -761,7 +773,7 @@ void CustomMenuUpdate(void)
             CapitalTextInfo menu_text_info[4] = {{0}};
 
             // Easy Exit
-            if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
@@ -857,6 +869,12 @@ void CustomMenuUpdate(void)
                     savestate_menu.selection = 1;
                 #endif
             }
+            #if BUILD == 2 || BUILD == 0
+                else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection = 0)
+                {
+                    savestate_menu.selection = 3;
+                }
+            #endif
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -864,9 +882,9 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-                if(savestate_menu.selection == 0)
-                {
-            #if BUILD == 2 || BUILD == 0
+            if(savestate_menu.selection == 0)
+            {
+                #if BUILD == 2 || BUILD == 0
                     if (_currentButtonOneFrame == RIGHT_BUTTON)
                     {
                         savestate_selection = (savestate_selection + 1) % 3;
@@ -888,8 +906,8 @@ void CustomMenuUpdate(void)
                     {
                         savestate_menu.stateslot_text = "CURRENT SLOT 3";
                     }
-            #endif
-                }
+                #endif
+            }
             
             else if (savestate_menu.selection == 1)
             {

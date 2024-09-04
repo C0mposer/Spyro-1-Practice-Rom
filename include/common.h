@@ -353,6 +353,9 @@ short LoadClut2(unsigned int* clut, int x, int y);
 int DrawSync(int moode);
 int VSync(int mode);
 int LoadImage(RECT* rect, int* ram_location);
+void PauseMusicAndSFX(unsigned int param_1);
+void PlayMusic(int track_number, int flags);
+
 
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables
@@ -484,6 +487,12 @@ extern int _collectablesBitflags; //0x80077908
 extern int _musicState; //0x800774B4                        //?
 
 extern int _musicVolume; //0x80075748                       //? Music Volume in Pause Menu
+
+extern int _currentMusicPos;
+
+extern int _pauseMusic;
+
+extern int _currentMusicTrack;
 
 extern char* _cameraStart; //0x80076DD0                     //? Start of Camera Struct?
 

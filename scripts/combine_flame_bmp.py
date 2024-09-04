@@ -2,7 +2,7 @@ import os
 
 # Replace with the list of your file names or paths
 directory = "bmps/"
-file_list = ["ogflame.bin", "iceflame.bin", "bloodflame.bin", "whiteflame.bin"]  # Add all your files here
+file_list = ["ogflame.bin", "redflame.bin", "iceflame.bin", "whiteflame.bin"]  # Add all your files here
 output_file = "final_output/flames.bin"
 
 # Define constants

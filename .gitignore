@@ -3062,6 +3062,24 @@ build/PS1_Practice_Codes.bin
 .git new/refs/remotes/origin/FullReleaseV1
 .git new/refs/remotes/origin/FullReleaseV1.1
 .git new/refs/remotes/origin/master
+mods/PracticeCodes/debug/dep/cosmetic.dep
+mods/PracticeCodes/debug/obj/cosmetic.o
+build/PS1_Practice_Codes.cue
+mods/PracticeCodes/backup/redux_asmgamestate_fairy_fixs.bin
+mods/PracticeCodes/backup/redux_asmheads.bin
+mods/PracticeCodes/backup/redux_asmhooks.bin
+mods/PracticeCodes/backup/redux_head.bin
+mods/PracticeCodes/backup/redux_IGT.bin
+mods/PracticeCodes/backup/redux_LS.bin
+mods/PracticeCodes/backup/redux_MainFunc.bin
+mods/PracticeCodes/backup/redux_menu.bin
+mods/PracticeCodes/backup/redux_menu2.bin
+mods/PracticeCodes/backup/redux_patcheslevelselectnames2bin.bin
+mods/PracticeCodes/backup/redux_patcheslevelselectnamesbin.bin
+mods/PracticeCodes/backup/redux_srcright_stickc.bin
+scripts/bmps/redflame.bin
+scripts/bmps/redflame.bmp
+scripts/temp/redflame.bmp_temp
 mods/PracticeCodes/src/save_geo.dep
 build/flames.bin
 build/PS1_Practice_Codes.cue

@@ -594,14 +594,14 @@ void CustomMenuUpdate2()
                         cosmetic_menu.flame_color_text = "FLAME DEFAULT";
                         break;
                     }
-                    case(FLAME_SKIN_ICE):
-                    {
-                        cosmetic_menu.flame_color_text = "FLAME ICE";
-                        break;
-                    }
                     case(FLAME_SKIN_BLOOD):
                     {
                         cosmetic_menu.flame_color_text = "FLAME BLOOD";
+                        break;
+                    }
+                    case(FLAME_SKIN_ICE):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME ICE";
                         break;
                     }
                     case(FLAME_SKIN_GHOST):

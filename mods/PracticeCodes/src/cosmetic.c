@@ -11,7 +11,7 @@ extern FlameColor flame_color_index;
 //! FLAME TRIANGLE
 
 // Custom Gradients Array
-FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[4] =
+FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[5] =
 {
 	//0 Original
 	{
@@ -99,6 +99,28 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[4] =
 		.left.r = 0x0,
 		.left.g = 0x98,
 		.left.b = 0x61,
+		.left.shape_code = 0x30
+	},
+	//4 Ghost
+	{
+        .tip.r = 0xd2,
+		.tip.g = 0xd2,
+		.tip.b = 0xd2,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0x8d,
+		.center.g = 0x8d,
+		.center.b = 0x8d,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0xcf,
+		.right.g = 0xcf,
+		.right.b = 0xcf,
+		.right.shape_code = 0x30,
+
+		.left.r = 0xbd,
+		.left.g = 0xbd,
+		.left.b = 0xbd,
 		.left.shape_code = 0x30
 	}
 };

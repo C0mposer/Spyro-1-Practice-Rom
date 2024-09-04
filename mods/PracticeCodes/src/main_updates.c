@@ -36,6 +36,7 @@ const RedGreen bg_colors[7] = {{0x0, 0x25}, {0x40, 0x18}, {0x00, 0x50}, {0x50, 0
 // Externed from elsewhere
 extern BackgroundColor bg_color_index;
 extern SpyroColor spyro_color_index;
+extern FlameColor flame_color_index;
 
 extern bool should_update_bg_color;
 extern bool should_load_spyro_color;
@@ -408,10 +409,14 @@ void MainUpdate()
 
         }   
 
-        //Reload Skin in Load
-        if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && spyro_color_index > 0) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
+        //Reload Spyro Skin in Load
+        if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && spyro_color_index > 0) 
         {
             should_write_spyro_bmp = true;    
+        }   
+        //Reload Flame Skin in Load
+        if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && flame_color_index > 0) 
+        {
             should_write_flame_bmp = true;  
         }   
     }

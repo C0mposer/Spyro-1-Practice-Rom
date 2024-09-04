@@ -351,7 +351,7 @@ void CustomMenuUpdate(void)
             CapitalTextInfo menu_text_info[5] = {{0}};
 
             // Easy Exit
-            if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
+            if(_currentButtonOneFrame == CIRCLE_BUTTON)
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);

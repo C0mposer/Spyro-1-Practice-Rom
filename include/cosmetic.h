@@ -46,6 +46,7 @@ typedef enum SpyroColor
     SKIN_CORAL_BLUE,
     SKIN_GOLD,
     SKIN_BERRY,
+    SKIN_GREY,
     SKIN_ZERA,
     SKIN_PIXIE,
     SKIN_JAYO,

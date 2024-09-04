@@ -2,7 +2,7 @@ import os
 
 # Replace with the list of your file names or paths
 directory = "bmps/"
-file_list = ["og_s1.bin", "dred.bin", "icy.bin", "emerald.bin", "rblue.bin", "gold.bin", "berry.bin", "zera.bin", "pixie.bin", "jayo.bin", "peri.bin", "woke.bin", "goth.bin", "ditto.bin", "ember.bin", "cyn_cre.bin"]  # Add all your files here
+file_list = ["og_s1.bin", "dred.bin", "icy.bin", "emerald.bin", "rblue.bin", "gold.bin", "berry.bin", "greyspyro_rev2.bin", "zera.bin", "pixie.bin", "jayo.bin", "peri.bin", "woke.bin", "goth.bin", "ditto.bin", "ember.bin", "cyn_cre.bin"]  # Add all your files here
 output_file = "final_output/skins.bin"
 
 # Define constants

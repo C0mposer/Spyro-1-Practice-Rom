@@ -480,7 +480,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    spyro_color_index = (spyro_color_index + 1) % 16;
+                    spyro_color_index = (spyro_color_index + 1) % 17;
                     should_load_spyro_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && spyro_color_index > 0)
@@ -490,7 +490,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && spyro_color_index == 0)
                 {
-                    spyro_color_index = 15;
+                    spyro_color_index = 16;
                     should_load_spyro_color = true;
                 }
 
@@ -529,6 +529,11 @@ void CustomMenuUpdate2()
                     case(SKIN_BERRY):
                     {
                         cosmetic_menu.spyro_color_text = "SKIN BERRY";
+                        break;
+                    }
+                    case(SKIN_GREY):
+                    {
+                        cosmetic_menu.spyro_color_text = "SKIN GREY";
                         break;
                     }
                     case(SKIN_ZERA):
@@ -582,7 +587,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    flame_color_index = (flame_color_index + 1) % 4;
+                    flame_color_index = (flame_color_index + 1) % 5;
                     should_load_flame_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index > 0)
@@ -592,7 +597,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index == 0)
                 {
-                    flame_color_index = 3;
+                    flame_color_index = 4;
                     should_load_flame_color = true;
                 }
 

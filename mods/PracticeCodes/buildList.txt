@@ -3,7 +3,7 @@ REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
 REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
 REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/vram.c, LS.bin
+REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c, LS.bin
 REDUX, exe, 0x80066840, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c
 REDUX, kernal, 0x8000C000, 0x0, src/custom_menu.c, menu.bin
 REDUX, kernal, 0x8000D000, 0x0, src/custom_menu_2.c, menu2.bin
@@ -21,7 +21,7 @@ NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
 NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/vram.c src/cd_load.c, LS.bin
+NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c src/cd_load.c, LS.bin
 NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/custom_text.c
 NTSC, kernal, 0x8000C000, 0x0, src/custom_menu.c, menu.bin
 NTSC, kernal, 0x8000EA00, 0x0, src/custom_menu_2.c, menu2.bin
@@ -39,7 +39,7 @@ DECKARD_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
 DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/vram.c src/cd_load.c, LS.bin
+DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c src/cd_load.c, LS.bin
 DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c
 DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu.c, menu.bin
 DECKARD_PS2_NTSC, kernal, 0x80007540, 0x0, src/custom_menu_2.c, menu2.bin
@@ -57,7 +57,7 @@ IOP_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
 IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
 IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/vram.c, LS.bin
+IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c, LS.bin
 IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/custom_text.c
 IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu.c, menu.bin
 IOP_PS2_NTSC, kernal, 0x80007540, 0x0, src/custom_menu_2.c, menu2.bin

@@ -338,6 +338,7 @@ void CustomMenuUpdate2()
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                PlayMusic(_currentMusicTrack, 8);
             }
 
             DrawTextBox(0x30, 0x1D0, 0x30, 0x80);

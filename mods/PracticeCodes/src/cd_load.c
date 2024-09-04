@@ -33,7 +33,7 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
         _pauseMusic = 9;
         CdlLOC location;
         CdIntToPos(sector_number, &location);                                       //? Stores the sector in the correct format for the CdlLOC struct format
-        //CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&location, NULL);                   //? Seeking to location, which was just set to our sector above to 265759. Platform specific lel just use it
+        CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&location, NULL);                   //? Seeking to location, which was just set to our sector above to 265759. Platform specific lel just use it
 
         //CdControlB(CDL_PRIMITIVE_SET_LOC, (void *)&location, NULL);                 //? Uses CdSetloc (0x02) to prepare for CdRead. This is required
                    
@@ -94,7 +94,7 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
         //     _musicState = 0x10;
         // }
         
-        PlayMusic(_currentMusicTrack, 8);
+        //PlayMusic(_currentMusicTrack, 8);
         hasStartedLoad++;
 }
 

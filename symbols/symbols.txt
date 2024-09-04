@@ -170,4 +170,7 @@ _dragonWalkTime = 0x80077070;
 
 _balloonDropLoc = 0x800777fc;
 
+_flame_triangle_color_gradient = 0x8006E1A8;
+
 should_reload_test_skins = 0x80074300;
+

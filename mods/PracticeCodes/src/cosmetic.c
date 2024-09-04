@@ -8,7 +8,56 @@ bool should_write_flame_bmp = false;
 extern SpyroColor spyro_color_index;
 extern FlameColor flame_color_index;
 
-//! SPYRO
+//! FLAME TRIANGLE
+
+// Custom Gradients Array
+FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[4] =
+{
+	//0 Original
+	{
+		.tip.r = 0xF0,
+		.tip.g = 0xF0,
+		.tip.b = 0x60,
+
+		.center.r = 0xD0,
+		.center.g = 0x90,
+		.center.b = 0x40,
+		
+		.right.r = 0x90,
+		.right.g = 0x60,
+		.right.b = 0x20,
+
+		.left.r = 0xA0,
+		.left.g = 0x30,
+		.left.b = 0x10,
+	},
+	//1 Icy
+	{
+		.tip.r = 0xF0,
+		.tip.g = 0xF0,
+		.tip.b = 0x60,
+
+		.center.r = 0xD0,
+		.center.g = 0x90,
+		.center.b = 0x40,
+		
+		.right.r = 0x90,
+		.right.g = 0x60,
+		.right.b = 0x20,
+
+		.left.r = 0xA0,
+		.left.g = 0x30,
+		.left.b = 0x10,
+	}
+};
+
+void ChangeFlameTriangleColor(FlameTriangleColorGradient new_color_gradient)
+{
+	_flame_triangle_color_gradient = new_color_gradient;
+}
+
+
+//! SPYRO SKIN
 void LoadSpyroBMPToMainRam(int sector)
 {
 	byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
@@ -45,7 +94,7 @@ void WriteSpyroBMPToVram()
 	should_write_spyro_bmp = false;
 }
 
-//! FLAME
+//! FLAME SKIN
 void LoadFlameBMPToMainRam(int sector)
 {
 	int* flame_bmp_main_ram_location = (int*)0x80074300;
@@ -73,7 +122,6 @@ void WriteFlameBMPToVram()
 
 	should_write_flame_bmp = false;
 }
-
 
 
 

@@ -3062,3 +3062,5 @@ build/PS1_Practice_Codes.bin
 .git new/refs/remotes/origin/FullReleaseV1
 .git new/refs/remotes/origin/FullReleaseV1.1
 .git new/refs/remotes/origin/master
+mods/PracticeCodes/debug/dep/cosmetic.dep
+mods/PracticeCodes/debug/obj/cosmetic.o

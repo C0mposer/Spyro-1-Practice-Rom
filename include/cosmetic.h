@@ -7,6 +7,25 @@ typedef struct RedGreen
     byte g;
 }RedGreen;
 
+struct FlameTriangleSingleColor
+{
+    byte r;
+    byte g;
+    byte b;
+    byte shape_code;
+};
+typedef struct FlameTriangleSingleColor FlameTriangleSingleColor;
+
+struct FlameTriangleColorGradient
+{
+    FlameTriangleSingleColor tip;
+    FlameTriangleSingleColor center;
+    FlameTriangleSingleColor right;
+    FlameTriangleSingleColor left;
+};
+typedef struct FlameTriangleColorGradient FlameTriangleColorGradient;
+extern FlameTriangleColorGradient _flame_triangle_color_gradient;
+
 typedef enum BackgroundColor
 {
     BG_BLUE,

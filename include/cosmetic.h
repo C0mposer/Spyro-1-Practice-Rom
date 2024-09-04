@@ -60,8 +60,8 @@ typedef enum SpyroColor
 typedef enum FlameColor
 {
     FLAME_SKIN_DEFAULT,
-    FLAME_SKIN_ICE,
     FLAME_SKIN_BLOOD,
+    FLAME_SKIN_ICE,
     FLAME_SKIN_GHOST
 }FlameColor;
 

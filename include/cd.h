@@ -97,5 +97,11 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
 
 extern int _musicSectors; //0x8006f200
 
+CdlCB CdReadyCallback(CdlCB func);
+
+CdlCB CdSyncCallback(CdlCB func);
+
+int CdReset(int mode);
+
 
 #endif /* CD_H */

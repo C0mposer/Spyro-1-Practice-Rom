@@ -40,7 +40,10 @@ maybe_CalculateAngle = 0x800169ac;
 
 CdRead = 0x8006606C;
 CdInit = 0x8006397C;
+CdReset = 0x80063acc;
 CdReadCallback = 0x8006623C;
+CdReadyCallback = 0x80063c30;
+CdSyncCallback = 0x80063c18;
 CdStatus = 0x80063A8C;
 CdSync = 0x80063BD8;
 CdControl = 0x80063C48;
@@ -59,3 +62,6 @@ LoadClut2 = 0x8005ea2c;
 DrawSync = 0x8005f764;
 VSync = 0x8005dbc4;
 LoadImage = 0x8005fa28;
+
+PauseMusicAndSFX = 0x80056b28;
+PlayMusic = 0x800567f4;

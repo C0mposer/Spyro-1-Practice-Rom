@@ -187,6 +187,7 @@ void CustomMenuUpdate(void)
         {
             _spyro.isMovementLocked = FALSE;
             current_menu = MAIN_MENU;
+            PlayMusic(_currentMusicTrack, 8);
         }
     }
 

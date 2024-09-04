@@ -871,7 +871,7 @@ void CustomMenuUpdate(void)
                 #endif
             }
             #if BUILD == 2 || BUILD == 0
-                else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection = 0)
+                else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection == 0)
                 {
                     savestate_menu.selection = 3;
                 }

@@ -280,7 +280,7 @@ void CustomMenuUpdate2()
                 {
                     misc_menu.sparx_mode_text = "PERMA SPARX";
                 }
-                else if(misc_menu.sparx_mode == 2)
+                else
                 {
                     misc_menu.sparx_mode_text = "SPARXLESS";
                 }
@@ -303,7 +303,7 @@ void CustomMenuUpdate2()
                     misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
 
                 }
-                else if (misc_menu.show_dragon_touch == TRUE)
+                else
                 {
                     misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH ON";
 
@@ -326,7 +326,7 @@ void CustomMenuUpdate2()
                 {
                     misc_menu.quick_goop_text = "QUICK GOOP OFF";
                 }
-                else if (misc_menu.quick_goop_mode == true)
+                else
                 {
                     misc_menu.quick_goop_text = "QUICK GOOP ON";
                 }

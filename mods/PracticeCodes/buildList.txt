@@ -1,12 +1,12 @@
 REDUX, exe, 0x80033e38, 0x0, asm/hook.s
 REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
-REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c src/cd_load.c, LS.bin
-REDUX, exe, 0x80066840, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c
-REDUX, kernal, 0x8000C000, 0x0, src/custom_menu.c, menu.bin
-REDUX, kernal, 0x8000EA00, 0x0, src/custom_menu_2.c, menu2.bin
+REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin
+REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
+REDUX, exe, 0x80066840, 0x0, src/custom_menu.c src/multi_tap.c, MemoryCardArea.bin
+REDUX, kernal, 0x8000C000, 0x0, src/custom_menu_2.c, OtherHeader1.bin
+REDUX, kernal, 0x8000EA00, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c, OtherHeader2.bin
 
 
 REDUX, exe, 0x80010084, 0x0, patches/levelselectnames.bin
@@ -17,12 +17,12 @@ REDUX, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
-NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c src/cd_load.c, LS.bin
-NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/custom_text.c
-NTSC, kernal, 0x8000C000, 0x0, src/custom_menu.c, menu.bin
-NTSC, kernal, 0x8000EA00, 0x0, src/custom_menu_2.c, menu2.bin
+NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin
+NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
+NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/multi_tap.c, MemoryCardArea.bin
+NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c, OtherHeader1.bin
+NTSC, kernal, 0x8000EA00, 0x0, src/right_stick.c src/custom_text.c, OtherHeader2.bin
 
 NTSC, wad, 0x800816c0, 0x0, asm/head.s
 NTSC, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin
@@ -35,12 +35,13 @@ NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 DECKARD_PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 DECKARD_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
-DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c src/cd_load.c, LS.bin
-DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c
-DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu.c, menu.bin
-DECKARD_PS2_NTSC, kernal, 0x80007540, 0x0, src/custom_menu_2.c, menu2.bin
+DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin
+DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
+DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/multi_tap.c, MemoryCardArea.bin
+
+DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, OtherHeader1.bin
+DECKARD_PS2_NTSC, kernal, 0x80007540, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c, OtherHeader2.bin
 
 DECKARD_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s
 DECKARD_PS2_NTSC, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin
@@ -53,12 +54,12 @@ DECKARD_PS2_NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 IOP_PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 IOP_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 
-IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainFunc.bin
-IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, IGT.bin
-IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/multi_tap.c src/levelselect.c src/cosmetic.c src/cd_load.c, LS.bin
-IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/right_stick.c src/custom_text.c
-IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu.c, menu.bin
-IOP_PS2_NTSC, kernal, 0x80007540, 0x0, src/custom_menu_2.c, menu2.bin
+IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin
+IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
+IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/multi_tap.c, MemoryCardArea.bin
+IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, OtherHeader1.bin
+IOP_PS2_NTSC, kernal, 0x80007540, 0x0, src/right_stick.c src/custom_text.c, OtherHeader2.bin
 
 IOP_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s
 IOP_PS2_NTSC, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin

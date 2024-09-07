@@ -483,7 +483,7 @@ void CustomMenuUpdate(void)
                     il_menu.il_mode_text = "IL MODE OFF";
 
                 }
-                else if(il_menu.il_state == TRUE)
+                else
                 {
                     il_menu.il_mode_text = "IL MODE ON";
 
@@ -507,7 +507,7 @@ void CustomMenuUpdate(void)
                     il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY AT END";
 
                 }
-                else if(il_menu.il_timer_display_mode == IL_TIMER_ALWAYS)
+                else
                 {
                     il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY ALWAYS";
 
@@ -527,7 +527,7 @@ void CustomMenuUpdate(void)
                     il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
 
                 }
-                else if(il_menu.display_on_dragon == TRUE)
+                else
                 {
                     il_menu.display_on_dragon_text = "DISPLAY AT DRAGON ON";
 
@@ -546,7 +546,7 @@ void CustomMenuUpdate(void)
                     il_menu.display_on_land_text = "DISPLAY LANDING OFF";
 
                 }
-                else if(il_menu.display_on_land == TRUE)
+                else
                 {
                     il_menu.display_on_land_text = "DISPLAY LANDING ON";
 
@@ -564,7 +564,7 @@ void CustomMenuUpdate(void)
                     il_menu.loop_level_text = "LOOP LEVEL ON";
 
                 }
-                else if(il_menu.dont_loop_level == 1)
+                else
                 {
                     il_menu.loop_level_text = "LOOP LEVEL OFF";
 
@@ -694,7 +694,7 @@ void CustomMenuUpdate(void)
                     timer_menu.timer_state_text = "MANUAL TIMER OFF";
 
                 }
-                else if(timer_menu.timer_state == TRUE)
+                else
                 {
                     timer_menu.timer_state_text = "MANUAL TIMER ON";
 
@@ -714,7 +714,7 @@ void CustomMenuUpdate(void)
                     timer_menu.timer_display_mode_text = "DISPLAY ON STOP";
 
                 }
-                else if(timer_menu.timer_display_mode == IL_TIMER_ALWAYS)
+                else
                 {
                     timer_menu.timer_display_mode_text = "DISPLAY ALWAYS";
 
@@ -734,7 +734,7 @@ void CustomMenuUpdate(void)
                     timer_menu.stop_timer_button_text = "STOP BUTTON START";
 
                 }
-                else if(timer_menu.stop_timer_button_index == 1)
+                else
                 {
                     timer_menu.stop_timer_button_text = "STOP BUTTON START";
 
@@ -753,7 +753,7 @@ void CustomMenuUpdate(void)
                     timer_menu.reset_timer_button_text = "RESET ON LOAD AND RESET";
 
                 }
-                else if(timer_menu.reset_timer_mode == 1)
+                else
                 {
                     timer_menu.reset_timer_button_text = "RESET ON LOAD ONLY";
 
@@ -903,7 +903,7 @@ void CustomMenuUpdate(void)
                     {
                         savestate_menu.stateslot_text = "CURRENT SLOT 2";
                     }
-                    else if(savestate_selection == 2)
+                    else
                     {
                         savestate_menu.stateslot_text = "CURRENT SLOT 3";
                     }
@@ -931,7 +931,7 @@ void CustomMenuUpdate(void)
                     savestate_menu.savestate_button_text = "SAVE BUTTON START";
 
                 }
-                else if (savestate_button_index == 2)
+                else
                 {
                     savestate_menu.savestate_button_text = "SAVE BUTTON L3 X2";
 
@@ -955,7 +955,7 @@ void CustomMenuUpdate(void)
                     savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                     ChangeInventoryMenu(ON);
                 }
-                else if (loadstate_button_index == 1)
+                else
                 {
                     savestate_menu.loadstate_button_text = "LOAD BUTTON SELECT";
                     ChangeInventoryMenu(OFF);
@@ -979,7 +979,7 @@ void CustomMenuUpdate(void)
                         savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
 
                     }
-                    else if (switch_state_button_index == 1)
+                    else
                     {
                         savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
 

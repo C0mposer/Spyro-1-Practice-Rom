@@ -3113,3 +3113,12 @@ scripts/bmps/smoke.bin
 scripts/bmps/smoke.bmp
 scripts/temp/greyspyro_rev2.bmp_temp
 scripts/temp/smoke.bmp_temp
+build/spyro1_PracticeCodes/RHEADER1.BIN
+build/spyro1_PracticeCodes/RHEADER2.BIN
+mods/PracticeCodes/output/FairyArea.bin
+mods/PracticeCodes/output/MainHeaderArea.bin
+mods/PracticeCodes/output/MemoryCardArea.bin
+mods/PracticeCodes/output/OtherHeader1.bin
+mods/PracticeCodes/output/OtherHeader2.bin
+mods/PracticeCodes/output/StartFairyArea.bin
+mods/PracticeCodes/src/t

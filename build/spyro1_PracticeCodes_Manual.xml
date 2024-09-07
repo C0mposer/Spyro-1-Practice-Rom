@@ -23,8 +23,8 @@
                 <file name="S000003C.NSF" source="spyro1_PracticeCodes/S0/S000003C.NSF" type="data" />
                 <file name="WARP.BIN" source="spyro1_PracticeCodes/S0/WARP.BIN" type="data" />
             </dir>
-            <file name="MENU.BIN" source="spyro1_PracticeCodes/MENU.BIN" type="data" />
-            <file name="MENU2.BIN" source="spyro1_PracticeCodes/MENU2.BIN" type="data" />
+            <file name="RHEADER1.BIN" source="spyro1_PracticeCodes/RHEADER1.BIN" type="data" />
+            <file name="RHEADER2.BIN" source="spyro1_PracticeCodes/RHEADER2.BIN" type="data" />
             <file name="ASMHEADS.BIN" source="spyro1_PracticeCodes/ASMHEADS.BIN" type="data" />
             <file name="HEAD.BIN" source="spyro1_PracticeCodes/HEAD.BIN" type="data" />
             <file name="flames.bin" source="spyro1_PracticeCodes/flames.bin" type="data" />

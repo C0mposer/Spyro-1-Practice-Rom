@@ -22,8 +22,8 @@
 
 #define SECONDS 30
 
-#define FLAME_SECTOR 265766
-#define SKIN_SECTOR 265767
+#define FLAME_SECTOR 265764
+#define SKIN_SECTOR 265765
 
 typedef enum Direction
 {

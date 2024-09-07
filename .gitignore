@@ -3113,3 +3113,7 @@ scripts/bmps/smoke.bin
 scripts/bmps/smoke.bmp
 scripts/temp/greyspyro_rev2.bmp_temp
 scripts/temp/smoke.bmp_temp
+mods/PracticeCodes/asm/head.dep
+mods/PracticeCodes/asm/head.o
+mods/PracticeCodes/src/head_patch.dep
+mods/PracticeCodes/src/head_patch.o

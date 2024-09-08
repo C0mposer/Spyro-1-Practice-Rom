@@ -3126,3 +3126,15 @@ mods/PracticeCodes/asm/head.dep
 mods/PracticeCodes/asm/head.o
 mods/PracticeCodes/src/head_patch.dep
 mods/PracticeCodes/src/head_patch.o
+mods/PracticeCodes/debug/dep/reset.dep
+mods/PracticeCodes/debug/obj/reset.o
+mods/PracticeCodes/output/asmresets.bin
+scripts/GrayscaleVC.bmp
+scripts/output.bmp
+scripts/PinkBlueVC.bmp
+scripts/PurpVC.bmp
+scripts/spyroVC.bmp
+scripts/SpyroVertexColors.bmp
+scripts/SpyroVertexColorsTemplate.pdn
+scripts/spyroBMPer.py
+scripts/spyroUNBMPer.py

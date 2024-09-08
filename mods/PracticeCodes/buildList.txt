@@ -16,6 +16,7 @@ REDUX, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
+NTSC, exe, 0x8002e2dc, 0x0, asm/reset.s
 
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin

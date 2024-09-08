@@ -3148,3 +3148,6 @@ scripts/SpyroVertexColors.bmp
 scripts/SpyroVertexColorsTemplate.pdn
 scripts/spyroBMPer.py
 scripts/spyroUNBMPer.py
+mods/PracticeCodes/debug/dep/save_state_region.dep
+mods/PracticeCodes/debug/obj/save_state_region.o
+scripts/__pycache__/reverse_file_endianess.cpython-312.pyc

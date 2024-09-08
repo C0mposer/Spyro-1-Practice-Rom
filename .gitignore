@@ -3126,6 +3126,16 @@ mods/PracticeCodes/asm/head.dep
 mods/PracticeCodes/asm/head.o
 mods/PracticeCodes/src/head_patch.dep
 mods/PracticeCodes/src/head_patch.o
+build/PS2_IOP_Practice_Codes.bin
+build/PS2_IOP_Practice_Codes.cue
+build/bootedit/spyro1.xml
+build/spyro1_PracticeCodes/KERN.BIN
+build/spyro1_PracticeCodes/KERN2.BIN
+build/spyro1_PracticeCodes/PS2M.BIN
+mods/PracticeCodes/output/kern.bin
+mods/PracticeCodes/output/kern2.bin
+mods/PracticeCodes/output/PS2M.bin
+build/spyro1_PracticeCodes/BE.bin
 mods/PracticeCodes/debug/dep/reset.dep
 mods/PracticeCodes/debug/obj/reset.o
 mods/PracticeCodes/output/asmresets.bin

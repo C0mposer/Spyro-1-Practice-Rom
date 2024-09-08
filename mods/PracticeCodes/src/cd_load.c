@@ -36,7 +36,6 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
             CdGetSector(ram_area, 0x3);                                     // Read the weird 3 ints of dummy data
         }
 
-        int sector_int_amount_left = 0x200;                              // We need to read the full 0x800 bytes because of the old PSYQ
 
         unsigned int i = 0;
         if (offset_in_ints > 0x49)                                      // If the offset in ints is > 0x49, we need to do multiple reads to avoid overwriting data.
@@ -45,7 +44,6 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
             while (i < amount_of_dummy_reads)                           // Loop 0x200 bytes of dummy data (0x50 ints) at a time down, until < 0x50 bytes of offset remain
             {
                 CdGetSector(ram_area, 0x50);
-                sector_int_amount_left -= 0x50;
                 i++;
             }       
         }
@@ -54,13 +52,10 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
         if (remaining_offset > 0)                                       // If there is any remaining offset bytes remaining, remove them
         {
             CdGetSector(ram_area, remaining_offset);                    // Read remaining offset data < 0x50 ints
-            sector_int_amount_left -= remaining_offset;
         }
 
 
         CdGetSector(ram_area, size_to_read_in_ints);                    // Read actual data
-        sector_int_amount_left -= size_to_read_in_ints;
-
 }
 
 

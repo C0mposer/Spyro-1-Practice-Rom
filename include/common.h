@@ -9,11 +9,26 @@
 //Constants
 //~~~~~~~~~
 
+#define REDUX 0
+#define PS1 1
+#define PS2_DECKARD 2
+#define PS2_IOP 3
+
 #if BUILD == 0
-    #define STARTING_MEM 0x80300000
+    #define STARTING_EXTRA_MEM 0x80300000
 #elif BUILD == 2
-    #define STARTING_MEM 0x80A10000
+    #define STARTING_EXTRA_MEM 0x80A10000
+    #define EXTRA_DECKARD_CODE_REGION 0x80A49000
 #endif
+
+#if BUILD == 1 || BUILD == 3 || BUILD == 0
+    #define FLAME_SECTOR 265764
+    #define SKIN_SECTOR 265765
+#elif BUILD == 2
+    #define FLAME_SECTOR 265766
+    #define SKIN_SECTOR 265767
+#endif
+
 
 #define SCREEN_LEFT_EDGE 0x0
 #define SCREEN_RIGHT_EDGE 0x200
@@ -22,8 +37,6 @@
 
 #define SECONDS 30
 
-#define FLAME_SECTOR 265764
-#define SKIN_SECTOR 265765
 
 typedef enum Direction
 {

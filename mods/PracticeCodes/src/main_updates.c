@@ -82,8 +82,15 @@ void SkipIntro()
 {
     _isPastTitleScreen = TRUE;                              //? This flag is checked by TheAdventureBeings() before it runs, so we must set this flag to TRUE.
     #if BUILD != 0 //Don't call adventure begins on redux
+        ChangeIntroTextColor(MOBY_COLOR_PURPLE);
         TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
     #endif
+}
+
+void ChangeIntroTextColor(int color)
+{
+    *(short*)0x8001e784 = color;  // Value part of li opcode
+    *(short*)0x8001e786 = 0x2402; // Regular part of li opcode
 }
 
 void SaveSpyroAndCamera(bool flyInFlag)

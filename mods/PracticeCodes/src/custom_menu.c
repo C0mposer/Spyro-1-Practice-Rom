@@ -290,10 +290,10 @@ void CustomMenuUpdate(void)
             {
                 custom_menu.selection = custom_menu.selection - 1;
             }
-            else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection == 0)
-            {
-                custom_menu.selection = 4;
-            }
+            // else if(_currentButtonOneFrame == UP_BUTTON && custom_menu.selection == 0)
+            // {
+            //     custom_menu.selection = 4;
+            // }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == X_BUTTON)
@@ -459,10 +459,10 @@ void CustomMenuUpdate(void)
             {
                 il_menu.selection = il_menu.selection - 1;
             }
-            else if(_currentButtonOneFrame == UP_BUTTON && il_menu.selection == 0 && il_menu.il_state == true)
-            {
-                il_menu.selection = il_menu.selection = 4;
-            }
+            // else if(_currentButtonOneFrame == UP_BUTTON && il_menu.selection == 0 && il_menu.il_state == true)
+            // {
+            //     il_menu.selection = il_menu.selection = 4;
+            // }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -670,10 +670,10 @@ void CustomMenuUpdate(void)
             {
                 timer_menu.selection = timer_menu.selection - 1;
             }
-            else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection == 0 && timer_menu.timer_state == true)
-            {
-                timer_menu.selection = 3;
-            }
+            // else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection == 0 && timer_menu.timer_state == true)
+            // {
+            //     timer_menu.selection = 3;
+            // }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -870,12 +870,12 @@ void CustomMenuUpdate(void)
                     savestate_menu.selection = 1;
                 #endif
             }
-            #if BUILD == 2 || BUILD == 0
-                else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection == 0)
-                {
-                    savestate_menu.selection = 3;
-                }
-            #endif
+            // #if BUILD == 2 || BUILD == 0
+            //     else if(_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection == 0)
+            //     {
+            //         savestate_menu.selection = 3;
+            //     }
+            // #endif
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)

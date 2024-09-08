@@ -3136,3 +3136,6 @@ mods/PracticeCodes/output/kern.bin
 mods/PracticeCodes/output/kern2.bin
 mods/PracticeCodes/output/PS2M.bin
 build/spyro1_PracticeCodes/BE.bin
+mods/PracticeCodes/debug/dep/save_state_region.dep
+mods/PracticeCodes/debug/obj/save_state_region.o
+scripts/__pycache__/reverse_file_endianess.cpython-312.pyc

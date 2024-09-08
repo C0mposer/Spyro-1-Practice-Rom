@@ -35,6 +35,7 @@ NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 DECKARD_PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 DECKARD_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
+DECKARD_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/reset.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin
@@ -55,6 +56,7 @@ DECKARD_PS2_NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 IOP_PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 IOP_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
+IOP_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/reset.s
 
 IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin

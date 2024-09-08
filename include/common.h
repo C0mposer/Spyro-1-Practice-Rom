@@ -22,8 +22,14 @@
 
 #define SECONDS 30
 
-#define FLAME_SECTOR 265764
-#define SKIN_SECTOR 265765
+#if BUILD == 1 || BUILD == 3
+    #define FLAME_SECTOR 265764
+    #define SKIN_SECTOR 265765
+#endif
+#if BUILD == 2
+    #define FLAME_SECTOR 265765
+    #define SKIN_SECTOR 265766
+#endif
 
 typedef enum Direction
 {

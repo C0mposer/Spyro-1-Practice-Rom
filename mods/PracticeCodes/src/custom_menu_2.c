@@ -249,10 +249,10 @@ void CustomMenuUpdate2()
             {
                 misc_menu.selection = misc_menu.selection - 1;
             }
-            else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
-            {
-                misc_menu.selection = 2;
-            }
+            // else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
+            // {
+            //     misc_menu.selection = 2;
+            // }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -405,10 +405,10 @@ void CustomMenuUpdate2()
             {
                 cosmetic_menu.selection = cosmetic_menu.selection - 1;
             }
-            else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection == 0)
-            {
-                cosmetic_menu.selection = 2;
-            }
+            // else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection == 0)
+            // {
+            //     cosmetic_menu.selection = 2;
+            // }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)

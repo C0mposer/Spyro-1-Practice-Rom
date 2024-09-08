@@ -9,22 +9,19 @@
 //Constants
 //~~~~~~~~~
 
-typedef enum BuildVersion
-{
-    REDUX,
-    PS1,
-    PS2_DECKARD,
-    PS2_IOP
-};
+#define REDUX 0
+#define PS1 1
+#define PS2_DECKARD 2
+#define PS2_IOP 3
 
 #if BUILD == 0
     #define STARTING_EXTRA_MEM 0x80300000
 #elif BUILD == 2
     #define STARTING_EXTRA_MEM 0x80A10000
+    #define EXTRA_DECKARD_CODE_REGION 0x80A49000
 #endif
-#define EXTRA_DECKARD_CODE_REGION = STARTING_EXTRA_MEM + 0x39000
 
-#if BUILD == PS1 || BUILD == PS2_IOP || BUILD == 0
+#if BUILD == 1 || BUILD == 3 || BUILD == 0
     #define FLAME_SECTOR 265764
     #define SKIN_SECTOR 265765
 #elif BUILD == 2

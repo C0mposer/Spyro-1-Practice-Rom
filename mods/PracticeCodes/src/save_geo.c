@@ -7,7 +7,6 @@ int geo_reset_state = OFF;
 
 // From save_state.c
 extern byte* mem_region;
-extern byte* mem_region2;
 
 void SaveGeoData(void)
 {

@@ -1,9 +1,11 @@
 import os
 import sys
+from reverse_file_endianess import *
 
 version_to_build = sys.argv[1].upper()
 
 os.chdir("../")
+
 os.chdir("mods/PracticeCodes")
 
 if version_to_build == "PS1":
@@ -12,6 +14,8 @@ if version_to_build == "PS1":
     
     os.chdir("../")
     os.chdir("../")
+    
+    
     os.chdir("build")
     
     os.system("mkpsxiso spyro1_PracticeCodes_Manual.xml")
@@ -33,6 +37,9 @@ elif version_to_build == "PS2_DECKARD":
     
     os.chdir("../")
     os.chdir("../")
+    
+    ReverseFileEndianness("build/spyro1_PracticeCodes/PS2M.BIN") # Reverse PS2M for extra ps2 ram
+    
     os.chdir("build")
     
     os.system("mkpsxiso spyro1_PracticeCodes_Manual_DECKARD.xml")

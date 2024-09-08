@@ -23,14 +23,14 @@ void MainFunc()
     {
         _musicState = 0x40;        
 
-        #if BUILD == PS1                         
+        #if BUILD == 1                         
             LoadCdData(265759, 0x8000C000, 0x1600, 0, 600);     //Loads kern.bin
             LoadCdData(265761, 0x8000EA00, 0x1000, 0, 600);     //Loads kern2.bin
-        #elif BUILD == PS2_DECKARD
+        #elif BUILD == 2
             LoadCdData(265759, 0x80008EB0, 0x1600, 0, 600);     //Loads kern.bin
             LoadCdData(265761, 0x80007530, 0x1000, 0, 600);     //Loads kern2.bin
             LoadCdData(265762, EXTRA_DECKARD_CODE_REGION, 0x1000, 0, 600);     //Loads PS2M.bin
-        #elif BUILD == PS2_IOP
+        #elif BUILD == 3
             LoadCdData(265759, 0x80008EB0, 0x1600, 0, 600);     //Loads kern.bin
             LoadCdData(265761, 0x80007530, 0x1000, 0, 600);     //Loads kern2.bin
         #endif

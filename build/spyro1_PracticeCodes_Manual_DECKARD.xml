@@ -25,7 +25,7 @@
             </dir>
             <file name="KERN.BIN" source="spyro1_PracticeCodes/KERN.BIN" type="data" />
             <file name="KERN2.BIN" source="spyro1_PracticeCodes/KERN2.BIN" type="data" />
-            <file name="PS2M.BIN" source="spyro1_PracticeCodes/PS2M.BIN" type="data" />
+            <file name="BE.BIN" source="spyro1_PracticeCodes/BE.BIN" type="data" />
             <file name="ASMHEADS.BIN" source="spyro1_PracticeCodes/ASMHEADS.BIN" type="data" />
             <file name="HEAD.BIN" source="spyro1_PracticeCodes/HEAD.BIN" type="data" />
             <file name="flames.bin" source="spyro1_PracticeCodes/flames.bin" type="data" />

@@ -4,7 +4,7 @@
 #include <multitap.h>
 #include <moving_geo.h>
 
-byte* mem_region = STARTING_MEM;
+byte* mem_region = STARTING_EXTRA_MEM;
 
 // from IGT.c
 extern int savestate_selection;
@@ -21,16 +21,16 @@ void SetMemoryRegion(void)
     switch (savestate_selection)
     {
       case 0:
-        mem_region = STARTING_MEM;
+        mem_region = STARTING_EXTRA_MEM;
         break;
       case 1:
-        mem_region = STARTING_MEM + 0x13000;
+        mem_region = STARTING_EXTRA_MEM + 0x13000;
         break;
       case 2:
-        mem_region = STARTING_MEM + 0x26000;
+        mem_region = STARTING_EXTRA_MEM + 0x26000;
         break;
       default:
-        mem_region = STARTING_MEM;
+        mem_region = STARTING_EXTRA_MEM;
     }
 }
 

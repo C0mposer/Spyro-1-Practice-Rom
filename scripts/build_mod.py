@@ -35,7 +35,7 @@ elif version_to_build == "PS2_DECKARD":
     os.chdir("../")
     os.chdir("build")
     
-    os.system("mkpsxiso spyro1_PracticeCodes_Manual.xml")
+    os.system("mkpsxiso spyro1_PracticeCodes_Manual_DECKARD.xml")
     
     if os.path.isfile("PS2_DECKARD_Practice_Codes.bin"):
         os.remove("PS2_DECKARD_Practice_Codes.bin")

@@ -659,6 +659,6 @@ void CustomMenuUpdate2()
     || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))
     {
         //printf("RENDERING\n");
-        MobyRender();
+        RenderShadedMobyQueue();
     }
 }

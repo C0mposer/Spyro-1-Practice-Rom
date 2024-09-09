@@ -1,130 +1,35 @@
 #include <common.h>
 #include <cd.h>
 #include <cosmetic.h>
+#include <flame_triangle_colors.h>
+#include <sparx_glow_colors.h>
+
+const RedGreen bg_colors[7] = {{0x0, 0x25}, {0x40, 0x18}, {0x00, 0x50}, {0x50, 0x50}, {0x70, 0}, {0xCD, 0x80}, {0xA0, 0xA0}};
 
 bool should_write_spyro_bmp = false;
 bool should_write_flame_bmp = false;
+bool should_write_sparx_bmp = false;
 
 extern SpyroColor spyro_color_index;
 extern FlameColor flame_color_index;
+extern SparxColor sparx_color_index;
+extern BackgroundColor bg_color_index;
+
+extern bool should_update_bg_color;
+extern bool should_load_spyro_color;
+extern bool should_load_flame_color;
+extern bool should_load_sparx_color;
+void* previous_sparx_ptr = NULL;
+
+//! BG COLOR
+//Changing asm instructions for pause menu RGB. Cannot change B value, as the value is in a shared register with other crucial parts of the struct.
+inline void SetTitleScreenColor(byte r, byte g)
+{
+    *(short*)(0x8001A674) = r;
+    *(short*)(0x8001A67C) = g;
+}
 
 //! FLAME TRIANGLE
-
-// Custom Gradients Array
-FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[5] =
-{
-	//0 Original
-	{
-		.tip.r = 0xF0,
-		.tip.g = 0xF0,
-		.tip.b = 0x60,
-		.tip.shape_code = 0x30,
-
-		.center.r = 0xD0,
-		.center.g = 0x90,
-		.center.b = 0x40,
-		.center.shape_code = 0x30,
-		
-		.right.r = 0x90,
-		.right.g = 0x60,
-		.right.b = 0x20,
-		.right.shape_code = 0x30,
-
-		.left.r = 0xA0,
-		.left.g = 0x30,
-		.left.b = 0x10,
-		.left.shape_code = 0x30,
-	},
-	//1 Blood Red
-	{
-        .tip.r = 0xb1,
-		.tip.g = 0x3a,
-		.tip.b = 0x3a,
-		.tip.shape_code = 0x30,
-
-		.center.r = 0x7b,
-		.center.g = 0x2b,
-		.center.b = 0x2b,
-		.center.shape_code = 0x30,
-		
-		.right.r = 0xb7,
-		.right.g = 0x28,
-		.right.b = 0x28,
-		.right.shape_code = 0x30,
-
-		.left.r = 0xab,
-		.left.g = 0x22,
-		.left.b = 0x22,
-		.left.shape_code = 0x30
-	},
-	//2 Icy
-	{
-		.tip.r = 0x46,
-		.tip.g = 0xBF,
-		.tip.b = 0xBF,
-		.tip.shape_code = 0x30,
-
-		.center.r = 0xDE,
-		.center.g = 0xF9,
-		.center.b = 0xFE,
-		.center.shape_code = 0x30,
-		
-		.right.r = 0x4B,
-		.right.g = 0xFF,
-		.right.b = 0xF9,
-		.right.shape_code = 0x30,
-
-		.left.r = 0x56,
-		.left.g = 0xE3,
-		.left.b = 0xEE,
-		.left.shape_code = 0x30,
-	},
-	//3 Jade
-	{
-        .tip.r = 0x87,
-		.tip.g = 0xff,
-		.tip.b = 0xda,
-		.tip.shape_code = 0x30,
-
-		.center.r = 0x28,
-		.center.g = 0x74,
-		.center.b = 0x5c,
-		.center.shape_code = 0x30,
-		
-		.right.r = 0x2,
-		.right.g = 0xa2,
-		.right.b = 0x6c,
-		.right.shape_code = 0x30,
-
-		.left.r = 0x0,
-		.left.g = 0x98,
-		.left.b = 0x61,
-		.left.shape_code = 0x30
-	},
-	//4 Ghost
-	{
-        .tip.r = 0xd2,
-		.tip.g = 0xd2,
-		.tip.b = 0xd2,
-		.tip.shape_code = 0x30,
-
-		.center.r = 0x8d,
-		.center.g = 0x8d,
-		.center.b = 0x8d,
-		.center.shape_code = 0x30,
-		
-		.right.r = 0xcf,
-		.right.g = 0xcf,
-		.right.b = 0xcf,
-		.right.shape_code = 0x30,
-
-		.left.r = 0xbd,
-		.left.g = 0xbd,
-		.left.b = 0xbd,
-		.left.shape_code = 0x30
-	}
-};
-
 void ChangeFlameTriangleColor(FlameTriangleColorGradient new_color_gradient)
 {
 	_flame_triangle_color_gradient = new_color_gradient;
@@ -134,12 +39,14 @@ void ChangeFlameTriangleColor(FlameTriangleColorGradient new_color_gradient)
 //! SPYRO SKIN
 void LoadSpyroBMPToMainRam(int sector)
 {
+	const int SPYRO_BMP_FILE_SIZE = 0x200;
+
 	byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
 
-	int spyro_skin_file_index = (spyro_color_index % 4) * 0x200/4; 	// In ints. %4, so that way it resets at the next sector
+	int spyro_skin_file_index = (spyro_color_index % 4) * SPYRO_BMP_FILE_SIZE/4; 	// In ints. %4, so that way it resets at the next sector
 	int sector_index = spyro_color_index / 4;					// Seek to the next sector, every 4 skins (0x800 bytes)
 
-	ReadFileIntoRam(sector + sector_index, 0x200/4, spyro_bmp_main_ram_location, spyro_skin_file_index);
+	ReadFileIntoRam(sector + sector_index, SPYRO_BMP_FILE_SIZE/4, spyro_bmp_main_ram_location, spyro_skin_file_index);
 
 	should_write_spyro_bmp = true;
 	
@@ -171,6 +78,8 @@ void WriteSpyroBMPToVram()
 //! FLAME SKIN
 void LoadFlameBMPToMainRam(int sector)
 {
+	const int FLAME_BMP_FILE_SIZE = 0x20;
+
 	int* flame_bmp_main_ram_location = (int*)0x80074300;
 
 	int flame_skin_file_index = flame_color_index * (0x20/4); // in ints
@@ -193,13 +102,138 @@ void WriteFlameBMPToVram()
 	
   	LoadImage(&flame_rect, flame_bmp_main_ram_location);
 
-	ChangeFlameTriangleColor(CUSTOM_FLAME_TRIANGLE_GRADIENTS[flame_color_index]); //Change Triangle Gradient
-
 	should_write_flame_bmp = false;
 }
 
 
+//! SPARX SKIN
+//Load the sparx skin to a buffer in main ram
+void LoadSparxBMPToMainRam(int sector)
+{
+	const int SPARX_BMP_FILE_SIZE = 0xD8;
 
+	byte* sparx_bmp_main_ram_location = (int*)0x80074330;
+
+	int sparx_skin_file_index = (sparx_color_index % 4) * SPARX_BMP_FILE_SIZE/4; 	// In ints. %4, so that way it resets at the next sector
+	int sector_index = sparx_color_index / 4;					// Seek to the next sector, every 4 skins (0x800 bytes)
+
+	ReadFileIntoRam(sector + sector_index, SPARX_BMP_FILE_SIZE/4, sparx_bmp_main_ram_location, sparx_skin_file_index);
+	should_write_sparx_bmp = true;
+}
+
+// Write the sparx skin from the buffer, into the correct area for sparx's vertex coloring. 
+//Keeping it in a buffer initially to avoid loading from the disk everytime we need it again.
+void WriteSparxBMPToSparxRam()
+{
+	const int SPARX_BMP_FILE_SIZE = 0xD8;
+
+	// Get the pointer to sparx's vertex colors
+	const int MOBY_TYPE_OFFSET = 0x36;
+	const int MODELS_HEADER_OFFSET = 0x38;
+    const int SPARX_ANIM = 0x4;
+    const int SPARX_TYPE = 0x78;
+	
+	int* sparx_base_ptr = 0x80075898;
+	int* current_sparx_ptr = *sparx_base_ptr;
+
+	int* models_base_ptr = 0x80076378;
+	int* current_models_ptr = *models_base_ptr;
+
+	int* start_of_current_sparx_models = *(int*)((int)models_base_ptr + (SPARX_TYPE * 4));
+	int* start_of_sparx_vertex_colors_ptr = *(int*)((int)start_of_current_sparx_models + 0x2D8);
+
+	// Logic				
+	byte* sparx_bmp_main_ram_location = (int*)0x80074330;
+	memcpy(start_of_sparx_vertex_colors_ptr, sparx_bmp_main_ram_location, 0xD8); // Copy the skin from the buffer to the correct area
+	
+	should_write_sparx_bmp = false;
+}
+
+void ChangeSparxGlowColor(u8RGBA new_color)
+{
+	_sparxGlowColor = new_color;
+	_sparxGlowColor2 = new_color;
+}
+
+
+//! Every Frame Update
+// Check for Loading Skins
+void CosmeticsUpdate(void)
+{
+	//Change background color when menu gets updated
+	if(should_update_bg_color)
+	{
+		SetTitleScreenColor(bg_colors[bg_color_index].r, bg_colors[bg_color_index].g);
+		should_update_bg_color = false;
+	}
+	//Change Spyro Skin
+	if(should_load_spyro_color)
+	{
+		LoadSpyroBMPToMainRam(SKIN_SECTOR);
+		should_load_spyro_color = false;
+	}
+	if(should_write_spyro_bmp && _isLoading == false)
+	{
+		WriteSpyroBMPToVram();
+	}
+	//Change Flame Skin
+	if(should_load_flame_color)
+	{
+		LoadFlameBMPToMainRam(FLAME_SECTOR);
+		should_load_flame_color = false;
+	}
+	if(should_write_flame_bmp && _isLoading == false)
+	{
+		WriteFlameBMPToVram();
+		ChangeFlameTriangleColor(CUSTOM_FLAME_TRIANGLE_GRADIENTS[flame_color_index]); // Change Triangle Gradient
+	}
+	//Change Sparx Skin
+	if(should_load_sparx_color)
+	{
+		LoadSparxBMPToMainRam(SPARX_SECTOR); // Change Sparx Vertex Color
+		should_load_sparx_color = false;
+	}
+	if(should_write_sparx_bmp)
+	{
+		WriteSparxBMPToSparxRam();
+		ChangeSparxGlowColor(CUSTOM_SPARX_GLOW_COLORS[sparx_color_index]); // Change Sparx Glow
+		InjectChangeSparxParticleColorJump(); // Inject Change Sparx Particles Function into Overlay
+	}
+
+	// Check for re-loading skin's in loads
+	if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING)
+	{
+		if (spyro_color_index > 0) 
+		{
+			should_write_spyro_bmp = true;    
+		}   
+		//Reload Flame Skin in Load
+		if(flame_color_index > 0) 
+		{
+			should_write_flame_bmp = true;  
+		}   
+	}
+	
+	// Check for reloading sparx skin when sparx is loaded again (from load, sparx death, or health up)
+	if(sparx_color_index > 0)
+	{
+		// If our local sparx pointer is different than the in game sparx pointer, that means he has moved in RAM
+		if(_sparx_ptr != previous_sparx_ptr)
+		{
+			previous_sparx_ptr = _sparx_ptr; 	// Set previous sparx pointer as the current one
+			if(_sparx_ptr != NULL)
+			{
+				should_write_sparx_bmp = true; 	// Reload sparx since he has moved.
+			}
+		}
+		// If the glow strength is between this range, that means it's growing from regetting max sparx
+		if(_sparxGlowStrength > 10 || _sparxGlowStrength < 60)
+		{
+			ChangeSparxGlowColor(CUSTOM_SPARX_GLOW_COLORS[sparx_color_index]); // Change Sparx Glow if we are back to 3 health
+		}
+	}
+
+}
 
 // extern bool should_reload_test_skins;
 

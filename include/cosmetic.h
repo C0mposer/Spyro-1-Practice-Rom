@@ -26,6 +26,8 @@ struct FlameTriangleColorGradient
 typedef struct FlameTriangleColorGradient FlameTriangleColorGradient;
 extern FlameTriangleColorGradient _flame_triangle_color_gradient;
 
+
+
 typedef enum BackgroundColor
 {
     BG_BLUE,
@@ -66,6 +68,13 @@ typedef enum FlameColor
     FLAME_SKIN_JADE,
     FLAME_SKIN_GHOST
 }FlameColor;
+
+typedef enum SparxColor
+{
+    SPARX_SKIN_DEFAULT,                                               
+    SPARX_SKIN_RED,                                               
+    SPARX_SKIN_PURPLE
+}SparxColor;
 
 
 

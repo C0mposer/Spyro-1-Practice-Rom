@@ -6,7 +6,7 @@ REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
 REDUX, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 REDUX, kernal, 0x8000C000, 0x0, src/custom_menu_2.c, kern.bin
-REDUX, kernal, 0x8000EA00, 0x0, src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c src/multi_tap.c, kern2.bin
+REDUX, kernal, 0x8000EA00, 0x0, src/sparx_particles.c src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
 
 
 REDUX, exe, 0x80010084, 0x0, patches/levelselectnames.bin
@@ -23,9 +23,9 @@ NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.
 NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
 NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c, kern.bin
-NTSC, kernal, 0x8000EA00, 0x0, src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
+NTSC, kernal, 0x8000EA00, 0x0, src/sparx_particles.c src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
 
-NTSC, exe, 0x8001c574, 0x0, asm/pause_hook.s
+NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
 
 NTSC, wad, 0x800816c0, 0x0, asm/head.s
@@ -46,10 +46,10 @@ DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cos
 DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 
 DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, kern.bin
-DECKARD_PS2_NTSC, kernal, 0x80007530, 0x0, src/right_stick.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
+DECKARD_PS2_NTSC, kernal, 0x80007530, 0x0, src/sparx_particles.c src/right_stick.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
 DECKARD_PS2_NTSC, kernal, 0x80A49000, 0x0, src/save_state.c src/save_geo.c, PS2M.bin
 
-DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_hook.s
+DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 DECKARD_PS2_NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
 
 DECKARD_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s
@@ -69,9 +69,9 @@ IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_h
 IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cosmetic.c src/cd_load.c, FairyArea.bin
 IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, kern.bin
-IOP_PS2_NTSC, kernal, 0x80007530, 0x0, src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
+IOP_PS2_NTSC, kernal, 0x80007530, 0x0, src/sparx_particles.c src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
 
-IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_hook.s
+IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 IOP_PS2_NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
 
 IOP_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s

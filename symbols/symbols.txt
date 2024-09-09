@@ -177,3 +177,8 @@ _flame_triangle_color_gradient = 0x8006E1A8;
 
 should_reload_test_skins = 0x80074300;
 
+_sparxGlowColor = 0x8007880C;
+_sparxGlowColor2 = 0x800788C0;
+_sparxGlowStrength = 0x80078810;
+
+_sparx_ptr = 0x80075898;

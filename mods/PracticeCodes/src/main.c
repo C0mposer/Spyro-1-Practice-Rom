@@ -57,6 +57,7 @@ void MainFunc()
             MultiTapUpdate();
             
             CheckLandingUpdate();
+            CosmeticsUpdate();
             //GeoDataUpdate();
         }
 

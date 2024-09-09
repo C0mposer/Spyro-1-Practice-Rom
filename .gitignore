@@ -3151,3 +3151,9 @@ scripts/spyroUNBMPer.py
 mods/PracticeCodes/debug/dep/save_state_region.dep
 mods/PracticeCodes/debug/obj/save_state_region.o
 scripts/__pycache__/reverse_file_endianess.cpython-312.pyc
+mods/PracticeCodes/debug/dep/pause_menu.dep
+mods/PracticeCodes/debug/obj/pause_patch.o
+mods/PracticeCodes/debug/dep/pause_patch.dep
+mods/PracticeCodes/debug/obj/pause_menu.o
+mods/PracticeCodes/output/asmpause_menus.bin
+mods/PracticeCodes/output/srcpause_patchc.bin

@@ -171,7 +171,7 @@ void DrawSavestateSwitchedText(void)
     char buf[3] = {0};
     sprintf(&buf, "%d", savestate_selection + 1);
     DrawTextCapitals(buf, &(CapitalTextInfo){.x=0x100, .y=0xDC, .size=DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-    MobyRender();
+    RenderShadedMobyQueue();
 }
 
 void ChangeInventoryMenu(SwitchButton state)
@@ -202,13 +202,24 @@ void MainUpdate()
         _musicVolume = 0;
     }
 
-    //Run once upon skipping intro
-    if(mod_state == SKIPPED_INTRO)
+    // Run Once
+    if(mod_state == SKIPPED_INTRO && _gameState == GAMESTATE_TITLE_SCREEN)
     {
         UnlockAllLevels();
         mod_state = UNLOCKED_LEVELS;
+    }
+
+    // Draw Version Number on The Adventure Continues
+    if(_gameState == GAMESTATE_TITLE_SCREEN)
+    {
         _globalLives = 99;
-        //memset((void*)0x8001b648, 0, 0x350); //Clear top of inventory menu   
+        CapitalTextInfo version_text_info = {0};
+        version_text_info.x = SCREEN_RIGHT_EDGE - 70;
+        version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
+        version_text_info.size = DEFAULT_SIZE;
+        
+        DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        RenderShadedMobyQueue();
     }
 
     //Change background color when menu gets updated

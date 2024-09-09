@@ -14,6 +14,8 @@
 #define PS2_DECKARD 2
 #define PS2_IOP 3
 
+#define MOD_VERSION_STRING "V3.0"
+
 #if BUILD == 0
     #define STARTING_EXTRA_MEM 0x80300000
 #elif BUILD == 2
@@ -21,10 +23,10 @@
     #define EXTRA_DECKARD_CODE_REGION 0x80A49000
 #endif
 
-#if BUILD == 1 || BUILD == 3 || BUILD == 0
+#if BUILD == PS1 || BUILD == PS2_IOP || BUILD == REDUX
     #define FLAME_SECTOR 265764
     #define SKIN_SECTOR 265765
-#elif BUILD == 2
+#elif BUILD == PS2_DECKARD
     #define FLAME_SECTOR 265766
     #define SKIN_SECTOR 265767
 #endif

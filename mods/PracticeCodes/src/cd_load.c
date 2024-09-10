@@ -20,7 +20,7 @@ void read_cb(unsigned char status, unsigned char *result){
 }
 
 //* Read a file into ram
-void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, int offset_in_ints)
+void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int* ram_area, int offset_in_ints)
 {
         _pauseMusic = 9;
         CdlLOC location;
@@ -33,17 +33,17 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
         CdReady(0, NULL);
 
         if(!_musicVolume){                                              // The 3 dummy int's only appear when music is off?
-            CdGetSector(ram_area, 0x3);                                 // Read the weird 3 ints of dummy data
+            CdGetSector((int*)ram_area, 0x3);                                 // Read the weird 3 ints of dummy data
         }
 
 
-        unsigned int i = 0;
+        int i = 0;
         if (offset_in_ints > 0x49)                                      // If the offset in ints is > 0x49, do multiple dummy reads into the same buffer.
         {                             
             int amount_of_dummy_reads = (offset_in_ints / 0x50);        // Amount of 0x200 byte (0x50 int) dummy reads to do in the loop
             while (i < amount_of_dummy_reads)                           // Loop 0x200 bytes of dummy data (0x50 ints) at a time down, until < 0x50 bytes of offset remain
             {
-                CdGetSector(ram_area, 0x50);
+                CdGetSector((int*)ram_area, 0x50);
                 i++;
             }       
         }
@@ -51,11 +51,11 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
         int remaining_offset = offset_in_ints - (0x50 * i);             // Calculate the remaning ints to remove, with the amount of for loop itterations            
         if (remaining_offset > 0)                                       // If there is any remaining offset bytes remaining, remove them
         {
-            CdGetSector(ram_area, remaining_offset);                    // Read remaining offset data < 0x50 ints
+            CdGetSector((int*)ram_area, remaining_offset);                    // Read remaining offset data < 0x50 ints
         }
 
 
-        CdGetSector(ram_area, size_to_read_in_ints);                    // Read actual data
+        CdGetSector((int*)ram_area, size_to_read_in_ints);                    // Read actual data
 }
 
 

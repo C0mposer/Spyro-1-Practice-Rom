@@ -154,7 +154,7 @@ typedef enum ILTimerState
     IL_STOPPED
 }ILTimerState;
 extern ILTimerState il_timer_state;
-extern mainTimerAtReset;
+extern int mainTimerAtReset;
 
 
 void CustomMenuUpdate(void)

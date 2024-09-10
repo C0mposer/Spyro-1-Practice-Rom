@@ -67,7 +67,7 @@ extern int loadstate_button_index;
 extern const short SAVESTATE_BUTTONS[2];
 extern const short LOADSTATE_BUTTONS[3];
 
-extern savestate_selection;
+extern int savestate_selection;
 
 int il_timer_offset[3] = {0};
 

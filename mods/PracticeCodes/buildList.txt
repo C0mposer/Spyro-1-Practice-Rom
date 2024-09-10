@@ -5,7 +5,7 @@ REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c s
 REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c, StartFairyArea.bin
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
 REDUX, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
-REDUX, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/cosmetic, kern.bin
+REDUX, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/cosmetic.c, kern.bin
 REDUX, kernal, 0x8000EA00, 0x0, src/sparx_particles.c src/right_stick.c src/save_state.c src/save_geo.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
 
 

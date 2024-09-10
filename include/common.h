@@ -529,7 +529,7 @@ extern int _treeTopsThiefTimer;
 
 extern int _dragonWalkTime;
 
-extern int _sparx_ptr;
+extern int* _sparx_ptr;
 extern u8RGBA _sparxGlowColor;
 extern u8RGBA _sparxGlowColor2;
 extern int _sparxGlowStrength;

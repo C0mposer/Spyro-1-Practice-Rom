@@ -56,6 +56,12 @@ extern bool should_write_sparx_bmp;
 
 
 
+void ChangeIntroTextColor(int color)
+{
+    *(short*)0x8001e784 = color;  // Value part of li opcode
+    *(short*)0x8001e786 = 0x2402; // Regular part of li opcode
+}
+
 //Shows all levels in inventory menu, and automatically unlocks homeworlds for balloonists
 void UnlockAllLevels()
 {
@@ -80,12 +86,6 @@ void SkipIntro()
         ChangeIntroTextColor(MOBY_COLOR_PURPLE);
         TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
     #endif
-}
-
-void ChangeIntroTextColor(int color)
-{
-    *(short*)0x8001e784 = color;  // Value part of li opcode
-    *(short*)0x8001e786 = 0x2402; // Regular part of li opcode
 }
 
 void SaveSpyroAndCamera(bool flyInFlag)
@@ -157,7 +157,7 @@ void ResetLevelCollectables()
 void DrawSavestateSwitchedText(void)
 {
     char buf[3] = {0};
-    sprintf(&buf, "%d", savestate_selection + 1);
+    sprintf(buf, "%d", savestate_selection + 1);
     DrawTextCapitals(buf, &(CapitalTextInfo){.x=0x100, .y=0xDC, .size=DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     RenderShadedMobyQueue();
 }

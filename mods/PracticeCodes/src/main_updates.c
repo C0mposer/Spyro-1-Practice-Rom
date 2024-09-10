@@ -8,7 +8,7 @@
 #include <right_stick.h>
 #include <sound.h>
 #include <custom_text.h>
-#include <vram.h>
+#include <cosmetic.h>
 
 enum ModState
 {
@@ -31,16 +31,7 @@ int savestated_level_ids[3] = {0}; // For keeping savestates upon loop
 
 bool should_savestate_after_dragon_or_load = false;
 
-const RedGreen bg_colors[7] = {{0x0, 0x25}, {0x40, 0x18}, {0x00, 0x50}, {0x50, 0x50}, {0x70, 0}, {0xCD, 0x80}, {0xA0, 0xA0}};
-
 // Externed from elsewhere
-extern BackgroundColor bg_color_index;
-extern SpyroColor spyro_color_index;
-extern FlameColor flame_color_index;
-
-extern bool should_update_bg_color;
-extern bool should_load_spyro_color;
-extern bool should_load_flame_color;
 
 extern int mainTimerAtReset;
 extern bool should_loadstate_gems;
@@ -58,6 +49,8 @@ extern int il_timer_offset[3];
 
 extern bool should_write_spyro_bmp;
 extern bool should_write_flame_bmp;
+extern bool should_write_sparx_bmp;
+
 
 
 
@@ -159,13 +152,6 @@ void ResetLevelCollectables()
     _ptr_keyChestHostGem = NULL;
 }
 
-//Changing asm instructions for pause menu RGB. Cannot change B value, as the value is in a shared register with other crucial parts of the struct.
-inline void SetTitleScreenColor(byte r, byte g)
-{
-    *(short*)(0x8001A674) = r;
-    *(short*)(0x8001A67C) = g;
-}
-
 void DrawSavestateSwitchedText(void)
 {
     char buf[3] = {0};
@@ -218,35 +204,8 @@ void MainUpdate()
         version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
         version_text_info.size = DEFAULT_SIZE;
         
-        DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
         RenderShadedMobyQueue();
-    }
-
-    //Change background color when menu gets updated
-    if(should_update_bg_color)
-    {
-        SetTitleScreenColor(bg_colors[bg_color_index].r, bg_colors[bg_color_index].g);
-        should_update_bg_color = false;
-    }
-    //Change Spyro Skin
-    if(should_load_spyro_color)
-    {
-        LoadSpyroBMPToMainRam(SKIN_SECTOR);
-        should_load_spyro_color = false;
-    }
-    if(should_write_spyro_bmp && _isLoading == false)
-    {
-        WriteSpyroBMPToVram();
-    }
-    //Change Flame Skin
-    if(should_load_flame_color)
-    {
-        LoadFlameBMPToMainRam(FLAME_SECTOR);
-        should_load_flame_color = false;
-    }
-    if(should_write_flame_bmp && _isLoading == false)
-    {
-        WriteFlameBMPToVram();
     }
     
     //Main Loop
@@ -282,7 +241,7 @@ void MainUpdate()
         //Load spyro & camera information
         if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
-            if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
+            if(_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath)
             {
                 #if BUILD == 2 || BUILD == 0
                     LoadStateTest();
@@ -426,19 +385,9 @@ void MainUpdate()
             // }
 
         }   
-
-        //Reload Spyro Skin in Load
-        if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && spyro_color_index > 0) 
-        {
-            should_write_spyro_bmp = true;    
-        }   
-        //Reload Flame Skin in Load
-        if(_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING && flame_color_index > 0) 
-        {
-            should_write_flame_bmp = true;  
-        }   
     }
-
+    
+    //VramTester();
     // //Every frame check to check for nopping MobyAnimationUpdate
     // {
     //     MobyAnimCrashFix();

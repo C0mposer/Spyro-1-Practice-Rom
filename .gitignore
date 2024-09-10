@@ -3159,4 +3159,17 @@ mods/PracticeCodes/output/asmpause_menus.bin
 mods/PracticeCodes/output/srcpause_patchc.bin
 build/forcomp/PS2_DECKARD_Practice_Codes.bin
 build/forcomp/PS2_DEKCARD_Practice_Codes.cue
+build/spyro1/sparx.bin
+build/spyro1_PracticeCodes/sparx.bin
+mods/PracticeCodes/asm/change_particle_color.dep
+mods/PracticeCodes/asm/change_particle_color.o
+mods/PracticeCodes/debug/dep/sparx_particles.dep
+mods/PracticeCodes/debug/obj/sparx_particles.o
+scripts/temp/og_sparx.bmp_temp
+scripts/temp/purple_sparx.bmp_temp
+scripts/bmps/og_sparx.bin
+scripts/bmps/og_sparx.bmp
+scripts/bmps/purple_sparx.bin
+scripts/bmps/purple_sparx.bmp
+scripts/final_output/sparx.bin
 scripts/tealhighlights.bmp

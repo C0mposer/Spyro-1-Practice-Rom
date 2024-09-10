@@ -118,8 +118,9 @@ typedef struct CosmeticMenu
     char* bg_color_text;
     char* spyro_color_text;
     char* flame_color_text;
+    char* sparx_color_text;
 }CosmeticMenu;
-extern CosmeticMenu cosmetic_menu;
+CosmeticMenu cosmetic_menu = {0};
 
 typedef enum CurrentMenu
 {
@@ -151,14 +152,14 @@ extern int loadstate_button_index;
 extern int switch_state_button_index;
 
 // Externing elsewhere
-extern BackgroundColor bg_color_index;
-extern SpyroColor spyro_color_index;
-extern FlameColor flame_color_index;
-extern bool should_update_bg_color;
-extern bool should_load_spyro_color;
-extern bool should_load_flame_color;
-
-extern bool should_loadstate_gems;
+BackgroundColor bg_color_index;
+SpyroColor spyro_color_index;
+FlameColor flame_color_index;
+SparxColor sparx_color_index;
+bool should_update_bg_color = true;
+bool should_load_spyro_color = false;
+bool should_load_flame_color = false;
+bool should_load_sparx_color = false;
 
 extern TimerState timerState;
 
@@ -249,10 +250,10 @@ void CustomMenuUpdate2()
             {
                 misc_menu.selection = misc_menu.selection - 1;
             }
-            // else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
-            // {
-            //     misc_menu.selection = 2;
-            // }
+            else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
+            {
+                misc_menu.selection = 2;
+            }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -335,7 +336,7 @@ void CustomMenuUpdate2()
 
         if (current_menu == COSMETIC_MENU)
         {       
-            CapitalTextInfo menu_text_info[3] = {{0}};
+            CapitalTextInfo cosmetic_text_info[4] = {{0}};
 
             // Easy Exit
             if(_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -345,46 +346,57 @@ void CustomMenuUpdate2()
                 PlayMusic(_currentMusicTrack, 8);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x80);
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x94);
             
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 70;
-            menu_text_info[0].size = DEFAULT_SIZE;
+            cosmetic_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            cosmetic_text_info[0].y = 70;
+            cosmetic_text_info[0].size = DEFAULT_SIZE;
 
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 90;
-            menu_text_info[1].size = DEFAULT_SIZE;
+            cosmetic_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            cosmetic_text_info[1].y = 90;
+            cosmetic_text_info[1].size = DEFAULT_SIZE;
 
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 110;
-            menu_text_info[2].size = DEFAULT_SIZE;
+            cosmetic_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            cosmetic_text_info[2].y = 110;
+            cosmetic_text_info[2].size = DEFAULT_SIZE;
+
+            cosmetic_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            cosmetic_text_info[3].y = 130;
+            cosmetic_text_info[3].size = DEFAULT_SIZE;
 
             _spyro.isMovementLocked = TRUE;
 
             if(cosmetic_menu.selection == 0)
             {
-                DrawTextCapitals(cosmetic_menu.bg_color_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(cosmetic_menu.bg_color_text, &cosmetic_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(cosmetic_menu.bg_color_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(cosmetic_menu.bg_color_text, &cosmetic_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
 
             if(cosmetic_menu.selection == 1)
             {
-                DrawTextCapitals(cosmetic_menu.spyro_color_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(cosmetic_menu.spyro_color_text, &cosmetic_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else
             {
-                DrawTextCapitals(cosmetic_menu.spyro_color_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(cosmetic_menu.spyro_color_text, &cosmetic_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
             
             if(cosmetic_menu.selection == 2)
             {
-                DrawTextCapitals(cosmetic_menu.flame_color_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(cosmetic_menu.flame_color_text, &cosmetic_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(cosmetic_menu.flame_color_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(cosmetic_menu.flame_color_text, &cosmetic_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if(cosmetic_menu.selection == 3)
+            {
+                DrawTextCapitals(cosmetic_menu.sparx_color_text, &cosmetic_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(cosmetic_menu.sparx_color_text, &cosmetic_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
 
@@ -392,23 +404,24 @@ void CustomMenuUpdate2()
             if(cosmetic_menu.bg_color_text == NULL)
             {
                 cosmetic_menu.bg_color_text = "BG BLUE";
-                cosmetic_menu.spyro_color_text = "SKIN DEFAULT";
-                cosmetic_menu.flame_color_text = "FLAME DEFAULT";
+                cosmetic_menu.spyro_color_text = "SPYRO SKIN DEFAULT";
+                cosmetic_menu.flame_color_text = "FLAME SKIN DEFAULT";
+                cosmetic_menu.sparx_color_text = "SPARX SKIN DEFAULT";
             }
 
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                cosmetic_menu.selection = (cosmetic_menu.selection + 1) % 3;
+                cosmetic_menu.selection = (cosmetic_menu.selection + 1) % 4;
             }
             else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection != 0)
             {
                 cosmetic_menu.selection = cosmetic_menu.selection - 1;
             }
-            // else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection == 0)
-            // {
-            //     cosmetic_menu.selection = 2;
-            // }
+            else if(_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection == 0)
+            {
+                cosmetic_menu.selection = 3;
+            }
             
             // Play Sound Effect
             if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -498,87 +511,87 @@ void CustomMenuUpdate2()
                 {
                     case(SKIN_DEFAULT):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN DEFAULT";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN DEFAULT";
                         break;
                     }
                     case(SKIN_DARK_RED):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN DARK RED";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN DARK RED";
                         break;
                     }
                     case(SKIN_ICY):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN ICY";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN ICY";
                         break;
                     }
                     case(SKIN_EMERALD):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN EMERALD";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN EMERALD";
                         break;
                     }
                     case(SKIN_CORAL_BLUE):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN CORAL BLUE";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN CORAL BLUE";
                         break;
                     }
                     case(SKIN_GOLD):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN GOLD";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN GOLD";
                         break;
                     }
                     case(SKIN_BERRY):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN BERRY";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN BERRY";
                         break;
                     }
                     case(SKIN_GREY):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN GREY";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN GREY";
                         break;
                     }
                     case(SKIN_ZERA):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN ZERA";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN ZERA";
                         break;
                     }
                     case(SKIN_PIXIE):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN PIXIE";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN PIXIE";
                         break;
                     }
                     case(SKIN_JAYO):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN JAYO";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN JAYO";
                         break;
                     }
                     case(SKIN_PERIDOT):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN PERIDOT";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN PERIDOT";
                         break;
                     }
                     case(SKIN_TRANS):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN TRANS";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN TRANS";
                         break;
                     }
                     case(SKIN_GOTH):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN GOTH";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN GOTH";
                         break;
                     }
                     case(SKIN_DITTO):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN DITTO";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN DITTO";
                         break;
                     }
                     case(SKIN_EMBER):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN EMBER";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN EMBER";
                         break;
                     }
                     case(SKIN_CYNDER):
                     {
-                        cosmetic_menu.spyro_color_text = "SKIN CYNDER";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN CYNDER";
                         break;
                     }
                 }
@@ -605,27 +618,65 @@ void CustomMenuUpdate2()
                 {
                     case(FLAME_SKIN_DEFAULT):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME DEFAULT";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN DEFAULT";
                         break;
                     }
                     case(FLAME_SKIN_BLOOD):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME BLOOD";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN BLOOD";
                         break;
                     }
                     case(FLAME_SKIN_ICE):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME ICE";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN ICE";
                         break;
                     }
                     case(FLAME_SKIN_JADE):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME JADE";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN JADE";
                         break;
                     }
                     case(FLAME_SKIN_GHOST):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME GHOST";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN GHOST";
+                        break;
+                    }
+                }
+            }
+
+            else if(cosmetic_menu.selection == 3)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    sparx_color_index = (sparx_color_index + 1) % 3;
+                    should_load_sparx_color = true;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index > 0)
+                {
+                    sparx_color_index--;
+                    should_load_sparx_color = true;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index == 0)
+                {
+                    sparx_color_index = 2;
+                    should_load_sparx_color = true;
+                }
+
+                switch(sparx_color_index)
+                {
+                    case(SPARX_SKIN_DEFAULT):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN DEFAULT";
+                        break;
+                    }
+                    case(SPARX_SKIN_RED):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN RED";
+                        break;
+                    }
+                    case(SPARX_SKIN_PURPLE):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN PURPLE";
                         break;
                     }
                 }

@@ -114,10 +114,9 @@ void LoadSparxBMPToMainRam(int sector)
 
 	byte* sparx_bmp_main_ram_location = (int*)0x80074330;
 
-	int sparx_skin_file_index = (sparx_color_index % 4) * SPARX_BMP_FILE_SIZE/4; 	// In ints. %4, so that way it resets at the next sector
-	int sector_index = sparx_color_index / 4;					// Seek to the next sector, every 4 skins (0x800 bytes)
+	int sparx_skin_file_index = (sparx_color_index) * SPARX_BMP_FILE_SIZE/4; 	// In ints. %4, so that way it resets at the next sector
 
-	ReadFileIntoRam(sector + sector_index, SPARX_BMP_FILE_SIZE/4, sparx_bmp_main_ram_location, sparx_skin_file_index);
+	ReadFileIntoRam(sector, SPARX_BMP_FILE_SIZE/4, sparx_bmp_main_ram_location, sparx_skin_file_index);
 	should_write_sparx_bmp = true;
 }
 

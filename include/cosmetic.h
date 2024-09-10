@@ -73,7 +73,13 @@ typedef enum SparxColor
 {
     SPARX_SKIN_DEFAULT,                                               
     SPARX_SKIN_RED,                                               
-    SPARX_SKIN_PURPLE
+    SPARX_SKIN_PURPLE,
+    SPARX_SKIN_ORANGE,
+    SPARX_SKIN_DARK_BLUE,
+    SPARX_SKIN_PINK,
+    SPARX_SKIN_TURQUOISE,
+    SPARX_SKIN_SILVER,
+    SPARX_SKIN_BLACK,
 }SparxColor;
 
 

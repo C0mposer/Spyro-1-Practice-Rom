@@ -39,7 +39,7 @@ def patch_binary_file(target_file_path, offset, replace_bytes):
         print(f"Error: {e}")
         sys.exit(1)
 
-if __name__ == "__main__":
+def PatchWadHeadControl():
     target_file = '../build/spyro1_PracticeCodes/wad.wad'
     offset = int(0x51E9C98)
     replace_file_path = '../mods/PracticeCodes/output/head.bin'

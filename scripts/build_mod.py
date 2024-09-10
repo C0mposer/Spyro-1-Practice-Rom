@@ -1,6 +1,7 @@
 import os
 import sys
 from reverse_file_endianess import *
+from patch_wad import *
 
 version_to_build = sys.argv[1].upper()
 
@@ -14,8 +15,11 @@ if version_to_build == "PS1":
     
     os.chdir("../")
     os.chdir("../")
+    os.chdir("scripts")
     
-    
+    PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+
+    os.chdir("../")
     os.chdir("build")
     
     os.system("mkpsxiso spyro1_PracticeCodes_Manual.xml")
@@ -37,7 +41,12 @@ elif version_to_build == "PS2_DECKARD":
     
     os.chdir("../")
     os.chdir("../")
+    os.chdir("scripts")
     
+    PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+
+    os.chdir("../")
+
     ReverseFileEndianness("build/spyro1_PracticeCodes/PS2M.BIN") # Reverse PS2M for extra ps2 ram
     
     os.chdir("build")
@@ -60,6 +69,11 @@ elif version_to_build == "PS2_IOP":
     os.system("py ../../../../tools/mod-builder/main.py 2 1 4 4 4")
     
     os.chdir("../")
+    os.chdir("../")
+    os.chdir("scripts")
+    
+    PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+
     os.chdir("../")
     os.chdir("build")
     

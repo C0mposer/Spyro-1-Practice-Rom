@@ -204,7 +204,7 @@ void MainUpdate()
         version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
         version_text_info.size = DEFAULT_SIZE;
         
-        DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
         RenderShadedMobyQueue();
     }
     
@@ -386,7 +386,8 @@ void MainUpdate()
 
         }   
     }
-
+    
+    //VramTester();
     // //Every frame check to check for nopping MobyAnimationUpdate
     // {
     //     MobyAnimCrashFix();

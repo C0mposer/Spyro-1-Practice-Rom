@@ -31,6 +31,8 @@ int savestated_level_ids[3] = {0}; // For keeping savestates upon loop
 
 bool should_savestate_after_dragon_or_load = false;
 
+bool should_loadstate_gems = false;
+
 // Externed from elsewhere
 
 extern int mainTimerAtReset;
@@ -241,7 +243,7 @@ void MainUpdate()
         //Load spyro & camera information
         if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
-            if(_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath)
+            if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
                 #if BUILD == 2 || BUILD == 0
                     LoadStateTest();

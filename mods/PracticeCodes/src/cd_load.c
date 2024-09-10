@@ -10,13 +10,13 @@ int hasStartedLoad = 0;
 
 //* Set the CD-DRIVE back into music playing mode after the read
 void read_cb(unsigned char status, unsigned char *result){
-    //CdReadCallback(NULL);                                             //? For some reason this keeps the read_cb function from happening a second time
-    //CdIntToPos(*(&_musicSectors + 3), &loc);                          //? Takes the abslute sector numbers of the music from ram, and adds the song offset. Then, converts them into the CdlLOC format
-    //CdControlB(CdlReadS, (void *)&loc, 0);                            //? Starts reading from the disk at the specified location. Must typecase void* onto CdlLOC struct pointer.
+    //CdReadCallback(NULL);                                             // For some reason this keeps the read_cb function from happening a second time
+    //CdIntToPos(*(&_musicSectors + 3), &loc);                          // Takes the abslute sector numbers of the music from ram, and adds the song offset. Then, converts them into the CdlLOC format
+    //CdControlB(CdlReadS, (void *)&loc, 0);                            // Starts reading from the disk at the specified location. Must typecase void* onto CdlLOC struct pointer.
     
-    int mode = CDL_MODE_RT | CDL_MODE_SPEED | CDL_MODE_SF;              //? This mode is Music Playing Mode, Double Speed, Sub-header Filter. const instead of define to avoid error warning lol
-    void* modePTR = &mode;                                              //? Needs to be put in a ptr presumably because this function takes different arguments depending on situation
-    CdControlB(CDL_PRIMITIVE_SETMODE, modePTR, NULL);                   //? Puts the Cd subsystem in the right mode to play music
+    int mode = CDL_MODE_RT | CDL_MODE_SPEED | CDL_MODE_SF;              // This mode is Music Playing Mode, Double Speed, Sub-header Filter. const instead of define to avoid error warning lol
+    void* modePTR = &mode;                                              // Needs to be put in a ptr presumably because this function takes different arguments depending on situation
+    CdControlB(CDL_PRIMITIVE_SETMODE, modePTR, NULL);                   // Puts the Cd subsystem in the right mode to play music
 }
 
 //* Read a file into ram
@@ -32,13 +32,13 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int ram_area, 
         CdControlB(CDL_PRIMITIVE_READN, (void *)&location, NULL);       //Read into sector buffer 
         CdReady(0, NULL);
 
-        if(!_musicVolume){
+        if(!_musicVolume){                                              // The 3 dummy int's only appear when music is off?
             CdGetSector(ram_area, 0x3);                                 // Read the weird 3 ints of dummy data
         }
 
 
         unsigned int i = 0;
-        if (offset_in_ints > 0x49)                                      // If the offset in ints is > 0x49, we need to do multiple reads to avoid overwriting data.
+        if (offset_in_ints > 0x49)                                      // If the offset in ints is > 0x49, do multiple dummy reads into the same buffer.
         {                             
             int amount_of_dummy_reads = (offset_in_ints / 0x50);        // Amount of 0x200 byte (0x50 int) dummy reads to do in the loop
             while (i < amount_of_dummy_reads)                           // Loop 0x200 bytes of dummy data (0x50 ints) at a time down, until < 0x50 bytes of offset remain

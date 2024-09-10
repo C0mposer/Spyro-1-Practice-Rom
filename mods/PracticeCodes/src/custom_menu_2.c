@@ -171,7 +171,7 @@ typedef enum ILTimerState
     IL_STOPPED
 }ILTimerState;
 extern ILTimerState il_timer_state;
-extern mainTimerAtReset;
+extern int mainTimerAtReset;
 
 
 void CustomMenuUpdate2()
@@ -648,7 +648,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    sparx_color_index = (sparx_color_index + 1) % 3;
+                    sparx_color_index = (sparx_color_index + 1) % 9;
                     should_load_sparx_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index > 0)
@@ -658,7 +658,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index == 0)
                 {
-                    sparx_color_index = 2;
+                    sparx_color_index = 8;
                     should_load_sparx_color = true;
                 }
 
@@ -677,6 +677,36 @@ void CustomMenuUpdate2()
                     case(SPARX_SKIN_PURPLE):
                     {
                         cosmetic_menu.sparx_color_text = "SPARX SKIN PURPLE";
+                        break;
+                    }
+                    case(SPARX_SKIN_ORANGE):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN ORANGE";
+                        break;
+                    }
+                    case(SPARX_SKIN_DARK_BLUE):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN DARK BLUE";
+                        break;
+                    }
+                    case(SPARX_SKIN_PINK):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN PINK";
+                        break;
+                    }
+                    case(SPARX_SKIN_TURQUOISE):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN TURQUOISE";
+                        break;
+                    }
+                    case(SPARX_SKIN_SILVER):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN SILVER";
+                        break;
+                    }
+                    case(SPARX_SKIN_BLACK):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN BLACK";
                         break;
                     }
                 }

@@ -25,7 +25,7 @@ NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c, kern.bin
 NTSC, kernal, 0x8000EA00, 0x0, src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
 
-NTSC, exe, 0x8001c574, 0x0, asm/pause_hook.s
+NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
 
 NTSC, wad, 0x800816c0, 0x0, asm/head.s
@@ -49,7 +49,7 @@ DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, kern.bin
 DECKARD_PS2_NTSC, kernal, 0x80007530, 0x0, src/right_stick.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
 DECKARD_PS2_NTSC, kernal, 0x80A49000, 0x0, src/save_state.c src/save_geo.c, PS2M.bin
 
-DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_hook.s
+DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 DECKARD_PS2_NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
 
 DECKARD_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s
@@ -71,7 +71,7 @@ IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, kern.bin
 IOP_PS2_NTSC, kernal, 0x80007530, 0x0, src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
 
-IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_hook.s
+IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 IOP_PS2_NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
 
 IOP_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s

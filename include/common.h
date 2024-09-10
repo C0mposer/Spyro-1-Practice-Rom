@@ -333,6 +333,7 @@ int DrawTextBox(int leftBoundaryDistanceFromLeft, int RightBoundaryDistanceFromL
 void DrawArrow(int *MobyInfo, unsigned int timer, int arrowDirection);                                  //? This function draws an arrow either to the left or rigt.
 void DrawLine(int point1X, int point1Y, int point2X, int point2Y);                                      //? This function draws a yellow line.
 void FillScreenColor(int colorSpace, char r, char g, char b);                                           //? Fills the screen with a specific color.
+void DrawPrimative(int param_1);
 
 //Pre-Reqs for other functions
 void CopyHudToShaded();

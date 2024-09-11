@@ -99,7 +99,7 @@
             },
             "icon": {
                 "id": "key",
-                "color": "terminal.ansiRed"
+                "color": "terminal.ansiMagenta"
             },
             "problemMatcher": []
         },
@@ -131,7 +131,7 @@
         {
             "label": "Check Available Space",
             "type": "shell",
-            "command": "py check_available_space.py PS2_DECKARD",
+            "command": "py check_available_space.py PS2_IOP",
             "options": {
                 "cwd": "${workspaceFolder}/scripts/"
             },
@@ -174,7 +174,7 @@
             },
             "icon": {
                 "id":  "beaker",
-                "color": "terminal.ansiGreen"
+                "color": "terminal.ansiRed"
             },
             "problemMatcher": []
         },
@@ -275,43 +275,43 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Compile and Build PS1 ISO",
+                "Compile and Build PS2 DECKARD ISO",
                 "Run in PCSX2"
             ],
             "problemMatcher": []
         },
-        {
-            "label": "Build VCD",
-            "type": "shell",
-            "command": "start ${workspaceFolder}\\build\\CUE2POPS.exe ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [],
-            "dependsOn": [
-                "Compile and Build ISO"
-            ]
-        },
-        {
-            "label": "POPSTARTER: Build & Copy VCD for Popstarter SMB",
-            "type": "shell",
-            "command": "Copy-Item -Path ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).VCD -Destination ${workspaceFolder}\\build\\PS2SMB\\POPS\\SCUS_942.29.TestMod.VCD",
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "icon": {
-                "id": "cloud-upload",
-                "color": "terminal.ansiGreen"
-            },
-            "dependsOn": [
-                "Build VCD"
-            ]
-        },
+        // {
+        //     "label": "Build VCD",
+        //     "type": "shell",
+        //     "command": "start ${workspaceFolder}\\build\\CUE2POPS.exe ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+        //     "options": {
+        //         "cwd": "${workspaceFolder}"
+        //     },
+        //     "problemMatcher": [],
+        //     "dependsOn": [
+        //         "Compile and Build ISO"
+        //     ]
+        // },
+        // {
+        //     "label": "POPSTARTER: Build & Copy VCD for Popstarter SMB",
+        //     "type": "shell",
+        //     "command": "Copy-Item -Path ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).VCD -Destination ${workspaceFolder}\\build\\PS2SMB\\POPS\\SCUS_942.29.TestMod.VCD",
+        //     "options": {
+        //         "cwd": "${workspaceFolder}"
+        //     },
+        //     "problemMatcher": [],
+        //     "group": {
+        //         "kind": "build",
+        //         "isDefault": true
+        //     },
+        //     "icon": {
+        //         "id": "cloud-upload",
+        //         "color": "terminal.ansiGreen"
+        //     },
+        //     "dependsOn": [
+        //         "Build VCD"
+        //     ]
+        // },
     ]
     }
     

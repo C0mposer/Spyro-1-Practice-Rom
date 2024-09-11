@@ -3163,3 +3163,6 @@ scripts/temp/rainbowflame.bmp_temp
 scripts/__pycache__/combine_flame_bmp.cpython-312.pyc
 scripts/__pycache__/combine_sparx_bmp.cpython-312.pyc
 scripts/__pycache__/combine_spyro_bmp.cpython-312.pyc
+mods/PracticeCodes/debug/dep/level_transition.dep
+mods/PracticeCodes/debug/obj/level_transition.o
+mods/PracticeCodes/output/asmlevel_transitions.bin

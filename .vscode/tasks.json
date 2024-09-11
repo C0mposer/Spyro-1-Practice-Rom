@@ -182,7 +182,7 @@
         {
             "label": "Run in Duckstation",
             "type": "shell",
-            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/Duckstation/duckstation-nogui-x64-ReleaseLTCG.exe ${workspaceFolder}/build/spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/Duckstation/duckstation-qt-x64-ReleaseLTCG.exe ${workspaceFolder}/build/PS1_Practice_Codes.cue",
             "presentation": {
                 "echo": true,
                 "reveal": "never",
@@ -200,7 +200,7 @@
         {
             "label": "Run in Mednefan",
             "type": "shell",
-            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/Mednafen/mednafen.exe ${workspaceFolder}/build/spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/Mednafen/mednafen.exe ${workspaceFolder}/build/PS1_Practice_Codes.cue",
             "presentation": {
                 "echo": true,
                 "reveal": "never",
@@ -258,7 +258,7 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Compile and Build ISO",
+                "Compile and Build PS1 ISO",
                 "Run in Mednefan"
             ],
             "icon": {

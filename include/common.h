@@ -41,6 +41,7 @@
 
 #define SECONDS 30
 
+#define NUMBER_TO_ASCII(x) x + '0'
 
 typedef enum Direction
 {
@@ -373,7 +374,7 @@ int VSync(int mode);
 int LoadImage(RECT* rect, int* ram_location);
 void PauseMusicAndSFX(unsigned int param_1);
 void PlayMusic(int track_number, int flags);
-void LevelTransitionCalls(void);
+void LevelTransition(void);
 
 
 //*~~~~~~~~~~~~~~~~~

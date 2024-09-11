@@ -53,7 +53,7 @@ extern bool should_write_spyro_bmp;
 extern bool should_write_flame_bmp;
 extern bool should_write_sparx_bmp;
 
-
+bool is_greenscreen = false;
 
 
 void ChangeIntroTextColor(int color)
@@ -191,7 +191,7 @@ void MainUpdate()
     }
 
     // Run Once
-    if(mod_state == SKIPPED_INTRO && _gameState == GAMESTATE_TITLE_SCREEN)
+    if(mod_state == SKIPPED_INTRO)
     {
         UnlockAllLevels();
         mod_state = UNLOCKED_LEVELS;
@@ -201,6 +201,7 @@ void MainUpdate()
     if(_gameState == GAMESTATE_TITLE_SCREEN)
     {
         _globalLives = 99;
+        
         CapitalTextInfo version_text_info = {0};
         version_text_info.x = SCREEN_RIGHT_EDGE - 70;
         version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
@@ -388,7 +389,39 @@ void MainUpdate()
 
         }   
     }
-    
+
+    // //! Green Screen Spyro
+    // {
+    //     // Nop Draw World
+    //     if (CheckButtonMultiTap(TRIANGLE_BUTTON, 3) && is_greenscreen == false)
+    //     {
+    //         // JR RA Draw World
+    //         *((int*)0x8002B9CC) = 0x03e00008;
+    //         *((int*)0x8002B9D0) = 0x00000000;
+
+    //         // JR RA Draw Skybox
+    //         *((int*)0x8004EBA8) = 0x03e00008;
+    //         *((int*)0x8004EBAC) = 0x00000000;
+            
+    //         is_greenscreen = true;
+    //     }
+    //     // Nop Draw World
+    //     else if (CheckButtonMultiTap(CIRCLE_BUTTON, 2) && is_greenscreen == true)
+    //     {
+    //         printf("Back On\n");
+    //         // Bring Back Draw World
+    //         *((int*)0x8002B9CC) = 0x27BDFFE8;
+    //         *((int*)0x8002B9D0) = 0x3C048007;
+
+    //         // Bring Back Draw Skybox
+    //         *((int*)0x8004EBA8) = 0x3C018007;
+    //         *((int*)0x8004EBAC) = 0x24217DD8;
+
+    //         is_greenscreen = false;
+    //     }
+
+
+
     //VramTester();
     // //Every frame check to check for nopping MobyAnimationUpdate
     // {

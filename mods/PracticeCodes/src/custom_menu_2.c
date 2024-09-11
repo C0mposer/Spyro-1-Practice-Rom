@@ -106,11 +106,13 @@ typedef struct MiscMenu
     char* sparx_mode_text;
     bool show_dragon_touch;
     char* show_dragon_touch_text;
+    char* disable_portal_entry_text;
     bool quick_goop_mode;
     char* quick_goop_text;
 }MiscMenu;
 extern MiscMenu misc_menu;
 bool counter_mode; // removed from struct
+bool disable_portal_entry; // removed from struct
 
 typedef struct CosmeticMenu
 {
@@ -181,7 +183,7 @@ void CustomMenuUpdate2()
 
         if (current_menu == MISC_MENU)
         {       
-            CapitalTextInfo menu_text_info[3] = {{0}};
+            CapitalTextInfo menu_text_info[4] = {{0}};
 
             // Easy Exit
             if(_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -190,7 +192,7 @@ void CustomMenuUpdate2()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x80);
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x94);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -203,6 +205,10 @@ void CustomMenuUpdate2()
             menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[2].y = 110;
             menu_text_info[2].size = DEFAULT_SIZE;
+            
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 130;
+            menu_text_info[3].size = DEFAULT_SIZE;
 
             _spyro.isMovementLocked = TRUE;
 
@@ -226,10 +232,18 @@ void CustomMenuUpdate2()
             
             if(misc_menu.selection == 2)
             {
-                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(misc_menu.disable_portal_entry_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else{
-                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(misc_menu.disable_portal_entry_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            
+            if(misc_menu.selection == 3)
+            {
+                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
 
@@ -238,13 +252,14 @@ void CustomMenuUpdate2()
             {
                 misc_menu.sparx_mode_text = "SPARX MODE NORMAL";
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
+                misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
                 misc_menu.quick_goop_text = "QUICK GOOP OFF";
             }
 
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                misc_menu.selection = (misc_menu.selection + 1) % 3;
+                misc_menu.selection = (misc_menu.selection + 1) % 4;
             }
             else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection != 0)
             {
@@ -252,7 +267,7 @@ void CustomMenuUpdate2()
             }
             else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
             {
-                misc_menu.selection = 2;
+                misc_menu.selection = 3;
             }
             
             // Play Sound Effect
@@ -313,6 +328,27 @@ void CustomMenuUpdate2()
 
 
             else if (misc_menu.selection == 2)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    disable_portal_entry = (disable_portal_entry + 1) % 2;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && disable_portal_entry > 0)
+                {
+                    disable_portal_entry--;
+                }
+
+                if (disable_portal_entry == false)
+                {
+                    misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
+                }
+                else
+                {
+                    misc_menu.disable_portal_entry_text = "DISABLE PORTAL ON";
+                }
+            }
+        
+            else if (misc_menu.selection == 3)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
@@ -559,9 +595,9 @@ void CustomMenuUpdate2()
                         cosmetic_menu.spyro_color_text = "SPYRO SKIN PIXIE";
                         break;
                     }
-                    case(SKIN_JAYO):
+                    case(SKIN_CANDY):
                     {
-                        cosmetic_menu.spyro_color_text = "SPYRO SKIN JAYO";
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN CANDY";
                         break;
                     }
                     case(SKIN_PERIDOT):
@@ -600,7 +636,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    flame_color_index = (flame_color_index + 1) % 5;
+                    flame_color_index = (flame_color_index + 1) % 11;
                     should_load_flame_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index > 0)
@@ -610,7 +646,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index == 0)
                 {
-                    flame_color_index = 4;
+                    flame_color_index = 10;
                     should_load_flame_color = true;
                 }
 
@@ -634,6 +670,36 @@ void CustomMenuUpdate2()
                     case(FLAME_SKIN_JADE):
                     {
                         cosmetic_menu.flame_color_text = "FLAME SKIN JADE";
+                        break;
+                    }
+                    case(FLAME_SKIN_BLUE):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN BLUE";
+                        break;
+                    }
+                    case(FLAME_SKIN_GREEN):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN GREEN";
+                        break;
+                    }
+                    case(FLAME_SKIN_PINK):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN PINK";
+                        break;
+                    }
+                    case(FLAME_SKIN_PURPLE):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN PURPLE";
+                        break;
+                    }
+                    case(FLAME_SKIN_PASTEL):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN PASTEL";
+                        break;
+                    }
+                    case(FLAME_SKIN_RAINBOW):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN RAINBOW";
                         break;
                     }
                     case(FLAME_SKIN_GHOST):

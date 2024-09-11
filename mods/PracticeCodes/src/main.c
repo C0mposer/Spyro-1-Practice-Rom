@@ -48,17 +48,16 @@ void MainFunc()
         {
             TimerUpdate();
             ILUpdate();
-            //CdLoad();               //Becomes CustomMenuUpdate once code is loaded
             CustomMenuUpdate();
             CustomMenuUpdate2();
             RatCodeUpdate();
             CreditsSkipUpdate();
             LootPlaneUpdate();
+            //ShempSkipFrameDataUpdate(); // Work on later
             MultiTapUpdate();
             
             CheckLandingUpdate();
             CosmeticsUpdate();
-            //GeoDataUpdate();
         }
 
         MainUpdate();

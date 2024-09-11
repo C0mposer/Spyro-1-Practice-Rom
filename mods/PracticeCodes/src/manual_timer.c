@@ -113,7 +113,7 @@ void TimerUpdate(){
         if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || !hasUpdatedPortalTimer)
         {
             timerState = TIMER_DISPLAYING;
-            hasUpdatedPortalTimer = TRUE;
+            hasUpdatedPortalTimer = true;
         }
 
         //Show the saved timer

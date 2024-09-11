@@ -66,4 +66,4 @@ LoadImage = 0x8005fa28;
 PauseMusicAndSFX = 0x80056b28;
 PlayMusic = 0x800567f4;
 
-LevelTransitionCalls = 0x8002df9c;
+LevelTransition = 0x8002df9c;

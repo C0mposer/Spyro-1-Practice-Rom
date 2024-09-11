@@ -183,3 +183,5 @@ _sparxGlowStrength = 0x80078810;
 
 _sparx_ptr = 0x80075898;
 _levelIDPortalExit = 0x8007596c;
+
+_shemplet = 0x8016A28C;

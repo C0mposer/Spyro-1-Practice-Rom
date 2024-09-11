@@ -3166,3 +3166,8 @@ scripts/__pycache__/combine_spyro_bmp.cpython-312.pyc
 mods/PracticeCodes/debug/dep/level_transition.dep
 mods/PracticeCodes/debug/obj/level_transition.o
 mods/PracticeCodes/output/asmlevel_transitions.bin
+scripts/tealhighlights.bmp
+scripts/temp/orangerflame.bmp_temp
+scripts/bmps/orangerflame.bin
+scripts/bmps/pinkflame.bin
+scripts/bmps/transflame.bin

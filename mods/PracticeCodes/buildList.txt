@@ -2,7 +2,7 @@ REDUX, exe, 0x80033e38, 0x0, asm/hook.s
 REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 REDUX, exe, 0x800338a0, 0x0, asm/level_transition.s
 
-REDUX, header, 0x8000B0C4, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c src/disable_portal.c, StartFairyArea.bin
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
 REDUX, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin

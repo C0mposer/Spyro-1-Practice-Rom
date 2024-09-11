@@ -182,3 +182,4 @@ _sparxGlowColor2 = 0x800788C0;
 _sparxGlowStrength = 0x80078810;
 
 _sparx_ptr = 0x80075898;
+_levelIDPortalExit = 0x8007596c;

@@ -3193,3 +3193,8 @@ scripts/bmps/silver_sparx.bmp
 scripts/bmps/turquoise_sparx.bin
 scripts/bmps/turquoise_sparx.bmp
 scripts/__pycache__/patch_wad.cpython-312.pyc
+mods/PracticeCodes/debug/dep/level_trans.dep
+mods/PracticeCodes/debug/dep/skip_portal.dep
+mods/PracticeCodes/debug/obj/level_trans.o
+mods/PracticeCodes/debug/obj/skip_portal.o
+mods/PracticeCodes/output/asmlevel_transs.bin

@@ -1,6 +1,6 @@
 REDUX, exe, 0x80033e38, 0x0, asm/hook.s
 REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
-REDUX, exe, 0x800338a0, 0x0, asm/level_trans.s
+REDUX, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c src/disable_portal.c, StartFairyArea.bin
@@ -18,7 +18,7 @@ REDUX, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
-NTSC, exe, 0x800338a0, 0x0, asm/level_trans.s
+NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c src/disable_portal.c, StartFairyArea.bin
@@ -40,8 +40,8 @@ NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 DECKARD_PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 DECKARD_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
-DECKARD_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/reset.s
-NTDECKARD_PS2_NTSCSC, exe, 0x800338a0, 0x0, asm/level_trans.s
+DECKARD_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
+NTDECKARD_PS2_NTSCSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c src/disable_portal.c, StartFairyArea.bin
@@ -66,7 +66,7 @@ DECKARD_PS2_NTSC, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 IOP_PS2_NTSC, exe, 0x80033e38, 0x0, asm/hook.s
 IOP_PS2_NTSC, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 IOP_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
-IOP_PS2_NTSC, exe, 0x800338a0, 0x0, asm/level_trans.s
+IOP_PS2_NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/draw_hud_moby.c src/landing_timer.c src/disable_portal.c, StartFairyArea.bin

@@ -1,0 +1,318 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile PS1 Code",
+            "type": "shell",
+            "command": "py ../../../../tools/mod-builder/main.py 2 1 2",
+            "options": {
+                "cwd": "${workspaceFolder}/mods/PracticeCodes/"
+            },
+            "group": {
+                "kind": "build",
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "icon": {
+                "id": "go-to-file",
+                "color": "terminal.ansiGreen"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Compile PS2 Code",
+            "type": "shell",
+            "command": "py ../../../../tools/mod-builder/main.py 2 3 2",
+            "options": {
+                "cwd": "${workspaceFolder}/mods/PracticeCodes/"
+            },
+            "group": {
+                "kind": "build",
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "icon": {
+                "id": "go-to-file",
+                "color": "terminal.ansiRed"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Compile and Build PS1 ISO",
+            "type": "shell",
+            "command": "py build_mod.py PS1",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": true
+            },
+            "icon": {
+                "id": "key",
+                "color": "terminal.ansiWhite"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Compile and Build PS2 DECKARD ISO",
+            "type": "shell",
+            "command": "py build_mod.py PS2_DECKARD",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "icon": {
+                "id": "key",
+                "color": "terminal.ansiRed"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Compile and Build PS2 IOP ISO",
+            "type": "shell",
+            "command": "py build_mod.py PS2_IOP",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "icon": {
+                "id": "key",
+                "color": "terminal.ansiYellow"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Check Available Space",
+            "type": "shell",
+            "command": "py check_available_space.py PS2_DECKARD",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "icon": {
+                "id": "dialog-info",
+                "color": "terminal.ansiGreen"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Combine All Skins",
+            "type": "shell",
+            "command": "py combine_all_skins.py",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "icon": {
+                "id":  "beaker",
+                "color": "terminal.ansiGreen"
+            },
+            "problemMatcher": []
+        },
+
+        {
+            "label": "Run in Duckstation",
+            "type": "shell",
+            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/Duckstation/duckstation-nogui-x64-ReleaseLTCG.exe ${workspaceFolder}/build/spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run in Mednefan",
+            "type": "shell",
+            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/Mednafen/mednafen.exe ${workspaceFolder}/build/spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run in PCSX2",
+            "type": "shell",
+            "command": "start ${workspaceFolder}/../../../Emulators_for_Testing/PCSX2/pcsx2.exe ${workspaceFolder}/build/spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "DUCKSTATION: Build ISO and Run in Duckstation",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Compile and Build PS1 ISO",
+                "Run in Duckstation"
+            ],
+            "icon": {
+                "id": "ruby",
+                "color": "terminal.ansiCyan"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "MEDNEFAN: Build ISO and Run in Mednefan",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Compile and Build ISO",
+                "Run in Mednefan"
+            ],
+            "icon": {
+                "id": "ruby",
+                "color": "terminal.ansiBlue"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build ISO and Run in PCSX2",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Compile and Build PS1 ISO",
+                "Run in PCSX2"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build VCD",
+            "type": "shell",
+            "command": "start ${workspaceFolder}\\build\\CUE2POPS.exe ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "dependsOn": [
+                "Compile and Build ISO"
+            ]
+        },
+        {
+            "label": "POPSTARTER: Build & Copy VCD for Popstarter SMB",
+            "type": "shell",
+            "command": "Copy-Item -Path ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).VCD -Destination ${workspaceFolder}\\build\\PS2SMB\\POPS\\SCUS_942.29.TestMod.VCD",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "icon": {
+                "id": "cloud-upload",
+                "color": "terminal.ansiGreen"
+            },
+            "dependsOn": [
+                "Build VCD"
+            ]
+        },
+    ]
+    }
+    
+    

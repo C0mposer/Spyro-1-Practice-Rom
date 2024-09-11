@@ -1,6 +1,8 @@
 #include <common.h>
-extern int levelSelectState;
+
 bool shouldContinue;
+
+extern int levelSelectState;
 
 SkipPortalEntry(){
     if(_levelLoadState || levelSelectState || (_levelIDPortalExit % 10)){

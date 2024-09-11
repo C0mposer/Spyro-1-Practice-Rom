@@ -3161,3 +3161,6 @@ scripts/temp/green_flame.bmp_temp
 scripts/temp/pasteflame.bmp_temp
 scripts/temp/pink_flame.bmp_temp
 scripts/temp/rainbowflame.bmp_temp
+scripts/__pycache__/combine_flame_bmp.cpython-312.pyc
+scripts/__pycache__/combine_sparx_bmp.cpython-312.pyc
+scripts/__pycache__/combine_spyro_bmp.cpython-312.pyc

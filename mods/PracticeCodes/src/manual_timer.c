@@ -8,7 +8,7 @@
 typedef enum TimerState
 {
     TIMER_RUNNING,
-    TIMER_DISPLAYING
+    TIMER_DISPLAYING,
 
 }TimerState;
 
@@ -60,6 +60,7 @@ extern const short STOP_TIMER_BUTTONS[2];
 extern const short SAVESTATE_BUTTONS[2];
 extern const short LOADSTATE_BUTTONS[3];
 
+extern bool hasUpdatedPortalTimer;
 
 //Math for 29.91hz
 void FramesToTimer(Timer* ptr_timer)
@@ -102,16 +103,17 @@ void TimerUpdate(){
         //Show the running timer
         if(timerState == TIMER_RUNNING)
         {
-            if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || timer_menu.timer_display_mode == TIMER_ALWAYS){
+            if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || timer_menu.timer_display_mode == TIMER_ALWAYS || !hasUpdatedPortalTimer){
                 mainTimer.timer = _globalTimer - mainTimerAtReset;
                 FramesToTimer(&mainTimer);
                 LoadAscii(&mainTimer, mainTimerAscii);
             }
         }
 
-        if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index])
+        if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || !hasUpdatedPortalTimer)
         {
             timerState = TIMER_DISPLAYING;
+            hasUpdatedPortalTimer = TRUE;
         }
 
         //Show the saved timer

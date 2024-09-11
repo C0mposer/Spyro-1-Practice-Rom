@@ -9,7 +9,7 @@
                 "cwd": "${workspaceFolder}/mods/PracticeCodes/"
             },
             "group": {
-                "kind": "build",
+                "kind": "build"
             },
             "presentation": {
                 "echo": true,
@@ -35,7 +35,7 @@
                 "cwd": "${workspaceFolder}/mods/PracticeCodes/"
             },
             "group": {
-                "kind": "build",
+                "kind": "build"
             },
             "presentation": {
                 "echo": true,
@@ -173,12 +173,11 @@
                 "isDefault": false
             },
             "icon": {
-                "id":  "beaker",
+                "id": "beaker",
                 "color": "terminal.ansiRed"
             },
             "problemMatcher": []
         },
-
         {
             "label": "Run in Duckstation",
             "type": "shell",
@@ -279,39 +278,7 @@
                 "Run in PCSX2"
             ],
             "problemMatcher": []
-        },
-        // {
-        //     "label": "Build VCD",
-        //     "type": "shell",
-        //     "command": "start ${workspaceFolder}\\build\\CUE2POPS.exe ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).cue",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}"
-        //     },
-        //     "problemMatcher": [],
-        //     "dependsOn": [
-        //         "Compile and Build ISO"
-        //     ]
-        // },
-        // {
-        //     "label": "POPSTARTER: Build & Copy VCD for Popstarter SMB",
-        //     "type": "shell",
-        //     "command": "Copy-Item -Path ${workspaceFolder}\\build\\spyro1_$(Split-Path $(Split-Path ${fileDirname} -Parent) -Leaf).VCD -Destination ${workspaceFolder}\\build\\PS2SMB\\POPS\\SCUS_942.29.TestMod.VCD",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}"
-        //     },
-        //     "problemMatcher": [],
-        //     "group": {
-        //         "kind": "build",
-        //         "isDefault": true
-        //     },
-        //     "icon": {
-        //         "id": "cloud-upload",
-        //         "color": "terminal.ansiGreen"
-        //     },
-        //     "dependsOn": [
-        //         "Build VCD"
-        //     ]
-        // },
+        }
     ]
     }
     

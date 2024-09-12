@@ -1,6 +1,7 @@
 from PIL import Image
 import sys
 
+# Takes a flame palette as a BMP file, and converts it to PSX clut format (2 bytes each)
 def RGBToVramBGR(colour):
     # Extract the RGB components
     r = colour[0] >> 3  # Bottom 3 bits are lost

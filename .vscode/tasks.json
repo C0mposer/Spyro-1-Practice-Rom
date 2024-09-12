@@ -158,7 +158,7 @@
             "type": "shell",
             "command": "py combine_all_skins.py",
             "options": {
-                "cwd": "${workspaceFolder}/scripts/"
+                "cwd": "${workspaceFolder}/scripts/bmp_scripts/"
             },
             "presentation": {
                 "echo": true,

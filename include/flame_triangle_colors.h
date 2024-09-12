@@ -117,31 +117,33 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[11] =
 	},
 	//5 Green
 	{
-        .tip.r = 0x78,
-		.tip.g = 0xff,
-		.tip.b = 0x48,
+
+        .tip.r = 0x4a,
+		.tip.g = 0x8b,
+		.tip.b = 0x0,
 		.tip.shape_code = 0x30,
 
-		.center.r = 0x18,
-		.center.g = 0xaa,
-		.center.b = 0x15,
+		.center.r = 0x72,
+		.center.g = 0xff,
+		.center.b = 0x6f,
 		.center.shape_code = 0x30,
 		
-		.right.r = 0x7a,
-		.right.g = 0xdf,
-		.right.b = 0x89,
+		.right.r = 0x8,
+		.right.g = 0x90,
+		.right.b = 0x0,
 		.right.shape_code = 0x30,
 
-		.left.r = 0x62,
-		.left.g = 0xd4,
-		.left.b = 0x63,
+		.left.r = 0xc,
+		.left.g = 0x85,
+		.left.b = 0x0,
 		.left.shape_code = 0x30
 	},
 	//6 Pink
 	{
+
         .tip.r = 0xff,
-		.tip.g = 0x5b,
-		.tip.b = 0xf7,
+		.tip.g = 0x0,
+		.tip.b = 0xf2,
 		.tip.shape_code = 0x30,
 
 		.center.r = 0xfc,
@@ -149,14 +151,14 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[11] =
 		.center.b = 0xff,
 		.center.shape_code = 0x30,
 		
-		.right.r = 0xf9,
-		.right.g = 0x53,
-		.right.b = 0xec,
+		.right.r = 0xb2,
+		.right.g = 0x0,
+		.right.b = 0x8b,
 		.right.shape_code = 0x30,
 
-		.left.r = 0xf4,
-		.left.g = 0x5a,
-		.left.b = 0xfd,
+		.left.r = 0xa6,
+		.left.g = 0xf,
+		.left.b = 0x85,
 		.left.shape_code = 0x30
 	},
 	//7 Purple (Cynder)

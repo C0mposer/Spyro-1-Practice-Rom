@@ -1,3 +1,5 @@
+### Flips the order of rows in a BMP, and reverses the bit-endianess every 4 bits, then outputs to the console
+
 import struct
 import sys
 
@@ -37,6 +39,16 @@ def read_bmp_4bit(input_path):
         reversed_data = b''.join(reversed_data)
         return reversed_data, width, height, row_size
 
+def flip_4bit_endianness(pixel_data):
+    # Flip the endianess of 4-bit nibbles in each byte
+    flipped_data = bytearray(len(pixel_data))
+    for i in range(len(pixel_data)):
+        byte = pixel_data[i]
+        # Swap the high nibble and low nibble
+        flipped_byte = ((byte & 0x0F) << 4) | ((byte & 0xF0) >> 4)
+        flipped_data[i] = flipped_byte
+    return bytes(flipped_data)
+
 def print_pixel_data_by_row(pixel_data, width, height, row_size):
     # Print the pixel data row by row
     for row in range(height):
@@ -46,14 +58,17 @@ def print_pixel_data_by_row(pixel_data, width, height, row_size):
         print(row_data.hex())  # Print the hex representation of each row
 
 if __name__ == "__main__":
-    
     input_file = sys.argv[1]  # Path to your 4-bit BMP file
 
     try:
         pixel_data, width, height, row_size = read_bmp_4bit(input_file)
         print(f"Pixel data read successfully from {input_file}.")
         print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
-        print("Raw 4-bit pixel data (top to bottom):")
-        print_pixel_data_by_row(pixel_data, width, height, row_size)
+        print()
+        print("Raw 4-bit pixel data (top to bottom) and bit-endian flipped:")
+
+        # Flip the endianess of the 4-bit data
+        flipped_pixel_data = flip_4bit_endianness(pixel_data)
+        print_pixel_data_by_row(flipped_pixel_data, width, height, row_size)
     except Exception as e:
         print(f"An error occurred: {e}")

@@ -1,6 +1,8 @@
 from PIL import Image
 import sys
-  
+
+# Takes sparx's vertex coloring as a BMP file, and converts the binary data needed by the game
+
 filename = sys.argv[1]
 img = Image.open(filename)
     

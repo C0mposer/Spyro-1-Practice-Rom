@@ -432,4 +432,50 @@ void MainUpdate()
     //     SkinTester();
     // }
 
+
+    // int envOffset;
+    // if(*(int *)0x80075888 == 0x80076f64){
+    //     envOffset = 0;
+    // }
+    // else{
+    //     envOffset = 240;
+    // }
+
+    // for (size_t i = 0; i < 10; i++)
+    // { 
+    //     byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
+
+    //     RECT spyro_area_1_rect;
+    //     spyro_area_1_rect.w = 6;
+    //     spyro_area_1_rect.x = 4;
+    //     spyro_area_1_rect.y = 12 + envOffset;
+    //     spyro_area_1_rect.h = 9;
+        
+    //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+    // }
+
+
+    // if(_currentButtonOneFrame == TRIANGLE_BUTTON){
+        
+    //     byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
+
+    //     RECT spyro_area_1_rect;
+    //     spyro_area_1_rect.w = 8;
+    //     spyro_area_1_rect.x = 912;
+    //     spyro_area_1_rect.y = 256;
+    //     spyro_area_1_rect.h = 32;
+        
+    //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+
+    //     spyro_bmp_main_ram_location = (byte*)0x800742B0;
+
+    //     spyro_area_1_rect.w = 16;
+    //     spyro_area_1_rect.x = 816;
+    //     spyro_area_1_rect.y = 480;
+    //     spyro_area_1_rect.h = 1;
+        
+    //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+    // }
+    
+
 }

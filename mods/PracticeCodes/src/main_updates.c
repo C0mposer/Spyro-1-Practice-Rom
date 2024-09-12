@@ -53,6 +53,9 @@ extern bool should_write_spyro_bmp;
 extern bool should_write_flame_bmp;
 extern bool should_write_sparx_bmp;
 
+extern bool disable_portal_entry;
+extern bool has_savestated_on_disabling_portal;
+
 bool is_greenscreen = false;
 
 
@@ -371,6 +374,25 @@ void MainUpdate()
         }
     }
 
+    // Prepare savestate after turning on disable portal
+    if(mod_state == UNLOCKED_LEVELS && disable_portal_entry == true && has_savestated_on_disabling_portal == false)
+    {
+        //printf("Savestated after enabling the disable portal option\n");
+        #if BUILD == 2 || BUILD == 0
+            SaveStateTest();
+        #elif BUILD == 1 || BUILD == 3
+            SaveSpyroAndCamera(false);
+        #endif
+
+        has_savestated_on_disabling_portal = true;
+    }
+
+    // Undo has_savestated_on_disabling_portal bool
+    if(mod_state == UNLOCKED_LEVELS && disable_portal_entry == false && has_savestated_on_disabling_portal == true)
+    {
+        //printf("Set savestate after dragon bool to false\n");
+        has_savestated_on_disabling_portal = false;
+    }
 
     {     
         //Safeguard against loading with another levels savestate/no savestate
@@ -378,6 +400,7 @@ void MainUpdate()
         {
             _globalEggs = 0;
 
+            //Change savestate slot to 0 upon leaving level
             if(savestated_level_ids[savestate_selection] != _levelID)
             {
                 savestate_selection = 0;
@@ -422,7 +445,7 @@ void MainUpdate()
 
 
 
-    //VramTester();
+    VramTester();
     // //Every frame check to check for nopping MobyAnimationUpdate
     // {
     //     MobyAnimCrashFix();

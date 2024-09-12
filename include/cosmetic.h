@@ -58,7 +58,7 @@ typedef enum SpyroColor
     SKIN_DITTO,
     SKIN_EMBER, 
     SKIN_CYNDER,
-    SKIN_CYNDER_CREST
+    SKIN_CUSTOM
 }SpyroColor;
 typedef enum FlameColor
 {

@@ -135,7 +135,6 @@ void LoadGeoData(void)
         local_mem_region += 1;
 
         // Force textures that weren't moving in either locked state, to update
-        printf("end: %X\n", local_mem_region);
     }
 
     //All moving collision in 1 area, no need to loop
@@ -149,7 +148,7 @@ void LoadGeoData(void)
         memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
         local_mem_region += movingCollisionSize;
     }
-        //printf("end of local region: %X\n", local_mem_region);
+        //printf("End of local savestate region: %X\n", local_mem_region);
 
     // Set our geo state to SHOULD_MOVE, so that GeoDataUpdate() can begin
     //geo_reset_state = SHOULD_MOVE;

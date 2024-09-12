@@ -6,7 +6,7 @@ extern int levelSelectState;
 extern int timerState;
 extern bool disable_portal_entry;
 
-SkipPortalEntry()
+DisablePortalEntry()
 {
     if(_levelLoadState || levelSelectState || (_levelIDPortalExit % 10) != 0 || !disable_portal_entry)
     {          

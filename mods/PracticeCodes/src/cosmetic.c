@@ -10,6 +10,10 @@ bool should_write_spyro_bmp = false;
 bool should_write_flame_bmp = false;
 bool should_write_sparx_bmp = false;
 
+void* previous_sparx_ptr = NULL;
+
+bool has_freed_dragon = false;
+
 extern SpyroColor spyro_color_index;
 extern FlameColor flame_color_index;
 extern SparxColor sparx_color_index;
@@ -19,7 +23,6 @@ extern bool should_update_bg_color;
 extern bool should_load_spyro_color;
 extern bool should_load_flame_color;
 extern bool should_load_sparx_color;
-void* previous_sparx_ptr = NULL;
 
 //! BG COLOR
 //Changing asm instructions for pause menu RGB. Cannot change B value, as the value is in a shared register with other crucial parts of the struct.
@@ -225,49 +228,53 @@ void CosmeticsUpdate(void)
 				should_write_sparx_bmp = true; 	// Reload sparx since he has moved.
 			}
 		}
+
 		// If the glow strength is between this range, that means it's growing from regetting max sparx
 		if(_sparxGlowStrength > 10 || _sparxGlowStrength < 60)
 		{
 			ChangeSparxGlowColor(CUSTOM_SPARX_GLOW_COLORS[sparx_color_index]); // Change Sparx Glow if we are back to 3 health
 		}
+
+		// If you have freed a dragon, wait until gamestate 0 to reload the skin
+		if (_gameState == GAMESTATE_DRAGON_STATE && has_freed_dragon == false)
+		{
+			//printf("Freed Dragon\n");
+			has_freed_dragon = true;
+		}
+		// Reload sparx skin after the dragon cutscene has finished
+		else if (has_freed_dragon == true && _gameState == GAMESTATE_GAMEPLAY)
+		{
+			//printf("Reloaded sparx skin after dragon\n");
+			should_write_sparx_bmp = true;
+			has_freed_dragon = false;
+		}
 	}
 
 }
 
-// void VramTester()
-// {
-// 	int* flame_bmp_main_ram_location = (int*)0x80074400;
+void VramTester()
+{
+	int* flag_bmp_main_ram_location = (int*)0x80074400;
 
-// 	// VORTEX CLUTS
-//  	RECT test_rect;
-// 	test_rect.w = 15;
-// 	test_rect.x = 545;
-// 	test_rect.y = 432;
-// 	test_rect.h = 7;
+	//Arty's flags
+ 	RECT test_rect;
+	test_rect.x = 912;
+	test_rect.y = 256;
+	test_rect.w = 32/4;
+	test_rect.h = 32;
 	
-//   	LoadImage(&test_rect, flame_bmp_main_ram_location);
+  	LoadImage(&test_rect, flag_bmp_main_ram_location);
 
-// 	test_rect.w = 15;
-// 	test_rect.x = 545;
-// 	test_rect.y = 424;
-// 	test_rect.h = 7;
-	
-//   	LoadImage(&test_rect, flame_bmp_main_ram_location);
+	int* flag2_bmp_main_ram_location = (int*)0x80074600;
 
-// 	test_rect.w = 15;
-// 	test_rect.x = 545;
-// 	test_rect.y = 440;
-// 	test_rect.h = 7;
+	test_rect.x = 904;
+	test_rect.y = 320;
+	test_rect.w = 32/4;
+	test_rect.h = 32;
 	
-//   	LoadImage(&test_rect, flame_bmp_main_ram_location);
+  	LoadImage(&test_rect, flag2_bmp_main_ram_location);
 
-// 	test_rect.w = 15;
-// 	test_rect.x = 561;
-// 	test_rect.y = 424;
-// 	test_rect.h = 7;
-	
-//   	LoadImage(&test_rect, flame_bmp_main_ram_location);
-// }
+}
 
 // extern bool should_reload_test_skins;
 

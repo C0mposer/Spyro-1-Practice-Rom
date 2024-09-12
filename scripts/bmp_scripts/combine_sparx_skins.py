@@ -1,4 +1,6 @@
 import os
+
+# Combines all converted sparx bmps to 1 combined sparx.bin file
 def CombineSparxSkins():
     directory = "bmps/"
     file_list = ["og_sparx.bin", "red_sparx.bin", "darkpurple_sparx.bin", "orange_sparx.bin", "darkblue_sparx.bin", "pink_sparx.bin", "turquoise_sparx.bin", "silver_sparx.bin", "black_sparx.bin"]  # Add all your files here

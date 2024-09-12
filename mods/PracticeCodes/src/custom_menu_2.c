@@ -113,6 +113,7 @@ typedef struct MiscMenu
 extern MiscMenu misc_menu;
 bool counter_mode; // removed from struct
 bool disable_portal_entry; // removed from struct
+bool has_savestated_on_disabling_portal = false;
 
 typedef struct CosmeticMenu
 {
@@ -529,7 +530,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    spyro_color_index = (spyro_color_index + 1) % 17;
+                    spyro_color_index = (spyro_color_index + 1) % 18;
                     should_load_spyro_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && spyro_color_index > 0)
@@ -539,7 +540,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && spyro_color_index == 0)
                 {
-                    spyro_color_index = 16;
+                    spyro_color_index = 17;
                     should_load_spyro_color = true;
                 }
 
@@ -628,6 +629,11 @@ void CustomMenuUpdate2()
                     case(SKIN_CYNDER):
                     {
                         cosmetic_menu.spyro_color_text = "SPYRO SKIN CYNDER";
+                        break;
+                    }
+                    case(SKIN_CUSTOM):
+                    {
+                        cosmetic_menu.spyro_color_text = "SPYRO SKIN CUSTOM";
                         break;
                     }
                 }

@@ -1,2 +1,2 @@
 .set noreorder
-jal SkipPortalEntry
+jal DisablePortalEntry

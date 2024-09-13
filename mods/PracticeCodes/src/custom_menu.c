@@ -101,8 +101,10 @@ typedef struct MiscMenu
     char* sparx_mode_text;
     bool show_dragon_touch;
     char* show_dragon_touch_text;
+    char* disable_portal_entry_text;
     bool quick_goop_mode;
     char* quick_goop_text;
+    char* consitency_tracker_text;
 }MiscMenu;
 MiscMenu misc_menu = {0};
 

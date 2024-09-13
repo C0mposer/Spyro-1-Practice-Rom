@@ -445,7 +445,7 @@ void MainUpdate()
 
 
 
-    VramTester();
+    //VramTester();
     // //Every frame check to check for nopping MobyAnimationUpdate
     // {
     //     MobyAnimCrashFix();

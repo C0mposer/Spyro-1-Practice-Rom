@@ -41,12 +41,14 @@
 
 #define SECONDS 30
 
-#define NUMBER_TO_ASCII(x) x + '0'
+void NumberToAscii(int number, char *result);
 
 typedef enum Direction
 {
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DOWN
 }Direction;
 
 typedef enum SwitchButton

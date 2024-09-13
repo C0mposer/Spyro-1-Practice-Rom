@@ -55,8 +55,8 @@ void MainFunc()
             LootPlaneUpdate();
             //ShempSkipFrameDataUpdate(); // Work on later
             MultiTapUpdate();
-            
             CheckLandingUpdate();
+            TrackConsistencyUpdate();
             CosmeticsUpdate();
         }
 

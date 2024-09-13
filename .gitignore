@@ -3255,3 +3255,7 @@ scripts/bmps/flag.bmp
 scripts/bmps/flag2.bmp
 scripts/bmps/palette_output.bin
 scripts/bmps/palette_output.bmp
+mods/PracticeCodes/debug/dep/common.dep
+mods/PracticeCodes/debug/dep/count_consistency.dep
+mods/PracticeCodes/debug/obj/common.o
+mods/PracticeCodes/debug/obj/count_consistency.o

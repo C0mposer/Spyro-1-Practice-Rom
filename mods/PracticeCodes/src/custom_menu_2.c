@@ -677,7 +677,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    flame_color_index = (flame_color_index + 1) % 11;
+                    flame_color_index = (flame_color_index + 1) % 15;
                     should_load_flame_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index > 0)
@@ -687,7 +687,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index == 0)
                 {
-                    flame_color_index = 10;
+                    flame_color_index = 14;
                     should_load_flame_color = true;
                 }
 
@@ -698,14 +698,14 @@ void CustomMenuUpdate2()
                         cosmetic_menu.flame_color_text = "FLAME SKIN DEFAULT";
                         break;
                     }
-                    case(FLAME_SKIN_BLOOD):
+                    case(FLAME_SKIN_DARK_RED):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME SKIN BLOOD";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN DARK RED";
                         break;
                     }
-                    case(FLAME_SKIN_ICE):
+                    case(FLAME_SKIN_ICY):
                     {
-                        cosmetic_menu.flame_color_text = "FLAME SKIN ICE";
+                        cosmetic_menu.flame_color_text = "FLAME SKIN ICY";
                         break;
                     }
                     case(FLAME_SKIN_JADE):
@@ -728,9 +728,24 @@ void CustomMenuUpdate2()
                         cosmetic_menu.flame_color_text = "FLAME SKIN PINK";
                         break;
                     }
+                    case(FLAME_SKIN_GOLD):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN GOLD";
+                        break;
+                    }
+                    case(FLAME_SKIN_ACID):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN ACID";
+                        break;
+                    }
                     case(FLAME_SKIN_PURPLE):
                     {
                         cosmetic_menu.flame_color_text = "FLAME SKIN PURPLE";
+                        break;
+                    }
+                    case(FLAME_SKIN_LIGHT_PINK):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN LIGHT PINK";
                         break;
                     }
                     case(FLAME_SKIN_PASTEL):
@@ -741,6 +756,11 @@ void CustomMenuUpdate2()
                     case(FLAME_SKIN_RAINBOW):
                     {
                         cosmetic_menu.flame_color_text = "FLAME SKIN RAINBOW";
+                        break;
+                    }
+                    case(FLAME_SKIN_CYNDER):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN CYNDER";
                         break;
                     }
                     case(FLAME_SKIN_GHOST):

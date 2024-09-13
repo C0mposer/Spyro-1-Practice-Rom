@@ -218,7 +218,7 @@ void MainUpdate()
     if(mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
     {
         //Save spyro & camera information
-        if(savestate_button_index < 2) //
+        if(savestate_button_index < 2)
         {
             if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load)
             {

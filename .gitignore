@@ -3259,3 +3259,11 @@ mods/PracticeCodes/debug/dep/common.dep
 mods/PracticeCodes/debug/dep/count_consistency.dep
 mods/PracticeCodes/debug/obj/common.o
 mods/PracticeCodes/debug/obj/count_consistency.o
+scripts/bmp_scripts/temp/acid.bmp_temp
+scripts/bmp_scripts/temp/gold_flame.bmp_temp
+scripts/bmp_scripts/temp/light pink.bmp_temp
+scripts/bmp_scripts/temp/pinkblue_flame.bmp_temp
+scripts/bmp_scripts/bmps/light_purple_flame.bin
+scripts/bmp_scripts/bmps/light_pink_flame.bin
+scripts/bmp_scripts/bmps/gold_flame.bin
+scripts/bmp_scripts/bmps/acid_flame.bin

@@ -10,6 +10,7 @@ extern Moby _2nd_loot_key;
 extern int _3rd_loot_key_collected;
 extern Moby _3rd_loot_key; 
 
+//! Every Frame Update
 void LootPlaneUpdate(void)
 {
     if(_levelID == GNASTYS_LOOT_ID)

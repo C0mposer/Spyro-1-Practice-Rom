@@ -3250,9 +3250,12 @@ scripts/bmp_scripts/temp/redflame.bmp_temp
 scripts/bmp_scripts/temp/smoke.bmp_temp
 scripts/bmp_scripts/temp/whiteflame.bmp_temp
 scripts/bmp_scripts/temp/woke.bmp_temp
-scripts/bmps/custom_spyro.bin
 scripts/bmps/custom_spyro.bin.bak
 scripts/bmps/flag.bmp
 scripts/bmps/flag2.bmp
 scripts/bmps/palette_output.bin
 scripts/bmps/palette_output.bmp
+mods/PracticeCodes/debug/dep/common.dep
+mods/PracticeCodes/debug/dep/count_consistency.dep
+mods/PracticeCodes/debug/obj/common.o
+mods/PracticeCodes/debug/obj/count_consistency.o

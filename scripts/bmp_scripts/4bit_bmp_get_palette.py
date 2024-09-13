@@ -47,7 +47,7 @@ def create_palette_bmp(palette, output_path):
 if __name__ == "__main__":
     input_file = sys.argv[1]            # Path to your 4-bit BMP file
     input_file_name = GetFileNameFromPathNoExt(input_file)
-    output_file = input_file_name + "_palette.bmp"  # Output path for the palette BMP file
+    output_file = "bmps/" + input_file_name + "_palette.bmp"  # Output path for the palette BMP file
 
     try:
         # Extract the palette from the BMP

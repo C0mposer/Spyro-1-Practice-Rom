@@ -51,11 +51,11 @@ void ReadFileIntoRam(int sector_number, int size_to_read_in_ints, int* ram_area,
         int remaining_offset = offset_in_ints - (0x50 * i);             // Calculate the remaning ints to remove, with the amount of for loop itterations            
         if (remaining_offset > 0)                                       // If there is any remaining offset bytes remaining, remove them
         {
-            CdGetSector((int*)ram_area, remaining_offset);                    // Read remaining offset data < 0x50 ints
+            CdGetSector((int*)ram_area, remaining_offset);              // Read remaining offset data < 0x50 ints
         }
 
 
-        CdGetSector((int*)ram_area, size_to_read_in_ints);                    // Read actual data
+        CdGetSector((int*)ram_area, size_to_read_in_ints);              // Read actual data
 }
 
 

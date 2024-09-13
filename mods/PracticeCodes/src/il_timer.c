@@ -72,8 +72,7 @@ extern int savestate_selection;
 int il_timer_offset[3] = {0};
 
 
-
-
+//! Every Frame Update
 void ILUpdate(){
     if(il_menu.il_state)
     {

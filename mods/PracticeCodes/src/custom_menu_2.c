@@ -109,9 +109,10 @@ typedef struct MiscMenu
     char* disable_portal_entry_text;
     bool quick_goop_mode;
     char* quick_goop_text;
+    char* consitency_tracker_text;
 }MiscMenu;
 extern MiscMenu misc_menu;
-bool counter_mode; // removed from struct
+bool consistency_tracker_mode; // removed from struct
 bool disable_portal_entry; // removed from struct
 bool has_savestated_on_disabling_portal = false;
 
@@ -178,6 +179,7 @@ extern int mainTimerAtReset;
 
 extern CdlLOC oldCdLocation;
 
+//! Every Frame Update
 void CustomMenuUpdate2()
 {
     if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
@@ -185,7 +187,7 @@ void CustomMenuUpdate2()
 
         if (current_menu == MISC_MENU)
         {       
-            CapitalTextInfo menu_text_info[4] = {{0}};
+            CapitalTextInfo menu_text_info[5] = {{0}};
 
             // Easy Exit
             if(_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -194,7 +196,7 @@ void CustomMenuUpdate2()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x94);
+            DrawTextBox(0x30, 0x1D0, 0x30, 0xA8);
             
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -211,6 +213,10 @@ void CustomMenuUpdate2()
             menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[3].y = 130;
             menu_text_info[3].size = DEFAULT_SIZE;
+
+            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[4].y = 150;
+            menu_text_info[4].size = DEFAULT_SIZE;
 
             _spyro.isMovementLocked = TRUE;
 
@@ -248,6 +254,14 @@ void CustomMenuUpdate2()
                 DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
+            if(misc_menu.selection == 4)
+            {
+                DrawTextCapitals(misc_menu.consitency_tracker_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else{
+                DrawTextCapitals(misc_menu.consitency_tracker_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
 
             // Fill text with defaults if NULL
             if(misc_menu.sparx_mode_text == NULL)
@@ -256,12 +270,13 @@ void CustomMenuUpdate2()
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
                 misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
                 misc_menu.quick_goop_text = "QUICK GOOP OFF";
+                misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
             }
 
             // Change Selection
             if(_currentButtonOneFrame == DOWN_BUTTON)
             {
-                misc_menu.selection = (misc_menu.selection + 1) % 4;
+                misc_menu.selection = (misc_menu.selection + 1) % 5;
             }
             else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection != 0)
             {
@@ -269,7 +284,7 @@ void CustomMenuUpdate2()
             }
             else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
             {
-                misc_menu.selection = 3;
+                misc_menu.selection = 4;
             }
             
             // Play Sound Effect
@@ -368,6 +383,27 @@ void CustomMenuUpdate2()
                 else
                 {
                     misc_menu.quick_goop_text = "QUICK GOOP ON";
+                }
+            }
+
+            if(misc_menu.selection == 4)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                {
+                    consistency_tracker_mode = (consistency_tracker_mode + 1) % 2;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON && consistency_tracker_mode > 0)
+                {
+                    consistency_tracker_mode;
+                }
+
+                if(consistency_tracker_mode == false)
+                {
+                    misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
+                }
+                else if(consistency_tracker_mode == true)
+                {
+                    misc_menu.consitency_tracker_text = "TRACK CONSISTENCY ON";
                 }
             }
         }
@@ -785,27 +821,6 @@ void CustomMenuUpdate2()
                     }
                 }
             }
-
-            // if(misc_menu.selection == 4)
-            // {
-            //     if (_currentButtonOneFrame == RIGHT_BUTTON)
-            //     {
-            //         counter_mode = (counter_mode + 1) % 2;
-            //     }
-            //     else if (_currentButtonOneFrame == LEFT_BUTTON && counter_mode > 0)
-            //     {
-            //         counter_mode;
-            //     }
-
-            //     if(counter_mode == 0)
-            //     {
-            //         counter_mode_text = "COUNTER OFF";
-            //     }
-            //     else if(counter_mode == 1)
-            //     {
-            //         counter_mode_text = "COUNTER ON";
-            //     }
-            // }
         }
     }
 

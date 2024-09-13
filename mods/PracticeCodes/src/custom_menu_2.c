@@ -6,7 +6,7 @@
 #include <cosmetic.h>
 #include <igt.h>
 #include <custom_types.h>
-
+#include <cd.h>
 
 typedef enum MenuState
 {
@@ -176,6 +176,8 @@ typedef enum ILTimerState
 }ILTimerState;
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
+
+extern CdlLOC oldCdLocation;
 
 //! Every Frame Update
 void CustomMenuUpdate2()
@@ -415,6 +417,7 @@ void CustomMenuUpdate2()
             {
                 current_menu = MAIN_MENU;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&oldCdLocation, NULL);
                 PlayMusic(_currentMusicTrack, 8);
             }
 

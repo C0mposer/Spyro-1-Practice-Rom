@@ -478,27 +478,52 @@ void MainUpdate()
     // }
 
 
-    // if(_currentButtonOneFrame == TRIANGLE_BUTTON){
+//    if(_currentButtonOneFrame == TRIANGLE_BUTTON){
         
-    //     byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
+//         byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
 
-    //     RECT spyro_area_1_rect;
-    //     spyro_area_1_rect.w = 8;
-    //     spyro_area_1_rect.x = 912;
-    //     spyro_area_1_rect.y = 256;
-    //     spyro_area_1_rect.h = 32;
+//         RECT spyro_area_1_rect;
+//         spyro_area_1_rect.w = 8;
+//         spyro_area_1_rect.x = 912;
+//         spyro_area_1_rect.y = 256;
+//         spyro_area_1_rect.h = 32;
         
-    //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
-
-    //     spyro_bmp_main_ram_location = (byte*)0x800742B0;
-
-    //     spyro_area_1_rect.w = 16;
-    //     spyro_area_1_rect.x = 816;
-    //     spyro_area_1_rect.y = 480;
-    //     spyro_area_1_rect.h = 1;
+//         LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
         
-    //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
-    // }
+            
+
+//         spyro_bmp_main_ram_location = (byte*)0x800742B0;
+
+//         spyro_area_1_rect.w = 16;
+//         spyro_area_1_rect.x = 816;
+//         spyro_area_1_rect.y = 480;
+//         spyro_area_1_rect.h = 1;
+        
+//         for (int i = 0; i < 8; i++)
+//         {
+//             spyro_area_1_rect.y = 480 + i;
+//             LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+//         }
+
+//         spyro_bmp_main_ram_location = (byte*)0x800743b0;
+
+//         spyro_area_1_rect.w = 32;
+//         spyro_area_1_rect.x = 784;
+//         spyro_area_1_rect.y = 480;
+//         spyro_area_1_rect.h = 8;
+
+//         LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+
+
+//         spyro_bmp_main_ram_location = (byte*)0x800740B0;
+
+//         spyro_area_1_rect.w = 8;
+//         spyro_area_1_rect.x = 960;
+//         spyro_area_1_rect.y = 384;
+//         spyro_area_1_rect.h = 128;
+
+//         LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+//     } 
     
 
 }

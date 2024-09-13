@@ -6,6 +6,7 @@
 #include <cosmetic.h>
 #include <igt.h>
 #include <moby.h>
+#include <cd.h>
 
 typedef enum MenuState
 {
@@ -146,6 +147,8 @@ int savestate_button_index;
 int loadstate_button_index;
 int switch_state_button_index;
 
+CdlLOC oldCdLocation;
+
 
 // Externed from elsewhere
 typedef enum ILTimerState
@@ -172,6 +175,7 @@ void CustomMenuUpdate(void)
         {
             _spyro.isMovementLocked = FALSE;
             current_menu = MAIN_MENU;
+            CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&oldCdLocation, NULL);
             PlayMusic(_currentMusicTrack, 8);
         }
     }
@@ -326,8 +330,11 @@ void CustomMenuUpdate(void)
                 if(_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = COSMETIC_MENU;
+                    CdControlB(CDL_PRIMITIVE_GETlocL, NULL, (void *)&oldCdLocation);
                 }
             }
+
+
 
         }
 

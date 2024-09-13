@@ -252,29 +252,29 @@ void CosmeticsUpdate(void)
 
 }
 
-void VramTester()
-{
-	int* flag_bmp_main_ram_location = (int*)0x80074400;
+// void VramTester()
+// {
+// 	int* flag_bmp_main_ram_location = (int*)0x80074400;
 
-	//Arty's flags
- 	RECT test_rect;
-	test_rect.x = 912;
-	test_rect.y = 256;
-	test_rect.w = 32/4;
-	test_rect.h = 32;
+// 	//Arty's flags
+//  	RECT test_rect;
+// 	test_rect.x = 912;
+// 	test_rect.y = 256;
+// 	test_rect.w = 32/4;
+// 	test_rect.h = 32;
 	
-  	LoadImage(&test_rect, flag_bmp_main_ram_location);
+//   	LoadImage(&test_rect, flag_bmp_main_ram_location);
 
-	int* flag2_bmp_main_ram_location = (int*)0x80074600;
+// 	int* flag2_bmp_main_ram_location = (int*)0x80074600;
 
-	test_rect.x = 904;
-	test_rect.y = 320;
-	test_rect.w = 32/4;
-	test_rect.h = 32;
+// 	test_rect.x = 904;
+// 	test_rect.y = 320;
+// 	test_rect.w = 32/4;
+// 	test_rect.h = 32;
 	
-  	LoadImage(&test_rect, flag2_bmp_main_ram_location);
+//   	LoadImage(&test_rect, flag2_bmp_main_ram_location);
 
-}
+// }
 
 // extern bool should_reload_test_skins;
 

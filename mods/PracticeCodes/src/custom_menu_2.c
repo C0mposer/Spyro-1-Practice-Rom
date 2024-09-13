@@ -177,7 +177,7 @@ typedef enum ILTimerState
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
 
-
+//! Every Frame Update
 void CustomMenuUpdate2()
 {
     if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)

@@ -63,6 +63,7 @@ bool CheckButtonMultiTap(unsigned short button, int times_to_press)
     }
 }
 
+//! Every Frame Update
 void MultiTapUpdate(void)
 {
     // Loop through all the timers

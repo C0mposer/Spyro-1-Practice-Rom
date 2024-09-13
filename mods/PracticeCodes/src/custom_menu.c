@@ -158,7 +158,7 @@ typedef enum ILTimerState
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
 
-
+//! Every Frame Update
 void CustomMenuUpdate(void)
 { 
     // Open Menu

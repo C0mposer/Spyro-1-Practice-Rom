@@ -81,6 +81,7 @@ void LoadAscii(Timer* ptr_timer, char* ascii){
     }
 }
 
+//! Every Frame Update
 void TimerUpdate(){
 
     if(timer_menu.timer_state)

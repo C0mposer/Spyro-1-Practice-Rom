@@ -41,6 +41,7 @@ void DrawConsistencyInfo(void)
     RenderShadedMobyQueue();
 }
 
+//! Every Frame Update
 void TrackConsistencyUpdate(void)
 {
     if (_gameState == GAMESTATE_GAMEPLAY && consistency_tracker_mode == true)

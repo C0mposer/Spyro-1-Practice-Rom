@@ -159,7 +159,6 @@ void ChangeSparxGlowColor(u8RGBA new_color)
 
 
 //! Every Frame Update
-// Check for Loading Skins
 void CosmeticsUpdate(void)
 {
 	//Change background color when menu gets updated

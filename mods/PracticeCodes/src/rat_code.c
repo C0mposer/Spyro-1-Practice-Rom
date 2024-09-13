@@ -68,6 +68,7 @@ void LoadRat(void)
     }
 }
 
+//! Every Frame Update
 void RatCodeUpdate(void)
 {
     if (_levelID == GNASTYS_WORLD_ID)

@@ -6,6 +6,7 @@ extern int gnasty_chase_state;
 extern void* ptr_gnasty_end_fight;
 extern void* path_ptr;
 
+//! Every Frame Update
 void CreditsSkipUpdate()
 {
     if(_levelID == GNASTY_GNORC_ID)

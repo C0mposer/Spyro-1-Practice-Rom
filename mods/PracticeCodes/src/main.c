@@ -53,11 +53,11 @@ void MainFunc()
             RatCodeUpdate();
             CreditsSkipUpdate();
             LootPlaneUpdate();
-            //ShempSkipFrameDataUpdate(); // Work on later
             MultiTapUpdate();
             CheckLandingUpdate();
             TrackConsistencyUpdate();
             CosmeticsUpdate();
+            //ShempSkipFrameDataUpdate(); // Work on later
         }
 
         MainUpdate();

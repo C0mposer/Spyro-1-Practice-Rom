@@ -62,3 +62,14 @@ def PatchWadHeadControl():
     except ValueError as ve:
         print(f"ValueError: {ve}")
         sys.exit(1)
+
+    offset = int(0x988F68)
+    replace_file_path = 'bmps/FlagLODVertexColors.bin'
+
+    replace_bytes = read_binary_file(replace_file_path)
+
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)

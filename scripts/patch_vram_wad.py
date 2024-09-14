@@ -1,7 +1,8 @@
 import sys
-sys.path.append('C:\\Users\\Kara\\Desktop\\Kara\\Toolchain-Crap\\toolchain_for_kara\\games\\Spyro1_PracticeCodes\\scripts\\bmp_scripts')
-from bmp_scripts.texture_bmp_flip import *
-from bmp_scripts.bmp_extract_pallette import *
+from bmp_scripts.texture_bmp_flip_4bit import *
+from bmp_scripts.bmp_extract_pallette_4bit import *
+from bmp_scripts.texture_bmp_flip_8bit import *
+from bmp_scripts.bmp_extract_pallette_8bit import *
 
 vram_offset_in_wad = {
     "artisans" : 0x801000,
@@ -56,7 +57,7 @@ def patch_vram_in_wad(x_vram, y_vram, width, height, level, patch_data):
     else:
         start_row = 0
 
-    with open("C:\\Users\\Kara\\Desktop\\Kara\\Toolchain-Crap\\toolchain_for_kara\\games\\Spyro1_PracticeCodes\\build\\spyro1_PracticeCodes\\WAD.WAD", "rb+") as file:
+    with open("..\\build\\spyro1_PracticeCodes\\WAD.WAD", "rb+") as file:
         for y in range(height):
 
             offset = (y + y_vram) * 0x400 + (2 * x_vram) + wad_offset
@@ -66,7 +67,7 @@ def patch_vram_in_wad(x_vram, y_vram, width, height, level, patch_data):
             patch_end = 2 * ((y + start_row + 1) * width)
             file.write(patch_data[patch_start:patch_end])
 
-def convert_texture(texture_bmp):
+def convert_4bit_texture(texture_bmp):
     try:
         pixel_data, width, height, row_size = read_bmp_4bit(texture_bmp)
         print(f"Pixel data read successfully from {texture_bmp}.")
@@ -80,13 +81,28 @@ def convert_texture(texture_bmp):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+def convert_8bit_texture(texture_bmp):
+    try:
+        pixel_data, width, height, row_size = read_bmp_8bit(texture_bmp)
+        print(f"Pixel data read successfully from {texture_bmp}.")
+        print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
+        print()
+        print("Raw 4-bit pixel data (top to bottom) and bit-endian flipped:")
+
+        # Flip the endianess of the 4-bit data
+        # flipped_pixel_data = flip_4bit_endianness(pixel_data)
+        print_pixel_data_by_row(pixel_data, width, height, row_size)
+        return pixel_data
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 def extract_and_convert_clut(clut_bmp, trans_flag):
     input_file_name = GetFileNameFromPathNoExt(clut_bmp)
     output_file = "bmps/" + input_file_name + "_palette.bmp"  # Output path for the palette BMP file
 
     try:
         # Extract the palette from the BMP
-        palette = extract_palette_from_bmp(clut_bmp)
+        palette = extract_palette_from_bmp_8bit(clut_bmp)
         print(f"Extracted {len(palette)} colors from the palette.")
 
         # Create and save the palette BMP
@@ -152,7 +168,7 @@ def RGBToVramBGR(colour, trans_flag):
 def patch_4bit_texture(x_vram, y_vram, level, texture_bmp):
     
     texture_data = b""
-    texture_data = convert_texture(texture_bmp)
+    texture_data = convert_4bit_texture(texture_bmp)
     
     patch_vram_in_wad(x_vram, y_vram, 8, 32, level, texture_data)
 
@@ -172,25 +188,74 @@ def patch_4bit_clut(x_vram, y_vram, fading_flag, trans_flag, level, clut_bmp):
 def patch_flame_texture(x_vram, y_vram, level, texture_bmp):
     
     texture_data = b""
-    texture_data = convert_texture(texture_bmp)
+    texture_data = convert_4bit_texture(texture_bmp)
     
     patch_vram_in_wad(x_vram, y_vram, 8, 128, level, texture_data)
 
 def PatchArtisansFlag():
     try:
         #Main Flag Texture
-        patch_4bit_texture(912, 256, "artisans", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\Comp_Kara_Logo.bmp")
-        patch_4bit_clut(816, 480, True, False, "artisans", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\Comp_Kara_Logo.bmp")
+        patch_4bit_texture(912, 256, "artisans", "bmp_scripts\\bmps\\Comp_Kara_Logo.bmp")
+        patch_4bit_clut(816, 480, True, False, "artisans", "bmp_scripts\\bmps\\Comp_Kara_Logo.bmp")
 
         #Bottom spiral and background
-        patch_4bit_texture(904, 320, "artisans", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\CustomFlag.bmp")
-        patch_4bit_texture(904, 352, "artisans", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\CustomFlag.bmp")
-        patch_4bit_clut(784, 480, True, False, "artisans", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\CustomFlag.bmp")
-        patch_4bit_clut(800, 480, True, False, "artisans", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\CustomFlag.bmp")
+        patch_4bit_texture(904, 320, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp")
+        patch_4bit_texture(904, 352, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp")
+        patch_4bit_clut(784, 480, True, False, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp")
+        patch_4bit_clut(800, 480, True, False, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp")
 
         
-        for levels in vram_offset_in_wad:
-            patch_flame_texture(960, 384, levels, "C:\\Users\\Kara\\Pictures\\Screenshots\\flame_texture_custom.bmp")
+        # for levels in vram_offset_in_wad:
+        #     patch_flame_texture(960, 384, levels, "bmp_scripts\\bmps\\flame_texture_custom.bmp")
+
+        texture_8bit_data = convert_8bit_texture("bmp_scripts\\bmps\\teehee.bmp")
+        patch_vram_in_wad(768, 0, 96, 128, "artisans", texture_8bit_data)
+
+        palette = extract_palette_from_bmp_8bit("bmp_scripts\\bmps\\teehee.bmp")
+        create_8bit_palette_bmp(palette, "pls_palette.bmp")
+
+        output_file = "pls_palette.bmp"
+        img = Image.open(output_file)
+    
+        width, height = img.size
+        print('width :', width)
+        print('height:', height)
+
+        rgb_img = img.convert('RGB')
+
+        sixteen_bit_bmp_data = [int]
+
+        for y in range(height):
+            for x in range(width):
+                pixel = rgb_img.getpixel((x, y))
+                #print(pixel)
+                r, g, b = pixel
+                print(f'| R: {hex(r)} | G: {hex(g)} | B: {hex(b)} |')
+                
+                # bmp_data.append(r)
+                # bmp_data.append(g)
+                # bmp_data.append(b)
+                
+                sixteen_bit_bmp_data.append(RGBToVramBGR(pixel, False))
+                
+        with open("temp/" + output_file.split("\\")[-1].split("/")[-1] + "_temp", "wb+") as file:
+                for i, data in enumerate(sixteen_bit_bmp_data):
+                    
+                    # Needs to be alligned to an int, so place padding after the first section
+                    if i == 46:
+                        file.write(int(0).to_bytes(2, signed=False, byteorder="little"))
+                        
+                    file.write(data.to_bytes(2, signed=False, byteorder='little'))
+
+        with open("temp/" + output_file.split("\\")[-1].split("/")[-1] + "_temp", 'rb') as in_file:
+            with open("bmps/" + output_file.split("\\")[-1].split("/")[-1].split(".")[0] + ".bin", 'wb') as out_file:
+                out_file.write(in_file.read()[1:])
+
+        with open("bmps/" + output_file.split("\\")[-1].split("/")[-1].split(".")[0] + ".bin", 'rb') as file:
+            clut_8bit_data = file.read()
+
+        for i in range(8):
+            patch_vram_in_wad(512, 112 + i, 256, 1, "artisans", clut_8bit_data)
 
         print("Major W")
     

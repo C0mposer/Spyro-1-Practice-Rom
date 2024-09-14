@@ -58,11 +58,11 @@ def print_pixel_data_by_row(pixel_data, width, height, row_size):
         print(row_data.hex())  # Print the hex representation of each row
 
 if __name__ == "__main__":
-    input_file = sys.argv[1]  # Path to your 4-bit BMP file
+    clut_bmp = sys.argv[1]  # Path to your 4-bit BMP file
 
     try:
-        pixel_data, width, height, row_size = read_bmp_4bit(input_file)
-        print(f"Pixel data read successfully from {input_file}.")
+        pixel_data, width, height, row_size = read_bmp_4bit(clut_bmp)
+        print(f"Pixel data read successfully from {clut_bmp}.")
         print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
         print()
         print("Raw 4-bit pixel data (top to bottom) and bit-endian flipped:")

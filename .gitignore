@@ -3259,3 +3259,11 @@ mods/PracticeCodes/debug/dep/common.dep
 mods/PracticeCodes/debug/dep/count_consistency.dep
 mods/PracticeCodes/debug/obj/common.o
 mods/PracticeCodes/debug/obj/count_consistency.o
+scripts/__pycache__/patch_vram_wad.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/bmp_extract_pallette.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/bmp_palette_to_clut.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/get_file_name.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/texture_bmp_flip.cpython-312.pyc
+scripts/bmp_scripts/bmps/Comp_Kara_Logo_palette.bin
+scripts/bmp_scripts/bmps/CustomFlag_palette.bin
+scripts/bmp_scripts/temp/Comp_Kara_Logo_palette.bmp_temp

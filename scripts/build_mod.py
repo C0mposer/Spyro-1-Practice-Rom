@@ -2,6 +2,7 @@ import os
 import sys
 from reverse_file_endianess import *
 from patch_wad import *
+from patch_vram_wad import *
 
 version_to_build = sys.argv[1].upper()
 
@@ -18,6 +19,7 @@ if version_to_build == "PS1":
     os.chdir("scripts")
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+    PatchArtisansFlag()
 
     os.chdir("../")
     os.chdir("build")
@@ -44,6 +46,7 @@ elif version_to_build == "PS2_DECKARD":
     os.chdir("scripts")
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+    PatchArtisansFlag()
 
     os.chdir("../")
 
@@ -73,6 +76,7 @@ elif version_to_build == "PS2_IOP":
     os.chdir("scripts")
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+    PatchArtisansFlag()
 
     os.chdir("../")
     os.chdir("build")

@@ -6,6 +6,11 @@
 extern const short LOADSTATE_BUTTONS[3];
 extern int loadstate_button_index;
 
+int consistency_tracker_render_time = 0; // Render time when you press a button, or turn it on. Currently 1 seconds (30 frames)
+
+int loadstate_render_delay = 0; // Used to fix VRAM corruption
+
+
 typedef struct Consistency
 {
     int successAmount;
@@ -52,21 +57,28 @@ void TrackConsistencyUpdate(void)
         if (_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index])
         {
             consistency_tracker.totalAmount++;
+
+            consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
+            loadstate_render_delay = 3; // Set the render delay to 3 frames
+            //printf("what\n");
         }
         // Decrease total counter by 1 if L2 + R2 + Right Stick Down
         else if (_currentButton == L2_BUTTON + R2_BUTTON && right_stick_direction == DOWN)
         {
             consistency_tracker.totalAmount--;
+            consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
         }
         // Increase success counter by 1 if Right Stick UP
         else if (right_stick_direction == UP)
         {
             consistency_tracker.successAmount++;
+            consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
         } 
         // Increase success counter by 1 if Right Stick DOWN
         else if (right_stick_direction == DOWN)
         {
             consistency_tracker.successAmount--;
+            consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
         }
 
         if(CheckButtonMultiTap(LOADSTATE_BUTTONS[loadstate_button_index], 3))
@@ -75,6 +87,21 @@ void TrackConsistencyUpdate(void)
             consistency_tracker.totalAmount = 0;
         }
 
-        DrawConsistencyInfo(); // Draw the streak info on screen
+        // Render while holding L2 + R2
+        if (_currentButton == L2_BUTTON + R2_BUTTON)
+        {
+            consistency_tracker_render_time = 30; // Set the time to render the text to be 1 seconds
+        }
+
+        // Decrement render delay
+        if (loadstate_render_delay > 0)
+            loadstate_render_delay--;
+        
+        // Render while the render timer isn't over, and when the render delay is up
+        if (loadstate_render_delay == 0 && consistency_tracker_render_time > 0)
+        {
+            DrawConsistencyInfo();  // Draw the streak info on screen
+            consistency_tracker_render_time--;          // Decrement render time
+        }
     }
 }

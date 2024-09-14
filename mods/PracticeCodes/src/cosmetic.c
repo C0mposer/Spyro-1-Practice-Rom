@@ -113,13 +113,15 @@ void WriteFlameBMPToVram()
 //Load the sparx skin to a buffer in main ram
 void LoadSparxBMPToMainRam(int sector)
 {
-	const int SPARX_BMP_FILE_SIZE = 0xD8;
+	const int SPARX_BMP_FILE_SIZE = 0x100;
 
 	byte* sparx_bmp_main_ram_location = (int*)0x80074330;
 
-	int sparx_skin_file_index = (sparx_color_index) * SPARX_BMP_FILE_SIZE/4; 	// In ints. %4, so that way it resets at the next sector
+	int sparx_skin_file_index = (sparx_color_index % 8) * SPARX_BMP_FILE_SIZE/4; 	// In ints. %8, so that way it resets at the next sector
 
-	ReadFileIntoRam(sector, SPARX_BMP_FILE_SIZE/4, sparx_bmp_main_ram_location, sparx_skin_file_index);
+	int sector_index = sparx_color_index / 8;	// Seek to the next sector, every 8 skins (0x800 bytes)
+
+	ReadFileIntoRam(sector + sector_index, SPARX_BMP_FILE_SIZE/4, sparx_bmp_main_ram_location, sparx_skin_file_index);
 	should_write_sparx_bmp = true;
 }
 

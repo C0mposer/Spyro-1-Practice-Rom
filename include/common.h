@@ -26,11 +26,11 @@
 #if BUILD == PS1 || BUILD == PS2_IOP || BUILD == REDUX
     #define FLAME_SECTOR 265766
     #define SPARX_SECTOR 265767
-    #define SKIN_SECTOR 265768
+    #define SKIN_SECTOR 265769
 #elif BUILD == PS2_DECKARD
     #define FLAME_SECTOR 265768
     #define SPARX_SECTOR 265769
-    #define SKIN_SECTOR 265770
+    #define SKIN_SECTOR 265771
 #endif
 
 

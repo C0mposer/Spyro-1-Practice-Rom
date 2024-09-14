@@ -27,6 +27,27 @@ void ChangeFullSparxParticleColor()
             s2[0xe] = 0x00; // Blue
             break;
         }
+        case(SPARX_SKIN_ICY):
+        {
+            s2[0xc] = 0x0; // Red
+            s2[0xd] = 0xB0; // Green
+            s2[0xe] = 0xFF; // Blue
+            break;
+        }
+        case(SPARX_SKIN_JADE):
+        {
+            s2[0xc] = 0x0; // Red
+            s2[0xd] = 0xFF; // Green
+            s2[0xe] = 0x90; // Blue
+            break;
+        }
+        case(SPARX_SKIN_DARK_BLUE):
+        {
+            s2[0xc] = 0x00; // Red
+            s2[0xd] = 0x00; // Green
+            s2[0xe] = 0xFF; // Blue
+            break;
+        }
         case(SPARX_SKIN_PURPLE):
         {
             s2[0xc] = 0x70; // Red
@@ -39,13 +60,6 @@ void ChangeFullSparxParticleColor()
             s2[0xc] = 0xFF; // Red
             s2[0xd] = 0x8B; // Green
             s2[0xe] = 0x00; // Blue
-            break;
-        }
-        case(SPARX_SKIN_DARK_BLUE):
-        {
-            s2[0xc] = 0x00; // Red
-            s2[0xd] = 0x00; // Green
-            s2[0xe] = 0xFF; // Blue
             break;
         }
         case(SPARX_SKIN_PINK):

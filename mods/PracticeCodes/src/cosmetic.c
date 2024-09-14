@@ -248,7 +248,6 @@ void CosmeticsUpdate(void)
 			has_freed_dragon = false;
 		}
 	}
-
 }
 
 // void VramTester()

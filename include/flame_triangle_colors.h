@@ -3,7 +3,7 @@
 #include <cosmetic.h>
 
 // Custom Gradients Array
-FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[11] =
+FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[15] =
 {
 	//0 Original
 	{
@@ -161,30 +161,95 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[11] =
 		.left.b = 0x85,
 		.left.shape_code = 0x30
 	},
-	//7 Purple (Cynder)
+	//7 Gold
 	{
-
-        .tip.r = 0x77,
-		.tip.g = 0x1,
-		.tip.b = 0xde,
+        .tip.r = 0xff,
+		.tip.g = 0xe3,
+		.tip.b = 0x9f,
 		.tip.shape_code = 0x30,
 
-		.center.r = 0xdd,
-		.center.g = 0x7,
-		.center.b = 0x6f,
+		.center.r = 0x88,
+		.center.g = 0x6a,
+		.center.b = 0x0,
 		.center.shape_code = 0x30,
 		
-		.right.r = 0x40,
-		.right.g = 0x9,
-		.right.b = 0x50,
+		.right.r = 0xfd,
+		.right.g = 0xe4,
+		.right.b = 0x8b,
 		.right.shape_code = 0x30,
 
-		.left.r = 0x67,
-		.left.g = 0xf,
-		.left.b = 0x4e,
+		.left.r = 0xda,
+		.left.g = 0xc5,
+		.left.b = 0x76,
 		.left.shape_code = 0x30
 	},
-	//8 Pastel
+	//8 Acid
+	{
+        .tip.r = 0xbd,
+		.tip.g = 0xff,
+		.tip.b = 0x38,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0xfa,
+		.center.g = 0xaa,
+		.center.b = 0x18,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0x3a,
+		.right.g = 0x85,
+		.right.b = 0x1,
+		.right.shape_code = 0x30,
+
+		.left.r = 0x84,
+		.left.g = 0xa0,
+		.left.b = 0x33,
+		.left.shape_code = 0x30
+	},
+	//9 Light Purple
+	{
+        .tip.r = 0x38,
+		.tip.g = 0xff,
+		.tip.b = 0xd6,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0xc7,
+		.center.g = 0x18,
+		.center.b = 0xfa,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0x47,
+		.right.g = 0x1,
+		.right.b = 0x85,
+		.right.shape_code = 0x30,
+
+		.left.r = 0x57,
+		.left.g = 0x33,
+		.left.b = 0xa0,
+		.left.shape_code = 0x30
+	},
+	//10 Light Pink
+	{
+        .tip.r = 0xff,
+		.tip.g = 0x5f,
+		.tip.b = 0xec,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0xfd,
+		.center.g = 0xbf,
+		.center.b = 0xdb,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0xad,
+		.right.g = 0x6b,
+		.right.b = 0x94,
+		.right.shape_code = 0x30,
+
+		.left.r = 0xbc,
+		.left.g = 0x6f,
+		.left.b = 0x9e,
+		.left.shape_code = 0x30
+	},
+	//11 Pastel
 	{
 
         .tip.r = 0xfc,
@@ -207,7 +272,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[11] =
 		.left.b = 0xa8,
 		.left.shape_code = 0x30
 	},
-	//9 Rainbow
+	//12 Rainbow
 	{
 
         .tip.r = 0xff,
@@ -230,7 +295,30 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[11] =
 		.left.b = 0xd9,
 		.left.shape_code = 0x30
 	},
-	//10 Ghost
+	//13 Cynder
+	{
+
+        .tip.r = 0x77,
+		.tip.g = 0x1,
+		.tip.b = 0xde,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0xdd,
+		.center.g = 0x7,
+		.center.b = 0x6f,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0x40,
+		.right.g = 0x9,
+		.right.b = 0x50,
+		.right.shape_code = 0x30,
+
+		.left.r = 0x67,
+		.left.g = 0xf,
+		.left.b = 0x4e,
+		.left.shape_code = 0x30
+	},
+	//14 Ghost
 	{
         .tip.r = 0xd2,
 		.tip.g = 0xd2,

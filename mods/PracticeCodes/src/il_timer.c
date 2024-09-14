@@ -69,6 +69,9 @@ extern const short LOADSTATE_BUTTONS[3];
 
 extern int savestate_selection;
 
+extern int sparx_color_index;
+extern bool should_write_sparx_bmp;
+
 int il_timer_offset[3] = {0};
 
 
@@ -170,6 +173,11 @@ void ILUpdate(){
                 _flyInAnimation = flyInArray[_levelIDIndex];
                 
                 _spyro.health = 3;
+
+                if(sparx_color_index > 0)
+	            {
+                    should_write_sparx_bmp = true; // Reload sparx skin on IL loop
+                }
             }
         }
         

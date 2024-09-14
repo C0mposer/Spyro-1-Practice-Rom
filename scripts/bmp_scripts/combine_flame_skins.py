@@ -3,7 +3,7 @@ import os
 # Combines all converted flame bmps to 1 combined flames.bin file
 def CombineFlameSkins():
     directory = "bmps/"
-    file_list = ["ogflame.bin", "redflame.bin", "iceflame.bin", "jadeflame.bin", "blue_flame.bin", "green_flame.bin", "pink_flame.bin", "cyderflame.bin", "pasteflame.bin", "rainbowflame.bin", "smoke.bin", "custom_flame.bin"]  # Add all your files here
+    file_list = ["ogflame.bin", "redflame.bin", "iceflame.bin", "jadeflame.bin", "blue_flame.bin", "green_flame.bin", "pink_flame.bin", "gold_flame.bin", "acid_flame.bin", "light_purple_flame.bin", "light_pink_flame.bin", "pasteflame.bin", "rainbowflame.bin", "cyderflame.bin", "smoke.bin", "custom_flame.bin"]  # Add all your files here
     output_file = "final_output/flames.bin"
 
     # Define constants

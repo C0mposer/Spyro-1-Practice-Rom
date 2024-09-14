@@ -3267,3 +3267,11 @@ scripts/bmp_scripts/__pycache__/texture_bmp_flip.cpython-312.pyc
 scripts/bmp_scripts/bmps/Comp_Kara_Logo_palette.bin
 scripts/bmp_scripts/bmps/CustomFlag_palette.bin
 scripts/bmp_scripts/temp/Comp_Kara_Logo_palette.bmp_temp
+scripts/bmp_scripts/temp/acid.bmp_temp
+scripts/bmp_scripts/temp/gold_flame.bmp_temp
+scripts/bmp_scripts/temp/light pink.bmp_temp
+scripts/bmp_scripts/temp/pinkblue_flame.bmp_temp
+scripts/bmp_scripts/bmps/light_purple_flame.bin
+scripts/bmp_scripts/bmps/light_pink_flame.bin
+scripts/bmp_scripts/bmps/gold_flame.bin
+scripts/bmp_scripts/bmps/acid_flame.bin

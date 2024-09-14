@@ -45,13 +45,13 @@ def create_palette_bmp(palette, output_path):
     img.save(output_path, format='BMP')
 
 if __name__ == "__main__":
-    input_file = sys.argv[1]            # Path to your 4-bit BMP file
-    input_file_name = GetFileNameFromPathNoExt(input_file)
+    clut_bmp = sys.argv[1]            # Path to your 4-bit BMP file
+    input_file_name = GetFileNameFromPathNoExt(clut_bmp)
     output_file = "bmps/" + input_file_name + "_palette.bmp"  # Output path for the palette BMP file
 
     try:
         # Extract the palette from the BMP
-        palette = extract_palette_from_bmp(input_file)
+        palette = extract_palette_from_bmp(clut_bmp)
         print(f"Extracted {len(palette)} colors from the palette.")
 
         # Create and save the palette BMP

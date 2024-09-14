@@ -4,7 +4,7 @@
 #include <common.h>
 #include <cosmetic.h>
 
-u8RGBA CUSTOM_SPARX_GLOW_COLORS[9] =
+u8RGBA CUSTOM_SPARX_GLOW_COLORS[11] =
 {
     // Default Yellow
     {
@@ -20,6 +20,27 @@ u8RGBA CUSTOM_SPARX_GLOW_COLORS[9] =
         .B = 0x00,
         .opacity = 0x0
     },
+    // Icy #186F8AFF
+    {
+        .R = 0x18,
+        .G = 0x6F,
+        .B = 0x8A,
+        .opacity = 0x0
+    },
+    // Jade #2E8469FF
+    {
+        .R = 0x2E,
+        .G = 0x84,
+        .B = 0x69,
+        .opacity = 0x0
+    },
+    // Dark Blue
+    {
+        .R = 0x00,
+        .G = 0x17,
+        .B = 0x9B,
+        .opacity = 0x0
+    },
     // Purple
     {
         .R = 0x3E,
@@ -32,13 +53,6 @@ u8RGBA CUSTOM_SPARX_GLOW_COLORS[9] =
         .R = 0x9B,
         .G = 0x45,
         .B = 0x00,
-        .opacity = 0x0
-    },
-    // Dark Blue
-    {
-        .R = 0x00,
-        .G = 0x17,
-        .B = 0x9B,
         .opacity = 0x0
     },
     // Pink

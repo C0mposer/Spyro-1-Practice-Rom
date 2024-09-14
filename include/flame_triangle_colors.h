@@ -3,7 +3,7 @@
 #include <cosmetic.h>
 
 // Custom Gradients Array
-FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[15] =
+FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 {
 	//0 Original
 	{
@@ -115,7 +115,29 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[15] =
 		.left.b = 0x93,
 		.left.shape_code = 0x30
 	},
-	//5 Green
+	//5 Gold
+	{
+        .tip.r = 0xff,
+		.tip.g = 0xe3,
+		.tip.b = 0x9f,
+		.tip.shape_code = 0x30,
+
+		.center.r = 0x88,
+		.center.g = 0x6a,
+		.center.b = 0x0,
+		.center.shape_code = 0x30,
+		
+		.right.r = 0xfd,
+		.right.g = 0xe4,
+		.right.b = 0x8b,
+		.right.shape_code = 0x30,
+
+		.left.r = 0xda,
+		.left.g = 0xc5,
+		.left.b = 0x76,
+		.left.shape_code = 0x30
+	},
+	//6 Green
 	{
 
         .tip.r = 0x4a,
@@ -138,7 +160,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[15] =
 		.left.b = 0x0,
 		.left.shape_code = 0x30
 	},
-	//6 Pink
+	//7 Pink
 	{
 
         .tip.r = 0xff,
@@ -159,28 +181,6 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[15] =
 		.left.r = 0xa6,
 		.left.g = 0xf,
 		.left.b = 0x85,
-		.left.shape_code = 0x30
-	},
-	//7 Gold
-	{
-        .tip.r = 0xff,
-		.tip.g = 0xe3,
-		.tip.b = 0x9f,
-		.tip.shape_code = 0x30,
-
-		.center.r = 0x88,
-		.center.g = 0x6a,
-		.center.b = 0x0,
-		.center.shape_code = 0x30,
-		
-		.right.r = 0xfd,
-		.right.g = 0xe4,
-		.right.b = 0x8b,
-		.right.shape_code = 0x30,
-
-		.left.r = 0xda,
-		.left.g = 0xc5,
-		.left.b = 0x76,
 		.left.shape_code = 0x30
 	},
 	//8 Acid
@@ -339,7 +339,8 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[15] =
 		.left.g = 0xbd,
 		.left.b = 0xbd,
 		.left.shape_code = 0x30
-	}
+	},
+	{0}
 };
 
 #endif /* FLAME_TRIANGLE_COLORS_H */

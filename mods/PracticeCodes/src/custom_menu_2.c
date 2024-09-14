@@ -44,6 +44,14 @@ typedef enum SparxMode
 
 }SparxMode;
 
+typedef enum ConsistencyTrackerMode
+{
+    CONSISTENCY_TRACKER_OFF,
+    CONSISTENCY_TRACKER_ON_CHANGED,
+    CONSISTENCY_TRACKER_ALWAYS
+
+}ConsistencyTrackerMode;
+
 typedef struct Menu
 {
     int selection;
@@ -154,6 +162,8 @@ extern const short LOADSTATE_BUTTONS[3];
 extern int savestate_button_index;
 extern int loadstate_button_index;
 extern int switch_state_button_index;
+
+extern int consistency_tracker_render_time;
 
 // Externing elsewhere
 BackgroundColor bg_color_index;
@@ -324,11 +334,11 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    misc_menu.show_dragon_touch = (misc_menu.show_dragon_touch + 1) % 2;
+                    misc_menu.show_dragon_touch = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.show_dragon_touch > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    misc_menu.show_dragon_touch--;
+                    misc_menu.show_dragon_touch = false;
                 }
 
                 if (misc_menu.show_dragon_touch == false)
@@ -348,11 +358,11 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    disable_portal_entry = (disable_portal_entry + 1) % 2;
+                    disable_portal_entry = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && disable_portal_entry > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    disable_portal_entry--;
+                    disable_portal_entry = false;
                 }
 
                 if (disable_portal_entry == false)
@@ -369,11 +379,11 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    misc_menu.quick_goop_mode = (misc_menu.quick_goop_mode + 1) % 2;
+                    misc_menu.quick_goop_mode = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.quick_goop_mode > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    misc_menu.quick_goop_mode--;
+                    misc_menu.quick_goop_mode = false;
                 }
 
                 if (misc_menu.quick_goop_mode == false)
@@ -390,11 +400,13 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    consistency_tracker_mode = (consistency_tracker_mode + 1) % 2;
+                    consistency_tracker_mode = true;
+
+                    consistency_tracker_render_time = 30; // Render for 1 second when you enable it
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && consistency_tracker_mode > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    consistency_tracker_mode;
+                    consistency_tracker_mode = false;
                 }
 
                 if(consistency_tracker_mode == false)
@@ -721,6 +733,11 @@ void CustomMenuUpdate2()
                         cosmetic_menu.flame_color_text = "FLAME SKIN BLUE";
                         break;
                     }
+                    case(FLAME_SKIN_GOLD):
+                    {
+                        cosmetic_menu.flame_color_text = "FLAME SKIN GOLD";
+                        break;
+                    }
                     case(FLAME_SKIN_GREEN):
                     {
                         cosmetic_menu.flame_color_text = "FLAME SKIN GREEN";
@@ -729,11 +746,6 @@ void CustomMenuUpdate2()
                     case(FLAME_SKIN_PINK):
                     {
                         cosmetic_menu.flame_color_text = "FLAME SKIN PINK";
-                        break;
-                    }
-                    case(FLAME_SKIN_GOLD):
-                    {
-                        cosmetic_menu.flame_color_text = "FLAME SKIN GOLD";
                         break;
                     }
                     case(FLAME_SKIN_ACID):
@@ -778,7 +790,7 @@ void CustomMenuUpdate2()
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    sparx_color_index = (sparx_color_index + 1) % 9;
+                    sparx_color_index = (sparx_color_index + 1) % 11;
                     should_load_sparx_color = true;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index > 0)
@@ -788,7 +800,7 @@ void CustomMenuUpdate2()
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index == 0)
                 {
-                    sparx_color_index = 8;
+                    sparx_color_index = 10;
                     should_load_sparx_color = true;
                 }
 
@@ -804,6 +816,21 @@ void CustomMenuUpdate2()
                         cosmetic_menu.sparx_color_text = "SPARX SKIN RED";
                         break;
                     }
+                    case(SPARX_SKIN_ICY):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN ICY";
+                        break;
+                    }
+                    case(SPARX_SKIN_JADE):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN JADE";
+                        break;
+                    }
+                    case(SPARX_SKIN_DARK_BLUE):
+                    {
+                        cosmetic_menu.sparx_color_text = "SPARX SKIN DARK BLUE";
+                        break;
+                    }
                     case(SPARX_SKIN_PURPLE):
                     {
                         cosmetic_menu.sparx_color_text = "SPARX SKIN PURPLE";
@@ -812,11 +839,6 @@ void CustomMenuUpdate2()
                     case(SPARX_SKIN_ORANGE):
                     {
                         cosmetic_menu.sparx_color_text = "SPARX SKIN ORANGE";
-                        break;
-                    }
-                    case(SPARX_SKIN_DARK_BLUE):
-                    {
-                        cosmetic_menu.sparx_color_text = "SPARX SKIN DARK BLUE";
                         break;
                     }
                     case(SPARX_SKIN_PINK):

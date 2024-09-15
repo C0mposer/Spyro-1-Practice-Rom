@@ -10,6 +10,8 @@
 #include <moving_geo.h>
 #include <cd.h>
 
+int savestate_free_space[12] = {0};
+
 bool hasLoadedCDCode;
 
 int loaded_timer = 0;

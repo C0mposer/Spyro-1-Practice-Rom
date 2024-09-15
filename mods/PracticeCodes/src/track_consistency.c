@@ -62,6 +62,12 @@ void TrackConsistencyUpdate(void)
             loadstate_render_delay = 3; // Set the render delay to 3 frames
             //printf("what\n");
         }
+        // Increase total counter by 1 if L2 + R2 + Right Stick Up
+        else if (_currentButton == L2_BUTTON + R2_BUTTON && right_stick_direction == UP)
+        {
+            consistency_tracker.totalAmount++;
+            consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
+        }
         // Decrease total counter by 1 if L2 + R2 + Right Stick Down
         else if (_currentButton == L2_BUTTON + R2_BUTTON && right_stick_direction == DOWN)
         {

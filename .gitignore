@@ -3300,3 +3300,15 @@ mods/PracticeCodes/debug/dep/track_consistency.dep
 mods/PracticeCodes/debug/obj/track_consistency.o
 scripts/bmp_scripts/bmps/icy_sparx.bin
 scripts/bmp_scripts/bmps/jade_sparx.bin
+build/Spyro1_PracticeCodes.lnk
+scripts/__pycache__/get_file_name.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/bmp_extract_pallette_4bit.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/bmp_extract_pallette_8bit.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/texture_bmp_flip_4bit.cpython-312.pyc
+scripts/bmp_scripts/__pycache__/texture_bmp_flip_8bit.cpython-312.pyc
+scripts/bmps/Comp_Kara_Logo_palette.bin
+scripts/bmps/CustomFlag_palette.bin
+scripts/bmps/pls_palette.bin
+scripts/temp/Comp_Kara_Logo_palette.bmp_temp
+scripts/temp/CustomFlag_palette.bmp_temp
+scripts/temp/pls_palette.bmp_temp

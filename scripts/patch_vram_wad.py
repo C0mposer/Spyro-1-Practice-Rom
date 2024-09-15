@@ -87,11 +87,11 @@ def convert_8bit_texture(texture_bmp):
         print(f"Pixel data read successfully from {texture_bmp}.")
         print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
         print()
-        print("Raw 4-bit pixel data (top to bottom) and bit-endian flipped:")
+        print("Raw 8-bit pixel data (top to bottom) and bit-endian flipped:")
 
         # Flip the endianess of the 4-bit data
         # flipped_pixel_data = flip_4bit_endianness(pixel_data)
-        print_pixel_data_by_row(pixel_data, width, height, row_size)
+        #print_pixel_data_by_row(pixel_data, width, height, row_size)
         return pixel_data
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -102,7 +102,7 @@ def extract_and_convert_clut(clut_bmp, trans_flag):
 
     try:
         # Extract the palette from the BMP
-        palette = extract_palette_from_bmp_8bit(clut_bmp)
+        palette = extract_palette_from_bmp_4bit(clut_bmp)
         print(f"Extracted {len(palette)} colors from the palette.")
 
         # Create and save the palette BMP
@@ -127,7 +127,7 @@ def extract_and_convert_clut(clut_bmp, trans_flag):
             pixel = rgb_img.getpixel((x, y))
             #print(pixel)
             r, g, b = pixel
-            print(f'| R: {hex(r)} | G: {hex(g)} | B: {hex(b)} |')
+            #print(f'| R: {hex(r)} | G: {hex(g)} | B: {hex(b)} |')
             
             # bmp_data.append(r)
             # bmp_data.append(g)
@@ -176,7 +176,7 @@ def patch_4bit_clut(x_vram, y_vram, fading_flag, trans_flag, level, clut_bmp):
     
     clut_data = b""
     clut_data = extract_and_convert_clut(clut_bmp, trans_flag)
-    print(clut_data)
+    #print(clut_data)
     
     if(fading_flag):
         height = 8
@@ -230,7 +230,7 @@ def PatchArtisansFlag():
                 pixel = rgb_img.getpixel((x, y))
                 #print(pixel)
                 r, g, b = pixel
-                print(f'| R: {hex(r)} | G: {hex(g)} | B: {hex(b)} |')
+                #print(f'| R: {hex(r)} | G: {hex(g)} | B: {hex(b)} |')
                 
                 # bmp_data.append(r)
                 # bmp_data.append(g)
@@ -257,7 +257,9 @@ def PatchArtisansFlag():
         for i in range(8):
             patch_vram_in_wad(512, 112 + i, 256, 1, "artisans", clut_8bit_data)
 
-        print("Major W")
+        print()
+        print("WAD VRAM patch successful")
+        print()
     
     except Exception as e:
         print(f"An error occurred: {e}")

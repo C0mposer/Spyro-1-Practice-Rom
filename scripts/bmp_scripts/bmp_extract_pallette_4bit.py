@@ -5,7 +5,7 @@ import sys
 from get_file_name import *
 from PIL import Image
 
-def extract_palette_from_bmp(input_path):
+def extract_palette_from_bmp_4bit(input_path):
     with open(input_path, 'rb') as f:
         # Read BMP header (first 54 bytes)
         header = f.read(54)
@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     try:
         # Extract the palette from the BMP
-        palette = extract_palette_from_bmp(clut_bmp)
+        palette = extract_palette_from_bmp_4bit(clut_bmp)
         print(f"Extracted {len(palette)} colors from the palette.")
 
         # Create and save the palette BMP

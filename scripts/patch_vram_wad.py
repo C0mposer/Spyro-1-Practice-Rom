@@ -234,6 +234,27 @@ def patch_8bit_clut(x_vram, y_vram, level, clut_bmp, num_fading_levels = 1, tran
     for i in range(num_fading_levels):
         patch_vram_in_wad(x_vram, y_vram + i, width, height, level, clut_data)
 
+def multi_patch_8bit_texture(num_textures_width, num_textures_height, texture_coord_list, level, texture_bmp):
+    patch_data = convert_8bit_texture(texture_bmp)
+
+    for i in range(len(texture_coord_list)):
+        texture_coord_list[i][1] -= 1
+
+    wad_offset = vram_offset_in_wad[level]
+
+    with open("..\\build\\spyro1_PracticeCodes\\WAD.WAD", "rb+") as file:
+        for texture_rows in range(num_textures_height):
+            for pixel_rows in range(32):
+                for texture_slice in range(num_textures_width):
+                    current_texture = texture_rows * num_textures_height + texture_slice
+                    offset = (pixel_rows + texture_coord_list[current_texture][1]) * 0x400 + (2 * texture_coord_list[current_texture][0]) + wad_offset
+
+                    file.seek(offset)
+
+                    patch_start = 2 * ((texture_rows * num_textures_width * 16 * 32) + (pixel_rows * num_textures_width * 16) + (texture_slice * 16))
+                    patch_end = patch_start + 32
+                    file.write(patch_data[patch_start:patch_end])
+
 
 def PatchArtisansFlag():
     try:
@@ -278,12 +299,12 @@ def PatchArtisansFlag():
         # patch_4bit_clut(944, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp", 16)
 
 
-        # patch_8bit_texture(640, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gg1.bmp")
-        # patch_8bit_texture(624, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gg2.bmp")
-        # patch_8bit_texture(624, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gg3.bmp")
-        # patch_8bit_texture(608, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gg4.bmp")
-        # patch_8bit_clut(512, 147, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gnasty1.bmp", 1)
 
+        # gnasty_texture_coords = [[608, 480], [624, 448], [544, 480], [560, 448], [624, 480], [640, 448], [560, 480], [576, 448], [576, 480], [592, 448], [528, 448], [512, 480], [592, 480], [608, 448], [528, 480], [544, 448]]
+
+        # multi_patch_8bit_texture(4, 4, gnasty_texture_coords, "gnastys_loot", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\cursed.bmp")
+        # for i in range(4):
+        #     patch_8bit_clut(512, 144 + i, "gnastys_loot", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\cursed.bmp")
 
         print()
         print("WAD VRAM patch successful")

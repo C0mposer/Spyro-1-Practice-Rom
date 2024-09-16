@@ -255,7 +255,7 @@ def PatchArtisansFlag():
 
         
         # for levels in vram_offset_in_wad:
-        #     patch_flame_texture(960, 384, levels, "bmp_scripts\\bmps\\flame_texture_custom.bmp")
+        #     patch_4bit_texture(960, 384, levels, "bmp_scripts\\bmps\\flame_texture_custom.bmp", 8, 128)
 
         # 
         for levels in vram_offset_in_wad: 
@@ -274,14 +274,14 @@ def PatchArtisansFlag():
 
 
 
-        patch_4bit_texture(808, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp")
-        patch_4bit_texture(808, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp")
-        patch_4bit_texture(816, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp")
-        patch_4bit_texture(816, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp")
-        patch_4bit_clut(928, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp", 16)
-        patch_4bit_clut(928, 144, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp", 16)
-        patch_4bit_clut(944, 112, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp", 16)
-        patch_4bit_clut(944, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp", 16)
+        # patch_4bit_texture(808, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp")
+        # patch_4bit_texture(808, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp")
+        # patch_4bit_texture(816, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp")
+        # patch_4bit_texture(816, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp")
+        # patch_4bit_clut(928, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp", 16)
+        # patch_4bit_clut(928, 144, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp", 16)
+        # patch_4bit_clut(944, 112, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp", 16)
+        # patch_4bit_clut(944, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp", 16)
 
 
         # patch_8bit_texture(640, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gg1.bmp")

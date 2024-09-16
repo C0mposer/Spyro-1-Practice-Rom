@@ -3312,3 +3312,15 @@ scripts/bmps/pls_palette.bin
 scripts/temp/Comp_Kara_Logo_palette.bmp_temp
 scripts/temp/CustomFlag_palette.bmp_temp
 scripts/temp/pls_palette.bmp_temp
+mods/PracticeCodes/debug/dep/test.dep
+mods/PracticeCodes/debug/obj/test.o
+scripts/bmp_scripts/bmps/luminize_flame.bin
+scripts/bmp_scripts/bmps/luminize_flame.bmp
+scripts/bmp_scripts/bmps/luminize.bin
+scripts/bmp_scripts/bmps/luminize.bmp
+scripts/bmp_scripts/bmps/whiteflame.bmp
+scripts/bmp_scripts/bmps/whiteflame.bmp
+scripts/bmp_scripts/temp/luminize_flame.bmp_temp
+scripts/bmp_scripts/temp/luminize.bmp_temp
+scripts/bmps/luminize.bmp
+scripts/bmps/whiteflames.bmp

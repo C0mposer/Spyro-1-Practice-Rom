@@ -30,7 +30,7 @@ vram_offset_in_wad = {
     "terrace_village" : 0x3800000,
     "misty_bog" : 0x3a7b000,
     "tree_tops" : 0x3d88800,
-    "metal_head" : 0x4035000,
+    "metalhead" : 0x4035000,
     "wild_flight" : 0x4261000,
 
     "dream_weavers" : 0x43ed000,
@@ -73,10 +73,10 @@ def patch_vram_in_wad(x_vram, y_vram, width, height, level, patch_data):
 def convert_4bit_texture(texture_bmp):
     try:
         pixel_data, width, height, row_size = read_bmp_4bit(texture_bmp)
-        print(f"Pixel data read successfully from {texture_bmp}.")
-        print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
-        print()
-        print("Raw 4-bit pixel data (top to bottom) and bit-endian flipped:")
+        # print(f"Pixel data read successfully from {texture_bmp}.")
+        # print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
+        # print()
+        # print("Raw 4-bit pixel data (top to bottom) and bit-endian flipped:")
 
         # Flip the endianess of the 4-bit data
         flipped_pixel_data = flip_4bit_endianness(pixel_data)
@@ -87,14 +87,11 @@ def convert_4bit_texture(texture_bmp):
 def convert_8bit_texture(texture_bmp):
     try:
         pixel_data, width, height, row_size = read_bmp_8bit(texture_bmp)
-        print(f"Pixel data read successfully from {texture_bmp}.")
-        print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
-        print()
-        print("Raw 8-bit pixel data (top to bottom) and bit-endian flipped:")
-
-        # Flip the endianess of the 4-bit data
-        # flipped_pixel_data = flip_4bit_endianness(pixel_data)
-        #print_pixel_data_by_row(pixel_data, width, height, row_size)
+        # print(f"Pixel data read successfully from {texture_bmp}.")
+        # print(f"Width: {width} pixels, Height: {height} pixels, Row size: {row_size} bytes.")
+        # print()
+        # print("Raw 8-bit pixel data (top to bottom):")
+        # print_pixel_data_by_row(pixel_data, width, height, row_size)
         return pixel_data
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -106,11 +103,11 @@ def extract_and_convert_4bit_clut(clut_bmp, trans_flag):
     try:
         # Extract the palette from the BMP
         palette = extract_palette_from_bmp_4bit(clut_bmp)
-        print(f"Extracted {len(palette)} colors from the palette.")
+        # print(f"Extracted {len(palette)} colors from the palette.")
 
         # Create and save the palette BMP
         create_palette_bmp(palette, output_file)
-        print(f"Palette exported as a BMP to {output_file}.")
+        # print(f"Palette exported as a BMP to {output_file}.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -118,8 +115,8 @@ def extract_and_convert_4bit_clut(clut_bmp, trans_flag):
     img = Image.open(output_file)
     
     width, height = img.size
-    print('width :', width)
-    print('height:', height)
+    # print('width :', width)
+    # print('height:', height)
 
     rgb_img = img.convert('RGB')
 
@@ -140,11 +137,6 @@ def extract_and_convert_4bit_clut(clut_bmp, trans_flag):
             
     with open("temp/" + output_file.split("\\")[-1].split("/")[-1] + "_temp", "wb+") as file:
             for i, data in enumerate(sixteen_bit_bmp_data):
-                
-                # Needs to be alligned to an int, so place padding after the first section
-                if i == 46:
-                    file.write(int(0).to_bytes(2, signed=False, byteorder="little"))
-                    
                 file.write(data.to_bytes(2, signed=False, byteorder='little'))
 
     with open("temp/" + output_file.split("\\")[-1].split("/")[-1] + "_temp", 'rb') as in_file:
@@ -167,8 +159,8 @@ def extract_and_convert_8bit_clut(clut_bmp, trans_flag):
     img = Image.open(output_file)
 
     width, height = img.size
-    print('width :', width)
-    print('height:', height)
+    # print('width :', width)
+    # print('height:', height)
 
     rgb_img = img.convert('RGB')
 
@@ -189,11 +181,6 @@ def extract_and_convert_8bit_clut(clut_bmp, trans_flag):
             
     with open("temp/" + output_file.split("\\")[-1].split("/")[-1] + "_temp", "wb+") as file:
             for i, data in enumerate(sixteen_bit_bmp_data):
-                
-                # Needs to be alligned to an int, so place padding after the first section
-                if i == 46:
-                    file.write(int(0).to_bytes(2, signed=False, byteorder="little"))
-                    
                 file.write(data.to_bytes(2, signed=False, byteorder='little'))
 
     with open("temp/" + output_file.split("\\")[-1].split("/")[-1] + "_temp", 'rb') as in_file:
@@ -256,11 +243,11 @@ def patch_flame_texture(x_vram, y_vram, level, texture_bmp):
 
 def PatchArtisansFlag():
     try:
-        #Main Flag Texture
+        # Main Flag Texture
         patch_4bit_texture(912, 256, "artisans", "bmp_scripts\\bmps\\Comp_Kara_Logo.bmp")
         patch_4bit_clut(816, 480, "artisans", "bmp_scripts\\bmps\\Comp_Kara_Logo.bmp", 8)
 
-        #Bottom spiral and background
+        # Bottom spiral and background
         patch_4bit_texture(904, 320, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp")
         patch_4bit_texture(904, 352, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp")
         patch_4bit_clut(784, 480, "artisans", "bmp_scripts\\bmps\\CustomFlag.bmp", 8)
@@ -270,19 +257,31 @@ def PatchArtisansFlag():
         # for levels in vram_offset_in_wad:
         #     patch_flame_texture(960, 384, levels, "bmp_scripts\\bmps\\flame_texture_custom.bmp")
 
+        # 
+        for levels in vram_offset_in_wad: 
+            
+            if levels in ["artisans", "stone_hill", "town_square", "toasty", "beast_makers", "twilight_harbor"]:    #also cliff town, MC, alpine, wizard, Terrace, metalhead, DW, passage, lofty, jacques
+                y_clut = 112
+            elif levels in ["blowhard", "tree_tops"]:   #also doctor shemp, blowhard, tree tops, haunted, 
+                y_clut = 16
+            elif levels in ["peace_keepers", "gnorc_gnexus", "gnasty_gnorc"]:     #also dry canyon, ice cavern, high caves, misty bog cove
+                y_clut = 0
+            else:
+                continue
 
-        patch_8bit_texture(768, 0, "artisans", "bmp_scripts\\bmps\\teehee.bmp", 96, 128)
-        patch_8bit_clut(512, 112, "artisans", "bmp_scripts\\bmps\\teehee.bmp", 16)
+            patch_8bit_texture(768, 0, levels, "bmp_scripts\\bmps\\teehee.bmp", 96, 128)
+            patch_8bit_clut(512, y_clut, levels, "bmp_scripts\\bmps\\teehee.bmp", 16)
 
 
-        # patch_4bit_texture(808, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp")
-        # patch_4bit_texture(808, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp")
-        # patch_4bit_texture(816, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp")
-        # patch_4bit_texture(816, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp")
-        # patch_4bit_clut(928, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp", 16)
-        # patch_4bit_clut(928, 144, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp", 16)
-        # patch_4bit_clut(944, 112, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp", 16)
-        # patch_4bit_clut(944, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp", 16)
+
+        patch_4bit_texture(808, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp")
+        patch_4bit_texture(808, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp")
+        patch_4bit_texture(816, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp")
+        patch_4bit_texture(816, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp")
+        patch_4bit_clut(928, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp", 16)
+        patch_4bit_clut(928, 144, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp", 16)
+        patch_4bit_clut(944, 112, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp", 16)
+        patch_4bit_clut(944, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp", 16)
 
 
         # patch_8bit_texture(640, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\gnastybmps-viaphotoshop\\gg1.bmp")

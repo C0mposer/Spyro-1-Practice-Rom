@@ -340,6 +340,28 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.left.b = 0xbd,
 		.left.shape_code = 0x30
 	},
+	// //15 Luminize
+	// {
+    //     .tip.r = 0xfe,
+    //     .tip.g = 0xfe,
+    //     .tip.b = 0xff,
+    //     .tip.shape_code = 0x30,
+
+    //     .center.r = 0xfe,
+    //     .center.g = 0xfe,
+    //     .center.b = 0xff,
+    //     .center.shape_code = 0x30,
+
+    //     .right.r = 0xec,
+    //     .right.g = 0xf6,
+    //     .right.b = 0xf4,
+    //     .right.shape_code = 0x30,
+
+    //     .left.r = 0xf0,
+    //     .left.g = 0xf8,
+    //     .left.b = 0xf9,
+    //     .left.shape_code = 0x30
+	// },
 	{0}
 };
 

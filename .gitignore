@@ -3324,3 +3324,6 @@ scripts/bmp_scripts/temp/luminize_flame.bmp_temp
 scripts/bmp_scripts/temp/luminize.bmp_temp
 scripts/bmps/luminize.bmp
 scripts/bmps/whiteflames.bmp
+scripts/temp/teehee_palette.bmp_temp
+scripts/bmps/teehee_palette.bin
+scripts/bmp_scripts/bmps/teehee_palette.bmp

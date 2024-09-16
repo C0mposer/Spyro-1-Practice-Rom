@@ -234,12 +234,6 @@ def patch_8bit_clut(x_vram, y_vram, level, clut_bmp, num_fading_levels = 1, tran
     for i in range(num_fading_levels):
         patch_vram_in_wad(x_vram, y_vram + i, width, height, level, clut_data)
 
-def patch_flame_texture(x_vram, y_vram, level, texture_bmp):
-    
-    texture_data = b""
-    texture_data = convert_4bit_texture(texture_bmp)
-    
-    patch_vram_in_wad(x_vram, y_vram, 8, 128, level, texture_data)
 
 def PatchArtisansFlag():
     try:

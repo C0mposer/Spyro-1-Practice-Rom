@@ -544,7 +544,6 @@ void ReturnToCustomMainMenu()
     PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
 }
 
-
 void UpdateManualTimerMenu()
 {
     CapitalTextInfo menu_text_info[4] = {{0}};

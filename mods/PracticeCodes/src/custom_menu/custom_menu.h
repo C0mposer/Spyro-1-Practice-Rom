@@ -11,6 +11,8 @@ void HandleEnteringSubMenu();
 
 void RenderMainMenu();
 
+void CreateMenuTextInfo(CapitalTextInfo  menu_text_info[5]);
+
 void HandleSwitchingMainMenuSelections();
 
 void ExitMainMenu();

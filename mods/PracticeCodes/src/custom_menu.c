@@ -1,4 +1,5 @@
 #include <common.h>
+#include <custom_menu.h>
 #include <custom_text.h>
 #include <sound.h>
 #include <shared_funcs.h>
@@ -105,8 +106,10 @@ typedef struct MiscMenu
     bool quick_goop_mode;
     char *quick_goop_text;
     char *consitency_tracker_text;
+    char *show_sparx_range_text;
 } MiscMenu;
 MiscMenu misc_menu = {0};
+extern bool show_sparx_range_mode;
 
 typedef enum CurrentMenu
 {
@@ -952,257 +955,6 @@ void CustomMenuUpdate(void)
             }
 #endif
         }
-
-        // if (current_menu == MISC_MENU)
-        // {
-        //     CapitalTextInfo menu_text_info[5] = {{0}};
-
-        //     // Easy Exit
-        //     if(_currentButtonOneFrame == CIRCLE_BUTTON || _currentButtonOneFrame == TRIANGLE_BUTTON)
-        //     {
-        //         current_menu = MAIN_MENU;
-        //         PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-        //     }
-
-        //     DrawTextBox(0x30, 0x1D0, 0x30, 0xa8);
-
-        //     menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[0].y = 70;
-        //     menu_text_info[0].size = DEFAULT_SIZE;
-
-        //     menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[1].y = 90;
-        //     menu_text_info[1].size = DEFAULT_SIZE;
-
-        //     menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[2].y = 110;
-        //     menu_text_info[2].size = DEFAULT_SIZE;
-
-        //     menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[3].y = 130;
-        //     menu_text_info[3].size = DEFAULT_SIZE;
-
-        //     menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
-        //     menu_text_info[4].y = 150;
-        //     menu_text_info[4].size = DEFAULT_SIZE;
-
-        //     _spyro.isMovementLocked = TRUE;
-
-        //     if(misc_menu.selection == 0)
-        //     {
-        //         DrawTextCapitals(misc_menu.sparx_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(misc_menu.sparx_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
-
-        //     if(misc_menu.selection == 1)
-        //     {
-        //         DrawTextCapitals(misc_menu.show_dragon_touch_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else
-        //     {
-        //         DrawTextCapitals(misc_menu.show_dragon_touch_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
-
-        //     if(misc_menu.selection == 2)
-        //     {
-        //         DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
-
-        //     if(misc_menu.selection == 3)
-        //     {
-        //         DrawTextCapitals(misc_menu.bg_color_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(misc_menu.bg_color_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
-
-        //     if(misc_menu.selection == 4)
-        //     {
-        //         DrawTextCapitals(misc_menu.super_mode_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-        //     }
-        //     else{
-        //         DrawTextCapitals(misc_menu.super_mode_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        //     }
-
-        //     // Fill text with defaults if NULL
-        //     if(misc_menu.sparx_mode_text == NULL)
-        //     {
-        //         misc_menu.sparx_mode_text = "SPARX MODE NORMAL";
-        //         misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
-        //         misc_menu.quick_goop_text = "QUICK GOOP OFF";
-        //         misc_menu.bg_color_text = "BG COLOR BLUE";
-        //         misc_menu.super_mode_text = "NGPLUS MODE OFF";
-        //     }
-
-        //     // Change Selection
-        //     if(_currentButtonOneFrame == DOWN_BUTTON)
-        //     {
-        //         misc_menu.selection = (misc_menu.selection + 1) % 5;
-        //     }
-        //     else if(_currentButtonOneFrame == UP_BUTTON && misc_menu.selection != 0)
-        //     {
-        //         misc_menu.selection = misc_menu.selection - 1;
-        //     }
-
-        //     // Play Sound Effect
-        //     if(_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
-        //     {
-        //         PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-        //     }
-
-        //     if(misc_menu.selection == 0)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             misc_menu.sparx_mode = (misc_menu.sparx_mode + 1) % 3;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.sparx_mode > 0)
-        //         {
-        //             misc_menu.sparx_mode;
-        //         }
-
-        //         if(misc_menu.sparx_mode == 0)
-        //         {
-        //             misc_menu.sparx_mode_text = "SPARX NORMAL";
-        //         }
-        //         else if(misc_menu.sparx_mode == 1)
-        //         {
-        //             misc_menu.sparx_mode_text = "PERMA SPARX";
-        //         }
-        //         else if(misc_menu.sparx_mode == 2)
-        //         {
-        //             misc_menu.sparx_mode_text = "SPARXLESS";
-        //         }
-        //     }
-
-        //     else if (misc_menu.selection == 1)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             misc_menu.show_dragon_touch = (misc_menu.show_dragon_touch + 1) % 2;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.show_dragon_touch > 0)
-        //         {
-        //             misc_menu.show_dragon_touch--;
-        //         }
-
-        //         if (misc_menu.show_dragon_touch == false)
-        //         {
-        //             misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
-
-        //         }
-        //         else if (misc_menu.show_dragon_touch == TRUE)
-        //         {
-        //             misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH ON";
-
-        //         }
-        //     }
-
-        //     else if (misc_menu.selection == 2)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             misc_menu.quick_goop_mode = (misc_menu.quick_goop_mode + 1) % 2;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.quick_goop_mode > 0)
-        //         {
-        //             misc_menu.quick_goop_mode--;
-        //         }
-
-        //         if (misc_menu.quick_goop_mode == false)
-        //         {
-        //             misc_menu.quick_goop_text = "QUICK GOOP OFF";
-        //         }
-        //         else if (misc_menu.quick_goop_mode == true)
-        //         {
-        //             misc_menu.quick_goop_text = "QUICK GOOP ON";
-        //         }
-        //     }
-
-        //     else if(misc_menu.selection == 3)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             bg_color_index = (bg_color_index + 1) % 7;
-        //             should_update_bg_color = TRUE;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
-        //         {
-        //             bg_color_index--;
-        //             should_update_bg_color = TRUE;
-        //         }
-
-        //         switch(bg_color_index)
-        //         {
-        //             case(BG_BLUE):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR BLUE";
-        //                 break;
-        //             }
-        //             case(BG_PURPLE):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR PURPLE";
-        //                 break;
-        //             }
-        //             case(BG_TEAL):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR TEAL";
-        //                 break;
-        //             }
-        //             case(BG_GREY):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR GREY";
-        //                 break;
-        //             }
-        //             case(BG_PINK):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR PINK";
-        //                 break;
-        //             }
-        //             case(BG_ORANGE):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR ORANGE";
-        //                 break;
-        //             }
-        //             case(BG_YELLOW):
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR YELLOW";
-        //                 break;
-        //             }
-        //             default:
-        //             {
-        //                 misc_menu.bg_color_text = "BG COLOR GREY";
-        //                 break;
-        //             }
-        //         }
-        //     }
-
-        //     if(misc_menu.selection == 4)
-        //     {
-        //         if (_currentButtonOneFrame == RIGHT_BUTTON)
-        //         {
-        //             misc_menu.super_mode = (misc_menu.super_mode + 1) % 2;
-        //         }
-        //         else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.super_mode > 0)
-        //         {
-        //             misc_menu.super_mode;
-        //         }
-
-        //         if(misc_menu.super_mode == 0)
-        //         {
-        //             misc_menu.super_mode_text = "NGPLUS MODE OFF";
-        //         }
-        //         else if(misc_menu.super_mode == 1)
-        //         {
-        //             misc_menu.super_mode_text = "NGPLUS MODE ON";
-        //         }
-        //     }
-        // }
     }
 
     // Has Released Menu Button
@@ -1245,6 +997,11 @@ void CustomMenuUpdate(void)
             {
                 _spyro.drownTimer = 0x240;
             }
+        }
+
+        if (show_sparx_range_mode == true)
+        {
+            DrawSparxRange();
         }
     }
 

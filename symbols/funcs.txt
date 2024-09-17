@@ -67,3 +67,5 @@ PauseMusicAndSFX = 0x80056b28;
 PlayMusic = 0x800567f4;
 
 LevelTransition = 0x8002df9c;
+
+WorldToScreen = 0x80017aa4;

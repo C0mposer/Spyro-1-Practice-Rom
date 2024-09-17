@@ -378,6 +378,8 @@ void PauseMusicAndSFX(unsigned int param_1);
 void PlayMusic(int track_number, int flags);
 void LevelTransition(void);
 
+void WorldToScreen(Vec3 *param_1,Vec3 *param_2);
+
 
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables

@@ -2,6 +2,7 @@
 #include <main_updates.h>
 #include <IGT.h>
 #include <levelselect.h>
+#include <custom_menu.h>
 #include <cosmetic.h>
 #include <rat_code.h>
 #include <credits_skip.h>

@@ -3327,3 +3327,7 @@ scripts/bmps/whiteflames.bmp
 scripts/temp/teehee_palette.bmp_temp
 scripts/bmps/teehee_palette.bin
 scripts/bmp_scripts/bmps/teehee_palette.bmp
+mods/PracticeCodes/debug/dep/draw_sparx_range.dep
+mods/PracticeCodes/debug/dep/prims.dep
+mods/PracticeCodes/debug/obj/draw_sparx_range.o
+mods/PracticeCodes/debug/obj/prims.o

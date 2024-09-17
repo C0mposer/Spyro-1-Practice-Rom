@@ -189,7 +189,7 @@ typedef enum ILTimerState
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
 
-extern CdlLOC oldCdLocation;
+extern int oldCdLocation[2];    // Array of 2 ints because the seek location takes up 8 bytes
 
 //! Every Frame Update
 void CustomMenuUpdate2()

@@ -149,7 +149,7 @@ int savestate_button_index;
 int loadstate_button_index;
 int switch_state_button_index;
 
-CdlLOC oldCdLocation;
+int oldCdLocation[2];   // Array of 2 ints because the seek location takes up 8 bytes
 
 // Externed from elsewhere
 typedef enum ILTimerState

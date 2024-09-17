@@ -28,7 +28,7 @@ void DrawSparxRange(void) {
         {
             octagon_vertices[i].x = _spyro.position.x + OFFSETS[i][0];
             octagon_vertices[i].y = _spyro.position.y + OFFSETS[i][1];
-            octagon_vertices[i].z = _spyro.position.z - 100;
+            octagon_vertices[i].z = _spyro.position.z - 350;
         }
         // Draw octagon lines
         for (i = 0; i < 8; i++) 

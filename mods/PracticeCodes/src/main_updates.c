@@ -165,6 +165,21 @@ void DrawSavestateSwitchedText(void)
     RenderShadedMobyQueue();
 }
 
+// void EnableInventoryMenu()
+// {
+//     // UN-NOP Call to PrepareInventoryGamestate
+//     *(int*)(0x80033C28) = 0x0C00B1C5;
+//     *(int*)(0x80033C2C) = 0x24040001;
+// }
+
+// void DisableInventoryMenu()
+// {
+//     // NOP Call to PrepareInventoryGamestate
+//     *(int*)(0x80033C28) = 0x0;
+//     *(int*)(0x80033C2C) = 0x0;
+
+// }
+
 void ChangeInventoryMenu(SwitchButton state)
 {
     if (state == OFF)

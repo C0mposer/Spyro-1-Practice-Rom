@@ -289,14 +289,14 @@ def PatchArtisansFlag():
 
 
 
-        # patch_4bit_texture(808, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp")
-        # patch_4bit_texture(808, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp")
-        # patch_4bit_texture(816, 448, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp")
-        # patch_4bit_texture(816, 480, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp")
-        # patch_4bit_clut(928, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow1.bmp", 16)
-        # patch_4bit_clut(928, 144, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow2.bmp", 16)
-        # patch_4bit_clut(944, 112, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow3.bmp", 16)
-        # patch_4bit_clut(944, 128, "gnastys_loot", "C:\\Users\\Kara\\Downloads\\out\\out\\gnastylow4.bmp", 16)
+        patch_4bit_texture(808, 448, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag1.bmp")
+        patch_4bit_texture(808, 480, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag2.bmp")
+        patch_4bit_texture(816, 448, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag3.bmp")
+        patch_4bit_texture(816, 480, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag4.bmp")
+        patch_4bit_clut(928, 128, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag1.bmp", 16)
+        patch_4bit_clut(928, 144, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag2.bmp", 16)
+        patch_4bit_clut(944, 112, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag3.bmp", 16)
+        patch_4bit_clut(944, 128, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag4.bmp", 16)
 
 
 

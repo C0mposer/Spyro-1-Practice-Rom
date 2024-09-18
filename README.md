@@ -1,8 +1,8 @@
 
 
-# Spyro 1 Practice Codes
+# Spyro 1 Practice Rom
 
-This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *full save-states*, *a level select*, *timing functionalities*, *automatic collectable resetting*, and many other quality of life features.
+This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *full save-states*, *a level select*, *timing functionalities*, *automatic collectable resetting*, *custom skins*, *visualizations*, and many other quality of life features.
 
 This can be played on PS1, PS2, PS3, and most emulators.   
 *(however to use the full savestate functionality, you must have a PS2 75k-90k)*
@@ -98,6 +98,7 @@ This lets you change your hotkey for switching savestate slots from 2 options:
 
 ## Misc Settings
 ### Sparx Mode:
+- **SPARX NORMAL** mode is sparx's normal behavior.
 - **PERMA SPARX ON** mode keeps sparx gold at all times, and your health will never deplete.
 - **SPARXLESS ON** mode keeps sparx dead at all times, allowing for sparxless practice.
 	 
@@ -131,19 +132,23 @@ This setting kills spyro in goop the moment you can not input anymore. Small qua
 
 ## Cosmetic Menu
 ### BG Color:
-You can select the pause/inventory menu color from a range of pre-selected options!
+You can select the pause/inventory menu color from a range of pre-selected options.
 ### Spyro Skin:
-Choose from our selection of Spyro Skins!
+Choose from our selection of Spyro Skins.
 ### Flame Skin:
-Choose from our selection of Flame Skins!
+Choose from our selection of Flame Skins.
 ### Sparx Skin:
-Choose from our selection of Sparx Skins!
+Choose from our selection of Sparx Skins.
 
 ### Skin Credits
 Skins included are made by:
 Composer, OddKara, Pepper, & Jayobean!
 
 Also credit to Pepper for the custom portrait in Gnasty's Loot :)
+
+### Custom Spyro Skin
+If you would like to patch in your own custom spyro skin into the practice rom, see here:
+**[Spyro 1 Practice Rom Skin Patcher](https://github.com/C0mposer/Spyro1PracticeRomSkinPatcher)**
 
 	 
 

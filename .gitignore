@@ -3331,3 +3331,5 @@ mods/PracticeCodes/debug/dep/draw_sparx_range.dep
 mods/PracticeCodes/debug/dep/prims.dep
 mods/PracticeCodes/debug/obj/draw_sparx_range.o
 mods/PracticeCodes/debug/obj/prims.o
+mods/PracticeCodes/backup/redux_extra.bin
+mods/PracticeCodes/output/extra.bin

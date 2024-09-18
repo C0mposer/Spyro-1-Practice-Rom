@@ -165,7 +165,7 @@ int loadstate_button_index;
     bool respawn_on_loadstate = TRUE;
 #endif
 
-CdlLOC oldCdLocation;
+int oldCdLocation[2];   // Array of 2 ints because the seek location takes up 8 bytes
 
 // Externed from elsewhere
 typedef enum ILTimerState

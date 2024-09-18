@@ -263,31 +263,31 @@ void CustomMenuUpdate2()
                 DrawTextCapitals(misc_menu.disable_portal_entry_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
+
             if (misc_menu.selection == 3)
             {
-                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(misc_menu.consitency_tracker_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else
             {
-                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(misc_menu.consitency_tracker_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
             if (misc_menu.selection == 4)
             {
-                DrawTextCapitals(misc_menu.consitency_tracker_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(misc_menu.show_sparx_range_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else
             {
-                DrawTextCapitals(misc_menu.consitency_tracker_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(misc_menu.show_sparx_range_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-
             if (misc_menu.selection == 5)
             {
-                DrawTextCapitals(misc_menu.show_sparx_range_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else
             {
-                DrawTextCapitals(misc_menu.show_sparx_range_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
             // Fill text with defaults if NULL
@@ -296,9 +296,9 @@ void CustomMenuUpdate2()
                 misc_menu.sparx_mode_text = "SPARX MODE NORMAL";
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
                 misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
-                misc_menu.quick_goop_text = "QUICK GOOP OFF";
                 misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
                 misc_menu.show_sparx_range_text = "SHOW SPARX RANGE OFF";
+                misc_menu.quick_goop_text = "QUICK GOOP OFF";
             }
 
             // Change Selection
@@ -376,24 +376,7 @@ void CustomMenuUpdate2()
                 }
             }
 
-            else if (misc_menu.selection == 3)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    misc_menu.quick_goop_mode = (misc_menu.quick_goop_mode + 1) % 2;
-                }
-
-                if (misc_menu.quick_goop_mode == false)
-                {
-                    misc_menu.quick_goop_text = "QUICK GOOP OFF";
-                }
-                else
-                {
-                    misc_menu.quick_goop_text = "QUICK GOOP ON";
-                }
-            }
-
-            if (misc_menu.selection == 4)
+            if (misc_menu.selection == 3)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
@@ -415,7 +398,7 @@ void CustomMenuUpdate2()
                 }
             }
 
-            if (misc_menu.selection == 5)
+            if (misc_menu.selection == 4)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
@@ -431,6 +414,24 @@ void CustomMenuUpdate2()
                     misc_menu.show_sparx_range_text = "SHOW SPARX RANGE ON";
                 }
             }
+
+            else if (misc_menu.selection == 5)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    misc_menu.quick_goop_mode = (misc_menu.quick_goop_mode + 1) % 2;
+                }
+
+                if (misc_menu.quick_goop_mode == false)
+                {
+                    misc_menu.quick_goop_text = "QUICK GOOP OFF";
+                }
+                else
+                {
+                    misc_menu.quick_goop_text = "QUICK GOOP ON";
+                }
+            }
+
         }
 
         if (current_menu == COSMETIC_MENU)

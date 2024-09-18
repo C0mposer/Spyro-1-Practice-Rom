@@ -104,11 +104,47 @@ This lets you change your hotkey for switching savestate slots from 2 options:
 ### Show Dragon Touch:
 This setting shows the amount of frames you lost to a dragon touch (30fps).
 
+
+### Disable Portal
+With **Disable Portal** enabled, it will automatically load a savestate the moment the camera touches the portal. This allows you to practice portal entries much more effeciently.
+
+If you have manual timer on, the timer will stop the moment the camera touches the portal, allowing you to time portal entries as well.
+
+
+### Track Consistency
+With **Track Consistency** on, you can easily keep track of your consistentcy at tricks/hard movement from within the game.
+When you turn it on you will notice 2 numbers in the bottom left, a numerator and denominator. 
+The numerator represents your successful attempts at something, and the denominator represents your total attempts at something.
+Here are the controls:
+**Loadstate Button** - Automatically increase total attempts
+**Right Stick Up** - Manually increase successful attempts
+**Right Stick Down** - Manually decrease successful attempts
+**L2 + R2 + Right Stick Up** - Manually increase total attempts
+**L2 + R2 + Right Stick Down** - Manually decrease total attempts
+**L2 + R2** - Show tracker for 2 seconds
+	 
+### Show Sparx Range
+With **Show Sparx Range** on, it will draw an octagon around Spyro representing sparx's range for gem collection.
+
 ### Quick Goop:
 This setting kills spyro in goop the moment you can not input anymore. Small quality of life feature to reduce the amount of time you have to wait to die in goop.
-	 
+
+## Cosmetic Menu
 ### BG Color:
 You can select the pause/inventory menu color from a range of pre-selected options!
+### Spyro Skin:
+Choose from our selection of Spyro Skins!
+### Flame Skin:
+Choose from our selection of Flame Skins!
+### Sparx Skin:
+Choose from our selection of Sparx Skins!
+
+### Skin Credits
+Skins included are made by:
+Composer, OddKara, Pepper, & Jayobean!
+
+Also credit to Pepper for the custom portrait in Gnasty's Loot :)
+
 	 
 
 ## Other Features:
@@ -130,10 +166,10 @@ The rat is saved as a part of the sudo-savestate (L3/R3) as well
 - Open/Close Gnasty Gnorc - *R2 3 times*   
 - Open/Close Gnasty's Loot - *R1 3 times*   
 
-### Credits Skip Practice
+### Credits Skip Teleport
 - Warp to end of Gnasty Gnorc fight - *L1 + R1 + X*   
 
-### Loot Plane Practice
+### Loot Plane Teleports
 - Warp before plane 2 with key - *L1 + R1 + X*   
 - Warp before plane 1 with key - *L1 + R1 + Square*   
 

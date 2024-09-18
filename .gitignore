@@ -3333,3 +3333,15 @@ mods/PracticeCodes/debug/obj/draw_sparx_range.o
 mods/PracticeCodes/debug/obj/prims.o
 mods/PracticeCodes/backup/redux_extra.bin
 mods/PracticeCodes/output/extra.bin
+scripts/bmps/gnastytransflag1_palette.bin
+scripts/bmps/gnastytransflag1_palette.bmp
+scripts/bmps/gnastytransflag2_palette.bin
+scripts/bmps/gnastytransflag2_palette.bmp
+scripts/bmps/gnastytransflag3_palette.bin
+scripts/bmps/gnastytransflag3_palette.bmp
+scripts/bmps/gnastytransflag4_palette.bin
+scripts/bmps/gnastytransflag4_palette.bmp
+scripts/temp/gnastytransflag1_palette.bmp_temp
+scripts/temp/gnastytransflag2_palette.bmp_temp
+scripts/temp/gnastytransflag3_palette.bmp_temp
+scripts/temp/gnastytransflag4_palette.bmp_temp

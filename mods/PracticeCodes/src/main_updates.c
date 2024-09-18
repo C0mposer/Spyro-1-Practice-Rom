@@ -22,7 +22,6 @@ ModState mod_state = GAME_STARTED;
 
 bool hasSavedSpyro = false;
 bool hasResetSavestate = false;
-bool readyToLoadstateAfterDeath = false;
 bool switch_button_held;
 
 int savestateSwitchedTimer = 0;
@@ -31,12 +30,15 @@ int savestated_level_ids[3] = {0}; // For keeping savestates upon loop
 
 bool should_savestate_after_dragon_or_load = false;
 
-bool should_loadstate_gems = false;
+// Only Needed for PS1 or IOP Versions
+#if BUILD == 1 || BUILD == 3
+    extern bool respawn_on_loadstate;
+    bool readyToLoadstateAfterDeath = false;
+#endif
 
 // Externed from elsewhere
-
 extern int mainTimerAtReset;
-extern bool should_loadstate_gems;
+
 // from IGT.c
 extern int savestate_selection;
 
@@ -259,16 +261,25 @@ void MainUpdate()
             }
         }
 
+
         //Load spyro & camera information
+#if BUILD == 2 || BUILD == 0        //LOADSTATE 
+        if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
+        {
+            LoadStateTest();
+
+            if(_levelID == GNASTYS_LOOT_ID)
+            {
+                LootGiveAllKeys();
+            }
+        }
+#elif BUILD == 1 || BUILD == 3      //RESPAWN SPYRO DURING LOADSTATE ON PS1 AND PS2 IOP
         if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
-            if(!should_loadstate_gems || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
+            if(!respawn_on_loadstate || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
-                #if BUILD == 2 || BUILD == 0
-                    LoadStateTest();
-                #elif BUILD == 1 || BUILD == 3
-                    ReloadSpyroAndCamera(false);
-                #endif
+
+                ReloadSpyroAndCamera(false);
                 
                 readyToLoadstateAfterDeath = false;
 
@@ -291,6 +302,8 @@ void MainUpdate()
                 readyToLoadstateAfterDeath = true;
             }
         }
+#endif
+
 
         //Respawn spyro & reset level gems
         if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)

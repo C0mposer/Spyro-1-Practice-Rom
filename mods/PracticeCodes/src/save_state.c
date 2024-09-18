@@ -10,7 +10,7 @@ extern byte* mem_region;
 // from IGT.c
 extern int savestate_selection;
 // from main_updates.c
-extern bool hasSavedSpyro;
+//extern bool hasSavedSpyro;
 extern int local_level_id;
 extern savestated_level_ids[3];
 //from moby_anim_crash_fix.c
@@ -103,7 +103,7 @@ void SaveStateTest(void)
 
     SaveGeoData();
 
-    hasSavedSpyro = true;
+    //hasSavedSpyro = true;
 
     //printf("%X\n\n\n", local_mem_region);
 }

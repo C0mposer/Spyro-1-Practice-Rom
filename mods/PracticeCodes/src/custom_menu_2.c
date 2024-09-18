@@ -306,13 +306,9 @@ void CustomMenuUpdate2()
             {
                 misc_menu.selection = (misc_menu.selection + 1) % 6;
             }
-            else if (_currentButtonOneFrame == UP_BUTTON && misc_menu.selection != 0)
+            else if (_currentButtonOneFrame == UP_BUTTON)
             {
-                misc_menu.selection = misc_menu.selection - 1;
-            }
-            else if (_currentButtonOneFrame == UP_BUTTON && misc_menu.selection == 0)
-            {
-                misc_menu.selection = 5;
+                misc_menu.selection = (misc_menu.selection + 5) % 6;                    // +5 because it's the same as -1 in mod 6 math
             }
 
             // Play Sound Effect
@@ -327,9 +323,9 @@ void CustomMenuUpdate2()
                 {
                     misc_menu.sparx_mode = (misc_menu.sparx_mode + 1) % 3;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && misc_menu.sparx_mode > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    misc_menu.sparx_mode--;
+                    misc_menu.sparx_mode = (misc_menu.sparx_mode + 2) % 3;
                 }
 
                 if (misc_menu.sparx_mode == 0)
@@ -348,13 +344,9 @@ void CustomMenuUpdate2()
 
             else if (misc_menu.selection == 1)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    misc_menu.show_dragon_touch = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    misc_menu.show_dragon_touch = false;
+                    misc_menu.show_dragon_touch = (misc_menu.show_dragon_touch + 1) % 2;
                 }
 
                 if (misc_menu.show_dragon_touch == false)
@@ -369,13 +361,9 @@ void CustomMenuUpdate2()
 
             else if (misc_menu.selection == 2)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    disable_portal_entry = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    disable_portal_entry = false;
+                    disable_portal_entry = (disable_portal_entry + 1) % 2;
                 }
 
                 if (disable_portal_entry == false)
@@ -390,13 +378,9 @@ void CustomMenuUpdate2()
 
             else if (misc_menu.selection == 3)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    misc_menu.quick_goop_mode = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    misc_menu.quick_goop_mode = false;
+                    misc_menu.quick_goop_mode = (misc_menu.quick_goop_mode + 1) % 2;
                 }
 
                 if (misc_menu.quick_goop_mode == false)
@@ -411,15 +395,14 @@ void CustomMenuUpdate2()
 
             if (misc_menu.selection == 4)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    consistency_tracker_mode = true;
+                    consistency_tracker_mode = (consistency_tracker_mode + 1) % 2;
 
-                    consistency_tracker_render_time = 30; // Render for 1 second when you enable it
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    consistency_tracker_mode = false;
+                    if(consistency_tracker_mode)
+                    {
+                        consistency_tracker_render_time = 30; // Render for 1 second when you enable it
+                    }
                 }
 
                 if (consistency_tracker_mode == false)
@@ -434,13 +417,9 @@ void CustomMenuUpdate2()
 
             if (misc_menu.selection == 5)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    show_sparx_range_mode = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    show_sparx_range_mode = false;
+                    show_sparx_range_mode = (show_sparx_range_mode + 1) % 2;
                 }
 
                 if (show_sparx_range_mode == false)
@@ -536,13 +515,9 @@ void CustomMenuUpdate2()
             {
                 cosmetic_menu.selection = (cosmetic_menu.selection + 1) % 4;
             }
-            else if (_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection != 0)
+            else if (_currentButtonOneFrame == UP_BUTTON)
             {
-                cosmetic_menu.selection = cosmetic_menu.selection - 1;
-            }
-            else if (_currentButtonOneFrame == UP_BUTTON && cosmetic_menu.selection == 0)
-            {
-                cosmetic_menu.selection = 3;
+                cosmetic_menu.selection = (cosmetic_menu.selection + 3) % 4;                    // +3 because it's the same as -1 in mod 4 math
             }
 
             // Play Sound Effect
@@ -558,14 +533,9 @@ void CustomMenuUpdate2()
                     bg_color_index = (bg_color_index + 1) % 7;
                     should_update_bg_color = TRUE;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && bg_color_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    bg_color_index--;
-                    should_update_bg_color = TRUE;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && bg_color_index == 0)
-                {
-                    bg_color_index = 6;
+                    bg_color_index = (bg_color_index + 6) % 7;
                     should_update_bg_color = TRUE;
                 }
 
@@ -617,14 +587,9 @@ void CustomMenuUpdate2()
                     spyro_color_index = (spyro_color_index + 1) % 18;
                     should_load_spyro_color = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && spyro_color_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    spyro_color_index--;
-                    should_load_spyro_color = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && spyro_color_index == 0)
-                {
-                    spyro_color_index = 17;
+                    spyro_color_index = (spyro_color_index + 17) % 18;
                     should_load_spyro_color = true;
                 }
 
@@ -729,14 +694,9 @@ void CustomMenuUpdate2()
                     flame_color_index = (flame_color_index + 1) % 15;
                     should_load_flame_color = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    flame_color_index--;
-                    should_load_flame_color = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && flame_color_index == 0)
-                {
-                    flame_color_index = 14;
+                    flame_color_index = (flame_color_index + 14) % 15;
                     should_load_flame_color = true;
                 }
 
@@ -827,14 +787,9 @@ void CustomMenuUpdate2()
                     sparx_color_index = (sparx_color_index + 1) % 11;
                     should_load_sparx_color = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    sparx_color_index--;
-                    should_load_sparx_color = true;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && sparx_color_index == 0)
-                {
-                    sparx_color_index = 10;
+                    sparx_color_index = (sparx_color_index + 10) % 11;
                     should_load_sparx_color = true;
                 }
 

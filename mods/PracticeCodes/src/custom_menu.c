@@ -80,20 +80,31 @@ typedef struct TimerMenu
 } TimerMenu;
 TimerMenu timer_menu = {0};
 
-typedef struct SavestateMenu
-{
-    int selection;
-    //
-    char *stateslot_text;
-    // int savestate_button_index;
-    char *savestate_button_text;
-    // int loadstate_button_index;
-    char *loadstate_button_text;
-    // int switch_state_button_index;
-    char *switch_state_button_text;
 
-} SavestateMenu;
-SavestateMenu savestate_menu = {0};
+#if BUILD == 2 || BUILD == 0
+    typedef struct SavestateMenu
+    {
+        int selection;
+        char *stateslot_text;
+        char *savestate_button_text;
+        char *loadstate_button_text;
+        char *switch_state_button_text;
+
+    } SavestateMenu;
+    SavestateMenu savestate_menu = {0};
+#elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+    typedef struct SavestateMenu
+    {
+        int selection;
+        char *stateslot_text;
+        char *savestate_button_text;
+        char *loadstate_button_text;
+        char *respawn_on_loadstate_text;
+
+    } SavestateMenu;
+    SavestateMenu savestate_menu = {0};
+#endif
+
 
 typedef struct MiscMenu
 {
@@ -147,7 +158,12 @@ const short LOADSTATE_BUTTONS[3] = {R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_BU
 
 int savestate_button_index;
 int loadstate_button_index;
-int switch_state_button_index;
+
+#if BUILD == 2 || BUILD == 0
+    int switch_state_button_index;
+#elif BUILD == 1 || BUILD == 3
+    bool respawn_on_loadstate = TRUE;
+#endif
 
 CdlLOC oldCdLocation;
 
@@ -280,13 +296,9 @@ void CustomMenuUpdate(void)
             {
                 custom_menu.selection = (custom_menu.selection + 1) % 5;
             }
-            else if (_currentButtonOneFrame == UP_BUTTON && custom_menu.selection != 0)
+            else if (_currentButtonOneFrame == UP_BUTTON)
             {
-                custom_menu.selection = custom_menu.selection - 1;
-            }
-            else if (_currentButtonOneFrame == UP_BUTTON && custom_menu.selection == 0)
-            {
-                custom_menu.selection = 4;
+                custom_menu.selection = (custom_menu.selection + 4) % 5;
             }
 
             // Play Sound Effect
@@ -447,17 +459,15 @@ void CustomMenuUpdate(void)
             }
 
             // Change Selection
-            if (_currentButtonOneFrame == DOWN_BUTTON && il_menu.il_state == true)
-            {
-                il_menu.selection = (il_menu.selection + 1) % 5;
-            }
-            else if (_currentButtonOneFrame == UP_BUTTON && il_menu.selection != 0)
-            {
-                il_menu.selection = il_menu.selection - 1;
-            }
-            else if (_currentButtonOneFrame == UP_BUTTON && il_menu.selection == 0 && il_menu.il_state == true)
-            {
-                il_menu.selection = il_menu.selection = 4;
+            if(il_menu.il_state == true){
+                if (_currentButtonOneFrame == DOWN_BUTTON)
+                {
+                    il_menu.selection = (il_menu.selection + 1) % 5;
+                }
+                else if (_currentButtonOneFrame == UP_BUTTON)
+                {
+                    il_menu.selection = (il_menu.selection + 4) % 5;
+                }
             }
 
             // Play Sound Effect
@@ -486,14 +496,9 @@ void CustomMenuUpdate(void)
 
             else if (il_menu.selection == 1)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     il_menu.il_timer_display_mode = (il_menu.il_timer_display_mode + 1) % 2;
-                }
-
-                if (_currentButtonOneFrame == LEFT_BUTTON && il_menu.il_timer_display_mode > 0)
-                {
-                    il_menu.il_timer_display_mode--;
                 }
 
                 if (il_menu.il_timer_display_mode == IL_TIMER_AT_END)
@@ -646,18 +651,16 @@ void CustomMenuUpdate(void)
             }
 
             // Change Selection
-            if (_currentButtonOneFrame == DOWN_BUTTON && timer_menu.timer_state == true)
-            {
-                timer_menu.selection = (timer_menu.selection + 1) % 4;
+            if(timer_menu.timer_state == true){
+                if (_currentButtonOneFrame == DOWN_BUTTON)
+                {
+                    timer_menu.selection = (timer_menu.selection + 1) % 4;
+                }
+                else if (_currentButtonOneFrame == UP_BUTTON)
+                {
+                    timer_menu.selection = (timer_menu.selection + 3) % 4;
+                }
             }
-            else if (_currentButtonOneFrame == UP_BUTTON && timer_menu.selection != 0)
-            {
-                timer_menu.selection = timer_menu.selection - 1;
-            }
-            // else if(_currentButtonOneFrame == UP_BUTTON && timer_menu.selection == 0 && timer_menu.timer_state == true)
-            // {
-            //     timer_menu.selection = 3;
-            // }
 
             // Play Sound Effect
             if (_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -814,11 +817,19 @@ void CustomMenuUpdate(void)
             {
                 DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-#elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
-            DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+#elif BUILD == 1 || BUILD == 3
+            if (savestate_menu.selection == 3)
+            {
+                DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
 #endif
 
             // Fill text with defaults if NULL
+#if BUILD == 2 || BUILD == 0
             if (savestate_menu.stateslot_text == NULL)
             {
                 savestate_menu.stateslot_text = "CURRENT SLOT 1";
@@ -826,28 +837,34 @@ void CustomMenuUpdate(void)
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
             }
+#elif BUILD == 1 || BUILD == 3
+            if (savestate_menu.stateslot_text == NULL)
+            {
+                savestate_menu.stateslot_text = "CURRENT SLOT 1";
+                savestate_menu.savestate_button_text = "SAVE BUTTON L3";
+                savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
+                savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
+            }
+#endif
 
             // Change Selection
+#if BUILD == 2 || BUILD == 0
             if (_currentButtonOneFrame == DOWN_BUTTON)
             {
-#if BUILD == 2 || BUILD == 0
                 savestate_menu.selection = (savestate_menu.selection + 1) % 4;
-#elif BUILD == 1 || BUILD == 3
-                savestate_menu.selection = 2;
-#endif
             }
-            else if (_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
+            else if (_currentButtonOneFrame == UP_BUTTON)
             {
-#if BUILD == 2 || BUILD == 0
-                savestate_menu.selection = savestate_menu.selection - 1;
-#elif BUILD == 1 || BUILD == 3
-                savestate_menu.selection = 1;
-#endif
+                savestate_menu.selection = (savestate_menu.selection + 3) % 4;      // +3 because it's the same as -1 in mod 4 math
             }
-#if BUILD == 2 || BUILD == 0
-            else if (_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection == 0)
+#elif BUILD == 1 || BUILD == 3
+            if (_currentButtonOneFrame == DOWN_BUTTON)
             {
-                savestate_menu.selection = 3;
+                savestate_menu.selection = savestate_menu.selection % 3 + 1;        // +1 outside the mod operator to avoid it ever being 0
+            }
+            else if (_currentButtonOneFrame == UP_BUTTON)
+            {
+                savestate_menu.selection = (savestate_menu.selection + 1) % 3 + 1;  // +1 outside the mod operator to avoid it ever being 0 and +1 inside to make it effectively +2 overal to make it the same as -1
             }
 #endif
 
@@ -864,9 +881,9 @@ void CustomMenuUpdate(void)
                 {
                     savestate_selection = (savestate_selection + 1) % 3;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_selection > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    savestate_selection--;
+                    savestate_selection = (savestate_selection + 2) % 3;
                 }
 
                 if (savestate_selection == 0)
@@ -890,9 +907,9 @@ void CustomMenuUpdate(void)
                 {
                     savestate_button_index = (savestate_button_index + 1) % 3;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && savestate_button_index > 0)
+                else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    savestate_button_index--;
+                    savestate_button_index = (savestate_button_index + 2) % 3;
                 }
 
                 if (savestate_button_index == 0)
@@ -911,13 +928,9 @@ void CustomMenuUpdate(void)
 
             else if (savestate_menu.selection == 2)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     loadstate_button_index = (loadstate_button_index + 1) % 2;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && loadstate_button_index > 0)
-                {
-                    loadstate_button_index--;
                 }
 
                 if (loadstate_button_index == 0)
@@ -935,13 +948,9 @@ void CustomMenuUpdate(void)
 #if BUILD == 2 || BUILD == 0
             else if (savestate_menu.selection == 3)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     switch_state_button_index = (switch_state_button_index + 1) % 2;
-                }
-                else if (_currentButtonOneFrame == LEFT_BUTTON && switch_state_button_index > 0)
-                {
-                    switch_state_button_index--;
                 }
 
                 if (switch_state_button_index == 0)
@@ -951,6 +960,23 @@ void CustomMenuUpdate(void)
                 else
                 {
                     savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
+                }
+            }
+#elif BUILD == 1 || BUILD == 3
+            else if (savestate_menu.selection == 3)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    respawn_on_loadstate = (respawn_on_loadstate + 1) % 2;
+                }
+
+                if (respawn_on_loadstate == 1)
+                {
+                    savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
+                }
+                else
+                {
+                    savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE OFF";
                 }
             }
 #endif

@@ -21,7 +21,7 @@ NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
 NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c, StartFairyArea.bin
+NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c, StartFairyArea.bin
 NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
 NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c, kern.bin
@@ -29,6 +29,11 @@ NTSC, kernal, 0x8000EA00, 0x0, src/track_consistency.c src/sparx_particles.c src
 
 NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
+
+NTSC, exe, 0x8001288c, 0x0, asm/splash_screen1.s
+NTSC, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s
+NTSC, exe, 0x80012ab8, 0x0, asm/splash_screen2.s
+NTSC, exe, 0x80012b74, 0x0, asm/splash_screen2_fade.s
 
 NTSC, wad, 0x800816c0, 0x0, asm/head.s
 NTSC, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin
@@ -44,7 +49,7 @@ DECKARD_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
 DECKARD_PS2_NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c, StartFairyArea.bin
+DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c, StartFairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 
@@ -54,6 +59,11 @@ DECKARD_PS2_NTSC, kernal, 0x80A50000, 0x0, src/save_state.c src/save_geo.c, PS2M
 
 DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 DECKARD_PS2_NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
+
+DECKARD_PS2_NTSC, exe, 0x8001288c, 0x0, asm/splash_screen1.s
+DECKARD_PS2_NTSC, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s
+DECKARD_PS2_NTSC, exe, 0x80012ab8, 0x0, asm/splash_screen2.s
+DECKARD_PS2_NTSC, exe, 0x80012b74, 0x0, asm/splash_screen2_fade.s
 
 DECKARD_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s
 DECKARD_PS2_NTSC, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin
@@ -69,7 +79,7 @@ IOP_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
 IOP_PS2_NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 
 IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c, StartFairyArea.bin
+IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c, StartFairyArea.bin
 IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
 IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c, MemoryCardArea.bin
 IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c, kern.bin
@@ -77,6 +87,11 @@ IOP_PS2_NTSC, kernal, 0x80007530, 0x0, src/track_consistency.c src/sparx_particl
 
 IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 IOP_PS2_NTSC, exe, 0x8002e2f4, 0x0, src/pause_patch.c
+
+IOP_PS2_NTSC, exe, 0x8001288c, 0x0, asm/splash_screen1.s
+IOP_PS2_NTSC, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s
+IOP_PS2_NTSC, exe, 0x80012ab8, 0x0, asm/splash_screen2.s
+IOP_PS2_NTSC, exe, 0x80012b74, 0x0, asm/splash_screen2_fade.s
 
 IOP_PS2_NTSC, wad, 0x800816c0, 0x0, asm/head.s
 IOP_PS2_NTSC, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin

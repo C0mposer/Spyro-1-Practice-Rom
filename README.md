@@ -142,7 +142,7 @@ Choose from our selection of Sparx Skins.
 
 ### Skin Credits
 Skins included are made by:
-Composer, OddKara, Pepper, & Jayobean!
+Composer, OddKara, Pepper, Texensis, & Jayobean!
 
 Also credit to Pepper for the custom portrait in Gnasty's Loot :)
 

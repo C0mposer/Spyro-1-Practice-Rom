@@ -31,9 +31,8 @@
             <file name="flames.bin" source="spyro1_PracticeCodes/flames.bin" type="data" />
             <file name="sparx.bin" source="spyro1_PracticeCodes/sparx.bin" type="data" />
             <file name="skins.bin" source="spyro1_PracticeCodes/skins.bin" type="data" />
-            <dir name="SOURCE" source="spyro1_PracticeCodes/SOURCE">
-                <file name="SOURCE.TRD" source="spyro1_PracticeCodes/SOURCE/SOURCE.TRD" type="data" />
-            </dir>
+            <file name="splash1.bin" source="spyro1_PracticeCodes/splash1.bin" type="data" />
+            <file name="splash2.bin" source="spyro1_PracticeCodes/splash2.bin" type="data" />
         </directory_tree>
     </track>
 </iso_project>

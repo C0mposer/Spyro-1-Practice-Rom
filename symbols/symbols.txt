@@ -12,6 +12,7 @@ _globalDragons = 0x80075750;
 _globalEggs = 0x80075810;
 _currentLevelGems = 0x80077FC8;
 _globalLives = 0x8007582C;
+_globalLivesCounter = 0x80077FD0;
 _levelGemsCollectedArray = 0x80077420;
 _portalNumber = 0x8007576c;
 

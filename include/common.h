@@ -420,6 +420,7 @@ extern int _globalDragons; //0x80075750                      //? Total amount of
 extern int _globalEggs; //0x80075810                         //? Total amount of global eggs
 extern int _levelGemsCollectedArray[35]; //0x80077420        //? Total amount of gems collected in each level
 extern int _levelDragonCounts[35]; //0x800772d8              //? Total amount of dragons collected in each level
+extern int _globalLivesCounter; //0x80077FD0
 
 extern char _levelID; //0x800758B4                           //? Level ID according to the LevelIDs enum. This LevelID is used to determine which level will be loaded when in a loading screen, amung other things.
 extern char _portalToExitFromInHW; //0x800758AC              //? Same as the Level Id for the level. Also if 0, means entering level for fly in, not returning home

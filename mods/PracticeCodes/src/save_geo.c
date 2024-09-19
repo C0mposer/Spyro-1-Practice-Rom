@@ -8,9 +8,11 @@ int geo_reset_state = OFF;
 // From save_state.c
 extern byte* mem_region;
 
-void SaveGeoData(void)
+void SaveGeoData(byte* current_mem_region)
 {
-    int* local_mem_region = mem_region + 0x10A00;
+    int* local_mem_region = current_mem_region + 0x10;
+
+    //printf("geo start %X\n", local_mem_region);
 
     // The amount is 4 bytes before the pointers begin.
     int _amount_of_moving_collision = _ptr_moving_collision_data[-1];
@@ -80,9 +82,9 @@ void SaveGeoData(void)
     }
 }
 
-void LoadGeoData(void)
+void LoadGeoData(byte* current_mem_region)
 {
-    int* local_mem_region = mem_region + 0x10A00;
+    int* local_mem_region = current_mem_region + 0x10;
 
     // The amount is 4 bytes before the pointers begin.
     int _amount_of_moving_textures = _ptr_moving_texture_data[-1];   
@@ -148,7 +150,7 @@ void LoadGeoData(void)
         memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
         local_mem_region += movingCollisionSize;
     }
-        //printf("End of local savestate region: %X\n", local_mem_region);
+        printf("End of local savestate region: %X\n", local_mem_region);
 
     // Set our geo state to SHOULD_MOVE, so that GeoDataUpdate() can begin
     //geo_reset_state = SHOULD_MOVE;

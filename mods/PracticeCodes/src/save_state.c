@@ -69,8 +69,8 @@ void SaveStateTest(void)
     local_mem_region += sizeof(_globalFlightLevelCollectedItemsArray);
 
     // Copy general hud timer area
-    memcpy((int*)local_mem_region,      (void*)0x80077F20, 0x260);
-    local_mem_region += 0x260;
+    memcpy(local_mem_region, (void*)0x80077F20, 0x500);
+    local_mem_region += 0x500;
 
     // Copy spyro (moved from other area)
     memcpy((byte*)local_mem_region, &_spyro, sizeof(_spyro) + 0x100);
@@ -101,11 +101,13 @@ void SaveStateTest(void)
     memcpy((byte*)local_mem_region, 0x80075724, 0x4);
     local_mem_region += 0x4;
 
-    SaveGeoData();
-
+    if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
+    {
+        SaveGeoData(local_mem_region);
+    }
     //hasSavedSpyro = true;
 
-    //printf("%X\n\n\n", local_mem_region);
+    printf("%X\n\n\n", local_mem_region);
 }
 
 void LoadStateTest(void)
@@ -160,8 +162,8 @@ void LoadStateTest(void)
         local_mem_region += sizeof(_globalFlightLevelCollectedItemsArray);
 
         // Copy general hud timer area
-        memcpy((void*)0x80077F20, local_mem_region, 0x260);
-        local_mem_region += 0x260;
+        memcpy((void*)0x80077F20, local_mem_region, 0x500);
+        local_mem_region += 0x500;
 
         // Copy spyro (moved from other area)
         memcpy(&_spyro, local_mem_region, sizeof(_spyro) + 0x100);
@@ -193,7 +195,11 @@ void LoadStateTest(void)
         local_mem_region += 0x4;
 
         //printf("%X\n\n\n", local_mem_region);
-        LoadGeoData();
+
+        if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
+        {
+            LoadGeoData(local_mem_region);
+        }
       }
     }
 }

@@ -69,7 +69,7 @@ void TrackConsistencyUpdate(void)
             consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
         }
         // Decrease total counter by 1 if L2 + R2 + Right Stick Down
-        else if (_currentButton == L2_BUTTON + R2_BUTTON && right_stick_direction == DOWN)
+        else if (_currentButton == L2_BUTTON + R2_BUTTON && right_stick_direction == DOWN && consistency_tracker.totalAmount > 0)
         {
             consistency_tracker.totalAmount--;
             consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
@@ -81,7 +81,7 @@ void TrackConsistencyUpdate(void)
             consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
         } 
         // Increase success counter by 1 if Right Stick DOWN
-        else if (right_stick_direction == DOWN)
+        else if (right_stick_direction == DOWN && consistency_tracker.successAmount > 0)
         {
             consistency_tracker.successAmount--;
             consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds

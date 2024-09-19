@@ -139,7 +139,7 @@ void RespawnSpyro()
 {
     _gameState = GAMESTATE_DEATH;
     _effect_ScreenFadeOut = 0x0;
-    _globalLives = 100;
+    _globalLives = 99;
     _shouldRespawnAtCheckpoint = FALSE;
 
 
@@ -322,6 +322,13 @@ void MainUpdate()
         if(_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
         {
             _spyro.position.z += 500;
+        }
+
+        //Lives always 99
+        if(_globalLives != 99)
+        {
+            _globalLives = 99;
+            _globalLivesCounter = 99;
         }
 
         //Give Key

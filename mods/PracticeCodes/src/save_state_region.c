@@ -21,10 +21,10 @@ void SetMemoryRegion(void)
         mem_region = STARTING_EXTRA_MEM;
         break;
       case 1:
-        mem_region = STARTING_EXTRA_MEM + 0x13000;
+        mem_region = STARTING_EXTRA_MEM + 0x15000;
         break;
       case 2:
-        mem_region = STARTING_EXTRA_MEM + 0x26000;
+        mem_region = STARTING_EXTRA_MEM + 0x2A000;
         break;
       default:
         mem_region = STARTING_EXTRA_MEM;

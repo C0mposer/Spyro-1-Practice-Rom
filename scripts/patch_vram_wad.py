@@ -289,22 +289,22 @@ def PatchArtisansFlag():
 
 
 
-        patch_4bit_texture(808, 448, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag1.bmp")
-        patch_4bit_texture(808, 480, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag2.bmp")
-        patch_4bit_texture(816, 448, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag3.bmp")
-        patch_4bit_texture(816, 480, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag4.bmp")
-        patch_4bit_clut(928, 128, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag1.bmp", 16)
-        patch_4bit_clut(928, 144, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag2.bmp", 16)
-        patch_4bit_clut(944, 112, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag3.bmp", 16)
-        patch_4bit_clut(944, 128, "gnastys_loot", "bmp_scripts\\bmps\\gnastytransflag4.bmp", 16)
+        patch_4bit_texture(808, 448, "gnastys_loot", "bmp_scripts\\bmps\\agnasty1.bmp")
+        patch_4bit_texture(808, 480, "gnastys_loot", "bmp_scripts\\bmps\\agnasty2.bmp")
+        patch_4bit_texture(816, 448, "gnastys_loot", "bmp_scripts\\bmps\\agnasty3.bmp")
+        patch_4bit_texture(816, 480, "gnastys_loot", "bmp_scripts\\bmps\\agnasty4.bmp")
+        patch_4bit_clut(928, 128, "gnastys_loot", "bmp_scripts\\bmps\\agnasty1.bmp", 16)
+        patch_4bit_clut(928, 144, "gnastys_loot", "bmp_scripts\\bmps\\agnasty2.bmp", 16)
+        patch_4bit_clut(944, 112, "gnastys_loot", "bmp_scripts\\bmps\\agnasty3.bmp", 16)
+        patch_4bit_clut(944, 128, "gnastys_loot", "bmp_scripts\\bmps\\agnasty4.bmp", 16)
 
 
 
-        # gnasty_texture_coords = [[608, 480], [624, 448], [544, 480], [560, 448], [624, 480], [640, 448], [560, 480], [576, 448], [576, 480], [592, 448], [528, 448], [512, 480], [592, 480], [608, 448], [528, 480], [544, 448]]
+        gnasty_texture_coords = [[608, 480], [624, 448], [544, 480], [560, 448], [624, 480], [640, 448], [560, 480], [576, 448], [576, 480], [592, 448], [528, 448], [512, 480], [592, 480], [608, 448], [528, 480], [544, 448]]
 
-        # multi_patch_8bit_texture(4, 4, gnasty_texture_coords, "gnastys_loot", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\cursed.bmp")
-        # for i in range(4):
-        #     patch_8bit_clut(512, 144 + i, "gnastys_loot", "C:\\Users\\Kara\\Desktop\\Kara\\Stream\\cursed.bmp")
+        multi_patch_8bit_texture(4, 4, gnasty_texture_coords, "gnastys_loot", "bmp_scripts\\bmps\\pepper_portrait_smol.bmp")
+        for i in range(4):
+            patch_8bit_clut(512, 144 + i, "gnastys_loot","bmp_scripts\\bmps\\pepper_portrait_smol.bmp")
 
         print()
         print("WAD VRAM patch successful")

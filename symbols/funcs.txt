@@ -13,6 +13,9 @@ DrawLine = 0x8001844c;
 DrawPrimitive = 0x800168dc;
 FillScreenColor = 0x800190d4;
 
+DrawSpyro = 0x80023ac4;
+AddToWorldTable = 0x800168a0;
+
 PlaySoundEffect = 0x80055a78;
 
 DrawShapePreReq = 0x80060670;

@@ -11,10 +11,10 @@ const short OFFSETS[8][2] = {
         {-1043, -1043},
         {-1434, 0},
         {-1043, 1043}
-    };
+};
 
 void DrawSparxRange(void) {
-    if (_gameState == GAMESTATE_GAMEPLAY) 
+    if (_gameState == GAMESTATE_GAMEPLAY)
     {
         ShadedLine line;
 
@@ -24,17 +24,17 @@ void DrawSparxRange(void) {
 
         // Calculate octagon vertices in 3D space
         int i;
-        for (i = 0; i < 8; i++) 
+        for (i = 0; i < 8; i++)
         {
             octagon_vertices[i].x = _spyro.position.x + OFFSETS[i][0];
             octagon_vertices[i].y = _spyro.position.y + OFFSETS[i][1];
             octagon_vertices[i].z = _spyro.position.z - 350;
         }
         // Draw octagon lines
-        for (i = 0; i < 8; i++) 
+        for (i = 0; i < 8; i++)
         {
             WorldToScreen(&vertex_1, &octagon_vertices[i]);
-            WorldToScreen(&vertex_2, &octagon_vertices[(i+1)% 8]);
+            WorldToScreen(&vertex_2, &octagon_vertices[(i + 1) % 8]);
 
             line.point1Pos.x = vertex_1.x;
             line.point1Pos.y = vertex_1.y;

@@ -41,68 +41,68 @@ typedef enum SparxMode
 typedef struct Menu
 {
     int selection;
-    char *il_menu_text;
-    char *timer_menu_text;
-    char *savestate_menu_text;
-    char *misc_menu_text;
-    char *cosmetic_menu_text;
+    char* il_menu_text;
+    char* timer_menu_text;
+    char* savestate_menu_text;
+    char* misc_menu_text;
+    char* cosmetic_menu_text;
 } Menu;
-Menu custom_menu = {0};
+Menu custom_menu = { 0 };
 
 typedef struct ILMenu
 {
     int selection;
     bool il_state;
-    char *il_mode_text;
+    char* il_mode_text;
     ILTimerDisplayMode il_timer_display_mode;
-    char *il_timer_display_mode_text;
+    char* il_timer_display_mode_text;
     bool display_on_dragon;
-    char *display_on_dragon_text;
+    char* display_on_dragon_text;
     bool display_on_land;
-    char *display_on_land_text;
+    char* display_on_land_text;
     bool dont_loop_level;
-    char *loop_level_text;
+    char* loop_level_text;
 
 } ILMenu;
-ILMenu il_menu = {0};
+ILMenu il_menu = { 0 };
 typedef struct TimerMenu
 {
     int selection;
     bool timer_state;
-    char *timer_state_text;
+    char* timer_state_text;
     TimerDisplayMode timer_display_mode;
-    char *timer_display_mode_text;
+    char* timer_display_mode_text;
     short stop_timer_button_index;
-    char *stop_timer_button_text;
+    char* stop_timer_button_text;
     short reset_timer_mode;
-    char *reset_timer_button_text;
+    char* reset_timer_button_text;
 
 } TimerMenu;
-TimerMenu timer_menu = {0};
+TimerMenu timer_menu = { 0 };
 
 
 #if BUILD == 2 || BUILD == 0
-    typedef struct SavestateMenu
-    {
-        int selection;
-        char *stateslot_text;
-        char *savestate_button_text;
-        char *loadstate_button_text;
-        char *switch_state_button_text;
+typedef struct SavestateMenu
+{
+    int selection;
+    char* stateslot_text;
+    char* savestate_button_text;
+    char* loadstate_button_text;
+    char* switch_state_button_text;
 
-    } SavestateMenu;
-    SavestateMenu savestate_menu = {0};
+} SavestateMenu;
+SavestateMenu savestate_menu = { 0 };
 #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
-    typedef struct SavestateMenu
-    {
-        int selection;
-        char *stateslot_text;
-        char *savestate_button_text;
-        char *loadstate_button_text;
-        char *respawn_on_loadstate_text;
+typedef struct SavestateMenu
+{
+    int selection;
+    char* stateslot_text;
+    char* savestate_button_text;
+    char* loadstate_button_text;
+    char* respawn_on_loadstate_text;
 
-    } SavestateMenu;
-    SavestateMenu savestate_menu = {0};
+} SavestateMenu;
+SavestateMenu savestate_menu = { 0 };
 #endif
 
 
@@ -110,16 +110,16 @@ typedef struct MiscMenu
 {
     int selection;
     SparxMode sparx_mode;
-    char *sparx_mode_text;
+    char* sparx_mode_text;
     bool show_dragon_touch;
-    char *show_dragon_touch_text;
-    char *disable_portal_entry_text;
+    char* show_dragon_touch_text;
+    char* disable_portal_entry_text;
     bool quick_goop_mode;
-    char *quick_goop_text;
-    char *consitency_tracker_text;
-    char *show_sparx_range_text;
+    char* quick_goop_text;
+    char* consitency_tracker_text;
+    char* show_sparx_range_text;
 } MiscMenu;
-MiscMenu misc_menu = {0};
+MiscMenu misc_menu = { 0 };
 extern bool show_sparx_range_mode;
 
 typedef enum CurrentMenu
@@ -150,19 +150,19 @@ int savestate_selection = 0;
 
 bool isHeld = false;
 
-const short STOP_TIMER_BUTTONS[2] = {START_BUTTON, START_BUTTON};
-const short RESET_TIMER_BUTTONS[2] = {R3_BUTTON, SELECT_BUTTON};
+const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, START_BUTTON };
+const short RESET_TIMER_BUTTONS[2] = { R3_BUTTON, SELECT_BUTTON };
 
-const short SAVESTATE_BUTTONS[2] = {L3_BUTTON, START_BUTTON};
-const short LOADSTATE_BUTTONS[3] = {R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_BUTTON + CIRCLE_BUTTON)};
+const short SAVESTATE_BUTTONS[2] = { L3_BUTTON, START_BUTTON };
+const short LOADSTATE_BUTTONS[3] = { R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_BUTTON + CIRCLE_BUTTON) };
 
 int savestate_button_index;
 int loadstate_button_index;
 
 #if BUILD == 2 || BUILD == 0
-    int switch_state_button_index;
+int switch_state_button_index;
 #elif BUILD == 1 || BUILD == 3
-    bool respawn_on_loadstate = TRUE;
+bool respawn_on_loadstate = TRUE;
 #endif
 
 int oldCdLocation[2];   // Array of 2 ints because the seek location takes up 8 bytes
@@ -182,7 +182,7 @@ extern int mainTimerAtReset;
 void CustomMenuUpdate(void)
 {
     // Open Menu
-    if (_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
+    if (_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && menu_state == MENU_HIDDEN && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
     {
         menu_state = !menu_state;
         has_toggled_menu = TRUE;
@@ -192,7 +192,7 @@ void CustomMenuUpdate(void)
         {
             _spyro.isMovementLocked = FALSE;
             current_menu = MAIN_MENU;
-            CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&oldCdLocation, NULL);
+            CdControlB(CDL_PRIMITIVE_SEEKL, (void*)&oldCdLocation, NULL);
             PlayMusic(_currentMusicTrack, 8);
         }
     }
@@ -202,7 +202,7 @@ void CustomMenuUpdate(void)
     {
         if (current_menu == MAIN_MENU)
         {
-            CapitalTextInfo menu_text_info[5] = {{0}};
+            CapitalTextInfo menu_text_info[5] = { {0} };
 
             // Easy Exit
             if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -347,14 +347,14 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = COSMETIC_MENU;
-                    CdControlB(CDL_PRIMITIVE_GETlocL, NULL, (void *)&oldCdLocation);
+                    CdControlB(CDL_PRIMITIVE_GETlocL, NULL, (void*)&oldCdLocation);
                 }
             }
         }
 
         if (current_menu == IL_MENU)
         {
-            CapitalTextInfo menu_text_info[5] = {{0}};
+            CapitalTextInfo menu_text_info[5] = { {0} };
 
             // Easy Exit
             if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -459,7 +459,7 @@ void CustomMenuUpdate(void)
             }
 
             // Change Selection
-            if(il_menu.il_state == true){
+            if (il_menu.il_state == true) {
                 if (_currentButtonOneFrame == DOWN_BUTTON)
                 {
                     il_menu.selection = (il_menu.selection + 1) % 5;
@@ -564,7 +564,7 @@ void CustomMenuUpdate(void)
 
         if (current_menu == TIMER_MENU)
         {
-            CapitalTextInfo menu_text_info[4] = {{0}};
+            CapitalTextInfo menu_text_info[4] = { {0} };
 
             // Easy Exit
             if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -651,7 +651,7 @@ void CustomMenuUpdate(void)
             }
 
             // Change Selection
-            if(timer_menu.timer_state == true){
+            if (timer_menu.timer_state == true) {
                 if (_currentButtonOneFrame == DOWN_BUTTON)
                 {
                     timer_menu.selection = (timer_menu.selection + 1) % 4;
@@ -741,13 +741,13 @@ void CustomMenuUpdate(void)
 
         if (current_menu == SAVESTATE_MENU)
         {
-// Set menu to 1 by default if not on DECKARD
-#if BUILD == 1 || BUILD == 3
+            // Set menu to 1 by default if not on DECKARD
+            #if BUILD == 1 || BUILD == 3
             if (savestate_menu.selection == 0)
                 savestate_menu.selection = 1;
-#endif
+            #endif
 
-            CapitalTextInfo menu_text_info[4] = {{0}};
+            CapitalTextInfo menu_text_info[4] = { {0} };
 
             // Easy Exit
             if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -775,7 +775,7 @@ void CustomMenuUpdate(void)
 
             _spyro.isMovementLocked = TRUE;
 
-#if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
+            #if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
             if (savestate_menu.selection == 0)
             {
                 DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -784,11 +784,11 @@ void CustomMenuUpdate(void)
             {
                 DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-#elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+            #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
 
             DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
 
-#endif
+            #endif
 
             if (savestate_menu.selection == 1)
             {
@@ -808,7 +808,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-#if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0
             if (savestate_menu.selection == 3)
             {
                 DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -817,7 +817,7 @@ void CustomMenuUpdate(void)
             {
                 DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-#elif BUILD == 1 || BUILD == 3
+            #elif BUILD == 1 || BUILD == 3
             if (savestate_menu.selection == 3)
             {
                 DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -826,10 +826,10 @@ void CustomMenuUpdate(void)
             {
                 DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-#endif
+            #endif
 
             // Fill text with defaults if NULL
-#if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0
             if (savestate_menu.stateslot_text == NULL)
             {
                 savestate_menu.stateslot_text = "CURRENT SLOT 1";
@@ -837,7 +837,7 @@ void CustomMenuUpdate(void)
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.switch_state_button_text = "SWITCH SLOT RSTICK";
             }
-#elif BUILD == 1 || BUILD == 3
+            #elif BUILD == 1 || BUILD == 3
             if (savestate_menu.stateslot_text == NULL)
             {
                 savestate_menu.stateslot_text = "CURRENT SLOT 1";
@@ -845,10 +845,10 @@ void CustomMenuUpdate(void)
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
             }
-#endif
+            #endif
 
-            // Change Selection
-#if BUILD == 2 || BUILD == 0
+                        // Change Selection
+            #if BUILD == 2 || BUILD == 0
             if (_currentButtonOneFrame == DOWN_BUTTON)
             {
                 savestate_menu.selection = (savestate_menu.selection + 1) % 4;
@@ -857,7 +857,7 @@ void CustomMenuUpdate(void)
             {
                 savestate_menu.selection = (savestate_menu.selection + 3) % 4;      // +3 because it's the same as -1 in mod 4 math
             }
-#elif BUILD == 1 || BUILD == 3
+            #elif BUILD == 1 || BUILD == 3
             if (_currentButtonOneFrame == DOWN_BUTTON)
             {
                 savestate_menu.selection = savestate_menu.selection % 3 + 1;        // +1 outside the mod operator to avoid it ever being 0
@@ -866,9 +866,9 @@ void CustomMenuUpdate(void)
             {
                 savestate_menu.selection = (savestate_menu.selection + 1) % 3 + 1;  // +1 outside the mod operator to avoid it ever being 0 and +1 inside to make it effectively +2 overal to make it the same as -1
             }
-#endif
+            #endif
 
-            // Play Sound Effect
+                        // Play Sound Effect
             if (_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
             {
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
@@ -876,7 +876,7 @@ void CustomMenuUpdate(void)
 
             if (savestate_menu.selection == 0)
             {
-#if BUILD == 2 || BUILD == 0
+                #if BUILD == 2 || BUILD == 0
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
                     savestate_selection = (savestate_selection + 1) % 3;
@@ -898,7 +898,7 @@ void CustomMenuUpdate(void)
                 {
                     savestate_menu.stateslot_text = "CURRENT SLOT 3";
                 }
-#endif
+                #endif
             }
 
             else if (savestate_menu.selection == 1)
@@ -945,7 +945,7 @@ void CustomMenuUpdate(void)
                 }
             }
 
-#if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0
             else if (savestate_menu.selection == 3)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
@@ -962,7 +962,7 @@ void CustomMenuUpdate(void)
                     savestate_menu.switch_state_button_text = "SWITCH SLOT L1 R1 DPAD";
                 }
             }
-#elif BUILD == 1 || BUILD == 3
+            #elif BUILD == 1 || BUILD == 3
             else if (savestate_menu.selection == 3)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
@@ -979,7 +979,7 @@ void CustomMenuUpdate(void)
                     savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE OFF";
                 }
             }
-#endif
+            #endif
         }
     }
 
@@ -1034,7 +1034,7 @@ void CustomMenuUpdate(void)
     //! DRAGON TOUCH
     if (misc_menu.show_dragon_touch && _dragonState > 2 && _dragonState < 7)
     {
-        CapitalTextInfo timer_text_info = {0};
+        CapitalTextInfo timer_text_info = { 0 };
         timer_text_info.x = SCREEN_RIGHT_EDGE - 0x40;
         timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
         timer_text_info.size = DEFAULT_SIZE;
@@ -1042,7 +1042,7 @@ void CustomMenuUpdate(void)
         sprintf(temp, "%dF", (_dragonWalkTime - 64) / 2);
         DrawTextCapitals(temp, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
 
-        MyHudMoby dragon_logo = {.position.x = SCREEN_RIGHT_EDGE - 0x54, .position.y = SCREEN_TOP_EDGE + 0x27, .position.z = 3900};
+        MyHudMoby dragon_logo = { .position.x = SCREEN_RIGHT_EDGE - 0x54, .position.y = SCREEN_TOP_EDGE + 0x27, .position.z = 3900 };
         CustomDrawMoby(MOBY_ID_DRAGON_FIGURINE, &dragon_logo, MOBY_COLOR_GOLD);
     }
 

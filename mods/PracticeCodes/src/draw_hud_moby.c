@@ -8,7 +8,7 @@
 void CustomDrawMoby(short type, struct MyHudMoby* info, char color)
 
 {
-    _ptr_HudMobyData = _ptr_HudMobyData - MOBY_SIZE/4;              //set moby ptr to next moby space
+    _ptr_HudMobyData = _ptr_HudMobyData - MOBY_SIZE / 4;              //set moby ptr to next moby space
     memset(_ptr_HudMobyData, 0, MOBY_SIZE);                         //clear a space of memory for the moby
     struct Moby* ptr_current_moby = (Moby*)_ptr_HudMobyData;
 

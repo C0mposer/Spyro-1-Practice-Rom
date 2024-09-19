@@ -11,7 +11,7 @@ void ChangeFullSparxParticleColor()
 {
     register byte* s2 asm("s2"); // Particle register
 
-    switch(sparx_color_index)
+    switch (sparx_color_index)
     {
         case(SPARX_SKIN_DEFAULT):
         {
@@ -104,7 +104,7 @@ void ChangeFullSparxParticleColor()
 int* FindSparxParticleCode(void)
 {
     int* funcptr_create_particle = (int*)0x800758e4; // Global function pointer to CreateParticle
-    
+
     int* create_particle_current_addr = *funcptr_create_particle; // Address of CreateParticle in current level overlay
 
     // Find the sparx particle code
@@ -129,7 +129,7 @@ void InjectChangeSparxParticleColorJump()
     int* hook_into_color = start_of_sparx_particle_code + 5;           // Address to opcode for jump we will replace
 
     int* funcptr_ChangeFullSparxParticleColor = ChangeFullSparxParticleColor; // Save pointer to our function
-    short opcode_ChangeFulLSparxParticleColor = ((int)funcptr_ChangeFullSparxParticleColor/4 - 0x20000000); // Get the address of our function to be used in a j opcode. (addr/4 without 0x80)
+    short opcode_ChangeFulLSparxParticleColor = ((int)funcptr_ChangeFullSparxParticleColor / 4 - 0x20000000); // Get the address of our function to be used in a j opcode. (addr/4 without 0x80)
     *(funcptr_ChangeFullSparxParticleColor + 2) = 0x0; // NOP the stack pointer decrement of our compiled ChangeFullSparxParticleColor function. (Can't remove prolouge?)
 
     // Dynamic Hook

@@ -144,7 +144,7 @@ Choose from our selection of Sparx Skins.
 Skins included are made by:
 Composer, OddKara, Pepper, Texensis, & Jayobean!
 
-Also credit to Pepper for the custom portrait in Gnasty's Loot :)
+Also credit to Pepper for the custom portrait in Gnasty's Loot, as well as the splash screen :)
 
 ### Custom Spyro Skin
 If you would like to patch in your own custom spyro skin into the practice rom, see here:

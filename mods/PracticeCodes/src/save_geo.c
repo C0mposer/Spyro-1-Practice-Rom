@@ -27,15 +27,15 @@ void SaveGeoData(byte* current_mem_region)
         memcpy(local_mem_region, _ptr_moving_texture_data[i], sizeof(int));
         local_mem_region += 1;
 
-        short texturesArrayOffset = *(short *)((int *)_ptr_moving_texture_data[i] + 1);
-        int *ptr_textureBlock = (int *)_ptr_textures_array[texturesArrayOffset];
-        int * ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
+        short texturesArrayOffset = *(short*)((int*)_ptr_moving_texture_data[i] + 1);
+        int* ptr_textureBlock = (int*)_ptr_textures_array[texturesArrayOffset];
+        int* ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
         memcpy(local_mem_region, ptr_movingTextureUpdateRelated, sizeof(int));
         local_mem_region += 1;
 
-        unsigned char movingTextureOffset = *((char *)ptr_textureBlock + 0x17);
-        unsigned char movingTextureSize = *((char *)ptr_textureBlock + 0x14);
-        int *ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
+        unsigned char movingTextureOffset = *((char*)ptr_textureBlock + 0x17);
+        unsigned char movingTextureSize = *((char*)ptr_textureBlock + 0x14);
+        int* ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
         memcpy(local_mem_region, ptr_movingTexture, movingTextureSize * sizeof(int));
         local_mem_region += movingTextureSize;
 
@@ -48,15 +48,15 @@ void SaveGeoData(byte* current_mem_region)
         memcpy(local_mem_region, _ptr_low_lod_texture_data[i], sizeof(int));
         local_mem_region += 1;
 
-        short texturesArrayOffset = *(short *)((int *)_ptr_low_lod_texture_data[i] + 1);
-        int *ptr_textureBlock = (int *)_ptr_textures_array[texturesArrayOffset];
-        int * ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
+        short texturesArrayOffset = *(short*)((int*)_ptr_low_lod_texture_data[i] + 1);
+        int* ptr_textureBlock = (int*)_ptr_textures_array[texturesArrayOffset];
+        int* ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
         memcpy(local_mem_region, ptr_movingTextureUpdateRelated, sizeof(int));
         local_mem_region += 1;
 
-        unsigned char movingTextureOffset = *((char *)ptr_textureBlock + 0x17);
-        unsigned char movingTextureSize = *((char *)ptr_textureBlock + 0x14);
-        int *ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
+        unsigned char movingTextureOffset = *((char*)ptr_textureBlock + 0x17);
+        unsigned char movingTextureSize = *((char*)ptr_textureBlock + 0x14);
+        int* ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
         memcpy(local_mem_region, ptr_movingTexture, movingTextureSize * sizeof(int));
         local_mem_region += movingTextureSize;
 
@@ -67,12 +67,12 @@ void SaveGeoData(byte* current_mem_region)
     for (int i = 0; i < _amount_of_moving_collision; i++)
     {
         memcpy(local_mem_region, _ptr_moving_collision_data[i], sizeof(int));
-        local_mem_region += 1;    
+        local_mem_region += 1;
     }
 
     // All moving collision in 1 area, no need to loop
-    if(*(&_ptr_moving_collision_data - 1)){ //checks to make sure that there is moving collision to save
-        int movingCollisionSize = (*((short *)_ptr_moving_collision_data[0] + 2) + *((short *)_ptr_moving_collision_data[0] + 3)) * 3;
+    if (*(&_ptr_moving_collision_data - 1)) { //checks to make sure that there is moving collision to save
+        int movingCollisionSize = (*((short*)_ptr_moving_collision_data[0] + 2) + *((short*)_ptr_moving_collision_data[0] + 3)) * 3;
         int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
 
         //printf("%X\n", *(&_ptr_moving_collision_data - 1));
@@ -87,7 +87,7 @@ void LoadGeoData(byte* current_mem_region)
     int* local_mem_region = current_mem_region + 0x10;
 
     // The amount is 4 bytes before the pointers begin.
-    int _amount_of_moving_textures = _ptr_moving_texture_data[-1];   
+    int _amount_of_moving_textures = _ptr_moving_texture_data[-1];
     int _amount_of_moving_collision = _ptr_moving_collision_data[-1];
     int _amount_of_low_lod_textures = _ptr_low_lod_texture_data[-1];
     int _amount_of_myst_textures = _ptr_myst_texture_data[-1];
@@ -98,15 +98,15 @@ void LoadGeoData(byte* current_mem_region)
         memcpy(_ptr_moving_texture_data[i], local_mem_region, sizeof(int)); // Hard coding 0x10700 incase I add stuff tosave_state.c
         local_mem_region += 1;
 
-        short texturesArrayOffset = *(short *)((int *)_ptr_moving_texture_data[i] + 1);
-        int *ptr_textureBlock = (int *)_ptr_textures_array[texturesArrayOffset];
-        int * ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
+        short texturesArrayOffset = *(short*)((int*)_ptr_moving_texture_data[i] + 1);
+        int* ptr_textureBlock = (int*)_ptr_textures_array[texturesArrayOffset];
+        int* ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
         memcpy(ptr_movingTextureUpdateRelated, local_mem_region, sizeof(int));
         local_mem_region += 1;
 
-        unsigned char movingTextureOffset = *((char *)ptr_textureBlock + 0x17);
-        unsigned char movingTextureSize = *((char *)ptr_textureBlock + 0x14);
-        int *ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
+        unsigned char movingTextureOffset = *((char*)ptr_textureBlock + 0x17);
+        unsigned char movingTextureSize = *((char*)ptr_textureBlock + 0x14);
+        int* ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
         memcpy(ptr_movingTexture, local_mem_region, movingTextureSize * sizeof(int));
         local_mem_region += movingTextureSize;
     }
@@ -117,15 +117,15 @@ void LoadGeoData(byte* current_mem_region)
         memcpy(_ptr_low_lod_texture_data[i], local_mem_region, sizeof(int));
         local_mem_region += 1;
 
-        short texturesArrayOffset = *(short *)((int *)_ptr_low_lod_texture_data[i] + 1);
-        int *ptr_textureBlock = (int *)_ptr_textures_array[texturesArrayOffset];
-        int * ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
+        short texturesArrayOffset = *(short*)((int*)_ptr_low_lod_texture_data[i] + 1);
+        int* ptr_textureBlock = (int*)_ptr_textures_array[texturesArrayOffset];
+        int* ptr_movingTextureUpdateRelated = (ptr_textureBlock + 6);
         memcpy(ptr_movingTextureUpdateRelated, local_mem_region, sizeof(int));
         local_mem_region += 1;
 
-        unsigned char movingTextureOffset = *((char *)ptr_textureBlock + 0x17);
-        unsigned char movingTextureSize = *((char *)ptr_textureBlock + 0x14);
-        int *ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
+        unsigned char movingTextureOffset = *((char*)ptr_textureBlock + 0x17);
+        unsigned char movingTextureSize = *((char*)ptr_textureBlock + 0x14);
+        int* ptr_movingTexture = ptr_textureBlock + 0x7 + movingTextureOffset;
         memcpy(ptr_movingTexture, local_mem_region, movingTextureSize * sizeof(int));
         local_mem_region += movingTextureSize;
     }
@@ -140,20 +140,20 @@ void LoadGeoData(byte* current_mem_region)
     }
 
     //All moving collision in 1 area, no need to loop
-    if(*(&_ptr_moving_collision_data - 1)) //checks to make sure that there is moving collision to save
+    if (*(&_ptr_moving_collision_data - 1)) //checks to make sure that there is moving collision to save
     {
-    int movingCollisionSize = (*((short *)_ptr_moving_collision_data[0] + 2) + *((short *)_ptr_moving_collision_data[0] + 3)) * 3;
-    int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
-    // Copy the actual collision data
+        int movingCollisionSize = (*((short*)_ptr_moving_collision_data[0] + 2) + *((short*)_ptr_moving_collision_data[0] + 3)) * 3;
+        int* ptr_movingCollision = ((int*)*(_ptr_ptr_moving_collision + 4));
+        // Copy the actual collision data
 
-    //printf("T%X\n", local_mem_region);
+        //printf("T%X\n", local_mem_region);
         memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
         local_mem_region += movingCollisionSize;
     }
-        printf("End of local savestate region: %X\n", local_mem_region);
+    printf("End of local savestate region: %X\n", local_mem_region);
 
-    // Set our geo state to SHOULD_MOVE, so that GeoDataUpdate() can begin
-    //geo_reset_state = SHOULD_MOVE;
+// Set our geo state to SHOULD_MOVE, so that GeoDataUpdate() can begin
+//geo_reset_state = SHOULD_MOVE;
 }
 
 //HACK
@@ -166,7 +166,7 @@ void LoadGeoData(byte* current_mem_region)
 //     {
 //         int _amount_of_moving_textures = _ptr_moving_texture_data[-1];   
 //         int _amount_of_moving_collision = _ptr_moving_collision_data[-1];
-        
+
 //         // Loop over the moving texture pointers, and set its movement state to moving
 //         for (int i = 0; i < _amount_of_moving_textures; i++)
 //         {
@@ -179,7 +179,7 @@ void LoadGeoData(byte* current_mem_region)
 //         for (int i = 0; i < _amount_of_moving_collision; i++)
 //         {
 //             MovingGeo* geo_data = _ptr_moving_collision_data[i];
-            
+
 //             geo_data->movingState = GEO_MOVING;
 
 //         }
@@ -193,7 +193,7 @@ void LoadGeoData(byte* current_mem_region)
 //         // The amount is 4 bytes before the pointers begin.
 //         int _amount_of_moving_textures = _ptr_moving_texture_data[-1];   
 //         int _amount_of_moving_collision = _ptr_moving_collision_data[-1];
-        
+
 //         // Loop over the moving texture pointers and load the MovingGeo data
 //         for (int i = 0; i < _amount_of_moving_textures; i++)
 //         {

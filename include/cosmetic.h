@@ -56,7 +56,7 @@ typedef enum SpyroColor
     SKIN_TRANS,
     SKIN_GOTH,
     SKIN_DITTO,
-    SKIN_EMBER, 
+    SKIN_EMBER,
     SKIN_CYNDER,
     SKIN_CUSTOM
 }SpyroColor;
@@ -81,10 +81,10 @@ typedef enum FlameColor
 
 typedef enum SparxColor
 {
-    SPARX_SKIN_DEFAULT,                                               
-    SPARX_SKIN_RED,                                               
-    SPARX_SKIN_ICY,                                               
-    SPARX_SKIN_JADE,                                               
+    SPARX_SKIN_DEFAULT,
+    SPARX_SKIN_RED,
+    SPARX_SKIN_ICY,
+    SPARX_SKIN_JADE,
     SPARX_SKIN_DARK_BLUE,
     SPARX_SKIN_PURPLE,
     SPARX_SKIN_ORANGE,

@@ -9,7 +9,7 @@ extern void* path_ptr;
 //! Every Frame Update
 void CreditsSkipUpdate()
 {
-    if(_levelID == GNASTY_GNORC_ID)
+    if (_levelID == GNASTY_GNORC_ID)
     {
         if (_currentButton == L1_BUTTON + R1_BUTTON + X_BUTTON)
         {
@@ -47,7 +47,7 @@ void CreditsSkipUpdate()
 
             _isInInGameCutscene = false;
             _effect_ScreenLetterBox = 0;
-            
+
         }
     }
 }

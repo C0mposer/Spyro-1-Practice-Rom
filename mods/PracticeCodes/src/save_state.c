@@ -19,10 +19,8 @@ extern frames_unloaded_moby_anim_function;
 
 void SaveStateTest(void)
 {
-
-
     SetMemoryRegion();
-    
+
     savestated_level_ids[savestate_selection] = _levelID;
 
     byte* local_mem_region = (byte*)mem_region; // Local region for adding to
@@ -32,37 +30,37 @@ void SaveStateTest(void)
     local_mem_region += 0x10000;
 
     // Copy other misc data to the DECKARD IOP area
-    memcpy((int*)local_mem_region,       &_ptr_dynamicLevelMobys,     sizeof(int*));
+    memcpy((int*)local_mem_region, &_ptr_dynamicLevelMobys, sizeof(int*));
     local_mem_region += sizeof(int*);
 
-    memcpy((int*)local_mem_region,   &_ptr_levelMobyData,         sizeof(int*));
+    memcpy((int*)local_mem_region, &_ptr_levelMobyData, sizeof(int*));
     local_mem_region += sizeof(int*);
 
-    memcpy((int*)local_mem_region,   &_ptr_sparx,                 sizeof(int*));
+    memcpy((int*)local_mem_region, &_ptr_sparx, sizeof(int*));
     local_mem_region += sizeof(int*);
 
-    memcpy((int*)local_mem_region,   &_ptr_sparx2,                sizeof(int*));
+    memcpy((int*)local_mem_region, &_ptr_sparx2, sizeof(int*));
     local_mem_region += sizeof(int*);
 
-    memcpy((int*)local_mem_region,   &_doesHaveSuperflame,        sizeof(int));
+    memcpy((int*)local_mem_region, &_doesHaveSuperflame, sizeof(int));
     local_mem_region += sizeof(int);
 
-    memcpy((int*)local_mem_region,   &_superflameTimer,           sizeof(int));
+    memcpy((int*)local_mem_region, &_superflameTimer, sizeof(int));
     local_mem_region += sizeof(int);
 
 
-    memcpy((int*)local_mem_region,   &_levelGemsCollectedArray,   sizeof(_levelGemsCollectedArray));
+    memcpy((int*)local_mem_region, &_levelGemsCollectedArray, sizeof(_levelGemsCollectedArray));
     local_mem_region += sizeof(_levelGemsCollectedArray);
 
-    memcpy((int*)local_mem_region,   &_globalEggs,            sizeof(int));
+    memcpy((int*)local_mem_region, &_globalEggs, sizeof(int));
     local_mem_region += sizeof(int);
-    memcpy((int*)local_mem_region,   &_globalGems,                sizeof(int));
-    local_mem_region += sizeof(int);
-
-    memcpy((int*)local_mem_region,   &_globalDragons,             sizeof(int));
+    memcpy((int*)local_mem_region, &_globalGems, sizeof(int));
     local_mem_region += sizeof(int);
 
-    memcpy((int*)local_mem_region, &_globalFlightLevelTimer,    sizeof(int));
+    memcpy((int*)local_mem_region, &_globalDragons, sizeof(int));
+    local_mem_region += sizeof(int);
+
+    memcpy((int*)local_mem_region, &_globalFlightLevelTimer, sizeof(int));
     local_mem_region += sizeof(int);
 
     memcpy((int*)local_mem_region, &_globalFlightLevelCollectedItemsArray, sizeof(_globalFlightLevelCollectedItemsArray));
@@ -118,88 +116,88 @@ void LoadStateTest(void)
 
     if (*local_mem_region != NULL)
     {
-      if (savestated_level_ids[savestate_selection] == _levelID)
-      {
-        // Reload all level mobys, dynamic mobys, and moby data from the free DECKARD IOP area
-        memcpy( (byte*)_ptr_levelMobys, local_mem_region, 0x10000);
-        local_mem_region += 0x10000;
-
-        // Reload other misc data from the DECKARD IOP area
-        memcpy(&_ptr_dynamicLevelMobys,                 local_mem_region,     sizeof(int*));
-        local_mem_region += sizeof(int*);
-
-        memcpy(&_ptr_levelMobyData,                     local_mem_region, sizeof(int*));
-        local_mem_region += sizeof(int*);
-
-        memcpy(&_ptr_sparx,                             local_mem_region, sizeof(int*));
-        local_mem_region += sizeof(int*);
-
-        memcpy(&_ptr_sparx2,                            local_mem_region, sizeof(int*));
-        local_mem_region += sizeof(int*);
-
-        memcpy(&_doesHaveSuperflame,                    local_mem_region, sizeof(int*));
-        local_mem_region += sizeof(int*);
-        
-        memcpy(&_superflameTimer,                       local_mem_region, sizeof(int*));
-        local_mem_region += sizeof(int*);
-
-        memcpy(&_levelGemsCollectedArray,               local_mem_region, sizeof(_levelGemsCollectedArray));
-        local_mem_region += sizeof(_levelGemsCollectedArray);
-
-        memcpy(&_globalEggs,                            local_mem_region, sizeof(int));
-        local_mem_region += sizeof(int);
-
-        memcpy(&_globalGems,                            local_mem_region, sizeof(int));
-        local_mem_region += sizeof(int);
-
-        memcpy(&_globalDragons,                         local_mem_region, sizeof(int));
-        local_mem_region += sizeof(int);
-
-        memcpy(&_globalFlightLevelTimer,                local_mem_region, sizeof(int));
-        local_mem_region += sizeof(int);
-
-        memcpy(&_globalFlightLevelCollectedItemsArray,  local_mem_region, sizeof(_globalFlightLevelCollectedItemsArray));
-        local_mem_region += sizeof(_globalFlightLevelCollectedItemsArray);
-
-        // Copy general hud timer area
-        memcpy((void*)0x80077F20, local_mem_region, 0x500);
-        local_mem_region += 0x500;
-
-        // Copy spyro (moved from other area)
-        memcpy(&_spyro, local_mem_region, sizeof(_spyro) + 0x100);
-        local_mem_region += sizeof(_spyro) + 0x100;
-
-        // Copy Flame Data
-        memcpy((byte*)0x800786C8, (byte*)local_mem_region, 0x148);
-        local_mem_region += 0x148;
-
-        memcpy(&_cameraStart, local_mem_region, 0xFF);
-        local_mem_region += 0xFF;
-
-        memcpy(&_keyState, local_mem_region, 0x4);
-        local_mem_region += 0x4;
-       
-        memcpy(&_isInInGameCutscene, (byte*)local_mem_region, 0x4);
-        local_mem_region += 0x4;
-
-        memcpy(&_effect_ScreenLetterBox, (byte*)local_mem_region, 0x4);
-        local_mem_region += 0x4;
-
-        memcpy(&_spyroInvisible, (byte*)local_mem_region, 0x4);
-        local_mem_region += 0x4;
-
-        //Whirlwind Data
-        memcpy(0x80075668, (byte*)local_mem_region, 0x4);
-        local_mem_region += 0x4;
-        memcpy(0x80075724, (byte*)local_mem_region, 0x4);
-        local_mem_region += 0x4;
-
-        //printf("%X\n\n\n", local_mem_region);
-
-        if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
+        if (savestated_level_ids[savestate_selection] == _levelID)
         {
-            LoadGeoData(local_mem_region);
+          // Reload all level mobys, dynamic mobys, and moby data from the free DECKARD IOP area
+            memcpy((byte*)_ptr_levelMobys, local_mem_region, 0x10000);
+            local_mem_region += 0x10000;
+
+            // Reload other misc data from the DECKARD IOP area
+            memcpy(&_ptr_dynamicLevelMobys, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_ptr_levelMobyData, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_ptr_sparx, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_ptr_sparx2, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_doesHaveSuperflame, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_superflameTimer, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_levelGemsCollectedArray, local_mem_region, sizeof(_levelGemsCollectedArray));
+            local_mem_region += sizeof(_levelGemsCollectedArray);
+
+            memcpy(&_globalEggs, local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+
+            memcpy(&_globalGems, local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+
+            memcpy(&_globalDragons, local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+
+            memcpy(&_globalFlightLevelTimer, local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+
+            memcpy(&_globalFlightLevelCollectedItemsArray, local_mem_region, sizeof(_globalFlightLevelCollectedItemsArray));
+            local_mem_region += sizeof(_globalFlightLevelCollectedItemsArray);
+
+            // Copy general hud timer area
+            memcpy((void*)0x80077F20, local_mem_region, 0x500);
+            local_mem_region += 0x500;
+
+            // Copy spyro (moved from other area)
+            memcpy(&_spyro, local_mem_region, sizeof(_spyro) + 0x100);
+            local_mem_region += sizeof(_spyro) + 0x100;
+
+            // Copy Flame Data
+            memcpy((byte*)0x800786C8, (byte*)local_mem_region, 0x148);
+            local_mem_region += 0x148;
+
+            memcpy(&_cameraStart, local_mem_region, 0xFF);
+            local_mem_region += 0xFF;
+
+            memcpy(&_keyState, local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            memcpy(&_isInInGameCutscene, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            memcpy(&_effect_ScreenLetterBox, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            memcpy(&_spyroInvisible, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            //Whirlwind Data
+            memcpy(0x80075668, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+            memcpy(0x80075724, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            //printf("%X\n\n\n", local_mem_region);
+
+            if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
+            {
+                LoadGeoData(local_mem_region);
+            }
         }
-      }
     }
 }

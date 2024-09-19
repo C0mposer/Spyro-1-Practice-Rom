@@ -26,14 +26,14 @@ bool switch_button_held;
 
 int savestateSwitchedTimer = 0;
 
-int savestated_level_ids[3] = {0}; // For keeping savestates upon loop
+int savestated_level_ids[3] = { 0 }; // For keeping savestates upon loop
 
 bool should_savestate_after_dragon_or_load = false;
 
 // Only Needed for PS1 or IOP Versions
 #if BUILD == 1 || BUILD == 3
-    extern bool respawn_on_loadstate;
-    bool readyToLoadstateAfterDeath = false;
+extern bool respawn_on_loadstate;
+bool readyToLoadstateAfterDeath = false;
 #endif
 
 // Externed from elsewhere
@@ -72,11 +72,11 @@ void UnlockAllLevels()
 {
     for (int i = 0; i < 35; i++)
     {
-        if(i < 6)
+        if (i < 6)
         {
             _balloonist_requirements_state[i] = 2;
         }
-        if(i != 5)  //Don't Unlock Sunny Flight
+        if (i != 5)  //Don't Unlock Sunny Flight
         {
             _entered_level_flags[i] = 1;
         }
@@ -88,16 +88,16 @@ void SkipIntro()
 {
     _isPastTitleScreen = TRUE;                              //? This flag is checked by TheAdventureBeings() before it runs, so we must set this flag to TRUE.
     #if BUILD != 0 //Don't call adventure begins on redux
-        ChangeIntroTextColor(MOBY_COLOR_PURPLE);
-        TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
+    ChangeIntroTextColor(MOBY_COLOR_PURPLE);
+    TheAdventureBegins();                                 //Call The Adventure Begins cutscene sequence      
     #endif
 }
 
 void SaveSpyroAndCamera(bool flyInFlag)
-{  
+{
     byte* free_space = NULL;
 
-    if(!flyInFlag)
+    if (!flyInFlag)
     {
         free_space = (byte*)0x80073990;     //Free space 1 for L3
         hasSavedSpyro = true;               //To load only after L3 has been pressed
@@ -110,7 +110,7 @@ void SaveSpyroAndCamera(bool flyInFlag)
     //Copying The Spyro struct and most of the camera struct
     memcpy(free_space, &_spyro, sizeof(_spyro));
     memcpy((byte*)free_space + 0x270, &_cameraStart, 0xFF);
-    memcpy((byte *)free_space + 0x380, &_keyState, 0x4);
+    memcpy((byte*)free_space + 0x380, &_keyState, 0x4);
 
 }
 
@@ -118,7 +118,7 @@ void ReloadSpyroAndCamera(bool flyInFlag)
 {
     byte* free_space = NULL;
 
-    if(!flyInFlag)
+    if (!flyInFlag)
     {
         free_space = (byte*)_freeSpace;
     }
@@ -130,7 +130,7 @@ void ReloadSpyroAndCamera(bool flyInFlag)
     //Reloading The Spyro struct and most of the camera struct
     memcpy(&_spyro, free_space, sizeof(_spyro));
     memcpy(&_cameraStart, (byte*)free_space + 0x270, 0xFF);
-    memcpy(&_keyState, (byte *)free_space + 0x380, 0x4);
+    memcpy(&_keyState, (byte*)free_space + 0x380, 0x4);
 
 }
 
@@ -161,9 +161,9 @@ void ResetLevelCollectables()
 
 void DrawSavestateSwitchedText(void)
 {
-    char buf[3] = {0};
+    char buf[3] = { 0 };
     sprintf(buf, "%d", savestate_selection + 1);
-    DrawTextCapitals(buf, &(CapitalTextInfo){.x=0x100, .y=0xDC, .size=DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+    DrawTextCapitals(buf, &(CapitalTextInfo){.x = 0x100, .y = 0xDC, .size = DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     RenderShadedMobyQueue();
 }
 
@@ -201,9 +201,9 @@ void ChangeInventoryMenu(SwitchButton state)
 //! Main Basic Checks
 void MainUpdate()
 {
-    
+
     //Run once upon starting game
-    if(mod_state == GAME_STARTED && _globalTimer > 20)                // If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
+    if (mod_state == GAME_STARTED && _globalTimer > 20)                // If the code hasn't ran once yet, and the global timer is greater than 20. Checking global timer because I have to wait a few frames to call The Adventure Begins
     {
         SkipIntro();
         mod_state = SKIPPED_INTRO;
@@ -211,47 +211,47 @@ void MainUpdate()
     }
 
     // Run Once
-    if(mod_state == SKIPPED_INTRO)
+    if (mod_state == SKIPPED_INTRO)
     {
         UnlockAllLevels();
         mod_state = UNLOCKED_LEVELS;
     }
 
     // Draw Version Number on The Adventure Continues
-    if(_gameState == GAMESTATE_TITLE_SCREEN)
+    if (_gameState == GAMESTATE_TITLE_SCREEN)
     {
         _globalLives = 99;
-        
-        CapitalTextInfo version_text_info = {0};
+
+        CapitalTextInfo version_text_info = { 0 };
         version_text_info.x = SCREEN_RIGHT_EDGE - 70;
         version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
         version_text_info.size = DEFAULT_SIZE;
-        
+
         DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
         RenderShadedMobyQueue();
     }
-    
+
     //Main Loop
-    if(mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
+    if (mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
     {
         //Save spyro & camera information
-        if(savestate_button_index < 2)
+        if (savestate_button_index < 2)
         {
-            if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load)
+            if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load)
             {
                 #if BUILD == 2 || BUILD == 0
-                    SaveStateTest();
+                SaveStateTest();
                 #elif BUILD == 1 || BUILD == 3
-                    SaveSpyroAndCamera(false);
+                SaveSpyroAndCamera(false);
                 #endif
 
                 should_savestate_after_dragon_or_load = false;
-                
+
             }
         }
-        if(savestate_button_index == 2) // for multi tap check
+        if (savestate_button_index == 2) // for multi tap check
         {
-            if(CheckButtonMultiTap(L3_BUTTON, 2))
+            if (CheckButtonMultiTap(L3_BUTTON, 2))
             {
                 #if BUILD == 2 || BUILD == 0
                 SaveStateTest();
@@ -263,24 +263,24 @@ void MainUpdate()
 
 
         //Load spyro & camera information
-#if BUILD == 2 || BUILD == 0        //LOADSTATE 
-        if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
+        #if BUILD == 2 || BUILD == 0        //LOADSTATE 
+        if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
         {
             LoadStateTest();
 
-            if(_levelID == GNASTYS_LOOT_ID)
+            if (_levelID == GNASTYS_LOOT_ID)
             {
                 LootGiveAllKeys();
             }
         }
-#elif BUILD == 1 || BUILD == 3      //RESPAWN SPYRO DURING LOADSTATE ON PS1 AND PS2 IOP
-        if((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
+        #elif BUILD == 1 || BUILD == 3      //RESPAWN SPYRO DURING LOADSTATE ON PS1 AND PS2 IOP
+        if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
-            if(!respawn_on_loadstate || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
+            if (!respawn_on_loadstate || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
             {
 
                 ReloadSpyroAndCamera(false);
-                
+
                 readyToLoadstateAfterDeath = false;
 
                 if (_levelID == TREE_TOPS_ID)
@@ -290,7 +290,7 @@ void MainUpdate()
                     _effect_ScreenLetterBox = 0;
                 }
 
-                if(_levelID == GNASTYS_LOOT_ID)
+                if (_levelID == GNASTYS_LOOT_ID)
                 {
                     LootGiveAllKeys();
                 }
@@ -302,141 +302,141 @@ void MainUpdate()
                 readyToLoadstateAfterDeath = true;
             }
         }
-#endif
+        #endif
 
 
         //Respawn spyro & reset level gems
-        if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
+        if (_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
         {
             RespawnSpyro();
             ResetLevelCollectables();
         }
 
         //Make Nestor Skippable
-        if(_levelID == ARTISANS_ID)
+        if (_levelID == ARTISANS_ID)
         {
             _nestorMakeUnskipable = FALSE;
         }
 
         //Moonjump
-        if(_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
+        if (_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
         {
             _spyro.position.z += 500;
         }
 
         //Lives always 99
-        if(_globalLives != 99)
+        if (_globalLives != 99)
         {
             _globalLives = 99;
             _globalLivesCounter = 99;
         }
 
         //Give Key
-        if(CheckButtonMultiTap(TRIANGLE_BUTTON, 3))
+        if (CheckButtonMultiTap(TRIANGLE_BUTTON, 3))
         {
             _keyState = 1;
         }
 
         #if BUILD == 2 || BUILD == 0  // ONLY DO SAVESTATE SLOTS ON DECKARD
             // Quick Savestate Slot Selection
-            if(switch_state_button_index == 0)
-            {    
-                int direction = GetHorizontalRightStickDirection();
+        if (switch_state_button_index == 0)
+        {
+            int direction = GetHorizontalRightStickDirection();
 
-                if (direction == LEFT && savestate_selection > 0)
-                {
-                    savestate_selection--;
-                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                    savestateSwitchedTimer = 1;
-                }
-                else if (direction == RIGHT && savestate_selection < 2)
-                {
-                    savestate_selection++;
-                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                    savestateSwitchedTimer = 1;
-                }
-
-            }
-            else if (switch_state_button_index == 1)
-            {        
-                if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_button_held)
-                {
-                    savestate_selection--;
-                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                    savestateSwitchedTimer = 1;
-
-                    switch_button_held = true;
-                }
-                if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_button_held)
-                {
-                    savestate_selection++;
-                    PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                    savestateSwitchedTimer = 1;
-
-                    switch_button_held = true;
-                }
-            }
-            // Draw Switched Savestate Text
-            if (savestateSwitchedTimer > 0)
+            if (direction == LEFT && savestate_selection > 0)
             {
-                DrawSavestateSwitchedText();
-                savestateSwitchedTimer++;
+                savestate_selection--;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
             }
-            if (savestateSwitchedTimer > 30)
+            else if (direction == RIGHT && savestate_selection < 2)
             {
-                savestateSwitchedTimer = 0;
+                savestate_selection++;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
             }
 
-
-
-            // Check for release
+        }
+        else if (switch_state_button_index == 1)
+        {
+            if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_button_held)
             {
-                if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
-                {
-                    switch_button_held = false;
-                }
+                savestate_selection--;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
+
+                switch_button_held = true;
             }
-            
+            if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_button_held)
+            {
+                savestate_selection++;
+                PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                savestateSwitchedTimer = 1;
+
+                switch_button_held = true;
+            }
+        }
+        // Draw Switched Savestate Text
+        if (savestateSwitchedTimer > 0)
+        {
+            DrawSavestateSwitchedText();
+            savestateSwitchedTimer++;
+        }
+        if (savestateSwitchedTimer > 30)
+        {
+            savestateSwitchedTimer = 0;
+        }
+
+
+
+        // Check for release
+        {
+            if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
+            {
+                switch_button_held = false;
+            }
+        }
+
         #endif
     }
 
     // Prepare savestate after dragon
-    if(mod_state == UNLOCKED_LEVELS && (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING))
+    if (mod_state == UNLOCKED_LEVELS && (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING))
     {
-        if(_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
+        if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
         {
             should_savestate_after_dragon_or_load = true;
         }
     }
 
     // Prepare savestate after turning on disable portal
-    if(mod_state == UNLOCKED_LEVELS && disable_portal_entry == true && has_savestated_on_disabling_portal == false)
+    if (mod_state == UNLOCKED_LEVELS && disable_portal_entry == true && has_savestated_on_disabling_portal == false)
     {
         //printf("Savestated after enabling the disable portal option\n");
         #if BUILD == 2 || BUILD == 0
-            SaveStateTest();
+        SaveStateTest();
         #elif BUILD == 1 || BUILD == 3
-            SaveSpyroAndCamera(false);
+        SaveSpyroAndCamera(false);
         #endif
 
         has_savestated_on_disabling_portal = true;
     }
 
     // Undo has_savestated_on_disabling_portal bool
-    if(mod_state == UNLOCKED_LEVELS && disable_portal_entry == false && has_savestated_on_disabling_portal == true)
+    if (mod_state == UNLOCKED_LEVELS && disable_portal_entry == false && has_savestated_on_disabling_portal == true)
     {
         //printf("Set savestate after dragon bool to false\n");
         has_savestated_on_disabling_portal = false;
     }
 
-    {     
+    {
         //Safeguard against loading with another levels savestate/no savestate
-        if(_levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
+        if (_levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
         {
             _globalEggs = 0;
 
             //Change savestate slot to 0 upon leaving level
-            if(savestated_level_ids[savestate_selection] != _levelID)
+            if (savestated_level_ids[savestate_selection] != _levelID)
             {
                 savestate_selection = 0;
             }
@@ -445,7 +445,7 @@ void MainUpdate()
             //     il_timer_offset[i] = 0;
             // }
 
-        }   
+        }
     }
 
     // //! Green Screen Spyro
@@ -460,7 +460,7 @@ void MainUpdate()
     //         // JR RA Draw Skybox
     //         *((int*)0x8004EBA8) = 0x03e00008;
     //         *((int*)0x8004EBAC) = 0x00000000;
-            
+
     //         is_greenscreen = true;
     //     }
     //     // Nop Draw World
@@ -508,13 +508,13 @@ void MainUpdate()
     //     spyro_area_1_rect.x = 4;
     //     spyro_area_1_rect.y = 12 + envOffset;
     //     spyro_area_1_rect.h = 9;
-        
+
     //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
     // }
 
 
 //    if(_currentButtonOneFrame == TRIANGLE_BUTTON){
-        
+
 //         // byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
 
 //         // RECT spyro_area_1_rect;
@@ -522,10 +522,10 @@ void MainUpdate()
 //         // spyro_area_1_rect.x = 768;
 //         // spyro_area_1_rect.y = 0;
 //         // spyro_area_1_rect.h = 128;
-        
+
 //         // LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
-        
-            
+
+
 
 //         // spyro_bmp_main_ram_location = (byte*)0x800742B0;
 
@@ -533,7 +533,7 @@ void MainUpdate()
 //         // spyro_area_1_rect.x = 512;
 //         // spyro_area_1_rect.y = 112;
 //         // spyro_area_1_rect.h = 1;
-        
+
 //         // for (int i = 0; i < 8; i++)
 //         // {
 //         //     spyro_area_1_rect.y = 112 + i;
@@ -547,10 +547,10 @@ void MainUpdate()
 //         spyro_area_1_rect.x = 512;
 //         spyro_area_1_rect.y = 0;
 //         spyro_area_1_rect.h = 256;
-        
+
 //         LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
 
 //     } 
-    
+
 
 }

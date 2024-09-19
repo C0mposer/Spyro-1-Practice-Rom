@@ -1,7 +1,7 @@
 #ifndef PRIMS_H
 #define PRIMS_H
 
-typedef struct Poly4F 
+typedef struct Poly4F
 {
 
     int tag;

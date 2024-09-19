@@ -8,8 +8,8 @@ extern bool disable_portal_entry;
 
 DisablePortalEntry()
 {
-    if(_levelLoadState || levelSelectState || (_levelIDPortalExit % 10) != 0 || !disable_portal_entry)
-    {          
+    if (_levelLoadState || levelSelectState || (_levelIDPortalExit % 10) != 0 || !disable_portal_entry)
+    {
         LevelTransition();
     }
     else if (disable_portal_entry)
@@ -20,12 +20,12 @@ DisablePortalEntry()
         _levelID = _levelIDPortalExit;
         _canFlyIn = 0;
         hasUpdatedPortalTimer = false;
-        
+
 
         #if BUILD == 2 || BUILD == 0
-            LoadStateTest();
+        LoadStateTest();
         #elif BUILD == 1 || BUILD == 3
-            ReloadSpyroAndCamera(false);
+        ReloadSpyroAndCamera(false);
         #endif
     }
 }

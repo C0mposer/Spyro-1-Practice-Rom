@@ -16,7 +16,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x90,
 		.center.b = 0x40,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x90,
 		.right.g = 0x60,
 		.right.b = 0x20,
@@ -29,7 +29,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//1 Blood Red
 	{
-        .tip.r = 0xb1,
+		.tip.r = 0xb1,
 		.tip.g = 0x3a,
 		.tip.b = 0x3a,
 		.tip.shape_code = 0x30,
@@ -38,7 +38,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x2b,
 		.center.b = 0x2b,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0xb7,
 		.right.g = 0x28,
 		.right.b = 0x28,
@@ -60,7 +60,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xF9,
 		.center.b = 0xFE,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x4B,
 		.right.g = 0xFF,
 		.right.b = 0xF9,
@@ -73,7 +73,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//3 Jade
 	{
-        .tip.r = 0x87,
+		.tip.r = 0x87,
 		.tip.g = 0xff,
 		.tip.b = 0xda,
 		.tip.shape_code = 0x30,
@@ -82,7 +82,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x74,
 		.center.b = 0x5c,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x2,
 		.right.g = 0xa2,
 		.right.b = 0x6c,
@@ -95,7 +95,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//4 Blue
 	{
-        .tip.r = 0x34,
+		.tip.r = 0x34,
 		.tip.g = 0x44,
 		.tip.b = 0xff,
 		.tip.shape_code = 0x30,
@@ -104,7 +104,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x7d,
 		.center.b = 0xff,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x1c,
 		.right.g = 0x2d,
 		.right.b = 0x92,
@@ -117,7 +117,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//5 Gold
 	{
-        .tip.r = 0xff,
+		.tip.r = 0xff,
 		.tip.g = 0xe3,
 		.tip.b = 0x9f,
 		.tip.shape_code = 0x30,
@@ -126,7 +126,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x6a,
 		.center.b = 0x0,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0xfd,
 		.right.g = 0xe4,
 		.right.b = 0x8b,
@@ -140,7 +140,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	//6 Green
 	{
 
-        .tip.r = 0x4a,
+		.tip.r = 0x4a,
 		.tip.g = 0x8b,
 		.tip.b = 0x0,
 		.tip.shape_code = 0x30,
@@ -149,7 +149,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xff,
 		.center.b = 0x6f,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x8,
 		.right.g = 0x90,
 		.right.b = 0x0,
@@ -163,7 +163,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	//7 Pink
 	{
 
-        .tip.r = 0xff,
+		.tip.r = 0xff,
 		.tip.g = 0x0,
 		.tip.b = 0xf2,
 		.tip.shape_code = 0x30,
@@ -172,7 +172,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xa6,
 		.center.b = 0xff,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0xb2,
 		.right.g = 0x0,
 		.right.b = 0x8b,
@@ -185,7 +185,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//8 Acid
 	{
-        .tip.r = 0xbd,
+		.tip.r = 0xbd,
 		.tip.g = 0xff,
 		.tip.b = 0x38,
 		.tip.shape_code = 0x30,
@@ -194,7 +194,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xaa,
 		.center.b = 0x18,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x3a,
 		.right.g = 0x85,
 		.right.b = 0x1,
@@ -207,7 +207,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//9 Light Purple
 	{
-        .tip.r = 0x38,
+		.tip.r = 0x38,
 		.tip.g = 0xff,
 		.tip.b = 0xd6,
 		.tip.shape_code = 0x30,
@@ -216,7 +216,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x18,
 		.center.b = 0xfa,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x47,
 		.right.g = 0x1,
 		.right.b = 0x85,
@@ -229,7 +229,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//10 Light Pink
 	{
-        .tip.r = 0xff,
+		.tip.r = 0xff,
 		.tip.g = 0x5f,
 		.tip.b = 0xec,
 		.tip.shape_code = 0x30,
@@ -238,7 +238,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xbf,
 		.center.b = 0xdb,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0xad,
 		.right.g = 0x6b,
 		.right.b = 0x94,
@@ -252,7 +252,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	//11 Pastel
 	{
 
-        .tip.r = 0xfc,
+		.tip.r = 0xfc,
 		.tip.g = 0x88,
 		.tip.b = 0xeb,
 		.tip.shape_code = 0x30,
@@ -261,7 +261,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xff,
 		.center.b = 0xf5,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0xf6,
 		.right.g = 0xff,
 		.right.b = 0x9e,
@@ -275,7 +275,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	//12 Rainbow
 	{
 
-        .tip.r = 0xff,
+		.tip.r = 0xff,
 		.tip.g = 0x0,
 		.tip.b = 0x0,
 		.tip.shape_code = 0x30,
@@ -284,7 +284,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0xff,
 		.center.b = 0x0,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x0,
 		.right.g = 0xff,
 		.right.b = 0xdc,
@@ -298,7 +298,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	//13 Cynder
 	{
 
-        .tip.r = 0x77,
+		.tip.r = 0x77,
 		.tip.g = 0x1,
 		.tip.b = 0xde,
 		.tip.shape_code = 0x30,
@@ -307,7 +307,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x7,
 		.center.b = 0x6f,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0x40,
 		.right.g = 0x9,
 		.right.b = 0x50,
@@ -320,7 +320,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	//14 Ghost
 	{
-        .tip.r = 0xd2,
+		.tip.r = 0xd2,
 		.tip.g = 0xd2,
 		.tip.b = 0xd2,
 		.tip.shape_code = 0x30,
@@ -329,7 +329,7 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 		.center.g = 0x8d,
 		.center.b = 0x8d,
 		.center.shape_code = 0x30,
-		
+
 		.right.r = 0xcf,
 		.right.g = 0xcf,
 		.right.b = 0xcf,
@@ -342,25 +342,25 @@ FlameTriangleColorGradient CUSTOM_FLAME_TRIANGLE_GRADIENTS[16] =
 	},
 	// //15 Luminize
 	// {
-    //     .tip.r = 0xfe,
-    //     .tip.g = 0xfe,
-    //     .tip.b = 0xff,
-    //     .tip.shape_code = 0x30,
+	//     .tip.r = 0xfe,
+	//     .tip.g = 0xfe,
+	//     .tip.b = 0xff,
+	//     .tip.shape_code = 0x30,
 
-    //     .center.r = 0xfe,
-    //     .center.g = 0xfe,
-    //     .center.b = 0xff,
-    //     .center.shape_code = 0x30,
+	//     .center.r = 0xfe,
+	//     .center.g = 0xfe,
+	//     .center.b = 0xff,
+	//     .center.shape_code = 0x30,
 
-    //     .right.r = 0xec,
-    //     .right.g = 0xf6,
-    //     .right.b = 0xf4,
-    //     .right.shape_code = 0x30,
+	//     .right.r = 0xec,
+	//     .right.g = 0xf6,
+	//     .right.b = 0xf4,
+	//     .right.shape_code = 0x30,
 
-    //     .left.r = 0xf0,
-    //     .left.g = 0xf8,
-    //     .left.b = 0xf9,
-    //     .left.shape_code = 0x30
+	//     .left.r = 0xf0,
+	//     .left.g = 0xf8,
+	//     .left.b = 0xf9,
+	//     .left.shape_code = 0x30
 	// },
 	{0}
 };

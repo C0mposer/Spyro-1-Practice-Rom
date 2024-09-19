@@ -7,12 +7,12 @@
 void CustomDrawLineShaded(ShadedLine customLineData)
 {
     ShadedLine* lineData;
-    
+
     lineData = (ShadedLine*)_ptr_graphicsRelated;
     lineData->tag = 0x4000000;
-    lineData->code = LINE_SHADED;                        
+    lineData->code = LINE_SHADED;
 
-    lineData->point1Pos.x = customLineData.point1Pos.x;                  
+    lineData->point1Pos.x = customLineData.point1Pos.x;
     lineData->point1Pos.y = customLineData.point1Pos.y;
     lineData->point2Pos.x = customLineData.point2Pos.x;
     lineData->point2Pos.y = customLineData.point2Pos.y;
@@ -37,7 +37,7 @@ void CustomDrawLineShaded(ShadedLine customLineData)
 //   int lineP1Angle;
 //   int lineP2Angle;
 //   byte *ptr_toLine;
-  
+
 //   ptr_toLine = _ptr_graphicsRelated;
 //   *(int *)_ptr_graphicsRelated = 0x4000000;
 //   ptr_toLine[7] = 0x50;

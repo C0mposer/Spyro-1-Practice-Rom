@@ -2,18 +2,18 @@
 #include <moby.h>
 
 extern int _1st_loot_key_collected;
-extern Moby _1st_loot_key; 
+extern Moby _1st_loot_key;
 
 extern int _2nd_loot_key_collected;
-extern Moby _2nd_loot_key; 
+extern Moby _2nd_loot_key;
 
 extern int _3rd_loot_key_collected;
-extern Moby _3rd_loot_key; 
+extern Moby _3rd_loot_key;
 
 //! Every Frame Update
 void LootPlaneUpdate(void)
 {
-    if(_levelID == GNASTYS_LOOT_ID)
+    if (_levelID == GNASTYS_LOOT_ID)
     {
         // First Plane Practice
         if (_currentButton == L1_BUTTON + R1_BUTTON + SQUARE_BUTTON)
@@ -62,7 +62,7 @@ void LootGiveAllKeys(void)
 
     _2nd_loot_key_collected = 1;
     _2nd_loot_key.keyPickedUp = -1;
-    
+
     _3rd_loot_key_collected = 1;
     _3rd_loot_key.keyPickedUp = -1;
 }

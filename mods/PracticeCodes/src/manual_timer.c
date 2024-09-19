@@ -72,29 +72,29 @@ void FramesToTimer(Timer* ptr_timer)
     ptr_timer->milisecondsHundrethsPlace = ((ptr_timer->timer * 10000) % 59820) / 5982;
 }
 
-void LoadAscii(Timer* ptr_timer, char* ascii){
-    if(ptr_timer->minutes == 0){
+void LoadAscii(Timer* ptr_timer, char* ascii) {
+    if (ptr_timer->minutes == 0) {
         sprintf(ascii, "%d%d.%d%d", ptr_timer->secondsTensPlace, ptr_timer->secondsOnesPlace, ptr_timer->milisecondsTenthsPlace, ptr_timer->milisecondsHundrethsPlace);
     }
-    else if(ptr_timer->minutes >= 1){
+    else if (ptr_timer->minutes >= 1) {
         sprintf(ascii, "%d.%d%d.%d%d", ptr_timer->minutes, ptr_timer->secondsTensPlace, ptr_timer->secondsOnesPlace, ptr_timer->milisecondsTenthsPlace, ptr_timer->milisecondsHundrethsPlace);
     }
 }
 
 //! Every Frame Update
-void TimerUpdate(){
+void TimerUpdate() {
 
-    if(timer_menu.timer_state)
+    if (timer_menu.timer_state)
     {
         //Main Timer Checks/Loop
 
         //Button Checks
-        if(_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index])
-        {   
+        if (_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index])
+        {
             mainTimerAtReset = _globalTimer;
             timerState = TIMER_RUNNING;
         }
-        if(_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld && timer_menu.reset_timer_mode == 0)
+        if (_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld && timer_menu.reset_timer_mode == 0)
         {
             mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
             timerState = TIMER_RUNNING;
@@ -102,25 +102,25 @@ void TimerUpdate(){
         }
 
         //Show the running timer
-        if(timerState == TIMER_RUNNING)
+        if (timerState == TIMER_RUNNING)
         {
-            if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || timer_menu.timer_display_mode == TIMER_ALWAYS || !hasUpdatedPortalTimer){
+            if (_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || timer_menu.timer_display_mode == TIMER_ALWAYS || !hasUpdatedPortalTimer) {
                 mainTimer.timer = _globalTimer - mainTimerAtReset;
                 FramesToTimer(&mainTimer);
                 LoadAscii(&mainTimer, mainTimerAscii);
             }
         }
 
-        if(_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || !hasUpdatedPortalTimer)
+        if (_currentButtonOneFrame == STOP_TIMER_BUTTONS[timer_menu.stop_timer_button_index] || !hasUpdatedPortalTimer)
         {
             timerState = TIMER_DISPLAYING;
             hasUpdatedPortalTimer = true;
         }
 
         //Show the saved timer
-        if((timerState == TIMER_DISPLAYING || timer_menu.timer_display_mode == TIMER_ALWAYS) && _gameState == GAMESTATE_GAMEPLAY)
+        if ((timerState == TIMER_DISPLAYING || timer_menu.timer_display_mode == TIMER_ALWAYS) && _gameState == GAMESTATE_GAMEPLAY)
         {
-            CapitalTextInfo timer_text_info = {0};
+            CapitalTextInfo timer_text_info = { 0 };
             if (mainTimer.minutes == 0)
             {
                 timer_text_info.x = SCREEN_RIGHT_EDGE - 0x5A;
@@ -133,7 +133,7 @@ void TimerUpdate(){
                 timer_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
                 timer_text_info.size = DEFAULT_SIZE;
             }
-            DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);                
+            DrawTextCapitals(mainTimerAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);
         }
     }
 }

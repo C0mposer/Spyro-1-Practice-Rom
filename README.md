@@ -22,7 +22,7 @@ This can be played on PS1, PS2, PS3, and most emulators.
 ## PS2 (75k-90k)
 To download the patched rom and get practicing, download the bin & cue here:
    
-[Download bin & cue for PS2 (75k-90k)](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.1/spyro1_PracticeCodes_DECKARD_PS2.zip)
+[PS2 (75k-90k Download)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease3.0Spyro.1.Practice.Rom.PS2.Deckard.zip)
 
 *Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
 
@@ -30,15 +30,16 @@ To download the patched rom and get practicing, download the bin & cue here:
 *Note, the 30k-70k models of PS2's are not capable of full savestates, however they are capable of partial savestates.*
   
 To download the patched rom and get practicing, download the bin & cue here:
-   
-[Download bin & cue for PS2 (30k-70k)](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.1/spyro1_PracticeCodes_IOP_PS2.zip)
+
+[PS2 (30k-70k Download)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease3.0/Spyro.1.Practice.Rom.PS2.IOP.zip)
+
 
 *Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
    
 ## PS1/EMU
 To download the patched rom and get practicing, download the bin & cue here:
    
-[Download bin & cue for PS1](https://github.com/C0mposer/Spyro-1-Practice-Codes/releases/download/fullrelease2.0.1/spyro1_PracticeCodes_PS1.zip)
+[PS1/EMU Download](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease3.0/Spyro.1.Practice.Rom.PS1.zip)
 
 ## Menu Features:
 

@@ -282,7 +282,7 @@
         {
             "label": "Create PS1 Xdelta Patch",
             "type": "shell",
-            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS1_Practice_Codes.bin ${workspaceFolder}\\build\\PS1_Practice_Codes.xdelta",
+            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -S none -f -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS1_Practice_Codes.bin ${workspaceFolder}\\build\\PS1_Practice_Codes.xdelta",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -296,7 +296,7 @@
         {
             "label": "Create PS2 DECKARD Xdelta Patch",
             "type": "shell",
-            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS2_DECKARD_Practice_Codes.bin ${workspaceFolder}\\build\\PS2_DECKARD_Practice_Codes.xdelta",
+            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -S none -f -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS2_DECKARD_Practice_Codes.bin ${workspaceFolder}\\build\\PS2_DECKARD_Practice_Codes.xdelta",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -310,7 +310,7 @@
         {
             "label": "Create PS2 IOP Xdelta Patch",
             "type": "shell",
-            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS2_IOP_Practice_Codes.bin ${workspaceFolder}\\build\\PS2_IOP_Practice_Codes.xdelta",
+            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -S none -f -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS2_IOP_Practice_Codes.bin ${workspaceFolder}\\build\\PS2_IOP_Practice_Codes.xdelta",
             "group": {
                 "kind": "build",
                 "isDefault": true

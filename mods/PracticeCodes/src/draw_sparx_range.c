@@ -35,6 +35,7 @@ void DrawSparxRange(void) {
         {
             WorldToScreen(&vertex_1, &octagon_vertices[i]);
             WorldToScreen(&vertex_2, &octagon_vertices[(i+1)% 8]);
+            //AddToWorldTable(_ptr_graphicsRelated, vertex_1.z/128);        //add later to put sparx range under spyro lol
 
             line.point1Pos.x = vertex_1.x;
             line.point1Pos.y = vertex_1.y;

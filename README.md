@@ -186,7 +186,7 @@ The rat is saved as a part of the sudo-savestate (L3/R3) as well
 
 # Patch Game
 If you wish to patch your own personal spyro 1 .bin file instead, visit here:
-[Patch Personal Spyro 1 bin](https://c0mposer.github.io/Spyro-1-Practice-Codes/)
+[Patch Personal Spyro 1 bin](https://c0mposer.github.io/Spyro-1-Practice-Rom/)
 
 ## Compiling & Building
 If you wish to compile the mod yourself, you'll need a few prerequisites

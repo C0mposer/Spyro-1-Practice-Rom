@@ -125,6 +125,7 @@ Here are the controls:
 **L2 + R2 + Right Stick Up** - Manually increase total attempts  
 **L2 + R2 + Right Stick Down** - Manually decrease total attempts  
 **L2 + R2** - Show tracker for 2 seconds  
+**Loadstate Button x3** - Reset both total and successful attempts back to 0  
 	 
 ### Show Sparx Range
 With **Show Sparx Range** on, it will draw an octagon around Spyro representing sparx's range for gem collection.

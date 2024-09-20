@@ -119,12 +119,12 @@ When you turn it on you will notice 2 numbers in the bottom left, a numerator an
 The numerator represents your successful attempts at something, and the denominator represents your total attempts at something.  
 
 Here are the controls:
-**Loadstate Button** - Automatically increase total attempts
-**Right Stick Up** - Manually increase successful attempts
-**Right Stick Down** - Manually decrease successful attempts
-**L2 + R2 + Right Stick Up** - Manually increase total attempts
-**L2 + R2 + Right Stick Down** - Manually decrease total attempts
-**L2 + R2** - Show tracker for 2 seconds
+**Loadstate Button** - Automatically increase total attempts  
+**Right Stick Up** - Manually increase successful attempts  
+**Right Stick Down** - Manually decrease successful attempts  
+**L2 + R2 + Right Stick Up** - Manually increase total attempts  
+**L2 + R2 + Right Stick Down** - Manually decrease total attempts  
+**L2 + R2** - Show tracker for 2 seconds  
 	 
 ### Show Sparx Range
 With **Show Sparx Range** on, it will draw an octagon around Spyro representing sparx's range for gem collection.

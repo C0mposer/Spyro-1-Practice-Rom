@@ -116,7 +116,8 @@ If you have manual timer on, the timer will stop the moment the camera touches t
 ### Track Consistency
 With **Track Consistency** on, you can easily keep track of your consistentcy at tricks/hard movement from within the game.
 When you turn it on you will notice 2 numbers in the bottom left, a numerator and denominator. 
-The numerator represents your successful attempts at something, and the denominator represents your total attempts at something.
+The numerator represents your successful attempts at something, and the denominator represents your total attempts at something.  
+
 Here are the controls:
 **Loadstate Button** - Automatically increase total attempts
 **Right Stick Up** - Manually increase successful attempts

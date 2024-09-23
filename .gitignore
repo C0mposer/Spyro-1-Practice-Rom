@@ -3392,3 +3392,72 @@ build/bootedit/Spyro 1 Practice Rom PS2 Deckard.zip
 build/bootedit/Spyro 1 Practice Rom PS2 IOP.bin
 build/bootedit/Spyro 1 Practice Rom PS2 IOP.cue
 build/bootedit/Spyro 1 Practice Rom PS2 IOP.zip
+scripts/bmp_scripts/bmps/coop_palette.bmp
+scripts/bmp_scripts/bmps/cursed_palette.bmp
+scripts/bmp_scripts/bmps/gnasty1_palette.bmp
+scripts/bmp_scripts/temp/CustomFlag_palette.bmp_temp
+scripts/bmps/4bit-a_palette.bin
+scripts/bmps/4bit-a_palette.bmp
+scripts/bmps/4bit-b_palette.bin
+scripts/bmps/4bit-b_palette.bmp
+scripts/bmps/bgnasty1_palette.bin
+scripts/bmps/bgnasty1_palette.bmp
+scripts/bmps/bgnasty2_palette.bin
+scripts/bmps/bgnasty2_palette.bmp
+scripts/bmps/bgnasty3_palette.bin
+scripts/bmps/bgnasty3_palette.bmp
+scripts/bmps/bgnasty4_palette.bin
+scripts/bmps/bgnasty4_palette.bmp
+scripts/bmps/bitfont_palette.bin
+scripts/bmps/bitfont_palette.bmp
+scripts/bmps/coop_palette.bin
+scripts/bmps/cursed_palette.bin
+scripts/bmps/flame_texture_custom_no_clut_palette.bin
+scripts/bmps/flame_texture_custom_no_clut_palette.bmp
+scripts/bmps/flame_texture_custom_palette.bin
+scripts/bmps/flame_texture_custom_palette.bmp
+scripts/bmps/Frog_palette.bin
+scripts/bmps/Frog_palette.bmp
+scripts/bmps/frogclut.bin
+scripts/bmps/frogclut.bmp
+scripts/bmps/gnasty1_palette.bin
+scripts/bmps/gnasty1_palette.bmp
+scripts/bmps/gnasty2_palette.bin
+scripts/bmps/gnasty2_palette.bmp
+scripts/bmps/gnasty3_palette.bin
+scripts/bmps/gnasty3_palette.bmp
+scripts/bmps/gnasty4_palette.bin
+scripts/bmps/gnasty4_palette.bmp
+scripts/bmps/gnastylow1_palette.bin
+scripts/bmps/gnastylow1_palette.bmp
+scripts/bmps/gnastylow2_palette.bin
+scripts/bmps/gnastylow2_palette.bmp
+scripts/bmps/gnastylow3_palette.bin
+scripts/bmps/gnastylow3_palette.bmp
+scripts/bmps/gnastylow4_palette.bin
+scripts/bmps/gnastylow4_palette.bmp
+scripts/bmps/zera - Copy.bin
+scripts/bmps/zera - Copy.bmp
+scripts/bmps/zera - Copy.bmp.bak
+scripts/temp/4bit-a_palette.bmp_temp
+scripts/temp/4bit-b_palette.bmp_temp
+scripts/temp/bgnasty1_palette.bmp_temp
+scripts/temp/bgnasty2_palette.bmp_temp
+scripts/temp/bgnasty3_palette.bmp_temp
+scripts/temp/bgnasty4_palette.bmp_temp
+scripts/temp/bitfont_palette.bmp_temp
+scripts/temp/coop_palette.bmp_temp
+scripts/temp/cursed_palette.bmp_temp
+scripts/temp/flame_texture_custom_no_clut_palette.bmp_temp
+scripts/temp/flame_texture_custom_palette.bmp_temp
+scripts/temp/Frog_palette.bmp_temp
+scripts/temp/frogclut.bmp_temp
+scripts/temp/gnasty1_palette.bmp_temp
+scripts/temp/gnasty2_palette.bmp_temp
+scripts/temp/gnasty3_palette.bmp_temp
+scripts/temp/gnasty4_palette.bmp_temp
+scripts/temp/gnastylow1_palette.bmp_temp
+scripts/temp/gnastylow2_palette.bmp_temp
+scripts/temp/gnastylow3_palette.bmp_temp
+scripts/temp/gnastylow4_palette.bmp_temp
+scripts/temp/zera - Copy.bmp_temp

@@ -17,9 +17,8 @@ void HeadControl() {
 
     if (*_ptr_headControlMoby != COMPLETE) {          //Check if the heads need to be updated either because it's the first time or because of a manual change
         for (int i = 0; i < 3; i++) {                //vv Checks if it's the inital head update or if you're flying out of a portal
-            if ((*_ptr_headControlMoby == INITIAL && headBools[i]) || (_entered_level_flags[INDEX_TWILIGHT_HARBOR + i] != 0 && _spyro.state == 0xf && (TerrainSkipToKeyFrame(i, 0x3b, 0), _spyro.subState == MOVEMENT_SUBSTATE_EXIT_PORTAL))) {
+            if ((*_ptr_headControlMoby == INITIAL && headBools[i]) || (_spyro.state == 0xf && (TerrainSkipToKeyFrame(i, 0x3b, 0), _spyro.subState == MOVEMENT_SUBSTATE_EXIT_PORTAL))) {
                 UpdateTerrain(i, 0xfc, 0);                                  //Initiates the head opening animation
-                _entered_level_flags[INDEX_TWILIGHT_HARBOR + i] = 0;        //In the case of flying out of a portal this resets the entered level flag
             }
             if ((*_ptr_headControlMoby == (i + 2))) {                         //Checks if a head needs to be toggled by a manual input
                 UpdateTerrain(i, 0xfc, 0);                                  //Initiates the head opening/closing animation

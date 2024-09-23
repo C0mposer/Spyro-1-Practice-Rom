@@ -117,8 +117,8 @@ typedef struct MiscMenu
     bool show_dragon_touch;
     char* show_dragon_touch_text;
     char* disable_portal_entry_text;
-    bool quick_goop_mode;
-    char* quick_goop_text;
+    bool super_mode;
+    char* super_text;
     char* consitency_tracker_text;
 }MiscMenu;
 extern MiscMenu misc_menu;
@@ -134,7 +134,7 @@ typedef struct CosmeticMenu
     char* flame_color_text;
     char* sparx_color_text;
 }CosmeticMenu;
-CosmeticMenu cosmetic_menu = {0};
+CosmeticMenu cosmetic_menu = { 0 };
 
 typedef enum CurrentMenu
 {
@@ -218,9 +218,9 @@ void UpdateCosmeticMenu()
     if (_currentButtonOneFrame == CIRCLE_BUTTON)
     {
         ReturnToCustomMainMenu();
-        
+
         //Seek to old CD Location
-        CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&oldCdLocation, NULL);
+        CdControlB(CDL_PRIMITIVE_SEEKL, (void*)&oldCdLocation, NULL);
         PlayMusic(_currentMusicTrack, 8);
     }
 
@@ -231,7 +231,7 @@ void RenderCosmeticMenu()
 {
     DrawTextBox(0x30, 0x1D0, 0x30, 0x94);
 
-    CapitalTextInfo cosmetic_text_info[4] = {{0}};
+    CapitalTextInfo cosmetic_text_info[4] = { {0} };
 
     cosmetic_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
     cosmetic_text_info[0].y = 70;
@@ -314,61 +314,61 @@ void HandleSparxSkinMenuSelection()
 
     switch (sparx_color_index)
     {
-    case (SPARX_SKIN_DEFAULT):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN DEFAULT";
-        break;
-    }
-    case (SPARX_SKIN_RED):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN RED";
-        break;
-    }
-    case (SPARX_SKIN_ICY):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN ICY";
-        break;
-    }
-    case (SPARX_SKIN_JADE):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN JADE";
-        break;
-    }
-    case (SPARX_SKIN_DARK_BLUE):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN DARK BLUE";
-        break;
-    }
-    case (SPARX_SKIN_PURPLE):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN PURPLE";
-        break;
-    }
-    case (SPARX_SKIN_ORANGE):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN ORANGE";
-        break;
-    }
-    case (SPARX_SKIN_PINK):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN PINK";
-        break;
-    }
-    case (SPARX_SKIN_TURQUOISE):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN TURQUOISE";
-        break;
-    }
-    case (SPARX_SKIN_SILVER):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN SILVER";
-        break;
-    }
-    case (SPARX_SKIN_BLACK):
-    {
-        cosmetic_menu.sparx_color_text = "SPARX SKIN BLACK";
-        break;
-    }
+        case (SPARX_SKIN_DEFAULT):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN DEFAULT";
+            break;
+        }
+        case (SPARX_SKIN_RED):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN RED";
+            break;
+        }
+        case (SPARX_SKIN_ICY):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN ICY";
+            break;
+        }
+        case (SPARX_SKIN_JADE):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN JADE";
+            break;
+        }
+        case (SPARX_SKIN_DARK_BLUE):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN DARK BLUE";
+            break;
+        }
+        case (SPARX_SKIN_PURPLE):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN PURPLE";
+            break;
+        }
+        case (SPARX_SKIN_ORANGE):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN ORANGE";
+            break;
+        }
+        case (SPARX_SKIN_PINK):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN PINK";
+            break;
+        }
+        case (SPARX_SKIN_TURQUOISE):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN TURQUOISE";
+            break;
+        }
+        case (SPARX_SKIN_SILVER):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN SILVER";
+            break;
+        }
+        case (SPARX_SKIN_BLACK):
+        {
+            cosmetic_menu.sparx_color_text = "SPARX SKIN BLACK";
+            break;
+        }
     }
 }
 
@@ -392,81 +392,81 @@ void HandleFlameSkinMenuSelection()
 
     switch (flame_color_index)
     {
-    case (FLAME_SKIN_DEFAULT):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN DEFAULT";
-        break;
-    }
-    case (FLAME_SKIN_DARK_RED):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN DARK RED";
-        break;
-    }
-    case (FLAME_SKIN_ICY):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN ICY";
-        break;
-    }
-    case (FLAME_SKIN_JADE):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN JADE";
-        break;
-    }
-    case (FLAME_SKIN_BLUE):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN BLUE";
-        break;
-    }
-    case (FLAME_SKIN_GOLD):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN GOLD";
-        break;
-    }
-    case (FLAME_SKIN_GREEN):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN GREEN";
-        break;
-    }
-    case (FLAME_SKIN_PINK):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN PINK";
-        break;
-    }
-    case (FLAME_SKIN_ACID):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN ACID";
-        break;
-    }
-    case (FLAME_SKIN_PURPLE):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN PURPLE";
-        break;
-    }
-    case (FLAME_SKIN_LIGHT_PINK):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN LIGHT PINK";
-        break;
-    }
-    case (FLAME_SKIN_PASTEL):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN PASTEL";
-        break;
-    }
-    case (FLAME_SKIN_RAINBOW):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN RAINBOW";
-        break;
-    }
-    case (FLAME_SKIN_CYNDER):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN CYNDER";
-        break;
-    }
-    case (FLAME_SKIN_GHOST):
-    {
-        cosmetic_menu.flame_color_text = "FLAME SKIN GHOST";
-        break;
-    }
+        case (FLAME_SKIN_DEFAULT):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN DEFAULT";
+            break;
+        }
+        case (FLAME_SKIN_DARK_RED):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN DARK RED";
+            break;
+        }
+        case (FLAME_SKIN_ICY):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN ICY";
+            break;
+        }
+        case (FLAME_SKIN_JADE):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN JADE";
+            break;
+        }
+        case (FLAME_SKIN_BLUE):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN BLUE";
+            break;
+        }
+        case (FLAME_SKIN_GOLD):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN GOLD";
+            break;
+        }
+        case (FLAME_SKIN_GREEN):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN GREEN";
+            break;
+        }
+        case (FLAME_SKIN_PINK):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN PINK";
+            break;
+        }
+        case (FLAME_SKIN_ACID):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN ACID";
+            break;
+        }
+        case (FLAME_SKIN_PURPLE):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN PURPLE";
+            break;
+        }
+        case (FLAME_SKIN_LIGHT_PINK):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN LIGHT PINK";
+            break;
+        }
+        case (FLAME_SKIN_PASTEL):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN PASTEL";
+            break;
+        }
+        case (FLAME_SKIN_RAINBOW):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN RAINBOW";
+            break;
+        }
+        case (FLAME_SKIN_CYNDER):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN CYNDER";
+            break;
+        }
+        case (FLAME_SKIN_GHOST):
+        {
+            cosmetic_menu.flame_color_text = "FLAME SKIN GHOST";
+            break;
+        }
     }
 }
 
@@ -490,96 +490,96 @@ void HandleSpyroSkinMenuSelection()
 
     switch (spyro_color_index)
     {
-    case (SKIN_DEFAULT):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN DEFAULT";
-        break;
-    }
-    case (SKIN_DARK_RED):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN DARK RED";
-        break;
-    }
-    case (SKIN_ICY):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN ICY";
-        break;
-    }
-    case (SKIN_EMERALD):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN EMERALD";
-        break;
-    }
-    case (SKIN_CORAL_BLUE):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN CORAL BLUE";
-        break;
-    }
-    case (SKIN_GOLD):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN GOLD";
-        break;
-    }
-    case (SKIN_BERRY):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN BERRY";
-        break;
-    }
-    case (SKIN_GREY):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN GREY";
-        break;
-    }
-    case (SKIN_ZERA):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN ZERA";
-        break;
-    }
-    case (SKIN_PIXIE):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN PIXIE";
-        break;
-    }
-    case (SKIN_CANDY):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN CANDY";
-        break;
-    }
-    case (SKIN_PERIDOT):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN PERIDOT";
-        break;
-    }
-    case (SKIN_TRANS):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN TRANS";
-        break;
-    }
-    case (SKIN_GOTH):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN GOTH";
-        break;
-    }
-    case (SKIN_DITTO):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN DITTO";
-        break;
-    }
-    case (SKIN_EMBER):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN EMBER";
-        break;
-    }
-    case (SKIN_CYNDER):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN CYNDER";
-        break;
-    }
-    case (SKIN_CUSTOM):
-    {
-        cosmetic_menu.spyro_color_text = "SPYRO SKIN CUSTOM";
-        break;
-    }
+        case (SKIN_DEFAULT):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN DEFAULT";
+            break;
+        }
+        case (SKIN_DARK_RED):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN DARK RED";
+            break;
+        }
+        case (SKIN_ICY):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN ICY";
+            break;
+        }
+        case (SKIN_EMERALD):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN EMERALD";
+            break;
+        }
+        case (SKIN_CORAL_BLUE):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN CORAL BLUE";
+            break;
+        }
+        case (SKIN_GOLD):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN GOLD";
+            break;
+        }
+        case (SKIN_BERRY):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN BERRY";
+            break;
+        }
+        case (SKIN_GREY):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN GREY";
+            break;
+        }
+        case (SKIN_ZERA):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN ZERA";
+            break;
+        }
+        case (SKIN_PIXIE):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN PIXIE";
+            break;
+        }
+        case (SKIN_CANDY):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN CANDY";
+            break;
+        }
+        case (SKIN_PERIDOT):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN PERIDOT";
+            break;
+        }
+        case (SKIN_TRANS):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN TRANS";
+            break;
+        }
+        case (SKIN_GOTH):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN GOTH";
+            break;
+        }
+        case (SKIN_DITTO):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN DITTO";
+            break;
+        }
+        case (SKIN_EMBER):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN EMBER";
+            break;
+        }
+        case (SKIN_CYNDER):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN CYNDER";
+            break;
+        }
+        case (SKIN_CUSTOM):
+        {
+            cosmetic_menu.spyro_color_text = "SPYRO SKIN CUSTOM";
+            break;
+        }
     }
 }
 
@@ -603,41 +603,41 @@ void HandleBackgroundColorMenuSelection()
 
     switch (bg_color_index)
     {
-    case (BG_BLUE):
-    {
-        cosmetic_menu.bg_color_text = "BG BLUE";
-        break;
-    }
-    case (BG_PURPLE):
-    {
-        cosmetic_menu.bg_color_text = "BG PURPLE";
-        break;
-    }
-    case (BG_TEAL):
-    {
-        cosmetic_menu.bg_color_text = "BG TEAL";
-        break;
-    }
-    case (BG_GREY):
-    {
-        cosmetic_menu.bg_color_text = "BG GREY";
-        break;
-    }
-    case (BG_PINK):
-    {
-        cosmetic_menu.bg_color_text = "BG PINK";
-        break;
-    }
-    case (BG_ORANGE):
-    {
-        cosmetic_menu.bg_color_text = "BG ORANGE";
-        break;
-    }
-    case (BG_YELLOW):
-    {
-        cosmetic_menu.bg_color_text = "BG YELLOW";
-        break;
-    }
+        case (BG_BLUE):
+        {
+            cosmetic_menu.bg_color_text = "BG BLUE";
+            break;
+        }
+        case (BG_PURPLE):
+        {
+            cosmetic_menu.bg_color_text = "BG PURPLE";
+            break;
+        }
+        case (BG_TEAL):
+        {
+            cosmetic_menu.bg_color_text = "BG TEAL";
+            break;
+        }
+        case (BG_GREY):
+        {
+            cosmetic_menu.bg_color_text = "BG GREY";
+            break;
+        }
+        case (BG_PINK):
+        {
+            cosmetic_menu.bg_color_text = "BG PINK";
+            break;
+        }
+        case (BG_ORANGE):
+        {
+            cosmetic_menu.bg_color_text = "BG ORANGE";
+            break;
+        }
+        case (BG_YELLOW):
+        {
+            cosmetic_menu.bg_color_text = "BG YELLOW";
+            break;
+        }
     }
 }
 
@@ -666,7 +666,7 @@ void HandleSwitchingCosmeticMenuSelections()
 
 void UpdateMiscMenu()
 {
-    CapitalTextInfo menu_text_info[5] = {{0}};
+    CapitalTextInfo menu_text_info[5] = { {0} };
 
     // Easy Exit
     if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -728,11 +728,11 @@ void UpdateMiscMenu()
 
     if (misc_menu.selection == 3)
     {
-        DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+        DrawTextCapitals(misc_menu.super_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
     }
     else
     {
-        DrawTextCapitals(misc_menu.quick_goop_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+        DrawTextCapitals(misc_menu.super_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     }
 
     if (misc_menu.selection == 4)
@@ -750,7 +750,7 @@ void UpdateMiscMenu()
         misc_menu.sparx_mode_text = "SPARX MODE NORMAL";
         misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
         misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
-        misc_menu.quick_goop_text = "QUICK GOOP OFF";
+        misc_menu.super_text = "QUICK GOOP OFF";
         misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
     }
 
@@ -845,20 +845,20 @@ void UpdateMiscMenu()
     {
         if (_currentButtonOneFrame == RIGHT_BUTTON)
         {
-            misc_menu.quick_goop_mode = true;
+            misc_menu.super_mode = true;
         }
         else if (_currentButtonOneFrame == LEFT_BUTTON)
         {
-            misc_menu.quick_goop_mode = false;
+            misc_menu.super_mode = false;
         }
 
-        if (misc_menu.quick_goop_mode == false)
+        if (misc_menu.super_mode == false)
         {
-            misc_menu.quick_goop_text = "QUICK GOOP OFF";
+            misc_menu.super_text = "QUICK GOOP OFF";
         }
         else
         {
-            misc_menu.quick_goop_text = "QUICK GOOP ON";
+            misc_menu.super_text = "QUICK GOOP ON";
         }
     }
 
@@ -888,7 +888,7 @@ void UpdateMiscMenu()
 
 void UpdateILMenu()
 {
-    CapitalTextInfo menu_text_info[5] = {{0}};
+    CapitalTextInfo menu_text_info[5] = { {0} };
 
     // Easy Exit
     if (_currentButtonOneFrame == CIRCLE_BUTTON)

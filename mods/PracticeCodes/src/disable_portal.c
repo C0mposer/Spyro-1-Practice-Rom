@@ -5,8 +5,10 @@ bool hasUpdatedPortalTimer = true;  // bool used in manual_timer.c to pause the 
 extern int levelSelectState;
 extern int timerState;
 extern bool disable_portal_entry;
+extern int savestated_level_ids[3];
+extern int savestate_selection;
 
-DisablePortalEntry()
+void DisablePortalEntry(void)
 {
     if (_levelLoadState || levelSelectState || (_levelIDPortalExit % 10) != 0 || !disable_portal_entry)
     {
@@ -21,9 +23,16 @@ DisablePortalEntry()
         _canFlyIn = 0;
         hasUpdatedPortalTimer = false;
 
+        bool does_savestate_already_exist_in_hw = savestated_level_ids[savestate_selection] == _levelID;
+
+        if (does_savestate_already_exist_in_hw == false)
+        {
+            RespawnSpyro();
+            return;
+        }
 
         #if BUILD == 2 || BUILD == 0
-        LoadStateTest();
+        FullLoadState();
         #elif BUILD == 1 || BUILD == 3
         ReloadSpyroAndCamera(false);
         #endif

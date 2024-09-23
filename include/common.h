@@ -9,30 +9,36 @@
 //Constants
 //~~~~~~~~~
 
+#define MOD_VERSION_STRING "V3.1"
+
+//! Build Versions
 #define REDUX 0
 #define PS1 1
 #define PS2_DECKARD 2
 #define PS2_IOP 3
 
-#define MOD_VERSION_STRING "V3.0"
-
+//! Memory Regions
 #if BUILD == 0
-    #define STARTING_EXTRA_MEM 0x80300000
+#define STARTING_EXTRA_MEM 0x80300000
 #elif BUILD == 2
-    #define STARTING_EXTRA_MEM 0x80A10000
-    #define EXTRA_DECKARD_CODE_REGION 0x80A50000
+#define STARTING_EXTRA_MEM 0x80A10000
+#define EXTRA_DECKARD_CODE_REGION 0x80A50000
 #endif
 
+//! Sectors
 #if BUILD == PS1 || BUILD == PS2_IOP || BUILD == REDUX
-    #define FLAME_SECTOR 265766
-    #define SPARX_SECTOR 265767
-    #define SKIN_SECTOR 265769
+#define FLAME_SECTOR 265766
+#define SPARX_SECTOR 265767
+#define SKIN_SECTOR 265769
 #elif BUILD == PS2_DECKARD
-    #define FLAME_SECTOR 265768
-    #define SPARX_SECTOR 265769
-    #define SKIN_SECTOR 265771
+#define FLAME_SECTOR 265768
+#define SPARX_SECTOR 265769
+#define SKIN_SECTOR 265771
 #endif
 
+
+#define JR_RA 0x03E00008
+#define NOP 0
 
 #define SCREEN_LEFT_EDGE 0x0
 #define SCREEN_RIGHT_EDGE 0x200
@@ -41,7 +47,10 @@
 
 #define SECONDS 30
 
-void NumberToAscii(int number, char *result);
+#define IS_LEVEL_ID_HOMEWORLD (_levelID % 10)
+#define IS_LEVEL_ID_EXIT_HOMEWORLD (_levelIDPortalExit % 10)
+
+void NumberToAscii(int number, char* result);
 
 typedef enum Direction
 {
@@ -293,7 +302,7 @@ typedef struct NOPHexCode
 
 typedef struct RanOnceBitFlags
 {
-    bool hasRanOnceLoadSpyroReset:1;
+    bool hasRanOnceLoadSpyroReset : 1;
 
 
 }RanOnceBitFlags;
@@ -324,18 +333,18 @@ typedef struct AnalogStick
 
 
 //PSY-Q
-int printf (const char * format, ...);
-int sprintf(char *output, const char *format, ...);
-void memset(void *str, int c, int n);
+int printf(const char* format, ...);
+int sprintf(char* output, const char* format, ...);
+void memset(void* str, int c, int n);
 void* memcpy(void* destination, const void* source, int num);
 int rand();
 void srand(int seed);
 
 //Drawing Functions
 int DrawTextCapitals(char* text, void* TextInfo, int spacing, char color);                               //? This function draws text with all capitcal letters.
-int DrawTextAll(char *text, int *CapitalTextInfo, int *LowercaseTextInfo, int spacing, char colour);    //? This function draws text with 1 capital letter at the beginning of each word.
+int DrawTextAll(char* text, int* CapitalTextInfo, int* LowercaseTextInfo, int spacing, char colour);    //? This function draws text with 1 capital letter at the beginning of each word.
 int DrawTextBox(int leftBoundaryDistanceFromLeft, int RightBoundaryDistanceFromLeft, int TopBoundaryDistanceFromTop, int BottomBoundaryDistanceFromTop); //? This function draws a textbox with gold lines around it.
-void DrawArrow(int *MobyInfo, unsigned int timer, int arrowDirection);                                  //? This function draws an arrow either to the left or rigt.
+void DrawArrow(int* MobyInfo, unsigned int timer, int arrowDirection);                                  //? This function draws an arrow either to the left or rigt.
 void DrawLine(int point1X, int point1Y, int point2X, int point2Y);                                      //? This function draws a yellow line.
 void FillScreenColor(int colorSpace, char r, char g, char b);                                           //? Fills the screen with a specific color.
 void DrawPrimative(int param_1);
@@ -362,11 +371,11 @@ void UpdateMobyCollision(int param_1, unsigned int param_2);                    
 void LockCameraToSpyro(void);
 
 //Particle Related Reversing
-void Vec3IntToShortDiv4(short *Vec3ShortPTR,int *Vec3PTR);                                              //? This function takes an int vector, divides it by 4, then stores it as a short. Some things in spyro need to refer to position as a short rather than an int, like particles, this is where you'd convert them.
+void Vec3IntToShortDiv4(short* Vec3ShortPTR, int* Vec3PTR);                                              //? This function takes an int vector, divides it by 4, then stores it as a short. Some things in spyro need to refer to position as a short rather than an int, like particles, this is where you'd convert them.
 
 char* GetNextParticleSlot(char param_1);                                                                //param_1 Might be storing its subtype. It affects the way the particle looks ratio wise? It also stores the param value you pass into param_1 into the 1st element of the particle struct. NOT THE 0th.
 
-void CreateParticle(int param_1, int param_2, int **ptrToMoby, int *param_4);                           //? This function creates a particle. param_1 amount of particles, param_2 Is the Particle ID, param_3 is a Vec3 to its Initial Spawn Position, param_4 Vec3 of Amount of Units to Travel from Inital POS
+void CreateParticle(int param_1, int param_2, int** ptrToMoby, int* param_4);                           //? This function creates a particle. param_1 amount of particles, param_2 Is the Particle ID, param_3 is a Vec3 to its Initial Spawn Position, param_4 Vec3 of Amount of Units to Travel from Inital POS
 
 void UpdateTerrain(unsigned int terrainNumber, char param_2, char param_3);                             //? This function updates moveable terrain
 void TerrainSkipToKeyFrame(unsigned int terrainNumber, char keyFrame, int param_3);                     //? This function jumps moveable terrain to a particular animation key frame
@@ -380,7 +389,7 @@ void PauseMusicAndSFX(unsigned int param_1);
 void PlayMusic(int track_number, int flags);
 void LevelTransition(void);
 
-void WorldToScreen(Vec3 *param_1,Vec3 *param_2);
+void WorldToScreen(Vec3* param_1, Vec3* param_2);
 
 
 //*~~~~~~~~~~~~~~~~~
@@ -393,6 +402,7 @@ extern bool _isLoading; //0x800756B0                         //? 1 If is in load
 extern bool _isInsideOptionsMenu; //0x800757C8               //? 1 If inside options menu in start menu.
 extern bool _canFlyIn; //0x800756D0                          //? 1 If can fly in to level. If set to 0, will just fade in instead of flying in. I assume this is a leftover from prototypes?
 extern bool _flightWingsAnimation; //0x80078CA4
+extern bool _flightLevelBigWings; //0x80075690
 extern bool _shouldRespawnAtCheckpoint; //0x80077888
 
 //Timers
@@ -432,6 +442,8 @@ extern int _portalNumber; //0x8007576c                       //? Number for the 
 
 extern short _flyInAnimation; //0x80076EA8                   //? This is what determines the fly in animation for the level, determined by the LevelFlyInAnimations enum's.
 
+extern int _balloonist_state;
+
 extern Vec3 _cameraPosition; //0x80076DF8                    //? Start of Camera Position Vector
 extern CameraAngle _cameraAngle; //0x80076E1C                //? Start of Camera Angle Vector
 
@@ -440,12 +452,12 @@ extern int _shouldCameraFollowSpyro; //0x80033b4c            //? This is actuall
 #define FOLLOW_SPYRO 0x0C00DEF5                              //? This is the hex representation of the call to LockCameraToSpyro in MIPS. When we set it to this, we are un-nopping the function call.
 
 extern char _mainMenuState; //0x80078D88                     //? This is the current state of the main menu. Should make an enum for this
-extern int _ballonistState; //0x800777e8                     //? The Sub State for the balloonist. Should make an enum for this.
+extern int _balloonistState; //0x800777e8                     //? The Sub State for the balloonist. Should make an enum for this.
 extern unsigned int _levelLoadState; //0x80075864            //? The sub state for level loads.
 extern int _dragonState; //0x80077058                        //? The sub state for dragon cracking.
 extern int _keyState; //0x80075830            
 extern int _doesHaveSuperflame;
-extern int _superflameTimer; 
+extern int _superflameTimer;
 extern int _globalFlightLevelTimer;
 
 extern int _levelGemsCollectedArray[35];
@@ -486,11 +498,11 @@ extern int* _ptr_headControlMoby; //0x8015865C               //? This is a point
 
 extern int* _ptr_moving_texture_data; //0x80078584
 
-extern int*  _ptr_moving_collision_data; //0x800785a4
+extern int* _ptr_moving_collision_data; //0x800785a4
 
 extern int* _ptr_textures_array; //0x800785a8
 
-extern int*  _ptr_ptr_moving_collision; //0x800785d4
+extern int* _ptr_ptr_moving_collision; //0x800785d4
 
 extern int* _ptr_low_lod_texture_data; //0x80078574
 
@@ -544,6 +556,8 @@ extern u8RGBA _sparxGlowColor2;
 extern int _sparxGlowStrength;
 
 extern int _levelIDPortalExit;
+
+extern int _height_cap;
 
 
 #endif /* COMMON_H */

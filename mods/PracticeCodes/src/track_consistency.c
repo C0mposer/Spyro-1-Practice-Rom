@@ -87,10 +87,21 @@ void TrackConsistencyUpdate(void)
             consistency_tracker_render_time = 30;           // Set the time to render the text to be 1 seconds
         }
 
+        // Reset Counter DECKARD
         if (CheckButtonMultiTap(LOADSTATE_BUTTONS[loadstate_button_index], 3))
         {
             consistency_tracker.successAmount = 0;
             consistency_tracker.totalAmount = 0;
+        }
+
+        // Reset Counter IOP
+        if (_currentButton == L2_BUTTON + R2_BUTTON)
+        {
+            if (CheckButtonMultiTap(CIRCLE_BUTTON, 3))
+            {
+                consistency_tracker.successAmount = 0;
+                consistency_tracker.totalAmount = 0;
+            }
         }
 
         // Render while holding L2 + R2

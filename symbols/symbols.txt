@@ -16,6 +16,8 @@ _globalLivesCounter = 0x80077FD0;
 _levelGemsCollectedArray = 0x80077420;
 _portalNumber = 0x8007576c;
 
+
+_balloonist_state = 0x800777e8;
 _balloonist_requirements_state = 0x800758D0;
 _entered_level_flags = 0x80078E78;
 _paused_screen_color = 0x8001A674;
@@ -50,7 +52,7 @@ _isInsideOptionsMenu = 0x800757C8;
 _mainMenuState = 0x80078D88;
 _isPastTitleScreen = 0x8007566c;
 
-_ballonistState = 0x800777e8;
+_balloonistState = 0x800777e8;
 _dragonState = 0x80077058;
 
 _movementSubState = 0x80078AD4;
@@ -186,3 +188,9 @@ _sparx_ptr = 0x80075898;
 _levelIDPortalExit = 0x8007596c;
 
 _shemplet = 0x8016A28C;
+
+_height_cap = 0x800758C0;
+_flightLevelBigWings = 0x80075690;
+
+UpdateSpyroAnim = 0x8003CCE4;
+UpdateSpyroAnim_2 = 0x8003CCE8;

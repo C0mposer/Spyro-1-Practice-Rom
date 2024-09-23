@@ -17,7 +17,7 @@ extern savestated_level_ids[3];
 extern frames_unloaded_moby_anim_function;
 
 
-void SaveStateTest(void)
+void FullSaveState(void)
 {
     SetMemoryRegion();
 
@@ -108,7 +108,7 @@ void SaveStateTest(void)
     printf("%X\n\n\n", local_mem_region);
 }
 
-void LoadStateTest(void)
+void FullLoadState(void)
 {
     SetMemoryRegion();
 

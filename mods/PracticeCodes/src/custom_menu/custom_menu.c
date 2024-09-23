@@ -49,7 +49,7 @@ typedef struct Menu
     char* misc_menu_text;
     char* cosmetic_menu_text;
 }Menu;
-Menu custom_menu = {0};
+Menu custom_menu = { 0 };
 
 typedef struct ILMenu
 {
@@ -66,7 +66,7 @@ typedef struct ILMenu
     char* loop_level_text;
 
 }ILMenu;
-ILMenu il_menu = {0};
+ILMenu il_menu = { 0 };
 typedef struct TimerMenu
 {
     int selection;
@@ -80,7 +80,7 @@ typedef struct TimerMenu
     char* reset_timer_button_text;
 
 }TimerMenu;
-TimerMenu timer_menu = {0};
+TimerMenu timer_menu = { 0 };
 
 typedef struct SavestateMenu
 {
@@ -95,7 +95,8 @@ typedef struct SavestateMenu
     char* switch_state_button_text;
 
 }SavestateMenu;
-SavestateMenu savestate_menu = {0};
+SavestateMenu savestate_menu = { 0 };
+
 
 typedef struct MiscMenu
 {
@@ -105,11 +106,12 @@ typedef struct MiscMenu
     bool show_dragon_touch;
     char* show_dragon_touch_text;
     char* disable_portal_entry_text;
-    bool quick_goop_mode;
-    char* quick_goop_text;
+    bool super_mode;
+    char* super_text;
     char* consitency_tracker_text;
-}MiscMenu;
-MiscMenu misc_menu = {0};
+    char* show_sparx_range_text;
+} MiscMenu;
+MiscMenu misc_menu = { 0 };
 
 typedef enum CurrentMenu
 {
@@ -139,11 +141,11 @@ int savestate_selection = 0;
 
 bool isHeld = false;
 
-const short STOP_TIMER_BUTTONS[2] = {START_BUTTON, START_BUTTON};
-const short RESET_TIMER_BUTTONS[2] = {R3_BUTTON, SELECT_BUTTON};
+const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, START_BUTTON };
+const short RESET_TIMER_BUTTONS[2] = { R3_BUTTON, SELECT_BUTTON };
 
-const short SAVESTATE_BUTTONS[2] = {L3_BUTTON, START_BUTTON};
-const short LOADSTATE_BUTTONS[3] = {R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_BUTTON + CIRCLE_BUTTON)};
+const short SAVESTATE_BUTTONS[2] = { L3_BUTTON, START_BUTTON };
+const short LOADSTATE_BUTTONS[3] = { R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_BUTTON + CIRCLE_BUTTON) };
 
 int savestate_button_index;
 int loadstate_button_index;
@@ -172,15 +174,15 @@ extern TimerState timerState;
 
 //! Every Frame Update
 void CustomMenuUpdate(void)
-{ 
+{
     // Open Menu
-    if(_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
+    if (_currentButton == L2_BUTTON + R2_BUTTON + TRIANGLE_BUTTON && !has_toggled_menu && _movementSubState != MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS)
     {
         ToggleMainMenu();
     }
 
     // When Displaying Menu
-    if(menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
+    if (menu_state == MENU_DISPLAYING && _gameState == GAMESTATE_GAMEPLAY)
     {
         if (current_menu == MAIN_MENU)
         {
@@ -210,14 +212,14 @@ void CustomMenuUpdate(void)
 
     //! Checks
     {
-        if(misc_menu.sparx_mode == PERMA_SPARX_ON)
+        if (misc_menu.sparx_mode == PERMA_SPARX_ON)
         {
             if (_spyro.health > 0)
             {
                 _spyro.health = 3;
             }
         }
-        else if(misc_menu.sparx_mode == SPARXLESS)
+        else if (misc_menu.sparx_mode == SPARXLESS)
         {
             if (_spyro.health > 0)
             {
@@ -225,9 +227,9 @@ void CustomMenuUpdate(void)
             }
         }
 
-        if(misc_menu.quick_goop_mode == TRUE)
+        if (misc_menu.super_mode == TRUE)
         {
-            if(_spyro.drownTimer > 100)
+            if (_spyro.drownTimer > 100)
             {
                 _spyro.drownTimer = 0x240;
             }
@@ -235,7 +237,7 @@ void CustomMenuUpdate(void)
     }
 
     //! DRAGON TOUCH
-    if(misc_menu.show_dragon_touch && _dragonState > 2 && _dragonState < 7)
+    if (misc_menu.show_dragon_touch && _dragonState > 2 && _dragonState < 7)
     {
         RenderDragonTouchFrames();
     }
@@ -244,10 +246,10 @@ void CustomMenuUpdate(void)
     CheckReleasedButtons();
 
     bool should_render_shaded_mobys = ((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || timerState == TIMER_DISPLAYING || menu_state == MENU_DISPLAYING || ShouldDisplayLandingTime()) && _gameState == GAMESTATE_GAMEPLAY)
-    || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING) 
-    || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE);
+        || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING)
+        || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE);
 
-    if(should_render_shaded_mobys)
+    if (should_render_shaded_mobys)
     {
         RenderShadedMobyQueue();
     }
@@ -274,7 +276,7 @@ void CheckReleasedButtons()
 
 void RenderDragonTouchFrames()
 {
-    CapitalTextInfo timer_text_info = {0};
+    CapitalTextInfo timer_text_info = { 0 };
     timer_text_info.x = SCREEN_RIGHT_EDGE - 0x40;
     timer_text_info.y = SCREEN_TOP_EDGE + 0x20;
     timer_text_info.size = DEFAULT_SIZE;
@@ -284,7 +286,7 @@ void RenderDragonTouchFrames()
 
     DrawTextCapitals(temp, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_GOLD);
 
-    MyHudMoby dragon_logo = {.position.x = SCREEN_RIGHT_EDGE - 0x54, .position.y = SCREEN_TOP_EDGE + 0x27, .position.z = 3900};
+    MyHudMoby dragon_logo = { .position.x = SCREEN_RIGHT_EDGE - 0x54, .position.y = SCREEN_TOP_EDGE + 0x27, .position.z = 3900 };
     CustomDrawMoby(MOBY_ID_DRAGON_FIGURINE, &dragon_logo, MOBY_COLOR_GOLD);
 }
 
@@ -317,10 +319,10 @@ void UpdateSavestateMenu()
     }
 
     #if BUILD == 2 || BUILD == 0
-        else if (savestate_menu.selection == 3)
-        {
-            HandleSwitchSaveSlotButtonMenuSelection();
-        }
+    else if (savestate_menu.selection == 3)
+    {
+        HandleSwitchSaveSlotButtonMenuSelection();
+    }
     #endif
 
     // Easy Exit
@@ -336,7 +338,7 @@ void RenderSavestateMenu()
 {
     DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
 
-    CapitalTextInfo menu_text_info[4] = {{0}};
+    CapitalTextInfo menu_text_info[4] = { {0} };
 
     menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
     menu_text_info[0].y = 70;
@@ -354,7 +356,7 @@ void RenderSavestateMenu()
     menu_text_info[3].y = 130;
     menu_text_info[3].size = DEFAULT_SIZE;
 
-#if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
+    #if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
     if (savestate_menu.selection == 0)
     {
         DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -363,11 +365,11 @@ void RenderSavestateMenu()
     {
         DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     }
-#elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+    #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
 
     DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
 
-#endif
+    #endif
 
     if (savestate_menu.selection == 1)
     {
@@ -387,7 +389,7 @@ void RenderSavestateMenu()
         DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     }
 
-#if BUILD == 2 || BUILD == 0
+    #if BUILD == 2 || BUILD == 0
     if (savestate_menu.selection == 3)
     {
         DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -396,11 +398,11 @@ void RenderSavestateMenu()
     {
         DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     }
-#elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
+    #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
     DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-#endif
+    #endif
 
-    // Fill text with defaults if NULL
+        // Fill text with defaults if NULL
     if (savestate_menu.stateslot_text == NULL)
     {
         savestate_menu.stateslot_text = "CURRENT SLOT 1";
@@ -481,7 +483,7 @@ void HandleSaveButtonMenuSelection()
 
 void HandleSaveSlotMenuSelection()
 {
-#if BUILD == 2 || BUILD == 0
+    #if BUILD == 2 || BUILD == 0
     if (_currentButtonOneFrame == RIGHT_BUTTON)
     {
         savestate_selection = (savestate_selection + 1) % 3;
@@ -503,26 +505,26 @@ void HandleSaveSlotMenuSelection()
     {
         savestate_menu.stateslot_text = "CURRENT SLOT 3";
     }
-#endif
+    #endif
 }
 
 void HandleSwitchingSavestateMenuSelections()
 {
     if (_currentButtonOneFrame == DOWN_BUTTON)
     {
-    #if BUILD == 2 || BUILD == 0
+        #if BUILD == 2 || BUILD == 0
         savestate_menu.selection = (savestate_menu.selection + 1) % 4;
-    #elif BUILD == 1 || BUILD == 3
+        #elif BUILD == 1 || BUILD == 3
         savestate_menu.selection = 2;
-    #endif
+        #endif
     }
     else if (_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection != 0)
     {
-    #if BUILD == 2 || BUILD == 0
+        #if BUILD == 2 || BUILD == 0
         savestate_menu.selection = savestate_menu.selection - 1;
-    #elif BUILD == 1 || BUILD == 3
+        #elif BUILD == 1 || BUILD == 3
         savestate_menu.selection = 1;
-    #endif
+        #endif
     }
     #if BUILD == 2 || BUILD == 0
     else if (_currentButtonOneFrame == UP_BUTTON && savestate_menu.selection == 0)
@@ -546,7 +548,7 @@ void ReturnToCustomMainMenu()
 
 void UpdateManualTimerMenu()
 {
-    CapitalTextInfo menu_text_info[4] = {{0}};
+    CapitalTextInfo menu_text_info[4] = { {0} };
 
     // Easy Exit
     if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -789,7 +791,7 @@ void HandleEnteringSubMenu()
         {
             current_menu = COSMETIC_MENU;
 
-            CdControlB(CDL_PRIMITIVE_GETlocL, NULL, (void *)&oldCdLocation); // Store old seek location to restore later
+            CdControlB(CDL_PRIMITIVE_GETlocL, NULL, (void*)&oldCdLocation); // Store old seek location to restore later
         }
     }
 }
@@ -798,7 +800,7 @@ void RenderMainMenu()
 {
     DrawTextBox(0x30, 0x1D0, 0x30, 0xAA);
 
-    CapitalTextInfo menu_text_info[5] = {{0}};
+    CapitalTextInfo menu_text_info[5] = { {0} };
 
     menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
     menu_text_info[0].y = 70;
@@ -915,7 +917,7 @@ void ToggleMainMenu()
     {
         _spyro.isMovementLocked = FALSE;
         current_menu = MAIN_MENU;
-        CdControlB(CDL_PRIMITIVE_SEEKL, (void *)&oldCdLocation, NULL);
+        CdControlB(CDL_PRIMITIVE_SEEKL, (void*)&oldCdLocation, NULL);
         PlayMusic(_currentMusicTrack, 8);
     }
 }

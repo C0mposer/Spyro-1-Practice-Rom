@@ -114,8 +114,8 @@ typedef struct MiscMenu
     bool show_dragon_touch;
     char* show_dragon_touch_text;
     char* disable_portal_entry_text;
-    bool quick_goop_mode;
-    char* quick_goop_text;
+    bool super_mode;
+    char* super_text;
     char* consitency_tracker_text;
     char* show_sparx_range_text;
 } MiscMenu;
@@ -167,6 +167,7 @@ bool respawn_on_loadstate = TRUE;
 
 int oldCdLocation[2];   // Array of 2 ints because the seek location takes up 8 bytes
 
+
 // Externed from elsewhere
 typedef enum ILTimerState
 {
@@ -177,6 +178,15 @@ typedef enum ILTimerState
 } ILTimerState;
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
+
+typedef enum SUPERFLY_MODE
+{
+    SUPERFLY_NOT_SET,
+    SUPERFLY_TURNED_ON,
+    SUPERFLY_TURNED_OFF
+};
+
+bool custom_superfly_state = false;
 
 //! Every Frame Update
 void CustomMenuUpdate(void)
@@ -1002,32 +1012,57 @@ void CustomMenuUpdate(void)
 
     //! Checks
     {
-        if (misc_menu.sparx_mode == PERMA_SPARX_ON)
+        if (_gameState == GAMESTATE_GAMEPLAY)
         {
-            if (_spyro.health > 0)
+            if (misc_menu.sparx_mode == PERMA_SPARX_ON)
             {
-                _spyro.health = 3;
+                if (_spyro.health > 0)
+                {
+                    _spyro.health = 3;
+                }
             }
-        }
-        else if (misc_menu.sparx_mode == SPARXLESS)
-        {
-            if (_spyro.health > 0)
+            else if (misc_menu.sparx_mode == SPARXLESS)
             {
-                _spyro.health = 0;
+                if (_spyro.health > 0)
+                {
+                    _spyro.health = 0;
+                }
             }
-        }
 
-        if (misc_menu.quick_goop_mode == TRUE)
-        {
-            if (_spyro.drownTimer > 100)
+            if (show_sparx_range_mode == true)
             {
-                _spyro.drownTimer = 0x240;
+                DrawSparxRange();
             }
-        }
 
-        if (show_sparx_range_mode == true)
-        {
-            DrawSparxRange();
+            // Superfly/Supercharge checks
+
+            // Turn on Supercharge
+            if (misc_menu.super_mode == true)
+            {
+                SuperchargeUpdate();
+            }
+            //Turn on Superfly
+            if (misc_menu.super_mode == true && _levelID == _levelIDPortalExit && _movementSubState == 0 && (custom_superfly_state == SUPERFLY_NOT_SET || custom_superfly_state == SUPERFLY_TURNED_OFF))
+            {
+                custom_superfly_state = SUPERFLY_TURNED_ON;
+                printf("SUPERFLY ON\n");
+                _spyro.canSuperfly = true;
+                _height_cap = 0x100000;
+            }
+            //Turn off supercharge during portal entry
+            if ((misc_menu.super_mode == false || _levelID != _levelIDPortalExit) && custom_superfly_state == SUPERFLY_TURNED_ON)
+            {
+                custom_superfly_state = SUPERFLY_TURNED_OFF;
+                printf("SUPERFLY OFF\n");
+                _spyro.canSuperfly = false;
+            }
+            //Prepare to turn superfly back on, after portal exit ends since it turns it off on it's own
+            if (misc_menu.super_mode == true && _movementSubState == MOVEMENT_SUBSTATE_EXIT_PORTAL && custom_superfly_state == SUPERFLY_TURNED_ON)
+            {
+                custom_superfly_state = SUPERFLY_TURNED_OFF;
+                printf("SUPERFLY OFF. NEEDS TO BE TURNED ON AFTER PORTAL EXIT ENDS\n");
+                _spyro.canSuperfly = false;
+            }
         }
     }
 

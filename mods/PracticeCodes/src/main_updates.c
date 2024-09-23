@@ -30,6 +30,8 @@ int savestated_level_ids[3] = { 0 }; // For keeping savestates upon loop
 
 bool should_savestate_after_dragon_or_load = false;
 
+bool local_previous_level_id = 0;
+
 // Only Needed for PS1 or IOP Versions
 #if BUILD == 1 || BUILD == 3
 extern bool respawn_on_loadstate;
@@ -240,7 +242,7 @@ void MainUpdate()
             if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load)
             {
                 #if BUILD == 2 || BUILD == 0
-                SaveStateTest();
+                FullSaveState();
                 #elif BUILD == 1 || BUILD == 3
                 SaveSpyroAndCamera(false);
                 #endif
@@ -254,7 +256,7 @@ void MainUpdate()
             if (CheckButtonMultiTap(L3_BUTTON, 2))
             {
                 #if BUILD == 2 || BUILD == 0
-                SaveStateTest();
+                FullSaveState();
                 #elif BUILD == 1 || BUILD == 3
                 SaveSpyroAndCamera(false);
                 #endif
@@ -266,7 +268,7 @@ void MainUpdate()
         #if BUILD == 2 || BUILD == 0        //LOADSTATE 
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
         {
-            LoadStateTest();
+            FullLoadState();
 
             if (_levelID == GNASTYS_LOOT_ID)
             {
@@ -401,7 +403,7 @@ void MainUpdate()
     }
 
     // Prepare savestate after dragon
-    if (mod_state == UNLOCKED_LEVELS && (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING))
+    if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
         {
@@ -410,22 +412,27 @@ void MainUpdate()
     }
 
     // Prepare savestate after turning on disable portal
-    if (mod_state == UNLOCKED_LEVELS && disable_portal_entry == true && has_savestated_on_disabling_portal == false)
+    bool does_savestate_already_exist = savestated_level_ids[savestate_selection] == _levelID;
+    if (disable_portal_entry == true && has_savestated_on_disabling_portal == false)
     {
-        //printf("Savestated after enabling the disable portal option\n");
-        #if BUILD == 2 || BUILD == 0
-        SaveStateTest();
-        #elif BUILD == 1 || BUILD == 3
-        SaveSpyroAndCamera(false);
-        #endif
-
         has_savestated_on_disabling_portal = true;
+
+        if (does_savestate_already_exist == false)
+        {
+            //printf("Savestated after enabling the disable portal option\n");
+            #if BUILD == 2 || BUILD == 0
+            FullSaveState();
+            #elif BUILD == 1 || BUILD == 3
+            SaveSpyroAndCamera(false);
+            #endif
+        }
+
     }
 
     // Undo has_savestated_on_disabling_portal bool
-    if (mod_state == UNLOCKED_LEVELS && disable_portal_entry == false && has_savestated_on_disabling_portal == true)
+    bool has_turned_off_disable_portal = (disable_portal_entry == false && has_savestated_on_disabling_portal == true);
+    if (has_turned_off_disable_portal)
     {
-        //printf("Set savestate after dragon bool to false\n");
         has_savestated_on_disabling_portal = false;
     }
 
@@ -433,13 +440,15 @@ void MainUpdate()
         //Safeguard against loading with another levels savestate/no savestate
         if (_levelLoadState < 0xB) // Checking for a level load state before 0xB instaload, to ensure not removing savestate on instaload
         {
-            _globalEggs = 0;
+            hasSavedSpyro = false;
 
             //Change savestate slot to 0 upon leaving level
             if (savestated_level_ids[savestate_selection] != _levelID)
             {
                 savestate_selection = 0;
             }
+
+            _globalEggs = 0;
 
             // for(int i = 0; i < 3; i++){                     //Setting the IL Timer offsets back to 0 when going to a new level
             //     il_timer_offset[i] = 0;
@@ -448,109 +457,109 @@ void MainUpdate()
         }
     }
 
-    // //! Green Screen Spyro
-    // {
-    //     // Nop Draw World
-    //     if (CheckButtonMultiTap(TRIANGLE_BUTTON, 3) && is_greenscreen == false)
-    //     {
-    //         // JR RA Draw World
-    //         *((int*)0x8002B9CC) = 0x03e00008;
-    //         *((int*)0x8002B9D0) = 0x00000000;
+        // //! Green Screen Spyro
+        // {
+        //     // Nop Draw World
+        //     if (CheckButtonMultiTap(TRIANGLE_BUTTON, 3) && is_greenscreen == false)
+        //     {
+        //         // JR RA Draw World
+        //         *((int*)0x8002B9CC) = 0x03e00008;
+        //         *((int*)0x8002B9D0) = 0x00000000;
 
-    //         // JR RA Draw Skybox
-    //         *((int*)0x8004EBA8) = 0x03e00008;
-    //         *((int*)0x8004EBAC) = 0x00000000;
+        //         // JR RA Draw Skybox
+        //         *((int*)0x8004EBA8) = 0x03e00008;
+        //         *((int*)0x8004EBAC) = 0x00000000;
 
-    //         is_greenscreen = true;
-    //     }
-    //     // Nop Draw World
-    //     else if (CheckButtonMultiTap(CIRCLE_BUTTON, 2) && is_greenscreen == true)
-    //     {
-    //         printf("Back On\n");
-    //         // Bring Back Draw World
-    //         *((int*)0x8002B9CC) = 0x27BDFFE8;
-    //         *((int*)0x8002B9D0) = 0x3C048007;
+        //         is_greenscreen = true;
+        //     }
+        //     // Nop Draw World
+        //     else if (CheckButtonMultiTap(CIRCLE_BUTTON, 2) && is_greenscreen == true)
+        //     {
+        //         printf("Back On\n");
+        //         // Bring Back Draw World
+        //         *((int*)0x8002B9CC) = 0x27BDFFE8;
+        //         *((int*)0x8002B9D0) = 0x3C048007;
 
-    //         // Bring Back Draw Skybox
-    //         *((int*)0x8004EBA8) = 0x3C018007;
-    //         *((int*)0x8004EBAC) = 0x24217DD8;
+        //         // Bring Back Draw Skybox
+        //         *((int*)0x8004EBA8) = 0x3C018007;
+        //         *((int*)0x8004EBAC) = 0x24217DD8;
 
-    //         is_greenscreen = false;
-    //     }
-
-
-
-    //VramTester();
-    // //Every frame check to check for nopping MobyAnimationUpdate
-    // {
-    //     MobyAnimCrashFix();
-    // }
-
-    // {
-    //     SkinTester();
-    // }
-
-
-    // int envOffset;
-    // if(*(int *)0x80075888 == 0x80076f64){
-    //     envOffset = 0;
-    // }
-    // else{
-    //     envOffset = 240;
-    // }
-
-    // for (size_t i = 0; i < 10; i++)
-    // { 
-    //     byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
-
-    //     RECT spyro_area_1_rect;
-    //     spyro_area_1_rect.w = 6;
-    //     spyro_area_1_rect.x = 4;
-    //     spyro_area_1_rect.y = 12 + envOffset;
-    //     spyro_area_1_rect.h = 9;
-
-    //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
-    // }
-
-
-//    if(_currentButtonOneFrame == TRIANGLE_BUTTON){
-
-//         // byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
-
-//         // RECT spyro_area_1_rect;
-//         // spyro_area_1_rect.w = 96;
-//         // spyro_area_1_rect.x = 768;
-//         // spyro_area_1_rect.y = 0;
-//         // spyro_area_1_rect.h = 128;
-
-//         // LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+        //         is_greenscreen = false;
+        //     }
 
 
 
-//         // spyro_bmp_main_ram_location = (byte*)0x800742B0;
+        //VramTester();
+        // //Every frame check to check for nopping MobyAnimationUpdate
+        // {
+        //     MobyAnimCrashFix();
+        // }
 
-//         // spyro_area_1_rect.w = 256;
-//         // spyro_area_1_rect.x = 512;
-//         // spyro_area_1_rect.y = 112;
-//         // spyro_area_1_rect.h = 1;
+        // {
+        //     SkinTester();
+        // }
 
-//         // for (int i = 0; i < 8; i++)
-//         // {
-//         //     spyro_area_1_rect.y = 112 + i;
-//         //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
-//         // }
 
-//         byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
+        // int envOffset;
+        // if(*(int *)0x80075888 == 0x80076f64){
+        //     envOffset = 0;
+        // }
+        // else{
+        //     envOffset = 240;
+        // }
 
-//         RECT spyro_area_1_rect;
-//         spyro_area_1_rect.w = 512;
-//         spyro_area_1_rect.x = 512;
-//         spyro_area_1_rect.y = 0;
-//         spyro_area_1_rect.h = 256;
+        // for (size_t i = 0; i < 10; i++)
+        // { 
+        //     byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
 
-//         LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+        //     RECT spyro_area_1_rect;
+        //     spyro_area_1_rect.w = 6;
+        //     spyro_area_1_rect.x = 4;
+        //     spyro_area_1_rect.y = 12 + envOffset;
+        //     spyro_area_1_rect.h = 9;
 
-//     } 
+        //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+        // }
+
+
+    //    if(_currentButtonOneFrame == TRIANGLE_BUTTON){
+
+    //         // byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
+
+    //         // RECT spyro_area_1_rect;
+    //         // spyro_area_1_rect.w = 96;
+    //         // spyro_area_1_rect.x = 768;
+    //         // spyro_area_1_rect.y = 0;
+    //         // spyro_area_1_rect.h = 128;
+
+    //         // LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+
+
+
+    //         // spyro_bmp_main_ram_location = (byte*)0x800742B0;
+
+    //         // spyro_area_1_rect.w = 256;
+    //         // spyro_area_1_rect.x = 512;
+    //         // spyro_area_1_rect.y = 112;
+    //         // spyro_area_1_rect.h = 1;
+
+    //         // for (int i = 0; i < 8; i++)
+    //         // {
+    //         //     spyro_area_1_rect.y = 112 + i;
+    //         //     LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+    //         // }
+
+    //         byte* spyro_bmp_main_ram_location = (byte*)0x800740B0;
+
+    //         RECT spyro_area_1_rect;
+    //         spyro_area_1_rect.w = 512;
+    //         spyro_area_1_rect.x = 512;
+    //         spyro_area_1_rect.y = 0;
+    //         spyro_area_1_rect.h = 256;
+
+    //         LoadImage(&spyro_area_1_rect, spyro_bmp_main_ram_location);
+
+    //     } 
 
 
 }

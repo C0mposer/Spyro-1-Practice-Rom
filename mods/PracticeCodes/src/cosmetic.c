@@ -13,6 +13,7 @@ bool should_write_sparx_bmp = false;
 void* previous_sparx_ptr = NULL;
 
 bool has_freed_dragon = false;
+bool has_looped_level = false;
 
 extern SpyroColor spyro_color_index;
 extern FlameColor flame_color_index;
@@ -204,7 +205,7 @@ void CosmeticsUpdate(void)
 	}
 
 	// Check for re-loading skin's in loads
-	if (_levelLoadState == 0x7 && _gameState == GAMESTATE_LOADING)
+	if ((_levelLoadState == 0x7 || _balloonistState == 0x6) && (_gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_TITLE_SCREEN || _gameState == GAMESTATE_BALLOONIST))
 	{
 		if (spyro_color_index > 0)
 		{
@@ -230,13 +231,7 @@ void CosmeticsUpdate(void)
 			}
 		}
 
-		// If the glow strength is between this range, that means it's growing from regetting max sparx
-		if (_sparxGlowStrength > 10 || _sparxGlowStrength < 60)
-		{
-			ChangeSparxGlowColor(CUSTOM_SPARX_GLOW_COLORS[sparx_color_index]); // Change Sparx Glow if we are back to 3 health
-		}
-
-		// If you have freed a dragon, wait until gamestate 0 to reload the skin
+		// If you have freed a dragon, wait until gamestate 0 to reload the sparx skin
 		if (_gameState == GAMESTATE_DRAGON_STATE && has_freed_dragon == false)
 		{
 			//printf("Freed Dragon\n");
@@ -248,6 +243,26 @@ void CosmeticsUpdate(void)
 			//printf("Reloaded sparx skin after dragon\n");
 			should_write_sparx_bmp = true;
 			has_freed_dragon = false;
+		}
+
+		// If you have looped a level, wait until gamestate 0 to reload the sparx skin
+		if (_gameState == GAMESTATE_LOADING && has_looped_level == false)
+		{
+			//printf("Freed Dragon\n");
+			has_looped_level = true;
+		}
+		// Reload sparx skin after the loading cutscene has finished
+		else if (has_looped_level == true && _gameState == GAMESTATE_GAMEPLAY)
+		{
+			//printf("Reloaded sparx skin after dragon\n");
+			should_write_sparx_bmp = true;
+			has_looped_level = false;
+		}
+
+		// If the glow strength is between this range, that means it's growing from regetting max sparx
+		if (_sparxGlowStrength > 10 || _sparxGlowStrength < 60)
+		{
+			ChangeSparxGlowColor(CUSTOM_SPARX_GLOW_COLORS[sparx_color_index]); // Change Sparx Glow if we are back to 3 health
 		}
 	}
 }

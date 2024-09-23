@@ -133,8 +133,11 @@ Here are the controls:
 ### Show Sparx Range
 With **Show Sparx Range** on, it will draw an octagon around Spyro representing sparx's range for gem collection.
 
-### Quick Goop:
-This setting kills spyro in goop the moment you can not input anymore. Small quality of life feature to reduce the amount of time you have to wait to die in goop.
+### Super Mode
+With **Super Mode** enabled, you can supercharge & superfly in any level!  
+To superfly, simply glide.   
+To supercharge, first jump, then press square twice when in the air.  
+While supercharging you can increase your supercharge speed with **R1**, and decrease your supercharge speed with **L1**.  
 
 ## Cosmetic Menu
 ### BG Color:

@@ -3,15 +3,15 @@
 #include <custom_text.h>
 
 int IntToAscii(int number) {
-   return '0' + number;
+    return '0' + number;
 }
 
 const char* EARLY_TEXT = "FRAMES EARLY";
 const char* LATE_TEXT = "FRAMES LATE";
 const char* PERFECT_TEXT = "PERFECT";
 
-int frames_early_trick = 0;  
-int frames_late_trick = 0; 
+int frames_early_trick = 0;
+int frames_late_trick = 0;
 int frames_to_display_text = 0;
 
 #define IDLE 0
@@ -61,9 +61,9 @@ ShempSkipFrameDataUpdate()
             printf("EARLY %d\n", frames_early_trick);
             printf("LATE %d\n", frames_late_trick);
 
-            CapitalTextInfo frames_off_text_info = {.x=SCREEN_RIGHT_EDGE - 250, .y=SCREEN_BOTTOM_EDGE - 10, .size=DEFAULT_SIZE};
-            CapitalTextInfo early_late_text_info = {.x=SCREEN_RIGHT_EDGE - 220, .y=SCREEN_BOTTOM_EDGE - 10, .size=DEFAULT_SIZE};
-            CapitalTextInfo peftect_text_info = {.x=SCREEN_RIGHT_EDGE - 120, .y=SCREEN_BOTTOM_EDGE - 10, .size=DEFAULT_SIZE};
+            CapitalTextInfo frames_off_text_info = { .x = SCREEN_RIGHT_EDGE - 250, .y = SCREEN_BOTTOM_EDGE - 10, .size = DEFAULT_SIZE };
+            CapitalTextInfo early_late_text_info = { .x = SCREEN_RIGHT_EDGE - 220, .y = SCREEN_BOTTOM_EDGE - 10, .size = DEFAULT_SIZE };
+            CapitalTextInfo peftect_text_info = { .x = SCREEN_RIGHT_EDGE - 120, .y = SCREEN_BOTTOM_EDGE - 10, .size = DEFAULT_SIZE };
 
             // Draw FRAMES EARLY
             if (frames_early_trick > 0)
@@ -88,7 +88,7 @@ ShempSkipFrameDataUpdate()
             // version_text_info.x = SCREEN_RIGHT_EDGE - 70;
             // version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
             // version_text_info.size = DEFAULT_SIZE;
-            
+
             // DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
 
             RenderShadedMobyQueue();

@@ -1056,7 +1056,7 @@ void CustomMenuUpdate(void)
             if (misc_menu.super_mode == true && _levelID == _levelIDPortalExit && _movementSubState == 0 && (custom_superfly_state == SUPERFLY_NOT_SET || custom_superfly_state == SUPERFLY_TURNED_OFF))
             {
                 custom_superfly_state = SUPERFLY_TURNED_ON;
-                printf("SUPERFLY ON\n");
+                //printf("SUPERFLY ON\n");
                 _spyro.canSuperfly = true;
             }
         }
@@ -1064,14 +1064,14 @@ void CustomMenuUpdate(void)
         if ((misc_menu.super_mode == false || _levelID != _levelIDPortalExit) && custom_superfly_state == SUPERFLY_TURNED_ON)
         {
             custom_superfly_state = SUPERFLY_TURNED_OFF;
-            printf("SUPERFLY OFF\n");
+            //printf("SUPERFLY OFF\n");
             _spyro.canSuperfly = false;
         }
         //Prepare to turn superfly back on, after portal exit ends since it turns it off on it's own
         if (misc_menu.super_mode == true && (_movementSubState == MOVEMENT_SUBSTATE_EXIT_PORTAL || _gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_DEATH) && custom_superfly_state == SUPERFLY_TURNED_ON)
         {
             custom_superfly_state = SUPERFLY_TURNED_OFF;
-            printf("SUPERFLY OFF.\n");
+            //printf("SUPERFLY OFF.\n");
             _spyro.canSuperfly = false;
         }
 
@@ -1083,13 +1083,13 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
                     _height_cap += 0x1000;
-                    printf("%X\n", _height_cap);
+                    //printf("%X\n", _height_cap);
                 }
                 else if (_currentButton == L2_BUTTON + R2_BUTTON)
                 {
                     _height_cap = _spyro.position.z + 0x200;
                     _spyro.neutralJumpZPos = _spyro.position.z + 0x200;
-                    printf("%X\n", _height_cap);
+                    //printf("%X\n", _height_cap);
                 }
             }
         }

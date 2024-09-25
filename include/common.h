@@ -9,7 +9,7 @@
 //Constants
 //~~~~~~~~~
 
-#define MOD_VERSION_STRING "V3.1"
+#define MOD_VERSION_STRING "V3.2"
 
 //! Build Versions
 #define REDUX 0

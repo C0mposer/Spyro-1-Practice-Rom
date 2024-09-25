@@ -105,7 +105,7 @@ void FullSaveState(void)
     }
     //hasSavedSpyro = true;
 
-    printf("%X\n\n\n", local_mem_region);
+    //printf("%X\n\n\n", local_mem_region);
 }
 
 void FullLoadState(void)

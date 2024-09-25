@@ -194,3 +194,5 @@ _flightLevelBigWings = 0x80075690;
 
 UpdateSpyroAnim = 0x8003CCE4;
 UpdateSpyroAnim_2 = 0x8003CCE8;
+
+_whichCutsceneToPlay = 0x8007566c;

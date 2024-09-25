@@ -150,7 +150,7 @@ int savestate_selection = 0;
 
 bool isHeld = false;
 
-const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, START_BUTTON };
+const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, SELECT_BUTTON };
 const short RESET_TIMER_BUTTONS[2] = { R3_BUTTON, SELECT_BUTTON };
 
 const short SAVESTATE_BUTTONS[2] = { L3_BUTTON, START_BUTTON };
@@ -727,7 +727,7 @@ void CustomMenuUpdate(void)
                 }
                 else
                 {
-                    timer_menu.stop_timer_button_text = "STOP BUTTON START";
+                    timer_menu.stop_timer_button_text = "STOP BUTTON SELECT";
                 }
             }
 

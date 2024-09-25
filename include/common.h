@@ -559,5 +559,7 @@ extern int _levelIDPortalExit;
 
 extern int _height_cap;
 
+extern int _whichCutsceneToPlay;
+
 
 #endif /* COMMON_H */

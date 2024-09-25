@@ -85,6 +85,11 @@ void UnlockAllLevels()
     }
 }
 
+void ResetCutscene()
+{
+    _whichCutsceneToPlay = 1;
+}
+
 //This runs The Adventure Begins cutscene
 void SkipIntro()
 {

@@ -1,4 +1,6 @@
 .set noreorder
+jal ResetCutscene
+nop
 jal TheAdventureBegins
 nop
 jal UnlockAllLevels

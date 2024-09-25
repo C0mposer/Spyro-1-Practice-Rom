@@ -3484,3 +3484,6 @@ mods/PracticeCodes/src/pause_patch.dep
 mods/PracticeCodes/src/pause_patch.o
 mods/PracticeCodes/src/splash_screen.dep
 mods/PracticeCodes/src/splash_screen.o
+mods/PracticeCodes/debug/dep/nop_SetupMemCard.dep
+mods/PracticeCodes/debug/obj/nop_SetupMemCard.o
+mods/PracticeCodes/output/asmnop_SetupMemCards.bin

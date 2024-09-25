@@ -205,6 +205,10 @@ void CustomMenuUpdate(void)
             CdControlB(CDL_PRIMITIVE_SEEKL, (void*)&oldCdLocation, NULL);
             PlayMusic(_currentMusicTrack, 8);
         }
+        else if (menu_state == MENU_DISPLAYING)
+        {
+            StopDrawWorldAndObjects();
+        }
     }
 
     // When Displaying Menu
@@ -220,6 +224,7 @@ void CustomMenuUpdate(void)
                 menu_state = MENU_HIDDEN;
                 _spyro.isMovementLocked = FALSE;
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+                RestartDrawWorldAndObjects();
             }
 
             DrawTextBox(0x30, 0x1D0, 0x30, 0xAA);
@@ -323,6 +328,7 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = IL_MENU;
+                    return; // HACK HACK HACK
                 }
             }
 
@@ -331,6 +337,7 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = TIMER_MENU;
+                    return; // HACK HACK HACK
                 }
             }
 
@@ -340,6 +347,7 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = SAVESTATE_MENU;
+                    return; // HACK HACK HACK
                 }
             }
 
@@ -349,6 +357,7 @@ void CustomMenuUpdate(void)
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
                     current_menu = MISC_MENU;
+                    return; // HACK HACK HACK
                 }
             }
 
@@ -358,6 +367,7 @@ void CustomMenuUpdate(void)
                 {
                     current_menu = COSMETIC_MENU;
                     CdControlB(CDL_PRIMITIVE_GETlocL, NULL, (void*)&oldCdLocation);
+                    return; // HACK HACK HACK
                 }
             }
         }
@@ -1012,58 +1022,78 @@ void CustomMenuUpdate(void)
 
     //! Checks
     {
+
+        if (misc_menu.sparx_mode == PERMA_SPARX_ON)
+        {
+            if (_spyro.health > 0)
+            {
+                _spyro.health = 3;
+            }
+        }
+        else if (misc_menu.sparx_mode == SPARXLESS)
+        {
+            if (_spyro.health > 0)
+            {
+                _spyro.health = 0;
+            }
+        }
+
+        if (show_sparx_range_mode == true)
+        {
+            DrawSparxRange();
+        }
+
+        // Superfly/Supercharge checks
+
+        // Turn on Supercharge
+        if (misc_menu.super_mode == true)
+        {
+            SuperchargeUpdate();
+        }
+        //Turn on Superfly
         if (_gameState == GAMESTATE_GAMEPLAY)
         {
-            if (misc_menu.sparx_mode == PERMA_SPARX_ON)
-            {
-                if (_spyro.health > 0)
-                {
-                    _spyro.health = 3;
-                }
-            }
-            else if (misc_menu.sparx_mode == SPARXLESS)
-            {
-                if (_spyro.health > 0)
-                {
-                    _spyro.health = 0;
-                }
-            }
-
-            if (show_sparx_range_mode == true)
-            {
-                DrawSparxRange();
-            }
-
-            // Superfly/Supercharge checks
-
-            // Turn on Supercharge
-            if (misc_menu.super_mode == true)
-            {
-                SuperchargeUpdate();
-            }
-            //Turn on Superfly
             if (misc_menu.super_mode == true && _levelID == _levelIDPortalExit && _movementSubState == 0 && (custom_superfly_state == SUPERFLY_NOT_SET || custom_superfly_state == SUPERFLY_TURNED_OFF))
             {
                 custom_superfly_state = SUPERFLY_TURNED_ON;
                 printf("SUPERFLY ON\n");
                 _spyro.canSuperfly = true;
-                _height_cap = 0x100000;
-            }
-            //Turn off supercharge during portal entry
-            if ((misc_menu.super_mode == false || _levelID != _levelIDPortalExit) && custom_superfly_state == SUPERFLY_TURNED_ON)
-            {
-                custom_superfly_state = SUPERFLY_TURNED_OFF;
-                printf("SUPERFLY OFF\n");
-                _spyro.canSuperfly = false;
-            }
-            //Prepare to turn superfly back on, after portal exit ends since it turns it off on it's own
-            if (misc_menu.super_mode == true && _movementSubState == MOVEMENT_SUBSTATE_EXIT_PORTAL && custom_superfly_state == SUPERFLY_TURNED_ON)
-            {
-                custom_superfly_state = SUPERFLY_TURNED_OFF;
-                printf("SUPERFLY OFF. NEEDS TO BE TURNED ON AFTER PORTAL EXIT ENDS\n");
-                _spyro.canSuperfly = false;
             }
         }
+            //Turn off supercharge during portal entry
+        if ((misc_menu.super_mode == false || _levelID != _levelIDPortalExit) && custom_superfly_state == SUPERFLY_TURNED_ON)
+        {
+            custom_superfly_state = SUPERFLY_TURNED_OFF;
+            printf("SUPERFLY OFF\n");
+            _spyro.canSuperfly = false;
+        }
+        //Prepare to turn superfly back on, after portal exit ends since it turns it off on it's own
+        if (misc_menu.super_mode == true && (_movementSubState == MOVEMENT_SUBSTATE_EXIT_PORTAL || _gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_DEATH) && custom_superfly_state == SUPERFLY_TURNED_ON)
+        {
+            custom_superfly_state = SUPERFLY_TURNED_OFF;
+            printf("SUPERFLY OFF.\n");
+            _spyro.canSuperfly = false;
+        }
+
+        //Increase & Decrease height cap
+        if (custom_superfly_state == SUPERFLY_TURNED_ON)
+        {
+            if (_spyro.state == GLIDE)
+            {
+                if (_currentButtonOneFrame == X_BUTTON)
+                {
+                    _height_cap += 0x1000;
+                    printf("%X\n", _height_cap);
+                }
+                else if (_currentButton == L2_BUTTON + R2_BUTTON)
+                {
+                    _height_cap = _spyro.position.z + 0x200;
+                    _spyro.neutralJumpZPos = _spyro.position.z + 0x200;
+                    printf("%X\n", _height_cap);
+                }
+            }
+        }
+
     }
 
     //! DRAGON TOUCH
@@ -1086,4 +1116,38 @@ void CustomMenuUpdate(void)
     //     //printf("RENDERING\n");
     //     RenderShadedMobyQueue();
     // }
+}
+
+void StopDrawWorldAndObjects(void)
+{
+    // Function addresses
+    int* draw_world_func = 0x8002b9cc;
+    int* draw_objects_func = 0x80019698;
+    int* draw_particles_func = 0x800573c8;
+
+    *draw_world_func = JR_RA;
+    *(draw_world_func + 1) = NOP;
+
+    *draw_objects_func = JR_RA;
+    *(draw_objects_func + 1) = NOP;
+
+    *draw_particles_func = JR_RA;
+    *(draw_particles_func + 1) = NOP;
+}
+void RestartDrawWorldAndObjects(void)
+{
+    // Function addresses
+    int* draw_world_func = 0x8002b9cc;
+    int* draw_objects_func = 0x80019698;
+    int* draw_particles_func = 0x800573c8;
+
+    // Original Opcodes
+    *draw_world_func = 0x27BDFFE8;
+    *(draw_world_func + 1) = 0x3C048007;
+
+    *draw_objects_func = 0x27BDFFE8;
+    *(draw_objects_func + 1) = 0xAFBF0010;
+
+    *draw_particles_func = 0x3C011F80;
+    *(draw_particles_func + 1) = 0xAC300000;
 }

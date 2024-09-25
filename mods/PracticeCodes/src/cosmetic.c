@@ -13,7 +13,7 @@ bool should_write_sparx_bmp = false;
 void* previous_sparx_ptr = NULL;
 
 bool has_freed_dragon = false;
-bool has_looped_level = false;
+bool has_looped_level_or_quit_game = false;
 
 extern SpyroColor spyro_color_index;
 extern FlameColor flame_color_index;
@@ -245,18 +245,19 @@ void CosmeticsUpdate(void)
 			has_freed_dragon = false;
 		}
 
-		// If you have looped a level, wait until gamestate 0 to reload the sparx skin
-		if (_gameState == GAMESTATE_LOADING && has_looped_level == false)
+		//! Maybe split these two conditions for clarity, but it's saving space so *shrug*
+		// If you have looped a level or quit game, wait until gamestate 0 to reload the sparx skin
+		if ((_gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_TITLE_SCREEN) && has_looped_level_or_quit_game == false)
 		{
-			//printf("Freed Dragon\n");
-			has_looped_level = true;
+			//printf("Looped Level or Quit Game\n");
+			has_looped_level_or_quit_game = true;
 		}
-		// Reload sparx skin after the loading cutscene has finished
-		else if (has_looped_level == true && _gameState == GAMESTATE_GAMEPLAY)
+		// Reload sparx skin after the loading cutscene or quit game has finished
+		else if (has_looped_level_or_quit_game == true && _gameState == GAMESTATE_GAMEPLAY)
 		{
-			//printf("Reloaded sparx skin after dragon\n");
+			//printf("Reloaded sparx skin after level loop or quit game\n");
 			should_write_sparx_bmp = true;
-			has_looped_level = false;
+			has_looped_level_or_quit_game = false;
 		}
 
 		// If the glow strength is between this range, that means it's growing from regetting max sparx

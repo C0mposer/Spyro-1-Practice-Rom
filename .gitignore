@@ -3468,3 +3468,19 @@ build/bootedit/Spyro 1 Practice Rom IOP.bin
 build/bootedit/Spyro 1 Practice Rom IOP.cue
 build/bootedit/Spyro 1 Practice Rom IOP.zip
 
+mods/PracticeCodes/asm/no_quit_game.dep
+mods/PracticeCodes/asm/no_quit_game.o
+mods/PracticeCodes/asm/pause_menu.dep
+mods/PracticeCodes/asm/pause_menu.o
+mods/PracticeCodes/asm/splash_screen1_fade.dep
+mods/PracticeCodes/asm/splash_screen1_fade.o
+mods/PracticeCodes/asm/splash_screen1.dep
+mods/PracticeCodes/asm/splash_screen1.o
+mods/PracticeCodes/asm/splash_screen2_fade.dep
+mods/PracticeCodes/asm/splash_screen2_fade.o
+mods/PracticeCodes/asm/splash_screen2.dep
+mods/PracticeCodes/asm/splash_screen2.o
+mods/PracticeCodes/src/pause_patch.dep
+mods/PracticeCodes/src/pause_patch.o
+mods/PracticeCodes/src/splash_screen.dep
+mods/PracticeCodes/src/splash_screen.o

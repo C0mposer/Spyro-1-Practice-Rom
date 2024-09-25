@@ -1085,7 +1085,7 @@ void CustomMenuUpdate(void)
                     _height_cap += 0x1000;
                     printf("%X\n", _height_cap);
                 }
-                else if (_currentButtonOneFrame == CIRCLE_BUTTON)
+                else if (_currentButton == L2_BUTTON + R2_BUTTON)
                 {
                     _height_cap = _spyro.position.z + 0x200;
                     _spyro.neutralJumpZPos = _spyro.position.z + 0x200;

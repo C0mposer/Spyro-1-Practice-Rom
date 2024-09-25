@@ -1,6 +1,7 @@
 #include <common.h>
 #include <levelselect.h>
 #include <shared_funcs.h>
+#include <multitap.h>
 
 typedef enum LevelSelectState
 {
@@ -43,46 +44,58 @@ void DetermineButton()
 		switch (_currentButton)
 		{
 			case(L3_BUTTON):
-				{
-					buttonSelection = LEVEL_SELECT_L3;
-					break;
-				}
+			{
+				buttonSelection = LEVEL_SELECT_L3;
+				break;
+			}
 
 			case(L1_BUTTON):
-				{
-					buttonSelection = LEVEL_SELECT_L1;
-					break;
-				}
+			{
+				buttonSelection = LEVEL_SELECT_L1;
+				break;
+			}
 
 			case(L2_BUTTON):
-				{
-					buttonSelection = LEVEL_SELECT_L2;
-					break;
-				}
+			{
+				buttonSelection = LEVEL_SELECT_L2;
+				break;
+			}
 
 			case(R1_BUTTON):
-				{
-					buttonSelection = LEVEL_SELECT_R1;
-					break;
-				}
+			{
+				buttonSelection = LEVEL_SELECT_R1;
+				break;
+			}
 
 			case(R2_BUTTON):
-				{
-					buttonSelection = LEVEL_SELECT_R2;
-					break;
-				}
+			{
+				buttonSelection = LEVEL_SELECT_R2;
+				break;
+			}
 
 			case(R3_BUTTON):
-				{
-					buttonSelection = LEVEL_SELECT_R3;
-					break;
-				}
+			{
+				buttonSelection = LEVEL_SELECT_R3;
+				break;
+			}
 
 			default:
-				{
-					levelSelectState = READY;	//Set state back to ready. This won't run if a relavent button is pressed.
-					break;
-				}
+			{
+				levelSelectState = READY;	//Set state back to ready. This won't run if a relavent button is pressed.
+				break;
+			}
+		}
+
+		// Digital Users
+		if (CheckButtonMultiTap(UP_BUTTON, 2))
+		{
+			buttonSelection = LEVEL_SELECT_L3;
+			levelSelectState = LEVEL_CHOSEN;
+		}
+		else if (CheckButtonMultiTap(DOWN_BUTTON, 2))
+		{
+			buttonSelection = LEVEL_SELECT_R3;
+			levelSelectState = LEVEL_CHOSEN;
 		}
 
 	}

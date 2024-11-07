@@ -32,6 +32,8 @@ bool should_savestate_after_dragon_or_load = false;
 
 bool local_previous_level_id = 0;
 
+bool default_mod_settings = false;
+
 // Only Needed for PS1 or IOP Versions
 #if BUILD == 1 || BUILD == 3
 extern bool respawn_on_loadstate;
@@ -51,6 +53,7 @@ extern int switch_state_button_index;
 extern const short SAVESTATE_BUTTONS[2];
 extern const short LOADSTATE_BUTTONS[3];
 
+extern int ilTimerStart;
 extern int il_timer_offset[3];
 
 extern bool should_write_spyro_bmp;
@@ -59,6 +62,7 @@ extern bool should_write_sparx_bmp;
 
 extern bool disable_portal_entry;
 extern bool has_savestated_on_disabling_portal;
+
 
 bool is_greenscreen = false;
 
@@ -205,6 +209,30 @@ void ChangeInventoryMenu(SwitchButton state)
     }
 }
 
+void UpdateDefaultSettings()
+{
+    if (_currentButtonOneFrame == RIGHT_BUTTON)
+    {
+        default_mod_settings = true;
+        //PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+    }
+    if (_currentButtonOneFrame == LEFT_BUTTON)
+    {
+        default_mod_settings = false;
+        //PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+    }
+
+    if (default_mod_settings == true)
+    {
+        TurnOnDefaultSettings();
+    }
+    if (default_mod_settings == false)
+    {
+        TurnOffDefaultSettings();
+    }
+
+}
+
 //! Main Basic Checks
 void MainUpdate()
 {
@@ -229,12 +257,25 @@ void MainUpdate()
     {
         _globalLives = 99;
 
+        // Mod Version Number
         CapitalTextInfo version_text_info = { 0 };
         version_text_info.x = SCREEN_RIGHT_EDGE - 70;
         version_text_info.y = SCREEN_BOTTOM_EDGE - 10;
         version_text_info.size = DEFAULT_SIZE;
-
         DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+
+        // Default Settings
+        CapitalTextInfo default_settings_text_info = { 0 };
+        default_settings_text_info.x = SCREEN_LEFT_EDGE + 15;
+        default_settings_text_info.y = SCREEN_BOTTOM_EDGE - 10;
+        default_settings_text_info.size = DEFAULT_SIZE;
+
+        UpdateDefaultSettings();
+        if (default_mod_settings == false)
+            DrawTextCapitals("DEFAULTS OFF", &default_settings_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);
+        if (default_mod_settings == true)
+            DrawTextCapitals("DEFAULTS ON", &default_settings_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);
+
         RenderShadedMobyQueue();
     }
 
@@ -251,6 +292,8 @@ void MainUpdate()
                 #elif BUILD == 1 || BUILD == 3
                 SaveSpyroAndCamera(false);
                 #endif
+
+                il_timer_offset[savestate_selection] = _globalTimer - ilTimerStart; // Save IL timer offset when savestate happens. In here instead of il_timer.c so it works on auto savestate after dragon
 
                 should_savestate_after_dragon_or_load = false;
 

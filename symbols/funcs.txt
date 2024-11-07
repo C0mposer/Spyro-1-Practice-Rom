@@ -72,3 +72,7 @@ PlayMusic = 0x800567f4;
 LevelTransition = 0x8002df9c;
 
 WorldToScreen = 0x80017aa4;
+
+PrepareInventoryGamestate = 0x8002c714;
+
+maybe_SFXProcessing = 0x8005637c;

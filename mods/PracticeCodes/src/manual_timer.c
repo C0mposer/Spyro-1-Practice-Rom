@@ -100,6 +100,12 @@ void TimerUpdate() {
             timerState = TIMER_RUNNING;
             isHeld = true;
         }
+        // If you pause exited a level, put timer back in running state to not show it after the exit/loop
+        if (_gameState == GAMESTATE_LOADING)
+        {
+            mainTimerAtReset = _globalTimer;
+            timerState = TIMER_RUNNING;
+        }
 
         //Show the running timer
         if (timerState == TIMER_RUNNING)

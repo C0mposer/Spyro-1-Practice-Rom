@@ -489,6 +489,11 @@ void CustomMenuUpdate(void)
                     il_menu.selection = (il_menu.selection + 4) % 5;
                 }
             }
+            // Put cursor back at top if turned off through default settings
+            else if (il_menu.il_state == false)
+            {
+                il_menu.selection = 0;
+            }
 
             // Play Sound Effect
             if (_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
@@ -1150,4 +1155,23 @@ void RestartDrawWorldAndObjects(void)
 
     *draw_particles_func = 0x3C011F80;
     *(draw_particles_func + 1) = 0xAC300000;
+}
+
+void TurnOnDefaultSettings()
+{
+    il_menu.il_state = true;
+    il_menu.display_on_dragon = true;
+
+    misc_menu.show_dragon_touch = true;
+
+    //timer_menu.timer_state = true;
+}
+void TurnOffDefaultSettings()
+{
+    il_menu.il_state = false;
+    il_menu.display_on_dragon = false;
+
+    misc_menu.show_dragon_touch = false;
+
+    //timer_menu.timer_state = false;
 }

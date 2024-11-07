@@ -9,7 +9,7 @@
 //Constants
 //~~~~~~~~~
 
-#define MOD_VERSION_STRING "V3.2"
+#define MOD_VERSION_STRING "V3.3"
 
 //! Build Versions
 #define REDUX 0
@@ -391,6 +391,9 @@ void LevelTransition(void);
 
 void WorldToScreen(Vec3* param_1, Vec3* param_2);
 
+void PrepareInventoryGamestate(bool pauseSFX);
+
+int maybe_SFXProcessing(void);
 
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables
@@ -477,6 +480,7 @@ extern char _collectablesStateArray[1231]; //0x80077900      //? The array for w
 
 extern int* _ptr_levelMobys; //0x80075828                    //? This is a pointer to the start of the level moby's array.
 extern int* _ptr_dynamicLevelMobys; //0x8007573C             //? This is a pointer to the start of the dynamic level moby's array.
+extern int _current_number_of_dynamic_mobys; //0x800756a4
 
 extern int* _ptr_levelMobyData; //0x80075930                 //? This is a pointer to the start of the level moby's data array.
 #define _ptr_endDynamicMobys _ptr_levelMobyData //0x80075930 //? Just giving it another name, since it also could be used to indicate the end of dynamic mobys, instead of just being used to indicate the start of levelMobyData.

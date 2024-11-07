@@ -33,6 +33,9 @@ void FullSaveState(void)
     memcpy((int*)local_mem_region, &_ptr_dynamicLevelMobys, sizeof(int*));
     local_mem_region += sizeof(int*);
 
+    memcpy((int*)local_mem_region, &_current_number_of_dynamic_mobys, sizeof(int*));
+    local_mem_region += sizeof(int*);
+
     memcpy((int*)local_mem_region, &_ptr_levelMobyData, sizeof(int*));
     local_mem_region += sizeof(int*);
 
@@ -124,6 +127,9 @@ void FullLoadState(void)
 
             // Reload other misc data from the DECKARD IOP area
             memcpy(&_ptr_dynamicLevelMobys, local_mem_region, sizeof(int*));
+            local_mem_region += sizeof(int*);
+
+            memcpy(&_current_number_of_dynamic_mobys, (int*)local_mem_region, sizeof(int*));
             local_mem_region += sizeof(int*);
 
             memcpy(&_ptr_levelMobyData, local_mem_region, sizeof(int*));

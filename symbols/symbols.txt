@@ -79,6 +79,7 @@ _ptr_HudMobyData = 0x80075710;
 _ptr_levelMobys = 0x80075828;
 
 _ptr_dynamicLevelMobys = 0x8007573C;
+_current_number_of_dynamic_mobys = 0x800756a4;
 
 _ptr_endDynamicMobys = 0x80075930;
 
@@ -196,3 +197,18 @@ UpdateSpyroAnim = 0x8003CCE4;
 UpdateSpyroAnim_2 = 0x8003CCE8;
 
 _whichCutsceneToPlay = 0x8007566c;
+
+
+_balloon_position = 0x80071EA8;
+_balloon_rotation = 0x80071EE0;
+_balloon_timer = 0x800777EC;
+_balloon_drop_off_location = 0x800777FC;
+_balloon_ptr = 0x80077850;
+
+_balloon_unk1 = 0x80071ED0;
+
+_balloon_unk2 = 0x80077840;
+_balloon_unk3 = 0x80077844;
+_balloon_unk4 = 0x80077820;
+_balloon_unk5 = 0x80077824;
+_balloon_unk6 = 0x80077828;

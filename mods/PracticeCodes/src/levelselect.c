@@ -22,7 +22,8 @@ typedef enum LevelSelectButtonSelections
 
 LevelSelectState levelSelectState = READY;
 bool instaLoadReady = FALSE;
-LevelSelectButtonSelections buttonSelection = 0;
+LevelSelectButtonSelections buttonSelection = -1;
+int balloonLoadTimer = 0;
 
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
 const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
@@ -37,7 +38,7 @@ const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_
 void DetermineButton()
 {
 	//if you're in the inventory, and have yet to pick a level
-	if (_gameState == GAMESTATE_INVENTORY && levelSelectState == READY)
+	if (_gameState == GAMESTATE_INVENTORY && _pausedTimer > 7 && levelSelectState == READY)
 	{
 		levelSelectState = LEVEL_CHOSEN;	//Assume button has been pressed, until default case. To avoid repeating in each case.
 
@@ -111,6 +112,8 @@ void LevelSelectUpdate()
 	if (levelSelectState == LEVEL_CHOSEN)
 	{
 		ResetLevelCollectables();
+		_globalGems = 0;
+
 		_gameState = GAMESTATE_EXITING_LEVEL;
 		_spyro.state = 0;
 		_pausedTimer = 0;
@@ -125,7 +128,7 @@ void LevelSelectUpdate()
 	{
 		//If selected homeworld, just spawn in
 		if (buttonSelection == LEVEL_SELECT_L3) {
-			_canFlyIn = 0;
+			_canFlyIn = false;
 		}
 		_flightWingsAnimation = 0;
 		_portalToExitFromInHW = 0;
@@ -134,6 +137,43 @@ void LevelSelectUpdate()
 
 		levelSelectState = READY;
 	}
+
+	//BalloonUpdate();
+
+}
+
+// Called in gamestate_check.s, to avoid updating any mobys
+void BalloonUpdate()
+{
+	maybe_SFXProcessing(); // Calling because we are hooking onto this function call in GameStateCheck.
+
+	// Balloon
+	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_GAMEPLAY)
+	{
+		_gameState = GAMESTATE_BALLOONIST;
+		_balloonistState = 0x6;
+		_loadingScreenTimer = 0;
+		_flightWingsAnimation = 0;
+		_portalToExitFromInHW = 0;
+		_effect_ScreenFadeIn = 0;
+
+		balloonLoadTimer = 1;
+		buttonSelection = -1;
+
+	}
+
+	if (balloonLoadTimer == 2)
+	{
+		LoadBalloonData(_selectMenuOption);
+		_spyro.currentAnim = IDLE_STANDING;
+		_spyro.nextAnim = IDLE_STANDING;
+
+		balloonLoadTimer = 0;
+		//printf("test\n");
+	}
+
+	if (balloonLoadTimer > 0)
+		balloonLoadTimer++;
 
 }
 

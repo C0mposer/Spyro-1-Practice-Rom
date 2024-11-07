@@ -3487,3 +3487,17 @@ mods/PracticeCodes/src/splash_screen.o
 mods/PracticeCodes/debug/dep/nop_SetupMemCard.dep
 mods/PracticeCodes/debug/obj/nop_SetupMemCard.o
 mods/PracticeCodes/output/asmnop_SetupMemCards.bin
+mods/PracticeCodes/debug/obj/balloon_data.o
+mods/PracticeCodes/debug/obj/playtime_timer.o
+mods/PracticeCodes/debug/dep/balloon_data.dep
+mods/PracticeCodes/debug/dep/playtime_timer.dep
+mods/PracticeCodes/src/3.3
+build/spyro1_PracticeCodes.bin.bak
+scripts/bmp_scripts/bmps/images.jpg
+scripts/bmp_scripts/bmps/Spyro_2_-_Ripto's_Rage!_Coverart.png
+scripts/bmp_scripts/bmps/Spyro_the_Dragon.jpg
+scripts/bmp_scripts/bmps/Spyro-year_of_the_dragon.png
+scripts/bmp_scripts/bmps/Super_Mario_64_box_cover.jpg
+mods/PracticeCodes/debug/dep/gamestate_check.dep
+mods/PracticeCodes/debug/obj/gamestate_check.o
+mods/PracticeCodes/output/asmgamestate_checks.bin

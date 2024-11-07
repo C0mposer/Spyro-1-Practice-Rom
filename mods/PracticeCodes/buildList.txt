@@ -1,6 +1,7 @@
 REDUX, exe, 0x80033e38, 0x0, asm/hook.s
 REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 REDUX, exe, 0x800338a0, 0x0, asm/level_transition.s
+REDUX, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
 REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c, StartFairyArea.bin
@@ -51,6 +52,7 @@ DECKARD_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
 DECKARD_PS2_NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 DECKARD_PS2_NTSC, exe, 0x800127e4, 0x0, asm/nop_SetupMemCard.s
+DECKARD_PS2_NTSC, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c, StartFairyArea.bin
@@ -80,6 +82,7 @@ IOP_PS2_NTSC, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
 IOP_PS2_NTSC, exe, 0x800338a0, 0x0, asm/level_transition.s
 IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 IOP_PS2_NTSC, exe, 0x800127e4, 0x0, asm/nop_SetupMemCard.s
+IOP_PS2_NTSC, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
 IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c, StartFairyArea.bin

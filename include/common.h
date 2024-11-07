@@ -395,6 +395,8 @@ void PrepareInventoryGamestate(bool pauseSFX);
 
 int maybe_SFXProcessing(void);
 
+int Vec2OctagonalDistance(Vec2* vecA, Vec2* vecB);
+
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables
 //*~~~~~~~~~~~~~~~~~

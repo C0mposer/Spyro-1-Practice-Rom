@@ -265,17 +265,19 @@ void MainUpdate()
         DrawTextCapitals(MOD_VERSION_STRING, &version_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
 
         // Default Settings
+        UpdateDefaultSettings();
+
         CapitalTextInfo default_settings_text_info = { 0 };
         default_settings_text_info.x = SCREEN_LEFT_EDGE + 15;
         default_settings_text_info.y = SCREEN_BOTTOM_EDGE - 10;
         default_settings_text_info.size = DEFAULT_SIZE;
 
-        UpdateDefaultSettings();
         if (default_mod_settings == false)
             DrawTextCapitals("DEFAULTS OFF", &default_settings_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);
         if (default_mod_settings == true)
             DrawTextCapitals("DEFAULTS ON", &default_settings_text_info, DEFAULT_SPACING, MOBY_COLOR_BLUE);
 
+        // Render Text
         RenderShadedMobyQueue();
     }
 
@@ -351,7 +353,7 @@ void MainUpdate()
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;
             }
-        }
+    }
         #endif
 
 
@@ -448,9 +450,9 @@ void MainUpdate()
         }
 
         #endif
-    }
+}
 
-    // Prepare savestate after dragon
+// Prepare savestate after dragon
     if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])

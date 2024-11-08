@@ -150,7 +150,7 @@ void LoadGeoData(byte* current_mem_region)
         memcpy(ptr_movingCollision, local_mem_region, movingCollisionSize * sizeof(int));
         local_mem_region += movingCollisionSize;
     }
-    printf("End of local savestate region: %X\n", local_mem_region);
+    //printf("End of local savestate region: %X\n", local_mem_region);
 
 // Set our geo state to SHOULD_MOVE, so that GeoDataUpdate() can begin
 //geo_reset_state = SHOULD_MOVE;

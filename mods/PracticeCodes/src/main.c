@@ -61,6 +61,7 @@ void MainFunc()
             TrackConsistencyUpdate();
             CosmeticsUpdate();
             CalculatePlaytimeUpdate();
+            LoadstateFixesUpdate();
             //ShempSkipFrameDataUpdate(); // Work on later
         }
 

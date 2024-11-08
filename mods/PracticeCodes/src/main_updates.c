@@ -311,10 +311,10 @@ void MainUpdate()
                 SaveSpyroAndCamera(false);
                 #endif
             }
-        }
+            }
 
 
-        //Load spyro & camera information
+            //Load spyro & camera information
         #if BUILD == 2 || BUILD == 0        //LOADSTATE 
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
         {
@@ -353,7 +353,7 @@ void MainUpdate()
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;
             }
-    }
+        }
         #endif
 
 
@@ -450,9 +450,9 @@ void MainUpdate()
         }
 
         #endif
-}
+        }
 
-// Prepare savestate after dragon
+        // Prepare savestate after dragon
     if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
@@ -477,9 +477,9 @@ void MainUpdate()
             #endif
         }
 
-    }
+        }
 
-    // Undo has_savestated_on_disabling_portal bool
+        // Undo has_savestated_on_disabling_portal bool
     bool has_turned_off_disable_portal = (disable_portal_entry == false && has_savestated_on_disabling_portal == true);
     if (has_turned_off_disable_portal)
     {
@@ -612,4 +612,4 @@ void MainUpdate()
     //     } 
 
 
-}
+    }

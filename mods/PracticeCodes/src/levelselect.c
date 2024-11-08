@@ -200,10 +200,15 @@ void InstaLoadUpdate() {
 		}
 	}
 
-	//Once the fly in starts, un-nop Vec3Length in SFX Proccessing
+	// Bring back function calls from fixes
 	if (_levelLoadState == 0xD)
 	{
-		*(int*)0x80056528 = 0x0C005C7F;						//Putting Vec3Length sfx call back after insta-load (0x0C005C7F is the asm opcode bytes for the function call)
+		*(int*)0x80056528 = 0x0C005C7F;						// Putting Vec3Length sfx call back after insta-load (0x0C005C7F is the asm opcode bytes for the function call)
+
+		// Bring back CameraRotation
+		*(int*)0x80033f08 = 0x27BDFFD8;
+		*(int*)0x80033f0C = 0x00802821;
+
 	}
 
 	//If pressed hotkey for instaload
@@ -223,7 +228,13 @@ void InstaLoadUpdate() {
 			_flyInAnimation = flyInArray[_levelIDIndex];
 			_cameraLockingRelated = 0x80000012;					// 0x80000012 is not an address it is just the value it is expecting for level loads
 			_musicState = 0x40;
+
+			// Fixes
 			*(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?
+
+			// JR RA CameraRotation for strange crash in whirlwind, notably in tree tops
+			*(int*)0x80033f08 = 0x03e00008;
+			*(int*)0x80033f0C = 0x00000000;
 		}
 
 		instaLoadReady = TRUE;

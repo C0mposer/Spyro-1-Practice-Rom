@@ -3,6 +3,8 @@
 
 void MainUpdate(void);
 
+void SaveStateUpdate();
+
 void ChangeInventoryMenu(SwitchButton state);
 
 #endif /* MAIN_UPDATES_H */

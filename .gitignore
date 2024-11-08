@@ -3504,3 +3504,8 @@ mods/PracticeCodes/output/asmgamestate_checks.bin
 mods/PracticeCodes/asm/nop_SetupMemCard.dep
 mods/PracticeCodes/asm/nop_SetupMemCard.o
 mods/PracticeCodes/backup/redux_asmgamestate_checks.bin
+include/main_updates.h
+mods/PracticeCodes/src/green_screen
+mods/PracticeCodes/src/main_updates_backup.c
+include/main_updates.h
+include/main_updates.h

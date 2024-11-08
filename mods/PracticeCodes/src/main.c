@@ -60,9 +60,12 @@ void MainFunc()
             CheckLandingUpdate();
             TrackConsistencyUpdate();
             CosmeticsUpdate();
-            CalculatePlaytimeUpdate();
-            LoadstateFixesUpdate();
+            //CalculatePlaytimeUpdate();
             //ShempSkipFrameDataUpdate(); // Work on later
+
+            #if BUILD == PS2_DECKARD || BUILD == REDUX
+            LoadstateFixesUpdate();
+            #endif
         }
 
         MainUpdate();

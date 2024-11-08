@@ -3,10 +3,10 @@ REDUX, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 REDUX, exe, 0x800338a0, 0x0, asm/level_transition.s
 REDUX, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
-REDUX, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+REDUX, header, 0x8000B0B8, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/playtime_timer.c src/pause_patch.c, StartFairyArea.bin
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
-REDUX, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c, MemoryCardArea.bin
+REDUX, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c src/credits_skip.c, MemoryCardArea.bin
 REDUX, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c, kern.bin
 REDUX, kernal, 0x8000EA00, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
 REDUX, kernal, 0x80400000, 0x0, src/save_state.c src/save_geo.c, extra.bin
@@ -25,10 +25,10 @@ NTSC, exe, 0x800127e4, 0x0, asm/nop_SetupMemCard.s
 NTSC, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
 
-NTSC, header, 0x8000B0B8, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+NTSC, header, 0x8000B0B8, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c src/playtime_timer.c src/pause_patch.c, StartFairyArea.bin
 NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
-NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c, MemoryCardArea.bin
+NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c src/credits_skip.c , MemoryCardArea.bin
 NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c, kern.bin
 NTSC, kernal, 0x8000EA00, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
 
@@ -54,10 +54,10 @@ DECKARD_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 DECKARD_PS2_NTSC, exe, 0x800127e4, 0x0, asm/nop_SetupMemCard.s
 DECKARD_PS2_NTSC, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
-DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c src/playtime_timer.c src/pause_patch.c, StartFairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
-DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c, MemoryCardArea.bin
+DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c src/credits_skip.c, MemoryCardArea.bin
 
 DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c, kern.bin
 DECKARD_PS2_NTSC, kernal, 0x80007530, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/save_state_region.c, kern2.bin
@@ -84,10 +84,10 @@ IOP_PS2_NTSC, exe, 0x8001c574, 0x0, asm/pause_menu.s
 IOP_PS2_NTSC, exe, 0x800127e4, 0x0, asm/nop_SetupMemCard.s
 IOP_PS2_NTSC, exe, 0x80033874, 0x0, asm/gamestate_check.s
 
-IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/credits_skip.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
+IOP_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 IOP_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/common.c src/il_timer.c src/draw_hud_moby.c src/splash_screen.c src/playtime_timer.c src/pause_patch.c, StartFairyArea.bin
 IOP_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/landing_timer.c src/disable_portal.c src/prims.c, FairyArea.bin
-IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c, MemoryCardArea.bin
+IOP_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/savestate_update.c src/balloon_data.c src/credits_skip.c, MemoryCardArea.bin
 IOP_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c, kern.bin
 IOP_PS2_NTSC, kernal, 0x80007530, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c, kern2.bin
 

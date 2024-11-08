@@ -198,6 +198,8 @@ UpdateSpyroAnim_2 = 0x8003CCE8;
 
 _whichCutsceneToPlay = 0x8007566c;
 
+_electricPadActivations = 0x800777C0;
+
 
 _balloon_position = 0x80071EA8;
 _balloon_rotation = 0x80071EE0;

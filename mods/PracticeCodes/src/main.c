@@ -53,6 +53,7 @@ void MainFunc()
             ILUpdate();
             CustomMenuUpdate();
             CustomMenuUpdate2();
+            SaveStateUpdate();
             RatCodeUpdate();
             CreditsSkipUpdate();
             LootPlaneUpdate();

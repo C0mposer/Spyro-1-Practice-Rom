@@ -104,6 +104,72 @@ void FullSaveState(void)
     memcpy((byte*)local_mem_region, 0x80075724, 0x4);
     local_mem_region += 0x4;
 
+    //Electric Pads in BM/Terrace
+    memcpy((byte*)local_mem_region, _electricPadActivations, (sizeof(_electricPadActivations)));
+    local_mem_region += sizeof(_electricPadActivations);
+
+    // Electric Pad Visuals
+    if (_levelID == BEAST_MAKERS_ID)
+    {
+        //Electric Pads Visuals BM
+        memcpy((byte*)local_mem_region, 0x80178E88, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80178FD4, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80179120, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x8017923C, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80179358, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80179474, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x801795A8, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x801796C4, 0x4);
+        local_mem_region += 0x4;
+    }
+    if (_levelID == TERRACE_VILLAGE_ID)
+    {
+        //Electric Pads Visuals Terrace
+        memcpy((byte*)local_mem_region, 0x80167CC4, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80168F80, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x801699C0, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x8016ADE4, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x8016BEF0, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80170710, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80170B5C, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x8017288C, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80174694, 0x4);
+        local_mem_region += 0x4;
+
+        memcpy((byte*)local_mem_region, 0x80174FE4, 0x4);
+        local_mem_region += 0x4;
+    }
+
     if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
     {
         SaveGeoData(local_mem_region);
@@ -200,7 +266,73 @@ void FullLoadState(void)
             memcpy(0x80075724, (byte*)local_mem_region, 0x4);
             local_mem_region += 0x4;
 
+            //Electric Pads in BM/Terrace
+            memcpy(_electricPadActivations, (byte*)local_mem_region, (sizeof(_electricPadActivations)));
+            local_mem_region += sizeof(_electricPadActivations);
+
             //printf("%X\n\n\n", local_mem_region);
+
+            // Electric Pad Visuals
+            if (_levelID == BEAST_MAKERS_ID)
+            {
+                //Electric Pads Visuals BM
+                memcpy(0x80178E88, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80178FD4, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80179120, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x8017923C, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80179358, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80179474, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x801795A8, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x801796C4, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+            }
+            if (_levelID == TERRACE_VILLAGE_ID)
+            {
+                //Electric Pads Visuals Terrace
+                memcpy(0x80167CC4, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80168F80, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x801699C0, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x8016ADE4, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x8016BEF0, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80170710, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80170B5C, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x8017288C, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80174694, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+
+                memcpy(0x80174FE4, (byte*)local_mem_region, 0x4);
+                local_mem_region += 0x4;
+            }
 
             if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
             {

@@ -567,5 +567,7 @@ extern int _height_cap;
 
 extern int _whichCutsceneToPlay;
 
+extern int _electricPadActivations[8];
+
 
 #endif /* COMMON_H */

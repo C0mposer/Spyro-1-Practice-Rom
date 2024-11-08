@@ -3509,3 +3509,5 @@ mods/PracticeCodes/src/green_screen
 mods/PracticeCodes/src/main_updates_backup.c
 include/main_updates.h
 include/main_updates.h
+mods/PracticeCodes/debug/dep/savestate_update.dep
+mods/PracticeCodes/debug/obj/savestate_update.o

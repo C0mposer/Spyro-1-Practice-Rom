@@ -158,7 +158,7 @@ void MainUpdate()
 
 void SaveStateUpdate()
 {
- //Save spyro & camera information
+    //Save spyro & camera information or Savestate depending on console
     if (_gameState == GAMESTATE_GAMEPLAY)
     {
         if (savestate_button_index < 2)
@@ -190,8 +190,8 @@ void SaveStateUpdate()
         }
 
 
-        //Load spyro & camera information
-        #if BUILD == 2 || BUILD == 0        //LOADSTATE 
+        // Load spyro & camera information or Loadstate depending on console
+        #if BUILD == 2 || BUILD == 0        // Real Loadstate
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
         {
             FullLoadState();
@@ -201,7 +201,7 @@ void SaveStateUpdate()
                 LootGiveAllKeys();
             }
         }
-        #elif BUILD == 1 || BUILD == 3      //RESPAWN SPYRO DURING LOADSTATE ON PS1 AND PS2 IOP
+        #elif BUILD == 1 || BUILD == 3      // Sudo Load-State
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
         {
             if (!respawn_on_loadstate || (_effect_ScreenFadeIn = 0, readyToLoadstateAfterDeath))
@@ -228,11 +228,11 @@ void SaveStateUpdate()
                 RespawnSpyro();
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;
+            }
         }
-    }
         #endif
 
-        #if BUILD == 2 || BUILD == 0  // ONLY DO SAVESTATE SLOTS ON DECKARD
+        #if BUILD == 2 || BUILD == 0  // Change Savestate Slots
          // Quick Savestate Slot Selection
         if (switch_state_button_index == 0)
         {
@@ -271,7 +271,7 @@ void SaveStateUpdate()
                 switch_button_held = true;
             }
         }
-        // Draw Switched Savestate Text
+        // Draw Savestate Slot Text
         if (savestateSwitchedTimer > 0)
         {
             DrawSavestateSwitchedText();
@@ -293,9 +293,9 @@ void SaveStateUpdate()
 
         #endif
 
-}
+    }
 
-// Prepare savestate after dragon
+    // Prepare savestate after dragon or portal
     if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])

@@ -33,17 +33,17 @@ void CreditsSkipUpdate()
             path_ptr = (void*)0x8016AEC4;
 
             // Set spyro's position to the end of the fight
-            _spyro.position.x = 0x643C;
-            _spyro.position.y = 0x7DE3;
-            _spyro.position.z = 0x3166;
-            _spyro.angle.yaw = 0x0C90;
+            _spyro.position.x = 0x00006A1D;
+            _spyro.position.y = 0x00009626;
+            _spyro.position.z = 0x00002B68;
+            _spyro.angle.yaw = 0x0B91;
             _spyro.health = YELLOW_SPARX;
             _spyroInvisible = false;
 
-            _cameraPosition.x = 0x627F;
-            _cameraPosition.y = 0x851A;
-            _cameraPosition.z = 0x33A7;
-            _cameraAngle.yaw = 0x0CBC;
+            _cameraPosition.x = 0x00006BA8;
+            _cameraPosition.y = 0x00009F28;
+            _cameraPosition.z = 0x00002DB2;
+            _cameraAngle.yaw = 0x0B91;
 
             _isInInGameCutscene = false;
             _effect_ScreenLetterBox = 0;

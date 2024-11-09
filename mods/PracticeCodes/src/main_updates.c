@@ -27,6 +27,10 @@ bool local_previous_level_id = 0;
 
 bool default_mod_settings = false;
 
+bool shouldUnNopRotationMoonJump = false;
+
+int moonjumpShouldSlowdown = 0;
+
 // Externed from elsewhere
 extern int mainTimerAtReset;
 
@@ -104,12 +108,6 @@ void MainUpdate()
             _nestorMakeUnskipable = FALSE;
         }
 
-        //Moonjump
-        if (_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
-        {
-            _spyro.position.z += 500;
-        }
-
         //Lives always 99
         if (_globalLives != 99)
         {
@@ -123,6 +121,45 @@ void MainUpdate()
             _keyState = 1;
         }
 
+        MoonjumpUpdate();
+    }
+}
+
+void MoonjumpUpdate()
+{
+    if (_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
+    {
+        _spyro.position.z += 500;
+
+        //NOP SetCameraTurnDirection
+        *(int*)0x80035F58 = 0x03E00008;
+        *(int*)0x80035F5C = 0x00000000;
+
+        _cameraTurnDirection = 0;
+
+        shouldUnNopRotationMoonJump = true;
+    }
+    else if (shouldUnNopRotationMoonJump)
+    {
+        // Bring back SetCameraTurnDirection
+        *(int*)0x80035F58 = 0x3C028008;
+        *(int*)0x80035F5C = 0x8C428C4C;
+
+        shouldUnNopRotationMoonJump = false;
+
+        moonjumpShouldSlowdown = true;
+    }
+
+    if (moonjumpShouldSlowdown)
+    {
+        if (_spyro.state == FLOP)
+        {
+            _spyro.position.z += 285;
+        }
+        else
+        {
+            moonjumpShouldSlowdown = false;
+        }
     }
 }
 

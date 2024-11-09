@@ -37,6 +37,7 @@ void CreditsSkipUpdate()
             _spyro.position.y = 0x00009626;
             _spyro.position.z = 0x00002B68;
             _spyro.angle.yaw = 0x0B91;
+            _spyro.state = IDLE_STANDING;
             _spyro.health = YELLOW_SPARX;
             _spyroInvisible = false;
 

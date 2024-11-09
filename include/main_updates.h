@@ -3,6 +3,8 @@
 
 void MainUpdate(void);
 
+void MoonjumpUpdate();
+
 void SaveStateUpdate();
 
 void ChangeInventoryMenu(SwitchButton state);

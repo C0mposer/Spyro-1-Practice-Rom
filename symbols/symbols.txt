@@ -200,6 +200,8 @@ _whichCutsceneToPlay = 0x8007566c;
 
 _electricPadActivations = 0x800777C0;
 
+_cameraTurnDirection = 0x80075924;
+
 
 _balloon_position = 0x80071EA8;
 _balloon_rotation = 0x80071EE0;

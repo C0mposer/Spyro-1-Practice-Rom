@@ -569,5 +569,7 @@ extern int _whichCutsceneToPlay;
 
 extern int _electricPadActivations[8];
 
+extern int _cameraTurnDirection;
+
 
 #endif /* COMMON_H */

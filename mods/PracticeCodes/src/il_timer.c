@@ -116,7 +116,7 @@ void ILUpdate() {
                 timer_text_info.size = DEFAULT_SIZE;
                 DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-            if (_gameState == GAMESTATE_LOADING && _levelGemsCollectedArray[34] < 1900) // Checking for if you have nowhere near the amount of loot gems to be reasonably doing a 120 IL
+            if (_gameState == GAMESTATE_LOADING)
             {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
@@ -129,7 +129,7 @@ void ILUpdate() {
 
                 il_timer_state = IL_DISPLAYING;
             }
-            if (_levelID == GNASTYS_LOOT_ID && _levelGemsCollectedArray[34] > 1900)
+            if (_levelID == GNASTYS_LOOT_ID && _levelGemsCollectedArray[34] > 1900) // Checking for if you have almost all the loot gems to be reasonably doing a 120 IL
             {
                 if (_spyro.state == WHIRLWIND)
                 {

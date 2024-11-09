@@ -59,7 +59,7 @@ char loadlessAscii[10];
 
 int il_timer_offset[3] = { 0 };
 
-int loot_vortex_timer = 0x3E; // 3E instead of 3C which is what the game checks, because our timer starts counting down 1 frame early
+int loot_vortex_timer = 0x3A; // 3E instead of 3C which is what the game checks, because our timer starts counting down 1 frame early
 
 extern ILMenu il_menu;
 
@@ -82,7 +82,7 @@ extern bool should_write_sparx_bmp;
 void ILUpdate() {
     if (il_menu.il_state)
     {
-        if (il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING))
+        if (il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_BALLOONIST))
         {
             il_timer_state = IL_FLYING_IN;
         }
@@ -138,7 +138,7 @@ void ILUpdate() {
                 if (loot_vortex_timer == 0)
                 {
                     Timer ilTimer;
-                    ilTimer.timer = _globalTimer - ilTimerStart - 4;
+                    ilTimer.timer = _globalTimer - ilTimerStart - 2;
                     FramesToTimer(&ilTimer);
                     LoadAscii(&ilTimer, ilAscii);
 
@@ -148,13 +148,13 @@ void ILUpdate() {
 
                     il_timer_state = IL_DISPLAYING;
 
-                    loot_vortex_timer = 0x3E;
+                    loot_vortex_timer = 0x3A;
                 }
             }
             // Reset if exit level/loop level
             if (_gameState == GAMESTATE_LOADING)
             {
-                loot_vortex_timer = 0x3E;
+                loot_vortex_timer = 0x3A;
             }
         }
 

@@ -25,6 +25,8 @@ bool instaLoadReady = FALSE;
 LevelSelectButtonSelections buttonSelection = -1;
 int balloonLoadTimer = 0;
 
+int instaLoadNopFixTimer = 0;
+
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
 const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
 						FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_RIGHT, FACING_LEFT, FACING_RIGHT,
@@ -203,15 +205,16 @@ void InstaLoadUpdate() {
 	// Bring back function calls from fixes
 	if (_levelLoadState == 0xD)
 	{
-		*(int*)0x80056528 = 0x0C005C7F;						// Putting Vec3Length sfx call back after insta-load (0x0C005C7F is the asm opcode bytes for the function call)
-
 		// Bring back CameraRotation
 		*(int*)0x80033f08 = 0x27BDFFD8;
 		*(int*)0x80033f0C = 0x00802821;
-
+	}
+	if (instaLoadNopFixTimer == 10) // Waiting 10 frames to bring back the SFX Vec3Length call, because of dark passage crash
+	{
+		*(int*)0x80056528 = 0x0C005C7F;						// Putting Vec3Length sfx call back after insta-load (0x0C005C7F is the asm opcode bytes for the function call)
 	}
 
-	//If pressed hotkey for instaload
+//If pressed hotkey for instaload
 	if (_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON) && _gameState == GAMESTATE_GAMEPLAY && _levelID % 10 != 0)
 	{
 		ResetLevelCollectables();
@@ -237,7 +240,12 @@ void InstaLoadUpdate() {
 			*(int*)0x80033f0C = 0x00000000;
 		}
 
+		instaLoadNopFixTimer = 1;
 		instaLoadReady = TRUE;
 	}
 
+	if (instaLoadNopFixTimer > 0)
+	{
+		instaLoadNopFixTimer++;
+	}
 }

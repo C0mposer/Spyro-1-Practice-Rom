@@ -59,7 +59,7 @@ char loadlessAscii[10];
 
 int il_timer_offset[3] = { 0 };
 
-int loot_vortex_timer = 0x3A; // 3E instead of 3C which is what the game checks, because our timer starts counting down 1 frame early
+int loot_vortex_timer = 0x3A; // 3A instead of 3C which is what the game checks, because we want to display it on the same frame
 
 extern ILMenu il_menu;
 
@@ -119,7 +119,7 @@ void ILUpdate() {
             if (_gameState == GAMESTATE_LOADING && _levelID != GNASTYS_LOOT_ID)
             {
                 Timer ilTimer;
-                ilTimer.timer = _globalTimer - ilTimerStart; // Because the timer starts 4 frames early, and loot ends not offset
+                ilTimer.timer = _globalTimer - ilTimerStart;
                 FramesToTimer(&ilTimer);
                 LoadAscii(&ilTimer, ilAscii);
 
@@ -138,7 +138,7 @@ void ILUpdate() {
                 if (loot_vortex_timer == 0)
                 {
                     Timer ilTimer;
-                    ilTimer.timer = _globalTimer - ilTimerStart - 2;
+                    ilTimer.timer = _globalTimer - ilTimerStart - 2; // It is offsynced by 4 frames, but we are only subtracting 2, because we are accounting for the other 2 to make it display on the same frame
                     FramesToTimer(&ilTimer);
                     LoadAscii(&ilTimer, ilAscii);
 

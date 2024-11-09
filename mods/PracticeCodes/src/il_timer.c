@@ -138,7 +138,7 @@ void ILUpdate() {
                 if (loot_vortex_timer == 0)
                 {
                     Timer ilTimer;
-                    ilTimer.timer = _globalTimer - ilTimerStart - 2; // It is offsynced by 4 frames, but we are only subtracting 2, because we are accounting for the other 2 to make it display on the same frame
+                    ilTimer.timer = _globalTimer - ilTimerStart;
                     FramesToTimer(&ilTimer);
                     LoadAscii(&ilTimer, ilAscii);
 
@@ -148,7 +148,7 @@ void ILUpdate() {
 
                     il_timer_state = IL_DISPLAYING;
 
-                    loot_vortex_timer = 0x3A;
+                    loot_vortex_timer = 0x3A;  // It is offsynced by 4 frames, but we using a timer starting at 0x3A instead of 0x3E to account for that as well as make the end time show up on the same frame as the IL ends
                 }
             }
 
@@ -163,7 +163,7 @@ void ILUpdate() {
                 if (gnasty_chase_state == 0x4 && _effect_ScreenLetterBox == 0xA) // The letter box appears on 0xE, but we are triggering it 2 frames early to appear on the right frame
                 {
                     Timer ilTimer;
-                    ilTimer.timer = _globalTimer - ilTimerStart - 2; // it is offsynced by 4 frames, but we are only subtracting 2, because we are accounting for the other 2 to make it display on the same frame
+                    ilTimer.timer = _globalTimer - ilTimerStart;
                     FramesToTimer(&ilTimer);
                     LoadAscii(&ilTimer, ilAscii);
 

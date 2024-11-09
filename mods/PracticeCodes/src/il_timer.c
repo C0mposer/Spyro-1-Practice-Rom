@@ -151,10 +151,28 @@ void ILUpdate() {
                     loot_vortex_timer = 0x3E;
                 }
             }
-            // Reset if exit level/loop level
+
+            // Reset loot vortex timer if exit level/loop level
             if (_gameState == GAMESTATE_LOADING)
             {
                 loot_vortex_timer = 0x3E;
+            }
+
+            if (_levelID == GNASTY_GNORC_ID)
+            {
+                if (_effect_ScreenLetterBox == 0xA) // The letter box appears on 0xE, but we are triggering it 2 frames early to appear on the right frame
+                {
+                    Timer ilTimer;
+                    ilTimer.timer = _globalTimer - ilTimerStart - 2; // it is offsynced by 4 frames, but we are only subtracting 2, because we are accounting for the other 2 to make it display on the same frame
+                    FramesToTimer(&ilTimer);
+                    LoadAscii(&ilTimer, ilAscii);
+
+                    ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
+                    FramesToTimer(&ilTimer);
+                    LoadAscii(&ilTimer, loadlessAscii);
+
+                    il_timer_state = IL_DISPLAYING;
+                }
             }
         }
 

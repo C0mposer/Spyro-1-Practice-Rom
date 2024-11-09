@@ -76,7 +76,7 @@ extern int savestate_selection;
 extern int sparx_color_index;
 extern bool should_write_sparx_bmp;
 
-
+extern int gnasty_chase_state;
 
 //! Every Frame Update
 void ILUpdate() {
@@ -116,7 +116,7 @@ void ILUpdate() {
                 timer_text_info.size = DEFAULT_SIZE;
                 DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-            if (_gameState == GAMESTATE_LOADING && _levelID != GNASTYS_LOOT_ID)
+            if (_gameState == GAMESTATE_LOADING && _levelGemsCollectedArray[34] < 1900) // Checking for if you have nowhere near the amount of loot gems to be reasonably doing a 120 IL
             {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
@@ -129,7 +129,7 @@ void ILUpdate() {
 
                 il_timer_state = IL_DISPLAYING;
             }
-            if (_levelID == GNASTYS_LOOT_ID)
+            if (_levelID == GNASTYS_LOOT_ID && _levelGemsCollectedArray[34] > 1900)
             {
                 if (_spyro.state == WHIRLWIND)
                 {
@@ -160,7 +160,7 @@ void ILUpdate() {
 
             if (_levelID == GNASTY_GNORC_ID)
             {
-                if (_effect_ScreenLetterBox == 0xA) // The letter box appears on 0xE, but we are triggering it 2 frames early to appear on the right frame
+                if (gnasty_chase_state == 0x4 && _effect_ScreenLetterBox == 0xA) // The letter box appears on 0xE, but we are triggering it 2 frames early to appear on the right frame
                 {
                     Timer ilTimer;
                     ilTimer.timer = _globalTimer - ilTimerStart - 2; // it is offsynced by 4 frames, but we are only subtracting 2, because we are accounting for the other 2 to make it display on the same frame

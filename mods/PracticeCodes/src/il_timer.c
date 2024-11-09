@@ -160,7 +160,7 @@ void ILUpdate() {
 
             if (_levelID == GNASTY_GNORC_ID)
             {
-                if (gnasty_chase_state == 0x4 && _effect_ScreenLetterBox == 0xA) // The letter box appears on 0xE, but we are triggering it 2 frames early to appear on the right frame
+                if (gnasty_chase_state == 0x4 && _effect_ScreenLetterBox == 0x8) // The letter box appears on 0xE, but we are triggering it 2 frames early to appear on the right frame
                 {
                     Timer ilTimer;
                     ilTimer.timer = _globalTimer - ilTimerStart;

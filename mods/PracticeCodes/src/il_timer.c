@@ -57,6 +57,10 @@ int framesSpentLoading = 0;
 char ilAscii[10];
 char loadlessAscii[10];
 
+int il_timer_offset[3] = { 0 };
+
+int loot_vortex_timer = 0x3E; // 3E instead of 3C which is what the game checks, because our timer starts counting down 1 frame early
+
 extern ILMenu il_menu;
 
 extern const short flyInArray[36];
@@ -72,7 +76,6 @@ extern int savestate_selection;
 extern int sparx_color_index;
 extern bool should_write_sparx_bmp;
 
-int il_timer_offset[3] = { 0 };
 
 
 //! Every Frame Update
@@ -89,17 +92,20 @@ void ILUpdate() {
             ilTimerStart = _globalTimer;
             framesSpentLoading = 0;
         }
-        else if (il_timer_state == IL_STARTED) {
+        else if (il_timer_state == IL_STARTED)
+        {
             if (_dragonState == 2 || _dragonState == 6) { //State 2 is after spyro has finished walking but the cd load is still going and state 6 is for the cd load after the dragon cut scene
                 framesSpentLoading++;
             }
             // if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] && _gameState == GAMESTATE_GAMEPLAY) { // put into main_updates, to fix it not saving during auto dragon savestate
             //     il_timer_offset[savestate_selection] = _globalTimer - ilTimerStart;
             // }
-            if (_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && _gameState == GAMESTATE_GAMEPLAY) {
+            if (_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && _gameState == GAMESTATE_GAMEPLAY)
+            {
                 ilTimerStart = _globalTimer - il_timer_offset[savestate_selection];
             }
-            if (il_menu.il_timer_display_mode == IL_TIMER_ALWAYS && _gameState == GAMESTATE_GAMEPLAY) {
+            if (il_menu.il_timer_display_mode == IL_TIMER_ALWAYS && _gameState == GAMESTATE_GAMEPLAY)
+            {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
                 FramesToTimer(&ilTimer);
@@ -110,9 +116,10 @@ void ILUpdate() {
                 timer_text_info.size = DEFAULT_SIZE;
                 DrawTextCapitals(ilAscii, &timer_text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-            if (_gameState == GAMESTATE_LOADING) {
+            if (_gameState == GAMESTATE_LOADING && _levelID != GNASTYS_LOOT_ID)
+            {
                 Timer ilTimer;
-                ilTimer.timer = _globalTimer - ilTimerStart;
+                ilTimer.timer = _globalTimer - ilTimerStart; // Because the timer starts 4 frames early, and loot ends not offset
                 FramesToTimer(&ilTimer);
                 LoadAscii(&ilTimer, ilAscii);
 
@@ -121,6 +128,33 @@ void ILUpdate() {
                 LoadAscii(&ilTimer, loadlessAscii);
 
                 il_timer_state = IL_DISPLAYING;
+            }
+            if (_levelID == GNASTYS_LOOT_ID)
+            {
+                if (_spyro.state == WHIRLWIND)
+                {
+                    loot_vortex_timer -= 2;
+                }
+                if (loot_vortex_timer == 0)
+                {
+                    Timer ilTimer;
+                    ilTimer.timer = _globalTimer - ilTimerStart - 4;
+                    FramesToTimer(&ilTimer);
+                    LoadAscii(&ilTimer, ilAscii);
+
+                    ilTimer.timer = ilTimer.timer - (2 * framesSpentLoading);
+                    FramesToTimer(&ilTimer);
+                    LoadAscii(&ilTimer, loadlessAscii);
+
+                    il_timer_state = IL_DISPLAYING;
+
+                    loot_vortex_timer = 0x3E;
+                }
+            }
+            // Reset if exit level/loop level
+            if (_gameState == GAMESTATE_LOADING)
+            {
+                loot_vortex_timer = 0x3E;
             }
         }
 
@@ -189,7 +223,7 @@ void ILUpdate() {
             DrawTextCapitals(ilAscii, &il_text_info, 0xF, MOBY_COLOR_PURPLE);
             DrawTextCapitals(loadlessAscii, &il2_text_info, 0xB, MOBY_COLOR_PURPLE);
 
-            if (_levelLoadState >= 0xB)
+            if (_levelLoadState >= 0xB && _levelLoadState != 0xFFFFFFFF)
             {
                 il_timer_state = IL_STOPPED;
 

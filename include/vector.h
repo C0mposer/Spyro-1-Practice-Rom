@@ -93,4 +93,6 @@ typedef struct u8Angle
     char roll;
 }u8Angle;
 
+void Vec3Copy(int* dst, int src);
+
 #endif /* VECTOR_H */

@@ -232,6 +232,8 @@ void InstaLoadUpdate() {
 			_cameraLockingRelated = 0x80000012;					// 0x80000012 is not an address it is just the value it is expecting for level loads
 			_musicState = 0x40;
 
+			memset(&_flightLevelTimes, 0, sizeof(int) * 5);
+
 			// Fixes
 			*(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?
 

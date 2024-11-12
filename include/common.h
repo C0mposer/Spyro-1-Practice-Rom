@@ -9,7 +9,7 @@
 //Constants
 //~~~~~~~~~
 
-#define MOD_VERSION_STRING "V3.3"
+#define MOD_VERSION_STRING "V4.0"
 
 //! Build Versions
 #define REDUX 0
@@ -570,6 +570,8 @@ extern int _whichCutsceneToPlay;
 extern int _electricPadActivations[8];
 
 extern int _cameraTurnDirection;
+
+extern int _flightLevelTimes[5];
 
 
 #endif /* COMMON_H */

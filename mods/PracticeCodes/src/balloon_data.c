@@ -171,6 +171,8 @@ BalloonLevelSelectData balloon_level_select_data[6] =
 void LoadBalloonData(int i)
 {
     _balloon_ptr = 0x80071e9c;
+
+    // Copy balloon moby to global balloon data depending on HW
     if (i == 0)
     {
         memcpy(0x80071e9c, 0x8016E3B8, 0x58);

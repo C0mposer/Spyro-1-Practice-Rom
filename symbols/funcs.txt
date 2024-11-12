@@ -78,3 +78,5 @@ PrepareInventoryGamestate = 0x8002c714;
 maybe_SFXProcessing = 0x8005637c;
 
 Vec2OctagonalDistance = 0x80017990;
+
+Vec3Copy = 0x80017700;

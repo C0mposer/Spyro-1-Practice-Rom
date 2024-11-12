@@ -64,6 +64,8 @@ void MainFunc()
             //CalculatePlaytimeUpdate();
             //ShempSkipFrameDataUpdate(); // Work on later
 
+            //MemoryWatchTest();
+
             #if BUILD == PS2_DECKARD || BUILD == REDUX
             LoadstateFixesUpdate();
             #endif

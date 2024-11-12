@@ -2,6 +2,8 @@
 #include <custom_text.h>
 #include <sound.h>
 
+bool should_savestate_on_game_start = true; // Initial savestate for nestor skip
+
 bool should_savestate_after_dragon_or_load = false;
 
 int savestated_level_ids[3] = { 0 }; // For keeping savestates upon loop
@@ -40,7 +42,7 @@ void SaveStateUpdate()
     {
         if (savestate_button_index < 2)
         {
-            if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load)
+            if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load || should_savestate_on_game_start)
             {
                 #if BUILD == 2 || BUILD == 0
                 FullSaveState();
@@ -51,6 +53,7 @@ void SaveStateUpdate()
                 il_timer_offset[savestate_selection] = _globalTimer - ilTimerStart; // Save IL timer offset when savestate happens. In here instead of il_timer.c so it works on auto savestate after dragon
 
                 should_savestate_after_dragon_or_load = false;
+                should_savestate_on_game_start = false;
 
             }
         }
@@ -106,7 +109,7 @@ void SaveStateUpdate()
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;
             }
-    }
+        }
         #endif
 
         #if BUILD == 2 || BUILD == 0  // Change Savestate Slots
@@ -170,15 +173,21 @@ void SaveStateUpdate()
 
         #endif
 
-}
+    }
 
-// Prepare savestate after dragon or portal
+    // Prepare savestate after dragon or portal
     if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
         {
             should_savestate_after_dragon_or_load = true;
         }
+    }
+
+    // Allow for initial savestate whenever going back to adventure continues
+    if (_gameState == GAMESTATE_TITLE_SCREEN)
+    {
+        should_savestate_on_game_start = true;
     }
 
     // Prepare savestate after turning on disable portal

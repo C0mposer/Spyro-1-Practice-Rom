@@ -75,6 +75,7 @@ _levelGemsCollectedArray = 0x80077420;
 _collectablesStateArray = 0x80077900;
 
 _ptr_HudMobyData = 0x80075710;
+_ptr_hudMobys = 0x80075710;
 
 _ptr_levelMobys = 0x80075828;
 
@@ -216,3 +217,5 @@ _balloon_unk3 = 0x80077844;
 _balloon_unk4 = 0x80077820;
 _balloon_unk5 = 0x80077824;
 _balloon_unk6 = 0x80077828;
+
+_flightLevelTimes = 0x80078618;

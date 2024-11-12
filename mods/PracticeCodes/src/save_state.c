@@ -95,6 +95,9 @@ void FullSaveState(void)
     memcpy((byte*)local_mem_region, &_effect_ScreenLetterBox, 0x4);
     local_mem_region += 0x4;
 
+    memcpy((byte*)local_mem_region, &_effect_ScreenFadeIn, 0x4);
+    local_mem_region += 0x4;
+
     memcpy((byte*)local_mem_region, &_spyroInvisible, 0x4);
     local_mem_region += 0x4;
 
@@ -185,11 +188,11 @@ void FullLoadState(void)
 
     byte* local_mem_region = (byte*)mem_region; // Local region for adding to
 
-    if (*local_mem_region != NULL)
+    if ((int*)local_mem_region != NULL)
     {
         if (savestated_level_ids[savestate_selection] == _levelID)
         {
-          // Reload all level mobys, dynamic mobys, and moby data from the free DECKARD IOP area
+                  // Reload all level mobys, dynamic mobys, and moby data from the free DECKARD IOP area
             memcpy((byte*)_ptr_levelMobys, local_mem_region, 0x10000);
             local_mem_region += 0x10000;
 
@@ -255,6 +258,9 @@ void FullLoadState(void)
             local_mem_region += 0x4;
 
             memcpy(&_effect_ScreenLetterBox, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            memcpy(&_effect_ScreenFadeIn, (byte*)local_mem_region, 0x4);
             local_mem_region += 0x4;
 
             memcpy(&_spyroInvisible, (byte*)local_mem_region, 0x4);

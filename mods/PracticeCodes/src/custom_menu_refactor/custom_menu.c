@@ -139,7 +139,7 @@ int current_menu = MAIN_MENU;
 
 int savestate_selection = 0;
 
-bool isHeld = false;
+bool isMenuButtonHeld = false;
 
 const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, START_BUTTON };
 const short RESET_TIMER_BUTTONS[2] = { R3_BUTTON, SELECT_BUTTON };
@@ -265,12 +265,12 @@ void CheckReleasedButtons()
     // Has Released Button
     if (!(_currentButton & L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON))
     {
-        isHeld = FALSE;
+        isMenuButtonHeld = FALSE;
     }
     // Has Released Button
     if (!(_currentButton & L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON))
     {
-        isHeld = FALSE;
+        isMenuButtonHeld = FALSE;
     }
 }
 

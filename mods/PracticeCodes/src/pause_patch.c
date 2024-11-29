@@ -5,9 +5,8 @@
 extern PlaytimeTimer playtime_timer;
 extern char global_playtime_string[15];
 
-//char global_playtime_string[15] = { 0 };
-// Display version number in pause menu
-void PausePatch(void)
+// Display version number in pause menu by hooking into pause function
+void PauseHook(void)
 {
     if (_gameState == GAMESTATE_PAUSED)
     {

@@ -34,7 +34,7 @@ extern int current_menu;
 
 extern int savestate_selection;
 
-extern bool isHeld;
+extern bool isMenuButtonHeld;
 
 extern const short STOP_TIMER_BUTTONS[1];
 extern const short RESET_TIMER_BUTTONS[2];

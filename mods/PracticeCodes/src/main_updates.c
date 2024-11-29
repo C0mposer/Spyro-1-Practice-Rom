@@ -121,11 +121,12 @@ void MainUpdate()
             _keyState = 1;
         }
 
-        MoonjumpUpdate();
+        MoonjumpChecks();
     }
 }
 
-void MoonjumpUpdate()
+
+void MoonjumpChecks()
 {
     if (_currentButton == L1_BUTTON + L2_BUTTON + R1_BUTTON + R2_BUTTON + X_BUTTON)
     {

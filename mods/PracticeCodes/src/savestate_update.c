@@ -3,16 +3,15 @@
 #include <sound.h>
 
 bool should_savestate_on_game_start = true; // Initial savestate for nestor skip
-
 bool should_savestate_after_dragon_or_load = false;
 
 int savestated_level_ids[3] = { 0 }; // For keeping savestates upon loop
 
 int savestateSwitchedTimer = 0;
 
-bool hasResetSavestate = false;
-bool switch_button_held;
+bool switch_savestate_button_held;
 
+//From other files
 extern int savestate_selection;
 
 extern int savestate_button_index;
@@ -109,7 +108,7 @@ void SaveStateUpdate()
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;
             }
-        }
+    }
         #endif
 
         #if BUILD == 2 || BUILD == 0  // Change Savestate Slots
@@ -134,21 +133,21 @@ void SaveStateUpdate()
         }
         else if (switch_state_button_index == 1)
         {
-            if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_button_held)
+            if (_currentButton == L1_BUTTON + R1_BUTTON + LEFT_BUTTON && savestate_selection > 0 && !switch_savestate_button_held)
             {
                 savestate_selection--;
                 PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
                 savestateSwitchedTimer = 1;
 
-                switch_button_held = true;
+                switch_savestate_button_held = true;
             }
-            if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_button_held)
+            if (_currentButton == L1_BUTTON + R1_BUTTON + RIGHT_BUTTON && savestate_selection < 2 && !switch_savestate_button_held)
             {
                 savestate_selection++;
                 PlaySoundEffect(SOUND_EFFECT_PAUSE_MENU_CHANGE_SELECTION_DING, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
                 savestateSwitchedTimer = 1;
 
-                switch_button_held = true;
+                switch_savestate_button_held = true;
             }
         }
         // Draw Savestate Slot Text
@@ -167,15 +166,15 @@ void SaveStateUpdate()
         {
             if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
             {
-                switch_button_held = false;
+                switch_savestate_button_held = false;
             }
         }
 
         #endif
 
-    }
+}
 
-    // Prepare savestate after dragon or portal
+// Prepare savestate after dragon or portal
     if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])

@@ -15,18 +15,12 @@ TimerMenu timer_menu = { 0 };
 SavestateMenu savestate_menu = { 0 };
 MiscMenu misc_menu = { 0 };
 
-extern bool show_sparx_range_mode; // from custom_menu_2.c
-
-
-// Globals
 bool has_toggled_menu = FALSE;
-
 MenuState menu_state = MENU_HIDDEN;
-int current_menu = MAIN_MENU;
+CurrentMenu current_menu = MAIN_MENU;
+SuperflyMode custom_superfly_state = false;
 
-int savestate_selection = 0;
-
-bool isHeld = false;
+bool isMenuButtonHeld = false;
 
 const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, SELECT_BUTTON };
 const short RESET_TIMER_BUTTONS[2] = { R3_BUTTON, SELECT_BUTTON };
@@ -36,6 +30,7 @@ const short LOADSTATE_BUTTONS[3] = { R3_BUTTON, SELECT_BUTTON, (L2_BUTTON + R2_B
 
 int savestate_button_index;
 int loadstate_button_index;
+int savestate_selection = 0;
 
 #if BUILD == 2 || BUILD == 0
 int switch_state_button_index;
@@ -47,6 +42,9 @@ int oldCdLocation[2];   // Array of 2 ints because the seek location takes up 8 
 
 
 // Externed from elsewhere
+extern bool show_sparx_range_mode; // From custom_menu_2.c
+
+// From il_timer.c
 typedef enum ILTimerState
 {
     IL_FLYING_IN,
@@ -57,8 +55,6 @@ typedef enum ILTimerState
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
 
-
-SuperflyMode custom_superfly_state = false;
 
 //! Every Frame Update
 void CustomMenuUpdate(void)
@@ -722,7 +718,7 @@ void CustomMenuUpdate(void)
             else
             {
                 DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+        }
             #endif
 
             // Fill text with defaults if NULL
@@ -741,7 +737,7 @@ void CustomMenuUpdate(void)
                 savestate_menu.savestate_button_text = "SAVE BUTTON L3";
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
-            }
+    }
             #endif
 
                         // Change Selection
@@ -762,7 +758,7 @@ void CustomMenuUpdate(void)
             else if (_currentButtonOneFrame == UP_BUTTON)
             {
                 savestate_menu.selection = (savestate_menu.selection + 1) % 3 + 1;  // +1 outside the mod operator to avoid it ever being 0 and +1 inside to make it effectively +2 overal to make it the same as -1
-            }
+}
             #endif
 
                         // Play Sound Effect
@@ -889,12 +885,12 @@ void CustomMenuUpdate(void)
     // Has Released Button
     if (!(_currentButton & L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON))
     {
-        isHeld = FALSE;
+        isMenuButtonHeld = FALSE;
     }
     // Has Released Button
     if (!(_currentButton & L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON))
     {
-        isHeld = FALSE;
+        isMenuButtonHeld = FALSE;
     }
 
     //! Checks

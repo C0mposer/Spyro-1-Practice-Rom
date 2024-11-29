@@ -49,7 +49,7 @@ TimerState timerState = TIMER_RUNNING;
 Timer mainTimer;
 int mainTimerAtReset;
 char mainTimerAscii[10];
-extern bool isHeld;
+extern bool isMenuButtonHeld;
 
 extern int savestate_button_index;
 extern int loadstate_button_index;
@@ -94,11 +94,11 @@ void TimerUpdate() {
             mainTimerAtReset = _globalTimer;
             timerState = TIMER_RUNNING;
         }
-        if (_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isHeld && timer_menu.reset_timer_mode == 0)
+        if (_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON && !isMenuButtonHeld && timer_menu.reset_timer_mode == 0)
         {
             mainTimerAtReset = _globalTimer;  //Resets timer to 0 by syncing up to the global timer
             timerState = TIMER_RUNNING;
-            isHeld = true;
+            isMenuButtonHeld = true;
         }
         // If you pause exited a level, put timer back in running state to not show it after the exit/loop
         if (_gameState == GAMESTATE_LOADING)

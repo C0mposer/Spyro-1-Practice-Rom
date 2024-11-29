@@ -3,7 +3,7 @@
 
 void MainUpdate(void);
 
-void MoonjumpUpdate();
+void MoonjumpChecks();
 
 void SaveStateUpdate();
 

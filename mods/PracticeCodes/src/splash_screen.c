@@ -9,7 +9,7 @@ bool has_loaded_splash_2 = false;
 
 int* test = 0;
 
-void SplashScreen1(void)
+void SplashScreen1Hook(void)
 {
     if (!has_loaded_splash_1)
     {
@@ -25,7 +25,7 @@ void SplashScreen1(void)
     return;
 }
 
-void SplashScreen2(void)
+void SplashScreen2Hook(void)
 {
     if (!has_loaded_splash_2)
     {

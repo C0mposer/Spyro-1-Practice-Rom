@@ -1,3 +1,3 @@
 .set noreorder
-jal SplashScreen1
+jal SplashScreen1Hook
 nop

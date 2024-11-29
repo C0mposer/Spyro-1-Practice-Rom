@@ -1,2 +1,2 @@
 .set noreorder
-jal PausePatch
+jal PauseHook

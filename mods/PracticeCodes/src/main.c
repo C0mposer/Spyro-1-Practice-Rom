@@ -20,7 +20,7 @@ int loaded_timer = 0;
 //*
 //* ~ MAIN EVERY FRAME HOOK ~
 //*
-void MainFunc()
+void MainHook()
 {
     if (!hasLoadedCDCode)
     {
@@ -46,9 +46,6 @@ void MainFunc()
         {
             LevelSelectUpdate();
             InstaLoadUpdate();
-        }
-        //! Other functions to run every frame at seperate memory locations (See buildlist.txt)
-        {
             TimerUpdate();
             ILUpdate();
             SaveStateUpdate();
@@ -61,16 +58,16 @@ void MainFunc()
             CheckMiscTimerUpdate();
             TrackConsistencyUpdate();
             CosmeticsUpdate();
-            //CalculatePlaytimeUpdate();
-            //ShempSkipFrameDataUpdate(); // Work on later
-
-            //MemoryWatchTest();
+            MainUpdate();
 
             #if BUILD == PS2_DECKARD || BUILD == REDUX
             LoadstateFixesUpdate();
             #endif
-        }
 
-        MainUpdate();
+            //! WIP
+            //ShempSkipFrameDataUpdate(); // Work on later
+            //MemoryWatchTest();
+
+        }
     }
 }

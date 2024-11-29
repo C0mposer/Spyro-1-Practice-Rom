@@ -86,9 +86,6 @@ void FullSaveState(void)
     memcpy((byte*)local_mem_region, &_cameraStart, 0xFF);
     local_mem_region += 0xFF;
 
-    memcpy((byte*)local_mem_region, &_keyState, 0x4);
-    local_mem_region += 0x4;
-
     memcpy((byte*)local_mem_region, &_isInInGameCutscene, 0x4);
     local_mem_region += 0x4;
 
@@ -105,6 +102,12 @@ void FullSaveState(void)
     memcpy((byte*)local_mem_region, 0x80075668, 0x4);
     local_mem_region += 0x4;
     memcpy((byte*)local_mem_region, 0x80075724, 0x4);
+    local_mem_region += 0x4;
+
+    // Key Data
+    memcpy((byte*)local_mem_region, &_keyState, 0x4);
+    local_mem_region += 0x4;
+    memcpy((byte*)local_mem_region, &_ptr_keyChestHostGem, 0x4);
     local_mem_region += 0x4;
 
     //Electric Pads in BM/Terrace
@@ -251,9 +254,6 @@ void FullLoadState(void)
             memcpy(&_cameraStart, local_mem_region, 0xFF);
             local_mem_region += 0xFF;
 
-            memcpy(&_keyState, local_mem_region, 0x4);
-            local_mem_region += 0x4;
-
             memcpy(&_isInInGameCutscene, (byte*)local_mem_region, 0x4);
             local_mem_region += 0x4;
 
@@ -272,7 +272,13 @@ void FullLoadState(void)
             memcpy(0x80075724, (byte*)local_mem_region, 0x4);
             local_mem_region += 0x4;
 
-            //Electric Pads in BM/Terrace
+            // Key Data
+            memcpy(&_keyState, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+            memcpy(&_ptr_keyChestHostGem, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+                    //Electric Pads in BM/Terrace
             memcpy(_electricPadActivations, (byte*)local_mem_region, (sizeof(_electricPadActivations)));
             local_mem_region += sizeof(_electricPadActivations);
 

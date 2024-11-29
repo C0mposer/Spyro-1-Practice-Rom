@@ -9,136 +9,14 @@
 #include <moby.h>
 #include <cd.h>
 
-typedef enum MenuState
-{
-    MENU_HIDDEN,
-    MENU_DISPLAYING
-
-} MenuState;
-
-typedef enum TimerDisplayMode
-{
-    TIMER_ONLY_PAUSE,
-    TIMER_ALWAYS
-
-} TimerDisplayMode;
-
-typedef enum ILTimerDisplayMode
-{
-    IL_TIMER_AT_END,
-    IL_TIMER_ALWAYS
-
-} ILTimerDisplayMode;
-
-typedef enum SparxMode
-{
-    PERMA_SPARX_OFF,
-    PERMA_SPARX_ON,
-    SPARXLESS
-
-} SparxMode;
-
-typedef struct Menu
-{
-    int selection;
-    char* il_menu_text;
-    char* timer_menu_text;
-    char* savestate_menu_text;
-    char* misc_menu_text;
-    char* cosmetic_menu_text;
-} Menu;
 Menu custom_menu = { 0 };
-
-typedef struct ILMenu
-{
-    int selection;
-    bool il_state;
-    char* il_mode_text;
-    ILTimerDisplayMode il_timer_display_mode;
-    char* il_timer_display_mode_text;
-    bool display_on_dragon;
-    char* display_on_dragon_text;
-    bool display_on_land;
-    char* display_on_land_text;
-    bool dont_loop_level;
-    char* loop_level_text;
-
-} ILMenu;
 ILMenu il_menu = { 0 };
-typedef struct TimerMenu
-{
-    int selection;
-    bool timer_state;
-    char* timer_state_text;
-    TimerDisplayMode timer_display_mode;
-    char* timer_display_mode_text;
-    short stop_timer_button_index;
-    char* stop_timer_button_text;
-    short reset_timer_mode;
-    char* reset_timer_button_text;
-
-} TimerMenu;
 TimerMenu timer_menu = { 0 };
-
-
-#if BUILD == 2 || BUILD == 0
-typedef struct SavestateMenu
-{
-    int selection;
-    char* stateslot_text;
-    char* savestate_button_text;
-    char* loadstate_button_text;
-    char* switch_state_button_text;
-
-} SavestateMenu;
 SavestateMenu savestate_menu = { 0 };
-#elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
-typedef struct SavestateMenu
-{
-    int selection;
-    char* stateslot_text;
-    char* savestate_button_text;
-    char* loadstate_button_text;
-    char* respawn_on_loadstate_text;
-
-} SavestateMenu;
-SavestateMenu savestate_menu = { 0 };
-#endif
-
-
-typedef struct MiscMenu
-{
-    int selection;
-    SparxMode sparx_mode;
-    char* sparx_mode_text;
-    bool show_dragon_touch;
-    char* show_dragon_touch_text;
-    char* disable_portal_entry_text;
-    bool super_mode;
-    char* super_text;
-    char* consitency_tracker_text;
-    char* show_sparx_range_text;
-} MiscMenu;
 MiscMenu misc_menu = { 0 };
-extern bool show_sparx_range_mode;
 
-typedef enum CurrentMenu
-{
-    MAIN_MENU,
-    IL_MENU,
-    TIMER_MENU,
-    SAVESTATE_MENU,
-    MISC_MENU,
-    COSMETIC_MENU
-} CurrentMenu;
+extern bool show_sparx_range_mode; // from custom_menu_2.c
 
-typedef struct FPS_t
-{
-    int compareTimer;
-    int difference;
-    int fps;
-    int difference_from_baseline;
-} FPS_t;
 
 // Globals
 bool has_toggled_menu = FALSE;
@@ -179,14 +57,8 @@ typedef enum ILTimerState
 extern ILTimerState il_timer_state;
 extern int mainTimerAtReset;
 
-typedef enum SUPERFLY_MODE
-{
-    SUPERFLY_NOT_SET,
-    SUPERFLY_TURNED_ON,
-    SUPERFLY_TURNED_OFF
-};
 
-bool custom_superfly_state = false;
+SuperflyMode custom_superfly_state = false;
 
 //! Every Frame Update
 void CustomMenuUpdate(void)
@@ -474,7 +346,7 @@ void CustomMenuUpdate(void)
                 il_menu.il_mode_text = "IL MODE OFF";
                 il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY AT END";
                 il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
-                il_menu.display_on_land_text = "DISPLAY LANDING OFF";
+                il_menu.display_on_land_text = "DISPLAY MISC OFF";
                 il_menu.loop_level_text = "LOOP LEVEL ON";
             }
 
@@ -562,11 +434,11 @@ void CustomMenuUpdate(void)
 
                 if (il_menu.display_on_land == FALSE)
                 {
-                    il_menu.display_on_land_text = "DISPLAY LANDING OFF";
+                    il_menu.display_on_land_text = "DISPLAY MISC OFF";
                 }
                 else
                 {
-                    il_menu.display_on_land_text = "DISPLAY LANDING ON";
+                    il_menu.display_on_land_text = "DISPLAY MISC ON";
                 }
             }
             else if (il_menu.selection == 4)
@@ -1174,4 +1046,37 @@ void TurnOffDefaultSettings()
     misc_menu.show_dragon_touch = false;
 
     //timer_menu.timer_state = false;
+}
+
+// Loop Level selection in HW fly in
+void UpdateLoopLevel()
+{
+    if (_currentButtonOneFrame == RIGHT_BUTTON)
+    {
+        il_menu.dont_loop_level = false;
+        //PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+    }
+    if (_currentButtonOneFrame == LEFT_BUTTON)
+    {
+        il_menu.dont_loop_level = true;
+        //PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+    }
+}
+
+void LoopLevelChoiceFlyIn(void)
+{
+    UpdateLoopLevel();
+
+    CapitalTextInfo loop_level_text_info = { 0 };
+    loop_level_text_info.x = SCREEN_LEFT_EDGE + 10;
+    loop_level_text_info.y = SCREEN_BOTTOM_EDGE - 6;
+    loop_level_text_info.size = DEFAULT_SIZE + 1500;
+
+    if (il_menu.dont_loop_level == false)
+        DrawTextCapitals("LOOP LEVEL ON", &loop_level_text_info, DEFAULT_SPACING - 5, MOBY_COLOR_BLUE);
+    if (il_menu.dont_loop_level == true)
+        DrawTextCapitals("LOOP LEVEL OFF", &loop_level_text_info, DEFAULT_SPACING - 5, MOBY_COLOR_BLUE);
+
+    // Render Text
+    RenderShadedMobyQueue();
 }

@@ -245,7 +245,7 @@ void CustomMenuUpdate(void)
     // Has Released Buttons
     CheckReleasedButtons();
 
-    bool should_render_shaded_mobys = ((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || timerState == TIMER_DISPLAYING || menu_state == MENU_DISPLAYING || ShouldDisplayLandingTime()) && _gameState == GAMESTATE_GAMEPLAY)
+    bool should_render_shaded_mobys = ((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || timerState == TIMER_DISPLAYING || menu_state == MENU_DISPLAYING || ShouldDisplayMiscTime()) && _gameState == GAMESTATE_GAMEPLAY)
         || (il_timer_state == IL_DISPLAYING && _gameState == GAMESTATE_LOADING)
         || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE);
 

@@ -262,6 +262,8 @@ void ResetLevelCollectables()
         _levelGemsCollectedArray[i] = 0;
     }
 
+    memset(&_flightLevelTimes, 0, sizeof(int) * 5);
+
     // Key Glitch Fix
     _keyState = 0;
     _ptr_keyChestHostGem = NULL;

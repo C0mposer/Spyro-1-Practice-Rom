@@ -149,6 +149,12 @@ void BalloonUpdate()
 {
 	maybe_SFXProcessing(); // Calling because we are hooking onto this function call in GameStateCheck.
 
+	// Display option to change loop level option when flying into HW
+	if (buttonSelection == LEVEL_SELECT_L3 && _loadingScreenTimer > 5)
+	{
+		LoopLevelChoiceFlyIn();
+	}
+
 	// Balloon
 	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_GAMEPLAY)
 	{
@@ -231,8 +237,6 @@ void InstaLoadUpdate() {
 			_flyInAnimation = flyInArray[_levelIDIndex];
 			_cameraLockingRelated = 0x80000012;					// 0x80000012 is not an address it is just the value it is expecting for level loads
 			_musicState = 0x40;
-
-			memset(&_flightLevelTimes, 0, sizeof(int) * 5);
 
 			// Fixes
 			*(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?

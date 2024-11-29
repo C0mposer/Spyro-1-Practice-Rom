@@ -1,35 +1,74 @@
 #include <common.h>
 #include <spyro.h>
 
-int landing_display_timer = 0;
+int misc_display_timer = 0;
+bool has_entered_new_state = false;
+bool has_bonked = false;
+bool has_flamed = false;
+
+bool IsInMiscState(void)
+{
+    return _spyro.isGrounded == true || _spyro.state == BONK || _spyro.state == WHIRLWIND;
+}
+bool IsFlaming(void)
+{
+    return (*(byte*)0x800786E8) > 0 && (*(byte*)0x800786E8) < 4; // Not actually has flamed bool, but instead the flame anim timer, so making a func instead of a var
+}
 
 //! Every Frame Update
-void CheckLandingUpdate(void)
+void CheckMiscTimerUpdate(void)
 {
-    // Should cound up
-    if (landing_display_timer > 0)
+    // Should count up
+    if (misc_display_timer > 0)
     {
-        
-        landing_display_timer++;
+
+        misc_display_timer++;
     }
 
     // Should start counting
-    if (_spyro.isGrounded == true && landing_display_timer == 0)
+    if (IsInMiscState() == true && (misc_display_timer == 0 || has_entered_new_state == false))
     {
-        landing_display_timer = 1;
+        misc_display_timer = 1;
+        has_entered_new_state = true;
     }
-    
-    // Should reset
-    else if (_spyro.isGrounded == false && landing_display_timer > 30)
+    else if (IsInMiscState() == false && has_entered_new_state == true)
     {
-        landing_display_timer = 0;
+        has_entered_new_state = false;
+    }
+
+    // Should start counting bonk
+    if (_spyro.state == BONK && (misc_display_timer == 0 || has_bonked == false))
+    {
+        misc_display_timer = 1;
+        has_bonked = true;
+    }
+    else if (_spyro.state != BONK && has_bonked == true)
+    {
+        has_bonked = false;
+    }
+
+    // Should start counting flame
+    if (IsFlaming() && (misc_display_timer == 0 || has_flamed == false))
+    {
+        misc_display_timer = 1;
+        has_flamed = true;
+    }
+    else if (_spyro.state != BONK && has_flamed == true)
+    {
+        has_flamed = false;
+    }
+
+    // Should reset
+    else if (IsInMiscState() == false && misc_display_timer > 30)
+    {
+        misc_display_timer = 0;
     }
 
 }
 
-bool ShouldSaveLandingTime(void)
+bool ShouldSaveMiscTime(void)
 {
-    if (landing_display_timer == 1)
+    if (misc_display_timer == 1)
     {
         return true;
     }
@@ -39,9 +78,9 @@ bool ShouldSaveLandingTime(void)
     }
 }
 
-bool ShouldDisplayLandingTime(void)
+bool ShouldDisplayMiscTime(void)
 {
-    if (landing_display_timer > 0 && landing_display_timer <= 30)
+    if (misc_display_timer > 0 && misc_display_timer <= 30)
     {
         return true;
     }

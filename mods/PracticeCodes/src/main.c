@@ -51,14 +51,14 @@ void MainFunc()
         {
             TimerUpdate();
             ILUpdate();
+            SaveStateUpdate();
             CustomMenuUpdate();
             CustomMenuUpdate2();
-            SaveStateUpdate();
             RatCodeUpdate();
             CreditsSkipUpdate();
             LootPlaneUpdate();
             MultiTapUpdate();
-            CheckLandingUpdate();
+            CheckMiscTimerUpdate();
             TrackConsistencyUpdate();
             CosmeticsUpdate();
             //CalculatePlaytimeUpdate();

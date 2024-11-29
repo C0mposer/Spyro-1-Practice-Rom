@@ -199,13 +199,13 @@ void ILUpdate() {
 
         //IL LANDING CHECKPOINT TIMES
         if (il_menu.display_on_land && il_menu.il_timer_display_mode != IL_TIMER_ALWAYS) {
-            if (ShouldSaveLandingTime()) {
+            if (ShouldSaveMiscTime()) {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
                 FramesToTimer(&ilTimer);
                 LoadAscii(&ilTimer, ilAscii);
             }
-            if (ShouldDisplayLandingTime() && _gameState == GAMESTATE_GAMEPLAY)
+            if (ShouldDisplayMiscTime() && _gameState == GAMESTATE_GAMEPLAY)
             {
                 CapitalTextInfo timer_text_info = { 0 };
                 timer_text_info.x = SCREEN_LEFT_EDGE + 0x10;

@@ -73,3 +73,93 @@ def PatchWadHeadControl():
     except ValueError as ve:
         print(f"ValueError: {ve}")
         sys.exit(1)
+
+    offset = int(0x7fa6E8)
+    replace_bytes = b'\0' * 0xD4
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    bytesHex = 0x03000a240780013cf4772aac
+    replace_bytes = bytesHex.to_bytes(12, 'big')
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    offset = int(0x1887b84)
+    replace_bytes = b'\0' * 0xD4
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    bytesHex = 0x090002240780013cf47722ac
+    replace_bytes = bytesHex.to_bytes(12, 'big')
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    offset = int(0x2730ee8)
+    replace_bytes = b'\0' * 0xEC
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    bytesHex = 0x0f0002240780013cf47722ac
+    replace_bytes = bytesHex.to_bytes(12, 'big')
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    offset = int(0x35948a0)
+    replace_bytes = b'\0' * 0xE4
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    bytesHex = 0x150002240780013cf47722ac
+    replace_bytes = bytesHex.to_bytes(12, 'big')
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    offset = int(0x43e5a74)
+    replace_bytes = b'\0' * 0xEC
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+
+    bytesHex = 0x1b0002240780013cf47722ac
+    replace_bytes = bytesHex.to_bytes(12, 'big')
+    
+    try:
+        patch_binary_file(target_file, offset, replace_bytes)
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)

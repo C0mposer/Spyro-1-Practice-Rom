@@ -158,7 +158,9 @@ _levelDragonCounts = 0x800772d8;
 _globalDragonCount = 0x80075750;
 _globalEggCount = 0x80075810;
 
-_globalFlightLevelTimer = 0x80075908;
+_flightLevelExpirationTimer = 0x80075908;
+_flightLevelTimer = 0x800758F4;
+
 _globalFlightLevelCollectedItemsArray = 0x80078630;
 
 _ptr_headControlMoby = 0x8015865C;
@@ -219,3 +221,10 @@ _balloon_unk5 = 0x80077824;
 _balloon_unk6 = 0x80077828;
 
 _flightLevelTimes = 0x80078618;
+
+_flightTargetVerticalRotation = 0x80075700;
+_flightTargetHorizontalRotation = 0x800758a0;
+_flightRoll = 0x80075960;
+
+_ptr_particleBuffer = 0x80075824;
+_ptr_nextFreeParticleSlot = 0x80075738;

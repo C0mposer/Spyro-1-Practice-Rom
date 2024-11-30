@@ -150,7 +150,7 @@ void BalloonUpdate()
 	maybe_SFXProcessing(); // Calling because we are hooking onto this function call in GameStateCheck.
 
 	// Display option to change loop level option when flying into HW
-	if (buttonSelection == LEVEL_SELECT_L3 && _loadingScreenTimer > 5)
+	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_LOADING && _loadingScreenTimer > 5)
 	{
 		LoopLevelChoiceFlyIn();
 	}
@@ -200,6 +200,11 @@ void InstaLoadUpdate() {
 	{
 		ReloadSpyroAndCamera(TRUE);
 		_spyro.health = YELLOW_SPARX;	// Setting before the save since it will load his struct
+
+		//Fix Flight Wiggle
+		_flightTargetVerticalRotation = 0;
+		_flightTargetHorizontalRotation = 0;
+		_flightRoll = 0;
 
 		//Once the level load state is C, reset the bool to allow for another instaload
 		if (_levelLoadState == 0xC)

@@ -10,17 +10,17 @@ def GetPercentage(current, previous):
     except ZeroDivisionError:
         return 0
 
-BIN_FILES = ["MainHeaderArea.bin", "StartFairyArea.bin", "FairyArea.bin", "MemoryCardArea.bin", "DebugLevelSelect.bin", "kern.bin", "kern2.bin"]
-DECKARD_BIN_FILES = ["MainHeaderArea.bin", "StartFairyArea.bin", "FairyArea.bin", "MemoryCardArea.bin", "DebugLevelSelect.bin", "kern.bin", "kern2.bin", "PS2M.bin"]
+BIN_FILES = ["MainHeaderArea.bin", "StartFairyArea.bin", "FairyArea.bin", "MemoryCardArea.bin", "PrepareFairyGamestate.bin", "kern.bin", "kern2.bin"]
+DECKARD_BIN_FILES = ["MainHeaderArea.bin", "StartFairyArea.bin", "FairyArea.bin", "MemoryCardArea.bin", "PrepareFairyGamestate.bin", "kern.bin", "kern2.bin", "PS2M.bin"]
 
 #PS1_AREAS = [0x8000A91C, 0x800314b4, 0x8001D718, 0x80066840, 0x8000C000, 0x8000EA00]
 
 
 IOP_AREAS = [0x8000B0B8, 0x800314b4, 0x8001D718, 0x80066840, 0x8002D580, 0x80008EB0, 0x80007540]
-IOP_AREA_SIZES = [0x7B4, 0x101C, 0xB30, 0x21CC, 0x28C, 0x1800, 0xF2F] #Technically we have 0x1A00 available in kern1, but we can only load 0x800 bytes (1 sector) at a time.
+IOP_AREA_SIZES = [0x7B4, 0x101C, 0xB30, 0x21CC, 0x360, 0x1800, 0xF2F] #Technically we have 0x1A00 available in kern1, but we can only load 0x800 bytes (1 sector) at a time.
 
 DECKARD_AREAS = [0x8000B0B8, 0x800314b4, 0x8001D718, 0x80066840, 0x8002D580, 0x80008EB0, 0x80007540, 0x80A49000]
-DECKARD_AREA_SIZES = [0x7B4, 0x101C, 0xB30, 0x21CC, 0x28C, 0x1800, 0xF2F, 0x2FFFF] #Technically we have 0x1A00 available in kern1, but we can only load 0x800 bytes (1 sector) at a time.
+DECKARD_AREA_SIZES = [0x7B4, 0x101C, 0xB30, 0x21CC, 0x360, 0x1800, 0xF2F, 0x2FFFF] #Technically we have 0x1A00 available in kern1, but we can only load 0x800 bytes (1 sector) at a time.
 
 os.chdir("../mods/PracticeCodes/output/")
 

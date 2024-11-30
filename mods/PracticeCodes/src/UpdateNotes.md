@@ -11,9 +11,12 @@ To simply download the rom and get practicing, download the correct version for 
 # Changes:  
 
 ## Misc Timer
-Landing timer has been revamped to display your time during multiple conditions:
+Landing timer has been renamed to **misc timer**, and now display's your time during multiple conditions:
 - Landing
 - Flaming
+- Gliding
+- Collecting a gem
+- Collecting a flight level object
 - Entering a whirlwind
 - Bonking  
 
@@ -25,9 +28,11 @@ Just a small quality of life feature incase you forgot to turn off loop level be
 
 
 # Bug Fixes
+- Fixed buggy flight level movement after instant fly in. 
 - Fixed instability when loading a state with a timer on screen at the same time.
 - Fixed key glitch when loading a state. (Was already fixed for fly-in)
-- Flights will be put back into their initial state when flying into a homeworld
+- Flight time will be saved as part of savestate
+- Flights will be put back into their initial state when flying into a homeworld.
 
 
 # Patch Own Game

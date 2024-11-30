@@ -3513,3 +3513,16 @@ mods/PracticeCodes/debug/dep/savestate_update.dep
 mods/PracticeCodes/debug/obj/savestate_update.o
 mods/PracticeCodes/src/savestate_update_refactor
 mods/PracticeCodes/output/DebugLevelSelect.bin
+mods/PracticeCodes/backup/redux_asmhook_collect_collectables.bin
+mods/PracticeCodes/backup/redux_asmhook_collect_flight_items.bin
+mods/PracticeCodes/backup/redux_asmno_quit_games.bin
+mods/PracticeCodes/backup/redux_PrepareFairyGamestate.bin
+mods/PracticeCodes/debug/dep/hook_collect_collectable.dep
+mods/PracticeCodes/debug/dep/hook_collect_flight_item.dep
+mods/PracticeCodes/debug/dep/watch_memory.dep
+mods/PracticeCodes/debug/obj/hook_collect_collectable.o
+mods/PracticeCodes/debug/obj/hook_collect_flight_item.o
+mods/PracticeCodes/debug/obj/watch_memory.o
+mods/PracticeCodes/output/asmhook_collect_collectables.bin
+mods/PracticeCodes/output/asmhook_collect_flight_items.bin
+mods/PracticeCodes/output/PrepareFairyGamestate.bin

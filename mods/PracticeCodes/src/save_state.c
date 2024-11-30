@@ -65,7 +65,17 @@ void FullSaveState(void)
     memcpy((int*)local_mem_region, &_globalDragons, sizeof(int));
     local_mem_region += sizeof(int);
 
-    memcpy((int*)local_mem_region, &_globalFlightLevelTimer, sizeof(int));
+    memcpy((int*)local_mem_region, &_flightLevelExpirationTimer, sizeof(int));
+    local_mem_region += sizeof(int);
+
+    memcpy((int*)local_mem_region, &_flightLevelTimer, sizeof(int));
+    local_mem_region += sizeof(int);
+
+    memcpy((int*)local_mem_region, &_flightTargetHorizontalRotation, sizeof(int));
+    local_mem_region += sizeof(int);
+    memcpy((int*)local_mem_region, &_flightTargetVerticalRotation, sizeof(int));
+    local_mem_region += sizeof(int);
+    memcpy((int*)local_mem_region, &_flightRoll, sizeof(int));
     local_mem_region += sizeof(int);
 
     memcpy((int*)local_mem_region, &_globalFlightLevelCollectedItemsArray, sizeof(_globalFlightLevelCollectedItemsArray));
@@ -110,7 +120,16 @@ void FullSaveState(void)
     memcpy((byte*)local_mem_region, &_ptr_keyChestHostGem, 0x4);
     local_mem_region += 0x4;
 
-    //Electric Pads in BM/Terrace
+    // Save particle data
+    memcpy((byte*)local_mem_region, _ptr_particleBuffer, 0x2000);
+    local_mem_region += 0x2000;
+
+    // Load particle slot ptr
+    memcpy((byte*)local_mem_region, &_ptr_nextFreeParticleSlot, 0x4);
+    local_mem_region += 0x4;
+
+
+//Electric Pads in BM/Terrace
     memcpy((byte*)local_mem_region, _electricPadActivations, (sizeof(_electricPadActivations)));
     local_mem_region += sizeof(_electricPadActivations);
 
@@ -233,7 +252,17 @@ void FullLoadState(void)
             memcpy(&_globalDragons, local_mem_region, sizeof(int));
             local_mem_region += sizeof(int);
 
-            memcpy(&_globalFlightLevelTimer, local_mem_region, sizeof(int));
+            memcpy(&_flightLevelExpirationTimer, local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+
+            memcpy(&_flightLevelTimer, local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+
+            memcpy(&_flightTargetHorizontalRotation, (int*)local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+            memcpy(&_flightTargetVerticalRotation, (int*)local_mem_region, sizeof(int));
+            local_mem_region += sizeof(int);
+            memcpy(&_flightRoll, (int*)local_mem_region, sizeof(int));
             local_mem_region += sizeof(int);
 
             memcpy(&_globalFlightLevelCollectedItemsArray, local_mem_region, sizeof(_globalFlightLevelCollectedItemsArray));
@@ -278,7 +307,15 @@ void FullLoadState(void)
             memcpy(&_ptr_keyChestHostGem, (byte*)local_mem_region, 0x4);
             local_mem_region += 0x4;
 
-                    //Electric Pads in BM/Terrace
+            // Load particle data
+            memcpy(_ptr_particleBuffer, (byte*)local_mem_region, 0x2000);
+            local_mem_region += 0x2000;
+
+            // Load particle slot ptr
+            memcpy(&_ptr_nextFreeParticleSlot, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            //Electric Pads in BM/Terrace
             memcpy(_electricPadActivations, (byte*)local_mem_region, (sizeof(_electricPadActivations)));
             local_mem_region += sizeof(_electricPadActivations);
 

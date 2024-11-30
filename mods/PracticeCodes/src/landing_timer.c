@@ -5,10 +5,12 @@ int misc_display_timer = 0;
 bool has_entered_new_state = false;
 bool has_bonked = false;
 bool has_flamed = false;
+bool has_collected_item = false;
+bool has_collected_flight_item = false;
 
 bool IsInMiscState(void)
 {
-    return _spyro.isGrounded == true || _spyro.state == BONK || _spyro.state == WHIRLWIND;
+    return _spyro.isGrounded == true || _spyro.state == GLIDE || _spyro.state == BONK || _spyro.state == WHIRLWIND;
 }
 bool IsFlaming(void)
 {
@@ -58,6 +60,17 @@ void CheckMiscTimerUpdate(void)
         has_flamed = false;
     }
 
+    // Reset collectable bool. Gets set to true in hook
+    else if (has_collected_item == true)
+    {
+        has_collected_item = false;
+    }
+    // Reset flight collectable bool. Gets set to true in hook
+    else if (has_collected_flight_item == true)
+    {
+        has_collected_flight_item = false;
+    }
+
     // Should reset
     else if (IsInMiscState() == false && misc_display_timer > 30)
     {
@@ -80,7 +93,7 @@ bool ShouldSaveMiscTime(void)
 
 bool ShouldDisplayMiscTime(void)
 {
-    if (misc_display_timer > 0 && misc_display_timer <= 30)
+    if (misc_display_timer > 0 && misc_display_timer <= 40)
     {
         return true;
     }
@@ -89,3 +102,26 @@ bool ShouldDisplayMiscTime(void)
         return false;
     }
 }
+
+// Hooks for timer conditions
+void CollectCollectableHook(void) // Hooking into CollectCollectable to show time when a gem/other collectable has been collected.
+{
+    // Should start counting collected something
+    if (misc_display_timer == 0 || has_collected_item == false)
+    {
+        misc_display_timer = 1;
+        has_collected_item = true;
+    }
+    return;
+}
+void CollectFlightItemHook(void) // Hooking into CollectFlightItem to show time when a gem/other collectable has been collected.
+{
+    // Should start counting collected something
+    if (misc_display_timer == 0 || has_collected_flight_item == false)
+    {
+        misc_display_timer = 1;
+        has_collected_flight_item = true;
+    }
+    return;
+}
+

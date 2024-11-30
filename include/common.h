@@ -22,7 +22,7 @@
 #define STARTING_EXTRA_MEM 0x80300000
 #elif BUILD == 2
 #define STARTING_EXTRA_MEM 0x80A10000
-#define EXTRA_DECKARD_CODE_REGION 0x80A50000
+#define EXTRA_DECKARD_CODE_REGION 0x80A52000
 #endif
 
 //! Sectors
@@ -418,6 +418,8 @@ extern int _levelTimer_60fps; //0x800758C8                   //? This is a level
 extern int _vSyncTimer_60fps; //0x800749E0                   //? This is a global timer at 60fps. It is running at all times, and controls the vSync. If frozen, video freezes. Can be unfrozen.
 extern int _wobbleAndOpacityTimer; //0x800770f4              //? This is a timer that is often used for changing the opacity of things like lines, the shimmer of text, etc.
 extern int _loadingScreenTimer; //0x800756ac                 //? This is a timer that is used for the loading screen. It need to be set to 0 when triggering a level load
+extern int _flightLevelExpirationTimer;
+extern int _flightLevelTimer;
 
 //Important Stuff
 extern char _gameState; //0x800757D8                         //? Main gamestate. Gamestate values are stored in the GameState enums.
@@ -463,7 +465,6 @@ extern int _dragonState; //0x80077058                        //? The sub state f
 extern int _keyState; //0x80075830            
 extern int _doesHaveSuperflame;
 extern int _superflameTimer;
-extern int _globalFlightLevelTimer;
 
 extern int _levelGemsCollectedArray[35];
 
@@ -572,6 +573,13 @@ extern int _electricPadActivations[8];
 extern int _cameraTurnDirection;
 
 extern int _flightLevelTimes[5];
+
+extern int _flightTargetVerticalRotation;
+extern int _flightTargetHorizontalRotation;
+extern int _flightRoll;
+
+extern int* _ptr_particleBuffer;
+extern int* _ptr_nextFreeParticleSlot;
 
 
 #endif /* COMMON_H */

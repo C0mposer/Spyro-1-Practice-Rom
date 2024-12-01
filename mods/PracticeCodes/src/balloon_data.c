@@ -2,7 +2,7 @@
 #include <vector.h>
 #include <balloon_data.h>
 
-BalloonLevelSelectData balloon_level_select_data[6] =
+const BalloonLevelSelectData BALLOON_LEVEL_SELECT_DATA[6] =
 {
     // Artisans
     {
@@ -199,19 +199,19 @@ void LoadBalloonData(int i)
     }
 
 
-    _balloon_position = balloon_level_select_data[i].balloonPos;
-    _balloon_rotation = balloon_level_select_data[i].balloonRotation;
-    _cameraPosition = balloon_level_select_data[i].cameraPos;
-    _spyro.position = balloon_level_select_data[i].spyroPos;
+    _balloon_position = BALLOON_LEVEL_SELECT_DATA[i].balloonPos;
+    _balloon_rotation = BALLOON_LEVEL_SELECT_DATA[i].balloonRotation;
+    _cameraPosition = BALLOON_LEVEL_SELECT_DATA[i].cameraPos;
+    _spyro.position = BALLOON_LEVEL_SELECT_DATA[i].spyroPos;
 
-    _balloon_timer = balloon_level_select_data[i].balloonTimer;
-    _balloon_drop_off_location = balloon_level_select_data[i].dropOffLocation;
+    _balloon_timer = BALLOON_LEVEL_SELECT_DATA[i].balloonTimer;
+    _balloon_drop_off_location = BALLOON_LEVEL_SELECT_DATA[i].dropOffLocation;
 
-    _balloon_unk1 = balloon_level_select_data[i].unk;
+    _balloon_unk1 = BALLOON_LEVEL_SELECT_DATA[i].unk;
 
-    _balloon_unk2 = balloon_level_select_data[i].unk2;
-    _balloon_unk3 = balloon_level_select_data[i].unk3;
-    _balloon_unk4 = balloon_level_select_data[i].unk4;
-    _balloon_unk5 = balloon_level_select_data[i].unk5;
-    _balloon_unk6 = balloon_level_select_data[i].unk6;
+    _balloon_unk2 = BALLOON_LEVEL_SELECT_DATA[i].unk2;
+    _balloon_unk3 = BALLOON_LEVEL_SELECT_DATA[i].unk3;
+    _balloon_unk4 = BALLOON_LEVEL_SELECT_DATA[i].unk4;
+    _balloon_unk5 = BALLOON_LEVEL_SELECT_DATA[i].unk5;
+    _balloon_unk6 = BALLOON_LEVEL_SELECT_DATA[i].unk6;
 }

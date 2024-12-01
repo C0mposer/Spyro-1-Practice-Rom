@@ -10,24 +10,36 @@ To simply download the rom and get practicing, download the correct version for 
 
 # Changes:  
 
-## Misc Timer
-Landing timer has been renamed to **misc timer**, and now display's your time during multiple conditions:
+## IL Timer Display Settings
+Landing timer has been renamed to **Display Settings**, and you can now display your time during multiple conditions:
 - Landing
 - Flaming
 - Gliding
 - Collecting a gem
 - Collecting a flight level object
 - Entering a whirlwind
-- Bonking  
+- Bonking 
+- Always 
 
-It also will update the displayed time immediately, even if the previous displayed time has yet to expire.
+It will also update the displayed time immediately, even if the previous displayed time has yet to expire.
+
+*(IL time will **always** display at the end if IL mode is on)*
+
+## IL Mode Disables Cheats
+When you have IL Mode enabled, you will now no longer have access to moonjump, perma sparx, and give key.
 
 ## Homeworld Fly-in Loop Option
 When you level select into a homeworld, you will now have the option to disable/enable loop level during the load.
 Just a small quality of life feature incase you forgot to turn off loop level before doing a homeworld RTA.
 
+## Homeworld Balloonist Dialouge Options
+When you talk to a balloonist at the end of a homeworld, it will always display the **success** dialouge you'd see in a run.
+
+## CSGO
+When doing credits skip, if hold the start button as spyro is dying you will game over to allow for more accurate Gnorc Gnexus Homeworld RTA's.
 
 # Bug Fixes
+- Save states now save particles for particle based object conditions (Wizard Peak enemy spawning, Haunted Towers armor waking up)
 - Fixed buggy flight level movement after instant fly in. 
 - Fixed instability when loading a state with a timer on screen at the same time.
 - Fixed key glitch when loading a state. (Was already fixed for fly-in)

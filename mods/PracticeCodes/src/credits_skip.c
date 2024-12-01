@@ -50,5 +50,10 @@ void CreditsSkipUpdate()
             _effect_ScreenLetterBox = 0;
 
         }
+
+        if (_isInInGameCutscene == true && _currentButton == START_BUTTON)
+        {
+            _globalLives = 0;
+        }
     }
 }

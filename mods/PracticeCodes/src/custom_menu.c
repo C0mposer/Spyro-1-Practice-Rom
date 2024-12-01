@@ -14,6 +14,7 @@ ILMenu il_menu = { 0 };
 TimerMenu timer_menu = { 0 };
 SavestateMenu savestate_menu = { 0 };
 MiscMenu misc_menu = { 0 };
+ILDisplayMenu il_display_modes = { 0 };
 
 bool has_toggled_menu = FALSE;
 MenuState menu_state = MENU_HIDDEN;
@@ -21,6 +22,7 @@ CurrentMenu current_menu = MAIN_MENU;
 SuperflyMode custom_superfly_state = false;
 
 bool isMenuButtonHeld = false;
+int time_in_display_menu = 0;
 
 const short STOP_TIMER_BUTTONS[2] = { START_BUTTON, SELECT_BUTTON };
 const short RESET_TIMER_BUTTONS[2] = { R3_BUTTON, SELECT_BUTTON };
@@ -204,7 +206,7 @@ void CustomMenuUpdate(void)
             {
                 if (_currentButtonOneFrame == X_BUTTON)
                 {
-                    current_menu = TIMER_MENU;
+                    current_menu = MANUAL_TIMER_MENU;
                     return; // HACK HACK HACK
                 }
             }
@@ -242,7 +244,7 @@ void CustomMenuUpdate(void)
 
         if (current_menu == IL_MENU)
         {
-            CapitalTextInfo menu_text_info[5] = { {0} };
+            CapitalTextInfo menu_text_info[3] = { {0} };
 
             // Easy Exit
             if (_currentButtonOneFrame == CIRCLE_BUTTON)
@@ -251,7 +253,7 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            DrawTextBox(0x30, 0x1F0, 0x30, 0xA8);
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x80);
 
             menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[0].y = 70;
@@ -264,14 +266,6 @@ void CustomMenuUpdate(void)
             menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
             menu_text_info[2].y = 110;
             menu_text_info[2].size = DEFAULT_SIZE;
-
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[3].y = 130;
-            menu_text_info[3].size = DEFAULT_SIZE;
-
-            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[4].y = 150;
-            menu_text_info[4].size = DEFAULT_SIZE;
 
             _spyro.isMovementLocked = TRUE;
 
@@ -286,75 +280,46 @@ void CustomMenuUpdate(void)
 
             if (il_menu.il_state != true)
             {
-                DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
             }
             else if (il_menu.selection == 1)
             {
-                DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else
             {
-                DrawTextCapitals(il_menu.il_timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
-
             if (il_menu.il_state != true)
             {
-                DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+                DrawTextCapitals(il_menu.display_modes_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
             }
             else if (il_menu.selection == 2)
             {
-                DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+                DrawTextCapitals(il_menu.display_modes_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
             }
             else
             {
-                DrawTextCapitals(il_menu.display_on_dragon_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (il_menu.il_state != true)
-            {
-                DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
-            else if (il_menu.selection == 3)
-            {
-                DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_menu.display_on_land_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (il_menu.il_state != true)
-            {
-                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
-            else if (il_menu.selection == 4)
-            {
-                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawTextCapitals(il_menu.display_modes_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
             // Fill text with defaults if NULL
             if (il_menu.il_mode_text == NULL)
             {
                 il_menu.il_mode_text = "IL MODE OFF";
-                il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY AT END";
-                il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
-                il_menu.display_on_land_text = "DISPLAY MISC OFF";
                 il_menu.loop_level_text = "LOOP LEVEL ON";
+                il_menu.display_modes_text = "DISPLAY SETTINGS";
             }
 
             // Change Selection
             if (il_menu.il_state == true) {
                 if (_currentButtonOneFrame == DOWN_BUTTON)
                 {
-                    il_menu.selection = (il_menu.selection + 1) % 5;
+                    il_menu.selection = (il_menu.selection + 1) % 3;
                 }
                 else if (_currentButtonOneFrame == UP_BUTTON)
                 {
-                    il_menu.selection = (il_menu.selection + 4) % 5;
+                    il_menu.selection = (il_menu.selection + 2) % 3;
                 }
             }
             // Put cursor back at top if turned off through default settings
@@ -369,7 +334,25 @@ void CustomMenuUpdate(void)
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
-            // Timer Selection
+            // Update Text
+            if (il_menu.il_state == false)
+            {
+                il_menu.il_mode_text = "IL MODE OFF";
+            }
+            else
+            {
+                il_menu.il_mode_text = "IL MODE ON";
+            }
+            if (il_menu.dont_loop_level == false)
+            {
+                il_menu.loop_level_text = "LOOP LEVEL ON";
+            }
+            else
+            {
+                il_menu.loop_level_text = "LOOP LEVEL OFF";
+            }
+
+            // Update Menu Options
             if (il_menu.selection == 0)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
@@ -377,85 +360,385 @@ void CustomMenuUpdate(void)
                     il_menu.il_state = (il_menu.il_state + 1) % 2;
                 }
 
-                if (il_menu.il_state == FALSE)
-                {
-                    il_menu.il_mode_text = "IL MODE OFF";
-                }
-                else
-                {
-                    il_menu.il_mode_text = "IL MODE ON";
-                }
             }
-
             else if (il_menu.selection == 1)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    il_menu.il_timer_display_mode = (il_menu.il_timer_display_mode + 1) % 2;
-                }
-
-                if (il_menu.il_timer_display_mode == IL_TIMER_AT_END)
-                {
-                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY AT END";
-                }
-                else
-                {
-                    il_menu.il_timer_display_mode_text = "IL TIMER DISPLAY ALWAYS";
-                }
-            }
-
-            else if (il_menu.selection == 2)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    il_menu.display_on_dragon = (il_menu.display_on_dragon + 1) % 2;
-                }
-
-                if (il_menu.display_on_dragon == FALSE)
-                {
-                    il_menu.display_on_dragon_text = "DISPLAY AT DRAGON OFF";
-                }
-                else
-                {
-                    il_menu.display_on_dragon_text = "DISPLAY AT DRAGON ON";
-                }
-            }
-
-            else if (il_menu.selection == 3)
-            {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
-                {
-                    il_menu.display_on_land = (il_menu.display_on_land + 1) % 2;
-                }
-
-                if (il_menu.display_on_land == FALSE)
-                {
-                    il_menu.display_on_land_text = "DISPLAY MISC OFF";
-                }
-                else
-                {
-                    il_menu.display_on_land_text = "DISPLAY MISC ON";
-                }
-            }
-            else if (il_menu.selection == 4)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     il_menu.dont_loop_level = (il_menu.dont_loop_level + 1) % 2;
                 }
 
-                if (il_menu.dont_loop_level == 0)
+            }
+            else if (il_menu.selection == 2)
+            {
+
+                if (_currentButtonOneFrame == X_BUTTON)
                 {
-                    il_menu.loop_level_text = "LOOP LEVEL ON";
-                }
-                else
-                {
-                    il_menu.loop_level_text = "LOOP LEVEL OFF";
+                    current_menu = IL_DISPLAY_OPTIONS_MENU;
                 }
             }
+
+            time_in_display_menu = 0;
         }
 
-        if (current_menu == TIMER_MENU)
+        if (current_menu == IL_DISPLAY_OPTIONS_MENU)
+        {
+            CapitalTextInfo menu_text_info[10] = { {0} };
+
+            // Easy Exit
+            if (_currentButtonOneFrame == CIRCLE_BUTTON)
+            {
+                current_menu = IL_MENU;
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            DrawTextBox(0x30, 0x1F0, 0x0C, 0xDF);
+
+            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[0].y = 30;
+            menu_text_info[0].size = DEFAULT_SIZE;
+
+            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[1].y = 50;
+            menu_text_info[1].size = DEFAULT_SIZE;
+
+            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[2].y = 70;
+            menu_text_info[2].size = DEFAULT_SIZE;
+
+            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[3].y = 90;
+            menu_text_info[3].size = DEFAULT_SIZE;
+
+            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[4].y = 110;
+            menu_text_info[4].size = DEFAULT_SIZE;
+
+            menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[5].y = 130;
+            menu_text_info[5].size = DEFAULT_SIZE;
+
+            menu_text_info[6].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[6].y = 150;
+            menu_text_info[6].size = DEFAULT_SIZE;
+
+            menu_text_info[7].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[7].y = 170;
+            menu_text_info[7].size = DEFAULT_SIZE;
+
+            menu_text_info[8].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[8].y = 190;
+            menu_text_info[8].size = DEFAULT_SIZE;
+
+            menu_text_info[9].x = SCREEN_LEFT_EDGE + 0x4A;
+            menu_text_info[9].y = 210;
+            menu_text_info[9].size = DEFAULT_SIZE;
+
+            _spyro.isMovementLocked = TRUE;
+
+            if (il_display_modes.selection == 0)
+            {
+                DrawTextCapitals(il_display_modes.il_display_enable_all_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_enable_all_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 1)
+            {
+                DrawTextCapitals(il_display_modes.il_display_dragon_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_dragon_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 2)
+            {
+                DrawTextCapitals(il_display_modes.il_display_landing_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_landing_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 3)
+            {
+                DrawTextCapitals(il_display_modes.il_display_glide_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_glide_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 4)
+            {
+                DrawTextCapitals(il_display_modes.il_display_flame_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_flame_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 5)
+            {
+                DrawTextCapitals(il_display_modes.il_display_gem_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_gem_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 6)
+            {
+                DrawTextCapitals(il_display_modes.il_display_flight_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_flight_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 7)
+            {
+                DrawTextCapitals(il_display_modes.il_display_whirlwind_text, &menu_text_info[7], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_whirlwind_text, &menu_text_info[7], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 8)
+            {
+                DrawTextCapitals(il_display_modes.il_display_bonk_text, &menu_text_info[8], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_bonk_text, &menu_text_info[8], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+            if (il_display_modes.selection == 9)
+            {
+                DrawTextCapitals(il_display_modes.il_display_always_text, &menu_text_info[9], DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            }
+            else
+            {
+                DrawTextCapitals(il_display_modes.il_display_always_text, &menu_text_info[9], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+            }
+
+            // Fill text with defaults if NULL
+            if (il_display_modes.il_display_enable_all_text == NULL)
+            {
+                il_display_modes.il_display_enable_all_text = "ENABLE ALL";
+                il_display_modes.il_display_dragon_text = "DISPLAY DRAGON OFF";
+                il_display_modes.il_display_landing_text = "DISPLAY LANDING OFF";
+                il_display_modes.il_display_glide_text = "DISPLAY GLIDE OFF";
+                il_display_modes.il_display_flame_text = "DISPLAY FLAME OFF";
+                il_display_modes.il_display_gem_text = "DISPLAY GEM COLLECT OFF";
+                il_display_modes.il_display_flight_text = "DISPLAY FLIGHT ITEM OFF";
+                il_display_modes.il_display_whirlwind_text = "DISPLAY WHIRLWIND OFF";
+                il_display_modes.il_display_bonk_text = "DISPLAY BONK OFF";
+                il_display_modes.il_display_always_text = "DISPLAY ALWAYS OFF";
+            }
+
+            // Change Selection
+            if (_currentButtonOneFrame == DOWN_BUTTON)
+            {
+                il_display_modes.selection = (il_display_modes.selection + 1) % 10;
+            }
+            else if (_currentButtonOneFrame == UP_BUTTON)
+            {
+                il_display_modes.selection = (il_display_modes.selection + 9) % 10;
+            }
+
+
+        // Play Sound Effect
+            if (_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == X_BUTTON)
+            {
+                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+            }
+
+            // Update Displays
+            if (il_display_modes.il_has_enabled_all == false)
+            {
+                il_display_modes.il_display_enable_all_text = "ENABLE ALL";
+            }
+            else
+            {
+                il_display_modes.il_display_enable_all_text = "DISABLE ALL";
+            }
+            if (il_display_modes.il_display_dragon == false)
+            {
+                il_display_modes.il_display_dragon_text = "DISPLAY DRAGON OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_dragon_text = "DISPLAY DRAGON ON";
+            }
+
+            if (il_display_modes.il_display_landing == false)
+            {
+                il_display_modes.il_display_landing_text = "DISPLAY LANDING OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_landing_text = "DISPLAY LANDING ON";
+            }
+            if (il_display_modes.il_display_glide == false)
+            {
+                il_display_modes.il_display_glide_text = "DISPLAY GLIDE OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_glide_text = "DISPLAY GLIDE ON";
+            }
+            if (il_display_modes.il_display_flame == false)
+            {
+                il_display_modes.il_display_flame_text = "DISPLAY FLAME OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_flame_text = "DISPLAY FLAME ON";
+            }
+            if (il_display_modes.il_display_gem == false)
+            {
+                il_display_modes.il_display_gem_text = "DISPLAY GEM COLLECT OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_gem_text = "DISPLAY GEM COLLECT ON";
+            }
+            if (il_display_modes.il_display_flight == false)
+            {
+                il_display_modes.il_display_flight_text = "DISPLAY FLIGHT ITEM OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_flight_text = "DISPLAY FLIGHT ITEM ON";
+            }
+            if (il_display_modes.il_display_whirlwind == false)
+            {
+                il_display_modes.il_display_whirlwind_text = "DISPLAY WHIRLWIND OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_whirlwind_text = "DISPLAY WHIRLWIND ON";
+            }
+            if (il_display_modes.il_display_bonk == false)
+            {
+                il_display_modes.il_display_bonk_text = "DISPLAY BONK OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_bonk_text = "DISPLAY BONK ON";
+            }
+            if (il_display_modes.il_display_always == false)
+            {
+                il_display_modes.il_display_always_text = "DISPLAY ALWAYS OFF";
+            }
+            else
+            {
+                il_display_modes.il_display_always_text = "DISPLAY ALWAYS ON";
+            }
+
+            // Enable all
+            if (il_display_modes.selection == 0)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || (_currentButton == X_BUTTON && time_in_display_menu > 10) && il_display_modes.il_has_enabled_all == false)
+                {
+                    il_display_modes.il_display_dragon = true;
+                    il_display_modes.il_display_landing = true;
+                    il_display_modes.il_display_glide = true;
+                    il_display_modes.il_display_flame = true;
+                    il_display_modes.il_display_gem = true;
+                    il_display_modes.il_display_flight = true;
+                    il_display_modes.il_display_whirlwind = true;
+                    il_display_modes.il_display_bonk = true;
+                    il_display_modes.il_has_enabled_all = true;
+                }
+                else if (_currentButtonOneFrame == LEFT_BUTTON || (_currentButton == X_BUTTON && time_in_display_menu > 10) && il_display_modes.il_has_enabled_all == true)
+                {
+                    il_display_modes.il_display_dragon = false;
+                    il_display_modes.il_display_landing = false;
+                    il_display_modes.il_display_glide = false;
+                    il_display_modes.il_display_flame = false;
+                    il_display_modes.il_display_gem = false;
+                    il_display_modes.il_display_flight = false;
+                    il_display_modes.il_display_whirlwind = false;
+                    il_display_modes.il_display_bonk = false;
+                    il_display_modes.il_has_enabled_all = false;
+                }
+            }
+
+            else if (il_display_modes.selection == 1)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_dragon = (il_display_modes.il_display_dragon + 1) % 2;
+                }
+
+            }
+
+            else if (il_display_modes.selection == 2)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_landing = (il_display_modes.il_display_landing + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 3)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_glide = (il_display_modes.il_display_glide + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 4)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_flame = (il_display_modes.il_display_flame + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 5)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_gem = (il_display_modes.il_display_gem + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 6)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_flight = (il_display_modes.il_display_flight + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 7)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_whirlwind = (il_display_modes.il_display_whirlwind + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 8)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_bonk = (il_display_modes.il_display_bonk + 1) % 2;
+                }
+            }
+
+            else if (il_display_modes.selection == 9)
+            {
+                if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
+                {
+                    il_display_modes.il_display_always = (il_display_modes.il_display_always + 1) % 2;
+                }
+            }
+
+            time_in_display_menu++;
+        }
+
+
+        if (current_menu == MANUAL_TIMER_MENU)
         {
             CapitalTextInfo menu_text_info[4] = { {0} };
 
@@ -718,7 +1001,7 @@ void CustomMenuUpdate(void)
             else
             {
                 DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-        }
+            }
             #endif
 
             // Fill text with defaults if NULL
@@ -737,7 +1020,7 @@ void CustomMenuUpdate(void)
                 savestate_menu.savestate_button_text = "SAVE BUTTON L3";
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
-    }
+            }
             #endif
 
                         // Change Selection
@@ -758,7 +1041,7 @@ void CustomMenuUpdate(void)
             else if (_currentButtonOneFrame == UP_BUTTON)
             {
                 savestate_menu.selection = (savestate_menu.selection + 1) % 3 + 1;  // +1 outside the mod operator to avoid it ever being 0 and +1 inside to make it effectively +2 overal to make it the same as -1
-}
+            }
             #endif
 
                         // Play Sound Effect
@@ -991,88 +1274,3 @@ void CustomMenuUpdate(void)
     // }
 }
 
-void StopDrawWorldAndObjects(void)
-{
-    // Function addresses
-    int* draw_world_func = 0x8002b9cc;
-    int* draw_objects_func = 0x80019698;
-    int* draw_particles_func = 0x800573c8;
-
-    *draw_world_func = JR_RA;
-    *(draw_world_func + 1) = NOP;
-
-    *draw_objects_func = JR_RA;
-    *(draw_objects_func + 1) = NOP;
-
-    *draw_particles_func = JR_RA;
-    *(draw_particles_func + 1) = NOP;
-}
-void RestartDrawWorldAndObjects(void)
-{
-    // Function addresses
-    int* draw_world_func = 0x8002b9cc;
-    int* draw_objects_func = 0x80019698;
-    int* draw_particles_func = 0x800573c8;
-
-    // Original Opcodes
-    *draw_world_func = 0x27BDFFE8;
-    *(draw_world_func + 1) = 0x3C048007;
-
-    *draw_objects_func = 0x27BDFFE8;
-    *(draw_objects_func + 1) = 0xAFBF0010;
-
-    *draw_particles_func = 0x3C011F80;
-    *(draw_particles_func + 1) = 0xAC300000;
-}
-
-void TurnOnDefaultSettings()
-{
-    il_menu.il_state = true;
-    il_menu.display_on_dragon = true;
-
-    misc_menu.show_dragon_touch = true;
-
-    //timer_menu.timer_state = true;
-}
-void TurnOffDefaultSettings()
-{
-    il_menu.il_state = false;
-    il_menu.display_on_dragon = false;
-
-    misc_menu.show_dragon_touch = false;
-
-    //timer_menu.timer_state = false;
-}
-
-// Loop Level selection in HW fly in
-void UpdateLoopLevel()
-{
-    if (_currentButtonOneFrame == RIGHT_BUTTON)
-    {
-        il_menu.dont_loop_level = false;
-        //PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-    }
-    if (_currentButtonOneFrame == LEFT_BUTTON)
-    {
-        il_menu.dont_loop_level = true;
-        //PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-    }
-}
-
-void LoopLevelChoiceFlyIn(void)
-{
-    UpdateLoopLevel();
-
-    CapitalTextInfo loop_level_text_info = { 0 };
-    loop_level_text_info.x = SCREEN_LEFT_EDGE + 10;
-    loop_level_text_info.y = SCREEN_BOTTOM_EDGE - 6;
-    loop_level_text_info.size = DEFAULT_SIZE + 1500;
-
-    if (il_menu.dont_loop_level == false)
-        DrawTextCapitals("LOOP LEVEL ON", &loop_level_text_info, DEFAULT_SPACING - 5, MOBY_COLOR_BLUE);
-    if (il_menu.dont_loop_level == true)
-        DrawTextCapitals("LOOP LEVEL OFF", &loop_level_text_info, DEFAULT_SPACING - 5, MOBY_COLOR_BLUE);
-
-    // Render Text
-    RenderShadedMobyQueue();
-}

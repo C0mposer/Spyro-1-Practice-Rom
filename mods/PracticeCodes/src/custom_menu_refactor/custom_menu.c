@@ -117,7 +117,7 @@ typedef enum CurrentMenu
 {
     MAIN_MENU,
     IL_MENU,
-    TIMER_MENU,
+    MANUAL_TIMER_MENU,
     SAVESTATE_MENU,
     MISC_MENU,
     COSMETIC_MENU
@@ -192,7 +192,7 @@ void CustomMenuUpdate(void)
         {
             UpdateILMenu();
         }
-        else if (current_menu == TIMER_MENU)
+        else if (current_menu == MANUAL_TIMER_MENU)
         {
             UpdateManualTimerMenu();
         }
@@ -777,7 +777,7 @@ void HandleEnteringSubMenu()
         }
         else if (custom_menu.selection == 1)
         {
-            current_menu = TIMER_MENU;
+            current_menu = MANUAL_TIMER_MENU;
         }
         else if (custom_menu.selection == 2)
         {

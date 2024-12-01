@@ -13,10 +13,11 @@ typedef enum CurrentMenu
 {
     MAIN_MENU,
     IL_MENU,
-    TIMER_MENU,
+    MANUAL_TIMER_MENU,
     SAVESTATE_MENU,
     MISC_MENU,
-    COSMETIC_MENU
+    COSMETIC_MENU,
+    IL_DISPLAY_OPTIONS_MENU
 } CurrentMenu;
 
 typedef enum TimerState
@@ -79,16 +80,41 @@ typedef struct ILMenu
     int selection;
     bool il_state;
     char* il_mode_text;
-    ILTimerDisplayMode il_timer_display_mode;
-    char* il_timer_display_mode_text;
-    bool display_on_dragon;
-    char* display_on_dragon_text;
-    bool display_on_land;
-    char* display_on_land_text;
     bool dont_loop_level;
     char* loop_level_text;
+    char* display_modes_text;
 
 } ILMenu;
+
+typedef struct ILDisplayMenu
+{
+    int selection;
+
+    bool il_display_dragon : 1;
+    bool il_display_landing : 1;
+    bool il_display_glide : 1;
+    bool il_display_flame : 1;
+    bool il_display_gem : 1;
+    bool il_display_flight : 1;
+    bool il_display_whirlwind : 1;
+    bool il_display_bonk : 1;
+    bool il_has_enabled_all;
+    bool il_display_always;
+
+    char* il_display_enable_all_text;
+    char* il_display_dragon_text;
+    char* il_display_landing_text;
+    char* il_display_glide_text;
+    char* il_display_flame_text;
+    char* il_display_gem_text;
+    char* il_display_flight_text;
+    char* il_display_whirlwind_text;
+    char* il_display_bonk_text;
+    char* il_display_always_text;
+
+} ILDisplayMenu;
+
+
 typedef struct TimerMenu
 {
     int selection;
@@ -124,7 +150,7 @@ typedef struct SavestateMenu
     char* respawn_on_loadstate_text;
 
 } SavestateMenu;
-#endif
+#endif /* CUSTOM_MENU_H */
 
 typedef struct MiscMenu
 {

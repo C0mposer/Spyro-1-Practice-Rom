@@ -109,7 +109,7 @@ void MainUpdate()
         }
 
         //Lives always 99
-        if (_globalLives != 99)
+        if (_globalLives != 99 && _isInInGameCutscene == false)
         {
             _globalLives = 99;
             _globalLivesCounter = 99;
@@ -323,4 +323,11 @@ void UpdateDefaultSettings()
         TurnOffDefaultSettings();
     }
 
+}
+
+void ResetMod(void)
+{
+    ResetCutscene();
+    TheAdventureBegins();
+    UnlockAllLevels();
 }

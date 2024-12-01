@@ -7,38 +7,7 @@
 #include <moby.h>
 #include <draw_hud_moby.h>
 #include <landing_timer.h>
-
-typedef enum ILTimerState
-{
-    IL_FLYING_IN,
-    IL_STARTED,
-    IL_DISPLAYING,
-    IL_STOPPED
-
-}ILTimerState;
-
-typedef enum ILTimerDisplayMode
-{
-    IL_TIMER_AT_END,
-    IL_TIMER_ALWAYS
-
-}ILTimerDisplayMode;
-
-typedef struct ILMenu
-{
-    int selection;
-    bool il_state;
-    char* il_mode_text;
-    ILTimerDisplayMode il_timer_display_mode;
-    char* il_timer_display_mode_text;
-    bool display_on_dragon;
-    char* display_on_dragon_text;
-    bool display_on_land;
-    char* display_on_land_text;
-    bool dont_loop_level;
-    char* loop_level_text;
-
-}ILMenu;
+#include <custom_menu.h>
 
 typedef struct Timer
 {
@@ -51,6 +20,15 @@ typedef struct Timer
 
 }Timer;
 
+typedef enum ILTimerState
+{
+    IL_FLYING_IN,
+    IL_STARTED,
+    IL_DISPLAYING,
+    IL_STOPPED
+
+}ILTimerState;
+
 ILTimerState il_timer_state = IL_STOPPED;
 int ilTimerStart = 0;
 int framesSpentLoading = 0;
@@ -62,6 +40,7 @@ int il_timer_offset[3] = { 0 };
 int loot_vortex_timer = 0x3A; // 3A instead of 3C which is what the game checks, because we want to display it on the same frame
 
 extern ILMenu il_menu;
+extern ILDisplayMenu il_display_modes;
 
 extern const short flyInArray[36];
 
@@ -80,7 +59,7 @@ extern int gnasty_chase_state;
 
 //! Every Frame Update
 void ILUpdate() {
-    if (il_menu.il_state)
+    if (il_menu.il_state == true)
     {
         if (il_timer_state == IL_STOPPED && (_gameState == GAMESTATE_FLY_IN || _gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_BALLOONIST))
         {
@@ -104,7 +83,7 @@ void ILUpdate() {
             {
                 ilTimerStart = _globalTimer - il_timer_offset[savestate_selection];
             }
-            if (il_menu.il_timer_display_mode == IL_TIMER_ALWAYS && _gameState == GAMESTATE_GAMEPLAY)
+            if (il_display_modes.il_display_always == true && _gameState == GAMESTATE_GAMEPLAY)
             {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
@@ -177,7 +156,7 @@ void ILUpdate() {
         }
 
         // IL DRAGON CHECKPOINT TIMES
-        if (il_menu.display_on_dragon) {
+        if (il_display_modes.il_display_dragon) {
             if (_dragonState == 2) {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
@@ -198,7 +177,8 @@ void ILUpdate() {
         }
 
         //IL LANDING CHECKPOINT TIMES
-        if (il_menu.display_on_land && il_menu.il_timer_display_mode != IL_TIMER_ALWAYS) {
+        bool any_misc_timers = il_display_modes.il_display_bonk || il_display_modes.il_display_flame || il_display_modes.il_display_flight || il_display_modes.il_display_gem || il_display_modes.il_display_glide || il_display_modes.il_display_landing || il_display_modes.il_display_whirlwind;
+        if (any_misc_timers && il_display_modes.il_display_always == false) {
             if (ShouldSaveMiscTime()) {
                 Timer ilTimer;
                 ilTimer.timer = _globalTimer - ilTimerStart;
@@ -234,7 +214,7 @@ void ILUpdate() {
         }
 
         //DISPLAY
-        if ((il_timer_state == IL_DISPLAYING))
+        if ((il_timer_state == IL_DISPLAYING) && _gameState != GAMESTATE_EXITING_LEVEL && _gameState != GAMESTATE_INVENTORY && _gameState != GAMESTATE_PAUSED)
         {
             CapitalTextInfo il_text_info = { SCREEN_LEFT_EDGE + 0x10, 50, 0x1400 };
             CapitalTextInfo il2_text_info = { SCREEN_LEFT_EDGE + 0x10, 65, 0x1800 };

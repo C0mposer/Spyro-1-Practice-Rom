@@ -3526,3 +3526,12 @@ mods/PracticeCodes/debug/obj/watch_memory.o
 mods/PracticeCodes/output/asmhook_collect_collectables.bin
 mods/PracticeCodes/output/asmhook_collect_flight_items.bin
 mods/PracticeCodes/output/PrepareFairyGamestate.bin
+mods/PracticeCodes/debug/dep/custom_menu_3.dep
+mods/PracticeCodes/debug/dep/disable_end_credits.dep
+mods/PracticeCodes/debug/dep/misc_timer.dep
+mods/PracticeCodes/debug/obj/custom_menu_3.o
+mods/PracticeCodes/debug/obj/disable_end_credits.o
+mods/PracticeCodes/debug/obj/misc_timer.o
+mods/PracticeCodes/output/asmdisable_end_creditss.bin
+mods/PracticeCodes/output/PlayIntroCutscenes.bin
+mods/PracticeCodes/output/TitleCameraRelated.bin

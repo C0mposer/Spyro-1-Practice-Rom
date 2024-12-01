@@ -1,8 +1,13 @@
 #include <common.h>
 #include <spyro.h>
+#include <custom_menu.h>
+
+extern ILDisplayMenu il_display_modes;
 
 int misc_display_timer = 0;
-bool has_entered_new_state = false;
+bool has_landed = false;
+bool has_glided = false;
+bool has_entered_whirlwind = false;
 bool has_bonked = false;
 bool has_flamed = false;
 bool has_collected_item = false;
@@ -10,7 +15,7 @@ bool has_collected_flight_item = false;
 
 bool IsInMiscState(void)
 {
-    return _spyro.isGrounded == true || _spyro.state == GLIDE || _spyro.state == BONK || _spyro.state == WHIRLWIND;
+    return _spyro.isGrounded == true || _spyro.state == GLIDE || _spyro.state == WHIRLWIND;
 }
 bool IsFlaming(void)
 {
@@ -27,19 +32,41 @@ void CheckMiscTimerUpdate(void)
         misc_display_timer++;
     }
 
-    // Should start counting
-    if (IsInMiscState() == true && (misc_display_timer == 0 || has_entered_new_state == false))
+    // Should start counting land
+    if (_spyro.isGrounded == true && (misc_display_timer == 0 || has_landed == false) && il_display_modes.il_display_landing)
     {
         misc_display_timer = 1;
-        has_entered_new_state = true;
+        has_landed = true;
     }
-    else if (IsInMiscState() == false && has_entered_new_state == true)
+    else if (_spyro.isGrounded == false && has_landed == true)
     {
-        has_entered_new_state = false;
+        has_landed = false;
+    }
+
+    // Should start counting land glide
+    if (_spyro.state == GLIDE && (misc_display_timer == 0 || has_glided == false) && il_display_modes.il_display_glide)
+    {
+        misc_display_timer = 1;
+        has_glided = true;
+    }
+    else if (_spyro.state != GLIDE && has_glided == true)
+    {
+        has_glided = false;
+    }
+
+    // Should start counting whirlwind
+    if (_spyro.state == WHIRLWIND && (misc_display_timer == 0 || has_entered_whirlwind == false) && il_display_modes.il_display_whirlwind)
+    {
+        misc_display_timer = 1;
+        has_entered_whirlwind = true;
+    }
+    else if (_spyro.state != WHIRLWIND && has_entered_whirlwind == true)
+    {
+        has_entered_whirlwind = false;
     }
 
     // Should start counting bonk
-    if (_spyro.state == BONK && (misc_display_timer == 0 || has_bonked == false))
+    if (_spyro.state == BONK && (misc_display_timer == 0 || has_bonked == false) && il_display_modes.il_display_bonk)
     {
         misc_display_timer = 1;
         has_bonked = true;
@@ -50,7 +77,7 @@ void CheckMiscTimerUpdate(void)
     }
 
     // Should start counting flame
-    if (IsFlaming() && (misc_display_timer == 0 || has_flamed == false))
+    if (IsFlaming() && (misc_display_timer == 0 || has_flamed == false) && il_display_modes.il_display_flame)
     {
         misc_display_timer = 1;
         has_flamed = true;
@@ -72,7 +99,7 @@ void CheckMiscTimerUpdate(void)
     }
 
     // Should reset
-    else if (IsInMiscState() == false && misc_display_timer > 30)
+    else if (IsInMiscState() == false && misc_display_timer > 40)
     {
         misc_display_timer = 0;
     }
@@ -107,7 +134,7 @@ bool ShouldDisplayMiscTime(void)
 void CollectCollectableHook(void) // Hooking into CollectCollectable to show time when a gem/other collectable has been collected.
 {
     // Should start counting collected something
-    if (misc_display_timer == 0 || has_collected_item == false)
+    if ((misc_display_timer == 0 || has_collected_item == false) && il_display_modes.il_display_gem)
     {
         misc_display_timer = 1;
         has_collected_item = true;
@@ -117,7 +144,7 @@ void CollectCollectableHook(void) // Hooking into CollectCollectable to show tim
 void CollectFlightItemHook(void) // Hooking into CollectFlightItem to show time when a gem/other collectable has been collected.
 {
     // Should start counting collected something
-    if (misc_display_timer == 0 || has_collected_flight_item == false)
+    if ((misc_display_timer == 0 || has_collected_flight_item == false) && il_display_modes.il_display_flight)
     {
         misc_display_timer = 1;
         has_collected_flight_item = true;

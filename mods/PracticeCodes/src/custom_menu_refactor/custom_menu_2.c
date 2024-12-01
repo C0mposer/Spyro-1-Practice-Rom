@@ -140,7 +140,7 @@ typedef enum CurrentMenu
 {
     MAIN_MENU,
     IL_MENU,
-    TIMER_MENU,
+    MANUAL_TIMER_MENU,
     SAVESTATE_MENU,
     MISC_MENU,
     COSMETIC_MENU

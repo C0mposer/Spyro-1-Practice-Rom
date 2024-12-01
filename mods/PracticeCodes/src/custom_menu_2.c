@@ -18,6 +18,7 @@ extern ILMenu il_menu;
 extern TimerMenu timer_menu;
 extern SavestateMenu savestate_menu;
 extern MiscMenu misc_menu;
+extern ILDisplayMenu il_display_modes;
 
 CosmeticMenu cosmetic_menu = { 0 };
 
@@ -197,6 +198,66 @@ void CustomMenuUpdate2()
                 PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
             }
 
+            // Update Text
+            if (misc_menu.sparx_mode == 0)
+            {
+                misc_menu.sparx_mode_text = "SPARX NORMAL";
+            }
+            else if (misc_menu.sparx_mode == 1)
+            {
+                misc_menu.sparx_mode_text = "PERMA SPARX";
+            }
+            else
+            {
+                misc_menu.sparx_mode_text = "SPARXLESS";
+            }
+
+            if (misc_menu.show_dragon_touch == false)
+            {
+                misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
+            }
+            else
+            {
+                misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH ON";
+            }
+
+            if (disable_portal_entry == false)
+            {
+                misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
+            }
+            else
+            {
+                misc_menu.disable_portal_entry_text = "DISABLE PORTAL ON";
+            }
+
+            if (consistency_tracker_mode == false)
+            {
+                misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
+            }
+            else if (consistency_tracker_mode == true)
+            {
+                misc_menu.consitency_tracker_text = "TRACK CONSISTENCY ON";
+            }
+
+            if (show_sparx_range_mode == false)
+            {
+                misc_menu.show_sparx_range_text = "SHOW SPARX RANGE OFF";
+            }
+            else if (show_sparx_range_mode == true)
+            {
+                misc_menu.show_sparx_range_text = "SHOW SPARX RANGE ON";
+            }
+
+            if (misc_menu.super_mode == false)
+            {
+                misc_menu.super_text = "SUPER MODE OFF";
+            }
+            else
+            {
+                misc_menu.super_text = "SUPER MODE ON";
+            }
+
+            // Update Menu Options
             if (misc_menu.selection == 0)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
@@ -207,19 +268,6 @@ void CustomMenuUpdate2()
                 {
                     misc_menu.sparx_mode = (misc_menu.sparx_mode + 2) % 3;
                 }
-
-                if (misc_menu.sparx_mode == 0)
-                {
-                    misc_menu.sparx_mode_text = "SPARX NORMAL";
-                }
-                else if (misc_menu.sparx_mode == 1)
-                {
-                    misc_menu.sparx_mode_text = "PERMA SPARX";
-                }
-                else
-                {
-                    misc_menu.sparx_mode_text = "SPARXLESS";
-                }
             }
 
             else if (misc_menu.selection == 1)
@@ -228,15 +276,6 @@ void CustomMenuUpdate2()
                 {
                     misc_menu.show_dragon_touch = (misc_menu.show_dragon_touch + 1) % 2;
                 }
-
-                if (misc_menu.show_dragon_touch == false)
-                {
-                    misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
-                }
-                else
-                {
-                    misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH ON";
-                }
             }
 
             else if (misc_menu.selection == 2)
@@ -244,15 +283,6 @@ void CustomMenuUpdate2()
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     disable_portal_entry = (disable_portal_entry + 1) % 2;
-                }
-
-                if (disable_portal_entry == false)
-                {
-                    misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
-                }
-                else
-                {
-                    misc_menu.disable_portal_entry_text = "DISABLE PORTAL ON";
                 }
             }
 
@@ -267,15 +297,6 @@ void CustomMenuUpdate2()
                         consistency_tracker_render_time = 30; // Render for 1 second when you enable it
                     }
                 }
-
-                if (consistency_tracker_mode == false)
-                {
-                    misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
-                }
-                else if (consistency_tracker_mode == true)
-                {
-                    misc_menu.consitency_tracker_text = "TRACK CONSISTENCY ON";
-                }
             }
 
             if (misc_menu.selection == 4)
@@ -284,15 +305,6 @@ void CustomMenuUpdate2()
                 {
                     show_sparx_range_mode = (show_sparx_range_mode + 1) % 2;
                 }
-
-                if (show_sparx_range_mode == false)
-                {
-                    misc_menu.show_sparx_range_text = "SHOW SPARX RANGE OFF";
-                }
-                else if (show_sparx_range_mode == true)
-                {
-                    misc_menu.show_sparx_range_text = "SHOW SPARX RANGE ON";
-                }
             }
 
             else if (misc_menu.selection == 5)
@@ -300,15 +312,6 @@ void CustomMenuUpdate2()
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
                 {
                     misc_menu.super_mode = (misc_menu.super_mode + 1) % 2;
-                }
-
-                if (misc_menu.super_mode == false)
-                {
-                    misc_menu.super_text = "SUPER MODE OFF";
-                }
-                else
-                {
-                    misc_menu.super_text = "SUPER MODE ON";
                 }
             }
 
@@ -736,9 +739,63 @@ void CustomMenuUpdate2()
         }
     }
 
-    if (((timer_menu.timer_display_mode == TIMER_ALWAYS || il_menu.il_timer_display_mode == IL_TIMER_ALWAYS || timerState == TIMER_DISPLAYING || menu_state == MENU_DISPLAYING || ShouldDisplayMiscTime()) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING) || ((il_menu.display_on_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))
+    if (((timer_menu.timer_display_mode == TIMER_ALWAYS || il_display_modes.il_display_always == true || timerState == TIMER_DISPLAYING || menu_state == MENU_DISPLAYING || ShouldDisplayMiscTime()) && _gameState == GAMESTATE_GAMEPLAY) || (il_timer_state == IL_DISPLAYING) || ((il_display_modes.il_display_dragon == TRUE || misc_menu.show_dragon_touch == TRUE) && _gameState == GAMESTATE_DRAGON_STATE))
     {
         // printf("RENDERING\n");
         RenderShadedMobyQueue();
     }
+}
+
+
+void StopDrawWorldAndObjects(void)
+{
+    // Function addresses
+    int* draw_world_func = 0x8002b9cc;
+    int* draw_objects_func = 0x80019698;
+    int* draw_particles_func = 0x800573c8;
+
+    *draw_world_func = JR_RA;
+    *(draw_world_func + 1) = NOP;
+
+    *draw_objects_func = JR_RA;
+    *(draw_objects_func + 1) = NOP;
+
+    *draw_particles_func = JR_RA;
+    *(draw_particles_func + 1) = NOP;
+}
+void RestartDrawWorldAndObjects(void)
+{
+    // Function addresses
+    int* draw_world_func = 0x8002b9cc;
+    int* draw_objects_func = 0x80019698;
+    int* draw_particles_func = 0x800573c8;
+
+    // Original Opcodes
+    *draw_world_func = 0x27BDFFE8;
+    *(draw_world_func + 1) = 0x3C048007;
+
+    *draw_objects_func = 0x27BDFFE8;
+    *(draw_objects_func + 1) = 0xAFBF0010;
+
+    *draw_particles_func = 0x3C011F80;
+    *(draw_particles_func + 1) = 0xAC300000;
+}
+
+void TurnOnDefaultSettings()
+{
+    il_menu.il_state = true;
+    il_display_modes.il_display_dragon = true;
+
+    misc_menu.show_dragon_touch = true;
+
+    //timer_menu.timer_state = true;
+}
+void TurnOffDefaultSettings()
+{
+    il_menu.il_state = false;
+    il_display_modes.il_display_dragon = false;
+
+    misc_menu.show_dragon_touch = false;
+
+    //timer_menu.timer_state = false;
 }

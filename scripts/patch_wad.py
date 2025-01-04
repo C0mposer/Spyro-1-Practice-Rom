@@ -74,6 +74,7 @@ def PatchWadHeadControl():
         print(f"ValueError: {ve}")
         sys.exit(1)
 
+    #ARTISANS BALLOONIST PATCH FOR ANY%
     offset = int(0x7fa6E8)
     replace_bytes = b'\0' * 0xD4
     
@@ -92,6 +93,7 @@ def PatchWadHeadControl():
         print(f"ValueError: {ve}")
         sys.exit(1)
 
+    #PEACE KEEPERS BALLOONIST PATCH FOR ANY%
     offset = int(0x1887b84)
     replace_bytes = b'\0' * 0xD4
     
@@ -110,6 +112,7 @@ def PatchWadHeadControl():
         print(f"ValueError: {ve}")
         sys.exit(1)
 
+    #MAGIC CRAFTERS BALLOONIST PATCH FOR ANY%
     offset = int(0x2730ee8)
     replace_bytes = b'\0' * 0xEC
     
@@ -128,6 +131,7 @@ def PatchWadHeadControl():
         print(f"ValueError: {ve}")
         sys.exit(1)
 
+    #BEAST MAKERS BALLOONIST PATCH FOR ANY%
     offset = int(0x35948a0)
     replace_bytes = b'\0' * 0xE4
     
@@ -146,6 +150,7 @@ def PatchWadHeadControl():
         print(f"ValueError: {ve}")
         sys.exit(1)
 
+    #DREAM WEAVERS BALLOONIST PATCH FOR ANY%
     offset = int(0x43e5a74)
     replace_bytes = b'\0' * 0xEC
     

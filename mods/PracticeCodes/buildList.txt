@@ -75,13 +75,13 @@ DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manua
 DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/disable_portal.c, FairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
-DECKARD_PS2_NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c src/prims.c, PlayIntroCutscenes.bin
+DECKARD_PS2_NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c src/prims.c src/save_state_region.c, PlayIntroCutscenes.bin
 DECKARD_PS2_NTSC, exe, 0x8002BFE0, 0x0, src/misc_timer.c, TitleCameraRelated.bin
 DECKARD_PS2_NTSC, exe, 0x8002d580, 0x0, src/custom_menu_3.c src/draw_hud_moby.c, DebugLevelSelect.bin
 
 DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c src/credits_skip.c, kern.bin
 DECKARD_PS2_NTSC, kernal, 0x80007530, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/common.c, kern2.bin
-DECKARD_PS2_NTSC, kernal, 0x80A60000, 0x0, src/save_state.c src/save_geo.c src/save_state_region.c, PS2M.bin
+DECKARD_PS2_NTSC, kernal, 0x80A60000, 0x0, src/save_state.c src/save_geo.c, PS2M.bin
 
 DECKARD_PS2_NTSC, exe, 0x8001288c, 0x0, asm/splash_screen1.s
 DECKARD_PS2_NTSC, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s

@@ -195,15 +195,14 @@ void FullSaveState(void)
         local_mem_region += 0x4;
     }
 
-    if (_levelID == TREE_TOPS_ID)
-    {
-        // Load theif teleport state
-        memcpy((byte*)local_mem_region, 0x80075870, 0x4);
-        local_mem_region += 0x4;
 
-        memcpy((byte*)local_mem_region, 0x80075874, 0x4);
-        local_mem_region += 0x4;
-    }
+        // Load theif teleport state
+    memcpy((byte*)local_mem_region, 0x80075870, 0x4);
+    local_mem_region += 0x4;
+
+    // memcpy((byte*)local_mem_region, 0x80075874, 0x4);
+    // local_mem_region += 0x4;
+
 
     if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
     {
@@ -391,15 +390,13 @@ void FullLoadState(void)
 
             }
 
-            if (_levelID == TREE_TOPS_ID)
-            {
-                // Load theif teleport state
-                memcpy(0x80075870, (byte*)local_mem_region, 0x4);
-                local_mem_region += 0x4;
 
-                memcpy(0x80075874, (byte*)local_mem_region, 0x4);
-                local_mem_region += 0x4;
-            }
+            // Load theif teleport state
+            memcpy(0x80075870, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            // memcpy(0x80075874, (byte*)local_mem_region, 0x4);
+            // local_mem_region += 0x4;
 
             if (_levelID != GNASTYS_WORLD_ID) // Gnasty's World has by far the most moving collision, but as it currently stands we so no reason to save it, as it doesn't move in any relavent way
             {

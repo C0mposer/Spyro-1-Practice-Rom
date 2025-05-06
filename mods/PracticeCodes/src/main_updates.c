@@ -9,7 +9,9 @@
 #include <sound.h>
 #include <custom_text.h>
 #include <cosmetic.h>
-#include "main_updates.h"
+#include <custom_menu.h>
+
+extern ILMenu il_menu;
 
 enum ModState
 {
@@ -115,13 +117,16 @@ void MainUpdate()
             _globalLivesCounter = 99;
         }
 
-        //Give Key
-        if (CheckButtonMultiTap(TRIANGLE_BUTTON, 3))
+        // Cheats when IL mode is off
+        if (il_menu.il_state == OFF)
         {
-            _keyState = 1;
-        }
+            MoonjumpChecks();
 
-        MoonjumpChecks();
+            if (CheckButtonMultiTap(TRIANGLE_BUTTON, 3))
+            {
+                _keyState = 1;
+            }
+        }
     }
 }
 

@@ -34,7 +34,7 @@ int savestate_button_index;
 int loadstate_button_index;
 int savestate_selection = 0;
 
-#if BUILD == 2 || BUILD == 0
+#if BUILD == 2 || BUILD == 0 || BUILD == 5
 int switch_state_button_index;
 #elif BUILD == 1 || BUILD == 3
 bool respawn_on_loadstate = TRUE;
@@ -635,7 +635,7 @@ void CustomMenuUpdate(void)
             // Enable all
             if (il_display_modes.selection == 0)
             {
-                if (_currentButtonOneFrame == RIGHT_BUTTON || (_currentButton == X_BUTTON && time_in_display_menu > 10) && il_display_modes.il_has_enabled_all == false)
+                if (_currentButtonOneFrame == RIGHT_BUTTON || (_currentButtonOneFrame == X_BUTTON && time_in_display_menu > 10) && il_display_modes.il_has_enabled_all == false)
                 {
                     il_display_modes.il_display_dragon = true;
                     il_display_modes.il_display_landing = true;
@@ -647,7 +647,7 @@ void CustomMenuUpdate(void)
                     il_display_modes.il_display_bonk = true;
                     il_display_modes.il_has_enabled_all = true;
                 }
-                else if (_currentButtonOneFrame == LEFT_BUTTON || (_currentButton == X_BUTTON && time_in_display_menu > 10) && il_display_modes.il_has_enabled_all == true)
+                else if (_currentButtonOneFrame == LEFT_BUTTON || (_currentButtonOneFrame == X_BUTTON && time_in_display_menu > 10) && il_display_modes.il_has_enabled_all == true)
                 {
                     il_display_modes.il_display_dragon = false;
                     il_display_modes.il_display_landing = false;
@@ -951,7 +951,7 @@ void CustomMenuUpdate(void)
 
             _spyro.isMovementLocked = TRUE;
 
-            #if BUILD == 2 || BUILD == 0 // DECKARD HAS SAVESTATE SLOT
+            #if BUILD == 2 || BUILD == 0 || BUILD == 5 // DECKARD HAS SAVESTATE SLOT
             if (savestate_menu.selection == 0)
             {
                 DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -984,7 +984,7 @@ void CustomMenuUpdate(void)
                 DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
             }
 
-            #if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0 || BUILD == 5
             if (savestate_menu.selection == 3)
             {
                 DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
@@ -1005,7 +1005,7 @@ void CustomMenuUpdate(void)
             #endif
 
             // Fill text with defaults if NULL
-            #if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0 || BUILD == 5
             if (savestate_menu.stateslot_text == NULL)
             {
                 savestate_menu.stateslot_text = "CURRENT SLOT 1";
@@ -1023,8 +1023,8 @@ void CustomMenuUpdate(void)
             }
             #endif
 
-                        // Change Selection
-            #if BUILD == 2 || BUILD == 0
+            // Change Selection
+            #if BUILD == 2 || BUILD == 0 || BUILD == 5
             if (_currentButtonOneFrame == DOWN_BUTTON)
             {
                 savestate_menu.selection = (savestate_menu.selection + 1) % 4;
@@ -1052,7 +1052,7 @@ void CustomMenuUpdate(void)
 
             if (savestate_menu.selection == 0)
             {
-                #if BUILD == 2 || BUILD == 0
+                #if BUILD == 2 || BUILD == 0 || BUILD == 5
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
                     savestate_selection = (savestate_selection + 1) % 3;
@@ -1121,7 +1121,7 @@ void CustomMenuUpdate(void)
                 }
             }
 
-            #if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0 || BUILD == 5
             else if (savestate_menu.selection == 3)
             {
                 if (_currentButtonOneFrame == RIGHT_BUTTON || _currentButtonOneFrame == LEFT_BUTTON)
@@ -1178,26 +1178,7 @@ void CustomMenuUpdate(void)
 
     //! Checks
     {
-
-        if (misc_menu.sparx_mode == PERMA_SPARX_ON)
-        {
-            if (_spyro.health > 0)
-            {
-                _spyro.health = 3;
-            }
-        }
-        else if (misc_menu.sparx_mode == SPARXLESS)
-        {
-            if (_spyro.health > 0)
-            {
-                _spyro.health = 0;
-            }
-        }
-
-        if (show_sparx_range_mode == true)
-        {
-            DrawSparxRange();
-        }
+        SparxChecks();
 
         // Superfly/Supercharge checks
 
@@ -1273,4 +1254,3 @@ void CustomMenuUpdate(void)
     //     RenderShadedMobyQueue();
     // }
 }
-

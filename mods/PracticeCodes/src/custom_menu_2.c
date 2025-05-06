@@ -205,12 +205,16 @@ void CustomMenuUpdate2()
             }
             else if (misc_menu.sparx_mode == 1)
             {
-                misc_menu.sparx_mode_text = "PERMA SPARX";
+                misc_menu.sparx_mode_text = "SPARXLESS";
             }
             else
             {
-                misc_menu.sparx_mode_text = "SPARXLESS";
+                if (il_menu.il_state == OFF)
+                    misc_menu.sparx_mode_text = "PERMA SPARX";
+                else
+                    misc_menu.sparx_mode_text = "SPARX NORMAL";
             }
+
 
             if (misc_menu.show_dragon_touch == false)
             {
@@ -260,13 +264,24 @@ void CustomMenuUpdate2()
             // Update Menu Options
             if (misc_menu.selection == 0)
             {
+                int num_items = 0;
+                if (il_menu.il_state == OFF)
+                {
+                    num_items = 3;
+                }
+                if (il_menu.il_state == ON)
+                {
+
+                    num_items = 2;
+                }
+
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
-                    misc_menu.sparx_mode = (misc_menu.sparx_mode + 1) % 3;
+                    misc_menu.sparx_mode = (misc_menu.sparx_mode + 1) % num_items;
                 }
                 else if (_currentButtonOneFrame == LEFT_BUTTON)
                 {
-                    misc_menu.sparx_mode = (misc_menu.sparx_mode + 2) % 3;
+                    misc_menu.sparx_mode = (misc_menu.sparx_mode + (num_items - 1)) % num_items;
                 }
             }
 

@@ -36,6 +36,10 @@ void MainHook()
         #elif BUILD == PS2_IOP
         LoadCdData(265759, (int*)0x80008EB0, 0x1600, 0, 600);     //Loads kern.bin
         LoadCdData(265762, (int*)0x80007530, 0x1000, 0, 600);     //Loads kern2.bin
+        #elif BUILD == 5
+        LoadCdData(265759, (int*)0x8000C000, 0x1600, 0, 600);     //Loads kern.bin
+        LoadCdData(265762, (int*)0x8000EA00, 0x1000, 0, 600);     //Loads kern2.bin
+        LoadCdData(265764, 0x80300000, 0x1000, 0, 600);           //Loads EXTRA.bin
         #endif
 
         hasLoadedCDCode = true;                                 //Set Flag
@@ -60,14 +64,13 @@ void MainHook()
             CosmeticsUpdate();
             MainUpdate();
 
-            #if BUILD == PS2_DECKARD || BUILD == REDUX
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == 5
             LoadstateFixesUpdate();
             #endif
 
             //! WIP
             //ShempSkipFrameDataUpdate(); // Work on later
             //MemoryWatchTest();
-
         }
     }
 }

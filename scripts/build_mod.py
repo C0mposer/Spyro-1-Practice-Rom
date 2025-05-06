@@ -94,9 +94,63 @@ elif version_to_build == "PS2_IOP":
         file.write(cue_string)
     os.remove("mkpsxiso.cue")
     
+elif version_to_build == "VITA":
+    print("Building...")
+    os.system("py ../../../../tools/mod-builder/main.py 2 1 5 4 5")
+    
+    os.chdir("../")
+    os.chdir("../")
+    os.chdir("scripts")
+    
+    PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+    PatchArtisansFlag()
+
+    os.chdir("../")
+    os.chdir("build")
+    
+    os.system("mkpsxiso spyro1_PracticeCodes_Manual_VITA.xml")
+    
+    if os.path.isfile("VITA_Practice_Codes.bin"):
+        os.remove("VITA_Practice_Codes.bin")
+    os.rename("mkpsxiso.bin", "VITA_Practice_Codes.bin")
+    with open("VITA_Practice_Codes.cue", "w+") as file:
+        cue_string = """FILE "VITA_Practice_Codes.bin" BINARY
+ TRACK 01 MODE2/2352
+  INDEX 01 00:00:00
+                    """
+        file.write(cue_string)
+    os.remove("mkpsxiso.cue")
+elif version_to_build == "TEST":
+    print("Building...")
+    os.system("py ../../../../tools/mod-builder/main.py 2 1 6 4 6")
+    
+    os.chdir("../")
+    os.chdir("../")
+    os.chdir("scripts")
+    
+    PatchWadHeadControl()                           #Patches head_control.c into wad.wad
+    PatchArtisansFlag()
+
+    os.chdir("../")
+    os.chdir("build")
+    
+    os.system("mkpsxiso spyro1_PracticeCodes_Manual_VITA.xml")
+    
+    if os.path.isfile("VITA_Practice_Codes.bin"):
+        os.remove("VITA_Practice_Codes.bin")
+    os.rename("mkpsxiso.bin", "VITA_Practice_Codes.bin")
+    with open("VITA_Practice_Codes.cue", "w+") as file:
+        cue_string = """FILE "VITA_Practice_Codes.bin" BINARY
+ TRACK 01 MODE2/2352
+  INDEX 01 00:00:00
+                    """
+        file.write(cue_string)
+    os.remove("mkpsxiso.cue")
+    
 else:
     print("Unknown Build Version!")
     exit()
+    
 
 
 

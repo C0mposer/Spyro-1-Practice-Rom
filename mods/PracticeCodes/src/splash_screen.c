@@ -15,7 +15,7 @@ void SplashScreen1Hook(void)
     {
         #if BUILD == PS1 || BUILD == PS2_IOP
         LoadCdData(265774, SPLASH_1_RAM_AREA, 0x59000, 0, 600);     //Loads kern.bin
-        #elif BUILD == PS2_DECKARD
+        #elif BUILD == PS2_DECKARD || BUILD == 5
         LoadCdData(265776, SPLASH_1_RAM_AREA, 0x59000, 0, 600);     //Loads kern.bin
         #endif
 
@@ -31,7 +31,7 @@ void SplashScreen2Hook(void)
     {
         #if BUILD == PS1 || BUILD == PS2_IOP
         LoadCdData(265954, SPLASH_2_RAM_AREA, 0x59000, 0, 600);     //Loads kern.bin
-        #elif BUILD == PS2_DECKARD
+        #elif BUILD == PS2_DECKARD || BUILD == 5
         LoadCdData(265956, SPLASH_2_RAM_AREA, 0x59000, 0, 600);     //Loads kern.bin
         #endif
 

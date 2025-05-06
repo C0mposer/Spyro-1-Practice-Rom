@@ -10,6 +10,8 @@
 #include <cd.h>
 
 extern ILMenu il_menu;
+extern MiscMenu misc_menu;
+extern bool show_sparx_range_mode;
 
 // Loop Level selection in HW fly in
 void UpdateLoopLevel()
@@ -42,4 +44,30 @@ void LoopLevelChoiceFlyIn(void)
 
     // Render Text
     RenderShadedMobyQueue();
+}
+
+void SparxChecks(void)
+{
+    if (il_menu.il_state == OFF) //Only allow perma sparx when IL mode is off
+    {
+        if (misc_menu.sparx_mode == PERMA_SPARX_ON)
+        {
+            if (_spyro.health > 0)
+            {
+                _spyro.health = 3;
+            }
+        }
+    }
+    if (misc_menu.sparx_mode == SPARXLESS)
+    {
+        if (_spyro.health > 0)
+        {
+            _spyro.health = 0;
+        }
+    }
+
+    if (show_sparx_range_mode == true)
+    {
+        DrawSparxRange();
+    }
 }

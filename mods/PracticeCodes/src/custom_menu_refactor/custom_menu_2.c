@@ -40,7 +40,7 @@ typedef enum ILTimerDisplayMode
 
 typedef enum SparxMode
 {
-    PERMA_SPARX_OFF,
+    NORMAL_SPARX,
     PERMA_SPARX_ON,
     SPARXLESS
 

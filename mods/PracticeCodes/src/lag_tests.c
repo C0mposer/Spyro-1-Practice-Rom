@@ -1,6 +1,15 @@
 #include <common.h>
-#include <levelselect.h>
 #include <custom_text.h>
+
+typedef enum LevelSelectButtonSelections
+{
+    LEVEL_SELECT_L3,
+    LEVEL_SELECT_L1,
+    LEVEL_SELECT_L2,
+    LEVEL_SELECT_R1,
+    LEVEL_SELECT_R2,
+    LEVEL_SELECT_R3
+}LevelSelectButtonSelections;
 
 enum Tests
 {
@@ -24,7 +33,7 @@ bool is_finished_with_tests = false;
 
 extern int inventory_timer;
 
-TestsUpdate(void)
+void TestsUpdate(void)
 {
     if (_gameState == GAMESTATE_GAMEPLAY)
     {

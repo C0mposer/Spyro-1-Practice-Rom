@@ -43,7 +43,7 @@ void SaveStateUpdate()
         {
             if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load || should_savestate_on_game_start)
             {
-                #if BUILD == 2 || BUILD == 0
+                #if BUILD == 2 || BUILD == 0 || BUILD == 5
                 FullSaveState();
                 #elif BUILD == 1 || BUILD == 3
                 SaveSpyroAndCamera(false);
@@ -60,7 +60,7 @@ void SaveStateUpdate()
         {
             if (CheckButtonMultiTap(L3_BUTTON, 2))
             {
-                #if BUILD == 2 || BUILD == 0
+                #if BUILD == 2 || BUILD == 0 || BUILD == 5
                 FullSaveState();
                 #elif BUILD == 1 || BUILD == 3
                 SaveSpyroAndCamera(false);
@@ -70,7 +70,7 @@ void SaveStateUpdate()
 
 
         // Load spyro & camera information or Loadstate depending on console
-        #if BUILD == 2 || BUILD == 0        // Real Loadstate
+        #if BUILD == 2 || BUILD == 0 || BUILD == 5        // Real Loadstate
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]))
         {
             FullLoadState();
@@ -108,10 +108,10 @@ void SaveStateUpdate()
                 ResetLevelCollectables();
                 readyToLoadstateAfterDeath = true;
             }
-    }
+        }
         #endif
 
-        #if BUILD == 2 || BUILD == 0  // Change Savestate Slots
+        #if BUILD == 2 || BUILD == 0 || BUILD == 5  // Change Savestate Slots
          // Quick Savestate Slot Selection
         if (switch_state_button_index == 0)
         {
@@ -172,9 +172,9 @@ void SaveStateUpdate()
 
         #endif
 
-}
+    }
 
-// Prepare savestate after dragon or portal
+    // Prepare savestate after dragon or portal
     if (_gameState == GAMESTATE_DRAGON_STATE || _gameState == GAMESTATE_LOADING)
     {
         if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index])
@@ -198,7 +198,7 @@ void SaveStateUpdate()
         if (does_savestate_already_exist == false)
         {
             //printf("Savestated after enabling the disable portal option\n");
-            #if BUILD == 2 || BUILD == 0
+            #if BUILD == 2 || BUILD == 0 || BUILD == 5
             FullSaveState();
             #elif BUILD == 1 || BUILD == 3
             SaveSpyroAndCamera(false);

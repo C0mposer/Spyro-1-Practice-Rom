@@ -31,7 +31,7 @@ void DisablePortalEntry(void)
             return;
         }
 
-        #if BUILD == 2 || BUILD == 0
+        #if BUILD == 2 || BUILD == 0 || BUILD == 5
         FullLoadState();
         #elif BUILD == 1 || BUILD == 3
         ReloadSpyroAndCamera(false);

@@ -144,13 +144,13 @@ void LevelSelectUpdate()
 
 }
 
-// Called in gamestate_check.s, to avoid updating any mobys
+// Called in gamestate_check.s, to avoid updating any mobys for cycle accuracy
 void BalloonUpdate()
 {
 	maybe_SFXProcessing(); // Calling because we are hooking onto this function call in GameStateCheck.
 
 	// Display option to change loop level option when flying into HW
-	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_LOADING && _loadingScreenTimer > 5)
+	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_LOADING && _loadingScreenTimer > 5 && _loadingScreenTimer < 60 * 5)
 	{
 		LoopLevelChoiceFlyIn();
 	}

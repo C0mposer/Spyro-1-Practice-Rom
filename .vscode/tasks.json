@@ -129,6 +129,31 @@
             "problemMatcher": []
         },
         {
+            "label": "Compile and Build VITA ISO",
+            "type": "shell",
+            "command": "py build_mod.py TEST",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "icon": {
+                "id": "key",
+                "color": "terminal.ansiYellow"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Check Available Space",
             "type": "shell",
             "command": "py check_available_space.py PS2_IOP",
@@ -311,6 +336,20 @@
             "label": "Create PS2 IOP Xdelta Patch",
             "type": "shell",
             "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -S none -f -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\PS2_IOP_Practice_Codes.bin ${workspaceFolder}\\build\\PS2_IOP_Practice_Codes.xdelta",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "icon": {
+                "id": "gather",
+                "color": "terminal.ansiYellow"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Create VITA Xdelta Patch",
+            "type": "shell",
+            "command": "${workspaceFolder}\\..\\..\\tools\\Xdelta\\xdelta.exe -S none -f -s ${workspaceFolder}\\build\\spyro1.bin ${workspaceFolder}\\build\\VITA_Practice_Codes.bin ${workspaceFolder}\\build\\VITA_Practice_Codes.xdelta",
             "group": {
                 "kind": "build",
                 "isDefault": true

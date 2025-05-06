@@ -55,6 +55,30 @@
             ],
             "build_id": 3
         }
+    },
+    {
+        "VITA": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 4
+        }
+    },
+    {
+        "TEST": 
+        {
+            "name": "spyro1.bin",
+            "symbols": 
+            [
+                "symbols.txt",
+                "funcs.txt"
+            ],
+            "build_id": 5
+        }
     }
     ]
 }

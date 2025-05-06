@@ -43,9 +43,9 @@ typedef enum ILTimerDisplayMode
 
 typedef enum SparxMode
 {
-    PERMA_SPARX_OFF,
-    PERMA_SPARX_ON,
-    SPARXLESS
+    NORMAL_SPARX,
+    SPARXLESS,
+    PERMA_SPARX_ON
 
 } SparxMode;
 
@@ -129,7 +129,7 @@ typedef struct TimerMenu
 
 } TimerMenu;
 
-#if BUILD == 2 || BUILD == 0
+#if BUILD == 2 || BUILD == 0 || BUILD == 5
 typedef struct SavestateMenu
 {
     int selection;

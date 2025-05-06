@@ -1,6 +1,5 @@
 {
-    "REDUX": 
-    [
+    "REDUX": [
         {
             "SCUS_942.28": [
                 {
@@ -16,9 +15,7 @@
             ]
         }
     ],
-    
-    "NTSC": 
-    [
+    "NTSC": [
         {
             "SCUS_942.28": [
                 {
@@ -34,9 +31,7 @@
             ]
         }
     ],
-    
-    "DECKARD_PS2_NTSC": 
-    [
+    "DECKARD_PS2_NTSC": [
         {
             "SCUS_942.28": [
                 {
@@ -52,13 +47,44 @@
             ]
         }
     ],
-    "IOP_PS2_NTSC": 
-    [
+    "IOP_PS2_NTSC": [
         {
             "SCUS_942.28": [
                 {
                     "name": "header",
                     "address": "0x8000A8D0",
+                    "offset": "0x0"
+                },
+                {
+                    "name": "exe",
+                    "address": "0x80010000",
+                    "offset": "0x800"
+                }
+            ]
+        }
+    ],
+    "VITA": [
+        {
+            "SCUS_942.28": [
+                {
+                    "name": "header",
+                    "address": "0x8000B070",
+                    "offset": "0x0"
+                },
+                {
+                    "name": "exe",
+                    "address": "0x80010000",
+                    "offset": "0x800"
+                }
+            ]
+        }
+    ],
+    "TEST": [
+        {
+            "SCUS_942.28": [
+                {
+                    "name": "header",
+                    "address": "0x8000B070",
                     "offset": "0x0"
                 },
                 {

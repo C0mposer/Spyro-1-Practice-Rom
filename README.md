@@ -75,7 +75,7 @@ This submenu has a multitude of options for when to display your IL time. This c
 This setting displays an on screen timer that resets upon reloading your state/reloading spyro, and stops upon pausing. Can be used for manually timing movement, routes, & tricks in game!
 
 ### Manual Timer Display Mode
-- **DISPLAY ON STOPPED** mode displays the timer on screen only when you pause to stop the timer. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
+- **DISPLAY ON STOPPED** mode displays the timer on screen only when you pause to stop the timer.
 - **DISPLAY ALWAYS** mode displays the timer on screen at all times.
 
 

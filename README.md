@@ -51,22 +51,24 @@ This setting lets you practice & time individual level runs for most categories!
 - Once you leave through a vortex/through the pause menu, it will then stop the first frame the HUD for the "RETURNING HOME" text starts coming down in the loading screen.
 - The loading screen will then display your individual level time in big text, and underneath display the loadless version of the same time to account for dragons in slightly smaller text.
 - It will also reload you back into the same level to let you practice on loop.
-- This timer should be accurate within 1 frame (~0.03) in most situations.
+- This timer should be accurate within 2 frames (~0.06) in most situations.
 	 
-### IL Timer Display: 
-This setting controls the main display setting for the IL Timer
-
-- **IL TIMER DISPLAY AT END** mode displays the IL timer on screen only when you finish a level. This is to reduce minor lag that could be caused from the extra rendering of the text mobys.
-- **TIMER ALWAYS** mode displays the IL timer on screen at all times, as well as at the end.    
-
-### Display At Dragon: 
-This setting will render the IL Timer when you freed a dragon.
-
-### Display Landing: 
-This setting will render the IL Timer when land on the ground.
 
 ### Loop Level: 
 This setting controls if the level should loop upon exiting in IL Mode.
+
+### Display Settings: 
+This submenu has a multitude of options for when to display your IL time. This can be useful to keep track of "checkpoints".
+
+- Display Dragon
+- Display Landing
+- Display Glide
+- Display Flame
+- Display Gem Collect
+- Display Flight Item
+- Display Whirlwind
+- Display Bonk
+- Display Always
 
 ## Manual Timer Settings
 ### Manual Timer: 

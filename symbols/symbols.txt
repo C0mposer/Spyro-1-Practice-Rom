@@ -221,6 +221,7 @@ _balloon_unk5 = 0x80077824;
 _balloon_unk6 = 0x80077828;
 
 _flightLevelTimes = 0x80078618;
+_flightLevelObjectivesComplete = 0x80078680;
 
 _flightTargetVerticalRotation = 0x80075700;
 _flightTargetHorizontalRotation = 0x800758a0;
@@ -228,3 +229,8 @@ _flightRoll = 0x80075960;
 
 _ptr_particleBuffer = 0x80075824;
 _ptr_nextFreeParticleSlot = 0x80075738;
+
+_ptr_controller_one = 0x80075d48;
+_ptr_controller_two = 0x80075e38;
+
+_homeworldID = 0x8007595c;

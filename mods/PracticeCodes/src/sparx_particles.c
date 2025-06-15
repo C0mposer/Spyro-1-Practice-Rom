@@ -96,8 +96,8 @@ void ChangeFullSparxParticleColor()
     asm(
         "j %0"
         :
-        : "r" (end_of_rand_switch)
-    );
+    : "r" (end_of_rand_switch)
+        );
 }
 
 // Finds the specific opcodes in the particle overlay function for sparx's particles
@@ -115,7 +115,7 @@ int* FindSparxParticleCode(void)
     //printf("Found! %X\n", create_particle_current_addr);
 
     int* start_of_sparx_particle_code = create_particle_current_addr;  // Address of the sparx particle code
-    end_of_rand_switch = start_of_sparx_particle_code + 45;            // Address to our the end of the switch, which will be where we return normal control flow
+    end_of_rand_switch = start_of_sparx_particle_code + 45;            // Address to the end of the switch, which will be where we return normal control flow
 
     return start_of_sparx_particle_code;
 

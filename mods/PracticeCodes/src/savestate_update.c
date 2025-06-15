@@ -11,6 +11,10 @@ int savestateSwitchedTimer = 0;
 
 bool switch_savestate_button_held;
 
+bool just_loaded_state = false;
+
+bool fly_in_resets_loadstate_timer = 0;
+
 //From other files
 extern int savestate_selection;
 
@@ -28,6 +32,8 @@ extern bool disable_portal_entry;
 extern bool has_savestated_on_disabling_portal;
 
 extern bool hasSavedSpyro;
+
+extern short fly_in_resets[37];
 
 #if BUILD == 1 || BUILD == 3
 extern bool respawn_on_loadstate;
@@ -75,10 +81,20 @@ void SaveStateUpdate()
         {
             FullLoadState();
 
+            if ((_movementSubState == MOVEMENT_SUBSTATE_FLY_IN_LOOP || _movementSubState == MOVEMENT_SUBSTATE_FLY_IN_CAMERA_180 || _movementSubState == MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS) && fly_in_resets_loadstate_timer == 0)
+            {
+                fly_in_resets[_levelIDIndex]++;
+            }
+            fly_in_resets_loadstate_timer = 1;
+
             if (_levelID == GNASTYS_LOOT_ID)
             {
                 LootGiveAllKeys();
             }
+        }
+        else
+        {
+            just_loaded_state = false;
         }
         #elif BUILD == 1 || BUILD == 3      // Sudo Load-State
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index] && hasSavedSpyro == true) || (readyToLoadstateAfterDeath == true && _effect_ScreenFadeIn != 0))
@@ -234,8 +250,9 @@ void SaveStateUpdate()
 
         }
     }
-}
 
+    FlyInResetsLoadstateTimerUpdate();
+}
 
 void DrawSavestateSwitchedText(void)
 {
@@ -243,4 +260,16 @@ void DrawSavestateSwitchedText(void)
     sprintf(buf, "%d", savestate_selection + 1);
     DrawTextCapitals(buf, &(CapitalTextInfo){.x = 0x100, .y = 0xDC, .size = DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
     RenderShadedMobyQueue();
+}
+
+void FlyInResetsLoadstateTimerUpdate(void)
+{
+    if (fly_in_resets_loadstate_timer > 0)
+    {
+        fly_in_resets_loadstate_timer++;
+    }
+    if (fly_in_resets_loadstate_timer >= 30)
+    {
+        fly_in_resets_loadstate_timer = 0;
+    }
 }

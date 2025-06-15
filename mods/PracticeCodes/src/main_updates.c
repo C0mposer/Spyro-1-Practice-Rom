@@ -270,6 +270,11 @@ void ResetLevelCollectables()
 
     memset(&_flightLevelTimes, 0, sizeof(int) * 5);
 
+    for (int i = 0; i < 0x1A; i++) // For some reason memset doesn't work for _flightLevelObjectivesComplete lmao
+    {
+        _flightLevelObjectivesComplete[i] = 0;
+    }
+
     // Key Glitch Fix
     _keyState = 0;
     _ptr_keyChestHostGem = NULL;

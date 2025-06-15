@@ -27,6 +27,8 @@ int balloonLoadTimer = 0;
 
 int instaLoadNopFixTimer = 0;
 
+short fly_in_resets[37] = { 0 };
+
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
 const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
 						FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_RIGHT, FACING_LEFT, FACING_RIGHT,
@@ -39,7 +41,7 @@ const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_
 
 void DetermineButton()
 {
-	//if you're in the inventory, and have yet to pick a level
+	// If you're in the inventory, and have yet to pick a level
 	if (_gameState == GAMESTATE_INVENTORY && _pausedTimer > 7 && levelSelectState == READY)
 	{
 		levelSelectState = LEVEL_CHOSEN;	//Assume button has been pressed, until default case. To avoid repeating in each case.
@@ -107,10 +109,9 @@ void DetermineButton()
 
 void LevelSelectUpdate()
 {
-
 	DetermineButton();
 
-	//Prepare Level Select
+	// Prepare Level Select
 	if (levelSelectState == LEVEL_CHOSEN)
 	{
 		ResetLevelCollectables();
@@ -125,22 +126,54 @@ void LevelSelectUpdate()
 		levelSelectState = STARTING_LEVEL_LOAD;
 	}
 
-	//Set Level ID and Animation to correct values for level fly in
+	// Set Level ID and Animation to correct values for level fly in
 	if (_movementSubState == MOVEMENT_SUBSTATE_LOADING && levelSelectState == STARTING_LEVEL_LOAD)
 	{
-		//If selected homeworld, just spawn in
+		// If selected homeworld, just spawn in
 		if (buttonSelection == LEVEL_SELECT_L3) {
 			_canFlyIn = false;
 		}
-		_flightWingsAnimation = 0;
-		_portalToExitFromInHW = 0;
-		_levelID = ((_selectMenuOption + 1) * 0xA + buttonSelection < 0x41 ? (_selectMenuOption + 1) * 0xA + buttonSelection : 0x3C);
-		_flyInAnimation = flyInArray[_selectMenuOption * 6 + buttonSelection];
+
+		if (_currentButton != TRIANGLE_BUTTON) // Normal Level Load
+		{
+			_flightWingsAnimation = 0;
+			_portalToExitFromInHW = 0;
+			_levelID = ((_selectMenuOption + 1) * 0xA + buttonSelection < 0x41 ? (_selectMenuOption + 1) * 0xA + buttonSelection : 0x3C);
+			_flyInAnimation = flyInArray[_selectMenuOption * 6 + buttonSelection];
+
+			// Swap Fly in animation direction with circle
+			if (_currentButton == CIRCLE_BUTTON)
+			{
+				if (_flyInAnimation == (short)FACING_LEFT)
+				{
+					_flyInAnimation = FACING_RIGHT;
+				}
+				else if (_flyInAnimation == (short)FACING_RIGHT)
+				{
+					_flyInAnimation = FACING_LEFT;
+				}
+				// Swap High Caves Camera
+				else if (_levelID == HIGH_CAVES_ID)
+				{
+					_spyro.angle.yaw = 0xE3E;
+					*((int*)0x80078C5C) = 0x00E40000; // Unknown variable, but is related to fly in camera
+				}
+			}
+
+		}
+		else // Level select out of level portal
+		{
+			_flightWingsAnimation = 0;
+			_portalToExitFromInHW = ((_selectMenuOption + 1) * 0xA + buttonSelection < 0x41 ? (_selectMenuOption + 1) * 0xA + buttonSelection : 0x3C);
+			_levelID = ((_selectMenuOption + 1) * 0xA);
+			_flyInAnimation = RETURNING_HOME;
+		}
 
 		levelSelectState = READY;
+
+		fly_in_resets[LOCAL_LEVEL_ID_INDEX]++; // Increase amount of resets in the current level
 	}
 
-	//BalloonUpdate();
 
 }
 
@@ -150,8 +183,9 @@ void BalloonUpdate()
 	maybe_SFXProcessing(); // Calling because we are hooking onto this function call in GameStateCheck.
 
 	// Display option to change loop level option when flying into HW
-	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_LOADING && _loadingScreenTimer > 5 && _loadingScreenTimer < 60 * 5)
+	if (buttonSelection == LEVEL_SELECT_L3 && _gameState == GAMESTATE_LOADING && _loadingScreenTimer > 5 && _loadingScreenTimer < 60 * 6)
 	{
+		ChangeGemcountFlyIn();
 		LoopLevelChoiceFlyIn();
 	}
 
@@ -177,7 +211,6 @@ void BalloonUpdate()
 		_spyro.nextAnim = IDLE_STANDING;
 
 		balloonLoadTimer = 0;
-		//printf("test\n");
 	}
 
 	if (balloonLoadTimer > 0)
@@ -185,23 +218,23 @@ void BalloonUpdate()
 
 }
 
-//Custom Function for instantly flying back into current level
+// Custom Function for instantly flying back into current level
 void InstaLoadUpdate() {
 
-	//Save Camera and Spyro when it is stopped
+	// Save Camera and Spyro when it is stopped
 	if (_levelLoadState == 0xB && _portalToExitFromInHW == 0)
 	{
 		_spyro.timer_framesInAir = 1;						// For Tree Tops, setting before the save
 		SaveSpyroAndCamera(TRUE);
 	}
 
-	//If the instaload has been set up, reload the Camera and Spyro
+	// If the instaload has been set up, reload the Camera and Spyro
 	if (instaLoadReady == TRUE)
 	{
 		ReloadSpyroAndCamera(TRUE);
 		_spyro.health = YELLOW_SPARX;	// Setting before the save since it will load his struct
 
-		//Fix Flight Wiggle
+		// Fix Flight Wiggle
 		_flightTargetVerticalRotation = 0;
 		_flightTargetHorizontalRotation = 0;
 		_flightRoll = 0;
@@ -225,12 +258,12 @@ void InstaLoadUpdate() {
 		*(int*)0x80056528 = 0x0C005C7F;						// Putting Vec3Length sfx call back after insta-load (0x0C005C7F is the asm opcode bytes for the function call)
 	}
 
-//If pressed hotkey for instaload
+	// If pressed hotkey for instaload
 	if (_currentButton == (L1_BUTTON + R1_BUTTON + TRIANGLE_BUTTON) && _gameState == GAMESTATE_GAMEPLAY && _levelID % 10 != 0)
 	{
 		ResetLevelCollectables();
 
-		//Pre-reqs for insta-load
+		// Pre-reqs for insta-load
 		{
 			_levelLoadState = 0xB;
 			_gameState = GAMESTATE_LOADING;
@@ -244,7 +277,7 @@ void InstaLoadUpdate() {
 			_musicState = 0x40;
 
 			// Fixes
-			*(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?
+			*(int*)0x80056528 = 0x00000000;						// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after the insta-load?
 
 			// JR RA CameraRotation for strange crash in whirlwind, notably in tree tops
 			*(int*)0x80033f08 = 0x03e00008;
@@ -253,6 +286,8 @@ void InstaLoadUpdate() {
 
 		instaLoadNopFixTimer = 1;
 		instaLoadReady = TRUE;
+
+		fly_in_resets[_levelIDIndex]++; //Increase amount of resets in the current level
 	}
 
 	if (instaLoadNopFixTimer > 0)

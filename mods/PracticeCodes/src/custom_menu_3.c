@@ -46,6 +46,7 @@ void LoopLevelChoiceFlyIn(void)
     RenderShadedMobyQueue();
 }
 
+
 void SparxChecks(void)
 {
     if (il_menu.il_state == OFF) //Only allow perma sparx when IL mode is off

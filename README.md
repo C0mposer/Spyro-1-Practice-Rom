@@ -190,7 +190,7 @@ The rat is saved as a part of the sudo-savestate (L3/R3) as well
 - Warp before plane 1 with key - *L1 + R1 + Square*   
 
 ### Moonjump
-- Moonjump by press *L2 + R2 + L1 + R1 + X*  
+- Moonjump by pressing *L2 + R2 + L1 + R1 + X*. (*This only works when IL mode is off.*)
 
 # Patch Game
 If you wish to patch your own personal spyro 1 .bin file instead, visit here:

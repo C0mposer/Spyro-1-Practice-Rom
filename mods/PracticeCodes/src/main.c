@@ -11,11 +11,7 @@
 #include <moving_geo.h>
 #include <cd.h>
 
-int savestate_free_space[12] = { 0 };
-
 bool hasLoadedCDCode;
-
-int loaded_timer = 0;
 
 //*
 //* ~ MAIN EVERY FRAME HOOK ~
@@ -52,6 +48,7 @@ void MainHook()
             InstaLoadUpdate();
             TimerUpdate();
             ILUpdate();
+            TrackConsistencyUpdate();
             SaveStateUpdate();
             CustomMenuUpdate();
             CustomMenuUpdate2();
@@ -60,9 +57,9 @@ void MainHook()
             LootPlaneUpdate();
             MultiTapUpdate();
             CheckMiscTimerUpdate();
-            TrackConsistencyUpdate();
             CosmeticsUpdate();
             MainUpdate();
+            SwapControllerUpdate();
 
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == 5
             LoadstateFixesUpdate();

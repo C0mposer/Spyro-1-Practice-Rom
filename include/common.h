@@ -9,7 +9,7 @@
 //Constants
 //~~~~~~~~~
 
-#define MOD_VERSION_STRING "V4.1"
+#define MOD_VERSION_STRING "V4.2"
 
 //! Build Versions
 #define REDUX 0
@@ -59,6 +59,10 @@
 
 #define IS_LEVEL_ID_HOMEWORLD (_levelID % 10)
 #define IS_LEVEL_ID_EXIT_HOMEWORLD (_levelIDPortalExit % 10)
+
+// Specifically for if the hw and index variables themselves have yet to update, but we have manually updated levelID
+#define LOCAL_HOMEWORLD_ID (_levelID / 10 -1)
+#define LOCAL_LEVEL_ID_INDEX (LOCAL_HOMEWORLD_ID * 6 + _levelID % 10)
 
 void NumberToAscii(int number, char* result);
 
@@ -454,6 +458,7 @@ extern int _globalLivesCounter; //0x80077FD0
 extern char _levelID; //0x800758B4                           //? Level ID according to the LevelIDs enum. This LevelID is used to determine which level will be loaded when in a loading screen, amung other things.
 extern char _portalToExitFromInHW; //0x800758AC              //? Same as the Level Id for the level. Also if 0, means entering level for fly in, not returning home
 extern int _levelIDIndex; //0x80075964                       //? Level ID that is used for indexing through level arrays.
+extern int _homeworldID;
 
 extern int _portalNumber; //0x8007576c                       //? Number for the portal that spyro should fly out of in the homeworld
 
@@ -583,6 +588,7 @@ extern int _electricPadActivations[8];
 extern int _cameraTurnDirection;
 
 extern int _flightLevelTimes[5];
+extern char _flightLevelObjectivesComplete[0x1A];
 
 extern int _flightTargetVerticalRotation;
 extern int _flightTargetHorizontalRotation;

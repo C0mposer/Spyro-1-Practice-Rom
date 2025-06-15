@@ -4,7 +4,17 @@
 
 extern ILDisplayMenu il_display_modes;
 
+// typedef union MiscDisplayTimer
+// {
+//     bool should_display_time;
+//     int display_timer;
+// } MiscDisplayTimer;
+
+// MiscDisplayTimer misc_display_timer;
+// misc_display_timer.should
+
 int misc_display_timer = 0;
+
 bool has_landed = false;
 bool has_glided = false;
 bool has_entered_whirlwind = false;

@@ -57,6 +57,8 @@ extern bool should_write_sparx_bmp;
 
 extern int gnasty_chase_state;
 
+extern bool ignore_loop_level;
+
 //! Every Frame Update
 void ILUpdate() {
     if (il_menu.il_state == true)
@@ -196,7 +198,7 @@ void ILUpdate() {
         }
 
         // IL LOOPING //!TEST THIS, SHOULD WORK
-        if (il_menu.dont_loop_level == false)
+        if (il_menu.dont_loop_level == false && !ignore_loop_level)
         {
             if ((_portalToExitFromInHW && _portalNumber == -1))
             {
@@ -230,6 +232,11 @@ void ILUpdate() {
                     ResetLevelCollectables();
                 }
             }
+        }
+
+        if (_levelLoadState == 0xFFFFFFFF)
+        {
+            ignore_loop_level = false;
         }
     }
 }

@@ -27,7 +27,9 @@ int balloonLoadTimer = 0;
 
 int instaLoadNopFixTimer = 0;
 
-short fly_in_resets[37] = { 0 };
+unsigned short fly_in_resets[36] = { 0 };
+
+bool ignore_loop_level = false;
 
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
 const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
@@ -167,6 +169,7 @@ void LevelSelectUpdate()
 			_portalToExitFromInHW = ((_selectMenuOption + 1) * 0xA + buttonSelection < 0x41 ? (_selectMenuOption + 1) * 0xA + buttonSelection : 0x3C);
 			_levelID = ((_selectMenuOption + 1) * 0xA);
 			_flyInAnimation = RETURNING_HOME;
+			ignore_loop_level = true;
 		}
 
 		levelSelectState = READY;

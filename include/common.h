@@ -597,5 +597,7 @@ extern int _flightRoll;
 extern int* _ptr_particleBuffer;
 extern int* _ptr_nextFreeParticleSlot;
 
+extern int* _ptr_respawn_position; // Vec3 + Angle
+
 
 #endif /* COMMON_H */

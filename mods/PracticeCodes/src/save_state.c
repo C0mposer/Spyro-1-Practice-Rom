@@ -124,12 +124,22 @@ void FullSaveState(void)
     memcpy((byte*)local_mem_region, _ptr_particleBuffer, 0x2000);
     local_mem_region += 0x2000;
 
-    // Load particle slot ptr
+    // Particle slot ptr
     memcpy((byte*)local_mem_region, &_ptr_nextFreeParticleSlot, 0x4);
     local_mem_region += 0x4;
 
+    // respawn ptr
+    memcpy((byte*)local_mem_region, 0x800778D8, 0x16);
+    local_mem_region += 0x16;
 
-//Electric Pads in BM/Terrace
+    // respawn angle
+    memcpy((byte*)local_mem_region, 0x800777A0, 0x4);
+    local_mem_region += 0x4;
+
+    memcpy((byte*)local_mem_region, &_collectablesBitflags, 0x4B0);
+    local_mem_region += 0x4B0;
+
+    //Electric Pads in BM/Terrace
     memcpy((byte*)local_mem_region, _electricPadActivations, (sizeof(_electricPadActivations)));
     local_mem_region += sizeof(_electricPadActivations);
 
@@ -324,7 +334,18 @@ void FullLoadState(void)
             memcpy(&_ptr_nextFreeParticleSlot, (byte*)local_mem_region, 0x4);
             local_mem_region += 0x4;
 
-            //Electric Pads in BM/Terrace
+            // respawn pos
+            memcpy(0x800778D8, (byte*)local_mem_region, 0x16);
+            local_mem_region += 0x16;
+
+            // respawn angle
+            memcpy(0x800777A0, (byte*)local_mem_region, 0x4);
+            local_mem_region += 0x4;
+
+            memcpy(&_collectablesBitflags, (byte*)local_mem_region, 0x4B0);
+            local_mem_region += 0x4B0;
+
+                    //Electric Pads in BM/Terrace
             memcpy(_electricPadActivations, (byte*)local_mem_region, (sizeof(_electricPadActivations)));
             local_mem_region += sizeof(_electricPadActivations);
 

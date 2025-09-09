@@ -9,9 +9,10 @@ REDUX, exe, 0x8003cb1c, 0x0, asm/hook_collect_flight_item.s
 REDUX, exe, 0x8001c1b4, 0x0, asm/remove_dragon_slash.s
 REDUX, exe, 0x8001c218, 0x0, asm/remove_dragon_totals.s
 REDUX, exe, 0x8001c158, 0x0, asm/change_dragons_collected_to_resets.s
+REDUX, exe, 0x80019734, 0x0, asm/ghosts.s
 
 REDUX, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
+REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c src/ghost_replay.c, StartFairyArea.bin
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
 REDUX, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
 REDUX, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c, PlayIntroCutscenes.bin
@@ -83,9 +84,10 @@ DECKARD_PS2_NTSC, exe, 0x8003cb1c, 0x0, asm/hook_collect_flight_item.s
 DECKARD_PS2_NTSC, exe, 0x8001c1b4, 0x0, asm/remove_dragon_slash.s
 DECKARD_PS2_NTSC, exe, 0x8001c218, 0x0, asm/remove_dragon_totals.s
 DECKARD_PS2_NTSC, exe, 0x8001c158, 0x0, asm/change_dragons_collected_to_resets.s
+DECKARD_PS2_NTSC, exe, 0x80019734, 0x0, asm/ghosts.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
+DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c src/ghost_replay.c, StartFairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
 DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
 DECKARD_PS2_NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c src/save_state_region.c, PlayIntroCutscenes.bin

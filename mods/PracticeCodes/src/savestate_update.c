@@ -273,3 +273,31 @@ void FlyInResetsLoadstateTimerUpdate(void)
         fly_in_resets_loadstate_timer = 0;
     }
 }
+
+
+
+// Moved from Savestate.c for space
+int appliedNopFixTimer = 0;
+void LoadstateNopFixes(void)
+{
+    *(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after a loadstate
+
+    appliedNopFixTimer = 1;
+}
+
+void RevertLoadstateNOPFixes(void)
+{
+    if (appliedNopFixTimer == 10)
+        *(int*)0x80056528 = 0x0C005C7F;
+
+    if (appliedNopFixTimer > 0)
+    {
+        appliedNopFixTimer++;
+    }
+}
+
+// Check to revert NOP's every frame
+void LoadstateFixesUpdate()
+{
+    RevertLoadstateNOPFixes();
+}

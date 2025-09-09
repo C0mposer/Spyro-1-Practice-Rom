@@ -49,6 +49,7 @@ void MainHook()
             TimerUpdate();
             ILUpdate();
             TrackConsistencyUpdate();
+            GhostButtonCheck();
             SaveStateUpdate();
             CustomMenuUpdate();
             CustomMenuUpdate2();
@@ -60,6 +61,7 @@ void MainHook()
             CosmeticsUpdate();
             MainUpdate();
             SwapControllerUpdate();
+            //GhostTest();
 
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == 5
             LoadstateFixesUpdate();

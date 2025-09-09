@@ -373,6 +373,7 @@ void RenderObjs();
 void DrawShapePreReq(void* param_1, int param_2, int param_3, short colorSpace, int param_5);
 
 void DrawSpyro(void);
+void DrawSpyroShadow(void);
 void AddToWorldTable(int param_1, int param_2);
 
 void PlayIntroCutscenes();                                                                              //? This function is related to the intro cutscenes.

@@ -3800,3 +3800,10 @@ mods/NestorSkip/src/custom_menu_refactor/custom_menu_2.c
 mods/NestorSkip/src/custom_menu_refactor/custom_menu_2.h
 mods/NestorSkip/src/custom_menu_refactor/custom_menu.c
 mods/NestorSkip/src/custom_menu_refactor/custom_menu.h
+mods/PracticeCodes/asm/ghost_hook.dep
+mods/PracticeCodes/asm/ghost_hook.o
+mods/PracticeCodes/debug/dep/ghost_replay.dep
+mods/PracticeCodes/debug/dep/ghosts.dep
+mods/PracticeCodes/debug/obj/ghost_replay.o
+mods/PracticeCodes/debug/obj/ghosts.o
+mods/PracticeCodes/output/asmghostss.bin

@@ -12,18 +12,18 @@ REDUX, exe, 0x8001c158, 0x0, asm/change_dragons_collected_to_resets.s
 REDUX, exe, 0x80019734, 0x0, asm/ghosts.s
 
 REDUX, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c src/ghost_replay.c, StartFairyArea.bin
+REDUX, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
 REDUX, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
 REDUX, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
 REDUX, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c, PlayIntroCutscenes.bin
 REDUX, exe, 0x8002BFE0, 0x0, src/misc_timer.c, TitleCameraRelated.bin
 REDUX, exe, 0x8002d580, 0x0, src/custom_menu_3.c src/draw_hud_moby.c, DebugLevelSelect.bin
 REDUX, exe, 0x800539fc, 0x0, src/swap_controller.c src/prims.c, ControlDemoModeSpyro.bin
-REDUX, exe, 0x8002ccd0, 0x0, src/gemcount.c src/disable_portal.c, PrepareFairyGamestate.bin
+REDUX, exe, 0x8002ccd0, 0x0, src/gemcount.c src/disable_portal.c src/skin_editor_menu_globals.c src/color_edit_globals.c src/ghost_menu_globals.c, PrepareFairyGamestate.bin
 
 REDUX, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c src/credits_skip.c, kern.bin
 REDUX, kernal, 0x8000EA00, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/common.c, kern2.bin
-REDUX, kernal, 0x80400000, 0x0, src/save_state.c src/save_geo.c src/save_state_region.c, extra.bin
+REDUX, kernal, 0x80400000, 0x0, src/save_state.c src/save_geo.c src/save_state_region.c src/ghost_menu.c src/store_gte_reg.c src/skin_editor_menu.c src/og_spyro_skin_data.c src/color_edit.c src/deckard.c src/draw_poly.c src/ghost_replay.c src/draw_fool_range.c, extra.bin
 
 REDUX, exe, 0x80010084, 0x0, patches/levelselectnames.bin
 REDUX, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
@@ -47,16 +47,17 @@ NTSC, exe, 0x8001c158, 0x0, asm/change_dragons_collected_to_resets.s
 
 NTSC, header, 0x8000B0B8, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
 NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
-NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
-NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
-NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c, PlayIntroCutscenes.bin
+NTSC, exe, 0x8001D718, 0x0, src/levelselect.c src/cd_load.c, FairyArea.bin
+NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c src/credits_skip.c, MemoryCardArea.bin
+NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c src/draw_sparx_range.c, PlayIntroCutscenes.bin
 NTSC, exe, 0x8002BFE0, 0x0, src/misc_timer.c, TitleCameraRelated.bin
 NTSC, exe, 0x8002d580, 0x0, src/custom_menu_3.c src/draw_hud_moby.c, DebugLevelSelect.bin
 NTSC, exe, 0x800539fc, 0x0, src/swap_controller.c src/prims.c, ControlDemoModeSpyro.bin
 NTSC, exe, 0x8002ccd0, 0x0, src/gemcount.c src/disable_portal.c, PrepareFairyGamestate.bin
 
-NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c src/credits_skip.c, kern.bin
+NTSC, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/supercharge.c src/rat_code.c, kern.bin
 NTSC, kernal, 0x8000EA00, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/common.c, kern2.bin
+
 
 NTSC, exe, 0x8001288c, 0x0, asm/splash_screen1.s
 NTSC, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s
@@ -87,18 +88,18 @@ DECKARD_PS2_NTSC, exe, 0x8001c158, 0x0, asm/change_dragons_collected_to_resets.s
 DECKARD_PS2_NTSC, exe, 0x80019734, 0x0, asm/ghosts.s
 
 DECKARD_PS2_NTSC, header, 0x8000A91C, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c src/ghost_replay.c, StartFairyArea.bin
-DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
-DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
-DECKARD_PS2_NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c src/save_state_region.c, PlayIntroCutscenes.bin
+DECKARD_PS2_NTSC, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
+DECKARD_PS2_NTSC, exe, 0x8001D718, 0x0, src/levelselect.c src/cd_load.c src/pause_patch.c, FairyArea.bin
+DECKARD_PS2_NTSC, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c src/rat_code.c, MemoryCardArea.bin
+DECKARD_PS2_NTSC, exe, 0x800331AC, 0x0, src/savestate_update.c src/save_state_region.c, PlayIntroCutscenes.bin
 DECKARD_PS2_NTSC, exe, 0x8002BFE0, 0x0, src/misc_timer.c, TitleCameraRelated.bin
 DECKARD_PS2_NTSC, exe, 0x8002d580, 0x0, src/custom_menu_3.c src/draw_hud_moby.c, DebugLevelSelect.bin
-DECKARD_PS2_NTSC, exe, 0x800539fc, 0x0, src/swap_controller.c src/prims.c, ControlDemoModeSpyro.bin
+DECKARD_PS2_NTSC, exe, 0x800539fc, 0x0, src/swap_controller.c src/prims.c src/ghost_menu_globals.c, ControlDemoModeSpyro.bin
 DECKARD_PS2_NTSC, exe, 0x8002ccd0, 0x0, src/gemcount.c src/disable_portal.c, PrepareFairyGamestate.bin
 
 DECKARD_PS2_NTSC, kernal, 0x80008EB0, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c src/credits_skip.c, kern.bin
 DECKARD_PS2_NTSC, kernal, 0x80007530, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/common.c, kern2.bin
-DECKARD_PS2_NTSC, kernal, 0x80A60000, 0x0, src/save_state.c src/save_geo.c, PS2M.bin
+DECKARD_PS2_NTSC, kernal, 0x80A60000, 0x0, src/save_state.c src/save_geo.c src/ghost_menu.c src/deckard.c src/draw_poly.c src/ghost_replay.c, PS2M.bin
 
 DECKARD_PS2_NTSC, exe, 0x8001288c, 0x0, asm/splash_screen1.s
 DECKARD_PS2_NTSC, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s
@@ -191,26 +192,32 @@ VITA, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 TEST, exe, 0x80033e38, 0x0, asm/hook.s
 TEST, exe, 0x8002ccc8, 0x0, asm/gamestate_fairy_fix.s
 TEST, exe, 0x8002e2dc, 0x0, asm/no_quit_game.s
-TEST, exe, 0x80033a04, 0x0, asm/disable_end_credits.s
+TEST, exe, 0x80033a34, 0x0, asm/disable_end_credits.s
 TEST, exe, 0x800338a0, 0x0, asm/level_transition.s
-TEST, exe, 0x8001c574, 0x0, asm/pause_menu.s
-TEST, exe, 0x800127e4, 0x0, asm/nop_SetupMemCard.s
 TEST, exe, 0x80033874, 0x0, asm/gamestate_check.s
 TEST, exe, 0x8003b9cc, 0x0, asm/hook_collect_collectable.s
 TEST, exe, 0x8003cb1c, 0x0, asm/hook_collect_flight_item.s
-
+TEST, exe, 0x8001c1b4, 0x0, asm/remove_dragon_slash.s
+TEST, exe, 0x8001c218, 0x0, asm/remove_dragon_totals.s
+TEST, exe, 0x8001c158, 0x0, asm/change_dragons_collected_to_resets.s
+TEST, exe, 0x80019734, 0x0, asm/ghosts.s
 
 TEST, header, 0x8000B0B8, 0x0, src/main.c src/loot_plane.c src/manual_timer.c, MainHeaderArea.bin
-TEST, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c, StartFairyArea.bin
-TEST, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c src/disable_portal.c, FairyArea.bin
+TEST, exe, 0x800314b4, 0x0, src/main_updates.c src/il_timer.c src/splash_screen.c src/playtime_timer.c src/ghost_replay.c, StartFairyArea.bin
+TEST, exe, 0x8001D718, 0x0, src/rat_code.c src/levelselect.c src/cd_load.c, FairyArea.bin
 TEST, exe, 0x80066840, 0x0, src/custom_menu.c src/balloon_data.c, MemoryCardArea.bin
-TEST, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c src/prims.c , PlayIntroCutscenes.bin
+TEST, exe, 0x800331AC, 0x0, src/savestate_update.c src/pause_patch.c, PlayIntroCutscenes.bin
 TEST, exe, 0x8002BFE0, 0x0, src/misc_timer.c, TitleCameraRelated.bin
 TEST, exe, 0x8002d580, 0x0, src/custom_menu_3.c src/draw_hud_moby.c, DebugLevelSelect.bin
+TEST, exe, 0x800539fc, 0x0, src/swap_controller.c src/prims.c, ControlDemoModeSpyro.bin
+TEST, exe, 0x8002ccd0, 0x0, src/gemcount.c src/disable_portal.c, PrepareFairyGamestate.bin
 
 TEST, kernal, 0x8000C000, 0x0, src/custom_menu_2.c src/draw_sparx_range.c src/supercharge.c src/credits_skip.c, kern.bin
 TEST, kernal, 0x8000EA00, 0x0, src/track_consistency.c src/sparx_particles.c src/cosmetic.c src/right_stick.c src/custom_text.c src/multi_tap.c src/common.c, kern2.bin
-TEST, kernal, 0x80300000, 0x0, src/save_state.c src/save_geo.c src/save_state_region.c, extra.bin
+TEST, kernal, 0x80400000, 0x0, src/save_state.c src/save_geo.c src/save_state_region.c src/ghost_menu.c src/store_gte_reg.c src/skin_editor_menu.c src/og_spyro_skin_data.c src/color_edit.c, extra.bin
+
+TEST, exe, 0x80010084, 0x0, patches/levelselectnames.bin
+TEST, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin
 
 TEST, exe, 0x8001288c, 0x0, asm/splash_screen1.s
 TEST, exe, 0x80012a24, 0x0, asm/splash_screen1_fade.s
@@ -219,6 +226,3 @@ TEST, exe, 0x80012b74, 0x0, asm/splash_screen2_fade.s
 
 TEST, wad, 0x800816c0, 0x0, asm/head.s
 TEST, wad, 0x800816d0, 0x0, src/head_patch.c, head.bin
-
-TEST, exe, 0x80010084, 0x0, patches/levelselectnames.bin
-TEST, exe, 0x8007556c, 0x0, patches/levelselectnames2.bin

@@ -126,7 +126,11 @@ void SaveStateUpdate()
             }
         }
         #endif
+    }
 
+    // Change Savestate Slot in either gameplay, or dragon state
+    if (_gameState == GAMESTATE_GAMEPLAY || _gameState == GAMESTATE_DRAGON_STATE)
+    {
         #if BUILD == 2 || BUILD == 0 || BUILD == 5  // Change Savestate Slots
          // Quick Savestate Slot Selection
         if (switch_state_button_index == 0)
@@ -177,7 +181,6 @@ void SaveStateUpdate()
             savestateSwitchedTimer = 0;
         }
 
-
         // Check for release
         {
             if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
@@ -185,9 +188,7 @@ void SaveStateUpdate()
                 switch_savestate_button_held = false;
             }
         }
-
         #endif
-
     }
 
     // Prepare savestate after dragon or portal

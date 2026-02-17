@@ -129,7 +129,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Compile and Build VITA ISO",
+            "label": "Compile and Build DUCKTEST ISO",
             "type": "shell",
             "command": "py build_mod.py TEST",
             "options": {

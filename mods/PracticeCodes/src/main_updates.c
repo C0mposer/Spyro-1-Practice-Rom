@@ -45,6 +45,14 @@ extern bool disable_portal_entry;
 extern bool has_savestated_on_disabling_portal;
 
 
+extern int Itest_le;
+extern short Stest_le;
+extern char Ctest_le;
+extern int Itest_be;
+extern short Stest_be;
+extern char Ctest_be;
+
+
 bool is_greenscreen = false;
 
 //! Main Basic Checks
@@ -127,6 +135,7 @@ void MainUpdate()
                 _keyState = 1;
             }
         }
+
     }
 }
 
@@ -215,7 +224,7 @@ void SaveSpyroAndCamera(bool flyInFlag)
     {
         free_space = (byte*)0x80073990;     //Free space 1 for L3
         hasSavedSpyro = true;               //To load only after L3 has been pressed
-    }
+}
     else
     {
         free_space = (byte*)0x80073d20;     //Free space 2 for fly in snap-shot for instaload

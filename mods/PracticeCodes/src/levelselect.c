@@ -31,6 +31,9 @@ unsigned short fly_in_resets[36] = { 0 };
 
 bool ignore_loop_level = false;
 
+bool has_started_insta_fly_in = false; //used for ghosts only
+bool has_started_reg_fly_in = false; //used for ghosts only
+
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
 const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
 						FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_RIGHT, FACING_LEFT, FACING_RIGHT,
@@ -245,9 +248,21 @@ void InstaLoadUpdate() {
 		//Once the level load state is C, reset the bool to allow for another instaload
 		if (_levelLoadState == 0xC)
 		{
-			instaLoadReady = FALSE;
+			instaLoadReady = false;
+			has_started_insta_fly_in = true;
 		}
 	}
+	// for ghosts
+	if (_levelLoadState == 0xC && has_started_insta_fly_in != true)
+	{
+		has_started_reg_fly_in = true;
+	}
+	else if (_levelLoadState != 0xC)
+	{
+		has_started_insta_fly_in = false;
+		has_started_reg_fly_in = false;
+	}
+	//for ghosts end
 
 	// Bring back function calls from fixes
 	if (_levelLoadState == 0xD)

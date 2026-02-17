@@ -1,2 +1,2 @@
 .set noreorder
-j GhostTest
+j GhostUpdate

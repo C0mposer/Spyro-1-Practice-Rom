@@ -94,5 +94,5 @@ typedef struct u8Angle
 }u8Angle;
 
 void Vec3Copy(int* dst, int src);
-
+void Vec3Add(int* result, int* a, int* b);
 #endif /* VECTOR_H */

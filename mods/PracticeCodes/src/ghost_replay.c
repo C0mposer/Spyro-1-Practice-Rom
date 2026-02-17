@@ -91,6 +91,25 @@ typedef struct GhostBufferState
 #define GET_GHOST_FRAMES(region) ((ReplayFrameData*)((region) + GHOST_HEADER_SIZE))
 
 
+// Deckard region helpers: sub-32-bit accesses in 0x80Axxxxx are half-word swapped
+#if BUILD == 2
+#define DECK_READ_U8(addr)          deckard_read_u8((u8*)(addr))
+#define DECK_READ_SHORT(addr)       ((short)deckard_read_u16((u32*)(addr)))
+#define DECK_READ_INT(addr)         (*(int*)(addr))
+#define DECK_WRITE_U8(addr, val)    deckard_write_u8((u8*)(addr), (val))
+#define DECK_WRITE_SHORT(addr, val) deckard_write_u16((u16*)(addr), (u16)(val))
+#define DECK_WRITE_INT(addr, val)   (*(int*)(addr) = (val))
+#define DECK_MEMCPY(d, s, n)        deckard_memcpy((d), (s), (n))
+#else
+#define DECK_READ_U8(addr)          (*(u8*)(addr))
+#define DECK_READ_SHORT(addr)       (*(short*)(addr))
+#define DECK_READ_INT(addr)         (*(int*)(addr))
+#define DECK_WRITE_U8(addr, val)    (*(u8*)(addr) = (val))
+#define DECK_WRITE_SHORT(addr, val) (*(short*)(addr) = (val))
+#define DECK_WRITE_INT(addr, val)   (*(int*)(addr) = (val))
+#define DECK_MEMCPY(d, s, n)        memcpy((d), (s), (n))
+#endif
+
 // Two ghost buffers: A for playback, B for recording
 GhostBufferState g_ghostA = { 0 };  // Playback (race against this)
 GhostBufferState g_ghostB = { 0 };  // Recording (current attempt)
@@ -153,7 +172,7 @@ static void CopyGhostData(unsigned int srcRegion, unsigned int dstRegion)
     ReplayFrameData* dstFrames = GET_GHOST_FRAMES(dstRegion);
 
     int bytesToCopy = srcHeader->frameCount * GHOST_FRAME_SIZE;
-    memcpy(dstFrames, srcFrames, bytesToCopy);
+    DECK_MEMCPY(dstFrames, srcFrames, bytesToCopy);
 }
 
 // Record a single frame
@@ -176,23 +195,23 @@ static void RecordFrame(GhostBufferState* state, unsigned int region)
     int deltaZ = _spyro.position.z - state->previousPosition.z;
 
     // Clamp deltas to short range
-    frame->deltaX = (short)deltaX;
-    frame->deltaY = (short)deltaY;
-    frame->deltaZ = (short)deltaZ;
+    DECK_WRITE_SHORT(&frame->deltaX, (short)deltaX);
+    DECK_WRITE_SHORT(&frame->deltaY, (short)deltaY);
+    DECK_WRITE_SHORT(&frame->deltaZ, (short)deltaZ);
 
     // Store animation data
-    frame->relativeSparxAngle = _spyro.relativeSparxAngle;
-    frame->currentAnim = _spyro.currentAnim;
-    frame->nextAnim = _spyro.nextAnim;
-    frame->currentKeyframe = _spyro.currentKeyfame;
-    frame->nextKeyframe = _spyro.nextKeyframe;
-    frame->animSpeed = _spyro.animSpeed;
-    frame->currentHeadAnim = _spyro.currentHeadAnim;
-    frame->nextHeadAnim = _spyro.nextHeadAnim;
-    frame->currentHeadKeyframe = _spyro.currentHeadKeyframe;
-    frame->nextHeadKeyframe = _spyro.nextHeadKeyframe;
-    frame->headAnimSpeed = _spyro.headAnimSpeed;
-    frame->padding = 0;
+    DECK_WRITE_INT(&frame->relativeSparxAngle, _spyro.relativeSparxAngle);
+    DECK_WRITE_U8(&frame->currentAnim, _spyro.currentAnim);
+    DECK_WRITE_U8(&frame->nextAnim, _spyro.nextAnim);
+    DECK_WRITE_U8(&frame->currentKeyframe, _spyro.currentKeyfame);
+    DECK_WRITE_U8(&frame->nextKeyframe, _spyro.nextKeyframe);
+    DECK_WRITE_U8(&frame->animSpeed, _spyro.animSpeed);
+    DECK_WRITE_U8(&frame->currentHeadAnim, _spyro.currentHeadAnim);
+    DECK_WRITE_U8(&frame->nextHeadAnim, _spyro.nextHeadAnim);
+    DECK_WRITE_U8(&frame->currentHeadKeyframe, _spyro.currentHeadKeyframe);
+    DECK_WRITE_U8(&frame->nextHeadKeyframe, _spyro.nextHeadKeyframe);
+    DECK_WRITE_U8(&frame->headAnimSpeed, _spyro.headAnimSpeed);
+    DECK_WRITE_U8(&frame->padding, 0);
 
     // Update state for next frame
     state->previousPosition = _spyro.position;
@@ -214,24 +233,25 @@ static void PlaybackFrame(GhostBufferState* state, unsigned int region, Spyro* t
     ReplayFrameData* frames = GET_GHOST_FRAMES(region);
     ReplayFrameData* frame = &frames[state->currentFrame];
 
-    // Reconstruct position from delta
-    state->currentPosition.x += frame->deltaX;
-    state->currentPosition.y += frame->deltaY;
-    state->currentPosition.z += frame->deltaZ;
+    // Reconstruct position from delta (shorts need deckard read)
+    state->currentPosition.x += DECK_READ_SHORT(&frame->deltaX);
+    state->currentPosition.y += DECK_READ_SHORT(&frame->deltaY);
+    state->currentPosition.z += DECK_READ_SHORT(&frame->deltaZ);
 
-    // Apply to temp spyro
+    // Apply to temp spyro — direct writes here because DrawSpyro reads
+    // through the same hardware swap, so normal writes cancel out correctly
     temp_spyro->position = state->currentPosition;
-    temp_spyro->relativeSparxAngle = frame->relativeSparxAngle;
-    temp_spyro->currentAnim = frame->currentAnim;
-    temp_spyro->nextAnim = frame->nextAnim;
-    temp_spyro->currentKeyfame = frame->currentKeyframe;
-    temp_spyro->nextKeyframe = frame->nextKeyframe;
-    temp_spyro->animSpeed = frame->animSpeed;
-    temp_spyro->currentHeadAnim = frame->currentHeadAnim;
-    temp_spyro->nextHeadAnim = frame->nextHeadAnim;
-    temp_spyro->currentHeadKeyframe = frame->currentHeadKeyframe;
-    temp_spyro->nextHeadKeyframe = frame->nextHeadKeyframe;
-    temp_spyro->headAnimSpeed = frame->headAnimSpeed;
+    temp_spyro->relativeSparxAngle = DECK_READ_INT(&frame->relativeSparxAngle);
+    temp_spyro->currentAnim = DECK_READ_U8(&frame->currentAnim);
+    temp_spyro->nextAnim = DECK_READ_U8(&frame->nextAnim);
+    temp_spyro->currentKeyfame = DECK_READ_U8(&frame->currentKeyframe);
+    temp_spyro->nextKeyframe = DECK_READ_U8(&frame->nextKeyframe);
+    temp_spyro->animSpeed = DECK_READ_U8(&frame->animSpeed);
+    temp_spyro->currentHeadAnim = DECK_READ_U8(&frame->currentHeadAnim);
+    temp_spyro->nextHeadAnim = DECK_READ_U8(&frame->nextHeadAnim);
+    temp_spyro->currentHeadKeyframe = DECK_READ_U8(&frame->currentHeadKeyframe);
+    temp_spyro->nextHeadKeyframe = DECK_READ_U8(&frame->nextHeadKeyframe);
+    temp_spyro->headAnimSpeed = DECK_READ_U8(&frame->headAnimSpeed);
 
     state->currentFrame++;
 }
@@ -242,7 +262,8 @@ void GhostButtonCheck(void)
     if (!ghost_menu.ghosts_enabled)
         return;
 
-    // Copy Spyro data to temp region
+    // Copy Spyro data to temp region (plain memcpy — DrawSpyro reads through
+    // the same hardware swap, so normal writes cancel out correctly)
     memcpy((void*)TEMP_SPYRO_REGION, &_spyro, sizeof(_spyro));
 
     // L3 or insta fly-in: Start fresh recording (no playback ghost)

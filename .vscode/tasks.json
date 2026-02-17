@@ -129,7 +129,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Compile and Build VITA ISO",
+            "label": "Compile and Build DUCKTEST ISO",
             "type": "shell",
             "command": "py build_mod.py TEST",
             "options": {
@@ -156,7 +156,7 @@
         {
             "label": "Check Available Space",
             "type": "shell",
-            "command": "py check_available_space.py PS2_IOP",
+            "command": "py check_available_space.py PS2_DECKARD",
             "options": {
                 "cwd": "${workspaceFolder}/scripts/"
             },

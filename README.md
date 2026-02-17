@@ -1,6 +1,10 @@
 
 
 # Spyro 1 Practice Rom
+![GitHub Release](https://img.shields.io/github/v/release/c0mposer/spyro-1-practice-rom?style=flat-square&color=blue&link=https%3A%2F%2Fgithub.com%2FC0mposer%2FC-Game-Modding-Utility%2Freleases%2Ftag%2Flatest)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/C0mposer/Spyro-1-Practice-Rom/total?style=flat-square&color=purple&link=https%3A%2F%2Fgithub.com%2FC0mposer%2FSpyro-1-Practice-Rom%2Freleases%2Flatest) 
+
+
 
 This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *full save-states*, *a level select*, *timing functionalities*, *automatic collectable resetting*, *custom skins*, *visualizations*, and many other quality of life features.
 

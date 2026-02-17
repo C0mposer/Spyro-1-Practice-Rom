@@ -14,6 +14,7 @@ DrawPrimitive = 0x800168dc;
 FillScreenColor = 0x800190d4;
 
 DrawSpyro = 0x80023ac4;
+DrawSpyroShadow = 0x80059a48;
 AddToWorldTable = 0x800168a0;
 
 PlaySoundEffect = 0x80055a78;
@@ -24,6 +25,11 @@ CopyHudToShaded = 0x80018880;
 DrawShadedMobys = 0x80022a2c;
 
 UpdateMobyCollision = 0x800529e4;
+
+Vec3ApplyRotationMatrix = 0x80017048;
+Vec3ApplyLastLoadedRotationMatrix = 0x800170c0;
+Vec3Add = 0x80017758;
+MobyUpdatePosition = 0x8004d5ec;
 
 Vec3IntToShortDiv4 = 0x80017bfc;
 

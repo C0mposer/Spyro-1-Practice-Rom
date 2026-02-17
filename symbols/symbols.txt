@@ -234,3 +234,5 @@ _ptr_controller_one = 0x80075d48;
 _ptr_controller_two = 0x80075e38;
 
 _homeworldID = 0x8007595c;
+
+_ptr_respawn_position = 0x800785E4;

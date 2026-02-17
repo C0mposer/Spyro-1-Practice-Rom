@@ -49,37 +49,38 @@ typedef struct Spyro
 
     struct Vec3 position;                               //? Spyro's position vector.
 
-    struct u8Angle RelativeSparxAngle;                  //? Something to do with sparx's rotation based on spyros angle I think.
+    int relativeSparxAngle;                  //? Something to do with sparx's rotation based on spyros angle I think.
 
-    char pad1;
+    //char pad1;
     int unkown1;
     int unkown2;
 
     char currentAnim;                                   //? Spyros current animation.
     char nextAnim;                                      //? Spyros next animation.
 
-    char maybe_currentAnimDupe;
-    char maybe_nextAnimDupe;
-    char maybe_currentAnimDupe2;
-    char maybe_nextAnimDupe2;
+    char currentHeadAnim;
+    char nextHeadAnim;
+    char currentTailAnim;
+    char nextTailAnim;
 
     char currentKeyfame;                                //? The current animation keyframe.
     char nextKeyframe;                                  //? The next animation keyframe.
+    char currentHeadKeyframe;                                //? The current animation keyframe.
+    char nextHeadKeyframe;                                  //? The next animation keyframe.
+    char currentTailKeyframe;                                //? The current animation keyframe.
+    char nextTailKeyframe;                                  //? The next animation keyframe.
 
-    char maybe_keyframeDupe1;
-    char maybe_keyframeDupe2;
-    char maybe_keyframeDupe3;
-    char maybe_keyframeDupe4;
+
     char maybe_AnimSpeedRelated;
-    char maybe_animSpeedRelatedDupe1;
-    char maybe_animSpeedRelatedDupe2;
+    char maybe_HeadAnimSpeedRelated;
+    char maybe_TailAnimSpeedRelated;
     char unkown3;
 
 
     u8RGBA colorFilter;                       //? The color filter to apply to spyro. Used during fairy kiss, electric shock, etc.
 
     short maybe_weirdDamageAnimRelated;
-    short unkown4;
+    short floorDistance;
     int pad2;
     int unkown5;
     int unkown6;
@@ -95,7 +96,7 @@ typedef struct Spyro
 
     char unkown10;
     char unkown11;
-    char unkown12;
+    char headAnimSpeed;
     int maybe_animStateRelated;
     int maybe_headAnimRelated;
     int unkown_anim1;

@@ -7,7 +7,7 @@
             <file name="SYSTEM.CNF" source="spyro1_PracticeCodes/SYSTEM.CNF" type="data" />
             <dummy sectors="13" />
             <file name="WAD.WAD" source="spyro1_PracticeCodes/WAD.WAD" type="data" />
-             <file name="SCUS_942.28" source="spyro1_PracticeCodes/SCUS_942.28" type="data" />
+            <file name="SCUS_942.28" source="spyro1_PracticeCodes/SCUS_942.28" type="data" />
             <dummy sectors="5921" />
             <file name="PETEXA0.STR" source="spyro1_PracticeCodes/PETEXA0.STR" type="mixed" />
             <file name="PETEXA1.STR" source="spyro1_PracticeCodes/PETEXA1.STR" type="mixed" />
@@ -25,6 +25,7 @@
             </dir>
             <file name="KERN.BIN" source="spyro1_PracticeCodes/KERN.BIN" type="data" />
             <file name="KERN2.BIN" source="spyro1_PracticeCodes/KERN2.BIN" type="data" />
+            <file name="BEPAD.BIN" source="BEPAD.BIN" type="data" />
             <file name="ASMHEADS.BIN" source="spyro1_PracticeCodes/ASMHEADS.BIN" type="data" />
             <file name="HEAD.BIN" source="spyro1_PracticeCodes/HEAD.BIN" type="data" />
             <file name="flames.bin" source="spyro1_PracticeCodes/flames.bin" type="data" />
@@ -32,7 +33,7 @@
             <file name="skins.bin" source="spyro1_PracticeCodes/skins.bin" type="data" />
             <file name="splash1.bin" source="spyro1_PracticeCodes/splash1.bin" type="data" />
             <file name="splash2.bin" source="spyro1_PracticeCodes/splash2.bin" type="data" />
-
+            <file name="extra.BIN" source="spyro1_PracticeCodes/extra.BIN" type="data" />
         </directory_tree>
     </track>
 </iso_project>

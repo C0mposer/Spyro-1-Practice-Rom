@@ -1,5 +1,6 @@
 #ifndef CUSTOM_MENU_H
 #define CUSTOM_MENU_H
+#include <custom_types.h>
 
 //! Enums
 typedef enum MenuState
@@ -17,7 +18,9 @@ typedef enum CurrentMenu
     SAVESTATE_MENU,
     MISC_MENU,
     COSMETIC_MENU,
-    IL_DISPLAY_OPTIONS_MENU
+    IL_DISPLAY_OPTIONS_MENU,
+    SKIN_EDITOR_MENU,
+    GHOST_MENU
 } CurrentMenu;
 
 typedef enum TimerState
@@ -83,6 +86,7 @@ typedef struct ILMenu
     bool dont_loop_level;
     char* loop_level_text;
     char* display_modes_text;
+    char* ghost_menu_text;
 
 } ILMenu;
 
@@ -173,7 +177,51 @@ typedef struct CosmeticMenu
     char* spyro_color_text;
     char* flame_color_text;
     char* sparx_color_text;
+    char* skin_editor_menu_text;
 } CosmeticMenu;
+typedef struct SkinEditorMenu
+{
+    int selection;
+    int skin_section;
+    int hue_level;
+    int saturation_level;
+    int lightness_level;
+    char* skin_section_text;
+    char* hue_text;
+    char* saturation_text;
+    char* value_text;
+    char* save_text;
+    int* index_ptr;
+    int index_array_size;
+
+}SkinEditorMenu;
+
+typedef enum SpyroSections
+{
+    SECTION_BODY,
+    SECTION_BELLY,
+    SECTION_WING,
+    SECTION_WINGBONE,
+    SECTION_HORNS,
+    SECTION_CREST,
+    SECTION_EYES,
+}SpyroSection;
+
+typedef struct GhostMenu
+{
+    int selection;
+    bool ghosts_enabled;
+    int ghosts_visual;
+    char* ghost_enabled_text;
+    char* ghost_visual_text;
+
+}GhostMenu;
+
+enum
+{
+    VISUAL_SPYRO,
+    VISUAL_POLYGON
+};
 
 //! Prototypes
 void CustomMenuUpdate(void);

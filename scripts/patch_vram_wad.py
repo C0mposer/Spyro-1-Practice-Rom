@@ -69,6 +69,50 @@ def patch_vram_in_wad(x_vram, y_vram, width, height, level, patch_data):
             patch_start = 2 * ((y + start_row) * width)
             patch_end = 2 * ((y + start_row + 1) * width)
             file.write(patch_data[patch_start:patch_end])
+            
+def convert_bmp_direct(bmp, trans_flag = False):
+    input_file_name = GetFileNameFromPathNoExt(bmp)
+    img = Image.open(bmp)
+    
+    width, height = img.size
+    # print('width :', width)
+    # print('height:', height)
+
+    rgb_img = img.convert('RGB')
+
+    sixteen_bit_bmp_data = [int]
+
+    for y in range(height):
+        for x in range(width):
+            pixel = rgb_img.getpixel((x, y))
+            #print(pixel)
+            r, g, b = pixel
+            #print(f'| R: {hex(r)} | G: {hex(g)} | B: {hex(b)} |')
+            
+            # bmp_data.append(r)
+            # bmp_data.append(g)
+            # bmp_data.append(b)
+            
+            sixteen_bit_bmp_data.append(RGBToVramBGR(pixel, trans_flag))
+            
+    with open("temp/" + input_file_name.split("\\")[-1].split("/")[-1] + "_temp", "wb+") as file:
+            for i, data in enumerate(sixteen_bit_bmp_data):
+                file.write(data.to_bytes(2, signed=False, byteorder='little'))
+
+    with open("temp/" + input_file_name.split("\\")[-1].split("/")[-1] + "_temp", 'rb') as in_file:
+        with open("bmps/" + input_file_name.split("\\")[-1].split("/")[-1].split(".")[0] + ".bin", 'wb') as out_file:
+            out_file.write(in_file.read()[1:])
+
+    with open("bmps/" + input_file_name.split("\\")[-1].split("/")[-1].split(".")[0] + ".bin", 'rb') as file:
+        return file.read()
+            
+def patch_bmp_direct(x_vram, y_vram, width, height, level, bmp, trans_flag = False):
+    
+    bmp_data = b""
+    bmp_data = convert_bmp_direct(bmp, trans_flag)
+    #print(clut_data)
+    
+    patch_vram_in_wad(x_vram, y_vram, width, height, level, bmp_data)
 
 def convert_4bit_texture(texture_bmp):
     try:
@@ -317,8 +361,13 @@ def PatchArtisansFlag():
     except Exception as e:
         print(f"An error occurred: {e}")
 
-
+def PatchFont():
+    print("Patching font clut...")
+    patch_4bit_texture(1000, 364, "artisans", "bmp_scripts\\bmps\\Font5.bmp", 24, 36)
+    print("Patching font texture...")
+    patch_bmp_direct(1008, 395, 16, 5, "artisans", "bmp_scripts\\bmps\\FontCluts3.bmp")
 
 if __name__ == "__main__":
     
     PatchArtisansFlag()
+    

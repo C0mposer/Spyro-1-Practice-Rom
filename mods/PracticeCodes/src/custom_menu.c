@@ -86,85 +86,18 @@ void CustomMenuUpdate(void)
     {
         if (current_menu == MAIN_MENU)
         {
-            CapitalTextInfo menu_text_info[5] = { {0} };
+            _spyro.isMovementLocked = TRUE;
 
             // Easy Exit
-            if (_currentButtonOneFrame == CIRCLE_BUTTON)
-            {
-                menu_state = MENU_HIDDEN;
-                _spyro.isMovementLocked = FALSE;
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-                RestartDrawWorldAndObjects();
-            }
+            CheckExitMenu();
 
             DrawTextBox(0x30, 0x1D0, 0x30, 0xAA);
 
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 70;
-            menu_text_info[0].size = DEFAULT_SIZE;
-
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 90;
-            menu_text_info[1].size = DEFAULT_SIZE;
-
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 110;
-            menu_text_info[2].size = DEFAULT_SIZE;
-
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[3].y = 130;
-            menu_text_info[3].size = DEFAULT_SIZE;
-
-            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[4].y = 150;
-            menu_text_info[4].size = DEFAULT_SIZE;
-
-            _spyro.isMovementLocked = TRUE;
-
-            if (custom_menu.selection == 0)
-            {
-                DrawTextCapitals(custom_menu.il_menu_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(custom_menu.il_menu_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (custom_menu.selection == 1)
-            {
-                DrawTextCapitals(custom_menu.timer_menu_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(custom_menu.timer_menu_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (custom_menu.selection == 2)
-            {
-                DrawTextCapitals(custom_menu.savestate_menu_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(custom_menu.savestate_menu_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (custom_menu.selection == 3)
-            {
-                DrawTextCapitals(custom_menu.misc_menu_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(custom_menu.misc_menu_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (custom_menu.selection == 4)
-            {
-                DrawTextCapitals(custom_menu.cosmetic_menu_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(custom_menu.cosmetic_menu_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+            DrawMenuItem(custom_menu.il_menu_text, 0, custom_menu.selection, 70);
+            DrawMenuItem(custom_menu.timer_menu_text, 1, custom_menu.selection, 70);
+            DrawMenuItem(custom_menu.savestate_menu_text, 2, custom_menu.selection, 70);
+            DrawMenuItem(custom_menu.misc_menu_text, 3, custom_menu.selection, 70);
+            DrawMenuItem(custom_menu.cosmetic_menu_text, 4, custom_menu.selection, 70);
 
             // Fill text with defaults if NULL
             if (custom_menu.il_menu_text == NULL)
@@ -244,64 +177,20 @@ void CustomMenuUpdate(void)
 
         if (current_menu == IL_MENU)
         {
-            CapitalTextInfo menu_text_info[3] = { {0} };
-
-            // Easy Exit
-            if (_currentButtonOneFrame == CIRCLE_BUTTON)
-            {
-                current_menu = MAIN_MENU;
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            }
-
-            DrawTextBox(0x30, 0x1D0, 0x30, 0x80);
-
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 70;
-            menu_text_info[0].size = DEFAULT_SIZE;
-
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 90;
-            menu_text_info[1].size = DEFAULT_SIZE;
-
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 110;
-            menu_text_info[2].size = DEFAULT_SIZE;
-
             _spyro.isMovementLocked = TRUE;
 
-            if (il_menu.selection == 0)
-            {
-                DrawTextCapitals(il_menu.il_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_menu.il_mode_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+            CheckBackMenu();
 
-            if (il_menu.il_state != true)
+            DrawTextBox(0x30, 0x1D0, 0x30, 0x90);
+
+            DrawMenuItem(il_menu.il_mode_text, 0, il_menu.selection, 70);
+            DrawPossiblyLockedMenuItem(il_menu.loop_level_text, 1, il_menu.selection, il_menu.il_state, 70);
+            DrawPossiblyLockedMenuItem(il_menu.display_modes_text, 2, il_menu.selection, il_menu.il_state, 70);
+            #if BUILD == PS2_DECKARD || BUILD == REDUX
             {
-                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+                DrawPossiblyLockedMenuItem(il_menu.ghost_menu_text, 3, il_menu.selection, il_menu.il_state, 70);
             }
-            else if (il_menu.selection == 1)
-            {
-                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_menu.loop_level_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_menu.il_state != true)
-            {
-                DrawTextCapitals(il_menu.display_modes_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
-            else if (il_menu.selection == 2)
-            {
-                DrawTextCapitals(il_menu.display_modes_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_menu.display_modes_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+            #endif
 
             // Fill text with defaults if NULL
             if (il_menu.il_mode_text == NULL)
@@ -309,17 +198,26 @@ void CustomMenuUpdate(void)
                 il_menu.il_mode_text = "IL MODE OFF";
                 il_menu.loop_level_text = "LOOP LEVEL ON";
                 il_menu.display_modes_text = "DISPLAY SETTINGS";
+                il_menu.ghost_menu_text = "GHOST SETTINGS";
             }
 
             // Change Selection
-            if (il_menu.il_state == true) {
+            if (il_menu.il_state == true)
+            {
+
+                #if BUILD == PS2_DECKARD || BUILD == REDUX
+                const int amt_menu_items = 4;
+                #else
+                const int amt_menu_items = 3;
+                #endif
+
                 if (_currentButtonOneFrame == DOWN_BUTTON)
                 {
-                    il_menu.selection = (il_menu.selection + 1) % 3;
+                    il_menu.selection = (il_menu.selection + 1) % amt_menu_items;
                 }
                 else if (_currentButtonOneFrame == UP_BUTTON)
                 {
-                    il_menu.selection = (il_menu.selection + 2) % 3;
+                    il_menu.selection = (il_menu.selection + (amt_menu_items - 1)) % amt_menu_items;
                 }
             }
             // Put cursor back at top if turned off through default settings
@@ -377,145 +275,40 @@ void CustomMenuUpdate(void)
                     current_menu = IL_DISPLAY_OPTIONS_MENU;
                 }
             }
+            #if BUILD == PS2_DECKARD || BUILD == REDUX
+
+            else if (il_menu.selection == 3)
+            {
+
+                if (_currentButtonOneFrame == X_BUTTON)
+                {
+                    current_menu = GHOST_MENU;
+                }
+            }
+
+            #endif
 
             time_in_display_menu = 0;
         }
 
         if (current_menu == IL_DISPLAY_OPTIONS_MENU)
         {
-            CapitalTextInfo menu_text_info[10] = { {0} };
+            _spyro.isMovementLocked = TRUE;
 
-            // Easy Exit
-            if (_currentButtonOneFrame == CIRCLE_BUTTON)
-            {
-                current_menu = IL_MENU;
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            }
+            CheckBackMenu();
 
             DrawTextBox(0x30, 0x1F0, 0x0C, 0xDF);
 
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 30;
-            menu_text_info[0].size = DEFAULT_SIZE;
-
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 50;
-            menu_text_info[1].size = DEFAULT_SIZE;
-
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 70;
-            menu_text_info[2].size = DEFAULT_SIZE;
-
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[3].y = 90;
-            menu_text_info[3].size = DEFAULT_SIZE;
-
-            menu_text_info[4].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[4].y = 110;
-            menu_text_info[4].size = DEFAULT_SIZE;
-
-            menu_text_info[5].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[5].y = 130;
-            menu_text_info[5].size = DEFAULT_SIZE;
-
-            menu_text_info[6].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[6].y = 150;
-            menu_text_info[6].size = DEFAULT_SIZE;
-
-            menu_text_info[7].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[7].y = 170;
-            menu_text_info[7].size = DEFAULT_SIZE;
-
-            menu_text_info[8].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[8].y = 190;
-            menu_text_info[8].size = DEFAULT_SIZE;
-
-            menu_text_info[9].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[9].y = 210;
-            menu_text_info[9].size = DEFAULT_SIZE;
-
-            _spyro.isMovementLocked = TRUE;
-
-            if (il_display_modes.selection == 0)
-            {
-                DrawTextCapitals(il_display_modes.il_display_enable_all_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_enable_all_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 1)
-            {
-                DrawTextCapitals(il_display_modes.il_display_dragon_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_dragon_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 2)
-            {
-                DrawTextCapitals(il_display_modes.il_display_landing_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_landing_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 3)
-            {
-                DrawTextCapitals(il_display_modes.il_display_glide_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_glide_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 4)
-            {
-                DrawTextCapitals(il_display_modes.il_display_flame_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_flame_text, &menu_text_info[4], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 5)
-            {
-                DrawTextCapitals(il_display_modes.il_display_gem_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_gem_text, &menu_text_info[5], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 6)
-            {
-                DrawTextCapitals(il_display_modes.il_display_flight_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_flight_text, &menu_text_info[6], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 7)
-            {
-                DrawTextCapitals(il_display_modes.il_display_whirlwind_text, &menu_text_info[7], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_whirlwind_text, &menu_text_info[7], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 8)
-            {
-                DrawTextCapitals(il_display_modes.il_display_bonk_text, &menu_text_info[8], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_bonk_text, &menu_text_info[8], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-            if (il_display_modes.selection == 9)
-            {
-                DrawTextCapitals(il_display_modes.il_display_always_text, &menu_text_info[9], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(il_display_modes.il_display_always_text, &menu_text_info[9], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+            DrawMenuItem(il_display_modes.il_display_enable_all_text, 0, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_dragon_text, 1, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_landing_text, 2, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_glide_text, 3, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_flame_text, 4, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_gem_text, 5, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_flight_text, 6, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_whirlwind_text, 7, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_bonk_text, 8, il_display_modes.selection, 30);
+            DrawMenuItem(il_display_modes.il_display_always_text, 9, il_display_modes.selection, 30);
 
             // Fill text with defaults if NULL
             if (il_display_modes.il_display_enable_all_text == NULL)
@@ -740,82 +533,16 @@ void CustomMenuUpdate(void)
 
         if (current_menu == MANUAL_TIMER_MENU)
         {
-            CapitalTextInfo menu_text_info[4] = { {0} };
+            _spyro.isMovementLocked = TRUE;
 
-            // Easy Exit
-            if (_currentButtonOneFrame == CIRCLE_BUTTON)
-            {
-                current_menu = MAIN_MENU;
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            }
+            CheckBackMenu();
 
             DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
 
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 70;
-            menu_text_info[0].size = DEFAULT_SIZE;
-
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 90;
-            menu_text_info[1].size = DEFAULT_SIZE;
-
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 110;
-            menu_text_info[2].size = DEFAULT_SIZE;
-
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[3].y = 130;
-            menu_text_info[3].size = DEFAULT_SIZE;
-
-            _spyro.isMovementLocked = TRUE;
-
-            if (timer_menu.selection == 0)
-            {
-                DrawTextCapitals(timer_menu.timer_state_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(timer_menu.timer_state_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (timer_menu.timer_state != true)
-            {
-                DrawTextCapitals(timer_menu.timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
-            else if (timer_menu.selection == 1)
-            {
-                DrawTextCapitals(timer_menu.timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(timer_menu.timer_display_mode_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (timer_menu.timer_state != true)
-            {
-                DrawTextCapitals(timer_menu.stop_timer_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
-            else if (timer_menu.selection == 2)
-            {
-                DrawTextCapitals(timer_menu.stop_timer_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(timer_menu.stop_timer_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (timer_menu.timer_state != true)
-            {
-                DrawTextCapitals(timer_menu.reset_timer_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
-            else if (timer_menu.selection == 3)
-            {
-                DrawTextCapitals(timer_menu.reset_timer_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(timer_menu.reset_timer_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+            DrawMenuItem(timer_menu.timer_state_text, 0, timer_menu.selection, 70);
+            DrawPossiblyLockedMenuItem(timer_menu.timer_display_mode_text, 1, timer_menu.selection, timer_menu.timer_state, 70);
+            DrawPossiblyLockedMenuItem(timer_menu.stop_timer_button_text, 2, timer_menu.selection, timer_menu.timer_state, 70);
+            DrawPossiblyLockedMenuItem(timer_menu.reset_timer_button_text, 3, timer_menu.selection, timer_menu.timer_state, 70);
 
             // Fill text with defaults if NULL
             if (timer_menu.timer_state_text == NULL)
@@ -917,90 +644,46 @@ void CustomMenuUpdate(void)
 
         if (current_menu == SAVESTATE_MENU)
         {
+            _spyro.isMovementLocked = TRUE;
+
+            CheckBackMenu();
+
+            DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
+
+            CapitalTextInfo menu_text_info[4] = { {0} };
+            for (int i = 0; i < 4; i++)
+            {
+                menu_text_info[i].x = SCREEN_LEFT_EDGE + 0x4A;
+                menu_text_info[i].y = 70 + (20 * i);
+                menu_text_info[i].size = DEFAULT_SIZE;
+            }
+
             // Set menu to 1 by default if not on DECKARD
             #if BUILD == 1 || BUILD == 3
             if (savestate_menu.selection == 0)
                 savestate_menu.selection = 1;
             #endif
 
-            CapitalTextInfo menu_text_info[4] = { {0} };
-
-            // Easy Exit
-            if (_currentButtonOneFrame == CIRCLE_BUTTON)
-            {
-                current_menu = MAIN_MENU;
-                PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
-            }
-            DrawTextBox(0x30, 0x1F4, 0x30, 0x98);
-
-            menu_text_info[0].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[0].y = 70;
-            menu_text_info[0].size = DEFAULT_SIZE;
-
-            menu_text_info[1].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[1].y = 90;
-            menu_text_info[1].size = DEFAULT_SIZE;
-
-            menu_text_info[2].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[2].y = 110;
-            menu_text_info[2].size = DEFAULT_SIZE;
-
-            menu_text_info[3].x = SCREEN_LEFT_EDGE + 0x4A;
-            menu_text_info[3].y = 130;
-            menu_text_info[3].size = DEFAULT_SIZE;
-
-            _spyro.isMovementLocked = TRUE;
-
             #if BUILD == 2 || BUILD == 0 || BUILD == 5 // DECKARD HAS SAVESTATE SLOT
-            if (savestate_menu.selection == 0)
             {
-                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawMenuItem(savestate_menu.stateslot_text, 0, savestate_menu.selection, 70);
             }
             #elif BUILD == 1 || BUILD == 3 // GREY OUT OPTION FOR OTHER PLATFORMS
-
-            DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-
+            {
+                DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
+            }
             #endif
 
-            if (savestate_menu.selection == 1)
-            {
-                DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(savestate_menu.savestate_button_text, &menu_text_info[1], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
-
-            if (savestate_menu.selection == 2)
-            {
-                DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(savestate_menu.loadstate_button_text, &menu_text_info[2], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-            }
+            DrawMenuItem(savestate_menu.savestate_button_text, 1, savestate_menu.selection, 70);
+            DrawMenuItem(savestate_menu.loadstate_button_text, 2, savestate_menu.selection, 70);
 
             #if BUILD == 2 || BUILD == 0 || BUILD == 5
-            if (savestate_menu.selection == 3)
             {
-                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(savestate_menu.switch_state_button_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawMenuItem(savestate_menu.switch_state_button_text, 3, savestate_menu.selection, 70);
             }
             #elif BUILD == 1 || BUILD == 3
-            if (savestate_menu.selection == 3)
             {
-                DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_GOLD);
-            }
-            else
-            {
-                DrawTextCapitals(savestate_menu.respawn_on_loadstate_text, &menu_text_info[3], DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+                DrawMenuItem(savestate_menu.respawn_on_loadstate_text, 3, savestate_menu.selection, 70);
             }
             #endif
 
@@ -1253,4 +936,65 @@ void CustomMenuUpdate(void)
     //     //printf("RENDERING\n");
     //     RenderShadedMobyQueue();
     // }
+}
+
+void CheckExitMenu(void)
+{
+    if (_currentButtonOneFrame == CIRCLE_BUTTON)
+    {
+        menu_state = MENU_HIDDEN;
+        _spyro.isMovementLocked = FALSE;
+        PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+        RestartDrawWorldAndObjects();
+    }
+}
+void CheckBackMenu(void)
+{
+    if (_currentButtonOneFrame == CIRCLE_BUTTON)
+    {
+        current_menu = MAIN_MENU;
+        PlaySoundEffect(SOUND_EFFECT_SPARX_GRAB_GEM, 0, SOUND_PLAYBACK_MODE_NORMAL, 0);
+    }
+}
+
+void DrawMenuItem(const char* text, int menu_number, int currently_selected_menu, int init_size) {
+    CapitalTextInfo info = { 0 };
+    info.x = SCREEN_LEFT_EDGE + 0x4A;
+    info.y = init_size + (20 * menu_number);
+    info.size = DEFAULT_SIZE;
+
+    int color;
+    if (currently_selected_menu == menu_number)
+    {
+        color = MOBY_COLOR_GOLD;
+    }
+    else
+    {
+        color = MOBY_COLOR_PURPLE;
+    }
+
+    DrawTextCapitals(text, &info, DEFAULT_SPACING, color);
+}
+
+void DrawPossiblyLockedMenuItem(const char* text, int menu_number, int currently_selected_menu, bool unlocked_var, int init_size) {
+    CapitalTextInfo info = { 0 };
+    info.x = SCREEN_LEFT_EDGE + 0x4A;
+    info.y = init_size + (20 * menu_number);
+    info.size = DEFAULT_SIZE;
+
+    int color;
+    if (unlocked_var != true)
+    {
+        color = MOBY_COLOR_TRANSPARENT;
+    }
+    else if (currently_selected_menu == menu_number)
+    {
+        color = MOBY_COLOR_GOLD;
+    }
+    else
+    {
+        color = MOBY_COLOR_PURPLE;
+    }
+
+    DrawTextCapitals(text, &info, DEFAULT_SPACING, color);
 }

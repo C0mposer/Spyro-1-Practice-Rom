@@ -92,7 +92,7 @@ void ChangeFullSparxParticleColor()
         }
     }
 
-    // jump to end_of_rand_switch (where normal control flow in the original function should resume)
+    // jump to end_of_rand_switch instead of returning (where normal control flow in the original function should resume)
     asm(
         "j %0"
         :
@@ -124,15 +124,15 @@ int* FindSparxParticleCode(void)
 // Injects the "ChangeSparxParticleColor" function into the relavent particle overlay function
 void InjectChangeSparxParticleColorJump()
 {
-    int* start_of_sparx_particle_code = FindSparxParticleCode();
+    int* start_of_sparx_particle_code = FindSparxParticleCode(); // Start of sparx color switch statement
 
-    int* hook_into_color = start_of_sparx_particle_code + 5;           // Address to opcode for jump we will replace
+    int* hook_into_color = start_of_sparx_particle_code + 5;           // Address to opcode for the jump we will replace
 
     int* funcptr_ChangeFullSparxParticleColor = ChangeFullSparxParticleColor; // Save pointer to our function
     short opcode_ChangeFulLSparxParticleColor = ((int)funcptr_ChangeFullSparxParticleColor / 4 - 0x20000000); // Get the address of our function to be used in a j opcode. (addr/4 without 0x80)
     *(funcptr_ChangeFullSparxParticleColor + 2) = 0x0; // NOP the stack pointer decrement of our compiled ChangeFullSparxParticleColor function. (Can't remove prolouge?)
 
-    // Dynamic Hook
+    // Construct the opcodes for the hook dynamically
     *((short*)start_of_sparx_particle_code + 10) = opcode_ChangeFulLSparxParticleColor; // j ChangeFullSparxParticleColor
     *((short*)start_of_sparx_particle_code + 11) = 0x0800; // j opcode
     *(start_of_sparx_particle_code + 6) = 0x00000000; // nop the branch delay

@@ -20,6 +20,7 @@ if version_to_build == "PS1":
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
     PatchArtisansFlag()
+    PatchFont()
 
     os.chdir("../")
     os.chdir("build")
@@ -47,6 +48,8 @@ elif version_to_build == "PS2_DECKARD":
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
     PatchArtisansFlag()
+    PatchFont()
+
 
     os.chdir("../")
 
@@ -77,6 +80,8 @@ elif version_to_build == "PS2_IOP":
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
     PatchArtisansFlag()
+    PatchFont()
+
 
     os.chdir("../")
     os.chdir("build")
@@ -104,6 +109,7 @@ elif version_to_build == "VITA":
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
     PatchArtisansFlag()
+    PatchFont()
 
     os.chdir("../")
     os.chdir("build")
@@ -120,6 +126,7 @@ elif version_to_build == "VITA":
                     """
         file.write(cue_string)
     os.remove("mkpsxiso.cue")
+    
 elif version_to_build == "TEST":
     print("Building...")
     os.system("py ../../../../tools/mod-builder/main.py 2 1 6 4 6")
@@ -130,17 +137,18 @@ elif version_to_build == "TEST":
     
     PatchWadHeadControl()                           #Patches head_control.c into wad.wad
     PatchArtisansFlag()
+    PatchFont()
 
     os.chdir("../")
     os.chdir("build")
     
-    os.system("mkpsxiso spyro1_PracticeCodes_Manual_VITA.xml")
+    os.system("mkpsxiso spyro1_PracticeCodes_Manual_DUCKTEST.xml")
     
-    if os.path.isfile("VITA_Practice_Codes.bin"):
-        os.remove("VITA_Practice_Codes.bin")
-    os.rename("mkpsxiso.bin", "VITA_Practice_Codes.bin")
-    with open("VITA_Practice_Codes.cue", "w+") as file:
-        cue_string = """FILE "VITA_Practice_Codes.bin" BINARY
+    if os.path.isfile("DUCKTEST_Practice_Codes.bin"):
+        os.remove("DUCKTEST_Practice_Codes.bin")
+    os.rename("mkpsxiso.bin", "DUCKTEST_Practice_Codes.bin")
+    with open("DUCKTEST_Practice_Codes.cue", "w+") as file:
+        cue_string = """FILE "DUCKTEST_Practice_Codes.bin" BINARY
  TRACK 01 MODE2/2352
   INDEX 01 00:00:00
                     """

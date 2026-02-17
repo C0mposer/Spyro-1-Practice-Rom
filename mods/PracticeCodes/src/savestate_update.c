@@ -126,7 +126,11 @@ void SaveStateUpdate()
             }
         }
         #endif
+    }
 
+    // Change Savestate Slot in either gameplay, or dragon state
+    if (_gameState == GAMESTATE_GAMEPLAY || _gameState == GAMESTATE_DRAGON_STATE)
+    {
         #if BUILD == 2 || BUILD == 0 || BUILD == 5  // Change Savestate Slots
          // Quick Savestate Slot Selection
         if (switch_state_button_index == 0)
@@ -177,7 +181,6 @@ void SaveStateUpdate()
             savestateSwitchedTimer = 0;
         }
 
-
         // Check for release
         {
             if (_currentButton != L1_BUTTON + R1_BUTTON + LEFT_BUTTON && _currentButton != L1_BUTTON + R1_BUTTON + RIGHT_BUTTON)
@@ -185,9 +188,7 @@ void SaveStateUpdate()
                 switch_savestate_button_held = false;
             }
         }
-
         #endif
-
     }
 
     // Prepare savestate after dragon or portal
@@ -272,4 +273,32 @@ void FlyInResetsLoadstateTimerUpdate(void)
     {
         fly_in_resets_loadstate_timer = 0;
     }
+}
+
+
+
+// Moved from Savestate.c for space
+int appliedNopFixTimer = 0;
+void LoadstateNopFixes(void)
+{
+    *(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after a loadstate
+
+    appliedNopFixTimer = 1;
+}
+
+void RevertLoadstateNOPFixes(void)
+{
+    if (appliedNopFixTimer == 10)
+        *(int*)0x80056528 = 0x0C005C7F;
+
+    if (appliedNopFixTimer > 0)
+    {
+        appliedNopFixTimer++;
+    }
+}
+
+// Check to revert NOP's every frame
+void LoadstateFixesUpdate()
+{
+    RevertLoadstateNOPFixes();
 }

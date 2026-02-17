@@ -36,8 +36,9 @@ To swap back to port 1, do the same thing. Press any button 3 times while plugge
 You can now game over during credits skip for accurate homeworld RTA's. Simply hold the start button while spyro is dying after credits skip, and it will trigger a game over.
 
 # Bug Fixes
+- Fixed savestate not saving dragon respawn position, for death abuse levels.
 - Fixed consistency counter not incrementing denominator upon loading state
-- Fixed gems not being given from flight levels after 1 completion of them 
+- Fixed gems not being given from flight levels after subsequent completions of them 
 
 # Patch Own Game
 If you wish to patch your own personal spyro 1 .bin file instead, visit here:

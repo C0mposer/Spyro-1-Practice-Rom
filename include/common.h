@@ -64,6 +64,8 @@
 #define LOCAL_HOMEWORLD_ID (_levelID / 10 -1)
 #define LOCAL_LEVEL_ID_INDEX (LOCAL_HOMEWORLD_ID * 6 + _levelID % 10)
 
+#define abs(x) ((x) < 0 ? -(x) : (x))
+
 void NumberToAscii(int number, char* result);
 
 typedef enum Direction
@@ -327,6 +329,18 @@ typedef struct AnalogStick
     u8 y_axis;
 }AnalogStick;
 
+typedef struct Mat33 { /* Representation of a 3x3 matrix */
+    short R11;
+    short R12;
+    short R13;
+    short R21;
+    short R22;
+    short R23;
+    short R31;
+    short R32;
+    short R33;
+}Mat33;
+
 
 //*~~~~~~~~~~~~~~~~
 //*Custom Functions 
@@ -373,6 +387,7 @@ void RenderObjs();
 void DrawShapePreReq(void* param_1, int param_2, int param_3, short colorSpace, int param_5);
 
 void DrawSpyro(void);
+void DrawSpyroShadow(void);
 void AddToWorldTable(int param_1, int param_2);
 
 void PlayIntroCutscenes();                                                                              //? This function is related to the intro cutscenes.
@@ -410,6 +425,11 @@ void PrepareInventoryGamestate(bool pauseSFX);
 int maybe_SFXProcessing(void);
 
 int Vec2OctagonalDistance(Vec2* vecA, Vec2* vecB);
+
+void Vec3ApplyRotationMatrix(int* rotationMatrix, int* inputVector, int* outputVector);
+void Vec3ApplyLastLoadedRotationMatrix(int* inputVector, int* outputVector);
+
+int MobyUpdatePosition(unsigned int* param_1, int param_2);
 
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables
@@ -596,6 +616,8 @@ extern int _flightRoll;
 
 extern int* _ptr_particleBuffer;
 extern int* _ptr_nextFreeParticleSlot;
+
+extern int* _ptr_respawn_position; // Vec3 + Angle
 
 
 #endif /* COMMON_H */

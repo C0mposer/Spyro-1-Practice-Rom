@@ -1,8 +1,6 @@
 # Getting Started
 
-## What Is This?
-
-The **Spyro 1 Practice ROM** is a mod for *Spyro the Dragon (NTSC)* that adds a comprehensive suite of practice and speedrun tools, including full save states, a level select, IL timing, ghost replays, visualizers, and much more.
+The **Spyro 1 Practice ROM** is a mod for *Spyro the Dragon (NTSC)* that adds a suite of practice and speedrun tools, including full save states, a level select, IL timing, ghost replays, visualizers, and much more.
 
 ---
 
@@ -12,10 +10,12 @@ This mod supports multiple platforms. **Download the correct version for your ha
 
 | Platform | Save States | Ghost Replay | Notes |
 |---|---|---|---|
-| PS2 75k–90k (Deckard) | Full | Yes | Recommended for full feature set |
+| PS2 75k–90k (Deckard) | Full | Yes | Recommended console for full feature set |
+| Emulator (DuckStation) | Full | Yes | Recommended emulator for full feature set |
+| |
 | PS2 30k–70k (IOP) | Partial | No | Spyro/camera position only |
 | PS1 | Partial | No | Spyro/camera position only |
-| Emulator (PCSX-Redux / DuckStation) | Partial | Yes | Larger ghost buffer than Deckard |
+| Emulator (Any other PS1 emulator) | Partial | No | Spyro/camera position only |
 
 See [Platform Comparison](13-platform-comparison.md) for a complete feature matrix.
 

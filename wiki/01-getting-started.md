@@ -11,7 +11,7 @@ This mod supports multiple platforms. **Download the correct version for your ha
 | Platform | Save States | Ghost Replay | Notes |
 |---|---|---|---|
 |[PS2 75k–90k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.Deckard.zip) | Full | Yes | Recommended console for full feature set |
-| Emulator (DuckStation) | Full | Yes | Recommended emulator for full feature set |
+| Emulator (Duckstation) | Full | Yes | Recommended emulator for full feature set |
 | |
 | [PS2 30k–70k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.IOP.zip) | Partial | No | Spyro/camera position only |
 | [PS1](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS1.zip) | Partial | No | Spyro/camera position only |
@@ -48,15 +48,14 @@ Works on original PS1 hardware and most emulators (PCSX-Redux, DuckStation, etc.
 
 If you already own a Spyro 1 `.bin` file and want to patch it yourself:
 
-[Online Patcher — c0mposer.github.io/Spyro-1-Practice-Rom](https://c0mposer.github.io/Spyro-1-Practice-Rom/)
+[Online Patcher](https://c0mposer.github.io/Spyro-1-Practice-Rom/)
 
 ---
 
 ## Emulator Setup Notes
 
-- **PCSX-Redux** and **DuckStation** are the recommended emulators.
-- The emulator build has a significantly larger ghost buffer than the PS2 Deckard build (~8:17 max vs ~3:22 max at 30fps).
-- Ghost replay is supported on emulators even though it is not available on PS2 IOP or PS1.
+- **Duckstation** is the recommended emulators.
+- You **MUST** enable extra 8mb ram if you use the Duckstation version
 
 ---
 

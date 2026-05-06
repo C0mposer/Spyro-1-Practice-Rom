@@ -1,37 +1,27 @@
 # Level Select
 
-**Default hotkey:** Select
-
-Opens the level select inside the inventory menu. Navigate to any world or level without going through the hub.
-
----
-
 ## Using the Level Select
 
-Press **Select** to open the inventory screen with the level select active. Navigate the list and choose your destination. The game will fly Spyro into the selected level just like a normal portal entry.
+Press **Select** to open the inventory screen with the level select. Navigate and choose your destination. The game will fly Spyro into the selected level just like a normal portal entry.
 
 ---
 
-## Fly-In Controls
-
-While the fly-in camera is active, these inputs are available:
+## Controls
 
 | Action | Input |
 |---|---|
 | Fly in to Homeworld | L3 |
-| Fly in — directional variants | L1, L2, R1, R2, R3 |
-| Digital pad — Homeworld | DPad Up |
-| Digital pad — alternate direction | DPad Down |
-| Cancel immediately (RETURNING HOME) | Triangle |
-| Reverse the fly-in approach angle | Circle |
-
-**Quick fly-in to the current level** (without opening the menu): **L1 + R1 + Triangle**
+| Fly in to level | L1, L2, R1, R2, R3 |
+| Dpad — Homeworld | DPad Up |
+| Dpad — Flight Level | DPad Down |
+| Fly out of level portal | Hold Triangle during fly in |
+| Reverse the camera fly-in angle | Hold Circle during fly in |
 
 ---
 
 ## Gem Count Adjustment
 
-During a **homeworld fly-in**, you can adjust Spyro's gem count on the fly. The current count is shown on the loading screen.
+During a **homeworld fly-in**, you can adjust Spyro's gem count on the fly. This is especially useful for Any% when doing homeworld runs.
 
 | Action | Input |
 |---|---|
@@ -41,19 +31,12 @@ During a **homeworld fly-in**, you can adjust Spyro's gem count on the fly. The 
 | +10 gems | R2 |
 | ±50 gems per frame (hold) | Hold L2 / R2 |
 
-This is useful for practicing gem-count-dependent routing or portal unlocks without collecting gems manually.
-
 ---
 
 ## Fly-In Reset Counter
 
 Each time you fly into a level or load a state during a fly-in, a counter increments. This counter is displayed in the inventory menu in place of the normal dragon count.
 
-Useful for tracking how many attempts you've taken on a given approach or entry.
+Useful for tracking how many attempts you've spend on a single level during a practice session
 
 ---
-
-## Notes
-
-- The level select is available on all platforms.
-- The fly-in reset counter resets when you leave the level or close the game.

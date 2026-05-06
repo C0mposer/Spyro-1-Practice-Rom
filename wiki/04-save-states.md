@@ -20,6 +20,8 @@ Full save states capture and restore essentially the entire level state:
 - Respawn position and angle
 - Flight level timer and collected items
 - Moving level geometry and dynamic objects (moving platforms)
+  
+It essentially feels like a real emulator savestate
 
 ### Partial Save States (PS1 / PS2 30k–70k)
 

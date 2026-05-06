@@ -6,25 +6,25 @@
 
 ## BG Color
 
-Changes the color of the pause / inventory menu background. Choose from a selection of pre-set colors.
-
+Changes the color of the pause / inventory menu background.
+ 
 ---
 
 ## Spyro Skin
 
-Select a pre-included Spyro skin from the list. Skins change Spyro's body texture and colors.
+Choose from a selection of Spyro skins.
 
 ---
 
 ## Flame Skin
 
-Choose from a selection of flame attack colors and styles.
+Choose from a selection of flame colors.
 
 ---
 
 ## Sparx Skin
 
-Choose from a selection of Sparx glow colors.
+Choose from a selection of Sparx skins.
 
 ---
 
@@ -36,19 +36,19 @@ The custom skin editor lets you build your own Spyro color scheme directly in-ga
 
 | Section | Description |
 |---|---|
-| Body | Main body color |
-| Belly | Underbelly and chest |
-| Wings | Wing membrane |
-| Wing Bones | Wing bone structure |
-| Horns | Horn color |
-| Crest | Head crest |
+| Body | Main Body Color |
+| Belly | Belly Color |
+| Wings | Wing Color |
+| Wing Bones | Wing Bone Color |
+| Horns | Horn Color |
+| Crest | Crest/Mohawk Color |
 | Eyes | Eye color |
 
 ### Controls
 
-Adjust Hue, Saturation, and Lightness independently for each section. Use the menu navigation to move between sections and save your custom colors.
+Adjust Hue, Saturation, and Lightness independently for each section. Then, save your custom Skin.  
 
-If you want to patch a fully custom BMP texture skin into the ROM instead of using the in-game editor, see the external tool below.
+*Note: I plan on eventually letting you save your created skin to a USB drive, but it will take some work, and isn't possible yet.*
 
 ---
 

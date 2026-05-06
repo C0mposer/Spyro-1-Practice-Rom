@@ -14,7 +14,7 @@ Feature availability varies by hardware. Use this table to understand what you c
 | **Theatre Mode** | Yes | Yes | No | No | No |
 | **Memory Watch** | Yes | Yes | No | No | No |
 | **Hitbox Viewer** | Yes | Yes | No | No | No |
-| **Free Camera** | Yes | Yes | No | No | | No |
+| **Free Camera** | Yes | Yes | No | No | No |
 | **Custom Skin Editor** | Yes | Yes | No | No | No |
 
 ---

@@ -1,6 +1,6 @@
 # Hotkeys
 
-All default button combos for the Practice ROM. Many of these can be customized in the menu — see [Save States](04-save-states.md) for button remapping options.
+All default button combos for the Practice ROM.
 
 ---
 

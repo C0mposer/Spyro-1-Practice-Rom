@@ -6,7 +6,7 @@
 
 ## Manual Timer
 
-An on-screen stopwatch for manually timing movement, routes, and tricks.
+An on-screen timer for manually timing movement, routes, and tricks. Essentially a built in stopwatch.
 
 - Resets when you load a state or respawn Spyro
 - Stops when you pause the game
@@ -23,34 +23,33 @@ An on-screen stopwatch for manually timing movement, routes, and tricks.
 
 ## Sparx Mode
 
-Controls Spyro's health companion Sparx.
+Controls Sparx's health.
 
 | Mode | Behavior |
 |---|---|
-| Sparx Normal | Default game behavior |
-| Perma Sparx On | Sparx stays gold at all times — health never depletes *(only when IL mode is OFF)* |
-| Sparxless On | Sparx is permanently dead — for sparxless category practice |
+| Sparx Normal | Default behavior |
+| Perma Sparx | Sparx stays gold at all times. *(only when IL mode is OFF)* |
+| Sparxless On | Sparx is permanently dead. (For sparxless practice) |
 
 ---
 
 ## Show Dragon Touch
 
-Displays the number of **frames lost to a dragon touch** (at 30fps). Useful for measuring the cost of accidental dragon conversations mid-run.
+Displays the number of **frames lost to a bad dragon touch** (at 30fps).
 
 ---
 
 ## Disable Portal
 
-When enabled, the game automatically **loads your current save state the moment the camera touches a portal**. This removes the need to manually reload after failed portal entries.
+When enabled, the game automatically **loads your current save state the moment the camera touches a portal**. This is useful for timing portal entries.
 
-- Stops the Manual Timer at portal contact, allowing you to time portal entries
-- Works per-level — only triggers for portals in the level where the state was saved
+- Stops the Manual Timer at portal contact, allowing you to easily time portal entries accurately
 
 ---
 
 ## Track Consistency
 
-Tracks your success rate on tricks or movement sequences without leaving the game.
+Helps you track your success rate on tricks or movement sequences.
 
 Two numbers are displayed in the **bottom-left corner**: a numerator (successes) and a denominator (total attempts).
 
@@ -67,13 +66,7 @@ Two numbers are displayed in the **bottom-left corner**: a numerator (successes)
 | Reset both counters | Load State × 3 |
 | Reset both counters *(PS1 / 70k alt)* | Hold L2 + R2, then Circle × 3 |
 
-The typical workflow: load your state to attempt the trick (this increments total automatically), then use Right Stick Up if you landed it.
-
----
-
-## Show Sparx Range
-
-Draws a **cyan octagon** around Spyro showing the radius at which Sparx will collect nearby gems. Useful for optimizing gem vacuum routing.
+Best way to use it: load your state to attempt the trick (this increments total automatically), then use Right Stick Up if you landed it.
 
 ---
 
@@ -93,19 +86,19 @@ While supercharging:
 | Increase supercharge speed | R1 |
 | Decrease supercharge speed | L1 |
 
-*Super Mode only activates when enabled in the menu.*
+*This feature may be removed as it is not relavent to any practice scenarios. It's just fun :)*
 
 ---
 
 ## Memory Watch
 
-*(PS2 Deckard / Emulator only)*
+*(PS2 75k-90k / Emulator only)*
 
-Watch up to **10 arbitrary RAM addresses** simultaneously, displayed on screen in real time. Useful for debugging, route research, or verifying game state.
+Watch up to **10 arbitrary RAM addresses** simultaneously, displayed on screen in real time.
 
 ### Configuration
 
-- **Address** — 8-digit hex address to watch
+- **Address** — 8-digit hex memory address to watch
 - **Data type** — U8, U16, U32, S8, S16, S32, or Fixed 12.20 (fixed-point)
 - **Display format** — Hex or Decimal
 - **Label** — Custom name up to 10 characters

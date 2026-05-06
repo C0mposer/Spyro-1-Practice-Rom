@@ -1,0 +1,2293 @@
+{
+  "version": "1.0",
+  "project_name": "PracitceRomPort",
+  "project_folder": "./",
+  "currently_selected_build_index": 0,
+  "build_versions": [
+    {
+      "build_name": "REDUX",
+      "platform": "PS1",
+      "symbols_file": "SpyroPractice.txt",
+      "injection_files": [
+        "SCUS_420.67"
+      ],
+      "injection_file_offsets": {
+        "SCUS_420.67": "F800"
+      },
+      "injection_file_types": {
+        "SCUS_420.67": "disk"
+      },
+      "extracted_game_folder": "./.config/game_files/REDUX",
+      "main_executable": "SCUS_420.67",
+      "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
+      "compiler_flags": "-Os -g",
+      "is_single_file_mode": false,
+      "single_file_path": null,
+      "section_maps": {},
+      "code_caves": [
+        {
+          "name": "MainHeaderArea",
+          "code_files": [
+            "./src/main.c",
+            "./src/loot_plane.c",
+            "./src/manual_timer.c"
+          ],
+          "memory_address": "8000B0B8",
+          "size": "7B4",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x48",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "StartFairyArea",
+          "code_files": [
+            "./src/main_updates.c",
+            "./src/il_timer.c",
+            "./src/splash_screen.c",
+            "./src/playtime_timer.c"
+          ],
+          "memory_address": "800314b4",
+          "size": "101C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x21CB4",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "FairyArea",
+          "code_files": [
+            "./src/levelselect.c",
+            "./src/cd_load.c",
+            "./src/multi_tap.c"
+          ],
+          "memory_address": "8001D718",
+          "size": "b30",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xDF18",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "MemoryCardArea",
+          "code_files": [
+            "./src/custom_menu.c",
+            "./src/balloon_data.c",
+            "./src/rat_code.c",
+            "./src/pause_patch.c"
+          ],
+          "memory_address": "80066840",
+          "size": "21cc",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x57040",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PlayIntroCutscenes",
+          "code_files": [
+            "./src/savestate_update.c"
+          ],
+          "memory_address": "800331AC",
+          "size": "6a8",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x239AC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "TitleCameraRelated",
+          "code_files": [
+            "./src/misc_timer.c"
+          ],
+          "memory_address": "8002BFE0",
+          "size": "43c",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1C7E0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "DebugLevelSelect",
+          "code_files": [
+            "./src/custom_menu_3.c",
+            "./src/draw_hud_moby.c"
+          ],
+          "memory_address": "8002d580",
+          "size": "28C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1DD80",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "ControlDemoModeSpyro",
+          "code_files": [
+            "./src/swap_controller.c",
+            "./src/prims.c"
+          ],
+          "memory_address": "800539fc",
+          "size": "268",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x441FC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PrepareFairyGamestate",
+          "code_files": [
+            "./src/gemcount.c",
+            "./src/disable_portal.c"
+          ],
+          "memory_address": "8002ccd0",
+          "size": "360",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4D0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "kern",
+          "code_files": [
+            "./src/custom_menu_2.c",
+            "./src/draw_sparx_range.c",
+            "./src/supercharge.c",
+            "./src/credits_skip.c"
+          ],
+          "memory_address": "8000C000",
+          "size": "1800",
+          "injection_file": "KERN.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "kern2",
+          "code_files": [
+            "./src/track_consistency.c",
+            "./src/sparx_particles.c",
+            "./src/cosmetic.c",
+            "./src/right_stick.c",
+            "./src/custom_text.c",
+            "./src/common.c"
+          ],
+          "memory_address": "8000EA00",
+          "size": "f38",
+          "injection_file": "KERN2.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "extra",
+          "code_files": [
+            "./src/deckard_strings.c",
+            "./src/save_state.c",
+            "./src/save_geo.c",
+            "./src/save_state_region.c",
+            "./src/ghost_menu.c",
+            "./src/store_gte_reg.c",
+            "./src/skin_editor_menu.c",
+            "./src/og_spyro_skin_data.c",
+            "./src/color_edit_globals.c",
+            "./src/color_edit.c",
+            "./src/deckard.c",
+            "./src/draw_poly.c",
+            "./src/ghost_replay.c",
+            "./src/ghosts_autoplay.c",
+            "./src/ghosts_autoplay_test.c",
+            "./src/draw_fool_range.c",
+            "./src/font_testing.c",
+            "./src/theatre_mode.c",
+            "./src/watch_memory.c",
+            "./src/hitbox_viewer.c",
+            "./src/collision_wireframe.c",
+            "./src/spin_wheel.c",
+            "./src/freecam.c",
+            "./src/cosmetic_menu_preview.c"
+          ],
+          "memory_address": "80400000",
+          "size": "400000",
+          "injection_file": "",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "memory_only",
+          "enabled": true
+        }
+      ],
+      "hooks": [
+        {
+          "name": "hook_main",
+          "code_files": [
+            "./asm/hook.s"
+          ],
+          "memory_address": "80033e38",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24638",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_fairy_fix",
+          "code_files": [
+            "./asm/gamestate_fairy_fix.s"
+          ],
+          "memory_address": "8002ccc8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4C8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "no_quit_game",
+          "code_files": [
+            "./asm/no_quit_game.s"
+          ],
+          "memory_address": "8002e2dc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1EADC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "disable_end_credits",
+          "code_files": [
+            "./asm/disable_end_credits.s"
+          ],
+          "memory_address": "80033a34",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24234",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "level_transition",
+          "code_files": [
+            "./asm/level_transition.s"
+          ],
+          "memory_address": "800338a0",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x240A0",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_check",
+          "code_files": [
+            "./asm/gamestate_check.s"
+          ],
+          "memory_address": "80033874",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24074",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_collectable",
+          "code_files": [
+            "./asm/hook_collect_collectable.s"
+          ],
+          "memory_address": "8003b9cc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2C1CC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_flight_item",
+          "code_files": [
+            "./asm/hook_collect_flight_item.s"
+          ],
+          "memory_address": "8003cb1c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2D31C",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_slash",
+          "code_files": [
+            "./asm/remove_dragon_slash.s"
+          ],
+          "memory_address": "8001c1b4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC9B4",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_totals",
+          "code_files": [
+            "./asm/remove_dragon_totals.s"
+          ],
+          "memory_address": "8001c218",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCA18",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "change_dragons_collected_to_resets",
+          "code_files": [
+            "./asm/change_dragons_collected_to_resets.s"
+          ],
+          "memory_address": "8001c158",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC958",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "ghosts",
+          "code_files": [
+            "./asm/ghosts.s"
+          ],
+          "memory_address": "80019734",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x9F34",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        }
+      ],
+      "binary_patches": [
+        {
+          "name": "levelselectnames",
+          "code_files": [
+            "./patches/levelselectnames.bin"
+          ],
+          "memory_address": "80010084",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x884",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "levelselectnames2",
+          "code_files": [
+            "./patches/levelselectnames2.bin"
+          ],
+          "memory_address": "8007556c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x65D6C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "multi_patches": []
+    },
+    {
+      "build_name": "NTSC",
+      "platform": "PS1",
+      "symbols_file": "SpyroPractice.txt",
+      "injection_files": [
+        "SCUS_420.67"
+      ],
+      "injection_file_offsets": {
+        "SCUS_420.67": "F800"
+      },
+      "injection_file_types": {
+        "SCUS_420.67": "disk"
+      },
+      "extracted_game_folder": "./.config/game_files/NTSC",
+      "main_executable": "SCUS_420.67",
+      "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
+      "compiler_flags": "-Os -g",
+      "is_single_file_mode": false,
+      "single_file_path": null,
+      "section_maps": {},
+      "code_caves": [
+        {
+          "name": "MainHeaderArea",
+          "code_files": [
+            "./src/main.c",
+            "./src/loot_plane.c",
+            "./src/manual_timer.c"
+          ],
+          "memory_address": "8000B0B8",
+          "size": "7B4",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x48",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "StartFairyArea",
+          "code_files": [
+            "./src/main_updates.c",
+            "./src/il_timer.c",
+            "./src/splash_screen.c",
+            "./src/playtime_timer.c"
+          ],
+          "memory_address": "800314b4",
+          "size": "101C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x21CB4",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "FairyArea",
+          "code_files": [
+            "./src/levelselect.c",
+            "./src/cd_load.c",
+            "./src/multi_tap.c"
+          ],
+          "memory_address": "8001D718",
+          "size": "b30",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xDF18",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "MemoryCardArea",
+          "code_files": [
+            "./src/custom_menu.c",
+            "./src/balloon_data.c",
+            "./src/rat_code.c",
+            "./src/pause_patch.c"
+          ],
+          "memory_address": "80066840",
+          "size": "21cc",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x57040",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PlayIntroCutscenes",
+          "code_files": [
+            "./src/savestate_update.c"
+          ],
+          "memory_address": "800331AC",
+          "size": "6a8",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x239AC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "TitleCameraRelated",
+          "code_files": [
+            "./src/misc_timer.c"
+          ],
+          "memory_address": "8002BFE0",
+          "size": "800",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1C7E0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "DebugLevelSelect",
+          "code_files": [
+            "./src/custom_menu_3.c",
+            "./src/draw_hud_moby.c"
+          ],
+          "memory_address": "8002d580",
+          "size": "28C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1DD80",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "ControlDemoModeSpyro",
+          "code_files": [
+            "./src/swap_controller.c",
+            "./src/prims.c"
+          ],
+          "memory_address": "800539fc",
+          "size": "268",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x441FC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PrepareFairyGamestate",
+          "code_files": [
+            "./src/gemcount.c",
+            "./src/disable_portal.c"
+          ],
+          "memory_address": "8002ccd0",
+          "size": "360",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4D0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "kern",
+          "code_files": [
+            "./src/custom_menu_2.c",
+            "./src/draw_sparx_range.c",
+            "./src/supercharge.c",
+            "./src/credits_skip.c",
+            "./src/save_state_region.c"
+          ],
+          "memory_address": "8000C000",
+          "size": "1800",
+          "injection_file": "KERN.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "kern2",
+          "code_files": [
+            "./src/track_consistency.c",
+            "./src/sparx_particles.c",
+            "./src/cosmetic.c",
+            "./src/right_stick.c",
+            "./src/custom_text.c",
+            "./src/common.c"
+          ],
+          "memory_address": "8000EA00",
+          "size": "f38",
+          "injection_file": "KERN2.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "head",
+          "code_files": [
+            "./src/head_patch.c"
+          ],
+          "memory_address": "800816d0",
+          "size": "200",
+          "injection_file": "HEAD.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "asmheads",
+          "code_files": [
+            "./asm/head.s"
+          ],
+          "memory_address": "800816c0",
+          "size": "10",
+          "injection_file": "ASMHEADS.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        }
+      ],
+      "hooks": [
+        {
+          "name": "hook_main",
+          "code_files": [
+            "./asm/hook.s"
+          ],
+          "memory_address": "80033e38",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24638",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_fairy_fix",
+          "code_files": [
+            "./asm/gamestate_fairy_fix.s"
+          ],
+          "memory_address": "8002ccc8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4C8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "no_quit_game",
+          "code_files": [
+            "./asm/no_quit_game.s"
+          ],
+          "memory_address": "8002e2dc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1EADC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "disable_end_credits",
+          "code_files": [
+            "./asm/disable_end_credits.s"
+          ],
+          "memory_address": "80033a04",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24204",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "level_transition",
+          "code_files": [
+            "./asm/level_transition.s"
+          ],
+          "memory_address": "800338a0",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x240A0",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_check",
+          "code_files": [
+            "./asm/gamestate_check.s"
+          ],
+          "memory_address": "80033874",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24074",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_collectable",
+          "code_files": [
+            "./asm/hook_collect_collectable.s"
+          ],
+          "memory_address": "8003b9cc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2C1CC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_flight_item",
+          "code_files": [
+            "./asm/hook_collect_flight_item.s"
+          ],
+          "memory_address": "8003cb1c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2D31C",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_slash",
+          "code_files": [
+            "./asm/remove_dragon_slash.s"
+          ],
+          "memory_address": "8001c1b4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC9B4",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_totals",
+          "code_files": [
+            "./asm/remove_dragon_totals.s"
+          ],
+          "memory_address": "8001c218",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCA18",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "change_dragons_collected_to_resets",
+          "code_files": [
+            "./asm/change_dragons_collected_to_resets.s"
+          ],
+          "memory_address": "8001c158",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC958",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "pause_menu",
+          "code_files": [
+            "./asm/pause_menu.s"
+          ],
+          "memory_address": "8001c574",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCD74",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "nop_SetupMemCard",
+          "code_files": [
+            "./asm/nop_SetupMemCard.s"
+          ],
+          "memory_address": "800127e4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2FE4",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1",
+          "code_files": [
+            "./asm/splash_screen1.s"
+          ],
+          "memory_address": "8001288c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x308C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1_fade",
+          "code_files": [
+            "./asm/splash_screen1_fade.s"
+          ],
+          "memory_address": "80012a24",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3224",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2",
+          "code_files": [
+            "./asm/splash_screen2.s"
+          ],
+          "memory_address": "80012ab8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x32B8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2_fade",
+          "code_files": [
+            "./asm/splash_screen2_fade.s"
+          ],
+          "memory_address": "80012b74",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3374",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "binary_patches": [
+        {
+          "name": "levelselectnames",
+          "code_files": [
+            "./patches/levelselectnames.bin"
+          ],
+          "memory_address": "80010084",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x884",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "levelselectnames2",
+          "code_files": [
+            "./patches/levelselectnames2.bin"
+          ],
+          "memory_address": "8007556c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x65D6C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "multi_patches": []
+    },
+    {
+      "build_name": "DECKARD_PS2_NTSC",
+      "platform": "PS1",
+      "symbols_file": "SpyroPractice.txt",
+      "injection_files": [
+        "SCUS_420.67"
+      ],
+      "injection_file_offsets": {
+        "SCUS_420.67": "F800"
+      },
+      "injection_file_types": {
+        "SCUS_420.67": "disk"
+      },
+      "extracted_game_folder": "./.config/game_files/DECKARD_PS2_NTSC",
+      "main_executable": "SCUS_420.67",
+      "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
+      "compiler_flags": "-Os -g",
+      "is_single_file_mode": false,
+      "single_file_path": null,
+      "section_maps": {},
+      "code_caves": [
+        {
+          "name": "MainHeaderArea",
+          "code_files": [
+            "./src/main.c",
+            "./src/loot_plane.c",
+            "./src/manual_timer.c"
+          ],
+          "memory_address": "8000A918",
+          "size": "7B4",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x48",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "StartFairyArea",
+          "code_files": [
+            "./src/main_updates.c",
+            "./src/il_timer.c",
+            "./src/splash_screen.c",
+            "./src/playtime_timer.c"
+          ],
+          "memory_address": "800314b4",
+          "size": "101C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x21CB4",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "FairyArea",
+          "code_files": [
+            "./src/levelselect.c",
+            "./src/cd_load.c",
+            "./src/multi_tap.c"
+          ],
+          "memory_address": "8001D718",
+          "size": "b30",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xDF18",
+          "auto_calculate_injection_file_address": true,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "MemoryCardArea",
+          "code_files": [
+            "./src/custom_menu.c",
+            "./src/balloon_data.c",
+            "./src/rat_code.c",
+            "./src/pause_patch.c"
+          ],
+          "memory_address": "80066840",
+          "size": "21cc",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x57040",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PlayIntroCutscenes",
+          "code_files": [
+            "./src/savestate_update.c"
+          ],
+          "memory_address": "800331AC",
+          "size": "6a8",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x239AC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "TitleCameraRelated",
+          "code_files": [
+            "./src/misc_timer.c"
+          ],
+          "memory_address": "8002BFE0",
+          "size": "43c",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1C7E0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "DebugLevelSelect",
+          "code_files": [
+            "./src/custom_menu_3.c",
+            "./src/draw_hud_moby.c"
+          ],
+          "memory_address": "8002d580",
+          "size": "28C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1DD80",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "ControlDemoModeSpyro",
+          "code_files": [
+            "./src/swap_controller.c",
+            "./src/prims.c"
+          ],
+          "memory_address": "800539fc",
+          "size": "268",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x441FC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PrepareFairyGamestate",
+          "code_files": [
+            "./src/gemcount.c",
+            "./src/disable_portal.c"
+          ],
+          "memory_address": "8002ccd0",
+          "size": "360",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4D0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "kern",
+          "code_files": [
+            "./src/custom_menu_2.c",
+            "./src/draw_sparx_range.c",
+            "./src/supercharge.c",
+            "./src/credits_skip.c",
+            "./src/save_state_region.c"
+          ],
+          "memory_address": "80008EB0",
+          "size": "1800",
+          "injection_file": "KERN.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "kern2",
+          "code_files": [
+            "./src/track_consistency.c",
+            "./src/sparx_particles.c",
+            "./src/cosmetic.c",
+            "./src/right_stick.c",
+            "./src/custom_text.c",
+            "./src/common.c"
+          ],
+          "memory_address": "80007530",
+          "size": "f38",
+          "injection_file": "KERN2.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "deckard_ps2m",
+          "code_files": [
+            "./src/save_state.c",
+            "./src/save_geo.c",
+            "./src/ghost_menu.c",
+            "./src/deckard.c",
+            "./src/draw_poly.c",
+            "./src/ghost_replay.c",
+            "./src/font_testing.c",
+            "./src/og_spyro_skin_data.c",
+            "./src/color_edit_globals.c",
+            "./src/color_edit.c",
+            "./src/cosmetic_menu_preview.c",
+            "./src/skin_editor_menu.c",
+            "./src/theatre_mode.c",
+            "./src/watch_memory.c",
+            "./src/spin_wheel.c",
+            "./src/hitbox_viewer.c",
+            "./src/freecam.c",
+            "./src/ghosts_autoplay.c"
+          ],
+          "memory_address": "80A70000",
+          "size": "F000",
+          "injection_file": "PS2M.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "head",
+          "code_files": [
+            "./src/head_patch.c"
+          ],
+          "memory_address": "800816d0",
+          "size": "200",
+          "injection_file": "HEAD.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "ps2m_strings",
+          "code_files": [
+            "./src/deckard_strings.c"
+          ],
+          "memory_address": "80A7F000",
+          "size": "1000",
+          "injection_file": "PS2MSTR.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "asmheads",
+          "code_files": [
+            "./asm/head.s"
+          ],
+          "memory_address": "800816c0",
+          "size": "10",
+          "injection_file": "ASMHEADS.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        }
+      ],
+      "hooks": [
+        {
+          "name": "hook_main",
+          "code_files": [
+            "./asm/hook.s"
+          ],
+          "memory_address": "80033e38",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24638",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_fairy_fix",
+          "code_files": [
+            "./asm/gamestate_fairy_fix.s"
+          ],
+          "memory_address": "8002ccc8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4C8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "no_quit_game",
+          "code_files": [
+            "./asm/no_quit_game.s"
+          ],
+          "memory_address": "8002e2dc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1EADC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "disable_end_credits",
+          "code_files": [
+            "./asm/disable_end_credits.s"
+          ],
+          "memory_address": "80033a34",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24234",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "level_transition",
+          "code_files": [
+            "./asm/level_transition.s"
+          ],
+          "memory_address": "800338a0",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x240A0",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_check",
+          "code_files": [
+            "./asm/gamestate_check.s"
+          ],
+          "memory_address": "80033874",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24074",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_collectable",
+          "code_files": [
+            "./asm/hook_collect_collectable.s"
+          ],
+          "memory_address": "8003b9cc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2C1CC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_flight_item",
+          "code_files": [
+            "./asm/hook_collect_flight_item.s"
+          ],
+          "memory_address": "8003cb1c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2D31C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_slash",
+          "code_files": [
+            "./asm/remove_dragon_slash.s"
+          ],
+          "memory_address": "8001c1b4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC9B4",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_totals",
+          "code_files": [
+            "./asm/remove_dragon_totals.s"
+          ],
+          "memory_address": "8001c218",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCA18",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "change_dragons_collected_to_resets",
+          "code_files": [
+            "./asm/change_dragons_collected_to_resets.s"
+          ],
+          "memory_address": "8001c158",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC958",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "pause_menu",
+          "code_files": [
+            "./asm/pause_menu.s"
+          ],
+          "memory_address": "8001c574",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCD74",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "nop_SetupMemCard",
+          "code_files": [
+            "./asm/nop_SetupMemCard.s"
+          ],
+          "memory_address": "800127e4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2FE4",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "ghosts",
+          "code_files": [
+            "./asm/ghosts.s"
+          ],
+          "memory_address": "80019734",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x9F34",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1",
+          "code_files": [
+            "./asm/splash_screen1.s"
+          ],
+          "memory_address": "8001288c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x308C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1_fade",
+          "code_files": [
+            "./asm/splash_screen1_fade.s"
+          ],
+          "memory_address": "80012a24",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3224",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2",
+          "code_files": [
+            "./asm/splash_screen2.s"
+          ],
+          "memory_address": "80012ab8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x32B8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2_fade",
+          "code_files": [
+            "./asm/splash_screen2_fade.s"
+          ],
+          "memory_address": "80012b74",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3374",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "binary_patches": [
+        {
+          "name": "levelselectnames",
+          "code_files": [
+            "./patches/levelselectnames.bin"
+          ],
+          "memory_address": "80010084",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x884",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "levelselectnames2",
+          "code_files": [
+            "./patches/levelselectnames2.bin"
+          ],
+          "memory_address": "8007556c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x65D6C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "multi_patches": []
+    },
+    {
+      "build_name": "IOP_PS2_NTSC",
+      "platform": "PS1",
+      "symbols_file": "SpyroPractice.txt",
+      "injection_files": [
+        "SCUS_420.67"
+      ],
+      "injection_file_offsets": {
+        "SCUS_420.67": "F800"
+      },
+      "injection_file_types": {
+        "SCUS_420.67": "disk"
+      },
+      "extracted_game_folder": "./.config/game_files/IOP_PS2_NTSC",
+      "main_executable": "SCUS_420.67",
+      "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
+      "compiler_flags": "-Os -g",
+      "is_single_file_mode": false,
+      "single_file_path": null,
+      "section_maps": {},
+      "code_caves": [
+        {
+          "name": "MainHeaderArea",
+          "code_files": [
+            "./src/main.c",
+            "./src/loot_plane.c",
+            "./src/manual_timer.c"
+          ],
+          "memory_address": "8000A918",
+          "size": "7B4",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x48",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "StartFairyArea",
+          "code_files": [
+            "./src/main_updates.c",
+            "./src/il_timer.c",
+            "./src/splash_screen.c",
+            "./src/playtime_timer.c"
+          ],
+          "memory_address": "800314b4",
+          "size": "101C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x21CB4",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "FairyArea",
+          "code_files": [
+            "./src/levelselect.c",
+            "./src/cd_load.c",
+            "./src/multi_tap.c"
+          ],
+          "memory_address": "8001D718",
+          "size": "b30",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xDF18",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "MemoryCardArea",
+          "code_files": [
+            "./src/custom_menu.c",
+            "./src/balloon_data.c",
+            "./src/rat_code.c",
+            "./src/pause_patch.c"
+          ],
+          "memory_address": "80066840",
+          "size": "21cc",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x57040",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PlayIntroCutscenes",
+          "code_files": [
+            "./src/savestate_update.c"
+          ],
+          "memory_address": "800331AC",
+          "size": "6a8",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x239AC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "TitleCameraRelated",
+          "code_files": [
+            "./src/misc_timer.c"
+          ],
+          "memory_address": "8002BFE0",
+          "size": "800",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1C7E0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "DebugLevelSelect",
+          "code_files": [
+            "./src/custom_menu_3.c",
+            "./src/draw_hud_moby.c"
+          ],
+          "memory_address": "8002d580",
+          "size": "28C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1DD80",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "ControlDemoModeSpyro",
+          "code_files": [
+            "./src/swap_controller.c",
+            "./src/prims.c"
+          ],
+          "memory_address": "800539fc",
+          "size": "268",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x441FC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PrepareFairyGamestate",
+          "code_files": [
+            "./src/gemcount.c",
+            "./src/disable_portal.c"
+          ],
+          "memory_address": "8002ccd0",
+          "size": "360",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4D0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "kern",
+          "code_files": [
+            "./src/custom_menu_2.c",
+            "./src/draw_sparx_range.c",
+            "./src/supercharge.c",
+            "./src/credits_skip.c",
+            "./src/save_state_region.c"
+          ],
+          "memory_address": "80008EB0",
+          "size": "1800",
+          "injection_file": "KERN.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "kern2",
+          "code_files": [
+            "./src/track_consistency.c",
+            "./src/sparx_particles.c",
+            "./src/cosmetic.c",
+            "./src/right_stick.c",
+            "./src/custom_text.c",
+            "./src/common.c"
+          ],
+          "memory_address": "80007530",
+          "size": "f38",
+          "injection_file": "KERN2.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "head",
+          "code_files": [
+            "./src/head_patch.c"
+          ],
+          "memory_address": "800816d0",
+          "size": "200",
+          "injection_file": "HEAD.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "asmheads",
+          "code_files": [
+            "./asm/head.s"
+          ],
+          "memory_address": "800816c0",
+          "size": "10",
+          "injection_file": "ASMHEADS.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        }
+      ],
+      "hooks": [
+        {
+          "name": "hook_main",
+          "code_files": [
+            "./asm/hook.s"
+          ],
+          "memory_address": "80033e38",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24638",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_fairy_fix",
+          "code_files": [
+            "./asm/gamestate_fairy_fix.s"
+          ],
+          "memory_address": "8002ccc8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4C8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "no_quit_game",
+          "code_files": [
+            "./asm/no_quit_game.s"
+          ],
+          "memory_address": "8002e2dc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1EADC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "disable_end_credits",
+          "code_files": [
+            "./asm/disable_end_credits.s"
+          ],
+          "memory_address": "80033a04",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24204",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "level_transition",
+          "code_files": [
+            "./asm/level_transition.s"
+          ],
+          "memory_address": "800338a0",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x240A0",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_check",
+          "code_files": [
+            "./asm/gamestate_check.s"
+          ],
+          "memory_address": "80033874",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24074",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_collectable",
+          "code_files": [
+            "./asm/hook_collect_collectable.s"
+          ],
+          "memory_address": "8003b9cc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2C1CC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_flight_item",
+          "code_files": [
+            "./asm/hook_collect_flight_item.s"
+          ],
+          "memory_address": "8003cb1c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2D31C",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_slash",
+          "code_files": [
+            "./asm/remove_dragon_slash.s"
+          ],
+          "memory_address": "8001c1b4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC9B4",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_totals",
+          "code_files": [
+            "./asm/remove_dragon_totals.s"
+          ],
+          "memory_address": "8001c218",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCA18",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "change_dragons_collected_to_resets",
+          "code_files": [
+            "./asm/change_dragons_collected_to_resets.s"
+          ],
+          "memory_address": "8001c158",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC958",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "pause_menu",
+          "code_files": [
+            "./asm/pause_menu.s"
+          ],
+          "memory_address": "8001c574",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCD74",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "nop_SetupMemCard",
+          "code_files": [
+            "./asm/nop_SetupMemCard.s"
+          ],
+          "memory_address": "800127e4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2FE4",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1",
+          "code_files": [
+            "./asm/splash_screen1.s"
+          ],
+          "memory_address": "8001288c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x308C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1_fade",
+          "code_files": [
+            "./asm/splash_screen1_fade.s"
+          ],
+          "memory_address": "80012a24",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3224",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2",
+          "code_files": [
+            "./asm/splash_screen2.s"
+          ],
+          "memory_address": "80012ab8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x32B8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2_fade",
+          "code_files": [
+            "./asm/splash_screen2_fade.s"
+          ],
+          "memory_address": "80012b74",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3374",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "binary_patches": [
+        {
+          "name": "levelselectnames",
+          "code_files": [
+            "./patches/levelselectnames.bin"
+          ],
+          "memory_address": "80010084",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x884",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "levelselectnames2",
+          "code_files": [
+            "./patches/levelselectnames2.bin"
+          ],
+          "memory_address": "8007556c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x65D6C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "multi_patches": []
+    },
+    {
+      "build_name": "DUCKSTATION",
+      "platform": "PS1",
+      "symbols_file": "SpyroPractice.txt",
+      "injection_files": [
+        "SCUS_420.67"
+      ],
+      "injection_file_offsets": {
+        "SCUS_420.67": "F800"
+      },
+      "injection_file_types": {
+        "SCUS_420.67": "disk"
+      },
+      "extracted_game_folder": "./.config/game_files/NTSC",
+      "main_executable": "SCUS_420.67",
+      "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
+      "compiler_flags": "-Os -g",
+      "is_single_file_mode": false,
+      "single_file_path": null,
+      "section_maps": {},
+      "code_caves": [
+        {
+          "name": "MainHeaderArea",
+          "code_files": [
+            "./src/main.c",
+            "./src/loot_plane.c",
+            "./src/manual_timer.c"
+          ],
+          "memory_address": "8000B0B8",
+          "size": "7B4",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x48",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "StartFairyArea",
+          "code_files": [
+            "./src/main_updates.c",
+            "./src/il_timer.c",
+            "./src/splash_screen.c",
+            "./src/playtime_timer.c"
+          ],
+          "memory_address": "800314b4",
+          "size": "101C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x21CB4",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "FairyArea",
+          "code_files": [
+            "./src/levelselect.c",
+            "./src/cd_load.c",
+            "./src/multi_tap.c"
+          ],
+          "memory_address": "8001D718",
+          "size": "b30",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xDF18",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "MemoryCardArea",
+          "code_files": [
+            "./src/custom_menu.c",
+            "./src/balloon_data.c",
+            "./src/rat_code.c",
+            "./src/pause_patch.c"
+          ],
+          "memory_address": "80066840",
+          "size": "21cc",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x57040",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PlayIntroCutscenes",
+          "code_files": [
+            "./src/savestate_update.c"
+          ],
+          "memory_address": "800331AC",
+          "size": "6a8",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x239AC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "TitleCameraRelated",
+          "code_files": [
+            "./src/misc_timer.c"
+          ],
+          "memory_address": "8002BFE0",
+          "size": "43c",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1C7E0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "DebugLevelSelect",
+          "code_files": [
+            "./src/custom_menu_3.c",
+            "./src/draw_hud_moby.c"
+          ],
+          "memory_address": "8002d580",
+          "size": "28C",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1DD80",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "ControlDemoModeSpyro",
+          "code_files": [
+            "./src/swap_controller.c",
+            "./src/prims.c"
+          ],
+          "memory_address": "800539fc",
+          "size": "268",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x441FC",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "PrepareFairyGamestate",
+          "code_files": [
+            "./src/gemcount.c",
+            "./src/disable_portal.c"
+          ],
+          "memory_address": "8002ccd0",
+          "size": "360",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4D0",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "existing_file",
+          "enabled": true
+        },
+        {
+          "name": "kern",
+          "code_files": [
+            "./src/custom_menu_2.c",
+            "./src/draw_sparx_range.c",
+            "./src/supercharge.c",
+            "./src/credits_skip.c"
+          ],
+          "memory_address": "8000C000",
+          "size": "1800",
+          "injection_file": "KERN.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "kern2",
+          "code_files": [
+            "./src/track_consistency.c",
+            "./src/sparx_particles.c",
+            "./src/cosmetic.c",
+            "./src/right_stick.c",
+            "./src/custom_text.c",
+            "./src/common.c"
+          ],
+          "memory_address": "8000EA00",
+          "size": "f38",
+          "injection_file": "KERN2.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "head",
+          "code_files": [
+            "./src/head_patch.c"
+          ],
+          "memory_address": "800816d0",
+          "size": "200",
+          "injection_file": "HEAD.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "asmheads",
+          "code_files": [
+            "./asm/head.s"
+          ],
+          "memory_address": "800816c0",
+          "size": "10",
+          "injection_file": "ASMHEADS.BIN",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "new_file",
+          "enabled": true
+        },
+        {
+          "name": "extra",
+          "code_files": [
+            "./src/deckard_strings.c",
+            "./src/save_state.c",
+            "./src/save_geo.c",
+            "./src/save_state_region.c",
+            "./src/ghost_menu.c",
+            "./src/store_gte_reg.c",
+            "./src/skin_editor_menu.c",
+            "./src/og_spyro_skin_data.c",
+            "./src/color_edit_globals.c",
+            "./src/color_edit.c",
+            "./src/deckard.c",
+            "./src/draw_poly.c",
+            "./src/ghost_replay.c",
+            "./src/ghosts_autoplay.c",
+            "./src/ghosts_autoplay_test.c",
+            "./src/draw_fool_range.c",
+            "./src/font_testing.c",
+            "./src/theatre_mode.c",
+            "./src/watch_memory.c",
+            "./src/hitbox_viewer.c",
+            "./src/spin_wheel.c",
+            "./src/freecam.c",
+            "./src/cosmetic_menu_preview.c"
+          ],
+          "memory_address": "80400000",
+          "size": "400000",
+          "injection_file": "",
+          "injection_file_address": "",
+          "auto_calculate_injection_file_address": false,
+          "injection_type": "memory_only",
+          "enabled": true
+        }
+      ],
+      "hooks": [
+        {
+          "name": "hook_main",
+          "code_files": [
+            "./asm/hook.s"
+          ],
+          "memory_address": "80033e38",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24638",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_fairy_fix",
+          "code_files": [
+            "./asm/gamestate_fairy_fix.s"
+          ],
+          "memory_address": "8002ccc8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1D4C8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "no_quit_game",
+          "code_files": [
+            "./asm/no_quit_game.s"
+          ],
+          "memory_address": "8002e2dc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x1EADC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "disable_end_credits",
+          "code_files": [
+            "./asm/disable_end_credits.s"
+          ],
+          "memory_address": "80033a34",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24234",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "level_transition",
+          "code_files": [
+            "./asm/level_transition.s"
+          ],
+          "memory_address": "800338a0",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x240A0",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "gamestate_check",
+          "code_files": [
+            "./asm/gamestate_check.s"
+          ],
+          "memory_address": "80033874",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x24074",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_collectable",
+          "code_files": [
+            "./asm/hook_collect_collectable.s"
+          ],
+          "memory_address": "8003b9cc",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2C1CC",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "hook_collect_flight_item",
+          "code_files": [
+            "./asm/hook_collect_flight_item.s"
+          ],
+          "memory_address": "8003cb1c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2D31C",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_slash",
+          "code_files": [
+            "./asm/remove_dragon_slash.s"
+          ],
+          "memory_address": "8001c1b4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC9B4",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "remove_dragon_totals",
+          "code_files": [
+            "./asm/remove_dragon_totals.s"
+          ],
+          "memory_address": "8001c218",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCA18",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "change_dragons_collected_to_resets",
+          "code_files": [
+            "./asm/change_dragons_collected_to_resets.s"
+          ],
+          "memory_address": "8001c158",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xC958",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "pause_menu",
+          "code_files": [
+            "./asm/pause_menu.s"
+          ],
+          "memory_address": "8001c574",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0xCD74",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "nop_SetupMemCard",
+          "code_files": [
+            "./asm/nop_SetupMemCard.s"
+          ],
+          "memory_address": "800127e4",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x2FE4",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "ghosts",
+          "code_files": [
+            "./asm/ghosts.s"
+          ],
+          "memory_address": "80019734",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x9F34",
+          "auto_calculate_injection_file_address": true,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1",
+          "code_files": [
+            "./asm/splash_screen1.s"
+          ],
+          "memory_address": "8001288c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x308C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen1_fade",
+          "code_files": [
+            "./asm/splash_screen1_fade.s"
+          ],
+          "memory_address": "80012a24",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3224",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2",
+          "code_files": [
+            "./asm/splash_screen2.s"
+          ],
+          "memory_address": "80012ab8",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x32B8",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "splash_screen2_fade",
+          "code_files": [
+            "./asm/splash_screen2_fade.s"
+          ],
+          "memory_address": "80012b74",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x3374",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "binary_patches": [
+        {
+          "name": "levelselectnames",
+          "code_files": [
+            "./patches/levelselectnames.bin"
+          ],
+          "memory_address": "80010084",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x884",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        },
+        {
+          "name": "levelselectnames2",
+          "code_files": [
+            "./patches/levelselectnames2.bin"
+          ],
+          "memory_address": "8007556c",
+          "size": "0",
+          "injection_file": "SCUS_420.67",
+          "injection_file_address": "0x65D6C",
+          "auto_calculate_injection_file_address": false,
+          "enabled": true
+        }
+      ],
+      "multi_patches": []
+    }
+  ]
+}

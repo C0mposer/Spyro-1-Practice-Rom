@@ -1,0 +1,6 @@
+.config/*
+.claude/*
+.modtool/*
+build/*
+UNUSED/*
+notes/*

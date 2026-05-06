@@ -1,0 +1,19 @@
+        .tip.r = 0xfd,
+    .tip.g = 0x98,
+    .tip.b = 0xc7,
+    .tip.shape_code = 0x30,
+
+    .center.r = 0xce,
+    .center.g = 0x80,
+    .center.b = 0xef,
+    .center.shape_code = 0x30,
+    
+    .right.r = 0xfb,
+    .right.g = 0xcd,
+    .right.b = 0x8c,
+    .right.shape_code = 0x30,
+
+    .left.r = 0xa2,
+    .left.g = 0xc8,
+    .left.b = 0xff,
+    .left.shape_code = 0x30

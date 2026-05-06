@@ -1,0 +1,61 @@
+#ifndef SKIN_STRINGS_H
+#define SKIN_STRINGS_H
+const char* BG_COLOR_STRING_LUT[7] = { "BG BLUE",
+                                       "BG PURPLE",
+                                       "BG TEAL",
+                                       "BG GREY",
+                                       "BG PINK",
+                                       "BG ORANGE",
+                                       "BG YELLOW" };
+
+const char* SPYRO_SKIN_STRING_LUT[] = { "DEFAULT",
+                                          "DARK RED",
+                                          "ICY",
+                                          "EMERALD",
+                                          "CORAL BLUE",
+                                          "GOLD",
+                                          "BERRY",
+                                          "GREY",
+                                          "ZERA",
+                                          "PIXIE",
+                                          "CANDY",
+                                          "PERIDOT",
+                                          "PINK",
+                                          "TRANS",
+                                          "GOTH",
+                                          "CERNY",
+                                          "DITTO",
+                                          "LEMON LIME",
+                                          "EMBER",
+                                          "CYNDER",
+                                          "CUSTOM" };
+
+const char* FLAME_SKIN_STRING_LUT[15] = { "DEFAULT",
+                                          "DARK RED",
+                                          "ICY",
+                                          "JADE",
+                                          "BLUE",
+                                          "GOLD",
+                                          "GREEN",
+                                          "PINK",
+                                          "ACID",
+                                          "PURPLE",
+                                          "LIGHT PINK",
+                                          "PASTEL",
+                                          "RAINBOW",
+                                          "CYNDER",
+                                          "GHOST" };
+
+const char* SPARX_SKIN_STRING_LUT[11] = { "DEFAULT",
+                                          "RED",
+                                          "ICY",
+                                          "JADE",
+                                          "DARK BLUE",
+                                          "PURPLE",
+                                          "ORANGE",
+                                          "PINK",
+                                          "TURQUOISE",
+                                          "SILVER",
+                                          "BLACK" };
+
+#endif /* SKIN_STRINGS_H */

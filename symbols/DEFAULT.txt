@@ -1,0 +1,3 @@
+/* Symbols file for build version: DEFAULT */
+/* This is where you put your in-game global variables & functions */
+game_symbol = 0x80001234; /* Example: */

@@ -14,6 +14,14 @@ Renders active object collision in real time.
 
 Detaches the camera from Spyro, giving you control to move around the camera with the analog sticks. Spyro stops updating while free cam is active.
 
+| Action | Controls |
+|---|---|
+| Move Camera | Left Analog |
+| Rotate Camera | Right Analog |
+| Speed Up Movement | R2 |
+| Slow Down Movement | L2 |
+| Move Camera Upwards | R1 |
+| Move Camera Downwards | L1 |
 ---
 
 ## Theatre Mode

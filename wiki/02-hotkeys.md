@@ -26,7 +26,7 @@ All default button combos for the Practice ROM.
 |---|---|
 | Fly in to Homeworld | L3 |
 | Fly in to levels | L1, L2, R1, R2, R3 |
-| Digital pad alternative — fly in | Up (Homeworld), Down (R3 direction) |
+| Digital pad alternative — fly in | Up (Homeworld), Down (Flight Level) |
 | Cancel to RETURNING HOME instantly | Triangle (during fly-in) |
 | Reverse fly-in angle | Circle (during fly-in) |
 

@@ -1,4 +1,4 @@
-# Spyro 1 Practice ROM — Wiki
+# Spyro 1 Practice ROM Wiki
 
 Welcome to the wiki for the **Spyro 1 Practice ROM**. Use the links below to navigate to any section.
 

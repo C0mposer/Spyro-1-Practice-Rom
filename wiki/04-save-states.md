@@ -6,23 +6,20 @@
 
 ## Full Save States vs. Partial Save States
 
-The type of save state available depends on your hardware. See [Platform Comparison](13-platform-comparison.md) for a full matrix.
+The type of save state available depends on your hardware. See [Platform Comparison](13-platform-comparison.md) for a full comparison.
 
-### Full Save States (PS2 75k–90k / Deckard)
+### Full Save States (PS2 75k–90k)
 
 Full save states capture and restore essentially the entire level state:
 
-- Spyro position, animation, and health
+- Spyro position, animation, angle, state
 - Camera position and state
 - All collectables (gems, dragons, eggs)
-- Key state and key chest host gem
+- Key state
 - Particle effects
 - Respawn position and angle
-- Electrical pad activation states
 - Flight level timer and collected items
-- Superflame timer state
-- Level geometry and dynamic objects (moving platforms, etc.)
-- Rat position (in Gnasty's World)
+- Moving level geometry and dynamic objects (moving platforms)
 
 ### Partial Save States (PS1 / PS2 30k–70k)
 
@@ -73,6 +70,4 @@ There are **3 independent savestate slots**. You can switch between them at any 
 
 ## Notes
 
-- On **PS2 30k–70k**, an additional **Respawn on Loadstate** toggle is available in the menu.
-- If you use **Track Consistency**, the Load State button also increments your attempt count — factor this in when choosing your load button.
-- **Rat position** is included in the partial save state for Gnasty's World, even on PS1 builds.
+- On **PS2 30k–70k**, an additional **Respawn on Loadstate** toggle is available in the menu. This will respawn everything in the level, so you can at least practice cycle independent sections easier. 

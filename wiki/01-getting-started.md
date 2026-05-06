@@ -10,10 +10,10 @@ This mod supports multiple platforms. **Download the correct version for your ha
 
 | Platform | Save States | Ghost Replay | Notes |
 |---|---|---|---|
-|[ PS2 75k–90k (Deckard)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.Deckard.zip) | Full | Yes | Recommended console for full feature set |
+|[PS2 75k–90k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.Deckard.zip) | Full | Yes | Recommended console for full feature set |
 | Emulator (DuckStation) | Full | Yes | Recommended emulator for full feature set |
 | |
-| [PS2 30k–70k (IOP)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.IOP.zip) | Partial | No | Spyro/camera position only |
+| [PS2 30k–70k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.IOP.zip) | Partial | No | Spyro/camera position only |
 | [PS1](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS1.zip) | Partial | No | Spyro/camera position only |
 | [Emulator (Any other PS1 emulator)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS1.zip) | Partial | No | Spyro/camera position only |
 

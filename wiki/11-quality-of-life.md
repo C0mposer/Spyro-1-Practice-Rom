@@ -1,24 +1,20 @@
 # Quality of Life
 
-Passive improvements that are always active or require minimal setup.
-
----
-
 ## Automatic Intro Skip
 
-On startup, the "The Adventure Begins" opening cutscene is automatically skipped. The game drops straight into "The Adventure Continues..." as if you have already played before.
+On startup, the game drops straight into "The Adventure Continues..."
 
 ---
 
 ## Nestor Always Skippable
 
-Nestor in Artisans is permanently configured as a skippable dragon, just like every other dragon in the game. This allows faster and more consistent Nestor skip practice without any setup.
+Nestor in Artisans is permanently configured as a skippable dragon, just like every other dragon in the game. This allows faster Nestor skip practice.
 
 ---
 
 ## 99 Lives
 
-Spyro's life count is permanently held at 99. You will never get a game over from losing lives.
+Spyro's life count is permanently held at 99.
 
 ---
 
@@ -36,17 +32,9 @@ Lifts Spyro upward and slows his descent, allowing you to reach elevated areas q
 
 ---
 
-## Respawn Spyro
-
-Press **L1 + R1 + Circle** to respawn Spyro at the level's spawn point. Also resets all collectables in the level (gems, keys, etc.) and flight level timers.
-
----
-
 ## Controller Port Swap
 
-If you need to switch from controller port 1 to port 2 (or back), press **any button three times** on the port you want to switch to. Three presses on port 2 switches input to port 2; three presses on port 1 switches back.
-
-Useful for multi-player setups, input device changes, or adapter compatibility.
+If you want to switch the active controller port from port 1 to port 2 (or back), press **any button three times** on the port you want to switch to. Three presses on port 2 switches input to port 2; three presses on port 1 switches back.
 
 ---
 

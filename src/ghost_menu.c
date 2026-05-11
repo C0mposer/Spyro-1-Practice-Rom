@@ -43,6 +43,18 @@ extern bool isMenuButtonHeld;
 
 void GhostResetAll(void);
 
+extern int savestated_level_ids[3];
+
+void ResetGhostsRegion()
+{
+    savestate_selection = 0; // Force savestate slot to 1
+    // Clear savestate slots 2/3 level IDs
+    savestated_level_ids[1] = 0;
+    savestated_level_ids[2] = 0;
+
+    memset(0x80A27000, 0x0, 0x48FD0);
+}
+
 //! Every Frame Update
 void CustomMenuUpdateGhosts()
 {
@@ -169,10 +181,10 @@ void CustomMenuUpdateGhosts()
         {
             ghost_menu.ghost_visual_text = VISUAL_SPYRO_TEXT;
         }
-        else if (ghost_menu.ghosts_visual == VISUAL_SPYRO_WIREFRAME)
-        {
-            ghost_menu.ghost_visual_text = VISUAL_SPYRO_WIREFRAME_TEXT;
-        }
+        // else if (ghost_menu.ghosts_visual == VISUAL_SPYRO_WIREFRAME)
+        // {
+        //     ghost_menu.ghost_visual_text = VISUAL_SPYRO_WIREFRAME_TEXT;
+        // }
         else
         {
             ghost_menu.ghost_visual_text = VISUAL_POLYGON_TEXT;
@@ -188,35 +200,30 @@ void CustomMenuUpdateGhosts()
 
         if (ghost_menu.selection == 0)
         {
-            if (_currentButtonOneFrame == RIGHT_BUTTON)
+            if (_currentButtonOneFrame == RIGHT_BUTTON && !ghost_menu.ghosts_enabled)
             {
                 ghost_menu.ghosts_enabled = true;
+
+                savestate_selection = 0;
+                // Clear savestate slots 2/3 level IDs
+                savestated_level_ids[1] = 0;
+                savestated_level_ids[2] = 0;
             }
-            else if (_currentButtonOneFrame == LEFT_BUTTON)
+            else if (_currentButtonOneFrame == LEFT_BUTTON && ghost_menu.ghosts_enabled)
             {
                 ghost_menu.ghosts_enabled = false;
+                savestate_selection = 0;
             }
         }
         if (ghost_menu.selection == 1)
         {
-            /* Cycle SPYRO -> WIREFRAME -> POLYGON -> SPYRO ... */
             if (_currentButtonOneFrame == RIGHT_BUTTON)
             {
-                if (ghost_menu.ghosts_visual == VISUAL_SPYRO)
-                    ghost_menu.ghosts_visual = VISUAL_SPYRO_WIREFRAME;
-                else if (ghost_menu.ghosts_visual == VISUAL_SPYRO_WIREFRAME)
-                    ghost_menu.ghosts_visual = VISUAL_POLYGON;
-                else
-                    ghost_menu.ghosts_visual = VISUAL_SPYRO;
+                ghost_menu.ghosts_visual = VISUAL_POLYGON;
             }
             else if (_currentButtonOneFrame == LEFT_BUTTON)
             {
-                if (ghost_menu.ghosts_visual == VISUAL_POLYGON)
-                    ghost_menu.ghosts_visual = VISUAL_SPYRO_WIREFRAME;
-                else if (ghost_menu.ghosts_visual == VISUAL_SPYRO_WIREFRAME)
-                    ghost_menu.ghosts_visual = VISUAL_SPYRO;
-                else
-                    ghost_menu.ghosts_visual = VISUAL_POLYGON;
+                ghost_menu.ghosts_visual = VISUAL_SPYRO;
             }
         }
         if (ghost_menu.selection == 2)
@@ -238,3 +245,4 @@ void CustomMenuUpdateGhosts()
         RenderShadedMobyQueue(); //why need to run again?
     }
 }
+

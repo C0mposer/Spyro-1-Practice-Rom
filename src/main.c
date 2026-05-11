@@ -42,7 +42,7 @@ void MainHook()
         LoadCdData(265759, (int*)0x80008EB0, 0x1600, 0, 600);     //Loads kern.bin
         LoadCdData(265762, (int*)0x80007530, 0x1000, 0, 600);     //Loads kern2.bin
         LoadCdData(DECKARD_PS2MSTR_SECTOR, (unsigned int*)DECKARD_STRINGS_REGION, 0x1000, 0, 600); // PS2MSTR.BIN (.data words flipped in build)
-        LoadCdData(DECKARD_BE_SECTOR, (int*)EXTRA_DECKARD_CODE_REGION, 0xC000, 0, 600);     // BE.BIN (byteswapped in release script)
+        LoadCdData(DECKARD_BE_SECTOR, (int*)EXTRA_DECKARD_CODE_REGION, 0xD000, 0, 600);     // BE.BIN (byteswapped in release script)
         #elif BUILD == PS2_IOP
         LoadCdData(265759, (int*)0x80008EB0, 0x1600, 0, 600);     //Loads kern.bin
         LoadCdData(265762, (int*)0x80007530, 0x1000, 0, 600);     //Loads kern2.bin
@@ -90,7 +90,7 @@ void MainHook()
             CreditsSkipUpdate();
             LootPlaneUpdate();
             MultiTapUpdate();
-            CheckMiscTimerUpdate();
+            //CheckMiscTimerUpdate();
             CosmeticsUpdate();
             MainUpdate();
             SwapControllerUpdate();

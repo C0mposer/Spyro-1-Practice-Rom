@@ -11,6 +11,8 @@
 
 #define MOD_VERSION_STRING "V5.0"
 
+#define SECTOR_OFFSET 1 //Because the skins sectors grow, we need to add an offset to every sector afterwards. This is hacky.
+
 //! Build Versions
 #define REDUX 0
 #define PS1 1
@@ -30,14 +32,14 @@
 #define EXTRA_DECKARD_CODE_REGION 0x80A70000
 /* PS2MSTR.BIN loads just below main PS2M; ISO lists it before BE.BIN (see custom_build spyro1_*_DECKARD.xml). */
 #define DECKARD_STRINGS_REGION 0x80A7F000
-#define DECKARD_PS2MSTR_SECTOR 266137
+#define DECKARD_PS2MSTR_SECTOR 266138 + SECTOR_OFFSET
 /* BE.BIN starts after PS2MSTR on disc (tune if mkpsxiso sector padding differs). */
-#define DECKARD_BE_SECTOR 266138
+#define DECKARD_BE_SECTOR 266139 + SECTOR_OFFSET
 #include "deckard_ghost_boot.h"
 #elif BUILD == DUCKSTATION
 #define STARTING_EXTRA_MEM 0x80300000
 #define DUCKSTATION_EXTRA_CODE_REGION 0x80400000
-#define DUCKSTATION_EXTRA_SECTOR 266135
+#define DUCKSTATION_EXTRA_SECTOR 266136 + SECTOR_OFFSET
 #define DUCKSTATION_EXTRA_BYTES 0x400000
 #endif
 

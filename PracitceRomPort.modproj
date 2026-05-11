@@ -2,10 +2,11 @@
   "version": "1.0",
   "project_name": "PracitceRomPort",
   "project_folder": "./",
-  "currently_selected_build_index": 0,
+  "currently_selected_build_index": 2,
   "build_versions": [
     {
       "build_name": "REDUX",
+      "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
       "injection_files": [
@@ -206,7 +207,6 @@
             "./src/draw_poly.c",
             "./src/ghost_replay.c",
             "./src/ghosts_autoplay.c",
-            "./src/ghosts_autoplay_test.c",
             "./src/draw_fool_range.c",
             "./src/font_testing.c",
             "./src/theatre_mode.c",
@@ -402,6 +402,7 @@
     },
     {
       "build_name": "NTSC",
+      "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
       "injection_files": [
@@ -849,6 +850,7 @@
     },
     {
       "build_name": "DECKARD_PS2_NTSC",
+      "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
       "injection_files": [
@@ -1351,6 +1353,7 @@
     },
     {
       "build_name": "IOP_PS2_NTSC",
+      "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
       "injection_files": [
@@ -1798,6 +1801,7 @@
     },
     {
       "build_name": "DUCKSTATION",
+      "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
       "injection_files": [
@@ -2024,7 +2028,6 @@
             "./src/draw_poly.c",
             "./src/ghost_replay.c",
             "./src/ghosts_autoplay.c",
-            "./src/ghosts_autoplay_test.c",
             "./src/draw_fool_range.c",
             "./src/font_testing.c",
             "./src/theatre_mode.c",

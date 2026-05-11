@@ -1031,7 +1031,7 @@ static void MakeGhostDrawSpyroPacketsWireframe(u8* start, u8* end)
             }
             else
             {
-                prim[3]  = 7;
+                prim[3] = 7;
                 words[1] = DR_MODE_50_BLEND;
                 words[2] = (((u32)POLYLINE_MONO_SEMITRANS) << 24) | GHOST_WIREFRAME_COLOR;
                 words[3] = xy0;
@@ -1055,7 +1055,7 @@ static void MakeGhostDrawSpyroPacketsWireframe(u8* start, u8* end)
             }
             else
             {
-                prim[3]  = 8;
+                prim[3] = 8;
                 words[1] = DR_MODE_50_BLEND;
                 words[2] = (((u32)POLYLINE_MONO_SEMITRANS) << 24) | GHOST_WIREFRAME_COLOR;
                 words[3] = xy0;
@@ -1370,7 +1370,9 @@ bool GhostIsRacing(void)
     return g_ghostA.isActive && !g_ghostA.isRecording && g_ghostB.isActive && g_ghostB.isRecording;
 }
 
-void GhostResetAll(void)
+extern int savestated_level_ids[3];
+
+void GhostInvalidateStoredGhosts(void)
 {
     StopGhost(&g_ghostA);
     StopGhost(&g_ghostB);
@@ -1381,6 +1383,24 @@ void GhostResetAll(void)
     g_ghost_new_best = false;
     s_recording_failed_too_long = false;
     s_recording_too_long_message_timer = 0;
+}
+
+void GhostResetAll(void)
+{
+    GhostInvalidateStoredGhosts();
+
+    #if BUILD == PS2_DECKARD
+    {
+        memset((void*)0x80A29000, 0, 0x46FE0);
+
+        savestate_selection = 0; // Force savestate slot to 1
+
+        // Clear savestate slots 2/3 level IDs
+        savestated_level_ids[1] = 0;
+        savestated_level_ids[2] = 0;
+
+    }
+    #endif
 }
 
 void GhostAutoEnableIfLoaded(void)

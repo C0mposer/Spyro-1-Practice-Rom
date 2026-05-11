@@ -742,7 +742,7 @@ void MemoryWatchUpdate(void)
             DrawGameplayWatches();
             if (visualizer_menu.hitbox_viewer)
             {
-                HitboxViewerUpdate();
+                HitboxViewerUpdate(); // Hacky, but it runs every frame so its fine. Probably move this for clarity eventually
             }
         }
         return;

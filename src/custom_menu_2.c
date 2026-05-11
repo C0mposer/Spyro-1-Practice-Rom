@@ -358,7 +358,7 @@ void CustomMenuUpdate2()
             // Spyro Color
             else if (cosmetic_menu.selection == 1)
             {
-                const int amount_of_skins = 21;
+                const int amount_of_skins = 31;
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
                     spyro_color_index = (spyro_color_index + 1) % amount_of_skins;

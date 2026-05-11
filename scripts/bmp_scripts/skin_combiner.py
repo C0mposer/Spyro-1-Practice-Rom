@@ -24,9 +24,12 @@ _OUTPUT_DIR = Path(__file__).parent / "final_output"
 
 _SPYRO_SKINS = [
     "og_s1.bin", "dred.bin", "icy.bin", "emerald.bin", "rblue.bin",
-    "gold.bin", "berry.bin", "greyspyro_rev2.bin", "zera.bin", "pixie.bin",
-    "jayo.bin", "peri.bin", "tex_pink.bin", "woke.bin", "goth.bin", "cerny.bin", "ditto.bin",
-    "lemon_lime.bin", "ember.bin", "cyn_cre.bin", "custom_spyro.bin",
+    "midnight.bin", "woke.bin", "lemon_lime.bin", "creamsicle.bin",
+    "mint.bin", "tex_pink.bin", "greyspyro_rev2.bin", "goth.bin",
+    "gold.bin", "berry.bin", "pixie.bin", "jayo.bin", "night_vision.bin",
+    "vampire.bin", "zera.bin", "nestor.bin", "titan.bin", "cosmo.bin",
+    "bruno.bin", "lateef.bin", "cerny.bin", "ember.bin", "cyn_cre.bin",
+    "peri.bin", "ditto.bin", "custom_spyro.bin",
 ]
 
 _FLAME_SKINS = [

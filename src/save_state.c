@@ -1,5 +1,6 @@
 #include <common.h>
 #include <levelselect.h>
+#include <custom_text.h>
 #include <shared_funcs.h>
 #include <multitap.h>
 #include <moving_geo.h>
@@ -7,14 +8,14 @@
 enum { LOAD, SAVE };
 
 void* g_save_state_bm_pad_addrs[8] = {
-	(void*)0x80178E88, (void*)0x80178FD4, (void*)0x80179120, (void*)0x8017923C,
-	(void*)0x80179358, (void*)0x80179474, (void*)0x801795A8, (void*)0x801796C4
+    (void*)0x80178E88, (void*)0x80178FD4, (void*)0x80179120, (void*)0x8017923C,
+    (void*)0x80179358, (void*)0x80179474, (void*)0x801795A8, (void*)0x801796C4
 };
 
 void* g_save_state_terrace_pad_addrs[10] = {
-	(void*)0x80167CC4, (void*)0x80168F80, (void*)0x801699C0, (void*)0x8016ADE4,
-	(void*)0x8016BEF0, (void*)0x80170710, (void*)0x80170B5C, (void*)0x8017288C,
-	(void*)0x80174694, (void*)0x80174FE4
+    (void*)0x80167CC4, (void*)0x80168F80, (void*)0x801699C0, (void*)0x8016ADE4,
+    (void*)0x8016BEF0, (void*)0x80170710, (void*)0x80170B5C, (void*)0x8017288C,
+    (void*)0x80174694, (void*)0x80174FE4
 };
 
 // from save_state_region.c
@@ -167,4 +168,52 @@ void FullLoadState(void)
             LoadstateNopFixes();
         }
     }
+}
+
+void DrawSavestateSwitchedText(void)
+{
+    char buf[3] = { 0 };
+    sprintf(buf, "%d", savestate_selection + 1);
+    DrawTextCapitals(buf, &(CapitalTextInfo){.x = 0x100, .y = 0xDC, .size = DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+    RenderShadedMobyQueue();
+}
+
+extern bool fly_in_resets_loadstate_timer;
+void FlyInResetsLoadstateTimerUpdate(void)
+{
+    if (fly_in_resets_loadstate_timer > 0)
+    {
+        fly_in_resets_loadstate_timer++;
+    }
+    if (fly_in_resets_loadstate_timer >= 30)
+    {
+        fly_in_resets_loadstate_timer = 0;
+    }
+}
+
+
+// Fixes
+int appliedNopFixTimer = 0;
+void LoadstateNopFixes(void)
+{
+    *(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after a loadstate
+
+    appliedNopFixTimer = 1;
+}
+
+void RevertLoadstateNOPFixes(void)
+{
+    if (appliedNopFixTimer == 10)
+        *(int*)0x80056528 = 0x0C005C7F;
+
+    if (appliedNopFixTimer > 0)
+    {
+        appliedNopFixTimer++;
+    }
+}
+
+// Check to revert NOP's every frame
+void LoadstateFixesUpdate()
+{
+    RevertLoadstateNOPFixes();
 }

@@ -44,6 +44,9 @@ extern VisualizerMenu visualizer_menu;
 void GhostSaveState(int slot);
 void GhostLoadState(int slot);
 #endif
+#if BUILD == PS2_DECKARD
+void GhostInvalidateStoredGhosts(void);
+#endif
 
 #if BUILD == PS1 || BUILD == PS2_IOP
 extern bool respawn_on_loadstate;
@@ -61,6 +64,12 @@ void SaveStateUpdate()
             {
                 #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
                 FullSaveState();
+                #if BUILD == PS2_DECKARD
+                if (!ghost_menu.ghosts_enabled && savestate_selection > 0) // Mark ghost area as dirty
+                {
+                    GhostInvalidateStoredGhosts();
+                }
+                #endif
                 #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
                 GhostSaveState(savestate_selection);
                 #endif
@@ -81,6 +90,12 @@ void SaveStateUpdate()
             {
                 #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
                 FullSaveState();
+                #if BUILD == PS2_DECKARD
+                if (!ghost_menu.ghosts_enabled && savestate_selection > 0) // Mark ghost area as dirty
+                {
+                    GhostInvalidateStoredGhosts();
+                }
+                #endif
                 #elif BUILD == PS1 || BUILD == PS2_IOP
                 SaveSpyroAndCamera(false);
                 #endif
@@ -274,6 +289,12 @@ void SaveStateUpdate()
             //printf("Savestated after enabling the disable portal option\n");
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             FullSaveState();
+            #if BUILD == PS2_DECKARD
+            if (!ghost_menu.ghosts_enabled && savestate_selection > 0) // Mark ghost area as dirty
+            {
+                GhostInvalidateStoredGhosts();
+            }
+            #endif
             #elif BUILD == PS1 || BUILD == PS2_IOP
             SaveSpyroAndCamera(false);
             #endif
@@ -312,50 +333,4 @@ void SaveStateUpdate()
     FlyInResetsLoadstateTimerUpdate();
 }
 
-void DrawSavestateSwitchedText(void)
-{
-    char buf[3] = { 0 };
-    sprintf(buf, "%d", savestate_selection + 1);
-    DrawTextCapitals(buf, &(CapitalTextInfo){.x = 0x100, .y = 0xDC, .size = DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-    RenderShadedMobyQueue();
-}
 
-void FlyInResetsLoadstateTimerUpdate(void)
-{
-    if (fly_in_resets_loadstate_timer > 0)
-    {
-        fly_in_resets_loadstate_timer++;
-    }
-    if (fly_in_resets_loadstate_timer >= 30)
-    {
-        fly_in_resets_loadstate_timer = 0;
-    }
-}
-
-
-
-// Moved from Savestate.c for space
-int appliedNopFixTimer = 0;
-void LoadstateNopFixes(void)
-{
-    *(int*)0x80056528 = 0x00000000;					// NOP-ing the Vec3Length call in the SFX proccessing function. This fixes a weird bug with some specific sound sources crashing right after a loadstate
-
-    appliedNopFixTimer = 1;
-}
-
-void RevertLoadstateNOPFixes(void)
-{
-    if (appliedNopFixTimer == 10)
-        *(int*)0x80056528 = 0x0C005C7F;
-
-    if (appliedNopFixTimer > 0)
-    {
-        appliedNopFixTimer++;
-    }
-}
-
-// Check to revert NOP's every frame
-void LoadstateFixesUpdate()
-{
-    RevertLoadstateNOPFixes();
-}

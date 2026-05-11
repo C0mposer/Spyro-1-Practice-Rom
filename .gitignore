@@ -4,3 +4,5 @@
 build/*
 UNUSED/*
 notes/*
+*.pyc
+scripts/bmp_scripts/bmps/lemon_lime.bin.bak

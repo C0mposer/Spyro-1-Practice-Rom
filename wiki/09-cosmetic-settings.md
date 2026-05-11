@@ -54,15 +54,46 @@ Adjust Hue, Saturation, and Lightness independently for each section. Then, save
 
 ## Skin Credits
 
-Skins included in this release were made by:
+| Skin | Author |
+|---|---|
+| Dark Red | OddKara |
+| Icy | OddKara |
+| Emerald | Composer |
+| Coral Blue | Composer |
+| Midnight | Composer |
+| Trans | Pepper |
+| Lemon Lime | Composer |
+| Creamsicle | trace |
+| Mint | trace |
+| Pink | Texensis |
+| Grey | Composer* |
+| Goth | Composer* |
+| Gold | Composer |
+| Berry | OddKara* |
+| Pixie | Jayobean |
+| Candy | Jayobean |
+| Neon | CIPHAT |
+| Vampire | CIPHAT |
+| Zera | OddKara |
+| Nestor | Megan |
+| Titan | Megan |
+| Cosmo | Megan |
+| Bruno | Megan |
+| Lateef | Megan |
+| Cerny | Megan |
+| Ember | Pepper |
+| Cynder | Pepper |
+| Peridot | OddKara |
+| Ditto | Pepper |
 
-**Composer, OddKara, Pepper, Texensis, & Jayobean**
+
+Special thanks for everyone involved in the creation of skins!
 
 Additional credit to **Pepper** for the custom portrait in Gnasty's Loot and the splash screen.
 
 ---
 
-## Custom Skin Patcher (External Tool)
+## Custom Skin Patcher
 
 To patch your own skin texture (as a BMP file) directly into the Practice ROM:
 

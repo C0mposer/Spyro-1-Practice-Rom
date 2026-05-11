@@ -32,88 +32,88 @@ bool IsFlaming(void)
 }
 
 //! Every Frame Update
-void CheckMiscTimerUpdate(void)
-{
-    // Should count up
-    if (misc_display_timer > 0)
-    {
+// void CheckMiscTimerUpdate(void)
+// {
+//     // Should count up
+//     if (misc_display_timer > 0)
+//     {
 
-        misc_display_timer++;
-    }
+//         misc_display_timer++;
+//     }
 
-    // Should start counting land
-    if (_spyro.isGrounded == true && (misc_display_timer == 0 || has_landed == false) && il_display_modes.il_display_landing)
-    {
-        misc_display_timer = 1;
-        has_landed = true;
-    }
-    else if (_spyro.isGrounded == false && has_landed == true)
-    {
-        has_landed = false;
-    }
+//     // Should start counting land
+//     if (_spyro.isGrounded == true && (misc_display_timer == 0 || has_landed == false) && il_display_modes.il_display_landing)
+//     {
+//         misc_display_timer = 1;
+//         has_landed = true;
+//     }
+//     else if (_spyro.isGrounded == false && has_landed == true)
+//     {
+//         has_landed = false;
+//     }
 
-    // Should start counting land glide
-    if (_spyro.state == GLIDE && (misc_display_timer == 0 || has_glided == false) && il_display_modes.il_display_glide)
-    {
-        misc_display_timer = 1;
-        has_glided = true;
-    }
-    else if (_spyro.state != GLIDE && has_glided == true)
-    {
-        has_glided = false;
-    }
+//     // Should start counting land glide
+//     if (_spyro.state == GLIDE && (misc_display_timer == 0 || has_glided == false) && il_display_modes.il_display_glide)
+//     {
+//         misc_display_timer = 1;
+//         has_glided = true;
+//     }
+//     else if (_spyro.state != GLIDE && has_glided == true)
+//     {
+//         has_glided = false;
+//     }
 
-    // Should start counting whirlwind
-    if (_spyro.state == WHIRLWIND && (misc_display_timer == 0 || has_entered_whirlwind == false) && il_display_modes.il_display_whirlwind)
-    {
-        misc_display_timer = 1;
-        has_entered_whirlwind = true;
-    }
-    else if (_spyro.state != WHIRLWIND && has_entered_whirlwind == true)
-    {
-        has_entered_whirlwind = false;
-    }
+//     // Should start counting whirlwind
+//     if (_spyro.state == WHIRLWIND && (misc_display_timer == 0 || has_entered_whirlwind == false) && il_display_modes.il_display_whirlwind)
+//     {
+//         misc_display_timer = 1;
+//         has_entered_whirlwind = true;
+//     }
+//     else if (_spyro.state != WHIRLWIND && has_entered_whirlwind == true)
+//     {
+//         has_entered_whirlwind = false;
+//     }
 
-    // Should start counting bonk
-    if (_spyro.state == BONK && (misc_display_timer == 0 || has_bonked == false) && il_display_modes.il_display_bonk)
-    {
-        misc_display_timer = 1;
-        has_bonked = true;
-    }
-    else if (_spyro.state != BONK && has_bonked == true)
-    {
-        has_bonked = false;
-    }
+//     // Should start counting bonk
+//     if (_spyro.state == BONK && (misc_display_timer == 0 || has_bonked == false) && il_display_modes.il_display_bonk)
+//     {
+//         misc_display_timer = 1;
+//         has_bonked = true;
+//     }
+//     else if (_spyro.state != BONK && has_bonked == true)
+//     {
+//         has_bonked = false;
+//     }
 
-    // Should start counting flame
-    if (IsFlaming() && (misc_display_timer == 0 || has_flamed == false) && il_display_modes.il_display_flame)
-    {
-        misc_display_timer = 1;
-        has_flamed = true;
-    }
-    else if (_spyro.state != BONK && has_flamed == true)
-    {
-        has_flamed = false;
-    }
+//     // Should start counting flame
+//     if (IsFlaming() && (misc_display_timer == 0 || has_flamed == false) && il_display_modes.il_display_flame)
+//     {
+//         misc_display_timer = 1;
+//         has_flamed = true;
+//     }
+//     else if (_spyro.state != BONK && has_flamed == true)
+//     {
+//         has_flamed = false;
+//     }
 
-    // Reset collectable bool. Gets set to true in hook
-    else if (has_collected_item == true)
-    {
-        has_collected_item = false;
-    }
-    // Reset flight collectable bool. Gets set to true in hook
-    else if (has_collected_flight_item == true)
-    {
-        has_collected_flight_item = false;
-    }
+//     // Reset collectable bool. Gets set to true in hook
+//     else if (has_collected_item == true)
+//     {
+//         has_collected_item = false;
+//     }
+//     // Reset flight collectable bool. Gets set to true in hook
+//     else if (has_collected_flight_item == true)
+//     {
+//         has_collected_flight_item = false;
+//     }
 
-    // Should reset
-    else if (IsInMiscState() == false && misc_display_timer > 40)
-    {
-        misc_display_timer = 0;
-    }
+//     // Should reset
+//     else if (IsInMiscState() == false && misc_display_timer > 40)
+//     {
+//         misc_display_timer = 0;
+//     }
 
-}
+// }
 
 bool ShouldSaveMiscTime(void)
 {

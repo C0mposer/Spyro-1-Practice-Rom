@@ -1,4 +1,5 @@
 #include <common.h>
+#include <custom_menu.h>
 #include <levelselect.h>
 #include <shared_funcs.h>
 #include <multitap.h>
@@ -34,6 +35,8 @@ bool ignore_loop_level = false;
 bool has_started_insta_fly_in = false; //used for ghosts only
 bool has_started_reg_fly_in = false; //used for ghosts only
 
+extern VisualizerMenu visualizer_menu;
+
 //Storing the fly in animation for all the levels to be iterated through using the levelID at 0x80075964
 const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_LEFT, FACING_LEFT, RETURNING_HOME,
 						FACING_LEFT, FACING_LEFT, FACING_RIGHT, FACING_RIGHT, FACING_LEFT, FACING_RIGHT,
@@ -46,6 +49,11 @@ const short flyInArray[36] = { FACING_LEFT, FACING_LEFT, FACING_FORWARD, FACING_
 
 void DetermineButton()
 {
+	if (visualizer_menu.free_cam == true)
+	{
+		return; // Don't allow level select during free cam
+	}
+
 	// If you're in the inventory, and have yet to pick a level
 	if (_gameState == GAMESTATE_INVENTORY && _pausedTimer > 7 && levelSelectState == READY)
 	{

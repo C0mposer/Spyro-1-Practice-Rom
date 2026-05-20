@@ -1,4 +1,4 @@
-# Hotkeys
+# Default Hotkeys
 
 All default button combos for the Practice ROM.
 
@@ -26,7 +26,7 @@ All default button combos for the Practice ROM.
 |---|---|
 | Fly in to Homeworld | L3 |
 | Fly in to levels | L1, L2, R1, R2, R3 |
-| Digital pad alternative — fly in | Up (Homeworld), Down (Flight Level) |
+| DPAD alternatives | Up (Homeworld), Down (Flight Level) |
 | Fly out of Level Portal | Hold Triangle during fly-in to level |
 | Reverse fly-in Angle | Hold Circle during fly-in to leve |
 

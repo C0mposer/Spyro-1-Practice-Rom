@@ -17,7 +17,6 @@ These numbers represent frame data, for how early/late you are, for each input a
  3 | Jump |
  4 | Charge |
  5 | Glide |
-|
 
 # Examples
 A period (**.**) before a number, represents a **(-)**, for being early. 

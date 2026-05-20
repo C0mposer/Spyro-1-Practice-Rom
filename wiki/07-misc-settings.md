@@ -92,7 +92,7 @@ While supercharging:
 
 ## Memory Watch
 
-*(PS2 75k-90k / Emulator only)*
+*(PS2 75k-90k / Duckstation only)*
 
 Watch up to **10 arbitrary RAM addresses** simultaneously, displayed on screen in real time.
 

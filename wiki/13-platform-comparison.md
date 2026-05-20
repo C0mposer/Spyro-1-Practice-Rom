@@ -22,10 +22,10 @@ Feature availability varies by hardware. Use this table to understand what you c
 ## Platform Notes
 
 ### PS2 75k–90k
-The recommended console platform for the full feature set. Full save states capture the entire level state. Ghost replay is available with up to ~3:22 of recording time. Theatre mode, memory watch, hitbox viewer, and the custom skin editor are all available.
+The recommended console platform for the full feature set.
 
 ### Duckstation
-The recommended emulator for the full feature set. Full save states capture the entire level state. Ghost replay is available with up to ~3:22 of recording time. Theatre mode, memory watch, hitbox viewer, and the custom skin editor are all available.
+The recommended emulator for the full feature set.
 
 ### PS2 30k–70k (IOP) / PS1 / Other Emulators
 Partial save states only — Spyro and camera position are saved but collectables and level state are not. No ghost replay, theatre mode, memory watch, or hitbox viewer.

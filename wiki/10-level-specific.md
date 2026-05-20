@@ -6,21 +6,17 @@ Several features only activate in specific levels or boss fights.
 
 ## Rat Practice (Gnasty's World)
 
-Lets you freeze the rat in place so you have more time to set up **rat-surf**.
+Lets you freeze the rat in place so you have more time to set up **rat proxy**.
 
 | Action | Input |
 |---|---|
 | Freeze / Unfreeze rat | Triangle × 2 |
-| Save rat position | L3 |
-| Load rat position | R3 |
-
-The rat's position is also saved as part of the save state (both full and partial), so reloading your state will restore the rat to wherever it was when you saved.
 
 ---
 
 ## Gnasty's World — Head Control
 
-Manually open or close the portal heads for the three Gnasty's World destinations. Useful for practicing the head manipulation routing or testing alternate entry timings.
+Manually open or close the portal heads for the three Gnasty's World heads.
 
 | Action | Input | Target |
 |---|---|---|
@@ -28,13 +24,13 @@ Manually open or close the portal heads for the three Gnasty's World destination
 | R2 × 3 | Gnasty Gnorc | Toggle open / closed |
 | R1 × 3 | Gnasty's Loot | Toggle open / closed |
 
-Heads toggle between open and closed each time the hotkey is pressed.
+Heads toggle between open and closed each time the hotkeys are pressed.
 
 ---
 
-## Gnasty Gnorc Fight — Credits Skip
+## Gnasty Gnorc - Credits Skip
 
-Instantly warps Spyro to the **end of the Gnasty Gnorc fight**, placing everything in position for the credits cutscene.
+Instantly warps Spyro to the **end of the Gnasty Gnorc fight**, right before credits skip.
 
 | Action | Input |
 |---|---|
@@ -42,13 +38,13 @@ Instantly warps Spyro to the **end of the Gnasty Gnorc fight**, placing everythi
 
 ### Game Over During Credits
 
-While the credits cutscene is playing, hold **Start** to trigger a **Game Over**. This is used in RTA runs to skip the credits and return to the title screen faster.
+While Spyro is dying during credits skip, hold **Start** to trigger a **Game Over**. This is useful when doing Gnasty's World homeworld runs, where you want to get a CS:GO.
 
 ---
 
 ## Gnasty's Loot — Plane Teleports
 
-Warp directly to a plane section with the required keys already given. Allows quick practice of individual plane segments without completing the earlier planes first.
+Warp directly to a plane section with the required keys already given. Allows quick practice of individual planes without completing the earlier parts of the level.
 
 | Action | Input | Destination |
 |---|---|---|

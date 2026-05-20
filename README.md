@@ -14,7 +14,7 @@ This mod for the original Spyro the Dragon adds practice features for speedrunne
 | *Ghost Replays* | Compare against top level ghost replays like a racing game. |
 | *Level Select* | Teleport to any level instantly. |
 | *Timing Tools* | Time movements, tricks, and more. |
-| *Custom Sskins* | Change Spyro's appearance while practicing. |
+| *Custom Skins* | Change Spyro's appearance while practicing. |
 | *Visualizations* | Visualize hitboxes, Sparx's range, and more.|
 | *Much More!* | [View Wiki for all features](https://github.com/C0mposer/Spyro-1-Practice-Rom/tree/main/wiki#spyro-1-practice-rom-wiki) |
 

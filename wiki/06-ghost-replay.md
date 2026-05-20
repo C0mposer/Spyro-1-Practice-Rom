@@ -39,7 +39,7 @@ Clears saved ghost recording.
 
 ---
 
-## Buffer Limits
+## Recording Length Limit
 
 You can only record for about 3:21s before running out of space. A warning is shown on screen when you have **10 seconds remaining**.
 

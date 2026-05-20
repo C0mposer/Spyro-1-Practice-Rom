@@ -25,6 +25,10 @@ Controls how the ghost is drawn:
 | Spyro | Renders a transparent Spyro model at the ghost's position |
 | Polygon | Renders a diamond where the ghost would be. Good for laggier levels, as drawing another spyro can add to the lag in bigger levels. |
 
+### Ghost Color Options
+
+Changes what color the transparent ghost is
+
 ### Show Recording Length
 
 Displays the maximum available recording time on screen so you can see how much buffer is left.

@@ -1,9 +1,5 @@
 # Getting Started
 
-The **Spyro 1 Practice ROM** is a mod for *Spyro the Dragon (NTSC)* that adds a suite of practice and speedrun tools, including full save states, a level select, IL timing, ghost replays, visualizers, and much more.
-
----
-
 ## Downloads
 
 This mod supports multiple platforms. **Download the correct version for what you're going to play on**. The PS2 build will not work on PS1 or emulator, and vice versa.

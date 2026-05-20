@@ -56,7 +56,7 @@ Download [ghost_tool.elf](https://github.com/C0mposer/Ghost-Tool/releases/downlo
 **Saving a ghost from PS2:**
 
 1. Record a completed ghost in IL Mode.
-2. **Soft reset**, then launch `ghost_loader.elf` from a USB drive in uLaunchELF.
+2. **Soft reset** (tap power button), then launch `ghost_loader.elf` from a USB drive in uLaunchELF.
 3. Choose **Save Ghost**.
 4. Review the level, and final time.
 5. Press **X** to write the ghost to USB.

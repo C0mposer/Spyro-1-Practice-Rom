@@ -17,7 +17,7 @@ To view wiki on how to use the practice rom, click here:
 
 ## Downloads
 
-This mod supports multiple platforms. **Download the correct version for what you're going to play on** — the PS2 build will not work on PS1 or emulator, and vice versa.
+This mod supports multiple platforms. **Download the correct version for what you're going to play on**. The PS2 build will not work on PS1 or emulator, and vice versa.
 
 | Platform | Save States | Ghost Replay | Notes |
 |---|---|---|---|

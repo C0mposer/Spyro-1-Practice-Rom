@@ -6,7 +6,7 @@ The **Spyro 1 Practice ROM** is a mod for *Spyro the Dragon (NTSC)* that adds a 
 
 ## Downloads
 
-This mod supports multiple platforms. **Download the correct version for what you're going to play on** — the PS2 build will not work on PS1 or emulator, and vice versa.
+This mod supports multiple platforms. **Download the correct version for what you're going to play on**. The PS2 build will not work on PS1 or emulator, and vice versa.
 
 | Platform | Save States | Ghost Replay | Notes |
 |---|---|---|---|
@@ -31,7 +31,7 @@ If you already own a Spyro 1 `.bin` file and want to patch it yourself:
 
 - **Duckstation** is the recommended emulator.
 - You **MUST** enable extra 8MB ram if you use the Duckstation version
-![Duckstation Settings](image.png)
+![Duckstation Settings](wiki/image.png)
 
 ---
 

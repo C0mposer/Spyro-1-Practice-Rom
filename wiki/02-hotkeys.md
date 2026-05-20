@@ -8,7 +8,7 @@ All default button combos for the Practice ROM.
 
 | Action | Input |
 |---|---|
-| Open Mod Menu | L2 + R2 + Triangle |
+| Open Practice Menu | L2 + R2 + Triangle |
 | Open Level Select | Select |
 | Quick Fly-In to Current Level | L1 + R1 + Triangle |
 | Save State | L3 |

@@ -6,14 +6,17 @@
 
 
 
-This mod for the original Spyro the Dragon adds practice features for speedrunners including but not limited to: *full save-states*, *a level select*, *timing functionalities*, *automatic collectable resetting*, *custom skins*, *visualizations*, and many other quality of life features.
+This mod for the original Spyro the Dragon adds practice features for speedrunners, including:
 
-This can be played on PS1, PS2, PS3, and most emulators.   
-*(however to use the full savestate functionality, you must have a PS2 75k-90k)*
-
-## Wiki
-To view wiki on how to use the practice rom, click here:
-[Practice Rom Wiki](https://github.com/C0mposer/Spyro-1-Practice-Rom/tree/main/wiki#spyro-1-practice-rom-wiki)
+| Feature | Description |
+|---|---|
+| *Full save-states* | Save and Load states to practice sections. |
+| *Ghost Replays* | Compare against top level ghost replays like a racing game. |
+| *A level select* | Teleport to any level instantly. |
+| *Timing functionalities* | Time movements, tricks, and more. |
+| *Custom skins* | Change Spyro's appearance while practicing. |
+| *Visualizations* | Visualize hitboxes, Sparx's range, and more.|
+| *Much more!* | [View Wiki for all features](https://github.com/C0mposer/Spyro-1-Practice-Rom/tree/main/wiki#spyro-1-practice-rom-wiki) |
 
 ## Downloads
 

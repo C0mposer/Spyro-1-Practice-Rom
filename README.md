@@ -15,33 +15,36 @@ This can be played on PS1, PS2, PS3, and most emulators.
 To view wiki on how to use the practice rom, click here:
 [Practice Rom Wiki](https://github.com/C0mposer/Spyro-1-Practice-Rom/tree/main/wiki#spyro-1-practice-rom-wiki)
 
-# Downloads
-**Be sure to download the correct version for the platform you are going to play on**
-## PS2 (75k-90k)
-To download the patched rom and get practicing, download the bin & cue here:
-   
-[PS2 (75k-90k Download)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.Deckard.zip)
+## Downloads
 
-*Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
+This mod supports multiple platforms. **Download the correct version for what you're going to play on** — the PS2 build will not work on PS1 or emulator, and vice versa.
 
-## PS2 (30k-70k)
-*Note, the 30k-70k models of PS2's are not capable of full savestates, however they are capable of partial savestates.*
-  
-To download the patched rom and get practicing, download the bin & cue here:
+| Platform | Save States | Ghost Replay | Notes |
+|---|---|---|---|
+|[PS2 75k–90k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.Deckard.zip) | Full | Yes | Recommended console for full feature set |
+| [PS2 30k–70k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.IOP.zip) | Partial | No | Spyro/camera position only |
+| [Duckstation](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS1.zip) | Full | Yes | Recommended emulator for full feature set |
+| [PS1 & Other Emulators](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS1.zip) | Partial | No | Spyro/camera position only |
 
-[PS2 (30k-70k Download)](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS2.IOP.zip)
+See [Platform Comparison](13-platform-comparison.md) for a complete breakdown.
 
+---
 
-*Note: To play this rom on **PS2** requires either a [MechaPwn'd](https://github.com/MechaResearch/MechaPwn) or modchipped PS2 to read the burned disc. Must be a CD not a DVD.*
-   
-## PS1/EMU
-To download the patched rom and get practicing, download the bin & cue here:
-   
-[PS1/EMU Download](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease4.1/Spyro.1.Practice.Rom.PS1.zip)
+## Patching Your Own ISO
 
-# Patch Game
-If you wish to patch your own personal spyro 1 .bin file instead, visit here:
-[Patch Personal Spyro 1 bin](https://c0mposer.github.io/Spyro-1-Practice-Rom/)
+If you already own a Spyro 1 `.bin` file and want to patch it yourself:
+
+[Online Patcher](https://c0mposer.github.io/Spyro-1-Practice-Rom/)
+
+---
+
+## Emulator Setup Notes
+
+- **Duckstation** is the recommended emulator.
+- You **MUST** enable extra 8MB ram if you use the Duckstation version
+![Duckstation Settings](image.png)
+
+---
 
 ## Tools Used In Creation
 

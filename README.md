@@ -10,7 +10,7 @@ This mod for the original Spyro the Dragon adds practice features for speedrunne
 
 | Feature | Description |
 |---|---|
-| *Full save-states* | Save and Load states to practice sections. |
+| *Full Save-States* | Save and Load states to practice sections. |
 | *Ghost Replays* | Compare against top level ghost replays like a racing game. |
 | *Level Select* | Teleport to any level instantly. |
 | *Timing Tools* | Time movements, tricks, and more. |

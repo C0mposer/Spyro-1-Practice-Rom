@@ -5,6 +5,7 @@
 **Platform:** PS2 75k–90k, and Duckstation only.
 
 Ghost replays let you record your IL runs and race against them in real time.  
+  
 You can also race against replays other runners upload online! Download ghosts [**here**](https://docs.google.com/spreadsheets/d/1FRsIFruvudBQzKBPcCEm27SErnol9FkRNUDLPE_SKMI/edit?gid=0#gid=0)
 
 ---

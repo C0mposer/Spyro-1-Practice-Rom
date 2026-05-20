@@ -37,7 +37,7 @@ Would be every input after the flame, was 1 frame late.
 ```
 0 .1 1 0 2
 ```
-would be the charge is one frame early, the jump is one frame late, and the glide is 2 frames late.
+Would be the charge is one frame early, the jump is one frame late, and the glide is 2 frames late.
 
 ---
 

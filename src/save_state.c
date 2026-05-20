@@ -172,23 +172,21 @@ void FullLoadState(void)
 
 void DrawSavestateSwitchedText(void)
 {
-    char buf[3] = { 0 };
-    sprintf(buf, "%d", savestate_selection + 1);
-    DrawTextCapitals(buf, &(CapitalTextInfo){.x = 0x100, .y = 0xDC, .size = DEFAULT_SIZE}, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
-    RenderShadedMobyQueue();
-}
+    #define percent_d_pointer ((char*)0x800755bc) // The game already has a %d pointer, and we're in deckard ram so, avoid new rodata strings!
 
-extern bool fly_in_resets_loadstate_timer;
-void FlyInResetsLoadstateTimerUpdate(void)
-{
-    if (fly_in_resets_loadstate_timer > 0)
+    CapitalTextInfo text_info = { .x = 0x100, .y = 0xDC, .size = DEFAULT_SIZE }; // Normal location
+
+    // Raise, and move to left if in dragon cutscene to avoid black bar, and rescued text
+    if (_gameState == GAMESTATE_DRAGON_STATE)
     {
-        fly_in_resets_loadstate_timer++;
+        text_info.y = 0xD0;
+        text_info.x = 0x15;
     }
-    if (fly_in_resets_loadstate_timer >= 30)
-    {
-        fly_in_resets_loadstate_timer = 0;
-    }
+
+    char buf[3] = { 0 };
+    sprintf(buf, percent_d_pointer, savestate_selection + 1);
+    DrawTextCapitals(buf, &text_info, DEFAULT_SPACING, MOBY_COLOR_PURPLE);
+    RenderShadedMobyQueue();
 }
 
 

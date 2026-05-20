@@ -496,22 +496,6 @@ void RestartCameraFollowSpyro(void)
 
 }
 
-void StopUpdateSpyro(void)
-{
-    int* update_spyro_func = 0x8004a200;
-
-    *update_spyro_func = JR_RA;
-    *(update_spyro_func + 1) = NOP;
-}
-void RestartUpdateSpyro(void)
-{
-    int* update_spyro_func = 0x8004a200;
-
-    *update_spyro_func = 0x3C028008;
-    *(update_spyro_func + 1) = 0x8C428C4C;
-}
-
-
 void TurnOnDefaultSettings()
 {
     il_menu.il_state = true;

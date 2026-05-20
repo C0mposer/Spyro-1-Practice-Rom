@@ -16,7 +16,7 @@
 
 /* Same row layout as IL_MENU::DrawMenuItem(..., 70) in custom_menu.c */
 #define GHOST_MENU_BASE_Y 70
-#define GHOST_MENU_NUM_ITEMS 4
+#define GHOST_MENU_NUM_ITEMS 5
 
 int g_ghost_menu_reset_confirm_active;
 int g_ghost_menu_reset_yesno; /* 0 = No, 1 = Yes */
@@ -44,6 +44,26 @@ extern bool isMenuButtonHeld;
 void GhostResetAll(void);
 
 extern int savestated_level_ids[3];
+
+static const char* GetGhostColorText(int color)
+{
+    switch (color)
+    {
+        case GHOST_COLOR_BLUE:
+        return GHOST_COLOR_BLUE_TEXT;
+        case GHOST_COLOR_GREEN:
+        return GHOST_COLOR_GREEN_TEXT;
+        case GHOST_COLOR_PURPLE:
+        return GHOST_COLOR_PURPLE_TEXT;
+        case GHOST_COLOR_GOLD:
+        return GHOST_COLOR_GOLD_TEXT;
+        case GHOST_COLOR_BLACK:
+        return GHOST_COLOR_BLACK_TEXT;
+        case GHOST_COLOR_RED:
+        default:
+        return GHOST_COLOR_RED_TEXT;
+    }
+}
 
 void ResetGhostsRegion()
 {
@@ -124,7 +144,7 @@ void CustomMenuUpdateGhosts()
             PlayMenuSound();
         }
 
-        DrawTextBox(0x30, 0x1D0, 0x30, 0x95);
+        DrawTextBox(0x30, 0x1D0, 0x30, 0xB0);
 
         _spyro.isMovementLocked = TRUE;
 
@@ -132,6 +152,7 @@ void CustomMenuUpdateGhosts()
         {
             ghost_menu.ghost_enabled_text = GHOSTS_DISABLED_TEXT;
             ghost_menu.ghost_visual_text = VISUAL_SPYRO_TEXT;
+            ghost_menu.ghost_color_text = GHOST_COLOR_RED_TEXT;
             ghost_menu.ghost_recording_length_text = SHOW_RECORDING_LENGTH_OFF_TEXT;
             ghost_menu.ghost_reset_text = RESET_ALL_GHOSTS_TEXT;
         }
@@ -141,11 +162,14 @@ void CustomMenuUpdateGhosts()
             ghost_menu.selection = 0;
         }
 
-        /* 0: enable, 1: visual, 2: rec length HUD, 3: reset (X) */
+        /* 0: enable, 1: visual, 2: color, 3: rec length HUD, 4: reset (X) */
         DrawMenuItem(ghost_menu.ghost_enabled_text, 0, ghost_menu.selection, GHOST_MENU_BASE_Y);
         DrawPossiblyLockedMenuItem(ghost_menu.ghost_visual_text, 1, ghost_menu.selection, ghost_menu.ghosts_enabled, GHOST_MENU_BASE_Y);
-        DrawPossiblyLockedMenuItem(ghost_menu.ghost_recording_length_text, 2, ghost_menu.selection, ghost_menu.ghosts_enabled, GHOST_MENU_BASE_Y);
-        DrawPossiblyLockedMenuItem(ghost_menu.ghost_reset_text, 3, ghost_menu.selection, ghost_menu.ghosts_enabled, GHOST_MENU_BASE_Y);
+        DrawPossiblyLockedMenuItem(ghost_menu.ghost_color_text, 2, ghost_menu.selection, ghost_menu.ghosts_enabled, GHOST_MENU_BASE_Y);
+        DrawPossiblyLockedMenuItem(ghost_menu.ghost_recording_length_text, 3, ghost_menu.selection, ghost_menu.ghosts_enabled, GHOST_MENU_BASE_Y);
+        DrawPossiblyLockedMenuItem(ghost_menu.ghost_reset_text, 4, ghost_menu.selection, ghost_menu.ghosts_enabled, GHOST_MENU_BASE_Y);
+
+
 
         if (ghost_menu.ghosts_enabled == true)
         {
@@ -189,6 +213,7 @@ void CustomMenuUpdateGhosts()
         {
             ghost_menu.ghost_visual_text = VISUAL_POLYGON_TEXT;
         }
+        ghost_menu.ghost_color_text = GetGhostColorText(ghost_menu.ghosts_color);
         if (ghost_menu.show_recording_length)
         {
             ghost_menu.ghost_recording_length_text = SHOW_RECORDING_LENGTH_ON_TEXT;
@@ -230,6 +255,17 @@ void CustomMenuUpdateGhosts()
         {
             if (_currentButtonOneFrame == RIGHT_BUTTON)
             {
+                ghost_menu.ghosts_color = (ghost_menu.ghosts_color + 1) % GHOST_COLOR_COUNT;
+            }
+            else if (_currentButtonOneFrame == LEFT_BUTTON)
+            {
+                ghost_menu.ghosts_color = (ghost_menu.ghosts_color + (GHOST_COLOR_COUNT - 1)) % GHOST_COLOR_COUNT;
+            }
+        }
+        if (ghost_menu.selection == 3)
+        {
+            if (_currentButtonOneFrame == RIGHT_BUTTON)
+            {
                 ghost_menu.show_recording_length = true;
             }
             else if (_currentButtonOneFrame == LEFT_BUTTON)
@@ -237,7 +273,7 @@ void CustomMenuUpdateGhosts()
                 ghost_menu.show_recording_length = false;
             }
         }
-        if (ghost_menu.selection == 3 && ghost_menu.ghosts_enabled == true && _currentButtonOneFrame == X_BUTTON)
+        if (ghost_menu.selection == 4 && ghost_menu.ghosts_enabled == true && _currentButtonOneFrame == X_BUTTON)
         {
             g_ghost_menu_reset_confirm_active = 1;
             g_ghost_menu_reset_yesno = 0;
@@ -245,4 +281,3 @@ void CustomMenuUpdateGhosts()
         RenderShadedMobyQueue(); //why need to run again?
     }
 }
-

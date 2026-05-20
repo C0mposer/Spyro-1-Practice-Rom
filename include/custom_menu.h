@@ -227,9 +227,11 @@ typedef struct GhostMenu
     int selection;
     bool ghosts_enabled;
     int ghosts_visual;
+    int ghosts_color;
     bool show_recording_length;
     char* ghost_enabled_text;
     char* ghost_visual_text;
+    const char* ghost_color_text;
     char* ghost_reset_text;
     char* ghost_recording_length_text;
 
@@ -240,6 +242,17 @@ enum
     VISUAL_SPYRO,
     VISUAL_SPYRO_WIREFRAME,
     VISUAL_POLYGON
+};
+
+enum
+{
+    GHOST_COLOR_RED,
+    GHOST_COLOR_BLUE,
+    GHOST_COLOR_GREEN,
+    GHOST_COLOR_PURPLE,
+    GHOST_COLOR_GOLD,
+    GHOST_COLOR_BLACK,
+    GHOST_COLOR_COUNT
 };
 
 //! Prototypes

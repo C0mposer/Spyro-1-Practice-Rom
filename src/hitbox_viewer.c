@@ -1,7 +1,7 @@
 #include <types.h>
 #include <deckard_strings.h>
 
-typedef struct HitboxViewerVisualizerMenu
+typedef struct VisualizerMenu
 {
     int selection;
     char* show_sparx_range_text;
@@ -13,9 +13,9 @@ typedef struct HitboxViewerVisualizerMenu
     char* hitbox_viewer_text;
     int collision_wireframe;
     char* collision_wireframe_text;
-} HitboxViewerVisualizerMenu;
+} VisualizerMenu;
 
-extern HitboxViewerVisualizerMenu visualizer_menu;
+extern VisualizerMenu visualizer_menu;
 extern int _currentButtonOneFrame;
 void DrawMenuItem(const char* text, int menu_number, int currently_selected_menu, int init_size);
 
@@ -93,8 +93,8 @@ void DrawPrimitive(void* prim);
 #define SPYRO_RADIUS     0x164
 #define PRIM_BUDGET      8192
 
-/* Instead of storing as shorts, Store as 32-bit words: the Deckard build
-whole-file byteswap, which corrupts the short tables that pack two shorts per word.
+/* Instead of storing as shorts, Store as ints. The Deckard build
+whole-file byteswap for the .text section, corrupts the shorts.
 Q12 (4096=1.0). */
 static const int g_cos16[CIRCLE_SEGS] = {
     4096, 3784, 2896, 1567, 0, -1567, -2896, -3784,

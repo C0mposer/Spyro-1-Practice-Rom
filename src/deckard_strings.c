@@ -126,9 +126,15 @@ const char deckard_str_hitbox_menu_on[] = "HITBOX VIEWER ON";
 
 const char GHOSTS_DISABLED_TEXT[] = "GHOSTS DISABLED";
 const char GHOSTS_ENABLED_TEXT[] = "GHOSTS ENABLED";
-const char VISUAL_SPYRO_TEXT[] = "VISUAL SPYRO";
+const char VISUAL_SPYRO_TEXT[] = "GHOST VISUAL SPYRO";
 const char VISUAL_SPYRO_WIREFRAME_TEXT[] = "VISUAL WIREFRAME";
-const char VISUAL_POLYGON_TEXT[] = "VISUAL POLYGON";
+const char VISUAL_POLYGON_TEXT[] = "GHOST VISUAL POLYGON";
+const char GHOST_COLOR_RED_TEXT[] = "GHOST COLOR RED";
+const char GHOST_COLOR_BLUE_TEXT[] = "GHOST COLOR BLUE";
+const char GHOST_COLOR_GREEN_TEXT[] = "GHOST COLOR GREEN";
+const char GHOST_COLOR_PURPLE_TEXT[] = "GHOST COLOR PURPLE";
+const char GHOST_COLOR_GOLD_TEXT[] = "GHOST COLOR GOLD";
+const char GHOST_COLOR_BLACK_TEXT[] = "GHOST COLOR BLACK";
 const char RESET_ALL_GHOSTS_TEXT[] = "RESET ALL GHOSTS";
 const char SHOW_RECORDING_LENGTH_ON_TEXT[] = "SHOW REC LENGTH ON";
 const char SHOW_RECORDING_LENGTH_OFF_TEXT[] = "SHOW REC LENGTH OFF";
@@ -145,3 +151,12 @@ const char deckard_str_boot_hs_lbl_r0[] = "R0";
 const char deckard_str_boot_hs_lbl_r1[] = "R1";
 const char deckard_str_boot_hs_lbl_r2[] = "R2";
 const char deckard_str_boot_hs_lbl_r3[] = "R3";
+
+
+
+const char special_keys[21] = "!:?-%.)=[]/\",+&><#('";
+//                                  row0 row1 row2    row3
+const char special_vals[][2] = {
+    {13,0},{13,1},{10,2},{11,2},{12,2},{13,2}, // rows 0-2
+    {0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3},{8,3},{9,3},{10,3},{11,3},{12,3},{13,3}
+};

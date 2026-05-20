@@ -4,7 +4,7 @@
 #include <custom_menu.h>
 #include <right_stick.h>
 
-bool should_savestate_on_game_start = true; // Initial savestate for nestor skip
+bool should_savestate_on_game_start = false; // Initial savestate for nestor skip (is now a timer too)
 bool should_savestate_after_dragon_or_load = false;
 bool should_loadstate_after_dragon = false;
 
@@ -53,6 +53,20 @@ extern bool respawn_on_loadstate;
 bool readyToLoadstateAfterDeath = false;
 #endif
 
+extern bool fly_in_resets_loadstate_timer;
+void FlyInResetsLoadstateTimerUpdate(void)
+{
+    if (fly_in_resets_loadstate_timer > 0)
+    {
+        fly_in_resets_loadstate_timer++;
+    }
+    if (fly_in_resets_loadstate_timer >= 30)
+    {
+        fly_in_resets_loadstate_timer = 0;
+    }
+}
+
+
 void SaveStateUpdate()
 {
     //Save spyro & camera information or Savestate depending on console
@@ -60,7 +74,7 @@ void SaveStateUpdate()
     {
         if (savestate_button_index < 2)
         {
-            if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load || should_savestate_on_game_start)
+            if (_currentButtonOneFrame == SAVESTATE_BUTTONS[savestate_button_index] || should_savestate_after_dragon_or_load || should_savestate_on_game_start > 2)
             {
                 #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
                 FullSaveState();
@@ -103,38 +117,41 @@ void SaveStateUpdate()
         }
     }
 
-    if (_gameState == GAMESTATE_GAMEPLAY || (_gameState == GAMESTATE_DRAGON_STATE && (_dragonState < 2 || _dragonState == 7))) {
+    if (_gameState == GAMESTATE_GAMEPLAY || (_gameState == GAMESTATE_DRAGON_STATE && (_dragonState < 1 || _dragonState == 7))) {
         // Load spyro & camera information or Loadstate depending on console
         #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION        // Real Loadstate
         if ((_currentButtonOneFrame == LOADSTATE_BUTTONS[loadstate_button_index]) || (should_loadstate_after_dragon))
         {
-            if (_dragonState == 1) {
-                _dragonState = 6;
-                *(int*)(&_dragonState + 1) = 4;
-                should_loadstate_after_dragon = true;
+            #define DRAGON_SOUND_HANDLE *((u32*)0x80077084) //don't wanna make a symbol lol
+            // if (_dragonState == 1) {                             // FIX SOUND CORRUPTION
+            //     _dragonState = 6;
+            //     *(int*)(&_dragonState + 1) = 4;
+            //     FreeSoundSlot(DRAGON_SOUND_HANDLE, 4);
+            //     FlushSPUKeyOnKeyOff();
+            //     should_loadstate_after_dragon = true;
+            // }
+        // else {
+            if (_gameState == GAMESTATE_DRAGON_STATE) {
+                ExitDragon();
+                should_loadstate_after_dragon = false;
             }
-            else {
-                if (_gameState == GAMESTATE_DRAGON_STATE) {
-                    ExitDragon();
-                    should_loadstate_after_dragon = false;
-                }
 
-                FullLoadState();
-                #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
-                GhostLoadState(savestate_selection);
-                #endif
+            FullLoadState();
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
+            GhostLoadState(savestate_selection);
+            #endif
 
-                if ((_movementSubState == MOVEMENT_SUBSTATE_FLY_IN_LOOP || _movementSubState == MOVEMENT_SUBSTATE_FLY_IN_CAMERA_180 || _movementSubState == MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS) && fly_in_resets_loadstate_timer == 0)
-                {
-                    fly_in_resets[_levelIDIndex]++;
-                }
-                fly_in_resets_loadstate_timer = 1;
-
-                // if (_levelID == GNASTYS_LOOT_ID)
-                // {
-                //     LootGiveAllKeys();
-                // }
+            if ((_movementSubState == MOVEMENT_SUBSTATE_FLY_IN_LOOP || _movementSubState == MOVEMENT_SUBSTATE_FLY_IN_CAMERA_180 || _movementSubState == MOVEMENT_SUBSTATE_FLY_IN_TREE_TOPS) && fly_in_resets_loadstate_timer == 0)
+            {
+                fly_in_resets[_levelIDIndex]++;
             }
+            fly_in_resets_loadstate_timer = 1;
+
+            // if (_levelID == GNASTYS_LOOT_ID)
+            // {
+            //     LootGiveAllKeys();
+            // }
+        // }
         }
         else
         {
@@ -275,7 +292,7 @@ void SaveStateUpdate()
     // Allow for initial savestate whenever going back to adventure continues
     if (_gameState == GAMESTATE_TITLE_SCREEN)
     {
-        should_savestate_on_game_start = true;
+        //should_savestate_on_game_start = true;
     }
 
     // Prepare savestate after turning on disable portal
@@ -331,6 +348,9 @@ void SaveStateUpdate()
     }
 
     FlyInResetsLoadstateTimerUpdate();
+
+    if (should_savestate_on_game_start > 0)
+        should_savestate_on_game_start++;   // This is a bit hacky, but basically because save stating the frame the game starts causes nestor skip to act strange, we need to wait a few frames. To save space, im sharing the bool logic and timer in one (true/1 is should count up.)
 }
 
 

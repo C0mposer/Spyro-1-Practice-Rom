@@ -2,13 +2,18 @@
   "version": "1.0",
   "project_name": "PracitceRomPort",
   "project_folder": "./",
-  "currently_selected_build_index": 2,
+  "currently_selected_build_index": 0,
+  "symbol_input_mode": "manual",
   "build_versions": [
     {
       "build_name": "REDUX",
       "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
+      "symbol_inputs": [
+        "symbols/SpyroPractice.txt",
+        "symbols/default.sym"
+      ],
       "injection_files": [
         "SCUS_420.67"
       ],
@@ -21,7 +26,7 @@
       "extracted_game_folder": "./.config/game_files/REDUX",
       "main_executable": "SCUS_420.67",
       "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
-      "compiler_flags": "-Os -g",
+      "compiler_flags": "-Os -g ",
       "is_single_file_mode": false,
       "single_file_path": null,
       "section_maps": {},
@@ -162,7 +167,8 @@
             "./src/custom_menu_2.c",
             "./src/draw_sparx_range.c",
             "./src/supercharge.c",
-            "./src/credits_skip.c"
+            "./src/credits_skip.c",
+            "./src/nestor_skip.c"
           ],
           "memory_address": "8000C000",
           "size": "1800",
@@ -215,7 +221,8 @@
             "./src/collision_wireframe.c",
             "./src/spin_wheel.c",
             "./src/freecam.c",
-            "./src/cosmetic_menu_preview.c"
+            "./src/cosmetic_menu_preview.c",
+            "./src/flame_update_test.c"
           ],
           "memory_address": "80400000",
           "size": "400000",
@@ -405,6 +412,10 @@
       "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
+      "symbol_inputs": [
+        "symbols/SpyroPractice.txt",
+        "symbols/default.sym"
+      ],
       "injection_files": [
         "SCUS_420.67"
       ],
@@ -559,7 +570,7 @@
             "./src/draw_sparx_range.c",
             "./src/supercharge.c",
             "./src/credits_skip.c",
-            "./src/save_state_region.c"
+            "./src/nestor_skip.c"
           ],
           "memory_address": "8000C000",
           "size": "1800",
@@ -853,6 +864,10 @@
       "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
+      "symbol_inputs": [
+        "symbols/SpyroPractice.txt",
+        "symbols/default.sym"
+      ],
       "injection_files": [
         "SCUS_420.67"
       ],
@@ -1007,7 +1022,7 @@
             "./src/draw_sparx_range.c",
             "./src/supercharge.c",
             "./src/credits_skip.c",
-            "./src/save_state_region.c"
+            "./src/nestor_skip.c"
           ],
           "memory_address": "80008EB0",
           "size": "1800",
@@ -1055,7 +1070,8 @@
             "./src/spin_wheel.c",
             "./src/hitbox_viewer.c",
             "./src/freecam.c",
-            "./src/ghosts_autoplay.c"
+            "./src/ghosts_autoplay.c",
+            "./src/save_state_region.c"
           ],
           "memory_address": "80A70000",
           "size": "F000",
@@ -1356,6 +1372,10 @@
       "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
+      "symbol_inputs": [
+        "symbols/SpyroPractice.txt",
+        "symbols/default.sym"
+      ],
       "injection_files": [
         "SCUS_420.67"
       ],
@@ -1510,7 +1530,7 @@
             "./src/draw_sparx_range.c",
             "./src/supercharge.c",
             "./src/credits_skip.c",
-            "./src/save_state_region.c"
+            "./src/nestor_skip.c"
           ],
           "memory_address": "80008EB0",
           "size": "1800",
@@ -1804,6 +1824,10 @@
       "shared_game_files": null,
       "platform": "PS1",
       "symbols_file": "SpyroPractice.txt",
+      "symbol_inputs": [
+        "symbols/SpyroPractice.txt",
+        "symbols/default.sym"
+      ],
       "injection_files": [
         "SCUS_420.67"
       ],
@@ -1956,8 +1980,9 @@
           "code_files": [
             "./src/custom_menu_2.c",
             "./src/draw_sparx_range.c",
-            "./src/supercharge.c",
-            "./src/credits_skip.c"
+            "./src/credits_skip.c",
+            "./src/nestor_skip.c",
+            "./src/supercharge.c"
           ],
           "memory_address": "8000C000",
           "size": "1800",

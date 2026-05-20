@@ -241,12 +241,15 @@ _ptr_controller_two = 0x80075e38;
 
 _homeworldID = 0x8007595c;
 
+ptr_last_touched_dragon = 0x800770c0;
+
 _ptr_respawn_position = 0x800785E4;printf = 0x8006279c;
 sprintf = 0x80062fd4;
 memset = 0x80016914;
 memcpy = 0x800626f8;
 rand = 0x8006272c;
 srand = 0x8006275c;
+ArrayCopy = 0x80016958;
 
 DrawTextCapitals = 0x80017FE4;
 DrawTextAll = 0x800181AC;
@@ -268,10 +271,15 @@ CopyHudToShaded = 0x80018880;
 DrawShadedMobys = 0x80022a2c;
 
 UpdateMobyCollision = 0x800529e4;
+MobyCollisionRelated = 0x8004e3c8;
+FindCollsionPolygonAltro = 0x8004ae38;
 
 Vec3ApplyRotationMatrix = 0x80017048;
 Vec3ApplyLastLoadedRotationMatrix = 0x800170c0;
 Vec3Add = 0x80017758;
+Vec3Subtract = 0x8001778c;
+Vec3Zero = 0x800176f0;
+Vec3ShortToInt = 0x80017c4c;
 MobyUpdatePosition = 0x8004d5ec;
 
 Vec3IntToShortDiv4 = 0x80017bfc;
@@ -346,3 +354,9 @@ ptrPrimitiveAlloc = 0x800757b0;
 maybe_ptr_models = 0x80076378;
 
 MobyCollision = 0x8004e3c8;
+
+StopAllSoundsFromMoby = 0x800562a4;
+
+FreeSoundSlot = 0x80056200;
+
+FlushSPUKeyOnKeyOff = 0x80056ed4;

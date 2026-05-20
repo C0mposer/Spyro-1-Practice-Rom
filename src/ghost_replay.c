@@ -5,6 +5,7 @@
 #include <font.h>
 #include <custom_menu.h>
 #include <ghost_replay_api.h>
+#include <ghosts_autoplay.h>
 #include <ghost_debug.h>
 #include <deckard.h>
 
@@ -171,6 +172,48 @@ static int s_recording_too_long_message_timer = 0;
 #define DECK_MEMCPY(d, s, n)        memcpy((d), (s), (n))
 #endif
 
+extern GhostMenu ghost_menu;
+
+static void GetGhostTint(u8RGBA* tint)
+{
+    tint->R = 0x66;
+    tint->G = 0x00;
+    tint->B = 0x00;
+    tint->opacity = 0x90;
+
+    switch (ghost_menu.ghosts_color)
+    {
+        case GHOST_COLOR_BLUE:
+        tint->R = 0x00;
+        tint->G = 0x30;
+        tint->B = 0x88;
+        break;
+        case GHOST_COLOR_GREEN:
+        tint->R = 0x00;
+        tint->G = 0x80;
+        tint->B = 0x20;
+        break;
+        case GHOST_COLOR_PURPLE:
+        tint->R = 0x66;
+        tint->G = 0x20;
+        tint->B = 0x88;
+        break;
+        case GHOST_COLOR_GOLD:
+        tint->R = 0x88;
+        tint->G = 0x60;
+        tint->B = 0x00;
+        break;
+        case GHOST_COLOR_BLACK:
+        tint->R = 0x00;
+        tint->G = 0x00;
+        tint->B = 0x00;
+        break;
+        case GHOST_COLOR_RED:
+        default:
+        break;
+    }
+}
+
 /* GhostHeader lives in Deckard RAM (0x80A29xxx / 0x80A44xxx). Full-word int
  * storage there can appear byte-swapped vs normal EE RAM; plain lw/sw then
  * breaks PB checks (finalTimeFrames reads as 0 -> "new best" every run).
@@ -198,7 +241,6 @@ static inline void GhostHdrStoreI32(int* p, int v)
 
 static void DrawGhostDiamond(Spyro* temp_spyro);
 
-extern GhostMenu ghost_menu;
 extern ILMenu il_menu;
 extern bool has_started_insta_fly_in;
 extern bool has_started_reg_fly_in;
@@ -820,46 +862,6 @@ static void RestoreDrawSpyro(void)
  * semi-transparent shaded poly AND prepend a Draw Mode (GP0 0xE1) command that
  * forces ABR=00 (50% B + 50% F).
  *
- * Why prepend DR_MODE: for untextured semi-transparent polygons (0x32 / 0x3A),
- * the GPU takes the blend mode from its *global* Draw Mode state. Whatever the
- * last polygon-or-E1 to touch the GPU happened to leave there decides the
- * ghost's blend. Over bright geometry that's often ABR=01 (additive -> very
- * bright) or ABR=10 (subtractive -> very dark). Forcing ABR=00 per ghost
- * packet pins it to the standard 50/50 ghost look regardless of what was
- * rendered just before.
- *
- * Layouts (each row is one 32-bit word):
- *
- *   GT3 (10 words, original DrawSpyro emit):
- *     [0]tag  [1]code+col0  [2]xy0  [3]uv0+clut
- *     [4]col1 [5]xy1         [6]uv1+tpage
- *     [7]col2 [8]xy2         [9]uv2
- *
- *   ->  G3 + DR_MODE (8 words used, body length = 7):
- *     [0]tag(len=7) [1]DR_MODE [2]code+col0 [3]xy0
- *     [4]col1 [5]xy1 [6]col2 [7]xy2
- *
- *   GT4 (13 words):
- *     [0]tag  [1]code+col0  [2]xy0  [3]uv0+clut
- *     [4]col1 [5]xy1         [6]uv1+tpage
- *     [7]col2 [8]xy2         [9]uv2
- *     [10]col3 [11]xy3       [12]uv3
- *
- *   ->  G4 + DR_MODE (10 words used, body length = 9):
- *     [0]tag(len=9) [1]DR_MODE [2]code+col0 [3]xy0
- *     [4]col1 [5]xy1 [6]col2 [7]xy2 [8]col3 [9]xy3
- *
- * Both new layouts fit comfortably inside the original textured allocation,
- * so no separate primitive needs to be allocated. We walk linearly because
- * the GPU only consumes (tag_length + 1) words per packet -- trailing slack
- * is ignored.
- *
- * DR_MODE word breakdown (0xE1000400):
- *   bit 10 = 1   drawing to display area enabled (don't break framebuffer rendering)
- *   bits 5-6 = 00  ABR mode 0 (B/2 + F/2)
- *   bits 0-4 = 0   tpage X/Y (untextured -> don't care)
- *   bit 9 = 0      dither off (shaded G3/G4 still looks fine; flip on if banding shows up)
- *
  * The next textured polygon the game emits will overwrite this Draw Mode via
  * its own inline TPAGE word, so the global state doesn't stay broken.
  */
@@ -935,140 +937,116 @@ static void MakeGhostDrawSpyroPacketsTransparent(u8* start, u8* end)
  * outline -- UNLESS the packet's longest edge is shorter than
  * GHOST_WIRE_LEN_SQ_MIN screen pixels squared, in which case the entire
  * packet is dropped (Option 2: length-threshold simplification).
- *
- * Per-packet binary keep/drop avoids the multi-polyline-per-packet encoding
- * pitfall (PSX polyline cursor state can carry into a back-to-back second
- * polyline within the same DMA block, which would draw spurious lines from
- * the end of the first run to the start of the second).
- *
- * Visual effect: small detail polys (claws, teeth, scales) disappear; big
- * structural polys still get their full outline. The shape of Spyro's
- * silhouette is preserved while the inner mesh density drops.
- *
- * Polyline encoding (PS1 GP0 0x4A = monochrome semi-transparent polyline):
- *   word 0: code (0x4A) | color (24-bit)
- *   word 1..N: vertex XY (2 shorts packed)
- *   word N+1: terminator 0x55555555
- *
- * The Draw Mode (GP0 0xE1) prefix pins ABR=00 (50% B + 50% F) so the ghost's
- * blend stays consistent regardless of what the previous packet left in the
- * GPU's global state.
- *
- * Adjust GHOST_WIRE_LEN_SQ_MIN to taste:
- *   25  -> drops polys whose longest edge is < 5 px  (subtle)
- *   64  -> drops < 8 px
- *   144 -> drops < 12 px (aggressive)
- *   256 -> drops < 16 px (only big structural polys remain)
  */
-#define GHOST_WIREFRAME_COLOR    0x00FFE0E0u  /* warm white; tweak to taste */
-#define POLYLINE_MONO_SEMITRANS  0x4Au
-#define POLYLINE_TERMINATOR      0x55555555u
-#define GHOST_WIRE_LEN_SQ_MIN    64           /* squared screen-pixel length */
+// #define GHOST_WIREFRAME_COLOR    0x00FFE0E0u  /* warm white; tweak to taste */
+// #define POLYLINE_MONO_SEMITRANS  0x4Au
+// #define POLYLINE_TERMINATOR      0x55555555u
+// #define GHOST_WIRE_LEN_SQ_MIN    64           /* squared screen-pixel length */
 
-static int GhostWireEdgeLenSq(u32 xy_a, u32 xy_b)
-{
-    int ax = (int)(short)(xy_a & 0xFFFFu);
-    int ay = (int)(short)(xy_a >> 16);
-    int bx = (int)(short)(xy_b & 0xFFFFu);
-    int by = (int)(short)(xy_b >> 16);
-    int dx = bx - ax;
-    int dy = by - ay;
-    return dx * dx + dy * dy;
-}
+// static int GhostWireEdgeLenSq(u32 xy_a, u32 xy_b)
+// {
+//     int ax = (int)(short)(xy_a & 0xFFFFu);
+//     int ay = (int)(short)(xy_a >> 16);
+//     int bx = (int)(short)(xy_b & 0xFFFFu);
+//     int by = (int)(short)(xy_b >> 16);
+//     int dx = bx - ax;
+//     int dy = by - ay;
+//     return dx * dx + dy * dy;
+// }
 
-static int GhostWireMaxLenSq3(u32 xy0, u32 xy1, u32 xy2)
-{
-    int a = GhostWireEdgeLenSq(xy0, xy1);
-    int b = GhostWireEdgeLenSq(xy1, xy2);
-    int c = GhostWireEdgeLenSq(xy2, xy0);
-    int m = a;
-    if (b > m) m = b;
-    if (c > m) m = c;
-    return m;
-}
+// static int GhostWireMaxLenSq3(u32 xy0, u32 xy1, u32 xy2)
+// {
+//     int a = GhostWireEdgeLenSq(xy0, xy1);
+//     int b = GhostWireEdgeLenSq(xy1, xy2);
+//     int c = GhostWireEdgeLenSq(xy2, xy0);
+//     int m = a;
+//     if (b > m) m = b;
+//     if (c > m) m = c;
+//     return m;
+// }
 
-static int GhostWireMaxLenSq4(u32 xy0, u32 xy1, u32 xy3, u32 xy2)
-{
-    /* Quad outline edges: 0-1, 1-3, 3-2, 2-0. */
-    int a = GhostWireEdgeLenSq(xy0, xy1);
-    int b = GhostWireEdgeLenSq(xy1, xy3);
-    int c = GhostWireEdgeLenSq(xy3, xy2);
-    int d = GhostWireEdgeLenSq(xy2, xy0);
-    int m = a;
-    if (b > m) m = b;
-    if (c > m) m = c;
-    if (d > m) m = d;
-    return m;
-}
+// static int GhostWireMaxLenSq4(u32 xy0, u32 xy1, u32 xy3, u32 xy2)
+// {
+//     /* Quad outline edges: 0-1, 1-3, 3-2, 2-0. */
+//     int a = GhostWireEdgeLenSq(xy0, xy1);
+//     int b = GhostWireEdgeLenSq(xy1, xy3);
+//     int c = GhostWireEdgeLenSq(xy3, xy2);
+//     int d = GhostWireEdgeLenSq(xy2, xy0);
+//     int m = a;
+//     if (b > m) m = b;
+//     if (c > m) m = c;
+//     if (d > m) m = d;
+//     return m;
+// }
 
 static void MakeGhostDrawSpyroPacketsWireframe(u8* start, u8* end)
 {
-    static const u32 DR_MODE_50_BLEND = 0xE1000400u;
+    // static const u32 DR_MODE_50_BLEND = 0xE1000400u;
 
-    u8* prim = start;
+    // u8* prim = start;
 
-    while (prim < end)
-    {
-        int packet_len = prim[3];
-        int packet_size = (packet_len + 1) * 4;
+    // while (prim < end)
+    // {
+    //     int packet_len = prim[3];
+    //     int packet_size = (packet_len + 1) * 4;
 
-        if (packet_size <= 0)
-            break;
-        if (prim + packet_size > end)
-            break;
+    //     if (packet_size <= 0)
+    //         break;
+    //     if (prim + packet_size > end)
+    //         break;
 
-        if (prim[7] == POLY3F_OPAQUE_SHADEDANDTEXTURED_RAW)
-        {
-            u32* words = (u32*)prim;
-            u32 xy0 = words[2];
-            u32 xy1 = words[5];
-            u32 xy2 = words[8];
+    //     if (prim[7] == POLY3F_OPAQUE_SHADEDANDTEXTURED_RAW)
+    //     {
+    //         u32* words = (u32*)prim;
+    //         u32 xy0 = words[2];
+    //         u32 xy1 = words[5];
+    //         u32 xy2 = words[8];
 
-            if (GhostWireMaxLenSq3(xy0, xy1, xy2) < GHOST_WIRE_LEN_SQ_MIN)
-            {
-                /* All edges shorter than threshold: drop the packet entirely. */
-                prim[3] = 0;
-            }
-            else
-            {
-                prim[3] = 7;
-                words[1] = DR_MODE_50_BLEND;
-                words[2] = (((u32)POLYLINE_MONO_SEMITRANS) << 24) | GHOST_WIREFRAME_COLOR;
-                words[3] = xy0;
-                words[4] = xy1;
-                words[5] = xy2;
-                words[6] = xy0;  /* close loop */
-                words[7] = POLYLINE_TERMINATOR;
-            }
-        }
-        else if (prim[7] == POLY4F_OPAQUE_SHADEDANDTEXTURED_RAW)
-        {
-            u32* words = (u32*)prim;
-            u32 xy0 = words[2];
-            u32 xy1 = words[5];
-            u32 xy2 = words[8];
-            u32 xy3 = words[11];
+    //         if (GhostWireMaxLenSq3(xy0, xy1, xy2) < GHOST_WIRE_LEN_SQ_MIN)
+    //         {
+    //             /* All edges shorter than threshold: drop the packet entirely. */
+    //             prim[3] = 0;
+    //         }
+    //         else
+    //         {
+    //             prim[3] = 7;
+    //             words[1] = DR_MODE_50_BLEND;
+    //             words[2] = (((u32)POLYLINE_MONO_SEMITRANS) << 24) | GHOST_WIREFRAME_COLOR;
+    //             words[3] = xy0;
+    //             words[4] = xy1;
+    //             words[5] = xy2;
+    //             words[6] = xy0;  /* close loop */
+    //             words[7] = POLYLINE_TERMINATOR;
+    //         }
+    //     }
+    //     else if (prim[7] == POLY4F_OPAQUE_SHADEDANDTEXTURED_RAW)
+    //     {
+    //         u32* words = (u32*)prim;
+    //         u32 xy0 = words[2];
+    //         u32 xy1 = words[5];
+    //         u32 xy2 = words[8];
+    //         u32 xy3 = words[11];
 
-            if (GhostWireMaxLenSq4(xy0, xy1, xy3, xy2) < GHOST_WIRE_LEN_SQ_MIN)
-            {
-                prim[3] = 0;
-            }
-            else
-            {
-                prim[3] = 8;
-                words[1] = DR_MODE_50_BLEND;
-                words[2] = (((u32)POLYLINE_MONO_SEMITRANS) << 24) | GHOST_WIREFRAME_COLOR;
-                words[3] = xy0;
-                words[4] = xy1;
-                words[5] = xy3;  /* PS1 quad: walk 0 -> 1 -> 3 -> 2 -> 0 */
-                words[6] = xy2;
-                words[7] = xy0;  /* close loop */
-                words[8] = POLYLINE_TERMINATOR;
-            }
-        }
+    //         if (GhostWireMaxLenSq4(xy0, xy1, xy3, xy2) < GHOST_WIRE_LEN_SQ_MIN)
+    //         {
+    //             prim[3] = 0;
+    //         }
+    //         else
+    //         {
+    //             prim[3] = 8;
+    //             words[1] = DR_MODE_50_BLEND;
+    //             words[2] = (((u32)POLYLINE_MONO_SEMITRANS) << 24) | GHOST_WIREFRAME_COLOR;
+    //             words[3] = xy0;
+    //             words[4] = xy1;
+    //             words[5] = xy3;  /* PS1 quad: walk 0 -> 1 -> 3 -> 2 -> 0 */
+    //             words[6] = xy2;
+    //             words[7] = xy0;  /* close loop */
+    //             words[8] = POLYLINE_TERMINATOR;
+    //         }
+    //     }
 
-        prim += packet_size;
-    }
+    //     prim += packet_size;
+    // }
 }
 
 static void FormatFramesAsMinSec(int frames, char* out)
@@ -1118,6 +1096,8 @@ void GhostUpdate(void)
 
     if (s_ghost_render_frame_ready)
     {
+        u8RGBA ghost_tint;
+
         // Apply ghost visual effect. DrawSpyro's hardcoded
         // `lw $a0, 0x28($a0)` load at 0x80024b64 is redirected to
         // temp_spyro by PatchDrawSpyroForGhost(), so the tint must be
@@ -1127,8 +1107,11 @@ void GhostUpdate(void)
          * TEMP_SPYRO_REGION lives in Deckard RAM on PS2; use Deckard-safe
          * byte stores so color filter bytes land on the expected lanes.
          */
-        DECK_WRITE_U8(&temp_spyro->colorFilter.R, 0x66);
-        DECK_WRITE_U8(&temp_spyro->colorFilter.opacity, 0x90);
+        GetGhostTint(&ghost_tint);
+        DECK_WRITE_U8(&temp_spyro->colorFilter.R, ghost_tint.R);
+        DECK_WRITE_U8(&temp_spyro->colorFilter.G, ghost_tint.G);
+        DECK_WRITE_U8(&temp_spyro->colorFilter.B, ghost_tint.B);
+        DECK_WRITE_U8(&temp_spyro->colorFilter.opacity, ghost_tint.opacity);
 
         if (ghost_menu.ghosts_visual == VISUAL_SPYRO ||
             ghost_menu.ghosts_visual == VISUAL_SPYRO_WIREFRAME)
@@ -1387,6 +1370,7 @@ void GhostInvalidateStoredGhosts(void)
 
 void GhostResetAll(void)
 {
+    GhostsAutoplayResetExternalLoadState();
     GhostInvalidateStoredGhosts();
 
     #if BUILD == PS2_DECKARD

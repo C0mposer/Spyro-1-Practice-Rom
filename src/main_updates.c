@@ -59,7 +59,7 @@ void MainUpdate()
     // Run Once
     if (mod_state == SKIPPED_INTRO)
     {
-        UnlockAllLevels();
+        //UnlockAllLevels();
         #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
         GhostAutoEnableIfLoaded();
         #endif
@@ -98,6 +98,7 @@ void MainUpdate()
     //Main Loop
     if (mod_state == UNLOCKED_LEVELS && _gameState == GAMESTATE_GAMEPLAY)
     {
+        UnlockAllLevels();
          //Respawn spyro & reset level gems
         if (_currentButton == L1_BUTTON + R1_BUTTON + CIRCLE_BUTTON)
         {

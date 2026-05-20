@@ -34,7 +34,7 @@
 #define DECKARD_STRINGS_REGION 0x80A7F000
 #define DECKARD_PS2MSTR_SECTOR 266138 + SECTOR_OFFSET
 /* BE.BIN starts after PS2MSTR on disc (tune if mkpsxiso sector padding differs). */
-#define DECKARD_BE_SECTOR 266139 + SECTOR_OFFSET
+#define DECKARD_BE_SECTOR 266140 + SECTOR_OFFSET
 #include "deckard_ghost_boot.h"
 #elif BUILD == DUCKSTATION
 #define STARTING_EXTRA_MEM 0x80300000
@@ -451,6 +451,10 @@ int MobyUpdatePosition(unsigned int* param_1, int param_2);
 
 void FillScreenColor(int unk, byte R, byte G, byte B);
 
+void StopAllSoundsFromMoby(void* moby, int mode);
+
+void FreeSoundSlot(int soundSlotHandle, int releaseMode);
+
 //*~~~~~~~~~~~~~~~~~
 //*In Game Variables
 //*~~~~~~~~~~~~~~~~~
@@ -640,5 +644,6 @@ extern int* _ptr_nextFreeParticleSlot;
 
 extern int* _ptr_respawn_position; // Vec3 + Angle
 
+extern int* ptr_last_touched_dragon;
 
 #endif /* COMMON_H */

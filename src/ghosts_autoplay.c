@@ -60,6 +60,17 @@ static void GhostBootClearRequest(void)
         GhostBootWriteInt(&words[i], 0);
 }
 
+void GhostsAutoplayResetExternalLoadState(void)
+{
+    GhostBootClearRequest();
+    s_autoplay_phase = GHOST_AUTOPLAY_IDLE;
+    s_target_world_menu = 0;
+    s_target_level_button = 0;
+    s_phase_timer_frames = 0;
+    s_inventory_stable_frames = 0;
+    s_request_is_active = 0;
+}
+
 /* Convert level ID (11, 12, ... 64) into inventory world/button indices. */
 static int MapLevelIdToInventorySelection(int level_id, int* out_world_menu, int* out_level_button)
 {

@@ -251,7 +251,14 @@ void CustomMenuUpdate(void)
                 il_menu.selection = 0;
             }
 
-            // Play Sound Effect
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
+            if (il_menu.il_state == OFF)
+            {
+                ghost_menu.ghosts_enabled = false; // Disable ghosts if IL mode is off
+            }
+            #endif
+
+                // Play Sound Effect
             if (_currentButtonOneFrame == UP_BUTTON || _currentButtonOneFrame == DOWN_BUTTON || _currentButtonOneFrame == LEFT_BUTTON || _currentButtonOneFrame == RIGHT_BUTTON)
             {
                 PlayMenuSound();
@@ -539,7 +546,7 @@ void CustomMenuUpdate(void)
             #elif BUILD == PS1 || BUILD == PS2_IOP // GREY OUT OPTION FOR OTHER PLATFORMS
             {
                 DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-            }
+        }
             #endif
 
             DrawMenuItem(savestate_menu.savestate_button_text, 1, savestate_menu.selection, 70);
@@ -552,7 +559,7 @@ void CustomMenuUpdate(void)
             #elif BUILD == PS1 || BUILD == PS2_IOP
             {
                 DrawMenuItem(savestate_menu.respawn_on_loadstate_text, 3, savestate_menu.selection, 70);
-            }
+    }
             #endif
 
             // Fill text with defaults if NULL
@@ -571,7 +578,7 @@ void CustomMenuUpdate(void)
                 savestate_menu.savestate_button_text = "SAVE BUTTON L3";
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
-            }
+}
             #endif
 
             // Change Selection
@@ -895,4 +902,20 @@ void DrawPossiblyLockedMenuItem(const char* text, int menu_number, int currently
     }
 
     DrawTextCapitals(text, &info, DEFAULT_SPACING, color);
+}
+
+
+void StopUpdateSpyro(void)
+{
+    int* update_spyro_func = 0x8004a200;
+
+    *update_spyro_func = JR_RA;
+    *(update_spyro_func + 1) = NOP;
+}
+void RestartUpdateSpyro(void)
+{
+    int* update_spyro_func = 0x8004a200;
+
+    *update_spyro_func = 0x3C028008;
+    *(update_spyro_func + 1) = 0x8C428C4C;
 }

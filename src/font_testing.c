@@ -1,4 +1,9 @@
 #include <common.h>
+#include <deckard_strings.h>
+
+// put in deckard_strings.c for ps2 compatability
+extern const char special_keys[21];
+extern const char special_vals[20][2];
 
 enum FontType
 {
@@ -122,6 +127,7 @@ void FontTesting(void)
     }
 }
 
+
 void DrawText(const char* str, int x, int y, FontType font, RGB text_color, RGB stroke_color)
 {
     #define CHAR_PER_ROW 13
@@ -135,12 +141,6 @@ void DrawText(const char* str, int x, int y, FontType font, RGB text_color, RGB 
     int current_row = 0;
     int case_type;
 
-    const char special_keys[] = "!:?-%.)=[]/\",+&><#('";
-    //                                  row0 row1 row2    row3
-    const char special_vals[][2] = {
-        {13,0},{13,1},{10,2},{11,2},{12,2},{13,2}, // rows 0-2
-        {0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3},{8,3},{9,3},{10,3},{11,3},{12,3},{13,3}
-    };
     const int SPECIAL_COUNT = sizeof(special_keys) - 1;
 
     for (int i = 0; i < length; i++)

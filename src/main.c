@@ -62,6 +62,7 @@ void MainHook()
     {
         //! Other functions to run every frame
         {
+            NestorSkipUpdate();
             //FontTesting();
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             //SpinWheelUpdate();
@@ -90,7 +91,7 @@ void MainHook()
             CreditsSkipUpdate();
             LootPlaneUpdate();
             MultiTapUpdate();
-            //CheckMiscTimerUpdate();
+            CheckMiscTimerUpdate();
             CosmeticsUpdate();
             MainUpdate();
             SwapControllerUpdate();

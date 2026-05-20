@@ -8,18 +8,18 @@ Welcome to the wiki for the **Spyro 1 Practice ROM**. Use the links below to nav
 
 | Page | Description |
 |---|---|
-| [Getting Started](01-getting-started.md) | Downloads, platform compatibility, and setup |
-| [Hotkeys](02-hotkeys.md) | All button combos in one place |
+| [Getting Started](01-getting-started.md) | How to setup the Practice Rom |
+| [Hotkeys](02-hotkeys.md) | All default button combos |
 | [IL Timer](03-il-timer.md) | Individual level timing and display settings |
 | [Save States](04-save-states.md) | Save/load states, slots, and button customization |
-| [Level Select](05-level-select.md) | Level select, fly-in controls, gem adjustment |
-| [Ghost Replay](06-ghost-replay.md) | Recording and racing ghosts (Deckard / Emulator) |
-| [Misc Settings](07-misc-settings.md) | Sparx mode, portal disable, consistency tracker, super mode, and more |
-| [Visualizer Settings](08-visualizer-settings.md) | Hitbox viewer, wireframe, free camera, theatre mode |
+| [Level Select](05-level-select.md) | Level select controls |
+| [Ghost Replay](06-ghost-replay.md) | Save & load ghost replays to compare to |
+| [Misc Settings](07-misc-settings.md) | Sparx health, disable portals, consistency tracker, and more |
+| [Visualizer Settings](08-visualizer-settings.md) | Hitbox viewer, free camera, theatre mode |
 | [Cosmetic Settings](09-cosmetic-settings.md) | Skins, flame/sparx colors, custom skin editor |
-| [Level-Specific Features](10-level-specific.md) | Rat practice, Gnasty's World heads, credits skip, loot teleports |
-| [Quality of Life](11-quality-of-life.md) | Intro skip, 99 lives, controller port swap, default settings |
-| [Building the Mod](12-building.md) | Compiling from source, generating patches |
+| [Level-Specific Features](10-level-specific.md) | Features specific to certain levels |
+| [Quality of Life](11-quality-of-life.md) | QOL features |
+| [Building the Mod](12-building.md) | Building from source |
 | [Platform Comparison](13-platform-comparison.md) | Feature availability by platform |
 
 ---
@@ -34,4 +34,3 @@ Welcome to the wiki for the **Spyro 1 Practice ROM**. Use the links below to nav
 **Moonjump:** L1 + R1 + L2 + R2 + X  
 
 For the full hotkey list see [Hotkeys](02-hotkeys.md).  
-For platform-specific feature differences see [Platform Comparison](13-platform-comparison.md).

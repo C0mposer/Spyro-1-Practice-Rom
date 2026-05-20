@@ -18,6 +18,7 @@ Welcome to the wiki for the **Spyro 1 Practice ROM**. Use the links below to nav
 | [Visualizer Settings](08-visualizer-settings.md) | Hitbox viewer, free camera, theatre mode |
 | [Cosmetic Settings](09-cosmetic-settings.md) | Skins, flame/sparx colors, custom skin editor |
 | [Level-Specific Features](10-level-specific.md) | Features specific to certain levels |
+| [Nestor Skip Frame Data](14-nestor-skip-frame-data.md) | Get feedback on your nestor skip attempts|
 | [Quality of Life](11-quality-of-life.md) | QOL features |
 | [Building the Mod](12-building.md) | Building from source |
 | [Platform Comparison](13-platform-comparison.md) | Feature availability by platform |

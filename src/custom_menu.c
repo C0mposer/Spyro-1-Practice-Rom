@@ -546,7 +546,7 @@ void CustomMenuUpdate(void)
             #elif BUILD == PS1 || BUILD == PS2_IOP // GREY OUT OPTION FOR OTHER PLATFORMS
             {
                 DrawTextCapitals(savestate_menu.stateslot_text, &menu_text_info[0], DEFAULT_SPACING, MOBY_COLOR_TRANSPARENT);
-        }
+            }
             #endif
 
             DrawMenuItem(savestate_menu.savestate_button_text, 1, savestate_menu.selection, 70);
@@ -559,7 +559,7 @@ void CustomMenuUpdate(void)
             #elif BUILD == PS1 || BUILD == PS2_IOP
             {
                 DrawMenuItem(savestate_menu.respawn_on_loadstate_text, 3, savestate_menu.selection, 70);
-    }
+            }
             #endif
 
             // Fill text with defaults if NULL
@@ -578,7 +578,7 @@ void CustomMenuUpdate(void)
                 savestate_menu.savestate_button_text = "SAVE BUTTON L3";
                 savestate_menu.loadstate_button_text = "LOAD BUTTON R3";
                 savestate_menu.respawn_on_loadstate_text = "RESPAWN ON LOADSTATE ON";
-}
+            }
             #endif
 
             // Change Selection
@@ -742,56 +742,56 @@ void CustomMenuUpdate(void)
         FreeCamUpdate();
         #endif
 
+        // Super mode disabled to save space for now :(
         // Superfly/Supercharge checks
+        // // Turn on Supercharge
+        // if (misc_menu.super_mode == true)
+        // {
+        //     SuperchargeUpdate();
+        // }
+        // //Turn on Superfly
+        // if (_gameState == GAMESTATE_GAMEPLAY)
+        // {
+        //     if (misc_menu.super_mode == true && _levelID == _levelIDPortalExit && _movementSubState == 0 && (custom_superfly_state == SUPERFLY_NOT_SET || custom_superfly_state == SUPERFLY_TURNED_OFF))
+        //     {
+        //         custom_superfly_state = SUPERFLY_TURNED_ON;
+        //         //printf("SUPERFLY ON\n");
+        //         _spyro.canSuperfly = true;
+        //     }
+        // }
+        //     //Turn off supercharge during portal entry
+        // if ((misc_menu.super_mode == false || _levelID != _levelIDPortalExit) && custom_superfly_state == SUPERFLY_TURNED_ON)
+        // {
+        //     custom_superfly_state = SUPERFLY_TURNED_OFF;
+        //     //printf("SUPERFLY OFF\n");
+        //     _spyro.canSuperfly = false;
+        // }
+        // //Prepare to turn superfly back on, after portal exit ends since it turns it off on it's own
+        // if (misc_menu.super_mode == true && (_movementSubState == MOVEMENT_SUBSTATE_EXIT_PORTAL || _gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_DEATH) && custom_superfly_state == SUPERFLY_TURNED_ON)
+        // {
+        //     custom_superfly_state = SUPERFLY_TURNED_OFF;
+        //     //printf("SUPERFLY OFF.\n");
+        //     _spyro.canSuperfly = false;
+        // }
 
-        // Turn on Supercharge
-        if (misc_menu.super_mode == true)
-        {
-            SuperchargeUpdate();
-        }
-        //Turn on Superfly
-        if (_gameState == GAMESTATE_GAMEPLAY)
-        {
-            if (misc_menu.super_mode == true && _levelID == _levelIDPortalExit && _movementSubState == 0 && (custom_superfly_state == SUPERFLY_NOT_SET || custom_superfly_state == SUPERFLY_TURNED_OFF))
-            {
-                custom_superfly_state = SUPERFLY_TURNED_ON;
-                //printf("SUPERFLY ON\n");
-                _spyro.canSuperfly = true;
-            }
-        }
-            //Turn off supercharge during portal entry
-        if ((misc_menu.super_mode == false || _levelID != _levelIDPortalExit) && custom_superfly_state == SUPERFLY_TURNED_ON)
-        {
-            custom_superfly_state = SUPERFLY_TURNED_OFF;
-            //printf("SUPERFLY OFF\n");
-            _spyro.canSuperfly = false;
-        }
-        //Prepare to turn superfly back on, after portal exit ends since it turns it off on it's own
-        if (misc_menu.super_mode == true && (_movementSubState == MOVEMENT_SUBSTATE_EXIT_PORTAL || _gameState == GAMESTATE_LOADING || _gameState == GAMESTATE_DEATH) && custom_superfly_state == SUPERFLY_TURNED_ON)
-        {
-            custom_superfly_state = SUPERFLY_TURNED_OFF;
-            //printf("SUPERFLY OFF.\n");
-            _spyro.canSuperfly = false;
-        }
-
-        //Increase & Decrease height cap
-        if (custom_superfly_state == SUPERFLY_TURNED_ON)
-        {
-            if (_spyro.state == GLIDE)
-            {
-                if (_currentButtonOneFrame == X_BUTTON)
-                {
-                    _height_cap += 0x1000;
-                    //printf("%X\n", _height_cap);
-                }
-                else if (_currentButton == L2_BUTTON + R2_BUTTON)
-                {
-                    _height_cap = _spyro.position.z + 0x200;
-                    _spyro.neutralJumpZPos = _spyro.position.z + 0x200;
-                    //printf("%X\n", _height_cap);
-                }
-            }
-        }
+        // //Increase & Decrease height cap
+        // if (custom_superfly_state == SUPERFLY_TURNED_ON)
+        // {
+        //     if (_spyro.state == GLIDE)
+        //     {
+        //         if (_currentButtonOneFrame == X_BUTTON)
+        //         {
+        //             _height_cap += 0x1000;
+        //             //printf("%X\n", _height_cap);
+        //         }
+        //         else if (_currentButton == L2_BUTTON + R2_BUTTON)
+        //         {
+        //             _height_cap = _spyro.position.z + 0x200;
+        //             _spyro.neutralJumpZPos = _spyro.position.z + 0x200;
+        //             //printf("%X\n", _height_cap);
+        //         }
+        //     }
+        // }
 
     }
 

@@ -1,71 +1,73 @@
-#include <common.h>
-#include <multitap.h>
-#include <spyro.h>
+// Disabled for now to save space :(
 
-extern int UpdateSpyroAnim;
-extern int UpdateSpyroAnim_2;
-//#define OPCODE2 0x8C428AB4;
+// #include <common.h>
+// #include <multitap.h>
+// #include <spyro.h>
 
-#define SUBSTATE_SUPERCHARGE 0xC0
+// extern int UpdateSpyroAnim;
+// extern int UpdateSpyroAnim_2;
+// //#define OPCODE2 0x8C428AB4;
 
-#define OPCODE1 0x3C028008;
+// #define SUBSTATE_SUPERCHARGE 0xC0
 
-#define OPCODE2_NTSC 0x8C428AB4; 
+// #define OPCODE1 0x3C028008;
 
-bool isSupercharging = false;
+// #define OPCODE2_NTSC 0x8C428AB4; 
 
-bool IsInAnySuperchargeSubState(void)
-{
-    return (_spyro.state == SUPERCHARGE || _spyro.state == CHARGING_AIR_SC_JUMP || _spyro.state == CHARGING_AIR);
-}
+// bool isSupercharging = false;
 
-void DisableUpdateSpyroAnimation(void)
-{
-    // Make UpdateSpyroAnim return immediately
-    UpdateSpyroAnim = JR_RA;
-    UpdateSpyroAnim_2 = NOP;
-}
-void EnableUpdateSpyroAnimation(void)
-{
-    // Set original opcodes for UpdateSpyroAnim
-    UpdateSpyroAnim = OPCODE1;
-    UpdateSpyroAnim_2 = OPCODE2_NTSC;
+// bool IsInAnySuperchargeSubState(void)
+// {
+//     return (_spyro.state == SUPERCHARGE || _spyro.state == CHARGING_AIR_SC_JUMP || _spyro.state == CHARGING_AIR);
+// }
 
-}
+// void DisableUpdateSpyroAnimation(void)
+// {
+//     // Make UpdateSpyroAnim return immediately
+//     UpdateSpyroAnim = JR_RA;
+//     UpdateSpyroAnim_2 = NOP;
+// }
+// void EnableUpdateSpyroAnimation(void)
+// {
+//     // Set original opcodes for UpdateSpyroAnim
+//     UpdateSpyroAnim = OPCODE1;
+//     UpdateSpyroAnim_2 = OPCODE2_NTSC;
 
-void SuperchargeUpdate(void)
-{
-    if (CheckButtonMultiTap(SQUARE_BUTTON, 2) && _spyro.state == CHARGING_AIR)
-    {
-        isSupercharging = true;
-    }
+// }
 
-    else if (!IsInAnySuperchargeSubState())
-    {
-        isSupercharging = false;
-    }
+// void SuperchargeUpdate(void)
+// {
+//     if (CheckButtonMultiTap(SQUARE_BUTTON, 2) && _spyro.state == CHARGING_AIR)
+//     {
+//         isSupercharging = true;
+//     }
 
-    if (isSupercharging)
-    {
+//     else if (!IsInAnySuperchargeSubState())
+//     {
+//         isSupercharging = false;
+//     }
 
-        _spyro.subState = SUBSTATE_SUPERCHARGE;
+//     if (isSupercharging)
+//     {
 
-        DisableUpdateSpyroAnimation();
+//         _spyro.subState = SUBSTATE_SUPERCHARGE;
 
-        // Update Speed
-        if (_currentButtonOneFrame & R1_BUTTON)
-        {
-            _spyro.superchargeHeightStarted += 2000;
-        }
-        else if (_currentButtonOneFrame & L1_BUTTON)
-        {
-            _spyro.superchargeHeightStarted -= 2000;
-        }
+//         DisableUpdateSpyroAnimation();
+
+//         // Update Speed
+//         if (_currentButtonOneFrame & R1_BUTTON)
+//         {
+//             _spyro.superchargeHeightStarted += 2000;
+//         }
+//         else if (_currentButtonOneFrame & L1_BUTTON)
+//         {
+//             _spyro.superchargeHeightStarted -= 2000;
+//         }
 
 
-    }
-    else if (!isSupercharging)
-    {
-        EnableUpdateSpyroAnimation();
-    }
-}
+//     }
+//     else if (!isSupercharging)
+//     {
+//         EnableUpdateSpyroAnimation();
+//     }
+// }

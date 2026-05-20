@@ -26,7 +26,7 @@
       "extracted_game_folder": "./.config/game_files/REDUX",
       "main_executable": "SCUS_420.67",
       "source_path": "D:/Documents/Roms/PS1/Spyro the Dragon.cue",
-      "compiler_flags": "-Os -g ",
+      "compiler_flags": "-Os -g",
       "is_single_file_mode": false,
       "single_file_path": null,
       "section_maps": {},

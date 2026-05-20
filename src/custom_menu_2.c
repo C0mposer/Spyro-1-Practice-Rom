@@ -105,9 +105,9 @@ void CustomMenuUpdate2()
 
         if (current_menu == MISC_MENU)
         {
-            int misc_item_count = 5;
+            int misc_item_count = 4;
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
-            misc_item_count = 6;
+            misc_item_count = 5;
             #endif
 
             _spyro.isMovementLocked = TRUE;
@@ -115,9 +115,9 @@ void CustomMenuUpdate2()
             CheckBackMenu();
 
             int misc_menu_base_y = 48;
-            int misc_menu_box_bottom = 0x92;
+            int misc_menu_box_bottom = 0x80;
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
-            misc_menu_box_bottom = 0xA8;
+            misc_menu_box_bottom = 0x94;
             #endif
             DrawTextBox(0x30, 0x1D0, 0x1A, misc_menu_box_bottom);
 
@@ -125,9 +125,9 @@ void CustomMenuUpdate2()
             DrawMenuItem(misc_menu.show_dragon_touch_text, 1, misc_menu.selection, misc_menu_base_y);
             DrawMenuItem(misc_menu.disable_portal_entry_text, 2, misc_menu.selection, misc_menu_base_y);
             DrawMenuItem(misc_menu.consitency_tracker_text, 3, misc_menu.selection, misc_menu_base_y);
-            DrawMenuItem(misc_menu.super_text, 4, misc_menu.selection, misc_menu_base_y);
+            //DrawMenuItem(misc_menu.super_text, 4, misc_menu.selection, misc_menu_base_y);
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
-            DrawMenuItem(misc_menu.memory_watch_text, 5, misc_menu.selection, misc_menu_base_y);
+            DrawMenuItem(misc_menu.memory_watch_text, 4, misc_menu.selection, misc_menu_base_y);
             //DrawMenuItem(visualizer_menu.collision_wireframe_text, 6, misc_menu.selection, misc_menu_base_y);
             #endif
 
@@ -138,7 +138,7 @@ void CustomMenuUpdate2()
                 misc_menu.show_dragon_touch_text = "SHOW DRAGON TOUCH OFF";
                 misc_menu.disable_portal_entry_text = "DISABLE PORTAL OFF";
                 misc_menu.consitency_tracker_text = "TRACK CONSISTENCY OFF";
-                misc_menu.super_text = "SUPER MODE OFF";
+                //misc_menu.super_text = "SUPER MODE OFF";
                 misc_menu.memory_watch_text = "MEMORY WATCH";
                 //visualizer_menu.collision_wireframe_text = "COLLISION WIREFRAME OFF";
             }
@@ -179,13 +179,13 @@ void CustomMenuUpdate2()
 
             misc_menu.show_dragon_touch_text = ToggleMenuBool(&misc_menu.show_dragon_touch, misc_menu.selection == 1, "SHOW DRAGON TOUCH ON", "SHOW DRAGON TOUCH OFF");
             misc_menu.disable_portal_entry_text = ToggleMenuBool(&disable_portal_entry, misc_menu.selection == 2, "DISABLE PORTAL ON", "DISABLE PORTAL OFF");
-            misc_menu.super_text = ToggleMenuBool(&misc_menu.super_mode, misc_menu.selection == 4, "SUPER MODE ON", "SUPER MODE OFF");
+            //misc_menu.super_text = ToggleMenuBool(&misc_menu.super_mode, misc_menu.selection == 4, "SUPER MODE ON", "SUPER MODE OFF");
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             visualizer_menu.collision_wireframe_text = ToggleMenuBool(&visualizer_menu.collision_wireframe, misc_menu.selection == 6, "COLLISION WIREFRAME ON", "COLLISION WIREFRAME OFF");
             #endif
 
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
-            if (misc_menu.selection == 5 && _currentButtonOneFrame == X_BUTTON)
+            if (misc_menu.selection == 4 && _currentButtonOneFrame == X_BUTTON)
             {
                 MemoryWatchOpenMenu();
             }
@@ -203,6 +203,7 @@ void CustomMenuUpdate2()
             // Update Menu Options
             if (misc_menu.selection == 0)
             {
+                // If IL mode is on, don't allow perma sparx
                 int num_items = 0;
                 if (il_menu.il_state == OFF)
                 {

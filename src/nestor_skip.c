@@ -1,3 +1,4 @@
+#include <custom_types.h>
 #include <common.h>
 #include <sound.h>
 #include <custom_text.h>
@@ -5,72 +6,81 @@
 extern int loadstate_button_index;
 extern const short LOADSTATE_BUTTONS[3];
 
-int ns_timer = -1;
-int count = 0;
-char inputs[5];
+int frame_timer_after_jump = -1;
+char current_input_index = 0;
+char input_frames[5];
 
+// Stores what frame after the initial jump you pressed each subsequent input. Then, prints how early/late you were on each input compared to the Daze/Composer setup.
 void NestorSkipUpdate()
 {
     if (_levelID == ARTISANS_ID)
     {
-        if (_currentButton == LOADSTATE_BUTTONS[loadstate_button_index])
+        bool should_reset_frame_data = _currentButton == LOADSTATE_BUTTONS[loadstate_button_index] || _gameState == GAMESTATE_CUTSCENE;
+        if (should_reset_frame_data)
         {
-            ns_timer = -1;
-            count = 0;
+            frame_timer_after_jump = -1;
+            current_input_index = 0;
         }
 
-        if (ns_timer == -1 && _currentButtonOneFrame == X_BUTTON) {
-            ns_timer = 0;
-        }
-
-        if (ns_timer >= 0) {
-            ns_timer++;
-
-            if ((_currentButtonOneFrame & CIRCLE_BUTTON && count == 0) ||
-                (_currentButtonOneFrame & SQUARE_BUTTON && count == 1) ||
-                (_currentButtonOneFrame & X_BUTTON && count == 2) ||
-                (_currentButtonOneFrame & SQUARE_BUTTON && count == 3) ||
-                (_currentButtonOneFrame & X_BUTTON && count == 4)) {
-                inputs[count] = ns_timer;
-                count++;
-            }
-        }
-
-        if (count == 5) {
-            // CapitalTextInfo input_text_info = { 0 };
-            // input_text_info.x = SCREEN_LEFT_EDGE + 0x10;
-            // input_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
-            // input_text_info.size = DEFAULT_SIZE + 1000;
-            // char buffer[15];
-            // sprintf(buffer, "%d %d %d %d %d", inputs[0], inputs[1], inputs[2], inputs[3], inputs[4]);
-            // DrawTextCapitals(buffer, &input_text_info, DEFAULT_SPACING, MOBY_COLOR_WHITE);
-
-            CapitalTextInfo input_text_info_adjusted = { 0 };
-            input_text_info_adjusted.x = SCREEN_LEFT_EDGE + 0x10;
-            input_text_info_adjusted.y = SCREEN_BOTTOM_EDGE - 0x1A;
-            input_text_info_adjusted.size = DEFAULT_SIZE;
-            char buffer2[15];
-
-            char flame_offset = 0;
-            if (inputs[0] > 10 && inputs[0] < 15)
+        if (_spyro.position.x == 0x14C00) // Exact X start position (stays the same throughout entire sequence)
+        {
+            if (_spyro.position.z == 0x2554) // Exact Z start position
             {
-                flame_offset = 0;
-            }
-            else if (inputs[0] <= 10)
-            {
-                flame_offset = inputs[0] - 11;
-            }
-            else if (inputs[0] >= 15)
-            {
-                flame_offset = inputs[0] - 14;
+                if (frame_timer_after_jump == -1 && _currentButtonOneFrame == X_BUTTON) {
+                    frame_timer_after_jump = 0;
+                }
             }
 
-            sprintf(buffer2, "%d %d %d %d %d", flame_offset, (inputs[1] - 17), (inputs[2] - 36), (inputs[3] - 51), (inputs[4]) - 55);
-            DrawTextCapitals(buffer2, &input_text_info_adjusted, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+            if (frame_timer_after_jump >= 0) {
+                frame_timer_after_jump++;
 
-            if (_gameState == GAMESTATE_GAMEPLAY)
-            {
-                RenderShadedMobyQueue();
+                if ((_currentButtonOneFrame & CIRCLE_BUTTON && current_input_index == 0) ||
+                    (_currentButtonOneFrame & SQUARE_BUTTON && current_input_index == 1) ||
+                    (_currentButtonOneFrame & X_BUTTON && current_input_index == 2) ||
+                    (_currentButtonOneFrame & SQUARE_BUTTON && current_input_index == 3) ||
+                    (_currentButtonOneFrame & X_BUTTON && current_input_index == 4)) {
+                    input_frames[current_input_index] = frame_timer_after_jump;
+                    current_input_index++;
+                }
+            }
+
+            if (current_input_index == 5) {
+                // RAW Frame Data
+                // CapitalTextInfo input_text_info = { 0 };
+                // input_text_info.x = SCREEN_LEFT_EDGE + 0x10;
+                // input_text_info.y = SCREEN_BOTTOM_EDGE - 0xA;
+                // input_text_info.size = DEFAULT_SIZE + 1000;
+                // char buffer[15];
+                // sprintf(buffer, "%d %d %d %d %d", input_frames[0], input_frames[1], input_frames[2], input_frames[3], input_frames[4]);
+                // DrawTextCapitals(buffer, &input_text_info, DEFAULT_SPACING, MOBY_COLOR_WHITE);
+
+                CapitalTextInfo input_text_info_adjusted = { 0 };
+                input_text_info_adjusted.x = SCREEN_LEFT_EDGE + 0x10;
+                input_text_info_adjusted.y = SCREEN_BOTTOM_EDGE - 0x1A;
+                input_text_info_adjusted.size = DEFAULT_SIZE;
+                char buffer2[15];
+
+                char flame_offset = 0;
+                if (input_frames[0] > 10 && input_frames[0] < 15)
+                {
+                    flame_offset = 0;
+                }
+                else if (input_frames[0] <= 10)
+                {
+                    flame_offset = input_frames[0] - 11;
+                }
+                else if (input_frames[0] >= 15)
+                {
+                    flame_offset = input_frames[0] - 14;
+                }
+
+                sprintf(buffer2, "%d %d %d %d %d", flame_offset, (input_frames[1] - 17), (input_frames[2] - 36), (input_frames[3] - 51), (input_frames[4]) - 55);
+                DrawTextCapitals(buffer2, &input_text_info_adjusted, DEFAULT_SPACING, MOBY_COLOR_GOLD);
+
+                if (_gameState == GAMESTATE_GAMEPLAY)
+                {
+                    RenderShadedMobyQueue();
+                }
             }
         }
     }

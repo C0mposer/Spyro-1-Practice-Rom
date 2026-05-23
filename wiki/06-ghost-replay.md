@@ -6,7 +6,7 @@
 
 Ghost replays let you record your IL runs and race against them in real time.  
   
-You can also race against replays other runners upload online! Download ghosts [**here**](https://docs.google.com/spreadsheets/d/1FRsIFruvudBQzKBPcCEm27SErnol9FkRNUDLPE_SKMI/edit?gid=0#gid=0)
+You can also race against replays other runners upload online! Download ghosts [**here**](https://www.spyropracticerom.com/ghosts)
 
 ---
 

@@ -1,4 +1,4 @@
-# Nestor Skip Frame Data
+# Nestor Skip Trainer
 Get feedback on your Nestor Skip attempts to quickly diagnose what inputs you're early/late on.
 
 # How To Use

@@ -24,9 +24,9 @@ This mod supports multiple platforms. **Download the correct version for what yo
 
 | Platform | Save States | Ghost Replay | Notes |
 |---|---|---|---|
-| [PS2 30k–70k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease5.0/Spyro.1.Practice.Rom.PS2.IOP.zip) | Partial | No | Spyro/camera position save-states only |
-| [Duckstation](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease5.0/Spyro.1.Practice.Rom.Duckstation.zip) | Full | Yes | Recommended emulator for full feature set |
 |[PS2 75k–90k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease5.0/Spyro.1.Practice.Rom.PS2.Deckard.zip) | Full | Yes | Recommended console for full feature set |
+| [Duckstation](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease5.0/Spyro.1.Practice.Rom.Duckstation.zip) | Full | Yes | Recommended emulator for full feature set |
+| [PS2 30k–70k](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease5.0/Spyro.1.Practice.Rom.PS2.IOP.zip) | Partial | No | Spyro/camera position save-states only |
 | [PS1 & Other Emulators](https://github.com/C0mposer/Spyro-1-Practice-Rom/releases/download/fullrelease5.0/Spyro.1.Practice.Rom.PS1.zip) | Partial | No | Spyro/camera position save-states only |
 
 See [Platform Comparison](13-platform-comparison.md) for a complete breakdown.

@@ -1,6 +1,6 @@
 # Building the Mod
 
-Instructions for compiling the mod from source and generating distributable patches.
+Instructions for compiling the mod from source.
 
 ---
 

@@ -4,7 +4,7 @@
 #include <custom_menu.h>
 #include <right_stick.h>
 
-bool should_savestate_on_game_start = false; // Initial savestate for nestor skip (is now a timer too)
+bool should_savestate_on_game_start = 1; // Initial savestate for nestor skip (is now a timer too)
 bool should_savestate_after_dragon_or_load = false;
 bool should_loadstate_after_dragon = false;
 
@@ -292,7 +292,7 @@ void SaveStateUpdate()
     // Allow for initial savestate whenever going back to adventure continues
     if (_gameState == GAMESTATE_TITLE_SCREEN)
     {
-        //should_savestate_on_game_start = true;
+        should_savestate_on_game_start = 1;
     }
 
     // Prepare savestate after turning on disable portal

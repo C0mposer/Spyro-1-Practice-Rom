@@ -1,6 +1,9 @@
 #include <common.h>
 #include <custom_menu.h>
 #include <shared_funcs.h>
+#include <multitap.h>
+#include <font.h>
+#include <deckard_strings.h>
 
 extern VisualizerMenu visualizer_menu;
 
@@ -9,6 +12,8 @@ extern volatile int _cameraRaycastRegionIndex;
 extern volatile int _cameraRenderRegionIndex;
 extern volatile int _cameraUnknownPositionVectorX;
 extern volatile int _worldRegionCount;
+
+extern int current_menu;
 
 static void FreeCamSyncRenderRegion(void)
 {
@@ -59,6 +64,7 @@ static FreeCamSpeedMode freecam_speed_mode = SPEED_NORMAL;
 #define FREECAM_PITCH_MAX    0x03E0
 #define FREECAM_PITCH_MIN    (-0x03E0)
 
+int free_cam_exit_warning_timer = -1;
 void FreeCamUpdate()
 {
     if (visualizer_menu.free_cam == true)
@@ -66,6 +72,32 @@ void FreeCamUpdate()
         StopCameraFollowSpyro();
         StopUpdateSpyro();
 
+        // ---- EXIT CONTROLS ----
+        // Show exit warning
+        if (_currentButtonOneFrame == CIRCLE_BUTTON && free_cam_exit_warning_timer == -1)
+        {
+            free_cam_exit_warning_timer = 0;
+        }
+        else if (free_cam_exit_warning_timer >= 0 && free_cam_exit_warning_timer < 60)
+        {
+            DrawTextSimple(FREE_CAM_EXIT_TEXT, 8, 11);
+
+            if (_currentButtonOneFrame == CIRCLE_BUTTON)
+            {
+                visualizer_menu.free_cam = false;
+                current_menu = MAIN_MENU;
+                ResetAllMenuSelections();
+
+            }
+
+            free_cam_exit_warning_timer++;
+        }
+        else
+        {
+            free_cam_exit_warning_timer = -1;
+        }
+
+        // ----- FREE CAM -----
         // ---- Toggle Speed Mode with L2 / R2 ----
         if (_currentButtonOneFrame & L2_BUTTON)
         {

@@ -6,41 +6,28 @@
 
 ## Full Save States vs. Partial Save States
 
-The type of save state available depends on your hardware. See [Platform Comparison](13-platform-comparison.md) for a full comparison.
+The type of save state available depends on what console you're playing on. See [Platform Comparison](13-platform-comparison.md) for a full comparison.
 
 ### Full Save States (PS2 75k–90k)
 
-Full save states capture and restore essentially the entire level state:
-
-- Spyro position, animation, angle, state
-- Camera position and state
-- All collectables (gems, dragons, eggs)
-- Key state
-- Particle effects
-- Respawn position and angle
-- Flight level timer and collected items
-- Moving level geometry and dynamic objects (moving platforms)
-  
-It essentially feels like a real emulator savestate
+Full save states capture and restore essentially the entire level state, like an emulator savestate.
 
 ### Partial Save States (PS1 / PS2 30k–70k)
 
 Partial save states only save and restore:
 
-- Spyro position
+- Spyro's position
 - Camera position
 - Rat position (in Gnasty's World)
-
-Collectables and level state are **not** saved on these platforms.
 
 ---
 
 ## Savestate Slots
 
-There are **3 independent savestate slots**. You can switch between them at any time.
+There are **3 savestate slots** you can switch between at any time. Move the right stick left/right to change slots during gameplay. 
 
 - **Current Slot** — view or manually change the active slot from the menu
-- **Switch Slot Hotkey** — quickly cycle slots without opening the menu
+- **Switch Slot Hotkey** — change the hotkey for switching slots, if you're playing on an analogless controller.
 
 ---
 
@@ -66,10 +53,10 @@ There are **3 independent savestate slots**. You can switch between them at any 
 | Option | Input |
 |---|---|
 | Right Stick Left / Right *(default)* | Tilt right stick left or right |
-| L1 + R1 + DPad Left / Right | Hold L1+R1, press DPad |
+| L1 + R1 + Dpad Left / Right | Hold L1+R1, press Dpad |
 
 ---
 
 ## Notes
 
-- On **PS2 30k–70k**, an additional **Respawn on Loadstate** toggle is available in the menu. This will respawn everything in the level, so you can at least practice cycle independent sections easier. 
+- On **PS2 30k–70k**, an additional **Respawn on Loadstate** toggle is available in the menu. This will respawn everything in the level, but it will not save the cycle. So you can at least practice cycle independent sections easier. 

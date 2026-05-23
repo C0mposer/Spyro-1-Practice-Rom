@@ -30,14 +30,14 @@ Choose from a selection of Sparx skins.
 
 ## Custom Skin Editor
 
-The custom skin editor lets you build your own Spyro color scheme directly in-game using **HSL (Hue / Saturation / Lightness)** sliders per body section. Changes are previewed in real time.
+The custom skin editor lets you build your own Spyro skin directly in-game using **HSL (Hue / Saturation / Lightness)** sliders per body section. Changes are previewed in real time.
 
 ### Editable Sections
 
 | Section | Description |
 |---|---|
 | Body | Main Body Color |
-| Belly | Belly Color |
+| Belly | Belly + Tail Color |
 | Wings | Wing Color |
 | Wing Bones | Wing Bone Color |
 | Horns | Horn Color |
@@ -75,6 +75,10 @@ Adjust Hue, Saturation, and Lightness independently for each section. Then, save
 | Neon | CIPHAT |
 | Vampire | CIPHAT |
 | Zera | OddKara |
+| Peace | Xeirla |
+| Magic | Xeirla |
+| Beast | Xeirla |
+| Dream | Xeirla |
 | Nestor | Megan |
 | Titan | Megan |
 | Cosmo | Megan |
@@ -95,6 +99,6 @@ Additional credit to **Pepper** for the custom portrait in Gnasty's Loot and the
 
 ## Custom Skin Patcher
 
-To patch your own skin texture (as a BMP file) directly into the Practice ROM:
+To patch your own skin texture (as a BMP file) directly into the Practice ROM permanently:
 
 [Spyro 1 Practice ROM Skin Patcher](https://github.com/C0mposer/Spyro1PracticeRomSkinPatcher)

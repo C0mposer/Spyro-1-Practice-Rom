@@ -68,8 +68,8 @@ typedef struct CameraKeyframe
     int posX;
     int posY;
     int posZ;
-    short yaw;
-    short pitch;
+    int yaw;   // int instead of short because of deckard
+    int pitch; // int instead of short because of deckard
     bool set;
 } CameraKeyframe;
 

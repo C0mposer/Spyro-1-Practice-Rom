@@ -26,11 +26,11 @@ Detaches the camera from Spyro, giving you control to move around the camera wit
 
 ## Theatre Mode
 
-A full camera keyframing system for creating cinematic shots.
+A suite of content creations tools, including a full camera keyframing system for creating cinematic shots.
 
 ### Overview
 
-Set up to **16 keyframes**, each storing a camera position and angle. The camera interpolates smoothly between them on playback.
+Set up to **16 keyframes**, each storing a camera position and angle. The camera moves smoothly between them on playback.
 
 ### Adding Keyframes
 
@@ -55,10 +55,10 @@ Move the camera to the desired position, then add some keyframes. Each keyframe 
 |---|---|
 | Auto-play Forward | Automatically plays through keyframes in order |
 | Auto-play Backward | Plays keyframes in reverse order |
-| Auto-play Off | Manual or scripted control only |
+| Auto-play Off | Manual control only |
 | Loop | Loops back to the first keyframe, when it reaches the last keyframe |
-| Green Screen | Draw's all objects over a solid green background for compositing |
-| Hide HUD | Hides all on-screen HUD elements during playback |
+| Green Screen | Draw's all objects over a solid green background |
+| Hide HUD | Hides all HUD elements during playback |
 
 
 ## Sparx Range

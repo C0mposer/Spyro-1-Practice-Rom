@@ -1,6 +1,6 @@
 # Platform Comparison
 
-Feature availability varies by hardware. Use this table to understand what you can expect on each platform.
+Feature availability by console/emu.
 
 ---
 

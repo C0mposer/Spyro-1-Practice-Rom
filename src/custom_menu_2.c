@@ -63,6 +63,8 @@ bool should_load_sparx_color = false;
 
 extern TimerState timerState;
 
+extern int free_cam_exit_warning_timer;
+
 typedef enum ILTimerState
 {
     IL_FLYING_IN,
@@ -257,7 +259,7 @@ void CustomMenuUpdate2()
             {
                 visualizer_menu.hitbox_viewer_text = "HITBOX VIEWER OFF";
                 visualizer_menu.show_sparx_range_text = "SHOW SPARX RANGE OFF";
-                visualizer_menu.free_cam_text = "FREE CAM OFF";
+                visualizer_menu.free_cam_text = "FREE CAM";
                 visualizer_menu.theatre_mode_text = "THEATRE MODE";
             }
 
@@ -277,8 +279,21 @@ void CustomMenuUpdate2()
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             visualizer_menu.hitbox_viewer_text = ToggleMenuBool(&visualizer_menu.hitbox_viewer, visualizer_menu.selection == 0, "HITBOX VIEWER ON", "HITBOX VIEWER OFF");
             visualizer_menu.show_sparx_range_text = ToggleMenuBool(&show_sparx_range_mode, visualizer_menu.selection == 1, "SHOW SPARX RANGE ON", "SHOW SPARX RANGE OFF");
-            visualizer_menu.free_cam_text = ToggleMenuBool(&visualizer_menu.free_cam, visualizer_menu.selection == 2, "FREE CAM ON", "FREE CAM OFF");
-            if (visualizer_menu.selection == 3 && _currentButtonOneFrame == X_BUTTON)
+
+            // Open Free Cam
+            if (visualizer_menu.selection == 2 && _currentButtonOneFrame == X_BUTTON)
+            {
+                #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
+                visualizer_menu.free_cam = true;
+                free_cam_exit_warning_timer = 0; // Display exit instructions upon entering
+                RestartDrawWorldAndObjects();
+                #endif
+                menu_state = MENU_HIDDEN;
+                _spyro.isMovementLocked = FALSE;
+            }
+
+            //Open Theatre Mode
+            else if (visualizer_menu.selection == 3 && _currentButtonOneFrame == X_BUTTON)
             {
                 #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
                 TheatreModeEnter();
@@ -303,15 +318,22 @@ void CustomMenuUpdate2()
 
             _spyro.isMovementLocked = TRUE;
 
+            int textbox_bottom = 0x68;
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
+            textbox_bottom = 0x7F;
+            #endif
+
             CheckBackMenu();
 
-            DrawTextBox(0x30, 0x1D0, 0xD, 0x7F);
+            DrawTextBox(0x30, 0x1D0, 0xD, textbox_bottom);
 
             DrawMenuItem(cosmetic_menu.bg_color_text, 0, cosmetic_menu.selection, 30);
             DrawMenuItem(cosmetic_menu.spyro_color_text, 1, cosmetic_menu.selection, 30);
             DrawMenuItem(cosmetic_menu.flame_color_text, 2, cosmetic_menu.selection, 30);
             DrawMenuItem(cosmetic_menu.sparx_color_text, 3, cosmetic_menu.selection, 30);
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             DrawMenuItem(cosmetic_menu.skin_editor_menu_text, 4, cosmetic_menu.selection, 30);
+            #endif
 
             // Fill text with defaults if NULL
             if (cosmetic_menu.bg_color_text == NULL)
@@ -324,13 +346,18 @@ void CustomMenuUpdate2()
             }
 
             // Change Selection
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
+            int menu_options = 5;
+            #else
+            int menu_options = 4;
+            #endif
             if (_currentButtonOneFrame == DOWN_BUTTON)
             {
-                cosmetic_menu.selection = (cosmetic_menu.selection + 1) % 5;
+                cosmetic_menu.selection = (cosmetic_menu.selection + 1) % menu_options;
             }
             else if (_currentButtonOneFrame == UP_BUTTON)
             {
-                cosmetic_menu.selection = (cosmetic_menu.selection + 4) % 5;                    // +3 because it's the same as -1 in mod 4 math
+                cosmetic_menu.selection = (cosmetic_menu.selection + 4) % menu_options;                    // +3 because it's the same as -1 in mod 4 math
             }
 
             // Play Sound Effect
@@ -359,7 +386,7 @@ void CustomMenuUpdate2()
             // Spyro Color
             else if (cosmetic_menu.selection == 1)
             {
-                const int amount_of_skins = 31;
+                const int amount_of_skins = 36;
                 if (_currentButtonOneFrame == RIGHT_BUTTON)
                 {
                     spyro_color_index = (spyro_color_index + 1) % amount_of_skins;
@@ -413,6 +440,7 @@ void CustomMenuUpdate2()
                 cosmetic_menu.sparx_color_text = constructed_skin_name;
             }
 
+            #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             else if (cosmetic_menu.selection == 4)
             {
                 if (_currentButtonOneFrame == X_BUTTON)
@@ -422,6 +450,7 @@ void CustomMenuUpdate2()
                     //RestartDrawWorldAndObjects();
                 }
             }
+            #endif
 
             #if BUILD == PS2_DECKARD || BUILD == REDUX || BUILD == DUCKSTATION
             CosmeticMenuSetPreviewMode(COSMETIC_PREVIEW_SPYRO);

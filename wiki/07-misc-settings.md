@@ -10,13 +10,13 @@ An on-screen timer for manually timing movement, routes, and tricks. Essentially
 
 - Resets when you load a state or respawn Spyro
 - Stops when you pause the game
-- Integrates with [Disable Portal](#disable-portal) — the timer stops the moment the camera touches the portal
+- Integrates with Disable Portal. The timer stops the moment the camera touches the portal when Disable Portal is on. Good for timing homeworld sections.
 
 ### Manual Timer Display Mode
 
 | Mode | Behavior |
 |---|---|
-| Display on Stopped | Timer only appears on screen after you pause to stop it |
+| Display on Stopped | Timer only appears on screen after you stop it |
 | Display Always | Timer is always visible |
 
 ---
@@ -43,7 +43,7 @@ Displays the number of **frames lost to a bad dragon touch** (at 30fps).
 
 When enabled, the game automatically **loads your current save state the moment the camera touches a portal**. This is useful for timing portal entries.
 
-- Stops the Manual Timer at portal contact, allowing you to easily time portal entries accurately
+- Stops the Manual Timer when Spyro & the camera touches the portal, allowing you to easily time portal entries accurately.
 
 ---
 
@@ -64,29 +64,9 @@ Two numbers are displayed in the **bottom-left corner**: a numerator (successes)
 | Decrement total attempts manually | L2 + R2 + Right Stick Down |
 | Show tracker for 2 seconds | L2 + R2 |
 | Reset both counters | Load State × 3 |
-| Reset both counters *(PS1 / 70k alt)* | Hold L2 + R2, then Circle × 3 |
+| Reset both counters *(Alternative)* | Hold L2 + R2, then Circle × 3 |
 
 Best way to use it: load your state to attempt the trick (this increments total automatically), then use Right Stick Up if you landed it.
-
----
-
-## Super Mode
-
-Lets you use **supercharge** and **superfly** in any level, regardless of whether the level normally supports them.
-
-| Move | How to activate |
-|---|---|
-| Superfly | Jump, then glide |
-| Supercharge | Jump, then press Square × 2 while in the air |
-
-While supercharging:
-
-| Action | Input |
-|---|---|
-| Increase supercharge speed | R1 |
-| Decrease supercharge speed | L1 |
-
-*This feature may be removed as it is not relavent to any practice scenarios. It's just fun :)*
 
 ---
 
@@ -94,11 +74,11 @@ While supercharging:
 
 *(PS2 75k-90k / Duckstation only)*
 
-Watch up to **10 arbitrary RAM addresses** simultaneously, displayed on screen in real time.
+View the values of up to **10 arbitrary RAM addresses** simultaneously. Displayed on screen during gameplay.
 
 ### Configuration
 
-- **Address** — 8-digit hex memory address to watch
+- **Address** — 8-digit memory address to watch
 - **Data type** — U8, U16, U32, S8, S16, S32, or Fixed 12.20 (fixed-point)
 - **Display format** — Hex or Decimal
 - **Label** — Custom name up to 10 characters

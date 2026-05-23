@@ -2,7 +2,7 @@
 
 ## Using the Level Select
 
-Press **Select** to open the inventory screen with the level select. Navigate and choose your destination. The game will fly Spyro into the selected level just like a normal portal entry.
+Press **Select** to open the inventory screen with the level select. Navigate and choose the level you'd like to teleport to. It will fly Spyro into the selected level just like a normal portal entry.
 
 ---
 
@@ -12,8 +12,8 @@ Press **Select** to open the inventory screen with the level select. Navigate an
 |---|---|
 | Fly in to Homeworld | L3 |
 | Fly in to level | L1, L2, R1, R2, R3 |
-| Dpad — Homeworld | DPad Up |
-| Dpad — Flight Level | DPad Down |
+| Homeworld (Dpad) | DPad Up |
+| Flight Level (Dpad) | DPad Down |
 | Fly out of level portal | Hold Triangle during fly in |
 | Reverse the camera fly-in angle | Hold Circle during fly in |
 

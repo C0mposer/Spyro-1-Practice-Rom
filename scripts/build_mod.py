@@ -7,6 +7,7 @@ Full release build for PracitceRomPort (matches upstream Spyro1_PracticeCodes fl
 4. Skin/splash bins from `scripts/bmp_scripts/final_output/`, `custom_build/bundled_assets/`, or game files.
 5. WAD/VRAM patches (`patch_wad`, `patch_vram_wad`), same as upstream scripts.
 6. `mkpsxiso` on XML from `custom_build/` (same role as `games/Spyro1_PracticeCodes/build/*.xml`).
+7. Final `.bin/.cue` output is written to `dist/`.
 
 Run from project root:
   python scripts/build_mod.py NTSC
@@ -15,7 +16,7 @@ Run from project root:
   python scripts/build_mod.py DECKARD_PS2_NTSC
   python scripts/build_mod.py IOP_PS2_NTSC
 
-Requires: `mkpsxiso` on PATH; game files under `.config/game_files/<Build>/` (per modproj).
+Requires: game files under `.config/game_files/<Build>/` (per modproj).
 """
 from __future__ import annotations
 
@@ -36,6 +37,8 @@ MODPROJ = os.path.join(ROOT, "PracitceRomPort.modproj")
 OUTPUT_DIR = os.path.join(ROOT, ".config", "output")
 BIN_OUT = os.path.join(ROOT, ".config", "output", "bin_files")
 BUNDLED_ASSETS = os.path.join(ROOT, "custom_build", "bundled_assets")
+DIST_DIR = os.path.join(ROOT, "dist")
+MKPSXISO_EXE = os.path.join(ROOT, "scripts", "mkpsxiso.exe")
 
 MKPSXISO_XML = {
     "NTSC": "spyro1_PracticeCodes_Manual.xml",
@@ -46,11 +49,11 @@ MKPSXISO_XML = {
 }
 
 ISO_OUT = {
-    "NTSC": ("PS1_Practice_Codes.bin", "PS1_Practice_Codes.cue"),
-    "REDUX": ("REDUX_Practice_Codes.bin", "REDUX_Practice_Codes.cue"),
-    "DUCKSTATION": ("DUCKSTATION_Practice_Codes.bin", "DUCKSTATION_Practice_Codes.cue"),
-    "DECKARD_PS2_NTSC": ("PS2_DECKARD_Practice_Codes.bin", "PS2_DECKARD_Practice_Codes.cue"),
-    "IOP_PS2_NTSC": ("PS2_IOP_Practice_Codes.bin", "PS2_IOP_Practice_Codes.cue"),
+    "NTSC": ("Spyro 1 Practice Rom PS1.bin", "Spyro 1 Practice Rom PS1.cue"),
+    "REDUX": ("Spyro 1 Practice Rom REDUX.bin", "Spyro 1 Practice Rom REDUX.cue"),
+    "DUCKSTATION": ("Spyro 1 Practice Rom Duckstation.bin", "Spyro 1 Practice Rom Duckstation.cue"),
+    "DECKARD_PS2_NTSC": ("Spyro 1 Practice Rom PS2 Deckard.bin", "Spyro 1 Practice Rom PS2 Deckard.cue"),
+    "IOP_PS2_NTSC": ("Spyro 1 Practice Rom PS2 IOP.bin", "Spyro 1 Practice Rom PS2 IOP.cue"),
 }
 
 # Toolchain codecave output -> disc names expected by custom mkpsxiso XML
@@ -266,20 +269,21 @@ def _prepare_license_and_deckard_extras(build: str, game_files: str, staging: st
 def _run_mkpsxiso(xml_name: str, bin_name: str, cue_name: str) -> None:
     build_dir = os.path.join(ROOT, "build")
     os.makedirs(build_dir, exist_ok=True)
+    os.makedirs(DIST_DIR, exist_ok=True)
     xml_src = os.path.join(ROOT, "custom_build", xml_name)
     if not os.path.isfile(xml_src):
         raise FileNotFoundError(xml_src)
     shutil.copy2(xml_src, os.path.join(build_dir, xml_name))
     _prune_mkpsxiso_xml_missing_sources(build_dir, xml_name)
     print("Running mkpsxiso:", xml_name, "(cwd=build/)")
-    subprocess.check_call(["scripts/mkpsxiso.exe", xml_name], cwd=build_dir) #HARDCODED, FIX THIS
+    subprocess.check_call([MKPSXISO_EXE, xml_name], cwd=build_dir)
     mk_bin = os.path.join(build_dir, "mkpsxiso.bin")
     mk_cue = os.path.join(build_dir, "mkpsxiso.cue")
-    out_bin = os.path.join(build_dir, bin_name)
-    out_cue = os.path.join(build_dir, cue_name)
+    out_bin = os.path.join(DIST_DIR, bin_name)
+    out_cue = os.path.join(DIST_DIR, cue_name)
     if os.path.isfile(out_bin):
         os.remove(out_bin)
-    os.rename(mk_bin, out_bin)
+    shutil.move(mk_bin, out_bin)
     cue_body = f'FILE "{bin_name}" BINARY\n TRACK 01 MODE2/2352\n  INDEX 01 00:00:00\n'
     with open(out_cue, "w", encoding="utf-8") as f:
         f.write(cue_body)
@@ -349,7 +353,7 @@ def main() -> None:
     xml = MKPSXISO_XML[build]
     bin_name, cue_name = ISO_OUT[build]
     _run_mkpsxiso(xml, bin_name, cue_name)
-    print("Done:", os.path.join(ROOT, "build", bin_name))
+    print("Done:", os.path.join(DIST_DIR, bin_name))
 
 
 if __name__ == "__main__":

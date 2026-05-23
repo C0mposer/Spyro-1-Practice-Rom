@@ -1,6 +1,6 @@
 # Default Hotkeys
 
-All default button combos for the Practice ROM.
+All default button comboinations.
 
 ---
 
@@ -26,11 +26,13 @@ All default button combos for the Practice ROM.
 |---|---|
 | Fly in to Homeworld | L3 |
 | Fly in to levels | L1, L2, R1, R2, R3 |
-| DPAD alternatives | Up (Homeworld), Down (Flight Level) |
+| Dpad alternatives | Up (Homeworld), Down (Flight Level) |
 | Fly out of Level Portal | Hold Triangle during fly-in to level |
 | Reverse fly-in Angle | Hold Circle during fly-in to leve |
 
-**Gem count adjustment during homeworld fly-in:**
+---
+
+**Adjust gem count during homeworld fly-in:**
 
 | Action | Input |
 |---|---|
@@ -89,8 +91,8 @@ All default button combos for the Practice ROM.
 
 | Action | Input |
 |---|---|
-| Warp before Plane 2 (with key) | L1 + R1 + X |
 | Warp before Plane 1 (with key) | L1 + R1 + Square |
+| Warp before Plane 2 (with key) | L1 + R1 + X |
 
 ---
 

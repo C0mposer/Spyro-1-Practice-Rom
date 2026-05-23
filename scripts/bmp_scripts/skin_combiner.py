@@ -27,7 +27,8 @@ _SPYRO_SKINS = [
     "midnight.bin", "woke.bin", "lemon_lime.bin", "creamsicle.bin",
     "mint.bin", "tex_pink.bin", "greyspyro_rev2.bin", "goth.bin",
     "gold.bin", "berry.bin", "pixie.bin", "jayo.bin", "night_vision.bin",
-    "vampire.bin", "zera.bin", "nestor.bin", "titan.bin", "cosmo.bin",
+    "vampire.bin", "zera.bin", "peacekeepers-skin.bin", "magiccrafters-skin.bin", "beastmakers-skin.bin", 
+    "dreamweavers-skin.bin", "gnorcgnexus-skin.bin", "nestor.bin", "titan.bin", "cosmo.bin",
     "bruno.bin", "lateef.bin", "cerny.bin", "ember.bin", "cyn_cre.bin",
     "peri.bin", "ditto.bin", "custom_spyro.bin",
 ]

@@ -6,7 +6,7 @@ Several features only activate in specific levels or boss fights.
 
 ## Rat Practice (Gnasty's World)
 
-Lets you freeze the rat in place so you have more time to set up **rat proxy**.
+Lets you freeze dorito in place so you have more time to set up **rat proxy**.
 
 | Action | Input |
 |---|---|
@@ -48,5 +48,5 @@ Warp directly to a plane section with the required keys already given. Allows qu
 
 | Action | Input | Destination |
 |---|---|---|
-| L1 + R1 + X | Warp before Plane 2 | With key provided |
 | L1 + R1 + Square | Warp before Plane 1 | With key provided |
+| L1 + R1 + X | Warp before Plane 2 | With key provided |

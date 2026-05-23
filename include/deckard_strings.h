@@ -133,6 +133,8 @@ extern const char RESET_ALL_GHOSTS_TEXT[];
 extern const char SHOW_RECORDING_LENGTH_ON_TEXT[];
 extern const char SHOW_RECORDING_LENGTH_OFF_TEXT[];
 
+extern const char FREE_CAM_EXIT_TEXT[];
+
 extern const char deckard_str_ghost_dbg_title[];
 extern const char deckard_str_ghost_dbg_new_best_1[];
 extern const char deckard_str_ghost_dbg_new_best_0[];

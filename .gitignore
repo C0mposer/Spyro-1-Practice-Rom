@@ -2,6 +2,7 @@
 .claude/*
 .modtool/*
 build/*
+dist/*
 UNUSED/*
 notes/*
 *.pyc

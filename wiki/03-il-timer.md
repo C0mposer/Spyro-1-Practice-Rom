@@ -2,7 +2,9 @@
 
 **Menu path:** Mod Menu → IL Settings
 
-IL Mode lets you do individual level runs to time, or submit to the IL Spreadsheet.
+IL Mode lets you do individual level runs. It automatically tracks your time, and loops the level over and over.  
+  
+You can submit runs you're happy with to the IL Spreadsheet.
 
 [View the IL Spreadsheet](https://www.docs.google.com/spreadsheets/d/1FLkc8-dGTO4jJhAi5nDrhm0h6qlVflPlAIlXAYEylsg/edit#gid=1140951951)
 
@@ -10,12 +12,12 @@ IL Mode lets you do individual level runs to time, or submit to the IL Spreadshe
 
 ## How It Works
 
-1. Enter a level, or re-fly into a level. The timer starts **the first frame the HUD begins coming down** from the fly-in animation.
+1. Fly in to a level. The timer starts **the first frame the HUD begins coming down**.
 2. Leave through a vortex or the pause menu. The timer stops **the first frame the "RETURNING HOME" HUD begins coming down** in the loading screen.
-3. The loading screen displays your time in large text, and the **loadless time** in smaller text underneath. Loadless time subtracts frames lost to dragon load animations, giving a fairer comparison between PS2 & Emu.
+3. The loading screen displays your time in large text, and the **loadless time** in smaller text underneath. Loadless time subtracts frames lost to dragon load animations, giving a fairer comparison between PS2 & PS1/Emulators.
 4. The level automatically reloads so you can practice on loop.
 
-Accuracy is within **~2 frames (~0.06 seconds)** in most situations.
+Accuracy of final time is within **2 frames (0.06 seconds)** in most situations.
 
 ---
 

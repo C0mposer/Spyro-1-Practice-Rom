@@ -11,7 +11,7 @@
 
 #define MOD_VERSION_STRING "V5.0"
 
-#define SECTOR_OFFSET 1 //Because the skins sectors grow, we need to add an offset to every sector afterwards. This is hacky.
+#define SECTOR_OFFSET 2 //Because the skins sectors grow, we need to add an offset to every sector afterwards. This is hacky.
 
 //! Build Versions
 #define REDUX 0

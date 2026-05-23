@@ -139,6 +139,8 @@ const char RESET_ALL_GHOSTS_TEXT[] = "RESET ALL GHOSTS";
 const char SHOW_RECORDING_LENGTH_ON_TEXT[] = "SHOW REC LENGTH ON";
 const char SHOW_RECORDING_LENGTH_OFF_TEXT[] = "SHOW REC LENGTH OFF";
 
+const char FREE_CAM_EXIT_TEXT[] = "Press Circle Twice to Exit";
+
 const char deckard_str_boot_hs_title[] = "GHOST BOOT HANDSHAKE";
 const char deckard_str_boot_hs_addr[] = "HS %08X";
 const char deckard_str_boot_hs_row[] = "%s %08X %d";

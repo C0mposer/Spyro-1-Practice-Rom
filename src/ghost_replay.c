@@ -520,28 +520,13 @@ static void PlaybackFrame(GhostBufferState* state, unsigned int region, Spyro* t
     temp_spyro->nextHeadKeyframe = DECK_READ_U8(&frame->nextHeadKeyframe);
     temp_spyro->headAnimSpeed = DECK_READ_U8(&frame->headAnimSpeed);
 
-    // Force non-interpolated rendering for the ghost — these three fields
-    // otherwise leak from live _spyro via GhostButtonCheck's memcpy, and
-    // combining live's interp factor with ghost's recorded keyframe indices
-    // causes vertex accumulator reads past valid bounds -> signed overflow
-    // at 0x800246ec (`add s1,s1,s2`) in DrawSpyro.
+    // Force non-interpolated rendering for the ghost
     temp_spyro->maybe_AnimSpeedRelated = 0;     // offset 0x24 (body)
     temp_spyro->maybe_HeadAnimSpeedRelated = 0; // offset 0x25 (head)
     temp_spyro->maybe_TailAnimSpeedRelated = 0; // offset 0x26 (tail)
 
     // --- Anim blacklist ---
-    // The per-level anim descriptor table at *(0x80076378)+0x38 has NULL
-    // entries for anims whose pose data isn't resident in the current level
-    // (SUPERCHARGE, SUPERFLY, ROLL_DOWN_SLOPE, PULL_BACK_GLIDE, CANNON_ROTATE,
-    //  HURT_YAW, IDLE_SIT, several others — varies by level).
-    // If the ghost tries to play one, DrawSpyro does `lw gp, 0x38(gp)` → 0,
-    // then `lw a2, 0x10(gp)` reads pose data from ~0x10 (exception vectors
-    // via KSEG0 wrap). The inner loop walks that garbage and eventually
-    // `add s1, s2` overflows (seen at 0x800246ec and 0x80024510).
-    //
-    // For now, blacklist only the anim we've actually caught crashing.
-    // Fall back to IDLE (anim 0) which is guaranteed resident everywhere.
-    // Extend the switch below as more offenders surface.
+    // Supercharge crashes when the ghost spyro is in that state but regular spyro isnt, so fallback to another anim state to avoid crashes
     {
         u8 bodyAnim = DECK_READ_U8(&frame->currentAnim);
         u8 bodyNext = DECK_READ_U8(&frame->nextAnim);
@@ -556,17 +541,15 @@ static void PlaybackFrame(GhostBufferState* state, unsigned int region, Spyro* t
 
         if (unsafe)
         {
-            // Safe fallback: IDLE, keyframe 0. Tail is not recorded, so it
-            // already holds live's value from GhostButtonCheck's memcpy and
-            // is always valid.
-            temp_spyro->currentAnim = CHARGE;
-            temp_spyro->nextAnim = CHARGE;
-            temp_spyro->currentKeyfame = 0;
-            temp_spyro->nextKeyframe = 0;
-            temp_spyro->currentHeadAnim = CHARGE;
-            temp_spyro->nextHeadAnim = CHARGE;
-            temp_spyro->currentHeadKeyframe = 0;
-            temp_spyro->nextHeadKeyframe = 0;
+            // Fallback to charge state so it looks natrual
+            DECK_WRITE_U8(&(temp_spyro->currentAnim), BONK);
+            DECK_WRITE_U8(&(temp_spyro->nextAnim), BONK);
+            DECK_WRITE_U8(&(temp_spyro->currentKeyfame), 0);
+            DECK_WRITE_U8(&(temp_spyro->nextKeyframe), 0);
+            DECK_WRITE_U8(&(temp_spyro->currentHeadAnim), BONK);
+            DECK_WRITE_U8(&(temp_spyro->nextHeadAnim), BONK);
+            DECK_WRITE_U8(&(temp_spyro->currentHeadKeyframe), 0);
+            DECK_WRITE_U8(&(temp_spyro->nextHeadKeyframe), 0);
         }
     }
 

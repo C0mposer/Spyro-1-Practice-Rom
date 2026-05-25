@@ -45,7 +45,7 @@ If you already own a Spyro 1 `.bin` file and want to patch it yourself:
 
 - **Duckstation** is the recommended emulator.
 - You **MUST** enable extra 8MB ram if you use the Duckstation version
-![Duckstation Settings](image.png)
+![Duckstation Settings](wiki/image.png)
 
 ---
 
